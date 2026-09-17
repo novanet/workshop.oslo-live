@@ -25,17 +25,21 @@ Det betyr noen ting du må vite før du starter:
 
 ## Backloggen
 
-25 issuer, i tre prioriteter.
+55 issuer, i tre prioriteter.
 
 | | Hva | Hvor mange |
 |---|---|---|
 | **P1** | Kartet er i stå. Fem feil som gjør produktet ubrukelig. Tas først. | 5 |
-| **P2** | Produktet er ikke ferdig uten. Kjernelagene og det viktigste av UX. | 6 |
-| **P3** | Gjør det bedre. Flere datakilder, flere funksjoner. | 14 |
+| **P2** | Produktet er ikke ferdig uten. Kjernelagene og det viktigste av UX. | 11 |
+| **P3** | Gjør det bedre. Flere datakilder, flere funksjoner, bedre drift. | 39 |
 
 P1-ene er ekte feil av typen som lever lenge i en kodebase fordi de ser riktige ut: byttet rekkefølge på koordinater, norsk desimalkomma i en URL, et mellomlager som aldri går ut på dato. De er alle synlige på kartet med en gang du ser etter.
 
 Start med P1. Et nytt kartlag hjelper ikke når punktene havner i Indiahavet.
+
+Backloggen er bred med vilje. Der er nye datakilder, men også tidslinje, varmekart, eksport, tastatursnarveier, tilgjengelighet, parallell henting, nytt forsøk mot ustabile kilder, metrikker, logging og ytelse. Det er nok til at ingen går tom, og variert nok til at agentene ikke ender med å gjøre det samme.
+
+**Issue 1–5** er feilene, **6–19** er kjernelagene på kartet, og **20 og oppover** er alt annet. Numrene er faste.
 
 ## Slik er koden satt sammen
 

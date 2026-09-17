@@ -31,8 +31,18 @@ lag_etikett P1           B60205 "Kartet er i stå. Tas først."
 lag_etikett P2           D93F0B "Produktet er ikke ferdig uten."
 lag_etikett P3           FBCA04 "Gjør det bedre."
 
+# Titlene som allerede finnes, saa skriptet kan kjoeres om igjen naar det
+# kommer nye issuer uten aa lage duplikater.
+finnes="$(gh issue list --state all --limit 500 --json title --jq '.[].title' "${repo_flag[@]}" 2>/dev/null || true)"
+
 for fil in "$here"/issues/feil-*.md "$here"/issues/feature-*.md; do
   tittel="$(sed -n 1p "$fil")"
+
+  if [[ -n "$finnes" ]] && grep -Fxq "$tittel" <<< "$finnes"; then
+    echo "Finnes: $tittel"
+    continue
+  fi
+
   etiketter="$(sed -n 2p "$fil")"
   body="$(tail -n +4 "$fil")"
 
@@ -48,4 +58,4 @@ for fil in "$here"/issues/feil-*.md "$here"/issues/feature-*.md; do
 done
 
 echo
-echo "Ferdig. Issue 1-5 er feilene (P1), 6-25 er lag og funksjoner."
+echo "Ferdig. Issue 1-5 er feilene (P1), 6-25 er kjernelagene, 26 og oppover er resten."
