@@ -120,6 +120,28 @@ Lengdegrad først. `navn` og `kilde` skal alltid være med. Alt annet du legger 
 
 Hver issue som ber om et nytt lag oppgir hvilken `id` laget skal ha. Den er en del av kontrakten — hold deg til den.
 
+## Kartet i drift
+
+Main ruller ut automatisk. Blir pull requesten din merget, står endringen din på storskjermen et par minutter senere.
+
+```
+merge til main
+  → GitHub Actions: dotnet build + dotnet test
+  → az acr build (bygger bildet i Azure, ikke på runneren)
+  → ny revisjon i Container Apps
+  → helsesjekk mot /api/helse
+```
+
+Kjører i Novanet-abonnementet, Norway East. Selve utrullingen tar under to minutter, mest fordi `dotnet restore` ligger i sitt eget docker-lag og gjenbrukes så lenge `OsloLive.csproj` er urørt.
+
+**Bygget er porten.** Feiler `dotnet build` eller `dotnet test`, blir det ingen utrulling. Det er derfor testene må være grønne før du leverer — ikke for formalitetens skyld, men fordi rødt bygg betyr at kartet ikke oppdateres for noen.
+
+**Ingen hemmeligheter i dette repoet.** Actions logger inn i Azure med federated credentials: GitHub beviser hvem den er, Azure stoler på beviset. Det finnes ingen nøkkel å lekke, og det er et bevisst valg fordi repoet er offentlig.
+
+Én ting verdt å legge merke til: kartet kjører med `minReplicas: 1`, altså alltid på. Agentjobben i starter-kit gjør det motsatte og skalerer til null. Forskjellen er hva de koster når ingen bruker dem, mot hva en kaldstart koster når noen faktisk ser på. For en jobb som kjører i bakgrunnen er svaret opplagt. For et kart på storskjermen er det motsatt.
+
+Oppsettet gjøres én gang, av kurslederen: `scripts/sett-opp-azure.sh`.
+
 ## Før du leverer
 
 ```bash

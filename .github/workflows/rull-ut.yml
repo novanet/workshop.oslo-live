@@ -1,0 +1,124 @@
+name: Bygg og rull ut
+
+# Bygg og test kjører på hver pull request, så den røde haken er synlig i
+# GitHub før noen merger. Utrulling skjer bare når main faktisk har endret seg.
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'issues/**'
+      - '**.md'
+  pull_request:
+  workflow_dispatch:
+
+# Rekker noen å merge to ganger på et minutt, skal den siste vinne.
+# Vi avbryter ikke et bygg som allerede er i gang med å rulle ut.
+concurrency:
+  group: rull-ut-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+  id-token: write      # trengs for OIDC mot Azure
+
+env:
+  RESSURSGRUPPE: rg-oslolive
+  APPNAVN: ca-oslolive
+
+jobs:
+  bygg:
+    name: Bygg og test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      # Gjenbruker NuGet-pakkene mellom kjøringer. Sparer 20-30 sekunder.
+      - uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: nuget-${{ runner.os }}-${{ hashFiles('**/*.csproj') }}
+          restore-keys: nuget-${{ runner.os }}-
+
+      - run: dotnet restore
+      - run: dotnet build --no-restore -c Release --nologo
+      - run: dotnet test --no-build -c Release --nologo
+
+  rull-ut:
+    name: Rull ut til Azure
+    needs: bygg
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment:
+      name: produksjon
+      url: ${{ steps.url.outputs.kart }}
+    steps:
+      - uses: actions/checkout@v4
+
+      # Ingen hemmeligheter i dette repoet - det er offentlig. Innlogging går
+      # via federated credentials: GitHub beviser hvem den er, Azure stoler
+      # på beviset. Se README for oppsettet.
+      - name: Logg inn i Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Finn registeret
+        id: acr
+        run: |
+          navn=$(az acr list -g "$RESSURSGRUPPE" --query "[0].name" -o tsv)
+          echo "navn=$navn" >> "$GITHUB_OUTPUT"
+          echo "Registeret er $navn"
+
+      # Bygger i skyen. Ingen docker på runneren, og laget med dotnet restore
+      # gjenbrukes så lenge OsloLive.csproj er urørt.
+      - name: Bygg bildet
+        run: |
+          az acr build \
+            --registry "${{ steps.acr.outputs.navn }}" \
+            --image "oslo-live:${{ github.sha }}" \
+            --image "oslo-live:latest" \
+            .
+
+      - name: Rull ut ny revisjon
+        run: |
+          az containerapp update \
+            --name "$APPNAVN" \
+            --resource-group "$RESSURSGRUPPE" \
+            --image "${{ steps.acr.outputs.navn }}.azurecr.io/oslo-live:${{ github.sha }}"
+
+      - name: Hent adressen
+        id: url
+        run: |
+          fqdn=$(az containerapp show -n "$APPNAVN" -g "$RESSURSGRUPPE" \
+                   --query "properties.configuration.ingress.fqdn" -o tsv)
+          echo "kart=https://$fqdn" >> "$GITHUB_OUTPUT"
+
+      - name: Sjekk at den svarer
+        run: |
+          kart="${{ steps.url.outputs.kart }}"
+          for forsok in $(seq 1 20); do
+            if curl -fsS --max-time 10 "$kart/api/helse" > /dev/null; then
+              echo "Kartet svarer: $kart"
+              exit 0
+            fi
+            echo "Venter på at den nye revisjonen skal ta over ($forsok/20) ..."
+            sleep 6
+          done
+          echo "Kartet svarte ikke innen to minutter." >&2
+          exit 1
+
+      - name: Oppsummering
+        if: always()
+        run: |
+          {
+            echo "### Oslo Live"
+            echo ""
+            echo "- Kart: ${{ steps.url.outputs.kart }}"
+            echo "- Commit: \`${{ github.sha }}\`"
+          } >> "$GITHUB_STEP_SUMMARY"
