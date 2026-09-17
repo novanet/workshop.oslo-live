@@ -22,7 +22,7 @@ permissions:
   id-token: write      # trengs for OIDC mot Azure
 
 env:
-  RESSURSGRUPPE: rg-oslolive
+  RESSURSGRUPPE: novanet-rg-oslolive
   APPNAVN: ca-oslolive
 
 jobs:

@@ -18,7 +18,7 @@
 set -euo pipefail
 
 ABONNEMENT="${ABONNEMENT:-Novanet}"
-GRUPPE="${GRUPPE:-rg-oslolive}"
+GRUPPE="${GRUPPE:-novanet-rg-oslolive}"
 STED="${STED:-norwayeast}"
 NAVN="${NAVN:-oslolive}"
 REPO="${REPO:-novanet/workshop.oslo-live}"
