@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="src/OsloLive/OsloLive.csproj" />
+  <Project Path="tests/OsloLive.Tester/OsloLive.Tester.csproj" />
+</Solution>

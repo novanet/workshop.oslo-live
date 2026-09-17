@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "allemannsdata": {
+      "type": "http",
+      "url": "https://allemannsdata.com/allemannsdata/mcp"
+    }
+  }
+}

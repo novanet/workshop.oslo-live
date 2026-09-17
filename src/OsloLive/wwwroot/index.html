@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Oslo Live</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+  :root {
+    --bg: #0d1117; --panel: #161b22; --kant: #30363d;
+    --tekst: #e6edf3; --dempet: #8b949e; --aksent: #2f81f7; --ok: #3fb950; --feil: #f85149;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; background: var(--bg); color: var(--tekst); }
+  #kart { position: absolute; inset: 0; background: var(--bg); }
+  .leaflet-tile-pane { filter: invert(1) hue-rotate(180deg) brightness(.85) contrast(.9) saturate(.6); }
+  .panel {
+    position: absolute; top: 16px; left: 16px; z-index: 1000; width: 300px;
+    background: var(--panel); border: 1px solid var(--kant); border-radius: 12px;
+    padding: 16px; box-shadow: 0 8px 32px rgba(0,0,0,.5);
+  }
+  .panel h1 { margin: 0 0 2px; font-size: 20px; letter-spacing: -.02em; }
+  .panel .under { margin: 0 0 14px; font-size: 12px; color: var(--dempet); }
+  .lag { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 8px; cursor: pointer; }
+  .lag:hover { background: rgba(255,255,255,.04); }
+  .lag input { accent-color: var(--aksent); width: 16px; height: 16px; cursor: pointer; }
+  .lag .ikon { font-size: 17px; width: 22px; text-align: center; }
+  .lag .navn { flex: 1; font-size: 14px; }
+  .lag .antall { font-size: 12px; color: var(--dempet); font-variant-numeric: tabular-nums; }
+  .lag .antall.feil { color: var(--feil); }
+  .lag .antall.ok { color: var(--ok); }
+  .tom { font-size: 13px; color: var(--dempet); line-height: 1.5; padding: 4px 2px; }
+  .bunn { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--kant); font-size: 11px; color: var(--dempet); display: flex; justify-content: space-between; }
+  .leaflet-popup-content-wrapper, .leaflet-popup-tip { background: var(--panel); color: var(--tekst); border: 1px solid var(--kant); }
+  .leaflet-popup-content { margin: 12px 14px; font-size: 13px; line-height: 1.6; }
+  .leaflet-popup-content b { display: block; font-size: 14px; margin-bottom: 4px; }
+  .leaflet-popup-content .rad { color: var(--dempet); }
+  .leaflet-popup-content .rad span { color: var(--tekst); }
+  .merke { font-size: 20px; text-align: center; line-height: 1; text-shadow: 0 0 6px rgba(0,0,0,.8); }
+</style>
+</head>
+<body>
+<div id="kart"></div>
+
+<div class="panel">
+  <h1>Oslo Live</h1>
+  <p class="under">Levende data fra Allemannsdata</p>
+  <div id="lagliste"><p class="tom">Laster lag …</p></div>
+  <div class="bunn">
+    <span id="oppdatert">–</span>
+    <span id="sum">–</span>
+  </div>
+</div>
+
+<script>
+const kart = L.map('kart', { zoomControl: false }).setView([59.9139, 10.7522], 12);
+L.control.zoom({ position: 'bottomright' }).addTo(kart);
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; OpenStreetMap · data: allemannsdata.com',
+  maxZoom: 19
+}).addTo(kart);
+
+const lagene = new Map();
+
+function popup(e) {
+  const skjul = new Set(['id', 'navn', 'kilde']);
+  const rader = Object.entries(e)
+    .filter(([k, v]) => !skjul.has(k) && v !== null && v !== undefined && v !== '')
+    .map(([k, v]) => `<div class="rad">${k}: <span>${v}</span></div>`)
+    .join('');
+  return `<b>${e.navn ?? 'Uten navn'}</b>${rader}<div class="rad" style="margin-top:6px;opacity:.7">${e.kilde ?? ''}</div>`;
+}
+
+async function hent(id) {
+  const oppf = lagene.get(id);
+  const teller = document.getElementById('antall-' + id);
+  try {
+    const svar = await fetch('/api/lag/' + id);
+    if (!svar.ok) throw new Error('HTTP ' + svar.status);
+    const geo = await svar.json();
+    oppf.gruppe.clearLayers();
+    L.geoJSON(geo, {
+      pointToLayer: (f, latlng) => L.marker(latlng, {
+        icon: L.divIcon({ className: '', html: `<div class="merke">${oppf.ikon}</div>`, iconSize: [22, 22] })
+      }),
+      onEachFeature: (f, l) => l.bindPopup(popup(f.properties ?? {}))
+    }).addTo(oppf.gruppe);
+    oppf.antall = geo.features?.length ?? 0;
+    teller.textContent = oppf.antall;
+    teller.className = 'antall ' + (oppf.antall ? 'ok' : '');
+  } catch (e) {
+    oppf.antall = 0;
+    teller.textContent = 'feil';
+    teller.className = 'antall feil';
+  }
+  oppdaterBunn();
+}
+
+function oppdaterBunn() {
+  let sum = 0;
+  for (const l of lagene.values()) if (l.på) sum += l.antall;
+  document.getElementById('sum').textContent = sum + ' punkter';
+  document.getElementById('oppdatert').textContent = new Date().toLocaleTimeString('no-NO');
+}
+
+async function start() {
+  const lag = await (await fetch('/api/lag')).json();
+  const liste = document.getElementById('lagliste');
+
+  if (!lag.length) {
+    liste.innerHTML = '<p class="tom">Ingen lag registrert ennå. Løs en issue, så dukker de opp her.</p>';
+    return;
+  }
+
+  liste.innerHTML = '';
+  for (const l of lag) {
+    lagene.set(l.id, { ikon: l.ikon || '📍', gruppe: L.layerGroup().addTo(kart), antall: 0, på: true });
+
+    const rad = document.createElement('label');
+    rad.className = 'lag';
+    rad.title = l.beskrivelse ?? '';
+    rad.innerHTML = `<input type="checkbox" checked><span class="ikon">${l.ikon || '📍'}</span>
+                     <span class="navn">${l.navn}</span><span class="antall" id="antall-${l.id}">…</span>`;
+    rad.querySelector('input').addEventListener('change', ev => {
+      const oppf = lagene.get(l.id);
+      oppf.på = ev.target.checked;
+      ev.target.checked ? oppf.gruppe.addTo(kart) : oppf.gruppe.remove();
+      oppdaterBunn();
+    });
+    liste.appendChild(rad);
+
+    hent(l.id);
+  }
+
+  setInterval(() => lagene.forEach((_, id) => hent(id)), 15000);
+}
+
+start();
+</script>
+</body>
+</html>
