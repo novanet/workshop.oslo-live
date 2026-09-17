@@ -1,0 +1,102 @@
+{
+  "oppdatert": "2026-09-17T22:57:00",
+  "repo": "novanet/workshop.oslo-live",
+  "produkt": {
+    "testerBestatt": 14,
+    "testerFeilet": 9,
+    "antallIssuer": 25,
+    "issuerLost": [
+      1,
+      2,
+      4,
+      6,
+      7,
+      11
+    ],
+    "feilmelding": null
+  },
+  "regler": {
+    "feil": 3,
+    "lag": 2,
+    "levert": 1,
+    "utkast": -1,
+    "perDollar": -1
+  },
+  "deltakere": [
+    {
+      "plass": 1,
+      "navn": "sondre",
+      "poeng": 12,
+      "feil": [
+        {
+          "issue": 1,
+          "navn": "Koordinatrekkefølge"
+        },
+        {
+          "issue": 4,
+          "navn": "Duplikatfjerning"
+        }
+      ],
+      "lag": [
+        {
+          "issue": 11,
+          "navn": "Kollektiv"
+        },
+        {
+          "issue": 7,
+          "navn": "Skipstrafikk"
+        }
+      ],
+      "levert": [],
+      "dollar": 2.41,
+      "tokens": 418000,
+      "sekunder": 612,
+      "pr": 5,
+      "utkast": 0,
+      "merget": 4
+    },
+    {
+      "plass": 2,
+      "navn": "ingrid",
+      "poeng": 6,
+      "feil": [
+        {
+          "issue": 2,
+          "navn": "Utsnittet"
+        }
+      ],
+      "lag": [
+        {
+          "issue": 6,
+          "navn": "Delt mobilitet"
+        }
+      ],
+      "levert": [
+        {
+          "issue": 22,
+          "navn": "Klynging"
+        }
+      ],
+      "dollar": 1.88,
+      "tokens": 295000,
+      "sekunder": 430,
+      "pr": 4,
+      "utkast": 1,
+      "merget": 3
+    },
+    {
+      "plass": 3,
+      "navn": "hbrotan",
+      "poeng": -2,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 0.94,
+      "tokens": 120000,
+      "sekunder": 210,
+      "pr": 2,
+      "utkast": 1,
+      "merget": 0
+    }
+  ]
+}

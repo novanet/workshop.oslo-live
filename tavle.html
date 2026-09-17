@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Resultattavle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --ground: #F6F8F5;
+    --surface: #FFFFFF;
+    --ink: #17231F;
+    --muted: #5A6A64;
+    --line: #D6DDD8;
+    --accent: #0E6D69;
+    --accent-soft: #E1F0EE;
+    --gull: #B97F0E;
+    --gull-soft: #F7EBCF;
+    --warn: #A33A2C;
+    --warn-soft: #F8E4E0;
+    --ok: #2E7D47;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0F1715; --surface: #16201D; --ink: #E4EBE7; --muted: #93A39D;
+      --line: #27332F; --accent: #43B5AE; --accent-soft: #14302E;
+      --gull: #E2A83B; --gull-soft: #33280F; --warn: #E07A6A; --warn-soft: #3A1B16;
+      --ok: #4FC172;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0F1715; --surface: #16201D; --ink: #E4EBE7; --muted: #93A39D;
+    --line: #27332F; --accent: #43B5AE; --accent-soft: #14302E;
+    --gull: #E2A83B; --gull-soft: #33280F; --warn: #E07A6A; --warn-soft: #3A1B16;
+    --ok: #4FC172;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--ground); color: var(--ink);
+    font-family: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+    font-size: 17px; line-height: 1.5;
+  }
+  .ramme { padding: clamp(20px, 3.2vw, 44px); padding-block: clamp(20px, 3.2vw, 44px); max-width: 1500px; margin: 0 auto; }
+
+  header { display: flex; align-items: flex-end; justify-content: space-between; gap: 22px; flex-wrap: wrap; margin-bottom: 26px; }
+  .merkelapp {
+    font-family: "IBM Plex Mono", monospace; font-size: 12px;
+    letter-spacing: .15em; text-transform: uppercase; color: var(--accent); margin: 0 0 6px;
+  }
+  h1 {
+    font-family: "Bricolage Grotesque", system-ui, sans-serif; font-weight: 700;
+    font-size: clamp(30px, 4.4vw, 54px); line-height: 1; letter-spacing: -.025em; margin: 0;
+  }
+  .status { text-align: right; font-family: "IBM Plex Mono", monospace; font-size: 14px; color: var(--muted); }
+  .status .puls { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--ok); margin-right: 7px; }
+  @media (prefers-reduced-motion: no-preference) {
+    .status .puls { animation: blink 2.4s ease-in-out infinite; }
+  }
+  @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: .25; } }
+
+  .rull { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; min-width: 880px; }
+  thead th {
+    font-family: "IBM Plex Mono", monospace; font-size: 11.5px; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--muted); font-weight: 600;
+    text-align: left; padding: 0 16px 10px 0; white-space: nowrap;
+  }
+  thead th.h { text-align: right; padding-right: 0; }
+  tbody tr { background: var(--surface); }
+  tbody td {
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    padding: 16px 16px 16px 0; vertical-align: middle;
+  }
+  tbody td:first-child { border-left: 1px solid var(--line); border-radius: 12px 0 0 12px; padding-left: 18px; }
+  tbody td:last-child { border-right: 1px solid var(--line); border-radius: 0 12px 12px 0; padding-right: 18px; text-align: right; }
+  tbody tr.mellom td { border: 0; padding: 0; height: 10px; background: transparent; }
+
+  .plass {
+    font-family: "Bricolage Grotesque", system-ui, sans-serif; font-weight: 700;
+    font-size: clamp(22px, 2.4vw, 32px); color: var(--muted);
+    font-variant-numeric: tabular-nums; width: 1%; white-space: nowrap;
+  }
+  tr.topp .plass { color: var(--gull); }
+  tr.topp td:first-child { box-shadow: inset 3px 0 0 var(--gull); }
+
+  .navn { font-weight: 600; font-size: clamp(17px, 1.6vw, 21px); }
+  .repo { font-family: "IBM Plex Mono", monospace; font-size: 12.5px; color: var(--muted); }
+
+  .poeng {
+    font-family: "Bricolage Grotesque", system-ui, sans-serif; font-weight: 700;
+    font-size: clamp(26px, 3vw, 40px); line-height: 1; color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .poeng.negativ { color: var(--warn); }
+
+  .merker { display: flex; flex-wrap: wrap; gap: 6px; }
+  .merke {
+    font-family: "IBM Plex Mono", monospace; font-size: 11.5px;
+    padding: 3px 9px; border-radius: 999px; white-space: nowrap;
+    background: var(--accent-soft); color: var(--accent); border: 1px solid transparent;
+  }
+  .merke.lag { background: transparent; border-color: var(--line); color: var(--muted); }
+  .merke.ingen { background: transparent; border-color: var(--line); color: var(--muted); font-style: italic; }
+
+  .tall { font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums; font-size: 15px; }
+  .tall.dyrt { color: var(--warn); }
+  .under { display: block; font-size: 12px; color: var(--muted); font-family: "IBM Plex Sans", sans-serif; }
+
+  .pille {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: "IBM Plex Mono", monospace; font-size: 12px;
+    padding: 4px 10px; border-radius: 999px;
+  }
+  .pille.groenn { background: var(--accent-soft); color: var(--ok); }
+  .pille.roed { background: var(--warn-soft); color: var(--warn); }
+  .prikk { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+
+  .beskjed {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+    padding: 34px; color: var(--muted); text-align: center;
+  }
+  .feil { color: var(--warn); font-size: 12.5px; margin-top: 5px; font-family: "IBM Plex Mono", monospace; }
+
+  .framdrift {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+    padding: 18px 20px; margin-bottom: 20px;
+    display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+  }
+  .framdrift .tekst { font-size: 15px; color: var(--muted); }
+  .framdrift .tekst b { color: var(--ink); font-size: 19px; font-family: "IBM Plex Mono", monospace; }
+  .stripe { flex: 1; min-width: 200px; height: 10px; background: var(--line); border-radius: 999px; overflow: hidden; }
+  .stripe i { display: block; height: 100%; background: var(--accent); border-radius: 999px; transition: width .6s ease; }
+  .framdrift .repo { font-size: 12.5px; }
+
+  footer {
+    margin-top: 26px; display: flex; gap: 10px; flex-wrap: wrap;
+    font-family: "IBM Plex Mono", monospace; font-size: 12.5px; color: var(--muted);
+  }
+  footer span { background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 5px 13px; }
+</style>
+</head>
+<body>
+<div class="ramme">
+
+  <header>
+    <div>
+      <p class="merkelapp">Bygg din egen Nils Georg</p>
+      <h1>Resultattavle</h1>
+    </div>
+    <div class="status">
+      <div><span class="puls"></span><span id="oppdatert">laster …</span></div>
+      <div id="neste"></div>
+    </div>
+  </header>
+
+  <div id="framdrift"></div>
+
+  <div id="innhold">
+    <div class="beskjed">Leser <span class="repo">resultat.json</span> …</div>
+  </div>
+
+  <footer id="regler"></footer>
+
+</div>
+
+<script>
+(function () {
+  var HENT_HVERT = 45000;
+
+  function esc(t) {
+    return String(t == null ? '' : t).replace(/[&<>"]/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+    });
+  }
+
+  function klokke(iso) {
+    if (!iso) return '–';
+    var d = new Date(iso);
+    return isNaN(d) ? '–' : d.toLocaleTimeString('no-NO', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  }
+
+  function rad(d) {
+    var merker = [];
+    (d.feil || []).forEach(function (f) {
+      merker.push('<span class="merke">#' + f.issue + ' ' + esc(f.navn) + '</span>');
+    });
+    (d.lag || []).forEach(function (l) {
+      merker.push('<span class="merke lag">#' + l.issue + ' ' + esc(l.navn) + '</span>');
+    });
+    (d.levert || []).forEach(function (l) {
+      merker.push('<span class="merke lag">#' + l.issue + ' ' + esc(l.navn) + '</span>');
+    });
+    if (!merker.length) merker.push('<span class="merke ingen">ingenting ennå</span>');
+
+    var dyrt = (d.dollar || 0) >= 5 ? ' dyrt' : '';
+
+    return '' +
+      '<tr class="' + (d.plass === 1 && d.poeng > 0 ? 'topp' : '') + '">' +
+        '<td class="plass">' + d.plass + '</td>' +
+        '<td><div class="navn">' + esc(d.navn) + '</div>' +
+            '<div class="repo">' + (d.merget || 0) + ' merget av ' + (d.pr || 0) + ' PR</div></td>' +
+        '<td><div class="merker">' + merker.join('') + '</div></td>' +
+        '<td>' + (d.utkast
+            ? '<span class="pille roed"><span class="prikk"></span>' + d.utkast + ' utkast</span>'
+            : '<span class="pille groenn"><span class="prikk"></span>alle bygger</span>') + '</td>' +
+        '<td><span class="tall' + dyrt + '">$' + (d.dollar || 0).toFixed(2) + '</span>' +
+            '<span class="under">' + Math.round((d.tokens || 0) / 1000) + 'k tokens</span></td>' +
+        '<td><span class="poeng' + (d.poeng < 0 ? ' negativ' : '') + '">' + d.poeng + '</span></td>' +
+      '</tr>' +
+      '<tr class="mellom"><td colspan="6"></td></tr>';
+  }
+
+  function tegnFramdrift(data) {
+    var pr = data.produkt || {};
+    var lost = (pr.issuerLost || []).length;
+    var alle = pr.antallIssuer || 25;
+    var andel = alle ? Math.round((lost / alle) * 100) : 0;
+
+    document.getElementById('framdrift').innerHTML =
+      '<div class="framdrift">' +
+        '<span class="tekst"><b>' + lost + '</b> av ' + alle + ' issuer løst</span>' +
+        '<span class="stripe"><i style="width:' + andel + '%"></i></span>' +
+        '<span class="repo">' + esc(data.repo || '') + '</span>' +
+        (pr.feilmelding ? '<span class="feil">' + esc(pr.feilmelding).slice(0, 120) + '</span>' : '') +
+      '</div>';
+  }
+
+  function tegn(data) {
+    var folk = data.deltakere || [];
+    document.getElementById('oppdatert').textContent = 'oppdatert ' + klokke(data.oppdatert);
+    tegnFramdrift(data);
+
+    if (!folk.length) {
+      document.getElementById('innhold').innerHTML =
+        '<div class="beskjed">Ingen pull requests ennå. Slipp agenten løs.</div>';
+    } else {
+      document.getElementById('innhold').innerHTML =
+        '<div class="rull"><table>' +
+          '<thead><tr>' +
+            '<th>#</th><th>Deltaker</th><th>Løst</th><th>Bygg</th>' +
+            '<th>Kostnad</th><th class="h">Poeng</th>' +
+          '</tr></thead><tbody>' + folk.map(rad).join('') + '</tbody>' +
+        '</table></div>';
+    }
+
+    var r = data.regler || {};
+    document.getElementById('regler').innerHTML =
+      '<span>+' + (r.feil != null ? r.feil : 3) + ' fikset feil</span>' +
+      '<span>+' + (r.lag != null ? r.lag : 2) + ' kartlag som virker</span>' +
+      '<span>+' + (r.levert != null ? r.levert : 1) + ' annen issue levert</span>' +
+      '<span>' + (r.utkast != null ? r.utkast : -1) + ' per PR som ikke bygger</span>' +
+      '<span>' + (r.perDollar != null ? r.perDollar : -1) + ' per påbegynte dollar</span>';
+  }
+
+  function hent() {
+    fetch('resultat.json?t=' + Date.now(), { cache: 'no-store' })
+      .then(function (s) { if (!s.ok) throw new Error('HTTP ' + s.status); return s.json(); })
+      .then(tegn)
+      .catch(function () {
+        document.getElementById('oppdatert').textContent = 'fant ikke resultat.json';
+        document.getElementById('innhold').innerHTML =
+          '<div class="beskjed">Fant ingen <span class="repo">resultat.json</span> ved siden av denne siden.<br>' +
+          'Kjør <span class="repo">python poeng.py --repo novanet/workshop.oslo-live</span> først.</div>';
+      });
+  }
+
+  hent();
+  setInterval(hent, HENT_HVERT);
+})();
+</script>
+</body>
+</html>
