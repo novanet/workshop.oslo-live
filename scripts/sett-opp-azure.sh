@@ -83,39 +83,72 @@ az identity create -n "$mi_navn" -g "$GRUPPE" -l "$STED" -o none
 mi_client="$(az identity show -n "$mi_navn" -g "$GRUPPE" --query clientId -o tsv)"
 mi_princ="$(az identity show -n "$mi_navn" -g "$GRUPPE" --query principalId -o tsv)"
 
-# Én credential per situasjon vi vil tillate. Bare main, og bare miljøet
-# «produksjon» - en pull request fra en fork kan ikke låne denne.
-for par in "main:ref:refs/heads/main" "produksjon:environment:produksjon"; do
-  cred_navn="${par%%:*}"
-  subject="repo:${REPO}:${par#*:}"
-  az identity federated-credential create \
-    --name "gh-$cred_navn" \
-    --identity-name "$mi_navn" \
-    -g "$GRUPPE" \
-    --issuer "https://token.actions.githubusercontent.com" \
-    --subject "$subject" \
-    --audiences "api://AzureADTokenExchange" \
-    -o none 2>/dev/null || echo "    (gh-$cred_navn fantes allerede)"
-  echo "    $subject"
+# Én credential per situasjon vi vil tillate: bare main, og bare miljøet
+# «produksjon». En pull request fra en fork kan ikke låne disse.
+#
+# Novanet-organisasjonen har «unique token claims» slått på, så GitHub
+# presenterer seg som repo:novanet@<org-id>/<repo>@<repo-id>:... i stedet for
+# med det klassiske navnet. Vi lager begge formene, så oppsettet virker
+# uansett hvordan organisasjonen er satt opp.
+org_id="$(gh api "orgs/${REPO%%/*}" --jq .id 2>/dev/null || true)"
+repo_id="$(gh api "repos/$REPO" --jq .id 2>/dev/null || true)"
+
+repo_navn=("$REPO")
+if [[ -n "$org_id" && -n "$repo_id" ]]; then
+  repo_navn+=("${REPO%%/*}@${org_id}/${REPO##*/}@${repo_id}")
+fi
+
+variant=0
+for rn in "${repo_navn[@]}"; do
+  for par in "main:ref:refs/heads/main" "produksjon:environment:produksjon"; do
+    subject="repo:${rn}:${par#*:}"
+    az identity federated-credential create \
+      --name "gh-${par%%:*}-${variant}" \
+      --identity-name "$mi_navn" \
+      -g "$GRUPPE" \
+      --issuer "https://token.actions.githubusercontent.com" \
+      --subject "$subject" \
+      --audiences "api://AzureADTokenExchange" \
+      -o none 2>/dev/null || true
+    echo "    $subject"
+  done
+  variant=$((variant + 1))
 done
 
+# ---------------------------------------------------------------------------
+# 4. Rettigheter
+# ---------------------------------------------------------------------------
 echo
 echo "==> Rettigheter"
 gruppe_id="$(az group show -n "$GRUPPE" --query id -o tsv)"
 acr_id="$(az acr show -n "$acr" -g "$GRUPPE" --query id -o tsv)"
 
-# Contributor på gruppen: oppdatere container-appen.
-az role assignment create --assignee-object-id "$mi_princ" \
-  --assignee-principal-type ServicePrincipal \
-  --role "Contributor" --scope "$gruppe_id" -o none 2>/dev/null || true
+# «az role assignment create» svarer MissingSubscription på en managed
+# identity i dette abonnementet, så vi går rett på ARM i stedet.
+tildel_rolle() {
+  local scope="$1" rolle="$2" beskrivelse="$3" g body
+  g="$(python -c 'import uuid;print(uuid.uuid4())' 2>/dev/null || uuidgen)"
+  body="$(printf '{"properties":{"roleDefinitionId":"/subscriptions/%s/providers/Microsoft.Authorization/roleDefinitions/%s","principalId":"%s","principalType":"ServicePrincipal"}}' \
+    "$sub_id" "$rolle" "$mi_princ")"
 
-# AcrPush: bygge og legge opp bildet.
-az role assignment create --assignee-object-id "$mi_princ" \
-  --assignee-principal-type ServicePrincipal \
-  --role "AcrPush" --scope "$acr_id" -o none 2>/dev/null || true
+  if az rest --method PUT \
+      --url "https://management.azure.com${scope}/providers/Microsoft.Authorization/roleAssignments/${g}?api-version=2022-04-01" \
+      --body "$body" \
+      -o none 2>/dev/null; then
+    echo "    $beskrivelse"
+  else
+    echo "    $beskrivelse (fantes allerede)"
+  fi
+}
+
+# Contributor: oppdatere container-appen. AcrPush: legge opp nye bilder.
+tildel_rolle "$gruppe_id" "b24988ac-6180-42a0-ab88-20f7382dd24c" "Contributor på ressursgruppen"
+tildel_rolle "$acr_id"    "8311e382-0749-4cb8-b61a-304f252e45ec" "AcrPush på registeret"
+
+echo "    (rettigheter bruker et par minutter på å tre i kraft)"
 
 # ---------------------------------------------------------------------------
-# 4. Legg verdiene inn i GitHub
+# 5. Legg verdiene inn i GitHub
 # ---------------------------------------------------------------------------
 echo
 if command -v gh >/dev/null 2>&1; then
@@ -123,12 +156,17 @@ if command -v gh >/dev/null 2>&1; then
   gh secret set AZURE_CLIENT_ID       --repo "$REPO" --body "$mi_client"
   gh secret set AZURE_TENANT_ID       --repo "$REPO" --body "$tenant_id"
   gh secret set AZURE_SUBSCRIPTION_ID --repo "$REPO" --body "$sub_id"
-  echo "    tre verdier satt"
+
+  # Miljøet må finnes, ellers avvises federated credential for «produksjon».
+  gh api -X PUT "repos/$REPO/environments/produksjon" --silent 2>/dev/null \
+    && echo "    miljøet «produksjon» er på plass" \
+    || echo "    lag miljøet «produksjon» manuelt under Settings > Environments"
 else
   echo "gh mangler. Legg disse inn manuelt under Settings > Secrets > Actions:"
   echo "  AZURE_CLIENT_ID       $mi_client"
   echo "  AZURE_TENANT_ID       $tenant_id"
   echo "  AZURE_SUBSCRIPTION_ID $sub_id"
+  echo "og lag miljøet «produksjon» under Settings > Environments."
 fi
 
 cat <<SLUTT
@@ -138,10 +176,9 @@ Ferdig.
   Kart:  $kart
   Repo:  https://github.com/$REPO
 
-Fra nå av: hver merge til main bygger og ruller ut automatisk.
+Fra nå av bygger og ruller hver merge til main ut automatisk.
 
-Gjenstår i GitHub (Settings > Environments):
-  Lag miljøet «produksjon». Uten det virker ikke federated credential
-  for miljøet, og du får heller ikke lenken på utrullingen.
+Går første Actions-kjøring i vasken med «No subscriptions found», er det
+bare rettighetene som ikke har rukket å spre seg. Kjør den på nytt.
 
 SLUTT
