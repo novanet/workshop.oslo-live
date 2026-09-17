@@ -18,9 +18,13 @@ RUN dotnet publish src/OsloLive/OsloLive.csproj \
       -c Release -o /out --no-restore
 
 # Chiseled: ingen shell, ingen pakkebehandler, kjører som ikke-root.
-# Rundt en tredjedel av størrelsen på det vanlige aspnet-bildet, som
-# betyr raskere nedlasting og raskere oppstart av en ny revisjon.
-FROM mcr.microsoft.com/dotnet/aspnet:10.0-noble-chiseled
+# Mye mindre enn det vanlige aspnet-bildet, som betyr raskere nedlasting
+# og raskere oppstart av en ny revisjon.
+#
+# Det må være «-extra»-varianten. Den vanlige chiseled kjører uten ICU, i
+# globalization-invariant mode, og da kaster `new CultureInfo("nb-NO")` i
+# Program.cs ved oppstart. Appen er norsk med vilje, så den trenger ICU.
+FROM mcr.microsoft.com/dotnet/aspnet:10.0-noble-chiseled-extra
 
 WORKDIR /app
 COPY --from=build /out .
