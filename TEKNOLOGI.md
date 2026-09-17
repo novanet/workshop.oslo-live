@@ -10,8 +10,8 @@ Hva Oslo Live er bygget med, og hvorfor. Kort nok til at en agent kan lese hele 
 | Web | ASP.NET Core minimal API | Hele API-et er 40 linjer i `Program.cs`. Ingen controllere, ingen MVC. |
 | JSON | `System.Text.Json` | Følger med. Ingen Newtonsoft. |
 | HTTP | `HttpClient` via `AddHttpClient<T>` | Riktig livssyklus på socketene uten at du trenger tenke på det. |
-| Kart | Leaflet 1.9.4 fra CDN | Én `<script>`-tag. Ingen npm, ingen bundler, ingen byggesteg for frontend. |
-| Kartfliser | OpenStreetMap, mørklagt i CSS | Ingen API-nøkkel. Merk: CARTO krever nøkkel nå — derfor ikke dem. |
+| Kart | MapLibre GL JS 4.7.1 fra CDN | Vektorkart med ekte 3D. Én `<script>`-tag, ingen npm, ingen bundler. |
+| Kartfliser | OpenFreeMap (vektor) | Gratis, ingen nøkkel, ingen kvote. Merk: CARTO og MapTiler krever nøkkel — derfor ikke dem. |
 | Tester | xUnit + `WebApplicationFactory` | Standard i .NET. Fabrikken starter hele appen i minnet. |
 | Data | [Allemannsdata](https://allemannsdata.com) | Norske offentlige data. MCP for å utforske, vanlig JSON over HTTP i drift. |
 
@@ -130,7 +130,9 @@ public void Punkt_utenfor_utsnittet_blir_forkastet()
 
 Det er et bevisst valg. En agent kan endre den uten å sette opp node, og du kan lese hele frontenden på to minutter. Vokser den ut av det, er det en issue verdt å ta — ikke noe du gjør på si.
 
-Leaflet lastes fra `unpkg.com`. Trenger du et Leaflet-tillegg (issue 17 om klynging, for eksempel), last det fra samme sted og pin versjonen.
+MapLibre lastes fra cdnjs med pinnet versjon. Trenger du et tillegg, last det fra samme sted og pin det på samme måte.
+
+Kartet står i 3D: `pitch` 58 grader, og bygningslaget `building-3d` fra OpenFreeMap-stilen er farget for å passe resten. Det er dette som gjør at en demo på storskjerm ser ut som noe. Knappene nede til høyre skifter mellom 3D og flatt, og «Snurr» roterer kameraet sakte — nyttig når kartet står på skjermen gjennom dagen.
 
 ## Verifisering før du leverer
 

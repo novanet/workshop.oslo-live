@@ -9,7 +9,7 @@ Les dette før du legger til noe større enn ett lag. Agenten din har fått den 
 Hele produktet er én abstraksjon:
 
 ```
-ILag  →  Kartlag (GeoJSON)  →  Leaflet
+ILag  →  Kartlag (GeoJSON)  →  MapLibre
 ```
 
 Et lag vet én ting: hvordan hente sine egne punkter. Det vet ingenting om de andre lagene, om kartet, eller om hvordan det blir tegnet. Legger du til et lag, rører du to filer: din egen i `Lag/`, og én linje i `Program.cs`.
@@ -90,7 +90,7 @@ Noen issuer ber om ting som ikke passer i `ILag` — adressesøk, historikk, tel
 
 - Legg endepunktet i `Program.cs` ved siden av de andre.
 - Hold det på samme form: `/api/<substantiv>`, JSON ut, ingen tilstand.
-- Frontendendringer hører hjemme i `wwwroot/index.html`. Den er med vilje én fil uten byggesteg — ingen npm, ingen bundler. Det holder for det vi driver med, og det gjør at en agent kan endre den uten å sette opp et verktøykjede først.
+- Frontendendringer hører hjemme i `wwwroot/index.html`. Den er med vilje én fil uten byggesteg — ingen npm, ingen bundler. Det holder for det vi driver med, og det gjør at en agent kan endre den uten å sette opp en verktøykjede først. Kartet er MapLibre GL JS med vektorfliser fra OpenFreeMap, og står i 3D med bygninger.
 
 ## Gode vaner i akkurat dette repoet
 

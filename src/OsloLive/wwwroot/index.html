@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Oslo Live</title>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.js"></script>
 <style>
   :root {
     --bg: #0d1117; --panel: #161b22; --kant: #30363d;
@@ -14,16 +14,19 @@
   * { box-sizing: border-box; }
   html, body { margin: 0; height: 100%; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; background: var(--bg); color: var(--tekst); }
   #kart { position: absolute; inset: 0; background: var(--bg); }
-  .leaflet-tile-pane { filter: invert(1) hue-rotate(180deg) brightness(.85) contrast(.9) saturate(.6); }
+
   .panel {
-    position: absolute; top: 16px; left: 16px; z-index: 1000; width: 300px;
-    background: var(--panel); border: 1px solid var(--kant); border-radius: 12px;
-    padding: 16px; box-shadow: 0 8px 32px rgba(0,0,0,.5);
+    position: absolute; top: 16px; left: 16px; z-index: 10; width: 300px;
+    background: color-mix(in srgb, var(--panel) 92%, transparent);
+    border: 1px solid var(--kant); border-radius: 12px;
+    padding: 16px; box-shadow: 0 8px 32px rgba(0,0,0,.6);
+    backdrop-filter: blur(10px);
+    max-height: calc(100% - 32px); overflow-y: auto;
   }
   .panel h1 { margin: 0 0 2px; font-size: 20px; letter-spacing: -.02em; }
   .panel .under { margin: 0 0 14px; font-size: 12px; color: var(--dempet); }
   .lag { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 8px; cursor: pointer; }
-  .lag:hover { background: rgba(255,255,255,.04); }
+  .lag:hover { background: rgba(255,255,255,.05); }
   .lag input { accent-color: var(--aksent); width: 16px; height: 16px; cursor: pointer; }
   .lag .ikon { font-size: 17px; width: 22px; text-align: center; }
   .lag .navn { flex: 1; font-size: 14px; }
@@ -32,12 +35,43 @@
   .lag .antall.ok { color: var(--ok); }
   .tom { font-size: 13px; color: var(--dempet); line-height: 1.5; padding: 4px 2px; }
   .bunn { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--kant); font-size: 11px; color: var(--dempet); display: flex; justify-content: space-between; }
-  .leaflet-popup-content-wrapper, .leaflet-popup-tip { background: var(--panel); color: var(--tekst); border: 1px solid var(--kant); }
-  .leaflet-popup-content { margin: 12px 14px; font-size: 13px; line-height: 1.6; }
-  .leaflet-popup-content b { display: block; font-size: 14px; margin-bottom: 4px; }
-  .leaflet-popup-content .rad { color: var(--dempet); }
-  .leaflet-popup-content .rad span { color: var(--tekst); }
-  .merke { font-size: 20px; text-align: center; line-height: 1; text-shadow: 0 0 6px rgba(0,0,0,.8); }
+
+  /* Kameraknapper */
+  .kamera {
+    position: absolute; bottom: 24px; right: 16px; z-index: 10;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .kamera button {
+    background: color-mix(in srgb, var(--panel) 92%, transparent);
+    border: 1px solid var(--kant); color: var(--tekst);
+    border-radius: 8px; padding: 8px 12px; font-size: 12px; cursor: pointer;
+    backdrop-filter: blur(10px); font-family: inherit;
+  }
+  .kamera button:hover { border-color: var(--aksent); color: var(--aksent); }
+  .kamera button[aria-pressed="true"] { border-color: var(--aksent); color: var(--aksent); }
+
+  /* Markører */
+  .merke {
+    font-size: 22px; line-height: 1; cursor: pointer;
+    filter: drop-shadow(0 3px 5px rgba(0,0,0,.9));
+    transition: transform .12s ease;
+  }
+  .merke:hover { transform: scale(1.35); }
+
+  .maplibregl-popup-content {
+    background: var(--panel); color: var(--tekst);
+    border: 1px solid var(--kant); border-radius: 10px;
+    padding: 12px 14px; font-size: 13px; line-height: 1.6;
+    box-shadow: 0 8px 28px rgba(0,0,0,.6);
+  }
+  .maplibregl-popup-tip { border-top-color: var(--panel) !important; border-bottom-color: var(--panel) !important; }
+  .maplibregl-popup-close-button { color: var(--dempet); font-size: 18px; padding: 2px 7px; }
+  .maplibregl-popup-content b { display: block; font-size: 14px; margin-bottom: 4px; }
+  .maplibregl-popup-content .rad { color: var(--dempet); }
+  .maplibregl-popup-content .rad span { color: var(--tekst); }
+  .maplibregl-ctrl-group { background: var(--panel) !important; border: 1px solid var(--kant); }
+  .maplibregl-ctrl-group button { background: transparent !important; }
+  .maplibregl-ctrl-group button span { filter: invert(1); }
 </style>
 </head>
 <body>
@@ -53,14 +87,66 @@
   </div>
 </div>
 
-<script>
-const kart = L.map('kart', { zoomControl: false }).setView([59.9139, 10.7522], 12);
-L.control.zoom({ position: 'bottomright' }).addTo(kart);
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '&copy; OpenStreetMap · data: allemannsdata.com',
-  maxZoom: 19
-}).addTo(kart);
+<div class="kamera">
+  <button id="snurr" type="button" aria-pressed="false">Snurr</button>
+  <button id="flatt" type="button">2D</button>
+  <button id="hjem" type="button">Sentrum</button>
+</div>
 
+<script>
+const SENTRUM = [10.7522, 59.9139];
+
+const kart = new maplibregl.Map({
+  container: 'kart',
+  style: 'https://tiles.openfreemap.org/styles/liberty',
+  center: SENTRUM,
+  zoom: 14.2,
+  pitch: 58,        // tittet kamera: det er dette som gjør bygningene synlige
+  bearing: -22,
+  antialias: true,
+  preserveDrawingBuffer: true,   // lar deg ta skjermbilde av kartet til slides
+  attributionControl: { compact: true }
+});
+
+kart.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), 'bottom-right');
+
+kart.on('style.load', () => {
+  // Mørkere underlag, så datapunktene er det som lyser.
+  for (const lag of kart.getStyle().layers) {
+    if (lag.type === 'background') {
+      kart.setPaintProperty(lag.id, 'background-color', '#11161d');
+    } else if (lag.type === 'fill' && /water/.test(lag.id)) {
+      kart.setPaintProperty(lag.id, 'fill-color', '#0b1a2b');
+    } else if (lag.type === 'fill' && /land|earth|park|wood|grass/.test(lag.id)) {
+      kart.setPaintProperty(lag.id, 'fill-color', '#161c24');
+    } else if (lag.type === 'symbol') {
+      try {
+        kart.setPaintProperty(lag.id, 'text-color', '#7d8794');
+        kart.setPaintProperty(lag.id, 'text-halo-color', '#0d1117');
+      } catch (e) { /* ikke alle symbollag har tekst */ }
+    } else if (lag.type === 'line' && /road|transportation|bridge/.test(lag.id)) {
+      try { kart.setPaintProperty(lag.id, 'line-color', '#28303b'); } catch (e) {}
+    }
+  }
+
+  // Bygningene i tre dimensjoner. Stilen har allerede laget, vi gir det farge.
+  if (kart.getLayer('building-3d')) {
+    kart.setPaintProperty('building-3d', 'fill-extrusion-color', '#1e2732');
+    kart.setPaintProperty('building-3d', 'fill-extrusion-opacity', 0.92);
+    kart.setPaintProperty('building-3d', 'fill-extrusion-vertical-gradient', true);
+  }
+
+  // Litt dis i horisonten gir dybde uten å skjule noe.
+  try {
+    kart.setFog({ range: [1, 12], color: '#0d1117', 'horizon-blend': 0.3 });
+  } catch (e) { /* eldre maplibre */ }
+
+  start();
+});
+
+// ---------------------------------------------------------------------------
+// Lagene
+// ---------------------------------------------------------------------------
 const lagene = new Map();
 
 function popup(e) {
@@ -79,14 +165,28 @@ async function hent(id) {
     const svar = await fetch('/api/lag/' + id);
     if (!svar.ok) throw new Error('HTTP ' + svar.status);
     const geo = await svar.json();
-    oppf.gruppe.clearLayers();
-    L.geoJSON(geo, {
-      pointToLayer: (f, latlng) => L.marker(latlng, {
-        icon: L.divIcon({ className: '', html: `<div class="merke">${oppf.ikon}</div>`, iconSize: [22, 22] })
-      }),
-      onEachFeature: (f, l) => l.bindPopup(popup(f.properties ?? {}))
-    }).addTo(oppf.gruppe);
-    oppf.antall = geo.features?.length ?? 0;
+
+    for (const m of oppf.markorer) m.remove();
+    oppf.markorer = [];
+
+    for (const f of (geo.features ?? [])) {
+      const c = f.geometry?.coordinates;
+      if (!Array.isArray(c) || c.length < 2) continue;
+
+      const el = document.createElement('div');
+      el.className = 'merke';
+      el.textContent = oppf.ikon;
+
+      const m = new maplibregl.Marker({ element: el })
+        .setLngLat([c[0], c[1]])
+        .setPopup(new maplibregl.Popup({ offset: 16, closeButton: true })
+          .setHTML(popup(f.properties ?? {})));
+
+      if (oppf.på) m.addTo(kart);
+      oppf.markorer.push(m);
+    }
+
+    oppf.antall = oppf.markorer.length;
     teller.textContent = oppf.antall;
     teller.className = 'antall ' + (oppf.antall ? 'ok' : '');
   } catch (e) {
@@ -105,7 +205,11 @@ function oppdaterBunn() {
 }
 
 async function start() {
-  const lag = await (await fetch('/api/lag')).json();
+  let lag = [];
+  try {
+    lag = await (await fetch('/api/lag')).json();
+  } catch (e) { /* vises under */ }
+
   const liste = document.getElementById('lagliste');
 
   if (!lag.length) {
@@ -115,7 +219,7 @@ async function start() {
 
   liste.innerHTML = '';
   for (const l of lag) {
-    lagene.set(l.id, { ikon: l.ikon || '📍', gruppe: L.layerGroup().addTo(kart), antall: 0, på: true });
+    lagene.set(l.id, { ikon: l.ikon || '📍', markorer: [], antall: 0, på: true });
 
     const rad = document.createElement('label');
     rad.className = 'lag';
@@ -125,7 +229,9 @@ async function start() {
     rad.querySelector('input').addEventListener('change', ev => {
       const oppf = lagene.get(l.id);
       oppf.på = ev.target.checked;
-      ev.target.checked ? oppf.gruppe.addTo(kart) : oppf.gruppe.remove();
+      for (const m of oppf.markorer) {
+        if (oppf.på) { m.addTo(kart); } else { m.remove(); }
+      }
       oppdaterBunn();
     });
     liste.appendChild(rad);
@@ -136,7 +242,41 @@ async function start() {
   setInterval(() => lagene.forEach((_, id) => hent(id)), 15000);
 }
 
-start();
+// ---------------------------------------------------------------------------
+// Kamera
+// ---------------------------------------------------------------------------
+let snurrer = false;
+let snurrId = null;
+
+function snurrSteg() {
+  if (!snurrer) return;
+  kart.setBearing(kart.getBearing() + 0.08);
+  snurrId = requestAnimationFrame(snurrSteg);
+}
+
+document.getElementById('snurr').addEventListener('click', ev => {
+  snurrer = !snurrer;
+  ev.currentTarget.setAttribute('aria-pressed', String(snurrer));
+  if (snurrer) { snurrSteg(); } else if (snurrId) { cancelAnimationFrame(snurrId); }
+});
+
+document.getElementById('flatt').addEventListener('click', ev => {
+  const flatt = kart.getPitch() > 10;
+  kart.easeTo({ pitch: flatt ? 0 : 58, bearing: flatt ? 0 : -22, duration: 900 });
+  ev.currentTarget.textContent = flatt ? '3D' : '2D';
+});
+
+document.getElementById('hjem').addEventListener('click', () => {
+  kart.flyTo({ center: SENTRUM, zoom: 14.2, pitch: 58, bearing: -22, duration: 1600 });
+});
+
+// Stopp snurringen når noen tar tak i kartet selv.
+kart.on('mousedown', () => {
+  if (snurrer) {
+    snurrer = false;
+    document.getElementById('snurr').setAttribute('aria-pressed', 'false');
+  }
+});
 </script>
 </body>
 </html>

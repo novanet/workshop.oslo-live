@@ -42,7 +42,7 @@ Start med P1. Et nytt kartlag hjelper ikke når punktene havner i Indiahavet.
 ```
 src/OsloLive/Kart/       kartmotoren: GeoJSON, Oslo-utsnittet, Allemannsdata-klienten
 src/OsloLive/Lag/        ett lag per datakilde
-src/OsloLive/wwwroot/    Leaflet-kartet
+src/OsloLive/wwwroot/    kartet (MapLibre GL JS, 3D)
 tests/OsloLive.Tester/   xUnit-tester
 issues/                  kildeteksten til issuene i dette repoet
 ```
