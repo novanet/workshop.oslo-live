@@ -1,13 +1,11 @@
 {
-  "oppdatert": "2026-09-17T23:40:42",
+  "oppdatert": "2026-09-17T23:42:27",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [],
   "produkt": {
     "testerBestatt": 6,
     "testerFeilet": 20,
-    "issuerLost": [
-      2
-    ],
+    "issuerLost": [],
     "antallIssuer": 25,
     "feilmelding": null
   },
