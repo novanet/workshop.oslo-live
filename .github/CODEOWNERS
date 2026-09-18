@@ -1,0 +1,6 @@
+# Hvem som maa godkjenne for at en PR kan merges til main.
+# Sensor kjoerer med kurslederens konto, saa godkjenningen derfra teller.
+# Deltakerne kan review-e hverandre, men det gir ingen merge.
+# Legg til hjelperne paa samme linje: * @hbrotan @hjelper1 @hjelper2
+
+* @hbrotan
