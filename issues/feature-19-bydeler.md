@@ -1,5 +1,5 @@
 Tell punkter per bydel
-enhancement,P3
+enhancement,P3,5 poeng
 
 Vi vil vite hvor i byen det skjer noe. Et panel som viser antall punkter per bydel, for det laget som er valgt.
 

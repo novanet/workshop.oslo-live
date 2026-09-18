@@ -1,5 +1,5 @@
 Kartet oppdaterer seg ikke, dataene står stille
-bug,P1
+bug,P1,1 poeng
 
 Poenget med Oslo Live er at dataene er ferske. Frontenden henter lagene på nytt hvert 15. sekund, men svarene er identiske i en halvtime av gangen. Det merkes godt på lag som beveger seg: skip står bom stille i fjorden.
 

@@ -1,5 +1,5 @@
 Nytt lag: idretts- og friluftsanlegg
-enhancement,P3
+enhancement,P3,2 poeng
 
 Anleggsregisteret vet om hver eneste fotballbane, svømmehall og lysløype i landet. Vi vil ha Oslo-anleggene på kartet.
 

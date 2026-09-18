@@ -1,5 +1,5 @@
 Tegn bydelsgrensene
-enhancement,P3
+enhancement,P3,5 poeng
 
 Vi vil se hvor bydelene går, som tynne svarte streker over kartet.
 

@@ -1,5 +1,5 @@
 Nytt lag: badetemperaturer
-enhancement,P3
+enhancement,P3,1 poeng
 
 Hvor kaldt er det egentlig i fjorden? Vi vil ha badeplassene i og rundt Oslo på kartet med siste målte temperatur.
 

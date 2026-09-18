@@ -1,5 +1,5 @@
 Varsle når noe skjer
-enhancement,P3
+enhancement,P3,5 poeng
 
 Vi vil bli gjort oppmerksom på ting uten å stirre på skjermen.
 

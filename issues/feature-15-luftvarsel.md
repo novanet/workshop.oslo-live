@@ -1,5 +1,5 @@
 Vis varselet for luftkvalitet, ikke bare målingen
-enhancement,P3
+enhancement,P3,3 poeng
 
 Luftkvalitetslaget viser hva som er målt nå. Det finnes også et modellert varsel for de neste to døgnene. Vi vil se det.
 

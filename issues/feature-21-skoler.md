@@ -1,5 +1,5 @@
 Nytt lag: skoler og barnehager
-enhancement,P3
+enhancement,P3,3 poeng
 
 Vi vil se skolene og barnehagene i Oslo på kartet.
 

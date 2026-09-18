@@ -41,6 +41,28 @@ Backloggen er bred med vilje. Der er nye datakilder, men også tidslinje, varmek
 
 **Issue 1–5** er feilene, **6–19** er kjernelagene på kartet, og **20 og oppover** er alt annet. Numrene er faste.
 
+### Hva en issue er verdt
+
+Hver issue har en etikett som sier hvor mange poeng den gir på resultattavlen. Skalaen er den samme som for story points, fordi vanskelighet ikke vokser jevnt:
+
+| | Hva det betyr | Antall |
+|---:|---|---:|
+| **1 poeng** | Liten og avgrenset. Du ser hvor det er. | 6 |
+| **2 poeng** | Ett lag eller én endring med en kjent form. | 17 |
+| **3 poeng** | Krever at du finner ut av noe først. | 20 |
+| **5 poeng** | Flere kilder, et nytt mønster, eller lagring. | 11 |
+| **8 poeng** | Åpen oppgave. Du må ta en beslutning og begrunne den. | 3 |
+
+Til sammen 179 poeng.
+
+Tre ting er verdt å vite før du velger:
+
+- **Feil og kjernelag må bestå en skjult test.** En merget pull request på issue 1–19 gir null poeng hvis testen ikke passerer. Resten gir poeng når de er merget.
+- **Første gode pull request tar poengene.** Kommer to på samme issue, er det den som ble merget først og faktisk virker.
+- **Kostnaden trekkes fra.** Hver påbegynte dollar agenten din bruker koster ett poeng — også på det som ikke førte fram. Et 8-poengs forsøk som ikke lykkes er ikke gratis.
+
+Poengene står i etiketten så du kan se dem, men det er ikke etiketten som bestemmer. Å gi en issue flere poeng på GitHub hjelper deg ikke.
+
 ## Slik er koden satt sammen
 
 ```

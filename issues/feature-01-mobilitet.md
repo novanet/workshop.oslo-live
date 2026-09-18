@@ -1,5 +1,5 @@
 Nytt lag: elsparkesykler og bysykler
-enhancement,P2
+enhancement,P2,2 poeng
 
 Vi vil se delt mobilitet i sanntid på kartet: elsparkesykler, bysykler og delebiler som står ledige i Oslo akkurat nå.
 

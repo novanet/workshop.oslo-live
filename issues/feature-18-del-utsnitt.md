@@ -1,5 +1,5 @@
 Del kartutsnittet som en lenke
-enhancement,P3
+enhancement,P3,2 poeng
 
 Når noen finner noe interessant, vil vi kunne sende en lenke som åpner akkurat det samme utsnittet med de samme lagene på.
 

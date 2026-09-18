@@ -1,5 +1,5 @@
 Nytt lag: trafikkregistreringspunkt
-enhancement,P3
+enhancement,P3,1 poeng
 
 Statens vegvesen teller biler på faste punkter langs veinettet. Vi vil se punktene i Oslo på kartet.
 

@@ -1,5 +1,5 @@
 Eksporter det du ser
-enhancement,P3
+enhancement,P3,2 poeng
 
 Vi vil kunne laste ned punktene som vises akkurat nå, som GeoJSON eller CSV.
 

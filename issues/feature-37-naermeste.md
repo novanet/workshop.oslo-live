@@ -1,5 +1,5 @@
 Hva er nærmest her?
-enhancement,P3
+enhancement,P3,3 poeng
 
 Klikk et sted på kartet og få vite hva som er nærmest fra hvert lag.
 

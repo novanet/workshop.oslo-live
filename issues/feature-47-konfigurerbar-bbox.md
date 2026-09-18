@@ -1,5 +1,5 @@
 Gjør kartutsnittet konfigurerbart
-enhancement,P3
+enhancement,P3,5 poeng
 
 Oslo-boksen er hardkodet i `Geo`. Vi vil kunne flytte kartet til en annen by uten å endre kode.
 

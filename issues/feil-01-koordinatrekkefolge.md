@@ -1,5 +1,5 @@
 Alle punkter havner i havet, langt utenfor Norge
-bug,P1
+bug,P1,2 poeng
 
 Zoomer du ut på kartet, ligger punktene våre midt i Indiahavet i stedet for i Oslo. Selve dataene ser riktige ut: luftkvalitetsstasjonene har fornuftige koordinater når jeg kaller `/api/lag/luftkvalitet` og leser tallene. Det er plasseringen på kartet som er feil.
 

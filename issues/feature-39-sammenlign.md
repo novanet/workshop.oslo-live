@@ -1,5 +1,5 @@
 Sammenlign to tidspunkt
-enhancement,P3
+enhancement,P3,5 poeng
 
 Hvor mange flere elsparkesykler står det i sentrum klokka åtte enn klokka to om natten?
 

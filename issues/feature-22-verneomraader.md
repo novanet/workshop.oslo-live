@@ -1,5 +1,5 @@
 Nytt lag: verneområder og naturtyper
-enhancement,P3
+enhancement,P3,3 poeng
 
 Markagrensa, naturreservatene og de vernede områdene rundt Oslo hører hjemme på kartet.
 

@@ -1,5 +1,5 @@
 Fargene må virke for alle
-enhancement,P3
+enhancement,P3,2 poeng
 
 Lagene skilles med farge i dag. Rundt åtte prosent av menn ser rødt og grønt likt.
 

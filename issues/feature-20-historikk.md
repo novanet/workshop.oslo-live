@@ -1,5 +1,5 @@
 Ta vare på et øyeblikksbilde hver time
-enhancement,P3
+enhancement,P3,5 poeng
 
 Alt vi viser er ferskvare, og forsvinner. Vi vil kunne se tilbake: hvor mange elsparkesykler sto i sentrum klokka åtte i morges?
 

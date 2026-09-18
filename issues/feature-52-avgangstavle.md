@@ -1,5 +1,5 @@
 Avgangstavle for Gardermoen
-enhancement,P3
+enhancement,P3,3 poeng
 
 Vi vil se hvilke fly som går fra og lander på Gardermoen den nærmeste timen, uten å forlate kartet.
 

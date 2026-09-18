@@ -1,5 +1,5 @@
 Nytt lag: togtrafikk
-enhancement,P3
+enhancement,P3,3 poeng
 
 Vi har busser og trikker. Nå vil vi ha togene også — både persontog og godstog gjennom Oslo.
 

@@ -1,5 +1,5 @@
 Vær grei mot kildene
-enhancement,P2
+enhancement,P2,3 poeng
 
 Med tjue lag og mange som ser på kartet samtidig kan vi lage mye trafikk mot API-er som ingen tar betalt for.
 

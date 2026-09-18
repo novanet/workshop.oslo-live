@@ -1,5 +1,5 @@
 Vis været over kartet
-enhancement,P3
+enhancement,P3,3 poeng
 
 Temperatur, vind og nedbør for Oslo, øverst i panelet.
 

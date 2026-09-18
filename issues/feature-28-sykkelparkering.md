@@ -1,5 +1,5 @@
 Nytt lag: sykkelparkering
-enhancement,P3
+enhancement,P3,1 poeng
 
 Hvor kan man sette fra seg sykkelen? Vi vil ha sykkelparkeringene i sentrum på kartet.
 

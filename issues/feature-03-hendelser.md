@@ -1,5 +1,5 @@
 Nytt lag: politilogg og nyhetshendelser
-enhancement,P2
+enhancement,P2,2 poeng
 
 Vi vil se hva som skjer i byen akkurat nå: meldinger fra politiloggen og geolokaliserte nyhetshendelser.
 

@@ -1,5 +1,5 @@
 Kartet blir tregt med mange punkter
-enhancement,P3
+enhancement,P3,5 poeng
 
 Hvert punkt er et HTML-element. Med flere tusen markører sliter nettleseren.
 

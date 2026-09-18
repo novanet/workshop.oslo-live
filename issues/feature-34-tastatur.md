@@ -1,5 +1,5 @@
 Tastatursnarveier
-enhancement,P3
+enhancement,P3,1 poeng
 
 Når kartet står på storskjerm vil vi ikke lete etter museknapper.
 

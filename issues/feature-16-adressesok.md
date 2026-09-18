@@ -1,5 +1,5 @@
 Søk etter adresse og hopp dit på kartet
-enhancement,P2
+enhancement,P2,3 poeng
 
 Vi vil kunne skrive «Karl Johans gate 1» i et søkefelt og få kartet til å zoome dit.
 

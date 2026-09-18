@@ -1,5 +1,5 @@
 Slå sammen punkter som ligger oppå hverandre
-enhancement,P2
+enhancement,P2,5 poeng
 
 Med flere lag på samtidig blir sentrum et eneste rot av ikoner. Vi vil ha klynging: punkter som ligger tett samles i én markør med antall, og sprer seg når du zoomer inn.
 

@@ -1,5 +1,5 @@
 Nytt lag: skip i Oslofjorden
-enhancement,P2
+enhancement,P2,2 poeng
 
 Oslofjorden er full av ferger, lastebåter og fritidsbåter. Vi vil se dem bevege seg på kartet.
 

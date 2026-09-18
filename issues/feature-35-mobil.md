@@ -1,5 +1,5 @@
 Kartet må virke på mobil
-enhancement,P3
+enhancement,P3,3 poeng
 
 Panelet dekker halve skjermen på en telefon.
 

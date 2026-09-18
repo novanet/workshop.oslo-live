@@ -1,5 +1,5 @@
 Nytt lag: kollektivtrafikk som beveger seg
-enhancement,P2
+enhancement,P2,3 poeng
 
 Dette er laget vi vil ha på storskjermen. Busser, trikker, T-bane og tog i Oslo rapporterer posisjonen sin i sanntid. Vi vil se dem kjøre.
 

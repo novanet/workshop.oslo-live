@@ -1,5 +1,5 @@
 Skru tiden tilbake med en tidslinje
-enhancement,P2
+enhancement,P2,8 poeng
 
 Kartet viser bare nå. Vi vil kunne dra i en tidslinje og se hvordan byen så ut for en time siden, eller i går morges.
 

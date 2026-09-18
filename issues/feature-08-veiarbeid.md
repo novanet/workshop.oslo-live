@@ -1,5 +1,5 @@
 Nytt lag: veiarbeid og stengte veier
-enhancement,P3
+enhancement,P3,2 poeng
 
 Statens vegvesen melder fra om veiarbeid, stengte veier og hendelser. Vi vil se dem på kartet så vi vet hvor det er kø.
 

@@ -1,5 +1,5 @@
 Prøv én gang til når en kilde svarer dårlig
-enhancement,P2
+enhancement,P2,3 poeng
 
 Offentlige API-er er ustabile. Ett hikk skal ikke gi rødt lag i fem minutter.
 

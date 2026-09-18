@@ -1,5 +1,5 @@
 En helsesjekk som betyr noe
-enhancement,P3
+enhancement,P3,3 poeng
 
 `/api/helse` svarer «ok» selv om alle kildene er nede.
 

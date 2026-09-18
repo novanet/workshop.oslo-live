@@ -1,5 +1,5 @@
 Nytt lag: kulturminner
-enhancement,P3
+enhancement,P3,3 poeng
 
 Riksantikvaren har rundt 630 000 kulturminner i Askeladden. Vi vil se dem som ligger i Oslo.
 

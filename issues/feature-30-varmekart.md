@@ -1,5 +1,5 @@
 Varmekart i stedet for punkter
-enhancement,P3
+enhancement,P3,5 poeng
 
 Med mange punkter blir sentrum et rot. Vi vil kunne bytte et lag til varmekart, så man ser hvor tettheten er.
 

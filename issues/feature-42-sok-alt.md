@@ -1,5 +1,5 @@
 Søk på tvers av alle lag
-enhancement,P3
+enhancement,P3,3 poeng
 
 Et søkefelt som leter i alt som vises på kartet.
 

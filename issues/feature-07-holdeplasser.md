@@ -1,5 +1,5 @@
 Nytt lag: holdeplasser og stasjoner
-enhancement,P3
+enhancement,P3,2 poeng
 
 Vi vil ha holdeplassene i Oslo på kartet, slik at kollektivlaget får noe å forholde seg til.
 

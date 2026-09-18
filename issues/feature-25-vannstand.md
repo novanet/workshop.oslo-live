@@ -1,5 +1,5 @@
 Vis vannstanden i fjorden
-enhancement,P3
+enhancement,P3,2 poeng
 
 Hvor høyt står sjøen akkurat nå? Vi vil se vannstand og tidevann for Oslo havn.
 

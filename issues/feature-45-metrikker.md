@@ -1,5 +1,5 @@
 Mål hva som skjer
-enhancement,P3
+enhancement,P3,3 poeng
 
 Vi vil vite hvor mange kall vi gjør, hvor ofte mellomlageret treffer, og hvor lang tid kildene bruker.
 

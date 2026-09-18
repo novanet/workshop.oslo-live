@@ -1,5 +1,5 @@
 Hent lagene parallelt
-enhancement,P2
+enhancement,P2,1 poeng
 
 Frontenden henter lagene ett om gangen. Med tjue lag tar en full oppdatering altfor lang tid.
 

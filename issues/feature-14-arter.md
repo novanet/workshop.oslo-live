@@ -1,5 +1,5 @@
 Nytt lag: artsobservasjoner
-enhancement,P3
+enhancement,P3,5 poeng
 
 Artsdatabanken har verifiserte observasjoner av arter over hele landet. Vi vil se hva folk har observert i Oslo.
 

@@ -1,5 +1,5 @@
 Nytt lag: museer og samlinger
-enhancement,P3
+enhancement,P3,3 poeng
 
 DigitaltMuseum har over ti millioner objekter fra norske museer. Vi vil se museene i Oslo på kartet, med et smakebit-objekt i popup-en.
 

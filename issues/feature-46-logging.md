@@ -1,5 +1,5 @@
 Strukturert logging
-enhancement,P3
+enhancement,P3,2 poeng
 
 Loggen er tekst i dag. Når kartet kjører i Azure vil vi kunne søke i den.
 

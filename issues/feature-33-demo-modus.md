@@ -1,5 +1,5 @@
 Demomodus for storskjerm
-enhancement,P2
+enhancement,P2,3 poeng
 
 Kartet skal stå på en skjerm hele dagen. Vi vil ha en modus som viser fram innholdet av seg selv.
 

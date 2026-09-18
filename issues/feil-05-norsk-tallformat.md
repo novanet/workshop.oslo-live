@@ -1,18 +1,20 @@
-Alle kall mot Allemannsdata feiler på norske maskiner
-bug,P1
+Tall i URL-ene får norsk desimalkomma
+bug,P1,3 poeng
 
-På maskinen min er hvert eneste lag rødt, og loggen viser at kallene mot Allemannsdata svarer med feil. På en kollegas engelskspråklige maskin virker akkurat den samme koden.
+Under en kodegjennomgang fant vi at adressene vi bygger mot Allemannsdata ser slik ut:
+
+```
+.../get_air_quality_nearby?lat=59%2C9139&lon=10%2C7522&limit=50
+```
+
+`59,9139` med komma. Det virker i dag — men bare fordi Allemannsdata er snill og leser komma som punktum. Den neste kilden vi kobler oss på gjør det kanskje ikke, og da feiler det bare på maskiner som kjører med norsk kultur. Det er den verste typen feil å lete etter: den virker hos utvikleren og ryker hos kunden.
 
 **Slik ser du det**
 
-Adressen som bygges ser slik ut:
-
-```
-.../kilder/luftkvalitet/get_air_quality_nearby?lat=59%2C9139&lon=10%2C7522&limit=50
-```
-
-`59,9139` med komma. API-et forventer punktum.
+Du ser det ikke på kartet. Det er hele problemet. Kall `Allemannsdata.ByggUrl` med norsk kultur og se på hva som kommer ut.
 
 **Forventet**
 
-Tall i en URL skal skrives på samme måte uansett hvilket språk maskinen kjører med. Appen skal fortsatt kjøre med norsk kultur ellers, så ikke fjern kulturoppsettet i `Program.cs`.
+Tall i en URL skal skrives med punktum uansett hvilket språk maskinen kjører med. Appen skal fortsatt kjøre med norsk kultur ellers, så ikke fjern kulturoppsettet i `Program.cs`.
+
+En feil uten synlig symptom kommer tilbake med mindre noe holder den fast. Skriv testen som gjør det.

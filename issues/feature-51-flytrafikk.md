@@ -1,5 +1,5 @@
 Nytt lag: fly i lufta over Oslo
-enhancement,P2
+enhancement,P2,8 poeng
 
 Vi vil se flytrafikken. Fly som er i lufta over byen, og fly som står på bakken på Gardermoen. Dette er laget vi har lyst til å ha på storskjermen når noen spør hva kartet er godt for.
 

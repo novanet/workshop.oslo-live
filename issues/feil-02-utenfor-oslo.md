@@ -1,5 +1,5 @@
 Steder langt utenfor Oslo slipper inn i kartet
-bug,P1
+bug,P1,2 poeng
 
 Kartet skal bare vise ting i Oslo og indre Oslofjord. Flere lag tar likevel med punkter fra helt andre deler av landet. Vi så blant annet en badeplass i Lillehammer og et målepunkt i Trøndelag.
 

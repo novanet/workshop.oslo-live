@@ -1,5 +1,5 @@
 Nytt lag: ladestasjoner for elbil
-enhancement,P3
+enhancement,P3,3 poeng
 
 Vi vil se de offentlige ladestasjonene i Oslo.
 

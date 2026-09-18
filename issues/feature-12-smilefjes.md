@@ -1,5 +1,5 @@
 Nytt lag: smilefjes fra Mattilsynet
-enhancement,P3
+enhancement,P3,8 poeng
 
 Mattilsynet gir spisesteder smilefjes etter tilsyn. Vi vil se karakterene på kartet.
 

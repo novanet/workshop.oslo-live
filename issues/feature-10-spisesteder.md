@@ -1,5 +1,5 @@
 Nytt lag: spisesteder
-enhancement,P3
+enhancement,P3,2 poeng
 
 Vi vil ha restauranter og kafeer i Oslo sentrum på kartet.
 

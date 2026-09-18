@@ -1,5 +1,5 @@
 Et statistikkpanel
-enhancement,P3
+enhancement,P3,2 poeng
 
 Vi vil se tall om det kartet viser, ikke bare punktene.
 

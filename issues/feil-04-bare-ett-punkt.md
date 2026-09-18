@@ -1,5 +1,5 @@
 Hvert lag viser bare ett eneste punkt
-bug,P1
+bug,P1,2 poeng
 
 Luftkvalitetslaget henter 18 målestasjoner fra kilden, men det tegnes bare én stasjon på kartet. Telleren i lagvelgeren viser «1». Det samme skjer for alle lag vi legger til.
 

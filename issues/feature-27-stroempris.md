@@ -1,5 +1,5 @@
 Vis strømprisen for Oslo
-enhancement,P3
+enhancement,P3,2 poeng
 
 Oslo ligger i prisområde NO1. Vi vil se hva strømmen koster nå, og når den er billigst i dag.
 
