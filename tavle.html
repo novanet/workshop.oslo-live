@@ -103,6 +103,7 @@
     background: var(--accent-soft); color: var(--accent); border: 1px solid transparent;
   }
   .merke.lag { background: transparent; border-color: var(--line); color: var(--muted); }
+  .merke b { font-weight: 600; margin-left: 3px; color: var(--ink); }
   .merke.ingen { background: transparent; border-color: var(--line); color: var(--muted); font-style: italic; }
 
   .tall { font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums; font-size: 15px; }
@@ -184,15 +185,13 @@
 
   function rad(d) {
     var merker = [];
-    (d.feil || []).forEach(function (f) {
-      merker.push('<span class="merke">#' + f.issue + ' ' + esc(f.navn) + '</span>');
-    });
-    (d.lag || []).forEach(function (l) {
-      merker.push('<span class="merke lag">#' + l.issue + ' ' + esc(l.navn) + '</span>');
-    });
-    (d.levert || []).forEach(function (l) {
-      merker.push('<span class="merke lag">#' + l.issue + ' ' + esc(l.navn) + '</span>');
-    });
+    function merke(x, klasse) {
+      var p = x.poeng != null ? ' <b>' + x.poeng + '</b>' : '';
+      return '<span class="merke' + klasse + '">#' + x.issue + ' ' + esc(x.navn) + p + '</span>';
+    }
+    (d.feil || []).forEach(function (f) { merker.push(merke(f, '')); });
+    (d.lag || []).forEach(function (l) { merker.push(merke(l, ' lag')); });
+    (d.levert || []).forEach(function (l) { merker.push(merke(l, ' lag')); });
     if (!merker.length) merker.push('<span class="merke ingen">ingenting ennå</span>');
 
     var dyrt = (d.dollar || 0) >= 5 ? ' dyrt' : '';
@@ -247,12 +246,12 @@
     }
 
     var r = data.regler || {};
+    var skala = (r.vanskelighet || [1, 2, 3, 5, 8]).join(' · ');
     document.getElementById('regler').innerHTML =
-      '<span>+' + (r.feil != null ? r.feil : 3) + ' fikset feil</span>' +
-      '<span>+' + (r.lag != null ? r.lag : 2) + ' kartlag som virker</span>' +
-      '<span>+' + (r.levert != null ? r.levert : 1) + ' annen issue levert</span>' +
+      '<span>Hver issue gir ' + skala + ' poeng etter vanskelighet</span>' +
       '<span>' + (r.utkast != null ? r.utkast : -1) + ' per PR som ikke bygger</span>' +
-      '<span>' + (r.perDollar != null ? r.perDollar : -1) + ' per påbegynte dollar</span>';
+      '<span>' + (r.perDollar != null ? r.perDollar : -1) + ' per påbegynte dollar</span>' +
+      (data.potten ? '<span>' + data.potten + ' poeng i potten</span>' : '');
   }
 
   function hent() {

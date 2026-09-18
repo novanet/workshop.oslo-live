@@ -1,19 +1,24 @@
 {
-  "oppdatert": "2026-09-17T23:42:27",
+  "oppdatert": "2026-09-18T09:07:42",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [],
   "produkt": {
     "testerBestatt": 6,
     "testerFeilet": 20,
     "issuerLost": [],
-    "antallIssuer": 25,
+    "antallIssuer": 57,
     "feilmelding": null
   },
   "regler": {
-    "feil": 3,
-    "lag": 2,
-    "levert": 1,
+    "vanskelighet": [
+      1,
+      2,
+      3,
+      5,
+      8
+    ],
     "utkast": -1,
     "perDollar": -1
-  }
+  },
+  "potten": 179
 }
