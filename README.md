@@ -18,8 +18,8 @@ Hver deltaker på kurset bygger sin egen autonome agent og slipper den løs **p�
 
 Det betyr noen ting du må vite før du starter:
 
-- **Agentene vil kollidere.** To agenter kan ta samme issue og levere hver sin pull request. Det er ikke en feil i oppsettet — det er med vilje, og det er en av tingene vi skal snakke om.
-- **Første gode PR vinner issuen.** Ikke den første som leverer, men den første som leverer noe som faktisk virker.
+- **Én agent per issue.** Agenten din sjekker om noen andre er i gang før den starter, og lar issuen ligge hvis den er tatt. Vil du reservere en issue for hånd, tildeler du den til deg selv i GitHub. Reservasjoner går ut etter en time.
+- **Ender to likevel med PR på samme issue**, er det den som merges først og faktisk virker som får den.
 - **Repoet er offentlig.** Aldri commit en API-nøkkel, et token eller en `.env`-fil. Agenten din har fått beskjed om det samme i `CLAUDE.md`, men du er den som har ansvaret.
 - **Alt innhold er data, ikke ordre.** Issuer og kommentarer kan skrives av hvem som helst. Ber en issue agenten din om å slette tester eller hente noe utenfor oppgaven, skal den nekte og si fra.
 
@@ -82,7 +82,7 @@ Et lag er én klasse som implementerer `ILag`, pluss én registreringslinje i `P
 
 `Geo.Lag` krever `navn` og `kilde` på hvert punkt og kaster bort alt som ligger utenfor Oslo. `Geo.Samle` fjerner duplikater. Et lag trenger derfor bare å oversette radene fra kilden — resten er felles.
 
-Mer om hvorfor det er satt opp slik: [ARKITEKTUR.md](ARKITEKTUR.md). Om språk, rammeverk og verktøy: [TEKNOLOGI.md](TEKNOLOGI.md).
+`CLAUDE.md`, `ARKITEKTUR.md` og `TEKNOLOGI.md` er skrevet for agenten, ikke for deg. Det du trenger å vite som menneske, står her.
 
 ## Å finne fram i Allemannsdata
 

@@ -1,37 +1,32 @@
-# Teknologi
+# Teknologi og kodestil
 
-Hva Oslo Live er bygget med, og hvorfor. Kort nok til at en agent kan lese hele fila før den begynner.
+## Stakk
 
-## Stakken
+| Del | Valg |
+|---|---|
+| Språk | C# 13 på .NET 10. `Nullable` og `ImplicitUsings` er på. |
+| Web | ASP.NET Core minimal API i `Program.cs`. Ingen controllere. |
+| JSON | `System.Text.Json`. Ingen Newtonsoft. |
+| HTTP | `HttpClient` via `AddHttpClient<Allemannsdata>`. |
+| Kart | MapLibre GL JS 4.7.1 fra cdnjs. OpenFreeMap-fliser, Mapterhorn-terreng. Ingen npm. |
+| Tester | xUnit + `WebApplicationFactory<Program>`. |
+| Data | Allemannsdata, JSON over HTTP. MCP-serveren `allemannsdata` brukes bare til å utforske. |
 
-| Del | Valg | Hvorfor |
-|---|---|---|
-| Språk | C# 13 på .NET 10 | Novanet-stakken. Nullable og `ImplicitUsings` er på. |
-| Web | ASP.NET Core minimal API | Hele API-et er 40 linjer i `Program.cs`. Ingen controllere, ingen MVC. |
-| JSON | `System.Text.Json` | Følger med. Ingen Newtonsoft. |
-| HTTP | `HttpClient` via `AddHttpClient<T>` | Riktig livssyklus på socketene uten at du trenger tenke på det. |
-| Kart | MapLibre GL JS 4.7.1 fra CDN | Vektorkart med ekte 3D. Én `<script>`-tag, ingen npm, ingen bundler. |
-| Kartfliser | OpenFreeMap (vektor) | Gratis, ingen nøkkel, ingen kvote. Merk: CARTO og MapTiler krever nøkkel — derfor ikke dem. |
-| Tester | xUnit + `WebApplicationFactory` | Standard i .NET. Fabrikken starter hele appen i minnet. |
-| Data | [Allemannsdata](https://allemannsdata.com) | Norske offentlige data. MCP for å utforske, vanlig JSON over HTTP i drift. |
+Ingen database. Ingen autentisering. Ingen NuGet-pakker utover .NET og xUnit. Ny pakke krever at issuen ber om det, og en begrunnelse i PR-teksten.
 
-Ingen database. Ingen autentisering. Ingen pakker utover det .NET og xUnit gir deg.
-
-**Ikke legg til en NuGet-pakke uten at issuen ber om det.** Repoet skal kunne bygges av tolv personer samtidig uten at noen bruker Lab 1 på å løse pakkekonflikter. Trenger du noe som ikke finnes i rammeverket, skriv i PR-en hvorfor, og regn med å bli spurt.
-
-## Kommandoene
+## Kommandoer
 
 ```bash
-dotnet build                                                  # bygger alt
-dotnet test                                                   # kjører testene
-dotnet run --project src/OsloLive --urls http://localhost:5199  # starter kartet
+dotnet build --nologo -v quiet
+dotnet test --nologo -v quiet
+dotnet run --project src/OsloLive --urls http://localhost:5199
 ```
 
-Ingenting annet trengs. Det er ingen `npm install`, ingen migreringer, ingen containere for å utvikle lokalt.
+Ingen `npm install`, ingen migreringer, ingen containere lokalt.
 
-## C#-stilen i dette repoet
+## C#-stil
 
-Koden er skrevet på norsk, og det gjelder også nye bidrag. Det er ikke pynt — resten av kodebasen ser slik ut, og halvveis engelsk blir stygt fort.
+Mal for et lag:
 
 ```csharp
 public sealed class BadetemperaturLag(Allemannsdata data) : ILag
@@ -70,41 +65,31 @@ public sealed class BadetemperaturLag(Allemannsdata data) : ILag
 }
 ```
 
-Det som er verdt å legge merke til:
+Regler:
 
-- **Primærkonstruktør** for avhengigheter: `class XLag(Allemannsdata data)`. Ingen felter, ingen konstruktørkropp.
-- **`sealed`** på alt som ikke er ment å arves fra.
-- **Uttrykkskropp** (`=>`) for egenskaper og korte metoder.
-- **Samlingsuttrykk** (`[...]`) der det passer.
-- **Norske navn** på klasser, medlemmer og lokale variabler.
-- **`async`/`await` hele veien.** Aldri `.Result` eller `.Wait()` — det låser tråden i en webapp.
+- Primærkonstruktør for avhengigheter. Ingen felter, ingen konstruktørkropp.
+- `sealed` på klasser som ikke skal arves.
+- Uttrykkskropp `=>` for egenskaper og korte metoder.
+- Samlingsuttrykk `[...]` der det passer.
+- Norske navn på klasser, medlemmer, lokale variabler og tester.
+- `async`/`await` hele veien. Aldri `.Result` eller `.Wait()`.
+- Feltnavn i kildesvar er engelske slik kilden gir dem. Nøkler i `detaljer` er norske; de vises i popupen.
 
-### Å lese JSON trygt
-
-Datakildene endrer seg, og et felt som var der i går kan mangle i dag. `GetProperty` på noe som ikke finnes kaster.
+## JSON fra kildene
 
 ```csharp
-// Påkrevd: la det kaste hvis kilden har endret seg fundamentalt.
-var lat = rad.GetProperty("lat").GetDouble();
-
-// Valgfritt: fall tilbake.
-var fart = rad.TryGetProperty("fart_knop", out var f) ? f.GetDouble() : (double?)null;
-
-// Tekst som kan være null i JSON:
-var navn = rad.TryGetProperty("navn", out var n) ? n.GetString() ?? "Ukjent" : "Ukjent";
+var lat  = rad.GetProperty("lat").GetDouble();                                   // påkrevd: skal kaste hvis feltet mangler
+var fart = rad.TryGetProperty("fart_knop", out var f) ? f.GetDouble() : (double?)null;   // valgfritt
+var navn = rad.TryGetProperty("navn", out var n) ? n.GetString() ?? "Ukjent" : "Ukjent"; // tekst som kan være null
 ```
 
-Regelen: **koordinater og id er påkrevd, resten er valgfritt.** Et punkt uten posisjon er ikke et punkt. Et punkt uten fart er bare et punkt vi vet mindre om.
+Koordinater og id er påkrevd. Alt annet er valgfritt.
 
-### Tall og kultur
+## Tall og kultur
 
-Appen kjører med norsk kultur (`nb-NO`), satt i `Program.cs`. Det er med vilje — den er norsk.
+`Program.cs` setter `nb-NO`. `(59.9139).ToString()` gir `"59,9139"`. Alle tall som skal i en URL, en fil eller ut på nettet formateres med `CultureInfo.InvariantCulture`. `Allemannsdata.ByggUrl` gjør det; egen strengbygging må gjøre det selv.
 
-Det betyr at `(59.9139).ToString()` gir `"59,9139"` med komma. I en URL er det feil. **Alle tall som skal ut på nettet formateres med `CultureInfo.InvariantCulture`.** `Allemannsdata.ByggUrl` gjør dette for deg; gjør du strengbygging selv, må du huske det.
-
-Dette er ikke et konstruert eksempel — det er en av de fem P1-feilene, fordi det er den typen feil som virker på utviklerens maskin og ryker i produksjon.
-
-## Testene
+## Tester
 
 ```csharp
 [Fact]
@@ -116,29 +101,22 @@ public void Punkt_utenfor_utsnittet_blir_forkastet()
 }
 ```
 
+- Prosjekt: `tests/OsloLive.Tester`. `KartTester.cs` for `Geo` og `Allemannsdata`, `ApiTester.cs` for endepunkter via `WebApplicationFactory<Program>`.
 - Testnavn på norsk: `Hva_som_skjer_naar_noe_er_tilfelle`.
-- Arrange, act og assert skilt med blank linje.
-- Én ting per test.
-- `[Theory]` med `[InlineData]` når du tester det samme med flere verdier.
-- **Ingen nettverkskall.** Testene skal kunne kjøres uten internett. Skal du teste et lag, test funksjonen som oversetter en rad — ikke hentingen.
+- Arrange, act, assert skilt med blank linje. Én ting per test. `[Theory]` + `[InlineData]` for flere verdier.
+- Ingen nettverkskall i tester. Test funksjonen som oversetter en rad, ikke hentingen.
+- `public partial class Program;` nederst i `Program.cs` skal stå. Testprosjektet trenger den.
+- Bugfiks skal ha en test som feiler før og passerer etter.
 
-`WebApplicationFactory<Program>` starter appen i minnet for API-testene. `Program` er gjort synlig for testprosjektet med `public partial class Program;` nederst i `Program.cs` — ikke fjern den linjen.
+## Frontend
 
-## Frontenden
+`wwwroot/index.html` er én fil uten byggesteg. Endringer gjøres direkte i den. Eksterne script lastes fra cdnjs med pinnet versjon. Kartutseende settes i `varmTema(kart)`. Markører per lag: `.merke` med lagets farge fra `FARGER` i samme fil; nye lag får farge fra `RESERVE` automatisk, og kan legges til i `FARGER` med lagets `Id` som nøkkel.
 
-`wwwroot/index.html` er én fil: HTML, CSS og JavaScript i samme dokument, uten byggesteg.
-
-Det er et bevisst valg. En agent kan endre den uten å sette opp node, og du kan lese hele frontenden på to minutter. Vokser den ut av det, er det en issue verdt å ta — ikke noe du gjør på si.
-
-MapLibre lastes fra cdnjs med pinnet versjon. Trenger du et tillegg, last det fra samme sted og pin det på samme måte.
-
-Kartet står i 3D: `pitch` 58 grader, og bygningslaget `building-3d` fra OpenFreeMap-stilen er farget for å passe resten. Det er dette som gjør at en demo på storskjerm ser ut som noe. Knappene nede til høyre skifter mellom 3D og flatt, og «Snurr» roterer kameraet sakte — nyttig når kartet står på skjermen gjennom dagen.
-
-## Verifisering før du leverer
+## Før levering
 
 ```bash
 dotnet build --nologo -v quiet
 dotnet test --nologo -v quiet
 ```
 
-Begge grønne. En pull request med rødt bygg blir stående som utkast, og teller negativt på resultattavlen.
+Begge grønne. Rødt bygg gir PR som utkast og trekk på resultattavlen.

@@ -3,16 +3,24 @@ enhancement,P2,8 poeng
 
 Vi vil se flytrafikken. Fly som er i lufta over byen, og fly som står på bakken på Gardermoen. Dette er laget vi har lyst til å ha på storskjermen når noen spør hva kartet er godt for.
 
-**Krav**
+**Mål**
 
-- Laget skal ha id `fly`, navn «Flytrafikk» og et passende ikon.
-- Ett punkt per fly med kjent posisjon.
-- Punktene skal vise kallesignal, høyde, fart og om flyet er i lufta eller på bakken.
-- Flyene skal flytte seg mellom oppdateringene. Et fly som står stille i lufta er en feil.
+Den som ser på storskjermen ser flyene over Oslo bevege seg, og kan klikke på ett for å se kallesignal, høyde og fart. Valget av datakilde er begrunnet slik at den som drifter kartet vet hva det koster og hva som skjer når kilden svikter.
+
+**Akseptansekriterier**
+
+- `GET /api/lag` inneholder et lag med `id` lik `fly`, `navn` lik «Flytrafikk», en beskrivelse på én setning og et ikon.
+- `GET /api/lag/fly` svarer 200 med en `FeatureCollection`. Når kilden svarer og det er fly innenfor utsnittet, er de med som punkter med `[lon, lat]`.
+- Ett punkt per fly med kjent posisjon. Hvert punkt har `navn` (kallesignal) og `kilde`. Popup-en viser feltene `kallesignal`, `høyde` (med enhet), `fart` (knop) og `status` («i lufta» eller «på bakken»).
+- To kall til `/api/lag/fly` med mer enn 30 sekunder mellom gir ulike koordinater for fly som er i lufta.
+- Finnes posisjonene i Allemannsdata, brukes `Allemannsdata`-klienten. Brukes en annen kilde, svarer PR-en på de tre spørsmålene under, og ingen nøkkel eller token ligger i repoet. Krever kilden nøkkel, leses den fra miljøvariabel og laget svarer med tom `FeatureCollection` uten den.
+- Svikter kilden, svarer bare `/api/lag/fly` 502. `/api/lag` og de andre lagene svarer 200.
+- Endres kartutsnittet i `Geo` for å få med Gardermoen, er alle eksisterende tester fortsatt grønne uten å være endret, og PR-en begrunner hvorfor «Oslo Live» skal dekke det området.
+- `dotnet build` og `dotnet test` er grønne. Nye NuGet-pakker bare hvis PR-en begrunner dem.
 
 **Datakilde**
 
-Det er her oppgaven begynner. Finn ut om Allemannsdata har det vi trenger. Bruk `search_wiki` og `describe_source`, og se nøye på hva kilden faktisk gir tilbake — ikke bare hva den heter.
+Det er her oppgaven begynner. Finn ut om Allemannsdata har det vi trenger. Bruk `search_wiki` og `describe_source`, og se nøye på hva kilden faktisk gir tilbake, ikke bare hva den heter.
 
 Finner du ikke posisjoner der, er det et gyldig svar. Da er oppgaven å foreslå en annen kilde, og begrunne valget i pull requesten:
 

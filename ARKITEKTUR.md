@@ -1,115 +1,95 @@
 # Arkitektur
 
-Hvorfor Oslo Live er satt sammen som det er, og hva du bør holde deg til når du utvider det.
+Struktur og kontrakter. Les før du legger til lag eller endepunkter.
 
-Les dette før du legger til noe større enn ett lag. Agenten din har fått den korte versjonen i `CLAUDE.md`.
-
-## Én idé: kartet er en liste med lag
-
-Hele produktet er én abstraksjon:
-
-```
-ILag  →  Kartlag (GeoJSON)  →  MapLibre
-```
-
-Et lag vet én ting: hvordan hente sine egne punkter. Det vet ingenting om de andre lagene, om kartet, eller om hvordan det blir tegnet. Legger du til et lag, rører du to filer: din egen i `Lag/`, og én linje i `Program.cs`.
-
-Det er med vilje. Titalls agenter jobber i dette repoet samtidig. Jo mindre overflate et bidrag trenger å ta på, jo færre konflikter blir det. **Et lag som må endre `Kart/` for å virke, er et lag som er designet feil.**
+## Struktur
 
 ```
 src/OsloLive/
-  Program.cs              oppsett, endepunkter, laglisten
+  Program.cs              kultur nb-NO, DI, endepunkter, laglisten
   Kart/
-    Geo.cs                GeoJSON-typene, Oslo-utsnittet, Lag() og Samle()
-    Allemannsdata.cs      HTTP-klienten mot datakildene, med mellomlager
+    Geo.cs                GeoJSON-typer, utsnitt, Punkt(), IOslo(), Lag(), Samle()
+    Allemannsdata.cs      HTTP-klient mot Allemannsdata, mellomlager 30 s
     ILag.cs               kontrakten et lag oppfyller
   Lag/
-    LuftkvalitetLag.cs    malen. Kopier denne.
-  wwwroot/index.html      kartet
+    LuftkvalitetLag.cs    mal for nye lag
+  wwwroot/index.html      hele frontenden, én fil, ingen byggesteg
+tests/OsloLive.Tester/    xUnit. ApiTester.cs (WebApplicationFactory), KartTester.cs (Geo, Allemannsdata)
+issues/                   issuetekstene. Ikke rør.
 ```
 
-## Lagene
+Prinsipp: kartet er en liste med lag. `ILag → Kartlag (GeoJSON) → MapLibre`. Et lag kjenner bare sin egen kilde. Nytt lag = én fil i `Lag/` + én linje i `Program.cs`.
+
+## Endepunkter
+
+| Rute | Svar |
+|---|---|
+| `GET /api/lag` | `[{ id, navn, beskrivelse, ikon }]` |
+| `GET /api/lag/{id}` | `Kartlag` som GeoJSON `FeatureCollection`. 404 ved ukjent id. 502 `{ feil }` hvis laget kaster; de andre lagene påvirkes ikke. |
+| `GET /api/helse` | `{ status: "ok", tid }` |
+
+Frontenden henter `/api/lag` ved oppstart og hvert lag hvert 15. sekund. Et lag som svarer 502 markeres rødt i lagvelgeren.
+
+## Kontrakten for et lag
 
 ```csharp
 public interface ILag
 {
-    string Id { get; }            // brukes i /api/lag/{id}
+    string Id { get; }            // små bokstaver, brukes i /api/lag/{id}, gitt i issuen
     string Navn { get; }          // vises i lagvelgeren
-    string Beskrivelse { get; }
-    string Ikon { get; }
+    string Beskrivelse { get; }   // én setning
+    string Ikon { get; }          // én emoji
     Task<Kartlag> Hent(CancellationToken stopp = default);
 }
 ```
 
-Et lag er registrert som singleton og deler `Allemannsdata`-klienten. Det betyr:
+Krav til implementasjonen:
 
-- **Lag ingen tilstand i laget.** Det kalles fra flere forespørsler samtidig. Felter som endrer seg mellom kall er en feil som først viser seg på storskjermen.
-- **Ta imot `CancellationToken` og send den videre.** Lukker noen fanen midt i et treigt kall, skal det stoppe.
-- **Ikke lag din egen `HttpClient`.** Bruk `Allemannsdata`. Den har mellomlager, tidsavbrudd og riktig `User-Agent` allerede.
+- Registrert som singleton. Ingen muterbar tilstand i klassen.
+- Ta imot `Allemannsdata` via primærkonstruktør. Ikke lag egen `HttpClient`.
+- Send `CancellationToken` videre til `Allemannsdata`.
+- Bygg punkter med `Geo.Lag(...)` og returner `Geo.Samle(...)`. Ikke filtrer på utsnitt selv; `Geo.Lag` returnerer `null` utenfor Oslo og `Geo.Samle` fjerner nullene.
+- Kaster kilden, la det kaste (laget blir rødt). Henter du fra flere kilder og én svikter, returner det du har. Begrunn valget i PR-teksten.
 
-### Feil i et lag skal ikke ta ned kartet
-
-`/api/lag/{id}` fanger opp alt et lag kaster og svarer 502 for akkurat det laget. Resten av kartet lever videre. Frontenden markerer laget rødt i lagvelgeren.
-
-Det gir deg et valg når en kilde er ustabil, og valget er ditt å begrunne:
-
-| Du velger | Konsekvens |
-|---|---|
-| La det kaste | Laget blir rødt. Ærlig, men synlig for alle på storskjermen. |
-| Fang og returner tomt | Kartet ser rolig ut, men du skjuler at kilden er nede. |
-| Fang, returner det du har | Best når du henter fra flere kilder og bare én svikter. |
-
-NOBIL (issue 11) svarer med 502 fra tid til annen, og den issuen handler egentlig om dette valget.
-
-## Utsnittet og koordinatene
-
-To ting har bitt oss før, og begge er kodet inn i `Geo`:
-
-**GeoJSON har lengdegrad først.** `[lon, lat]`, ikke `[lat, lon]`. Dette er den vanligste feilen i kartkode som finnes, og den er lett å overse fordi begge tallene ser ut som koordinater. Bruk alltid `Geo.Punkt`.
-
-**Kartet dekker Oslo og indre Oslofjord.** `Geo.Lag` returnerer `null` for alt utenfor, og `Geo.Samle` siler bort nullene. Det betyr at et lag trygt kan be kilden om et vidt område — filtreringen er felles, og du skal ikke gjenta den i laget ditt.
+## Geo
 
 ```csharp
-public const double MinLat = 59.80, MaksLat = 60.14;
-public const double MinLon = 10.45, MaksLon = 10.98;
+Geo.MinLat = 59.80; Geo.MaksLat = 60.14; Geo.MinLon = 10.45; Geo.MaksLon = 10.98;
+Geo.OsloLat = 59.9139; Geo.OsloLon = 10.7522;
+Geo.Punkt(lat, lon)                 // GeoJSON-geometri, [lon, lat]-rekkefølge
+Geo.IOslo(lat, lon)                 // true når både lat og lon er innenfor utsnittet
+Geo.Lag(id, lat, lon, navn, kilde, detaljer)   // Kartpunkt, eller null utenfor utsnittet
+Geo.Samle(punkter)                  // Kartlag uten null og uten duplikater på id
 ```
 
-Trenger du et punkt utenfor boksen, er det en diskusjon i en issue, ikke en endring du gjør i forbifarten.
+GeoJSON har lengdegrad først: `[lon, lat]`. Bruk alltid `Geo.Punkt`. Utsnittet endres ikke i en vanlig oppgave; det finnes tester på grensene.
 
-## Mellomlageret
+## Allemannsdata
 
-`Allemannsdata` mellomlagrer hvert svar i 30 sekunder, med adressen som nøkkel.
+```
+GET https://allemannsdata.com/wiki/api/v1/kilder/{kilde}/{operasjon}?param=verdi
+Svar: { "source", "operation", "parameters", "data": <liste eller objekt med liste> }
+```
 
-Det er ikke en ytelsesoptimalisering — det er hensyn til kildene. Ti personer med kartet oppe, som henter hvert 15. sekund, med et titalls lag, blir fort mange hundre kall i minuttet mot offentlige API-er som ingen tar betalt for. Mellomlageret gjør det til en håndfull.
+```csharp
+data.HentListe(kilde, operasjon, parametre, liste: "<navn på listen i data>" | null, stopp)
+data.Hent(kilde, operasjon, parametre, stopp)      // rå JsonElement fra "data"
+Allemannsdata.ByggUrl(kilde, operasjon, parametre) // formaterer tall med InvariantCulture
+```
 
-Trenger du ferskere data enn 30 sekunder, snakk med noen først. Trenger du å hente noe tungt sjelden, er det en annen sak — men skriv det i PR-en.
+- Ingen API-nøkkel. Ingen egen `HttpClient`.
+- Mellomlager 30 sekunder per adresse. Ikke omgå det. Trenger du ferskere data, skriv det i PR-en.
+- Tallparametre må ut som `59.91`, ikke `59,91`. Appen kjører med `nb-NO`; `ByggUrl` håndterer det, egen strengbygging må bruke `CultureInfo.InvariantCulture`.
+- Finn `kilde`, `operasjon`, parametre og feltnavn med MCP-serveren `allemannsdata` før du skriver kode.
 
-## Å legge til noe som ikke er et lag
+## Frontend
 
-Noen issuer ber om ting som ikke passer i `ILag` — adressesøk, historikk, telling per bydel. Da:
+`wwwroot/index.html`: HTML, CSS og JavaScript i én fil. MapLibre GL JS 4.7.1 fra cdnjs (pinnet), vektorfliser fra OpenFreeMap (stil `liberty`), terreng fra Mapterhorn. Kartet står i 3D med `pitch: 55`. Farger og terreng settes i `varmTema(kart)`; utseendeendringer gjøres der. Punkter tegnes som HTML-markører per lag; popup viser `navn` og alle `detaljer` unntatt `id`, `navn`, `kilde`. Nye script lastes fra cdnjs med pinnet versjon.
 
-- Legg endepunktet i `Program.cs` ved siden av de andre.
-- Hold det på samme form: `/api/<substantiv>`, JSON ut, ingen tilstand.
-- Frontendendringer hører hjemme i `wwwroot/index.html`. Den er med vilje én fil uten byggesteg — ingen npm, ingen bundler. Det holder for det vi driver med, og det gjør at en agent kan endre den uten å sette opp en verktøykjede først. Kartet er MapLibre GL JS med vektorfliser fra OpenFreeMap og terreng fra Mapterhorn, og står i 3D med bygninger. Fargene settes i `varmTema()`; skal du endre utseendet, er det der du gjør det.
+## Samtidige agenter
 
-## Gode vaner i akkurat dette repoet
+Flere agenter jobber i repoet samtidig. Derfor:
 
-**Gjør den minste endringen som løser issuen.** Repoet har mange samtidige bidragsytere. Omformatering, opprydding og «mens jeg først var inne» er hvordan du garantert får konflikt med noen andre.
-
-**Ikke svekk en test for å få den grønn.** Feiler en test etter endringen din, er det endringen som skal vurderes. Dette er også regel nummer én i `CLAUDE.md`, fordi det er den mest fristende snarveien for en agent som står fast.
-
-**Skriv testen der feilen kunne oppstått igjen.** De fem P1-feilene er alle av typen som kan snike seg inn på nytt. En test på `Geo` eller `Allemannsdata` er verdt mer enn en test som går mot nettet.
-
-**Nettverket hører ikke hjemme i en test som må være grønn.** Testene i `tests/` skal kunne kjøres på et tog. Vil du teste at et lag faktisk henter data, gjør det for hånd med appen kjørende.
-
-**Norsk i kode og tekst.** Klassenavn, medlemmer, kommentarer, commit-meldinger og PR-tekst. Det er ikke en smakssak her — det er slik resten av koden ser ut, og blandingsspråk blir fort stygt.
-
-## Når to agenter har gjort det samme
-
-Det kommer til å skje. Når det gjør det:
-
-- Den PR-en som virker, vinner. Ikke den som kom først.
-- Er begge grønne, vinner den minste diffen.
-- Den andre lukkes med en kommentar om hvorfor. Ikke bare slett den — begrunnelsen er poenget.
-
-Merker du at noen allerede har en åpen PR på issuen du er på vei inn i, er det billigere å finne en annen issue enn å kappes.
+- Minste mulige diff. Ikke rør filer oppgaven ikke krever.
+- Workeren sjekker før start om en annen agent er i gang med issuen eller om den er tildelt noen andre, og lar den i så fall ligge. Ender to agenter likevel med PR på samme issue, merges den som virker og kom først.
+- Ser du en åpen PR fra en annen agent på issuen din som løser den: si fra i rapporten, ikke lever en konkurrerende PR.

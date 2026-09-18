@@ -63,7 +63,8 @@ for fil in "$here"/issues/feil-*.md "$here"/issues/feature-*.md; do
   nummer="$(printf '%s\n' "$finnes" | awk -F'\t' -v t="$tittel" '$2 == t { print $1; exit }')"
 
   if [[ -n "$nummer" ]]; then
-    gh issue edit "$nummer" "${etikett_flagg[@]}" "${repo_flag[@]}" >/dev/null
+    # Finnes issuen, oppdaterer vi både etiketter og tekst fra fila.
+    gh issue edit "$nummer" --body "$body" "${etikett_flagg[@]}" "${repo_flag[@]}" >/dev/null
     echo "Oppdatert #$nummer: [$etiketter] $tittel"
     continue
   fi
