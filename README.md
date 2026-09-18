@@ -2,7 +2,7 @@
 
 Et kart over Oslo der hvert lag er levende offentlige data. Elsparkesyklene som står ledige akkurat nå. Skipene i fjorden. Politiloggen. Badetemperaturen. Bussene som kjører forbi mens du ser på.
 
-Dataene kommer fra [Allemannsdata](https://allemannsdata.com) — 51 norske offentlige datakilder pakket som MCP-servere. Ingen API-nøkkel, ingen registrering.
+Dataene kommer fra [Allemannsdata](https://allemannsdata.com): 51 norske offentlige datakilder pakket som MCP-servere. Ingen API-nøkkel, ingen registrering.
 
 Dette repoet er øvingsprosjektet på kurset **«Bygg din egen Nils Georg»** hos Novanet. Det er også et ekte, lite produkt: det bygger, det kjører, og det virker.
 
@@ -25,13 +25,13 @@ Det betyr noen ting du må vite før du starter:
 
 ## Backloggen
 
-55 issuer, i tre prioriteter.
+57 issuer, i tre prioriteter.
 
 | | Hva | Hvor mange |
 |---|---|---|
 | **P1** | Kartet er i stå. Fem feil som gjør produktet ubrukelig. Tas først. | 5 |
-| **P2** | Produktet er ikke ferdig uten. Kjernelagene og det viktigste av UX. | 11 |
-| **P3** | Gjør det bedre. Flere datakilder, flere funksjoner, bedre drift. | 39 |
+| **P2** | Produktet er ikke ferdig uten. Kjernelagene og det viktigste av UX. | 12 |
+| **P3** | Gjør det bedre. Flere datakilder, flere funksjoner, bedre drift. | 40 |
 
 P1-ene er ekte feil av typen som lever lenge i en kodebase fordi de ser riktige ut: byttet rekkefølge på koordinater, norsk desimalkomma i en URL, et mellomlager som aldri går ut på dato. De er alle synlige på kartet med en gang du ser etter.
 
@@ -39,7 +39,7 @@ Start med P1. Et nytt kartlag hjelper ikke når punktene havner i Indiahavet.
 
 Backloggen er bred med vilje. Der er nye datakilder, men også tidslinje, varmekart, eksport, tastatursnarveier, tilgjengelighet, parallell henting, nytt forsøk mot ustabile kilder, metrikker, logging og ytelse. Det er nok til at ingen går tom, og variert nok til at agentene ikke ender med å gjøre det samme.
 
-**Issue 1–5** er feilene, **6–19** er kjernelagene på kartet, og **20 og oppover** er alt annet. Numrene er faste.
+**Issue 1 til 5** er feilene, **6 til 19** er kjernelagene på kartet, og **20 og oppover** er alt annet. Numrene er faste.
 
 ### Hva en issue er verdt
 
@@ -55,11 +55,12 @@ Hver issue har en etikett som sier hvor mange poeng den gir på resultattavlen. 
 
 Til sammen 179 poeng.
 
-Tre ting er verdt å vite før du velger:
+Fire ting er verdt å vite før du velger:
 
-- **Feil og kjernelag må bestå en skjult test.** En merget pull request på issue 1–19 gir null poeng hvis testen ikke passerer. Resten gir poeng når de er merget.
+- **Feil og kjernelag må bestå en skjult test.** En merget pull request på issue 1 til 19 gir null poeng hvis testen ikke passerer. Resten gir poeng når de er merget.
 - **Første gode pull request tar poengene.** Kommer to på samme issue, er det den som ble merget først og faktisk virker.
-- **Kostnaden trekkes fra.** Hver påbegynte dollar agenten din bruker koster ett poeng — også på det som ikke førte fram. Et 8-poengs forsøk som ikke lykkes er ikke gratis.
+- **Kostnaden trekkes fra.** Hver påbegynte dollar agenten din bruker koster ett poeng, også på det som ikke førte fram. Et 8-poengs forsøk som ikke lykkes er ikke gratis.
+- **Rød `main` koster.** Går bygget på `main` fra grønt til rødt etter at PR-en din ble merget, er det to poeng i minus. Den som gjør den grønn igjen, får to.
 
 Poengene står i etiketten så du kan se dem, men det er ikke etiketten som bestemmer. Å gi en issue flere poeng på GitHub hjelper deg ikke.
 
@@ -80,13 +81,13 @@ Et lag er én klasse som implementerer `ILag`, pluss én registreringslinje i `P
 3. Samler dem med `Geo.Samle`.
 4. Registreres i `Program.cs`.
 
-`Geo.Lag` krever `navn` og `kilde` på hvert punkt og kaster bort alt som ligger utenfor Oslo. `Geo.Samle` fjerner duplikater. Et lag trenger derfor bare å oversette radene fra kilden — resten er felles.
+`Geo.Lag` krever `navn` og `kilde` på hvert punkt og kaster bort alt som ligger utenfor Oslo. `Geo.Samle` fjerner duplikater. Et lag trenger derfor bare å oversette radene fra kilden. Resten er felles.
 
 `CLAUDE.md`, `ARKITEKTUR.md` og `TEKNOLOGI.md` er skrevet for agenten, ikke for deg. Det du trenger å vite som menneske, står her.
 
 ## Å finne fram i Allemannsdata
 
-51 servere og over 250 verktøy. Du finner ikke riktig kilde ved å gjette, og det gjør ikke agenten din heller. Bruk MCP-serveren — den er laget for å bli utforsket.
+51 servere og over 250 verktøy. Du finner ikke riktig kilde ved å gjette, og det gjør ikke agenten din heller. Bruk MCP-serveren. Den er laget for å bli utforsket.
 
 Repoet har allerede `.mcp.json`, så Claude Code kobler seg på når du starter den her. Ellers:
 
@@ -115,7 +116,7 @@ Appen har ingen MCP-avhengighet i drift. Svaret har alltid samme ytterste form:
 { "source": "...", "operation": "...", "parameters": { }, "data": ... }
 ```
 
-`data` er enten en liste rett ut, eller et objekt med listen inni — `{ "vehicles": [...] }`, `{ "items": [...] }`, `{ "fartoy": [...] }`. Hvilken det er, ser du med `get_data`. `Allemannsdata.HentListe` tar navnet på listen som et valgfritt argument.
+`data` er enten en liste rett ut, eller et objekt med listen inni: `{ "vehicles": [...] }`, `{ "items": [...] }`, `{ "fartoy": [...] }`. Hvilken det er, ser du med `get_data`. `Allemannsdata.HentListe` tar navnet på listen som et valgfritt argument.
 
 Å gjette på feltnavn er den vanligste grunnen til at et nytt lag blir tomt.
 
@@ -123,13 +124,13 @@ Appen har ingen MCP-avhengighet i drift. Svaret har alltid samme ytterste form:
 
 Frontenden og testene er avhengige av at API-et ser slik ut.
 
-`GET /api/lag` — lagene som finnes:
+`GET /api/lag`: lagene som finnes:
 
 ```json
 [{ "id": "luftkvalitet", "navn": "Luftkvalitet", "beskrivelse": "…", "ikon": "🌬️" }]
 ```
 
-`GET /api/lag/{id}` — punktene i ett lag, som GeoJSON:
+`GET /api/lag/{id}`: punktene i ett lag, som GeoJSON:
 
 ```json
 {
@@ -144,7 +145,7 @@ Frontenden og testene er avhengige av at API-et ser slik ut.
 
 Lengdegrad først. `navn` og `kilde` skal alltid være med. Alt annet du legger i `detaljer` dukker opp i popup-en på kartet.
 
-Hver issue som ber om et nytt lag oppgir hvilken `id` laget skal ha. Den er en del av kontrakten — hold deg til den.
+Hver issue som ber om et nytt lag oppgir hvilken `id` laget skal ha. Den er en del av kontrakten. Hold deg til den.
 
 ## Kartet i drift
 
@@ -160,7 +161,7 @@ merge til main
 
 Kjører i Novanet-abonnementet, Norway East. Selve utrullingen tar under to minutter, mest fordi `dotnet restore` ligger i sitt eget docker-lag og gjenbrukes så lenge `OsloLive.csproj` er urørt.
 
-**Bygget er porten.** Feiler `dotnet build` eller `dotnet test`, blir det ingen utrulling. Det er derfor testene må være grønne før du leverer — ikke for formalitetens skyld, men fordi rødt bygg betyr at kartet ikke oppdateres for noen.
+**Bygget er porten.** Feiler `dotnet build` eller `dotnet test`, blir det ingen utrulling. Det er derfor testene må være grønne før du leverer. Ikke for formalitetens skyld, men fordi rødt bygg betyr at kartet ikke oppdateres for noen.
 
 **Ingen hemmeligheter i dette repoet.** Actions logger inn i Azure med federated credentials: GitHub beviser hvem den er, Azure stoler på beviset. Det finnes ingen nøkkel å lekke, og det er et bevisst valg fordi repoet er offentlig.
 
