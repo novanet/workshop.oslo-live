@@ -90,7 +90,7 @@ Noen issuer ber om ting som ikke passer i `ILag` — adressesøk, historikk, tel
 
 - Legg endepunktet i `Program.cs` ved siden av de andre.
 - Hold det på samme form: `/api/<substantiv>`, JSON ut, ingen tilstand.
-- Frontendendringer hører hjemme i `wwwroot/index.html`. Den er med vilje én fil uten byggesteg — ingen npm, ingen bundler. Det holder for det vi driver med, og det gjør at en agent kan endre den uten å sette opp en verktøykjede først. Kartet er MapLibre GL JS med vektorfliser fra OpenFreeMap, og står i 3D med bygninger.
+- Frontendendringer hører hjemme i `wwwroot/index.html`. Den er med vilje én fil uten byggesteg — ingen npm, ingen bundler. Det holder for det vi driver med, og det gjør at en agent kan endre den uten å sette opp en verktøykjede først. Kartet er MapLibre GL JS med vektorfliser fra OpenFreeMap og terreng fra Mapterhorn, og står i 3D med bygninger. Fargene settes i `varmTema()`; skal du endre utseendet, er det der du gjør det.
 
 ## Gode vaner i akkurat dette repoet
 

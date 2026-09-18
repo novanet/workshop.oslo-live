@@ -15,8 +15,8 @@
     --feil: #b91c1c;
   }
   * { box-sizing: border-box; }
-  html, body { margin: 0; height: 100%; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; background: #fff; color: var(--tekst); }
-  #kart { position: absolute; inset: 0; background: #fff; }
+  html, body { margin: 0; height: 100%; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; background: #ede7d8; color: var(--tekst); }
+  #kart { position: absolute; inset: 0; background: #ede7d8; }
 
   .panel {
     position: absolute; top: 16px; left: 16px; z-index: 10; width: 292px;
@@ -53,8 +53,8 @@
   .kamera button:hover { background: #111; color: #fff; }
   .kamera button[aria-pressed="true"] { background: #111; color: #fff; }
 
-  /* Markører: farget skive med svart ring. Det er dette som gjør at en rød
-     buss er umulig å overse på et hvitt kart. */
+  /* Markører: farget skive med mørk ring, så punktene står fram
+     mot det beige kartet. */
   .merke {
     width: 28px; height: 28px; border-radius: 50%;
     border: 2px solid #111;
@@ -117,74 +117,81 @@ const kart = new maplibregl.Map({
 kart.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), 'bottom-right');
 
 kart.on('style.load', () => {
-  lysTema();
+  varmTema(kart);
   start();
 });
 
 /**
- * Gjoer basiskartet hvitt med svarte streker.
+ * Varmt tema: beige land, blaagroenn fjord, oransje hovedveier og bygninger
+ * i 3D med terreng under. Samme uttrykk som Thomas Heggelunds Oslo-kart.
  *
- * Poenget er kontrast. Bakgrunnen skal vaere saa noeytral som mulig, slik at
- * datapunktene er det eneste fargede paa skjermen. En roed buss paa et hvitt
- * kart ser du fra bakerste rad; paa et fargerikt kart gjoer du det ikke.
+ * Basiskartet er OpenFreeMap sin «liberty»-stil. Vi endrer bare farger paa
+ * lagene som finnes der fra foer, og legger til terreng fra Mapterhorn.
  */
-function lysTema() {
+function varmTema(kart) {
   const S = (id, egenskap, verdi) => {
     if (!kart.getLayer(id)) return;
     try { kart.setPaintProperty(id, egenskap, verdi); } catch (e) { /* laget har ikke den egenskapen */ }
   };
   const skjul = (id) => { if (kart.getLayer(id)) kart.setLayoutProperty(id, 'visibility', 'none'); };
 
-  const SVART = '#111111';
+  const LAND = '#ede7d8', TEKST = '#4a4238', GLORIE = '#f4efe4';
 
-  S('background', 'background-color', '#ffffff');
+  S('background', 'background-color', LAND);
+  skjul('natural_earth');
 
-  // Flater: naesten hvitt, bare saa vidt nok til aa skille dem fra hverandre.
-  ['park', 'landcover_wood', 'landcover_grass', 'landuse_pitch',
-   'landuse_track', 'landuse_cemetery', 'landcover_wetland'
-  ].forEach((id) => S(id, 'fill-color', '#f2f5f1'));
+  // Flater
+  ['landuse_residential', 'landuse_hospital', 'landuse_school', 'aeroway_fill', 'road_area_pattern']
+    .forEach((id) => S(id, 'fill-color', '#e6dfce'));
+  ['park', 'landcover_grass', 'landuse_pitch', 'landuse_track', 'landuse_cemetery']
+    .forEach((id) => S(id, 'fill-color', '#d3e0bf'));
+  S('park', 'fill-opacity', 0.9);
+  S('landcover_wood', 'fill-color', '#c6d7b0');
+  S('landcover_wood', 'fill-opacity', 0.8);
+  S('landcover_wetland', 'fill-opacity', 0.35);
+  S('landcover_sand', 'fill-color', '#efe4c4');
+  S('landcover_ice', 'fill-color', '#eef0ea');
+  S('park_outline', 'line-color', '#bccaa6');
 
-  ['landuse_residential', 'landuse_hospital', 'landuse_school',
-   'landcover_ice', 'landcover_sand', 'aeroway_fill', 'road_area_pattern'
-  ].forEach((id) => S(id, 'fill-color', '#f7f7f7'));
-
-  S('park_outline', 'line-color', '#ccd6ca');
-  S('water', 'fill-color', '#dde7f0');
+  // Vann
+  S('water', 'fill-color', '#a9cdd6');
   ['waterway_river', 'waterway_other', 'waterway_tunnel']
-    .forEach((id) => S(id, 'line-color', '#aebfcf'));
+    .forEach((id) => S(id, 'line-color', '#8fbcc8'));
 
-  // Veier: hvit kjoerebane med svart kant. Stilen har egne casing-lag, og det
-  // er de som gir oss den svarte streken uten at vi maa tegne noe selv.
+  // Veier: oransje hovedveier, lyse smaaveier, brune kanter.
   kart.getStyle().layers.forEach((lag) => {
     if (lag.type !== 'line') return;
     const id = lag.id;
+    const hoved = /motorway|trunk_primary|secondary_tertiary|_link/.test(id) && !/casing/.test(id);
     if (/_casing$/.test(id)) {
-      S(id, 'line-color', SVART);
-      S(id, 'line-opacity', 0.85);
+      S(id, 'line-color', /motorway|trunk_primary|secondary_tertiary|_link/.test(id) ? '#d08a48' : '#d6cbb5');
+      S(id, 'line-opacity', 0.9);
+    } else if (hoved && /^(road|bridge|tunnel)_/.test(id)) {
+      S(id, 'line-color', '#eaa15c');
     } else if (/^(road|bridge|tunnel)_/.test(id) && !/rail|hatching|path_pedestrian/.test(id)) {
-      S(id, 'line-color', '#ffffff');
+      S(id, 'line-color', '#faf6ec');
     } else if (/rail/.test(id)) {
-      S(id, 'line-color', '#9aa0a6');
+      S(id, 'line-color', '#b3a894');
     } else if (/path_pedestrian/.test(id)) {
-      S(id, 'line-color', '#e3e3e3');
+      S(id, 'line-color', '#e8dfca');
     } else if (/^boundary/.test(id)) {
-      S(id, 'line-color', '#9aa0a6');
+      S(id, 'line-color', '#b3a894');
     }
   });
 
-  // Bygninger: hvite volumer med svak skyggeside, som en arkitektmodell.
-  S('building', 'fill-color', '#f0f0f0');
-  S('building', 'fill-outline-color', '#c9c9c9');
-  S('building-3d', 'fill-extrusion-color', '#f4f4f4');
+  // Bygninger: varm sandfarge med lys topp og moerkere vegger.
+  S('building', 'fill-color', '#e2d7c0');
+  S('building', 'fill-outline-color', '#cbbfa4');
+  S('building-3d', 'fill-extrusion-color', '#e6dcc6');
   S('building-3d', 'fill-extrusion-opacity', 1);
   S('building-3d', 'fill-extrusion-vertical-gradient', true);
 
-  // Tekst: svart med hvit glorie.
+  // Tekst
   kart.getStyle().layers.forEach((lag) => {
     if (lag.type !== 'symbol') return;
-    S(lag.id, 'text-color', SVART);
-    S(lag.id, 'text-halo-color', '#ffffff');
-    S(lag.id, 'text-halo-width', 1.6);
+    S(lag.id, 'text-color', TEKST);
+    S(lag.id, 'text-halo-color', GLORIE);
+    S(lag.id, 'text-halo-width', 1.4);
     S(lag.id, 'icon-opacity', 0.5);
   });
 
@@ -194,8 +201,33 @@ function lysTema() {
    'highway-shield-non-us', 'highway-shield-us-interstate', 'road_shield_us'
   ].forEach(skjul);
 
+  // Terreng fra Mapterhorn (aapne hoeydedata, ingen noekkel), med skyggelegging
+  // rett under bygningene saa aasene rundt byen faar form.
+  if (!kart.getSource('terreng')) {
+    kart.addSource('terreng', {
+      type: 'raster-dem',
+      tiles: ['https://tiles.mapterhorn.com/{z}/{x}/{y}.webp'],
+      encoding: 'terrarium',
+      tileSize: 512,
+      maxzoom: 14,
+      attribution: '<a href="https://mapterhorn.com/attribution">© Mapterhorn</a>'
+    });
+    kart.addLayer({
+      id: 'terreng-skygge', type: 'hillshade', source: 'terreng',
+      paint: {
+        'hillshade-shadow-color': '#b9a784',
+        'hillshade-highlight-color': '#fffdf6',
+        'hillshade-accent-color': '#cdbd9c',
+        'hillshade-exaggeration': 0.45
+      }
+    }, kart.getLayer('building') ? 'building' : undefined);
+  }
+  try { kart.setTerrain({ source: 'terreng', exaggeration: 1.3 }); } catch (e) { /* eldre maplibre */ }
   try {
-    kart.setFog({ range: [2, 14], color: '#ffffff', 'horizon-blend': 0.25 });
+    kart.setSky({
+      'sky-color': '#cfe3ec', 'horizon-color': '#f1e9d6', 'fog-color': '#ede7d8',
+      'sky-horizon-blend': 0.6, 'horizon-fog-blend': 0.7, 'fog-ground-blend': 0.5
+    });
   } catch (e) { /* eldre maplibre */ }
 }
 
