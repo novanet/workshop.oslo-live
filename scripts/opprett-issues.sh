@@ -29,7 +29,8 @@ lag_etikett() {
   gh label create "$1" --color "$2" --description "$3" --force "${repo_flag[@]}" >/dev/null 2>&1 || true
 }
 
-lag_etikett agent        0E6D69 "Agenten kan ta denne"
+# Ingen felles «agent»-etikett. Hver agent har sin egen, agent-<brukernavn>,
+# og den lages av scripts/registrer-webhooks.sh i kursrepoet.
 lag_etikett bug          D73A4A "Noe er i stykker"
 lag_etikett enhancement  A2EEEF "Ny funksjonalitet"
 lag_etikett P1           B60205 "Kartet er i stå. Tas først."
