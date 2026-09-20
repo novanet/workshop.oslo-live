@@ -611,10 +611,10 @@
     <h2>Lab 1: monter pipelinen</h2>
     <ul class="punkter">
       <li><b>Hent <code>mini-nils.zip</code> fra kurslederen og lag ditt eget private repo.</b> <span>Dette er agentens kode og det du tar med deg videre.</span></li>
-      <li><b>Fyll inn <code>.env</code>.</b> <span>Agentnavn, GitHub-token og Anthropic-nøkkel.</span></li>
+      <li><b>Fyll inn <code>.env</code>.</b> <span>Agentnavn og GitHub-token; Anthropic-nøkkelen kommer fra kurslederen. Du skal normalt ikke betale selv.</span></li>
       <li><b>Åpne <code>docs/lab1.md</code> og skjelettet i <code>Pipeline.cs</code>.</b> <span>Oppskriften beskriver sju steg og hvilke hjelpefunksjoner du skal bruke.</span></li>
       <li><b>Implementer <code>RunStages</code> og bygg etter hvert steg.</b> <span>Reservasjon, arbeidsområde, kontekst, modellsteg, kvalitetsporter og levering.</span></li>
-      <li><b>Kjør agenten mot issue 1.</b> <span>Sjekkpunktet er nådd når din egen pipeline har åpnet en pull request.</span></li>
+      <li><b>Test først, kjør så.</b> <span><code>--dry-run</code> sjekker GitHub-oppsettet uten API-kall. Deretter kjører du issue 1 med <code>--skip-reservation</code>; sjekkpunktet er nådd når din egen pipeline har åpnet en pull request.</span></li>
     </ul>
     <div class="lenker">
       <a class="lenke" href="https://github.com/novanet/workshop.oslo-live/issues" target="_blank" rel="noopener">Oslo Live <span class="mono">issuene</span></a>

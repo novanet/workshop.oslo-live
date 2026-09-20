@@ -38,7 +38,8 @@
     <p class="intro">Ha dette klart før du begynner:</p>
     <ul class="checklist">
       <li>Et eget privat repo for agenten din.</li>
-      <li>Skrivetilgang til <a href="https://github.com/novanet/workshop.oslo-live">novanet/workshop.oslo-live</a> via et fine-grained GitHub-token med <strong>Contents</strong>, <strong>Issues</strong> og <strong>Pull requests</strong> read/write, samt <strong>Metadata</strong> read-only. Autoriser tokenet for Novanet SSO hvis GitHub ber om det.</li>
+      <li>Skrivetilgang til <a href="https://github.com/novanet/workshop.oslo-live">novanet/workshop.oslo-live</a> via et fine-grained GitHub-token med <strong>Contents</strong>, <strong>Issues</strong> og <strong>Pull requests</strong> read/write, samt <strong>Metadata</strong> read-only. Velg akkurat dette repoet under repository access. SSO er bare relevant hvis GitHub faktisk viser en SSO-godkjenning.</li>
+      <li>En <code>ANTHROPIC_API_KEY</code> fra kurslederen. Du skal normalt ikke betale selv; Claude.ai-abonnement og Anthropic API-betaling er separate.</li>
       <li>En kopi av <code>mini-nils.zip</code>, pakket ut i mappen der du skal jobbe.</li>
       <li>En devcontainer eller Codespace med .NET 10, <code>gh</code> og Claude Code.</li>
     </ul>
@@ -58,7 +59,7 @@ gh repo create mini-kari --private --source . --push</pre>
         <pre>AGENT_NAME=Mini-Kari
 GH_TOKEN=github_pat_...
 ANTHROPIC_API_KEY=sk-ant-...</pre>
-        <p class="small">Tokenet trenger Contents, Issues og Pull requests med read/write på øvingsrepoet. Feilen <code>Resource not accessible ... (addComment)</code> betyr vanligvis manglende Issues write eller SSO-godkjenning. Hvis workeren sier <code>Mangler ANTHROPIC_API_KEY</code>, må du be kurslederen om Claude-nøkkelen og legge den i <code>.env</code>. <code>--dry-run</code> kan kjøres uten Anthropic-nøkkel.</p>
+        <p class="small">Tokenet trenger Contents, Issues og Pull requests med read/write på akkurat øvingsrepoet. Feilen <code>addComment</code> eller <code>replaceActorsForAssignable</code> betyr ofte at tokenet gjelder feil repo. Hvis workeren sier <code>Mangler eller ikke utfylt: ANTHROPIC_API_KEY</code>, må du be kurslederen om Claude-nøkkelen og legge den i <code>.env</code>. <code>--dry-run</code> kan kjøres uten Anthropic-nøkkel.</p>
       </div>
       <div class="card">
         <h3>Sjekk verktøyene</h3>
@@ -79,6 +80,7 @@ dotnet build</pre>
   --repo novanet/workshop.oslo-live `
   --dry-run</pre>
     <p><code>--dry-run</code> reserverer ikke issuen og stopper før clone, issue-kommentar, Claude Code, commit og PR. Kombinerer du det med <code>--skip-reservation</code>, hoppes reservasjonssjekken over og workeren stopper rett etter at issuen er hentet. Dry-run krever ikke <code>ANTHROPIC_API_KEY</code> og kan bare brukes med <code>--issue</code> og <code>--repo</code>, ikke kømodus.</p>
+    <div class="callout warn"><b>Betaling feilet?</b>Du skal normalt ikke kjøpe API-kreditt selv. Be kurslederen om nøkkelen fra kursets Anthropic-workspace. Claude.ai-abonnementet gir ikke automatisk API-kreditt.</div>
   </section>
 
   <section>
@@ -158,7 +160,7 @@ dotnet build</pre>
   --issue 1 `
   --repo novanet/workshop.oslo-live `
   --skip-reservation</pre>
-    <p>Følg loggen: reservasjonen kontrolleres eller hoppes over, repoet klones, modellstegene kjører, bygg/test kjøres og PR-adressen skrives ut.</p>
+    <p>Følg loggen: reservasjonen kontrolleres eller hoppes over, repoet klones, modellstegene kjører, bygg/test kjøres og PR-adressen skrives ut. Med <code>--skip-reservation</code> er forventet neste tydelige steg etter branch og startmarkør <code>Starter Claude Code</code>.</p>
     <div class="callout"><b>Sjekkpunkt 1</b>Din egen implementasjon av <code>RunStages</code> har åpnet en PR, bygget er grønt, og du kan forklare hva som er deterministisk kode og hvor modellen brukes.</div>
   </section>
 

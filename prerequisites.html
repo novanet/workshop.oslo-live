@@ -37,7 +37,7 @@
     <p class="intro">Kryss av listen før kursdagen, eller bruk den som startpunkt når du åpner <code>mini-nils.zip</code>.</p>
     <ul class="checklist">
       <li>En GitHub-konto som kan opprette et privat repository.</li>
-      <li>Tilgang til <a href="https://github.com/novanet/workshop.oslo-live" target="_blank" rel="noopener"><code>novanet/workshop.oslo-live</code></a> gjennom kursets GitHub-token.</li>
+      <li>Tilgang til <a href="https://github.com/novanet/workshop.oslo-live" target="_blank" rel="noopener"><code>novanet/workshop.oslo-live</code></a> gjennom et personlig fine-grained GitHub-token du lager for akkurat dette repoet.</li>
       <li>En laptop der du kan åpne Codespaces eller kjøre en devcontainer, alternativt tilgang til en ferdig kursmaskin.</li>
       <li>En kopi av <code>mini-nils.zip</code>, lastet ned og pakket ut lokalt.</li>
       <li>En nettleser som kan logge inn på GitHub og Azure med kurskontoene dine.</li>
@@ -69,14 +69,14 @@
       <table>
         <thead><tr><th>Tilgang</th><th>Når</th><th>Hvem leverer den</th><th>Hva du gjør</th></tr></thead>
         <tbody>
-          <tr><td><code>ANTHROPIC_API_KEY</code></td><td>Lab 1</td><td>Kurslederen</td><td>Legg den i lokal <code>.env</code>. Ikke commit eller send den i chat.</td></tr>
+          <tr><td><code>ANTHROPIC_API_KEY</code></td><td>Lab 1</td><td>Kurslederen</td><td>Legg kursnøkkelen i lokal <code>.env</code>. Du skal normalt ikke betale selv; Claude.ai og Anthropic API er separate tjenester.</td></tr>
           <tr><td><code>RESOURCE_GROUP</code></td><td>Lab 2</td><td>Kurslederen</td><td>Bruk ressursgruppen du får tildelt; ikke opprett en tilfeldig privat gruppe.</td></tr>
           <tr><td><code>WEBHOOK_SECRET</code></td><td>Lab 2</td><td>Kurslederen</td><td>Bruk samme verdi som kurslederen registrerer på GitHub-webhooken.</td></tr>
           <tr><td>Azure subscription</td><td>Lab 2</td><td>Kurslederen</td><td>Logg inn med kurskontoen og velg riktig subscription med <code>az account show</code>.</td></tr>
         </tbody>
       </table>
     </div>
-    <div class="callout warn"><b>Ikke bruk repository secrets</b><code>GH_TOKEN</code> lager du selv som et personlig fine-grained token på <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub</a>. Det legges i lokal <code>.env</code>; <a href="https://github.com/novanet/workshop.oslo-live/settings/secrets/agents" target="_blank" rel="noopener">Secrets/agents-siden</a> er ikke riktig sted for lokal Lab 1.</div>
+    <div class="callout warn"><b>Ikke bruk repository secrets</b><code>GH_TOKEN</code> lager du selv som et personlig fine-grained token på <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub</a>. Velg akkurat <code>novanet/workshop.oslo-live</code> under repository access; tokenet for agentrepoet ditt er ikke nok. Det legges i lokal <code>.env</code>; <a href="https://github.com/novanet/workshop.oslo-live/settings/secrets/agents" target="_blank" rel="noopener">Secrets/agents-siden</a> er ikke riktig sted for lokal Lab 1.</div>
   </section>
 
   <section>
@@ -94,7 +94,7 @@
         <div class="step-number">2</div>
         <div>
           <h3>Gi minst mulig tilgang</h3>
-          <p>Velg <code>Contents</code>, <code>Issues</code> og <code>Pull requests</code> med read/write, og <code>Metadata</code> med read. Autoriser tokenet for Novanet SSO hvis GitHub ber om det.</p>
+          <p>Velg <code>Contents</code>, <code>Issues</code> og <code>Pull requests</code> med read/write, og <code>Metadata</code> med read. SSO er bare relevant hvis GitHub faktisk viser en SSO-godkjenning; det er normalt å ikke se en slik knapp.</p>
         </div>
       </div>
       <div class="step">
@@ -103,7 +103,7 @@
           <h3>Lagre verdien lokalt</h3>
           <pre>cp .env.example .env
 GH_TOKEN=github_pat_...</pre>
-          <p>GitHub viser tokenverdien bare én gang. Ikke legg den i repository secrets, kode, issue, PR eller skjermbilde. Hvis workeren logger <code>Resource not accessible ... (addComment)</code>, kontroller Issues write, repository access og SSO.</p>
+          <p>GitHub viser tokenverdien bare én gang. Ikke legg den i repository secrets, kode, issue, PR eller skjermbilde. Hvis workeren logger <code>addComment</code> eller <code>replaceActorsForAssignable</code>, kontroller først at tokenet gjelder riktig repo, deretter Issues write og brukerens skrivetilgang.</p>
         </div>
       </div>
     </div>
@@ -119,7 +119,13 @@ az --version
 node --version
 claude --version
 dotnet build</pre>
-    <div class="callout"><b>Ferdig</b>Du er klar for Lab 1 når verktøyene svarer, løsningen bygger grønt og du har fått bekreftet at <code>.env</code> inneholder verdiene du trenger.</div>
+    <div class="callout"><b>Ferdig</b>Du er klar for Lab 1 når verktøyene svarer, løsningen bygger grønt og kurslederen har gitt deg <code>ANTHROPIC_API_KEY</code>. Test GitHub-tokenet uten API-kall med <code>dotnet run --project src/Worker -- --issue 1 --repo novanet/workshop.oslo-live --dry-run</code>.</div>
+  </section>
+
+  <section>
+    <h2>Hvis betalingen eller nøkkelen stopper deg</h2>
+    <p class="intro">Du skal normalt ikke kjøpe API-kreditt selv for kurset. Claude.ai-abonnement og Anthropic API-betaling er separate.</p>
+    <div class="callout warn"><b><code>Payment failed</code></b>Be kurslederen om kursnøkkelen fra Anthropic-workspace-et med kostnadstak. Ikke send betalingskort eller API-nøkkel i chat. Hvis workeren logger <code>Mangler eller ikke utfylt: ANTHROPIC_API_KEY</code>, legg nøkkelen i lokal <code>.env</code>. <code>--dry-run</code> kan fortsatt brukes uten nøkkel.</div>
   </section>
 
   <section>

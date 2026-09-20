@@ -610,21 +610,21 @@
       <div class="when">3 uker før</div>
       <ul>
         <li>Egen kurs-tenant i Entra med egen subscription, så deltakere utenfra aldri får tilgang til Novanets tenant. Én lokal bruker og én ressursgruppe per lag med Contributor, budsjettvarsel med hard grense, MFA av for kursdagen.</li>
-        <li>API-nøkler per agent i et eget Anthropic-workspace med kostnadstak. Max-abonnement kan ikke brukes i en worker, det må være API-nøkkel.</li>
+        <li>API-nøkler per agent i et eget Anthropic-workspace med kostnadstak. Max-abonnement kan ikke brukes i en worker, det må være API-nøkkel. Deltakerne skal få nøkkelen fra kurslederen; de skal ikke måtte kjøpe API-kreditt selv.</li>
         <li>Skrivetilgang for hver deltaker til <code>novanet/workshop.oslo-live</code>. Alle jobber i det samme repoet.</li>
       </ul>
     </div>
     <div class="row">
       <div class="when">2 uker før</div>
       <ul>
-        <li>Send forkrav: GitHub-konto, laptop, testet Azure-innlogging, Claude Code installert. Codespaces som fallback for alle.</li>
+        <li>Send forkrav: GitHub-konto, laptop, testet Azure-innlogging og Claude Code installert. Oppgi tydelig at Anthropic API-nøkkel leveres av kurslederen, og at Claude.ai-abonnement og API-betaling er separate. Codespaces som fallback for alle.</li>
         <li>Rekrutter én hjelper per seks deltakere. Jan er den opplagte.</li>
       </ul>
     </div>
     <div class="row">
       <div class="when">1 uke før</div>
       <ul>
-        <li>Tørrkjøring med en kollega som ikke har sett koden. Ta tiden på Lab 1 og Lab 2.</li>
+        <li>Tørrkjøring med en kollega som ikke har sett koden. Test først <code>--dry-run</code>, deretter en full Lab 1-kjøring med kursnøkkel. Ta tiden på Lab 1 og Lab 2.</li>
         <li>Sjekk nettverket på Novanet: at webhooks når mottaket, at ACR-bygg fungerer, at Codespaces ikke blokkeres, og at <code>allemannsdata.com</code> ikke er sperret.</li>
         <li>Bygg <code>mini-nils.zip</code>, pakk den ut i en tom mappe og test både <code>python setup-lab1.py</code> og <code>./sjekkpunkt.sh lab1</code>.</li>
       </ul>
@@ -646,7 +646,8 @@
   <div class="eyebrow">Risikoer</div>
   <h2>Det som pleier å gå galt, og hva du gjør</h2>
   <div class="risks">
-    <div class="risk"><div class="r">Miljøoppsett spiser Lab 1.</div><div class="m">Devcontainer og Codespaces for alle. Miljøsjekk er første steg i Lab 1, med hjelperne på gulvet.</div></div>
+    <div class="risk"><div class="r">Miljøoppsett eller manglende API-nøkkel spiser Lab 1.</div><div class="m">Devcontainer og Codespaces for alle. Kurslederen deler Anthropic-nøklene før start og tester minst én deltakerflyt. Miljøsjekk og <code>--dry-run</code> er første steg i Lab 1, med hjelperne på gulvet.</div></div>
+    <div class="risk"><div class="r">GitHub-tokenet gjelder feil repo.</div><div class="m">Be deltakerne velge akkurat <code>novanet/workshop.oslo-live</code> under fine-grained repository access. Feil repo gir ofte <code>addComment</code> eller <code>replaceActorsForAssignable</code>; manglende SSO-knapp er normalt ikke problemet.</div></div>
     <div class="risk"><div class="r">Azure-rettigheter eller policy stopper deploy.</div><div class="m">Egen kurs-tenant med ressursgrupper opprettet på forhånd. Test med en lag-bruker, ikke din egen.</div></div>
     <div class="risk"><div class="r">Docker virker ikke lokalt.</div><div class="m">Imaget bygges i skyen med <code>az acr build</code>.</div></div>
     <div class="risk"><div class="r">Webhooken når ikke fram.</div><div class="m">Vis «Recent deliveries» og redeliver i GitHub. Nødløsning: legg meldingen i køen manuelt fra portalen.</div></div>
