@@ -108,7 +108,7 @@ Storage Queue ── KEDA ──► Worker (Container Apps Job)
       <table>
         <thead><tr><th></th><th>Lokalt</th><th>Azure</th></tr></thead>
         <tbody>
-          <tr><td>Trigger</td><td><code>dotnet run ... --issue 1 --tving</code></td><td>GitHub webhook + etikett</td></tr>
+          <tr><td>Trigger</td><td><code>dotnet run ... --issue 1 --force</code></td><td>GitHub webhook + etikett</td></tr>
           <tr><td>Worker</td><td>Terminal/devcontainer</td><td>Container Apps Job</td></tr>
           <tr><td>Hukommelse</td><td><code>agent/memory.md</code></td><td>Bloben <code>hukommelse/memory.md</code></td></tr>
           <tr><td>Hemmeligheter</td><td><code>.env</code> lokalt</td><td>Key Vault + managed identity</td></tr>
@@ -132,7 +132,7 @@ Storage Queue ── KEDA ──► Worker (Container Apps Job)
     <h2>Kommandoer du bruker oftest</h2>
     <pre># lokalt
 dotnet build --nologo -v quiet
-dotnet run --project src/Worker -- --issue 1 --repo novanet/workshop.oslo-live --tving
+dotnet run --project src/Worker -- --issue 1 --repo novanet/workshop.oslo-live --force
 
 # Azure
 ./deploy.sh

@@ -80,8 +80,8 @@ dotnet build</pre>
         <div>
           <p class="meta">Reservasjon · før modellkallet</p>
           <h3>Hindre at to agenter tar samme issue</h3>
-          <p>Bytt ut kommentaren om reservasjon med <code>Reservasjon.Opptatt</code> og <code>Reservasjon.Ta</code>. Når <code>--tving</code> er satt, skal sjekken hoppes over.</p>
-          <pre>if (!tving)
+          <p>Bytt ut kommentaren om reservasjon med <code>Reservasjon.Opptatt</code> og <code>Reservasjon.Ta</code>. Når <code>--force</code> er satt, skal sjekken hoppes over.</p>
+          <pre>if (!force)
 {
     var grunn = await Reservasjon.Opptatt(task, AgentNavn);
     if (grunn is not null) return 0;
@@ -187,7 +187,7 @@ var prUrl = await repo.CreatePullRequest(
     <pre>dotnet run --project src/Worker -- `
   --issue 1 `
   --repo novanet/workshop.oslo-live `
-  --tving</pre>
+      --force</pre>
     <p>På macOS/Linux kan du bruke <code>\</code> i stedet for PowerShells linjefortsettelse. Følg loggen: oppgaven hentes, repoet klones, modellen kjører, bygg/test kjøres og PR-adressen skrives ut.</p>
     <div class="callout"><b>Sjekkpunkt 1</b>Du har selv montert pipelinen, PR-en er opprettet, og du kan peke på hva som er deterministisk kode og hvor modellen brukes.</div>
   </section>
