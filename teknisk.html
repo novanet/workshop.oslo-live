@@ -113,6 +113,7 @@ CLAUDE_MODEL=claude-sonnet-5</pre>
       <li><strong>Webhook-hemmelighet — få fra kurslederen:</strong> Be om den felles <code>WEBHOOK_SECRET</code>-verdien etter at du har deployet. Kurslederen kobler mottaks-URL-en din til Oslo Live og bruker samme hemmelighet på GitHub-webhooken. Ved et helt eget oppsett lager du den selv med <code>openssl rand -hex 32</code>.</li>
     </ol>
     <div class="callout warn"><b>Hvis kommentarer feiler</b>Logger workeren <code>Resource not accessible by personal access token (addComment)</code>, mangler tokenet vanligvis <code>Issues: Read and write</code>, riktig repository access eller Novanet SSO-godkjenning. <code>gh auth login</code> og <code>GH_TOKEN</code> er separate innlogginger; kontroller tokenet som faktisk ligger i den lokale <code>.env</code>-fila.</div>
+    <div class="callout warn"><b>Hvis Claude-nøkkelen mangler</b>Logger workeren <code>Mangler ANTHROPIC_API_KEY</code> og avslutter før Claude Code starter. Be kurslederen om nøkkelen og legg den i den lokale <code>.env</code>-fila. <code>--dry-run</code> kan brukes uten denne nøkkelen.</div>
     <div class="callout warn"><b>Behandle disse som passord</b>Ikke commit <code>.env</code>, lim nøkler inn i issue eller PR, legg dem i JavaScript, eller send dem i chat. Hvis en nøkkel lekker: si fra med en gang, tilbakekall den i leverandørens portal, og få en ny.</div>
     <h3>Logg inn i verktøyene</h3>
     <pre># GitHub CLI – brukes når du oppretter agentrepoet

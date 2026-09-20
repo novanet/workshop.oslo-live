@@ -58,7 +58,7 @@ gh repo create mini-kari --private --source . --push</pre>
         <pre>AGENT_NAME=Mini-Kari
 GH_TOKEN=github_pat_...
 ANTHROPIC_API_KEY=sk-ant-...</pre>
-        <p class="small">Tokenet trenger Contents, Issues og Pull requests med read/write på øvingsrepoet. Feilen <code>Resource not accessible ... (addComment)</code> betyr vanligvis manglende Issues write eller SSO-godkjenning.</p>
+        <p class="small">Tokenet trenger Contents, Issues og Pull requests med read/write på øvingsrepoet. Feilen <code>Resource not accessible ... (addComment)</code> betyr vanligvis manglende Issues write eller SSO-godkjenning. Hvis workeren sier <code>Mangler ANTHROPIC_API_KEY</code>, må du be kurslederen om Claude-nøkkelen og legge den i <code>.env</code>. <code>--dry-run</code> kan kjøres uten Anthropic-nøkkel.</p>
       </div>
       <div class="card">
         <h3>Sjekk verktøyene</h3>
