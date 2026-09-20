@@ -104,6 +104,7 @@ CLAUDE_MODEL=claude-sonnet-5</pre>
         </tbody>
       </table>
     </div>
+    <div class="callout warn"><b>Ikke repository secrets</b><code>GH_TOKEN</code> skal ikke lages eller lagres på <a href="https://github.com/novanet/workshop.oslo-live/settings/secrets/agents" target="_blank" rel="noopener">Secrets/agents-siden til Oslo Live</a>. Den siden brukes til repository secrets, ikke til den lokale workeren. Lag tokenet som et personlig fine-grained token på <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub → New fine-grained token</a>, legg det i den lokale <code>.env</code>-fila, og la <code>deploy.sh</code> håndtere Azure-lagringen i Lab 2.</div>
     <h3>Slik lager eller får du de tre viktigste nøklene</h3>
     <ol class="checklist">
       <li><strong>GitHub-token — lag selv:</strong> Åpne <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub → New fine-grained token</a> (alternativt: Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token). Gi tokenet et navn som <code>mini-kari-workshop</code>, velg kort utløpsdato, velg bare <code>novanet/workshop.oslo-live</code> under repository access, sett <code>Contents</code>, <code>Issues</code> og <code>Pull requests</code> til read/write og <code>Metadata</code> til read. Trykk Generate token, kopier verdien med én gang til <code>.env</code>, og test med <code>gh auth status</code>.</li>
