@@ -68,7 +68,7 @@ Storage Queue ── KEDA ──► Worker (Container Apps Job)
   <section>
     <h2>Mappene som betyr noe</h2>
     <div class="grid">
-      <div class="card"><h3><code>src/Worker/</code></h3><p><code>Pipeline.cs</code> er monteringsplassen. <code>Repository.cs</code> håndterer klon, branch, commit og PR. <code>ClaudeRunner.cs</code> kjører modellen.</p></div>
+      <div class="card"><h3><code>src/Worker/</code></h3><p><code>Pipeline.cs</code> er orkestreringen som installeres av Lab 1-scriptet. <code>Repository.cs</code> håndterer klon, branch, commit og PR. <code>ClaudeRunner.cs</code> kjører modellen.</p></div>
       <div class="card"><h3><code>src/Receiver/</code></h3><p>En liten ASP.NET Core-app som validerer webhooken og skriver til køen. Den har ingen LLM og ingen git.</p></div>
       <div class="card"><h3><code>agent/</code></h3><p><code>system.md</code>, <code>conventions.md</code>, prompts, skills, stages og hukommelse styrer modellens oppførsel.</p></div>
       <div class="card"><h3><code>infra/</code></h3><p><code>main.bicep</code> beskriver Container Apps, jobben, køen, Key Vault, identitet og miljøvariabler.</p></div>

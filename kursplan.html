@@ -397,11 +397,11 @@
 <section>
   <div class="eyebrow">Kort svar</div>
   <h2>Hvordan du klarer dette på én dag</h2>
-  <p class="intro">Deltakerne får ferdige byggeklosser, men monterer selv pipelinen som kobler dem sammen. Målet er en fungerende agent lokalt, så i skyen, og til slutt en som gjør noe de selv har bestemt. Derfor styres dagen etter sjekkpunkter, ikke klokkeslett.</p>
+  <p class="intro">Deltakerne får ferdige byggeklosser og et script som installerer baselinen. Målet er en fungerende agent lokalt, så i skyen, og til slutt en som gjør noe de selv har bestemt. Derfor styres dagen etter sjekkpunkter, ikke klokkeslett.</p>
   <div class="three">
     <div>
       <h3>Byggesett med oppskrift</h3>
-      <p><code>mini-nils.zip</code> har ferdige deler for GitHub, git, Claude Code, bygg, test og Azure. Deltakerne monterer orkestreringen i <code>Pipeline.cs</code> ved å følge en trinnvis IKEA-oppskrift.</p>
+      <p><code>mini-nils.zip</code> har ferdige deler for GitHub, git, Claude Code, bygg, test og Azure. <code>setup-lab1.py</code> installerer en fungerende baseline, slik at deltakerne kan lese orkestreringen og endre én policy uten å bruke tid på stor kopier-og-lim-kode.</p>
     </div>
     <div>
       <h3>Harness som motor</h3>
@@ -409,7 +409,7 @@
     </div>
     <div>
       <h3>Sjekkpunkt som følger med zippen</h3>
-      <p><code>./sjekkpunkt.sh lab1</code> tar vare på forsøket og legger inn den komplette pipelinen. Den som faller av kan være med i Lab 2 på to minutter.</p>
+      <p><code>python setup-lab1.py</code> tar vare på forsøket og legger inn den komplette baselinen. <code>./sjekkpunkt.sh lab1</code> er et Bash-alias for samme handling. Den som faller av kan være med i Lab 2 på to minutter.</p>
     </div>
   </div>
 </section>
@@ -442,7 +442,7 @@
     <div class="arrow">→</div>
     <div class="node"><div class="t">Leveranse</div><div class="n">Pull request</div><div class="d">Kommentar tilbake på issuen</div></div>
   </div>
-  <p>Workeren er et lite .NET-konsollprogram på rundt 1500 linjer. Deltakerne får ferdige komponenter og monterer rekkefølgen i <code>Pipeline.cs</code>. Deretter styrer de oppførselen med <code>system.md</code>, <code>conventions.md</code>, promptene per steg og <code>stages.json</code>.</p>
+  <p>Workeren er et lite .NET-konsollprogram på rundt 1500 linjer. Deltakerne får ferdige komponenter og et script som installerer rekkefølgen i <code>Pipeline.cs</code>. Deretter styrer de oppførselen med <code>system.md</code>, <code>conventions.md</code>, promptene per steg og <code>stages.json</code>.</p>
   <div class="tablewrap">
   <table>
     <thead><tr><th>Del</th><th>Mini-Nils (kurset)</th><th>Nils Georg (Cato)</th></tr></thead>
@@ -480,11 +480,11 @@
         <h3>Lab 1: Monter agenten</h3>
         <ul>
           <li>Pakk ut <code>mini-nils.zip</code>, lag eget repo, legg nøklene i <code>.env</code>. Miljøsjekk med hjelperne på gulvet: <code>dotnet --version</code>, <code>gh --version</code>, <code>claude --version</code>.</li>
-          <li>Monter de ferdige delene i <code>Pipeline.cs</code>: reservasjon, arbeidsområde, kontekst, modellsteg, diff-sjekk, bygg/test og levering.</li>
-          <li>Kjør <code>dotnet build</code> etter hvert trinn. Den som faller av bruker <code>./sjekkpunkt.sh lab1</code>.</li>
-          <li>Kjør pipelinen du monterte mot issue 1 og les diffen i pull requesten.</li>
+          <li>Kjør <code>python setup-lab1.py</code> og <code>dotnet build</code>. Scriptet tar vare på forsøket ditt og installerer baselinen.</li>
+          <li>Les de sju kontrollene i <code>Pipeline.cs</code> og gjør én bevisst policyendring.</li>
+          <li>Kjør agenten mot issue 1 og les diffen i pull requesten.</li>
         </ul>
-        <div class="checkpoint"><b>Sjekkpunkt 1</b>Pipelinen deltakeren monterte har åpnet en pull request, og deltakeren kan forklare hva som er deterministisk kode og hvor modellen brukes.</div>
+        <div class="checkpoint"><b>Sjekkpunkt 1</b>Baselinen med policyendringen har åpnet en pull request, og deltakeren kan forklare hva som er deterministisk kode og hvor modellen brukes.</div>
         <div class="tags"><span class="tag">lab</span><span class="tag">sjekkpunkt: lab1</span><span class="tag">LM 2</span><span class="tag">LM 4</span></div>
       </div>
     </div>
@@ -624,7 +624,7 @@
       <ul>
         <li>Tørrkjøring med en kollega som ikke har sett koden. Ta tiden på Lab 1 og Lab 2.</li>
         <li>Sjekk nettverket på Novanet: at webhooks når mottaket, at ACR-bygg fungerer, at Codespaces ikke blokkeres, og at <code>allemannsdata.com</code> ikke er sperret.</li>
-        <li>Bygg <code>mini-nils.zip</code>, pakk den ut i en tom mappe og test både IKEA-oppskriften og <code>./sjekkpunkt.sh lab1</code>.</li>
+        <li>Bygg <code>mini-nils.zip</code>, pakk den ut i en tom mappe og test både <code>python setup-lab1.py</code> og <code>./sjekkpunkt.sh lab1</code>.</li>
       </ul>
     </div>
     <div class="row">

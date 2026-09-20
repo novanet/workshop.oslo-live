@@ -477,10 +477,10 @@
   <section class="lysbilde">
     <p class="merkelapp">Din tur</p>
     <h2>Mini-Nils er versjonen du bygger i dag</h2>
-    <p class="ingress">Du får delene og en IKEA-oppskrift. I Lab 1 monterer du selv pipelinen som kobler en issue til en pull request.</p>
+    <p class="ingress">Du får delene og et monteringsscript. I Lab 1 kjører du baselinen, leser pipelinen som kobler en issue til en pull request og gjør én bevisst policyendring.</p>
     <div class="kort-rad">
       <div class="kort"><span class="tall">1</span><span class="navn">Delene følger med</span><span class="om">GitHub, git, Claude Code, bygg, test, rapportering og Azure er ferdige komponenter.</span></div>
-      <div class="kort"><span class="tall">2</span><span class="navn">Du monterer flyten</span><span class="om">I <code>Pipeline.cs</code> bestemmer du rekkefølgen, hvor modellen slipper til, og hva som kontrolleres i kode.</span></div>
+      <div class="kort"><span class="tall">2</span><span class="navn">Du styrer flyten</span><span class="om"><code>setup-lab1.py</code> installerer baselinen. I <code>Pipeline.cs</code> undersøker og endrer du rekkefølgen, modellkallet og kontrollene.</span></div>
       <div class="kort"><span class="tall">3</span><span class="navn">Agenten jobber i Oslo Live</span><span class="om">Et felles kart over Oslo med offentlige sanntidsdata. Agenten henter en issue og leverer en pull request.</span></div>
     </div>
     <div class="notis" style="margin-top:24px"><b>Nils Georg:</b> Azure DevOps, egne C#-verktøy og flere modellsteg. <b>Mini-Nils:</b> GitHub, Claude Code og ett steg til å begynne med. Begge følger samme løype fra oppgave til pull request.</div>
@@ -555,7 +555,7 @@
       <table>
         <thead><tr><th>Fil</th><th>Hva den bestemmer</th><th>Hva du kan undersøke</th></tr></thead>
         <tbody>
-          <tr><td><code>src/Worker/Pipeline.cs</code></td><td>Rekkefølgen fra oppgave til PR</td><td>Hva skal være kode, og hvor skal modellen brukes?</td></tr>
+          <tr><td><code>src/Worker/Pipeline.cs</code></td><td>Rekkefølgen fra oppgave til PR</td><td>Hva skal være kode, hvor skal modellen brukes, og hvilken policy vil du endre?</td></tr>
           <tr><td><code>agent/system.md</code></td><td>Rolle, prioriteringer og hvordan agenten rapporterer</td><td>Blir den mer presis når instruksjonen blir kortere?</td></tr>
           <tr><td><code>agent/conventions.md</code></td><td>Regler som gjelder i kodebasen</td><td>Følger den mønstrene teamet faktisk bruker?</td></tr>
           <tr><td><code>agent/prompts/*.md</code></td><td>Oppgaven i hvert steg</td><td>Hva endres når den må planlegge eller skrive test først?</td></tr>
@@ -598,11 +598,11 @@
     <p class="merkelapp">Resten av dagen</p>
     <h2>Tre sjekkpunkter</h2>
     <div class="kort-rad">
-      <div class="kort"><span class="tall">1</span><span class="navn">Montert pipeline</span><span class="om">Koble delene sammen og la koden du skrev åpne en PR fra maskinen din.</span></div>
+      <div class="kort"><span class="tall">1</span><span class="navn">Kjørt baseline</span><span class="om">Installer baselinen med <code>setup-lab1.py</code>, gjør én policyendring og la agenten åpne en PR fra maskinen din.</span></div>
       <div class="kort"><span class="tall">2</span><span class="navn">PR fra Azure</span><span class="om">Deploy agenten og start en oppgave fra GitHub mens laptopen er lukket.</span></div>
       <div class="kort"><span class="tall">3</span><span class="navn">En forklart forbedring</span><span class="om">Legg til en port, hukommelse, bedre sikkerhet eller en egen idé. Vis årsak og virkning.</span></div>
     </div>
-    <div class="notis" style="margin-top:26px">Faller du av i monteringen, kjører du <code>./sjekkpunkt.sh lab1</code>. Forsøket ditt tas vare på, og du kan fortsette med Lab 2.</div>
+    <div class="notis" style="margin-top:26px">Faller du av, kjører du <code>python setup-lab1.py</code>. Forsøket ditt tas vare på, og du kan fortsette med Lab 2.</div>
   </section>
 
   <!-- 16 Lab 1 ----------------------------------------------------------- -->
@@ -612,9 +612,9 @@
     <ul class="punkter">
       <li><b>Hent <code>mini-nils.zip</code> fra kurslederen og lag ditt eget private repo.</b> <span>Dette er agentens kode og det du tar med deg videre.</span></li>
       <li><b>Fyll inn <code>.env</code>.</b> <span>Agentnavn, GitHub-token og Anthropic-nøkkel.</span></li>
-      <li><b>Åpne <code>docs/lab1.md</code> og <code>Pipeline.cs</code> ved siden av hverandre.</b> <span>Oppskriften har sju trinn og én byggesjekk etter hvert trinn.</span></li>
-      <li><b>Monter reservasjon, arbeidsområde, kontekst, modell, diff-sjekk, verifisering og levering.</b></li>
-      <li><b>Kjør pipelinen mot issue 1.</b> <span>Sjekkpunktet er nådd når koden du monterte har åpnet en pull request.</span></li>
+      <li><b>Kjør <code>python setup-lab1.py</code> og bygg.</b> <span>Scriptet tar vare på forsøket ditt og installerer Lab 1-baselinen.</span></li>
+      <li><b>Les de sju kontrollene i <code>Pipeline.cs</code> og gjør én policyendring.</b> <span>Velg for eksempel verifisering, modellbudsjett eller verktøytilgang.</span></li>
+      <li><b>Kjør agenten mot issue 1.</b> <span>Sjekkpunktet er nådd når baselinen med policyendringen har åpnet en pull request.</span></li>
     </ul>
     <div class="lenker">
       <a class="lenke" href="https://github.com/novanet/workshop.oslo-live/issues" target="_blank" rel="noopener">Oslo Live <span class="mono">issuene</span></a>
