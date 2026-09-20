@@ -72,6 +72,16 @@ dotnet build</pre>
   </section>
 
   <section>
+    <h2>Test uten å starte agenten</h2>
+    <p class="intro">Vil du bare sjekke at issuen er tilgjengelig og ikke allerede reservert, uten å klone repoet eller bruke modellkall?</p>
+    <pre>dotnet run --project src/Worker -- `
+  --issue 1 `
+  --repo novanet/workshop.oslo-live `
+  --dry-run</pre>
+    <p><code>--dry-run</code> reserverer ikke issuen og stopper før clone, issue-kommentar, Claude Code, commit og PR. Kombinerer du det med <code>--skip-reservation</code>, hoppes reservasjonssjekken over og workeren stopper rett etter at issuen er hentet. Dry-run krever ikke <code>ANTHROPIC_API_KEY</code> og kan bare brukes med <code>--issue</code> og <code>--repo</code>, ikke kømodus.</p>
+  </section>
+
+  <section>
     <h2>Start med et kompilérbart skjelett</h2>
     <p class="intro">Scriptet legger inn en skjelettfil med den ytterste <code>Run</code>-metoden og alle hjelpeklassene du trenger. <code>RunStages</code> er din oppgave.</p>
     <pre>python setup-lab1.py
@@ -148,7 +158,7 @@ dotnet build</pre>
   --issue 1 `
   --repo novanet/workshop.oslo-live `
   --skip-reservation</pre>
-    <p>Følg loggen: reservasjonen kontrolleres, repoet klones, modellstegene kjører, bygg/test kjøres og PR-adressen skrives ut.</p>
+    <p>Følg loggen: reservasjonen kontrolleres eller hoppes over, repoet klones, modellstegene kjører, bygg/test kjøres og PR-adressen skrives ut.</p>
     <div class="callout"><b>Sjekkpunkt 1</b>Din egen implementasjon av <code>RunStages</code> har åpnet en PR, bygget er grønt, og du kan forklare hva som er deterministisk kode og hvor modellen brukes.</div>
   </section>
 

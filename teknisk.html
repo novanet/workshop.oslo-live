@@ -212,6 +212,7 @@ az account list -o table</pre>
     <pre># lokalt
 dotnet build --nologo -v quiet
 dotnet run --project src/Worker -- --issue 1 --repo novanet/workshop.oslo-live --skip-reservation
+dotnet run --project src/Worker -- --issue 1 --repo novanet/workshop.oslo-live --dry-run
 
 # Azure
 ./deploy.sh
@@ -221,6 +222,7 @@ az containerapp job logs show -g $RESOURCE_GROUP -n caj-$NAME-worker --container
 # målrepo
 gh issue list --repo novanet/workshop.oslo-live
 gh pr list --repo novanet/workshop.oslo-live</pre>
+    <p><code>--dry-run</code> sjekker issue og reservasjon uten å reservere, klone, kommentere eller starte Claude Code. Det krever <code>--issue</code> og <code>--repo</code>, og skal ikke brukes mot kømodus.</p>
   </section>
 
   <section>
