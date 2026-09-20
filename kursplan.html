@@ -356,11 +356,30 @@
     font-size: 0.9rem;
   }
   .assume ul { padding-left: 20px; margin: 8px 0 0; }
+
+  .kursnav {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px;
+  }
+  .kursnav a {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 999px;
+    color: var(--muted); font-family: "IBM Plex Mono", Consolas, monospace;
+    font-size: 11px; padding: 5px 10px; text-decoration: none;
+  }
+  .kursnav a:hover { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
 
 <div class="page">
+<nav class="kursnav" aria-label="Kursressurser">
+  <a href="index.html">Tavle</a>
+  <a href="presentasjon.html">Presentasjon</a>
+  <a href="lab1.html">Lab 1</a>
+  <a href="lab2.html">Lab 2</a>
+  <a href="lab3.html">Lab 3</a>
+  <a href="teknisk.html">Teknisk</a>
+  <a href="kursplan.html">Kursplan</a>
+</nav>
 <header>
   <div class="eyebrow">Endagskurs for utviklere · Novanet</div>
   <h1>Bygg din egen Nils Georg</h1>

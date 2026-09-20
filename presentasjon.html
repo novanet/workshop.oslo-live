@@ -280,9 +280,37 @@
   }
   .lenke:hover { border-color: var(--accent); color: var(--accent); }
   .lenke .mono { color: var(--muted); }
+
+  .kursnav {
+    position: fixed; top: 14px; right: clamp(16px, 5vw, 88px); z-index: 10;
+    display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px;
+    max-width: calc(100% - 32px);
+  }
+  .kursnav a {
+    background: color-mix(in srgb, var(--ground) 88%, transparent);
+    border: 1px solid var(--line); border-radius: 999px;
+    color: var(--muted); font-family: "IBM Plex Mono", monospace;
+    font-size: 11px; padding: 5px 9px; text-decoration: none;
+    backdrop-filter: blur(8px);
+  }
+  .kursnav a:hover { border-color: var(--accent); color: var(--accent); }
+  @media (max-width: 720px) {
+    .kursnav { left: 16px; right: 16px; }
+    .kursnav a { font-size: 10px; padding: 4px 7px; }
+  }
 </style>
 </head>
 <body>
+
+<nav class="kursnav" aria-label="Kursressurser">
+  <a href="index.html">Tavle</a>
+  <a href="presentasjon.html">Presentasjon</a>
+  <a href="lab1.html">Lab 1</a>
+  <a href="lab2.html">Lab 2</a>
+  <a href="lab3.html">Lab 3</a>
+  <a href="teknisk.html">Teknisk</a>
+  <a href="kursplan.html">Kursplan</a>
+</nav>
 
 <div class="dekk" id="dekk">
 

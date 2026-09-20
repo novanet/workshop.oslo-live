@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lab 2 · Til skyen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="deltaker.css">
+</head>
+<body>
+<main class="page">
+  <nav class="toppnav" aria-label="Kursressurser">
+    <a href="index.html">Tavle</a>
+    <a href="presentasjon.html">Presentasjon</a>
+    <a href="lab1.html">Lab 1</a>
+    <a class="aktiv" href="lab2.html">Lab 2</a>
+    <a href="lab3.html">Lab 3</a>
+    <a href="teknisk.html">Teknisk</a>
+    <a href="kursplan.html">Kursplan</a>
+  </nav>
+
+  <header class="hero">
+    <div class="eyebrow">Sjekkpunkt 2 · Azure</div>
+    <h1>Lab 2: Til skyen</h1>
+    <p class="lede">Deploy den samme workeren slik at en merket GitHub-issue gir en pull request fra Azure, uten at laptopen din er involvert.</p>
+    <div class="facts">
+      <div class="fact"><b>Mål</b><span>En issue starter en jobb fra null i Azure.</span></div>
+      <div class="fact"><b>Arbeidssted</b><span>Din ressursgruppe i kursets Azure-tenant.</span></div>
+      <div class="fact"><b>Ferdig når</b><span>PR-en er opprettet av Container Apps Job.</span></div>
+    </div>
+  </header>
+
+  <section>
+    <h2>Dette deployer du</h2>
+    <div class="grid">
+      <div class="card"><h3>Receiver</h3><p>En Container App som validerer webhook-signaturen og legger en melding i Storage Queue. Den har <code>minReplicas: 0</code>.</p></div>
+      <div class="card"><h3>Queue</h3><p>Storage Queue holder oppgaven til KEDA ser meldingen og starter en jobbkø.</p></div>
+      <div class="card"><h3>Worker</h3><p>En Container Apps Job kloner repoet, kjører <code>claude -p</code>, bygger, tester og åpner PR.</p></div>
+      <div class="card"><h3>Hemmeligheter</h3><p>GitHub-token, Anthropic-nøkkel og webhook-hemmelighet leses fra Key Vault med managed identity.</p></div>
+    </div>
+    <div class="callout"><b>Viktig skille</b>Issuen og PR-en bor i fellesrepoet. Receiver, worker, kø og hemmeligheter bor i din ressursgruppe og bygges fra ditt agentrepo.</div>
+  </section>
+
+  <section>
+    <h2>Deploy i seks trinn</h2>
+    <div class="steps">
+      <article class="step">
+        <div class="step-number">1</div>
+        <div>
+          <p class="meta">Azure-innlogging</p>
+          <h3>Logg inn i riktig tenant</h3>
+          <p>Bruk et InPrivate-vindu slik at jobbbrukeren ikke blandes med kursbrukeren.</p>
+          <pre>az login --use-device-code
+az account show</pre>
+          <p class="small">Sjekk at subscriptionen som vises er kursets subscription.</p>
+        </div>
+      </article>
+      <article class="step">
+        <div class="step-number">2</div>
+        <div>
+          <p class="meta">Konfigurasjon</p>
+          <h3>Fyll inn Azure-verdiene</h3>
+          <p>Legg verdiene i <code>.env</code> i agentrepoet. Behold <code>GH_TOKEN</code> og <code>ANTHROPIC_API_KEY</code> fra Lab 1.</p>
+          <pre>RESOURCE_GROUP=rg-mini-kari
+NAME=kari
+WEBHOOK_SECRET=&lt;felles hemmelighet fra kurslederen&gt;</pre>
+          <p class="small"><code>NAME</code> brukes i ressursnavnene. <code>AGENT_NAME</code> bestemmer etiketten agenten lytter etter.</p>
+        </div>
+      </article>
+      <article class="step">
+        <div class="step-number">3</div>
+        <div>
+          <p class="meta">Infrastruktur og bilder</p>
+          <h3>Kjør deploy</h3>
+          <pre>./deploy.sh</pre>
+          <p>Skriptet deployer først infrastrukturen med plassholderbilde, bygger Receiver og Worker i Azure Container Registry med <code>az acr build</code>, og deployer deretter med de ekte bildene.</p>
+          <p class="small">Ingen Docker lokalt. Noter URL-en til mottaket og åpne <code>infra/main.bicep</code> mens bygget kjører.</p>
+        </div>
+      </article>
+      <article class="step">
+        <div class="step-number">4</div>
+        <div>
+          <p class="meta">Webhook · kursleder</p>
+          <h3>Be om kobling til Oslo Live</h3>
+          <p>Du har ikke admin på fellesrepoet. Si fra når deployen er ferdig; kurslederen registrerer webhooken, lager etiketten og kobler URL-en til repoet.</p>
+          <pre>curl "$(jq -r .receiverUrl.value .deploy-outputs.json)/"</pre>
+          <p class="small">Svaret skal fortelle at Mini-Nils-mottaket lytter etter etiketten din, for eksempel <code>mini-kari</code>.</p>
+        </div>
+      </article>
+      <article class="step">
+        <div class="step-number">5</div>
+        <div>
+          <p class="meta">Trigger</p>
+          <h3>Merk en issue med agentetiketten</h3>
+          <p>Åpne en ledig issue, velg en oppgave kurslederen har anbefalt, og sett etiketten til navnet fra deployen. Receiveren mottar alle hendelser, men sender bare dine videre.</p>
+          <pre>az containerapp job execution list `
+  -g $RESOURCE_GROUP -n caj-$NAME-worker -o table</pre>
+          <p class="small">KEDA kan bruke opptil 30 sekunder på å se meldingen.</p>
+        </div>
+      </article>
+      <article class="step">
+        <div class="step-number">6</div>
+        <div>
+          <p class="meta">Observability · sjekkpunkt</p>
+          <h3>Følg kjøringen og les loggen</h3>
+          <pre>az containerapp job logs show `
+  -g $RESOURCE_GROUP -n caj-$NAME-worker `
+  --container worker --follow</pre>
+          <p>Lukk laptopen mens jobben kjører. PR-en skal komme fra workeren i Azure, ikke fra terminalen din.</p>
+          <div class="callout"><b>Sjekkpunkt 2</b>En merket issue har gitt en pull request som er opprettet av Azure-jobben. Vis kjøringen i Azure-portalen til kurslederen.</div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <h2>Se kostnaden i Log Analytics</h2>
+    <p class="intro">Workeren skriver en <code>LLM request completed</code>-linje for hver modellkjøring. Det er denne linjen som brukes i forbrukstabellen på PR-en og i resultattavlen.</p>
+    <pre>ContainerAppConsoleLogs_CL
+| where ContainerName_s == "worker"
+| where Log_s contains "LLM request completed"
+| project TimeGenerated, Log_s
+| order by TimeGenerated desc</pre>
+  </section>
+
+  <section>
+    <h2>Hvis noe stopper</h2>
+    <div class="grid">
+      <div class="card"><h3>Webhooken når ikke fram</h3><p>Be kurslederen sjekke Recent deliveries. Som nødløsning kan du sende oppgaven direkte til mottaket:</p><pre>curl -X POST "$(jq -r .receiverUrl.value .deploy-outputs.json)/tasks" `
+  -H "X-Webhook-Secret: $WEBHOOK_SECRET" `
+  -H "Content-Type: application/json" `
+  -d '{"repo":"novanet/workshop.oslo-live","issueNumber":2}'</pre></div>
+      <div class="card"><h3>Deploy feiler på rettigheter</h3><p>Ikke endre rundt sikkerheten selv. Si fra til kurslederen; ressursgruppen eller subscriptionen må justeres.</p></div>
+      <div class="card"><h3>Jobben feiler med en gang</h3><p>Les <code>az containerapp job logs show</code>. Manglende miljøvariabler ligger vanligvis under <code>env:</code> i <code>infra/main.bicep</code>.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Rydd opp etter kurset</h2>
+    <p>Ikke slett ressursgruppen før kurslederen sier fra. Når alt er ferdig:</p>
+    <pre>az group delete --name $RESOURCE_GROUP --yes --no-wait</pre>
+  </section>
+
+  <footer class="footer">
+    <a href="index.html">Til resultattavlen</a>
+    <a href="lab1.html">Forrige: Lab 1</a>
+    <a href="lab3.html">Neste: Lab 3</a>
+    <a href="teknisk.html">Les teknisk oversikt</a>
+  </footer>
+</main>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Teknisk oversikt · Mini-Nils</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="deltaker.css">
+</head>
+<body>
+<main class="page">
+  <nav class="toppnav" aria-label="Kursressurser">
+    <a href="index.html">Tavle</a>
+    <a href="presentasjon.html">Presentasjon</a>
+    <a href="lab1.html">Lab 1</a>
+    <a href="lab2.html">Lab 2</a>
+    <a href="lab3.html">Lab 3</a>
+    <a class="aktiv" href="teknisk.html">Teknisk</a>
+    <a href="kursplan.html">Kursplan</a>
+  </nav>
+
+  <header class="hero">
+    <div class="eyebrow">Referanse · Mini-Nils</div>
+    <h1>Det tekniske du trenger</h1>
+    <p class="lede">Denne siden forklarer hvor koden bor, hvordan en issue blir til en pull request, hva modellen får lov til å gjøre, og hvor du leter når noe feiler.</p>
+    <div class="facts">
+      <div class="fact"><b>Språk</b><span>C# på .NET 10.</span></div>
+      <div class="fact"><b>Modell</b><span>Claude Code headless via <code>claude -p</code>.</span></div>
+      <div class="fact"><b>Drift</b><span>Azure Container Apps, Storage Queue og Key Vault.</span></div>
+    </div>
+  </header>
+
+  <section>
+    <h2>Fra issue til PR</h2>
+    <p class="intro">Det er to kjøremiljøer med en tydelig grense mellom dem: Receiveren tar imot HTTP og legger en melding i kø; workeren gjør det tunge, modellerte arbeidet.</p>
+    <pre>GitHub issue + etikett
+        │ webhook
+        ▼
+Receiver (Container App, scale-to-zero)
+        │ signert melding
+        ▼
+Storage Queue ── KEDA ──► Worker (Container Apps Job)
+                              │
+                              ├─ klon repo og lag branch
+                              ├─ bygg systemprompt og kontekst
+                              ├─ kjør claude -p med stage-profil
+                              ├─ kjør dotnet build/test utenfor modellen
+                              └─ push branch og åpne PR</pre>
+    <p>GitHub trenger et raskt HTTP-svar. Derfor skal ikke Receiveren kjøre Claude eller git. Jobben kan bruke flere minutter uten at webhooken står åpen.</p>
+  </section>
+
+  <section>
+    <h2>De to repoene</h2>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Repo</th><th>Innhold</th><th>Din jobb</th></tr></thead>
+        <tbody>
+          <tr><td><code>mini-&lt;navn&gt;</code></td><td>Agenten, pipeline, prompts, skills, Bicep og deploy-skript.</td><td>Du eier og endrer dette.</td></tr>
+          <tr><td><code>novanet/workshop.oslo-live</code></td><td>Kartet, issuer og koden agenten skal endre.</td><td>Du sender PR hit, men endrer ikke <code>main</code> direkte.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout"><b>Husk</b>Agentens eget repo er ikke målet for oppgaven. <code>GH_TOKEN</code> må derfor ha skrivetilgang til <code>novanet/workshop.oslo-live</code>.</div>
+  </section>
+
+  <section>
+    <h2>Mappene som betyr noe</h2>
+    <div class="grid">
+      <div class="card"><h3><code>src/Worker/</code></h3><p><code>Pipeline.cs</code> er monteringsplassen. <code>Repository.cs</code> håndterer klon, branch, commit og PR. <code>ClaudeRunner.cs</code> kjører modellen.</p></div>
+      <div class="card"><h3><code>src/Receiver/</code></h3><p>En liten ASP.NET Core-app som validerer webhooken og skriver til køen. Den har ingen LLM og ingen git.</p></div>
+      <div class="card"><h3><code>agent/</code></h3><p><code>system.md</code>, <code>conventions.md</code>, prompts, skills, stages og hukommelse styrer modellens oppførsel.</p></div>
+      <div class="card"><h3><code>infra/</code></h3><p><code>main.bicep</code> beskriver Container Apps, jobben, køen, Key Vault, identitet og miljøvariabler.</p></div>
+      <div class="card"><h3><code>deploy.sh</code></h3><p>Deployer infrastrukturen, bygger bildene i ACR og ruller ut den nye revisjonen.</p></div>
+      <div class="card"><h3><code>.env</code></h3><p>Lokale hemmeligheter og navn. Filen skal aldri committes eller legges i issue, PR eller logg.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Hva som er kode og hva som er modell</h2>
+    <div class="grid">
+      <div class="card"><h3>Deterministisk kode</h3><p>Reservasjon, arbeidsområde, promptbygging, diff-sjekk, bygg/test, commit, push og PR. Disse delene skal gi samme kontroll ved hver kjøring.</p></div>
+      <div class="card"><h3>Modellens arbeid</h3><p>Les oppgaven, finn relevant kode, velg en implementasjon og gjør endringer innenfor verktøyprofilen. Modellen avgjør ikke om leveransen er grønn.</p></div>
+      <div class="card"><h3>Kvalitetsportene</h3><p>En tom diff stopper leveransen. Bygg eller test kjøres etter modellsteget. Rødt bygg gir PR som utkast og skal ikke merges automatisk.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Stages og verktøytilgang</h2>
+    <p class="intro"><code>agent/stages.json</code> er arbeidsflytens kontrollpanel. Hver stage kan ha egen prompt, modell, verktøyliste, maks antall turer og timeout.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Stage</th><th>Typisk tilgang</th><th>Hvorfor</th></tr></thead>
+        <tbody>
+          <tr><td>Research</td><td><code>Read</code>, <code>Glob</code>, <code>Grep</code></td><td>Forstå oppgaven uten å endre kode.</td></tr>
+          <tr><td>Implement</td><td>Lesing, <code>Edit</code>, <code>Write</code>, bygg og test</td><td>Gjøre endringen og kontrollere lokalt.</td></tr>
+          <tr><td>Self-review</td><td>Lesing, diff og test; helst ikke fri skriving</td><td>Finne feil før leveranse uten å omskrive alt.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Minst mulig tilgang er et teknisk valg. Fjerner du <code>Write</code>, kan agenten fortsatt gjøre mye med <code>Edit</code>. Legger du til et bredt <code>Bash</code>-mønster, øker konsekvensen av en feil instruksjon.</p>
+  </section>
+
+  <section>
+    <h2>Lokalt og i Azure</h2>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th></th><th>Lokalt</th><th>Azure</th></tr></thead>
+        <tbody>
+          <tr><td>Trigger</td><td><code>dotnet run ... --issue 1 --tving</code></td><td>GitHub webhook + etikett</td></tr>
+          <tr><td>Worker</td><td>Terminal/devcontainer</td><td>Container Apps Job</td></tr>
+          <tr><td>Hukommelse</td><td><code>agent/memory.md</code></td><td>Bloben <code>hukommelse/memory.md</code></td></tr>
+          <tr><td>Hemmeligheter</td><td><code>.env</code> lokalt</td><td>Key Vault + managed identity</td></tr>
+          <tr><td>Logger</td><td>Terminalen</td><td>Container logs og Log Analytics</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Tre porter du må kunne forklare</h2>
+    <ol class="checklist">
+      <li><strong>Reservasjon:</strong> stopper to agenter fra å bruke tokens på samme issue.</li>
+      <li><strong>Verktøyprofil:</strong> begrenser hva modellen kan lese, skrive og kjøre.</li>
+      <li><strong>Bygg/test:</strong> avgjør med faktisk kode om resultatet kan leveres.</li>
+    </ol>
+    <div class="callout warn"><b>Modellen er ikke en sikkerhetsgrense alene</b>Issues og kommentarer er brukerstyrt data. Branch protection, token-rettigheter, verktøyallowlist og deterministiske porter må sammen beskytte leveransen.</div>
+  </section>
+
+  <section>
+    <h2>Kommandoer du bruker oftest</h2>
+    <pre># lokalt
+dotnet build --nologo -v quiet
+dotnet run --project src/Worker -- --issue 1 --repo novanet/workshop.oslo-live --tving
+
+# Azure
+./deploy.sh
+az containerapp job execution list -g $RESOURCE_GROUP -n caj-$NAME-worker -o table
+az containerapp job logs show -g $RESOURCE_GROUP -n caj-$NAME-worker --container worker --follow
+
+# målrepo
+gh issue list --repo novanet/workshop.oslo-live
+gh pr list --repo novanet/workshop.oslo-live</pre>
+  </section>
+
+  <section>
+    <h2>Når noe feiler</h2>
+    <div class="grid">
+      <div class="card"><h3>Bygget feiler</h3><p>Les første egentlige compiler-feil, rett én ting, og kjør <code>dotnet build</code> igjen. Ikke be modellen om å rapportere grønt.</p></div>
+      <div class="card"><h3>Ingen PR</h3><p>Se etter tom diff, rødt bygg eller stage-feil i workeren. Se også at <code>GH_TOKEN</code> har tilgang til målrepoet.</p></div>
+      <div class="card"><h3>Azure-jobben starter ikke</h3><p>Sjekk etiketten, webhook delivery, queue og KEDA. Deretter les jobbloggen; manglende miljøvariabler står ofte under <code>env:</code> i Bicep.</p></div>
+      <div class="card"><h3>PR-en er dyr</h3><p>Les <code>LLM request completed</code>-linjene. Reduser kontekst, modell eller <code>maxTurns</code> én endring om gangen.</p></div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <a href="index.html">Til resultattavlen</a>
+    <a href="presentasjon.html">Til presentasjonen</a>
+    <a href="lab1.html">Lab 1</a>
+    <a href="lab2.html">Lab 2</a>
+    <a href="lab3.html">Lab 3</a>
+  </footer>
+</main>
+</body>
+</html>
