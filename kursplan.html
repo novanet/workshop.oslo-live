@@ -515,13 +515,13 @@
     <div class="slot">
       <div class="time">når klar<span class="dur">til sjekkpunkt 3</span></div>
       <div>
-        <h3>Lab 3: Smartere eller gøyere</h3>
+        <h3>Lab 3: Målbar forbedring</h3>
         <p>Lagene velger ett spor. Alle sporene bygger på det som kjører i skyen fra Lab 2. Lab 3 er valgfri: sprekker Lab 2 på tid, går vi rett til demo.</p>
         <ul>
           <li><strong>Porter:</strong> del kjøringen i research, implementer og selvreview. Planen sjekkes av en billigere modell før koding. Rødt bygg stopper PR-en.</li>
           <li><strong>Skills og hukommelse:</strong> agenten skriver én lærdom til <code>memory.md</code> etter hver oppgave. Kjør samme oppgave tre ganger og se om den blir billigere.</li>
           <li><strong>Sikkerhet:</strong> lesende og skrivende verktøyliste per steg. Plant en prompt-injeksjon i en issue og se hva som skjer.</li>
-          <li><strong>Gøy:</strong> velg en av ideene under.</li>
+          <li><strong>Praktisk forbedring:</strong> velg et konkret problem i agentens arbeidsflyt, mål det før og etter, og dokumenter effekten.</li>
         </ul>
         <div class="checkpoint"><b>Sjekkpunkt 3</b>Agenten oppfører seg annerledes enn før, og laget vet hvorfor.</div>
         <div class="tags"><span class="tag">lab</span><span class="tag">sjekkpunkt 3</span><span class="tag">LM 4</span><span class="tag">LM 5</span><span class="tag">LM 6</span></div>
@@ -550,9 +550,9 @@
 </section>
 
 <section>
-  <div class="eyebrow">Gøy-ideer</div>
-  <h2>Ting agentene kan brukes til</h2>
-  <p class="intro">Hver idé demonstrerer noe ekte fra Nils Georg. De to første egner seg som felles aktivitet for hele rommet.</p>
+  <div class="eyebrow">Praktiske forbedringer</div>
+  <h2>Utvid agentens arbeidsflyt</h2>
+  <p class="intro">Hver idé demonstrerer en konkret forbedring av kvalitet, sikkerhet, kostnad eller læring. Velg én, mål effekten, og vis avveiningen i demoen.</p>
   <div class="ideas">
     <div class="idea">
       <h3>Capture the Bug</h3>
@@ -565,14 +565,14 @@
       <div class="why"><strong>Fra Cato:</strong> Nevn Nils Georg, få en PR. Samme flyt som et vanlig work item, med et resultat som er synlig og morsomt.</div>
     </div>
     <div class="idea">
-      <h3>PR-poeten</h3>
-      <p>En agent som kommenterer alle PR-er i en persona: Ibsen, sportskommentator eller sur senior. Bytt persona per mottaker og se hvor lite som skal til i prompten.</p>
-      <div class="why"><strong>Fra Cato:</strong> Audience-regelen. Nils Georg skriver teknisk til utviklere og utfallsspråk til produkteiere, styrt av én flagg i konfigurasjonen.</div>
+      <h3>Bedre rapportering</h3>
+      <p>Gjør PR-oppsummeringen mer nyttig for den som skal godkjenne endringen: hva ble endret, hva ble verifisert, og hvilken risiko gjenstår?</p>
+      <div class="why"><strong>Fra Cato:</strong> Mottakerbevisst rapportering. Samme tekniske endring trenger ulik forklaring avhengig av hvem som skal lese den.</div>
     </div>
     <div class="idea">
-      <h3>Agent mot agent</h3>
-      <p>Lag A sin agent skriver koden, lag B sin agent reviewer den og poster funn som tråd. Lag A sin agent må svare eller fikse. Uenigheter leses opp.</p>
-      <div class="why"><strong>Fra Cato:</strong> Review-fanout med flere modeller og PrComment-flyten, der agenten svarer på reviewer-kommentarer og pusher fikser.</div>
+      <h3>Kvalitetsport</h3>
+      <p>Legg inn en self-review-stage uten skriveverktøy. Den skal sjekke akseptansekriteriene og stoppe leveransen når et kriterium ikke er verifisert.</p>
+      <div class="why"><strong>Fra Cato:</strong> Review-fanout og deterministiske porter gjør kvalitetssjekken eksplisitt før en PR kan merges.</div>
     </div>
     <div class="idea">
       <h3>Prompt-injeksjonsjakt</h3>
