@@ -107,7 +107,7 @@ WEBHOOK_SECRET=&lt;felles hemmelighet fra kurslederen&gt;</pre>
         <div>
           <p class="meta">Trigger</p>
           <h3>Merk en issue med agentetiketten</h3>
-          <p>Åpne en ledig issue, velg en oppgave kurslederen har anbefalt, og sett etiketten til navnet fra deployen. Receiveren mottar alle hendelser, men sender bare dine videre.</p>
+          <p>Åpne <a href="https://github.com/novanet/workshop.oslo-live/issues" target="_blank" rel="noopener">GitHub Issues</a>, velg en ledig oppgave kurslederen har anbefalt, og sett etiketten til navnet fra deployen. Receiveren mottar alle hendelser, men sender bare dine videre.</p>
           <pre>az containerapp job execution list `
   -g $RESOURCE_GROUP -n caj-$NAME-worker -o table</pre>
           <p class="small">KEDA kan bruke opptil 30 sekunder på å se meldingen.</p>
