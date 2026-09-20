@@ -56,6 +56,12 @@
   }
   .status { text-align: right; font-family: "IBM Plex Mono", monospace; font-size: 14px; color: var(--muted); }
   .status .puls { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--ok); margin-right: 7px; }
+  .navigasjon { display: flex; justify-content: flex-end; gap: 8px; margin-top: 10px; }
+  .navigasjon a {
+    color: var(--accent); background: var(--accent-soft); border-radius: 999px;
+    padding: 5px 11px; text-decoration: none; font-size: 12px;
+  }
+  .navigasjon a:hover { text-decoration: underline; }
   @media (prefers-reduced-motion: no-preference) {
     .status .puls { animation: blink 2.4s ease-in-out infinite; }
   }
@@ -105,6 +111,8 @@
   .merke.lag { background: transparent; border-color: var(--line); color: var(--muted); }
   .merke b { font-weight: 600; margin-left: 3px; color: var(--ink); }
   .merke.ingen { background: transparent; border-color: var(--line); color: var(--muted); font-style: italic; }
+  .merke.brakk { background: var(--warn-soft); color: var(--warn); }
+  .merke.fikset { background: var(--gull-soft); color: var(--gull); }
 
   .tall { font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums; font-size: 15px; }
   .tall.dyrt { color: var(--warn); }
@@ -136,6 +144,19 @@
   .stripe i { display: block; height: 100%; background: var(--accent); border-radius: 999px; transition: width .6s ease; }
   .framdrift .repo { font-size: 12.5px; }
 
+  .kjoerer { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 20px; }
+  .kjoerer .tittel { font-family: "IBM Plex Mono", monospace; font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-right: 4px; }
+  .kjoering {
+    display: inline-flex; align-items: center; gap: 9px;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 999px;
+    padding: 7px 14px 7px 11px; font-size: 14.5px;
+  }
+  .kjoering .prikk { width: 8px; height: 8px; background: var(--ok); }
+  @media (prefers-reduced-motion: no-preference) { .kjoering .prikk { animation: blink 1.6s ease-in-out infinite; } }
+  .kjoering b { font-weight: 600; }
+  .kjoering .hva { color: var(--muted); }
+  .kjoering .tid { font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--muted); }
+
   footer {
     margin-top: 26px; display: flex; gap: 10px; flex-wrap: wrap;
     font-family: "IBM Plex Mono", monospace; font-size: 12.5px; color: var(--muted);
@@ -154,10 +175,15 @@
     <div class="status">
       <div><span class="puls"></span><span id="oppdatert">laster …</span></div>
       <div id="neste"></div>
+      <nav class="navigasjon" aria-label="Kursressurser">
+        <a href="presentasjon.html">Presentasjon</a>
+        <a href="kursplan.html">Kursplan</a>
+      </nav>
     </div>
   </header>
 
   <div id="framdrift"></div>
+  <div id="kjoerer"></div>
 
   <div id="innhold">
     <div class="beskjed">Leser <span class="repo">resultat.json</span> …</div>
@@ -192,6 +218,10 @@
     (d.feil || []).forEach(function (f) { merker.push(merke(f, '')); });
     (d.lag || []).forEach(function (l) { merker.push(merke(l, ' lag')); });
     (d.levert || []).forEach(function (l) { merker.push(merke(l, ' lag')); });
+    (d.bygg || []).forEach(function (b) {
+      merker.push('<span class="merke ' + b.type + '">' + (b.type === 'brakk' ? 'brakk main' : 'fikset main') +
+        (b.pr ? ' #' + b.pr : '') + ' <b>' + (b.poeng > 0 ? '+' : '') + b.poeng + '</b></span>');
+    });
     if (!merker.length) merker.push('<span class="merke ingen">ingenting ennå</span>');
 
     var dyrt = (d.dollar || 0) >= 5 ? ' dyrt' : '';
@@ -200,13 +230,14 @@
       '<tr class="' + (d.plass === 1 && d.poeng > 0 ? 'topp' : '') + '">' +
         '<td class="plass">' + d.plass + '</td>' +
         '<td><div class="navn">' + esc(d.navn) + '</div>' +
-            '<div class="repo">' + (d.merget || 0) + ' merget av ' + (d.pr || 0) + ' PR</div></td>' +
+            '<div class="repo">' + (d.github && d.github !== d.navn ? esc(d.github) + ' · ' : '') + (d.merget || 0) + ' merget av ' + (d.pr || 0) + ' PR</div></td>' +
         '<td><div class="merker">' + merker.join('') + '</div></td>' +
         '<td>' + (d.utkast
             ? '<span class="pille roed"><span class="prikk"></span>' + d.utkast + ' utkast</span>'
             : '<span class="pille groenn"><span class="prikk"></span>alle bygger</span>') + '</td>' +
         '<td><span class="tall' + dyrt + '">$' + (d.dollar || 0).toFixed(2) + '</span>' +
-            '<span class="under">' + Math.round((d.tokens || 0) / 1000) + 'k tokens</span></td>' +
+            '<span class="under">' + Math.round((d.tokens || 0) / 1000) + 'k tokens' +
+            (d.utenPr ? ' · ' + d.utenPr + ' uten PR' : '') + '</span></td>' +
         '<td><span class="poeng' + (d.poeng < 0 ? ' negativ' : '') + '">' + d.poeng + '</span></td>' +
       '</tr>' +
       '<tr class="mellom"><td colspan="6"></td></tr>';
@@ -223,14 +254,31 @@
         '<span class="tekst"><b>' + lost + '</b> av ' + alle + ' issuer løst</span>' +
         '<span class="stripe"><i style="width:' + andel + '%"></i></span>' +
         '<span class="repo">' + esc(data.repo || '') + '</span>' +
+        (data.main ? (data.main.groent
+            ? '<span class="pille groenn"><span class="prikk"></span>main er grønn</span>'
+            : '<span class="pille roed"><span class="prikk"></span>main er rød siden ' + klokke(data.main.siden) +
+              (data.main.pr ? ' (#' + data.main.pr + ')' : '') + '</span>') : '') +
         (pr.feilmelding ? '<span class="feil">' + esc(pr.feilmelding).slice(0, 120) + '</span>' : '') +
       '</div>';
+  }
+
+  function tegnKjoerer(data) {
+    var liste = data.kjoerer || [];
+    var el = document.getElementById('kjoerer');
+    if (!liste.length) { el.innerHTML = ''; return; }
+    el.innerHTML = '<div class="kjoerer"><span class="tittel">Kjører nå</span>' +
+      liste.map(function (k) {
+        return '<span class="kjoering"><span class="prikk"></span><b>' + esc(k.agent) + '</b>' +
+          '<span class="hva">#' + k.issue + ' ' + esc(k.navn || '') + '</span>' +
+          '<span class="tid">' + (k.minutter || 0) + ' min</span></span>';
+      }).join('') + '</div>';
   }
 
   function tegn(data) {
     var folk = data.deltakere || [];
     document.getElementById('oppdatert').textContent = 'oppdatert ' + klokke(data.oppdatert);
     tegnFramdrift(data);
+    tegnKjoerer(data);
 
     if (!folk.length) {
       document.getElementById('innhold').innerHTML =
@@ -239,7 +287,7 @@
       document.getElementById('innhold').innerHTML =
         '<div class="rull"><table>' +
           '<thead><tr>' +
-            '<th>#</th><th>Deltaker</th><th>Løst</th><th>Bygg</th>' +
+            '<th>#</th><th>Agent</th><th>Løst</th><th>Bygg</th>' +
             '<th>Kostnad</th><th class="h">Poeng</th>' +
           '</tr></thead><tbody>' + folk.map(rad).join('') + '</tbody>' +
         '</table></div>';
@@ -251,6 +299,7 @@
       '<span>Hver issue gir ' + skala + ' poeng etter vanskelighet</span>' +
       '<span>' + (r.utkast != null ? r.utkast : -1) + ' per PR som ikke bygger</span>' +
       '<span>' + (r.perDollar != null ? r.perDollar : -1) + ' per påbegynte dollar</span>' +
+      (r.brekk != null ? '<span>' + r.brekk + ' for å gjøre main rød, +' + r.fiks + ' for å gjøre den grønn</span>' : '') +
       (data.potten ? '<span>' + data.potten + ' poeng i potten</span>' : '');
   }
 

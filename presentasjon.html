@@ -1,0 +1,938 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bygg din egen kodeagent</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --ground: #F6F8F5;
+    --surface: #FFFFFF;
+    --ink: #17231F;
+    --muted: #4B5A55;
+    --line: #D6DDD8;
+    --accent: #0E6D69;
+    --accent-ink: #FFFFFF;
+    --accent-soft: #E1F0EE;
+    --mark: #B97F0E;
+    --mark-soft: #F7EBCF;
+    --warn: #A33A2C;
+    --warn-soft: #F8E4E0;
+    --code-bg: #EDF1EE;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0F1715;
+      --surface: #16201D;
+      --ink: #E4EBE7;
+      --muted: #AAB8B2;
+      --line: #27332F;
+      --accent: #43B5AE;
+      --accent-ink: #0B1513;
+      --accent-soft: #14302E;
+      --mark: #E2A83B;
+      --mark-soft: #33280F;
+      --warn: #E07A6A;
+      --warn-soft: #3A1B16;
+      --code-bg: #1C2724;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0F1715;
+    --surface: #16201D;
+    --ink: #E4EBE7;
+    --muted: #AAB8B2;
+    --line: #27332F;
+    --accent: #43B5AE;
+    --accent-ink: #0B1513;
+    --accent-soft: #14302E;
+    --mark: #E2A83B;
+    --mark-soft: #33280F;
+    --warn: #E07A6A;
+    --warn-soft: #3A1B16;
+    --code-bg: #1C2724;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+    font-size: 19px;
+    line-height: 1.5;
+    overflow: hidden;
+  }
+
+  /* ---------- Rammeverk ---------- */
+  .dekk { height: 100%; position: relative; }
+  .lysbilde {
+    position: absolute; inset: 0;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    padding: 56px clamp(20px, 6vw, 120px) 96px;
+    overflow-y: auto;
+  }
+  .lysbilde.aktiv { display: flex; }
+  @media (prefers-reduced-motion: no-preference) {
+    .lysbilde.aktiv > * { animation: inn .38s cubic-bezier(.2,.7,.3,1) both; }
+    .lysbilde.aktiv > *:nth-child(2) { animation-delay: .05s; }
+    .lysbilde.aktiv > *:nth-child(3) { animation-delay: .09s; }
+    .lysbilde.aktiv > *:nth-child(4) { animation-delay: .13s; }
+  }
+  @keyframes inn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+  .merkelapp {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 13px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--accent); margin: 0 0 16px;
+  }
+  h1 {
+    font-family: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+    font-weight: 700; font-size: clamp(34px, 6.4vw, 76px);
+    line-height: 1.02; letter-spacing: -.028em; margin: 0 0 18px;
+    text-wrap: balance;
+  }
+  h2 {
+    font-family: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+    font-weight: 700; font-size: clamp(30px, 4.4vw, 56px);
+    line-height: 1.06; letter-spacing: -.022em; margin: 0 0 32px;
+    text-wrap: balance;
+  }
+  .ingress { font-size: clamp(18px, 2.1vw, 26px); line-height: 1.5; color: var(--muted); max-width: 58ch; margin: 0 0 30px; }
+  .stor { font-size: clamp(19px, 2.2vw, 27px); max-width: 60ch; }
+
+  ul.punkter { list-style: none; padding: 0; margin: 0; display: grid; gap: clamp(16px, 2.2vh, 26px); max-width: 68ch; }
+  ul.punkter li { position: relative; padding-left: 30px; font-size: clamp(18px, 2vw, 24px); line-height: 1.4; }
+  ul.punkter li::before {
+    content: ""; position: absolute; left: 4px; top: .55em;
+    width: 10px; height: 10px; border-radius: 2px; background: var(--accent);
+  }
+  ul.punkter li b { font-weight: 600; display: block; }
+  ul.punkter li b + span { display: block; margin-top: 3px; }
+  ul.punkter li span { color: var(--muted); font-size: .88em; }
+
+  ol.agenda { list-style: none; counter-reset: punkt; padding: 0; margin: 0; display: grid; gap: 4px; max-width: 900px; }
+  @media (min-width: 900px) { ol.agenda { grid-template-columns: 1fr 1fr; grid-template-rows: repeat(4, auto); grid-auto-flow: column; column-gap: 48px; } }
+  ol.agenda li {
+    counter-increment: punkt; display: flex; align-items: baseline; gap: 16px;
+    padding: 14px 0; border-bottom: 1px solid var(--line);
+    font-size: clamp(19px, 2.2vw, 26px);
+  }
+  ol.agenda li::before {
+    content: counter(punkt, decimal-leading-zero);
+    font-family: "IBM Plex Mono", monospace; font-size: 14px; color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+  ol.agenda li span { color: var(--muted); font-size: .8em; margin-left: auto; }
+
+  .protip { margin: 30px 0 0; max-width: 66ch; font-size: clamp(17px, 1.8vw, 21px); line-height: 1.45; color: var(--muted); }
+  .protip b { color: var(--accent); font-weight: 600; }
+
+  code, .mono { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: .89em; }
+  code { background: var(--code-bg); padding: .12em .42em; border-radius: 4px; }
+  pre.kode {
+    background: var(--code-bg); border-radius: 8px; padding: 14px 18px; margin: 0;
+    font-family: "IBM Plex Mono", monospace; font-size: clamp(14px, 1.5vw, 18px);
+    overflow-x: auto; max-width: 100%; line-height: 1.5;
+  }
+
+  .kort-rad { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin: 0; }
+  .kort {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+    padding: 20px; display: flex; flex-direction: column; gap: 7px;
+  }
+  .kort .tall {
+    font-family: "Bricolage Grotesque", system-ui, sans-serif;
+    font-size: 40px; font-weight: 700; line-height: 1; color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .kort .navn { font-weight: 600; font-size: 18px; }
+  .kort .om { color: var(--muted); font-size: 16px; line-height: 1.4; }
+
+  table { border-collapse: collapse; width: 100%; font-size: clamp(16px, 1.75vw, 22px); line-height: 1.4; }
+  th, td { text-align: left; padding: 13px 24px 13px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  td.tid { font-family: "IBM Plex Mono", monospace; color: var(--accent); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  td.poeng { font-family: "IBM Plex Mono", monospace; white-space: nowrap; font-variant-numeric: tabular-nums; font-weight: 500; }
+  td.modell { font-family: "IBM Plex Mono", monospace; white-space: nowrap; color: var(--accent); }
+  .rull { overflow-x: auto; max-width: 100%; }
+
+  .notis {
+    border-left: 3px solid var(--mark); background: var(--mark-soft);
+    padding: 16px 22px; border-radius: 0 8px 8px 0; max-width: 66ch;
+    color: var(--ink); font-size: clamp(17px, 1.9vw, 22px); line-height: 1.45;
+  }
+  .notis.fare { border-left-color: var(--warn); background: var(--warn-soft); }
+
+  .to-spalter { display: grid; gap: clamp(24px, 4vw, 64px); grid-template-columns: 1fr; }
+  @media (min-width: 900px) { .to-spalter { grid-template-columns: 1fr 1fr; } }
+  .spalte-tittel { font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin: 0 0 16px; }
+
+  /* ---------- Lave skjermer (720p-projektor) ---------- */
+  @media (max-height: 820px) {
+    .lysbilde { padding-top: 30px; padding-bottom: 72px; }
+    .lenke { padding: 7px 14px; font-size: 14px; }
+    .merkelapp { margin-bottom: 10px; }
+    h2 { font-size: clamp(28px, 3.8vw, 44px); margin-bottom: 18px; }
+    .ingress { font-size: clamp(17px, 1.8vw, 22px); margin-bottom: 18px; }
+    ul.punkter { gap: 11px; }
+    ul.punkter li { font-size: clamp(17px, 1.7vw, 21px); line-height: 1.35; }
+    ol.agenda li { padding: 10px 0; }
+    .protip { margin-top: 18px; font-size: clamp(16px, 1.6vw, 19px); }
+    .notis { padding: 12px 18px; font-size: clamp(16px, 1.7vw, 20px); }
+    th, td { padding: 9px 20px 9px 0; }
+    table { font-size: clamp(15px, 1.6vw, 20px); }
+    .kort { padding: 14px 16px; }
+    .lenker { margin-top: 4px; }
+  }
+
+  /* ---------- Poengskalaen ---------- */
+  .skala { display: grid; gap: 8px; max-width: 900px; }
+  .trinn {
+    display: grid; grid-template-columns: 64px 1fr auto; gap: 18px; align-items: center;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+    padding: 8px 18px;
+  }
+  .trinn .verdi {
+    font-family: "Bricolage Grotesque", system-ui, sans-serif; font-weight: 700;
+    font-size: 30px; line-height: 1; color: var(--accent); text-align: center;
+    font-variant-numeric: tabular-nums;
+  }
+  .trinn .hva { font-size: clamp(15px, 1.55vw, 18px); }
+  .trinn .hva span { display: block; color: var(--muted); font-size: .86em; margin-top: 2px; }
+  .trinn .antall { font-family: "IBM Plex Mono", monospace; font-size: 13px; color: var(--muted); white-space: nowrap; }
+  @media (max-width: 640px) {
+    .trinn { grid-template-columns: 44px 1fr; }
+    .trinn .antall { display: none; }
+  }
+
+  /* ---------- Arkitekturtegning ---------- */
+  .lysbilde.tett { padding-top: 34px; padding-bottom: 72px; }
+  .lysbilde.tett h2 { margin-bottom: 14px; }
+  .lysbilde.tett .merkelapp { margin-bottom: 9px; }
+  figure.tegning { margin: 0; width: 100%; }
+  figure.tegning svg { width: 100%; height: auto; max-width: 100%; display: block; color: var(--ink); }
+  figcaption { color: var(--muted); font-size: clamp(15px, 1.55vw, 19px); margin-top: 14px; max-width: 80ch; }
+  .boks-fyll { fill: var(--surface); }
+  .boks-kant { stroke: var(--line); }
+  .boks-aksent { fill: var(--accent-soft); stroke: var(--accent); }
+  .boks-fare { fill: var(--warn-soft); stroke: var(--warn); }
+  .tittel-tekst { font-family: "IBM Plex Sans", system-ui, sans-serif; font-size: 15px; font-weight: 600; fill: currentColor; }
+  .under-tekst { font-family: "IBM Plex Sans", system-ui, sans-serif; font-size: 11.5px; fill: var(--muted); }
+  .modell-tekst { font-family: "IBM Plex Mono", monospace; font-size: 11.5px; fill: var(--accent); }
+  .pil-tekst { font-family: "IBM Plex Mono", monospace; font-size: 11.5px; fill: var(--muted); }
+  .sone-tekst { font-family: "IBM Plex Mono", monospace; font-size: 11.5px; letter-spacing: .09em; text-transform: uppercase; fill: var(--accent); }
+
+  /* ---------- Kartsliden ---------- */
+  .lysbilde.kartside { padding: 0; }
+  .lysbilde.kartside > * { animation: none !important; }
+  #oslokart { position: absolute; inset: 0 0 58px 0; background: #ede7d8; }
+  .kart-info {
+    position: absolute; left: clamp(16px, 4vw, 64px); top: clamp(24px, 4vh, 48px);
+    background: color-mix(in srgb, var(--ground) 86%, transparent);
+    border: 1px solid var(--line); border-radius: 12px; padding: 16px 20px;
+    max-width: 380px; backdrop-filter: blur(8px); z-index: 2;
+  }
+  .kart-info h2 { font-size: clamp(22px, 2.6vw, 32px); margin: 0 0 8px; }
+  .kart-info p { margin: 0; color: var(--muted); font-size: 15px; }
+  .kart-info .tellere { display: flex; gap: 18px; margin: 12px 0 0; font-family: "IBM Plex Mono", monospace; font-size: 14px; }
+  .kart-info .tellere span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: -1px; }
+  .kart-info .buss::before { background: #e11d48; }
+  .kart-info .tog::before { background: #1d4ed8; }
+  .kart-info .skip::before { background: #0f766e; }
+  .kart-info .status { margin-top: 8px; font-size: 13px; color: var(--muted); }
+
+  /* ---------- Bunnlinje ---------- */
+  .bunn {
+    position: fixed; left: 0; right: 0; bottom: 0;
+    display: flex; align-items: center; gap: 16px;
+    padding: 12px clamp(16px, 5vw, 88px);
+    padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+    background: color-mix(in srgb, var(--ground) 88%, transparent);
+    border-top: 1px solid var(--line);
+    backdrop-filter: blur(8px);
+  }
+  .prikker { display: flex; gap: 6px; flex: 1; flex-wrap: wrap; }
+  .prikk {
+    width: 9px; height: 9px; border-radius: 50%; border: 0;
+    background: var(--line); padding: 0; cursor: pointer;
+  }
+  .prikk:hover { background: var(--muted); }
+  .prikk[aria-current="true"] { background: var(--accent); transform: scale(1.25); }
+  .prikk:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .teller { font-family: "IBM Plex Mono", monospace; font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .hint { font-size: 13px; color: var(--muted); }
+  @media (max-width: 720px) { .hint { display: none; } }
+
+  .lenker { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+  .lenke {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 999px;
+    padding: 9px 18px; text-decoration: none; color: var(--ink); font-size: 15px;
+  }
+  .lenke:hover { border-color: var(--accent); color: var(--accent); }
+  .lenke .mono { color: var(--muted); }
+</style>
+</head>
+<body>
+
+<div class="dekk" id="dekk">
+
+  <!-- 1 Tittel ----------------------------------------------------------- -->
+  <section class="lysbilde">
+    <p class="merkelapp">Novanet · endagskurs</p>
+    <h1>Bygg din egen kodeagent,<br>og sett den i drift i Azure</h1>
+    <p class="ingress stor">Fra issue til pull request.</p>
+    <p class="ingress">I dag lager du en liten, styrt arbeidsflyt som henter en oppgave fra GitHub, endrer kode, bygger, tester og åpner en pull request.</p>
+    <p class="ingress" style="margin-top:-18px">Hallstein Brøtan</p>
+    <div class="kort-rad" style="max-width:900px">
+      <div class="kort"><span class="tall">1</span><span class="navn">agent du eier</span><span class="om">I ditt eget GitHub-repo og din egen ressursgruppe</span></div>
+      <div class="kort"><span class="tall">2</span><span class="navn">kjøremiljøer</span><span class="om">Først på maskinen din, deretter i Azure</span></div>
+      <div class="kort"><span class="tall">3</span><span class="navn">sjekkpunkter</span><span class="om">En PR, en skyjobb og én målbar forbedring</span></div>
+    </div>
+  </section>
+
+  <!-- 2 Leveransen ------------------------------------------------------- -->
+  <section class="lysbilde">
+    <p class="merkelapp">Målet for dagen</p>
+    <h2>Dette skal virke før du går hjem</h2>
+    <div class="kort-rad">
+      <div class="kort"><span class="tall">1</span><span class="navn">Du velger en issue</span><span class="om">Oppgaven ligger i en felles GitHub-backlog.</span></div>
+      <div class="kort"><span class="tall">2</span><span class="navn">Agenten starter</span><span class="om">Lokalt først. Senere kjører den i Azure uten at laptopen din er med.</span></div>
+      <div class="kort"><span class="tall">3</span><span class="navn">Den gjør jobben</span><span class="om">Kloner repoet, lager branch, endrer kode, bygger og tester.</span></div>
+      <div class="kort"><span class="tall">4</span><span class="navn">Du får en PR</span><span class="om">Resultatet blir reviewet før merge. Agenten får ikke godkjenne sitt eget arbeid.</span></div>
+    </div>
+    <div class="notis" style="margin-top:26px"><b>Ferdig betyr:</b> En GitHub-issue starter agenten din i Azure, og resultatet kommer tilbake som en pull request uten at laptopen din er med i kjøringen.</div>
+  </section>
+
+  <!-- 3 Hvorfor ---------------------------------------------------------- -->
+  <section class="lysbilde">
+    <p class="merkelapp">Hvorfor</p>
+    <h2>En integrert, autonom arbeidsflyt</h2>
+    <div class="to-spalter">
+      <div>
+        <p class="spalte-tittel">Arbeidet starter der det oppstår</p>
+        <ul class="punkter">
+          <li><b>Fra backlog, hendelser og systemer.</b> <span>En utvikler trenger ikke kopiere kontekst inn i en ny samtale og følge den hele veien.</span></li>
+          <li><b>Produkteieren jobber i backloggen.</b> <span>Oppgave, prioritet og akseptansekriterier styrer agenten. Produkteieren trenger ikke åpne et AI-verktøy.</span></li>
+          <li><b>Asynkront og parallelt.</b> <span>Oppgaven kan gå mens teamet gjør annet arbeid, uten å oppta en laptop eller en chatøkt.</span></li>
+        </ul>
+      </div>
+      <div>
+        <p class="spalte-tittel">Leveransen blir en del av arbeidsflyten</p>
+        <ul class="punkter">
+          <li><b>Samme løype hver gang.</b> <span>Plan, kode, bygg, test, rapportering og review skjer i en avtalt rekkefølge.</span></li>
+          <li><b>Et resultat andre kan vurdere.</b> <span>Agenten leverer en diff, testresultater og begrunnelse, ikke bare et svar i en chat.</span></li>
+          <li><b>Oppgaver som ellers ikke blir prioritert.</b> <span>Små feil, vedlikehold, migreringer og repetitivt arbeid kan tas når kapasiteten ellers er knapp.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 Hvorfor eie arbeidsflyten --------------------------------------- -->
+  <section class="lysbilde">
+    <p class="merkelapp">Hvorfor bygge selv</p>
+    <h2>Kontrollen rundt modellen er en del av løsningen</h2>
+    <div class="to-spalter">
+      <div>
+        <p class="spalte-tittel">Tilpasses virksomheten</p>
+        <ul class="punkter">
+          <li><b>Kobles til systemene vi bruker.</b> <span>Azure DevOps, GitHub, Jira, dokumentasjon, bygg og interne tjenester.</span></li>
+          <li><b>Følger arbeidsmåten vår.</b> <span>Egne steg, konvensjoner, akseptansekriterier og dokumentasjonskrav.</span></li>
+          <li><b>Kan gjøre mer enn kode.</b> <span>Analyse, oppgraderinger, feilhåndtering og andre avgrensede prosesser.</span></li>
+        </ul>
+      </div>
+      <div>
+        <p class="spalte-tittel">Styres og kan etterprøves</p>
+        <ul class="punkter">
+          <li><b>Vi velger data, modell og kjøremiljø.</b> <span>Vi bestemmer også hva som logges og hvilke leverandører som kan brukes.</span></li>
+          <li><b>Grenser ligger i kode.</b> <span>Verktøy, nettverk, tidsfrister, kostnadstak og kvalitetsporter kan testes.</span></li>
+          <li><b>Feil kan spores.</b> <span>Vi ser hvilket steg som feilet og kan endre systemet rundt modellen.</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="notis" style="margin-top:24px">Vi kan bruke et SDK eller en ferdig motor. Det viktige er at vi eier integrasjonene, arbeidsflyten og grensene.</div>
+  </section>
+
+  <!-- 5 Nils Georg ------------------------------------------------------- -->
+  <section class="lysbilde">
+    <p class="merkelapp">Eksemplet vårt</p>
+    <h2>Nils Georg tar oppgaver fra teamets tavle</h2>
+    <p class="ingress">Cato er banksystemet til Nordic Corporate Bank. Jan og jeg bygde Nils Georg for Cato-teamet, og han har levert pull requests siden mars 2026.</p>
+    <div class="to-spalter">
+      <div>
+        <p class="spalte-tittel">Det han gjør</p>
+        <ul class="punkter">
+          <li>Starter når noen nevner ham, eller plukker prioritert arbeid fra tavla</li>
+          <li>Leser repoet og lager en plan</li>
+          <li>Endrer kode i en egen branch</li>
+          <li>Bygger, tester og åpner en pull request</li>
+          <li>Svarer på review-kommentarer</li>
+        </ul>
+      </div>
+      <div>
+        <p class="spalte-tittel">Det han ikke gjør</p>
+        <ul class="punkter">
+          <li>Velger ikke selv hva teamet skal prioritere</li>
+          <li>Jobber ikke direkte på main</li>
+          <li>Har ikke fri tilgang til shell, nettverk eller produksjon</li>
+          <li>Merger aldri sin egen pull request</li>
+        </ul>
+      </div>
+    </div>
+    <div class="notis" style="margin-top:26px">Vi begynte med små bugs og tydelige endringer. Først da leveransene ble forutsigbare, ga vi ham større oppgaver.</div>
+  </section>
+
+  <!-- 6 Arbeidsdelingen -------------------------------------------------- -->
+  <section class="lysbilde">
+    <p class="merkelapp">Under panseret</p>
+    <h2>Modellen er bare én del av systemet</h2>
+    <div class="to-spalter">
+      <div>
+        <p class="spalte-tittel">Vanlig kode styrer kjøringen</p>
+        <ul class="punkter">
+          <li>Tar imot hendelsen og legger oppgaven i kø</li>
+          <li>Kloner repoet og lager branch</li>
+          <li>Bestemmer steg, verktøy, tidsfrist og kostnadstak</li>
+          <li>Kjører bygg og test</li>
+          <li>Oppretter PR og rapporterer tilbake</li>
+        </ul>
+      </div>
+      <div>
+        <p class="spalte-tittel">Modellen brukes der vi trenger skjønn</p>
+        <ul class="punkter">
+          <li>Forstår oppgaven og finner relevant kode</li>
+          <li>Lager eller vurderer en plan</li>
+          <li>Skriver endringen</li>
+          <li>Leser diffen og peker på mulige feil</li>
+        </ul>
+      </div>
+    </div>
+    <div class="notis" style="margin-top:26px">Når modellen tar feil, skal systemet rundt enten stoppe den eller gjøre feilen synlig før merge.</div>
+  </section>
+
+  <!-- 7 Erfaringer ------------------------------------------------------- -->
+  <section class="lysbilde">
+    <p class="merkelapp">Det vi har lært</p>
+    <h2>Mest mulig deterministisk. Avgrenset kontekst.</h2>
+    <div class="to-spalter">
+      <div>
+        <p class="spalte-tittel">Deterministisk kode</p>
+        <ul class="punkter">
+          <li><b>Koden bestemmer rekkefølge og feilbaner.</b> <span>Ikke en modell som tolker en lang prompt.</span></li>
+          <li><b>Kode gjør det som ikke krever skjønn.</b> <span>Git, bygg, test og opprettelse av PR.</span></li>
+          <li><b>Rammene er faste.</b> <span>Tidsfrister, verktøytilgang og kvalitetsporter endrer seg ikke mellom kjøringer.</span></li>
+        </ul>
+      </div>
+      <div>
+        <p class="spalte-tittel">Kontroll på kontekst og tokens</p>
+        <ul class="punkter">
+          <li><b>Hvert steg får minst mulig kontekst.</b> <span>Ikke hele samtalehistorikken.</span></li>
+          <li><b>Stegene sender konkrete resultater videre.</b> <span>Plan, diff eller testresultat blir input til neste steg.</span></li>
+          <li><b>Rammene settes på forhånd.</b> <span>Modell, maks antall turer og tidsfrist. Tokenforbruket logges.</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="notis" style="margin-top:22px">Kodegenereringen varierer. Det som skjer rundt modellkallet, skal være forståelig, målbart og forutsigbart.</div>
+  </section>
+
+  <!-- 8 Mini-Nils -------------------------------------------------------- -->
+  <section class="lysbilde">
+    <p class="merkelapp">Din tur</p>
+    <h2>Mini-Nils er versjonen du bygger i dag</h2>
+    <p class="ingress">Du får delene og en IKEA-oppskrift. I Lab 1 monterer du selv pipelinen som kobler en issue til en pull request.</p>
+    <div class="kort-rad">
+      <div class="kort"><span class="tall">1</span><span class="navn">Delene følger med</span><span class="om">GitHub, git, Claude Code, bygg, test, rapportering og Azure er ferdige komponenter.</span></div>
+      <div class="kort"><span class="tall">2</span><span class="navn">Du monterer flyten</span><span class="om">I <code>Pipeline.cs</code> bestemmer du rekkefølgen, hvor modellen slipper til, og hva som kontrolleres i kode.</span></div>
+      <div class="kort"><span class="tall">3</span><span class="navn">Agenten jobber i Oslo Live</span><span class="om">Et felles kart over Oslo med offentlige sanntidsdata. Agenten henter en issue og leverer en pull request.</span></div>
+    </div>
+    <div class="notis" style="margin-top:24px"><b>Nils Georg:</b> Azure DevOps, egne C#-verktøy og flere modellsteg. <b>Mini-Nils:</b> GitHub, Claude Code og ett steg til å begynne med. Begge følger samme løype fra oppgave til pull request.</div>
+  </section>
+
+  <!-- 9 Hvor ting bor ---------------------------------------------------- -->
+  <section class="lysbilde">
+    <p class="merkelapp">Kartet over kurset</p>
+    <h2>To repoer, to Azure-oppsett</h2>
+    <div class="rull">
+      <table>
+        <thead><tr><th>Del</th><th>Hvor den bor</th><th>Hva du gjør der</th></tr></thead>
+        <tbody>
+          <tr><td><b>Agenten din</b></td><td><code>github.com/&lt;deg&gt;/mini-&lt;navn&gt;</code></td><td>Opprettes fra <code>mini-nils.zip</code>. Her endrer du prompt, regler, skills og Azure-oppsett.</td></tr>
+          <tr><td><b>Oppgavene og koden</b></td><td><code>github.com/novanet/workshop.oslo-live</code></td><td>Alle agentene henter oppgaver her og leverer pull requests hit.</td></tr>
+          <tr><td><b>Agenten i skyen</b></td><td>Din ressursgruppe i kursets Azure-tenant, Norway East</td><td>Du deployer mottak, kø, worker og hemmeligheter i Lab 2.</td></tr>
+          <tr><td><b>Oslo Live i drift</b></td><td>Novanets Azure-abonnement, Norway East</td><td>Fellesappen rulles ut automatisk når godkjent kode merges til main.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="notis" style="margin-top:24px"><b>Hold dem fra hverandre:</b> Repoet ditt inneholder agenten du deployer. Oslo Live er repoet agenten henter og endrer.</div>
+  </section>
+
+  <!-- 10 Deploy av agenten ----------------------------------------------- -->
+  <section class="lysbilde">
+    <p class="merkelapp">Lab 2 · din Azure</p>
+    <h2>Slik deployer du agenten din</h2>
+    <p class="ingress">Vi flytter den til skyen for å få et fast kjøremiljø, holde nøkler utenfor laptopen og la GitHub starte jobben selv om maskinen din er avslått.</p>
+    <div class="kort-rad">
+      <div class="kort"><span class="tall">1</span><span class="navn"><code>./deploy.sh</code></span><span class="om">Leser konfigurasjonen din og deployer Bicep til ressursgruppen du har fått.</span></div>
+      <div class="kort"><span class="tall">2</span><span class="navn">Azure bygger bildene</span><span class="om"><code>az acr build</code> bygger mottak og worker. Du trenger ikke Docker lokalt.</span></div>
+      <div class="kort"><span class="tall">3</span><span class="navn">Ressursene starter fra null</span><span class="om">Container App mottar webhooken. Storage Queue og KEDA starter en Container Apps Job.</span></div>
+      <div class="kort"><span class="tall">4</span><span class="navn">Nøkler ligger i Key Vault</span><span class="om">Mottak og worker leser dem med managed identity.</span></div>
+    </div>
+    <div class="notis" style="margin-top:26px">Kurslederen kobler GitHub til mottaket ditt. Når en oppgave sendes til agenten, legger mottaket den i kø og svarer GitHub med en gang. KEDA starter jobben.</div>
+  </section>
+
+  <!-- 11 Deploy av Oslo Live -------------------------------------------- -->
+  <section class="lysbilde">
+    <p class="merkelapp">Det felles resultatet</p>
+    <h2>Slik kommer endringen din ut i Oslo Live</h2>
+    <div class="kort-rad">
+      <div class="kort"><span class="tall">1</span><span class="navn">Agenten åpner PR</span><span class="om">PR-en ligger i <code>novanet/workshop.oslo-live</code>.</span></div>
+      <div class="kort"><span class="tall">2</span><span class="navn">Sensor reviewer</span><span class="om">Kurslederens review-agent sjekker bygg, skjulte tester og akseptansekriterier.</span></div>
+      <div class="kort"><span class="tall">3</span><span class="navn">GitHub Actions bygger</span><span class="om">Etter merge til main kjøres testene og containerbildet bygges i Azure Container Registry.</span></div>
+      <div class="kort"><span class="tall">4</span><span class="navn">Container App oppdateres</span><span class="om"><code>ca-oslolive</code> i <code>novanet-rg-oslolive</code> får en ny revisjon.</span></div>
+    </div>
+    <div class="lenker">
+      <a class="lenke" href="https://github.com/novanet/workshop.oslo-live" target="_blank" rel="noopener">github.com/novanet/workshop.oslo-live <span class="mono">repoet</span></a>
+      <a class="lenke" href="https://ca-oslolive.thankfulwave-6bdee498.norwayeast.azurecontainerapps.io" target="_blank" rel="noopener">Oslo Live <span class="mono">appen i Azure</span></a>
+    </div>
+    <p class="ingress" style="margin-top:20px">Du deployer altså agenten din. Oslo Live deployes automatisk når en godkjent PR blir merget.</p>
+  </section>
+
+  <!-- 12 Levende kart ---------------------------------------------------- -->
+  <section class="lysbilde kartside" data-kart>
+    <div id="oslokart"></div>
+    <div class="kart-info">
+      <p class="merkelapp">Oslo Live · akkurat nå</p>
+      <h2>Dette er appen agentene endrer</h2>
+      <p>Et felles kart med offentlige sanntidsdata. En oppgave kan være å rette en feil, legge til et datalag eller gjøre kartet raskere og mer tilgjengelig.</p>
+      <div class="tellere"><span class="buss" id="tell-buss">0 busser</span><span class="tog" id="tell-tog">0 tog</span><span class="skip" id="tell-skip">0 skip</span></div>
+      <div class="status" id="kart-status">Henter…</div>
+    </div>
+  </section>
+
+  <!-- 13 Styring --------------------------------------------------------- -->
+  <section class="lysbilde">
+    <p class="merkelapp">Det du faktisk skal endre</p>
+    <h2>Du bygger flyten og styrer oppførselen</h2>
+    <div class="rull">
+      <table>
+        <thead><tr><th>Fil</th><th>Hva den bestemmer</th><th>Hva du kan undersøke</th></tr></thead>
+        <tbody>
+          <tr><td><code>src/Worker/Pipeline.cs</code></td><td>Rekkefølgen fra oppgave til PR</td><td>Hva skal være kode, og hvor skal modellen brukes?</td></tr>
+          <tr><td><code>agent/system.md</code></td><td>Rolle, prioriteringer og hvordan agenten rapporterer</td><td>Blir den mer presis når instruksjonen blir kortere?</td></tr>
+          <tr><td><code>agent/conventions.md</code></td><td>Regler som gjelder i kodebasen</td><td>Følger den mønstrene teamet faktisk bruker?</td></tr>
+          <tr><td><code>agent/prompts/*.md</code></td><td>Oppgaven i hvert steg</td><td>Hva endres når den må planlegge eller skrive test først?</td></tr>
+          <tr><td><code>agent/stages.json</code></td><td>Modell, verktøy, maks antall modellrunder og verifisering</td><td>Hva skjer med kvalitet, tid og kostnad?</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="notis" style="margin-top:26px">I labbene endrer du én ting om gangen, kjører på nytt og peker på forskjellen i resultatet.</div>
+  </section>
+
+  <!-- 14 Produksjon ------------------------------------------------------ -->
+  <section class="lysbilde">
+    <p class="merkelapp">Viktig skille</p>
+    <h2>Mini-Nils er et læringsoppsett, ikke en ferdig produksjonsagent</h2>
+    <div class="to-spalter">
+      <div>
+        <p class="spalte-tittel">Du får ferdig</p>
+        <ul class="punkter">
+          <li>Komponenter for GitHub, git og Claude Code</li>
+          <li>Hjelpere for bygg, test og rapportering</li>
+          <li>Mottak, kø og Azure-oppsett</li>
+          <li>Et avgrenset øvingsrepo uten hemmeligheter</li>
+        </ul>
+      </div>
+      <div>
+        <p class="spalte-tittel">Før dette brukes på ordentlig</p>
+        <ul class="punkter">
+          <li>Strammere autorisasjon og isolasjon</li>
+          <li>Tak på kjøringer, tid og kostnad</li>
+          <li>Robust deduplisering, retry og observability</li>
+          <li>Testede porter og en tydelig menneskelig eier</li>
+        </ul>
+      </div>
+    </div>
+    <p class="ingress" style="margin-top:26px">Poenget i dag er å se disse valgene i et system som er lite nok til at du kan forstå hele kjøringen.</p>
+  </section>
+
+  <!-- 15 Dagen ----------------------------------------------------------- -->
+  <section class="lysbilde">
+    <p class="merkelapp">Resten av dagen</p>
+    <h2>Tre sjekkpunkter</h2>
+    <div class="kort-rad">
+      <div class="kort"><span class="tall">1</span><span class="navn">Montert pipeline</span><span class="om">Koble delene sammen og la koden du skrev åpne en PR fra maskinen din.</span></div>
+      <div class="kort"><span class="tall">2</span><span class="navn">PR fra Azure</span><span class="om">Deploy agenten og start en oppgave fra GitHub mens laptopen er lukket.</span></div>
+      <div class="kort"><span class="tall">3</span><span class="navn">En forklart forbedring</span><span class="om">Legg til en port, hukommelse, bedre sikkerhet eller en egen idé. Vis årsak og virkning.</span></div>
+    </div>
+    <div class="notis" style="margin-top:26px">Faller du av i monteringen, kjører du <code>./sjekkpunkt.sh lab1</code>. Forsøket ditt tas vare på, og du kan fortsette med Lab 2.</div>
+  </section>
+
+  <!-- 16 Lab 1 ----------------------------------------------------------- -->
+  <section class="lysbilde">
+    <p class="merkelapp">Nå</p>
+    <h2>Lab 1: monter pipelinen</h2>
+    <ul class="punkter">
+      <li><b>Hent <code>mini-nils.zip</code> fra kurslederen og lag ditt eget private repo.</b> <span>Dette er agentens kode og det du tar med deg videre.</span></li>
+      <li><b>Fyll inn <code>.env</code>.</b> <span>Agentnavn, GitHub-token og Anthropic-nøkkel.</span></li>
+      <li><b>Åpne <code>docs/lab1.md</code> og <code>Pipeline.cs</code> ved siden av hverandre.</b> <span>Oppskriften har sju trinn og én byggesjekk etter hvert trinn.</span></li>
+      <li><b>Monter reservasjon, arbeidsområde, kontekst, modell, diff-sjekk, verifisering og levering.</b></li>
+      <li><b>Kjør pipelinen mot issue 1.</b> <span>Sjekkpunktet er nådd når koden du monterte har åpnet en pull request.</span></li>
+    </ul>
+    <div class="lenker">
+      <a class="lenke" href="https://github.com/novanet/workshop.oslo-live/issues" target="_blank" rel="noopener">Oslo Live <span class="mono">issuene</span></a>
+      <a class="lenke" href="./kursplan.html">kursplan <span class="mono">hele dagen</span></a>
+      <a class="lenke" href="https://allemannsdata.com" target="_blank" rel="noopener">Allemannsdata <span class="mono">datakildene</span></a>
+    </div>
+  </section>
+
+  <!-- 17 Lab 2 ----------------------------------------------------------- -->
+  <section class="lysbilde">
+    <p class="merkelapp">Etter sjekkpunkt 1</p>
+    <h2>Lab 2: flytt agenten til Azure</h2>
+    <p class="ingress">Nå skal samme worker kjøre uten at utviklingsmaskinen din er med.</p>
+    <ul class="punkter">
+      <li><b>Logg inn i kursets Azure-tenant.</b> <span>Brukeren og ressursgruppen står på lappen du har fått.</span></li>
+      <li><b>Fyll inn Azure-verdiene i <code>.env</code>.</b> <span><code>RESOURCE_GROUP</code>, <code>NAME</code> og webhook-hemmeligheten fra kurslederen.</span></li>
+      <li><b>Kjør <code>./deploy.sh</code>.</b> <span>Bicep oppretter ressursene, og ACR bygger bildene.</span></li>
+      <li><b>Be kurslederen koble GitHub til mottaket ditt.</b> <span>Start deretter en oppgave og følg jobben i Azure-portalen.</span></li>
+      <li><b>Lukk laptopen mens jobben kjører.</b> <span>Pull requesten skal komme fra workeren i Azure.</span></li>
+    </ul>
+    <div class="notis" style="margin-top:22px"><b>Sjekkpunkt 2:</b> En oppgave fra GitHub har gitt en pull request fra Azure.</div>
+  </section>
+
+  <!-- 18 Lab 3 ----------------------------------------------------------- -->
+  <section class="lysbilde">
+    <p class="merkelapp">Etter sjekkpunkt 2</p>
+    <h2>Lab 3: gjør agenten merkbart annerledes</h2>
+    <p class="ingress">Velg ett spor. Endre én ting, kjør samme type oppgave igjen og sammenlign resultatet.</p>
+    <div class="kort-rad">
+      <div class="kort"><span class="navn">Flere porter</span><span class="om">Del opp i research, implementering og review. La bygg eller test stoppe leveransen.</span></div>
+      <div class="kort"><span class="navn">Mindre kontekst</span><span class="om">Kort ned input, bytt modell eller reduser antall turer. Sammenlign kvalitet og tokens.</span></div>
+      <div class="kort"><span class="navn">Strammere tilgang</span><span class="om">Skill mellom lesende og skrivende steg. Test hva som skjer med en uønsket instruksjon.</span></div>
+      <div class="kort"><span class="navn">Hukommelse eller egen idé</span><span class="om">La agenten ta med en lærdom videre, eller bygg noe som passer arbeidsflyten din.</span></div>
+    </div>
+    <div class="notis" style="margin-top:22px"><b>Sjekkpunkt 3:</b> Du kan vise forskjellen før og etter, og forklare hvilken endring som ga den.</div>
+  </section>
+
+  <!-- 19 Demo ------------------------------------------------------------ -->
+  <section class="lysbilde">
+    <p class="merkelapp">15:00</p>
+    <h2>Demo: vis én forskjell som betyr noe</h2>
+    <ul class="punkter">
+      <li><b>Vis oppgaven og pull requesten.</b> <span>Ikke hele koden; vis delen som forteller historien.</span></li>
+      <li><b>Vis endringen i agenten.</b> <span>Prompt, modell, verktøy, port eller hukommelse.</span></li>
+      <li><b>Sammenlign før og etter.</b> <span>Resultat, tokens, tid eller hva agenten fikk lov til å gjøre.</span></li>
+      <li><b>Avslutt med én setning.</b> <span>«Forskjellen var X, og den kom av Y.»</span></li>
+    </ul>
+    <div class="notis" style="margin-top:24px">Tre minutter per lag. Resultattavlen viser hva agentene fikk til, men forklaringen deres er viktigere enn poengene.</div>
+  </section>
+
+  <!-- 20 Avslutning ------------------------------------------------------ -->
+  <section class="lysbilde">
+    <p class="merkelapp">Det du tar med deg</p>
+    <h2>Du har bygget mer enn et modellkall</h2>
+    <div class="to-spalter">
+      <div>
+        <p class="spalte-tittel">Det som virker nå</p>
+        <ul class="punkter">
+          <li>En oppgave går fra GitHub til en pull request</li>
+          <li>Agenten kjører lokalt og i Azure</li>
+          <li>Du kan endre oppførselen og måle effekten</li>
+        </ul>
+      </div>
+      <div>
+        <p class="spalte-tittel">Det viktigste å ta videre</p>
+        <ul class="punkter">
+          <li>La kode styre det som kan være deterministisk</li>
+          <li>Gi hvert modellsteg minst mulig kontekst og tilgang</li>
+          <li>Lever et resultat mennesker kan kontrollere</li>
+        </ul>
+      </div>
+    </div>
+    <div class="lenker">
+      <a class="lenke" href="https://github.com/novanet/workshop.oslo-live" target="_blank" rel="noopener">workshop.oslo-live <span class="mono">repoet</span></a>
+      <a class="lenke" href="https://ca-oslolive.thankfulwave-6bdee498.norwayeast.azurecontainerapps.io" target="_blank" rel="noopener">Oslo Live <span class="mono">appen</span></a>
+      <a class="lenke" href="./kursplan.html">kursplan <span class="mono">referansen</span></a>
+    </div>
+  </section>
+
+</div>
+
+<div class="bunn">
+  <div class="prikker" id="prikker" role="tablist" aria-label="Lysbilder"></div>
+  <span class="hint">← → for å bla · T bytter tema</span>
+  <span class="teller" id="teller">1 / 20</span>
+</div>
+
+<script>
+(function () {
+  var lysbilder = Array.prototype.slice.call(document.querySelectorAll('.lysbilde'));
+  var prikker = document.getElementById('prikker');
+  var teller = document.getElementById('teller');
+  var na = 0;
+
+  lysbilder.forEach(function (_, i) {
+    var b = document.createElement('button');
+    b.className = 'prikk';
+    b.type = 'button';
+    b.setAttribute('role', 'tab');
+    b.setAttribute('aria-label', 'Lysbilde ' + (i + 1));
+    b.addEventListener('click', function () { vis(i); });
+    prikker.appendChild(b);
+  });
+
+  function vis(i) {
+    na = Math.max(0, Math.min(lysbilder.length - 1, i));
+    lysbilder.forEach(function (s, j) { s.classList.toggle('aktiv', j === na); });
+    Array.prototype.forEach.call(prikker.children, function (p, j) {
+      p.setAttribute('aria-current', j === na ? 'true' : 'false');
+    });
+    teller.textContent = (na + 1) + ' / ' + lysbilder.length;
+    try { location.hash = String(na + 1); } catch (e) {}
+    if (lysbilder[na].hasAttribute('data-kart')) startKart(); else stoppKart();
+  }
+
+  /* ---------- Levende kart ---------- */
+  var kart = null, kartTimere = [], kartRaf = 0;
+  var lag = {
+    kollektiv: { url: 'https://allemannsdata.com/wiki/api/v1/kilder/entur/find_live_vehicles_nearby?lat=59.9139&lon=10.7522&radius_km=7&limit=500',
+                 liste: 'vehicles', id: 'vehicle_id', hvert: 30000, ferskSek: 180, punkter: {} },
+    skip:      { url: 'https://allemannsdata.com/wiki/api/v1/kilder/ais/find_vessels_nearby?lat=59.89&lon=10.72&radius_km=14&limit=300',
+                 liste: 'fartoy', id: 'vessel_id', hvert: 30000, punkter: {} }
+  };
+
+  function startKart() {
+    var el = document.getElementById('oslokart');
+    if (!window.maplibregl) { document.getElementById('kart-status').textContent = 'Fikk ikke lastet MapLibre.'; return; }
+    if (!kart) {
+      kart = new maplibregl.Map({
+        container: el,
+        style: 'https://tiles.openfreemap.org/styles/liberty',
+        center: [10.745, 59.908], zoom: 12.4, pitch: 50, bearing: -15, attributionControl: false
+      });
+      kart.addControl(new maplibregl.AttributionControl({ compact: true }));
+      kart.on('style.load', function () {
+        try { varmTema(kart); } catch (e) { document.getElementById('kart-status').textContent = 'Tema feilet: ' + e.message; }
+        Object.keys(lag).forEach(function (navn) {
+          kart.addSource(navn, { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
+        });
+        kart.addLayer({ id: 'skip-p', type: 'circle', source: 'skip', paint: {
+          'circle-radius': 6, 'circle-color': '#0f766e', 'circle-stroke-color': '#2b2620', 'circle-stroke-width': 1.5 } });
+        kart.addLayer({ id: 'kollektiv-p', type: 'circle', source: 'kollektiv', paint: {
+          'circle-radius': 7,
+          'circle-color': ['match', ['get', 'mode'], 'BUS', '#e11d48', 'COACH', '#e11d48', '#1d4ed8'],
+          'circle-stroke-color': '#2b2620', 'circle-stroke-width': 1.5 } });
+        kart.addLayer({ id: 'kollektiv-t', type: 'symbol', source: 'kollektiv', layout: {
+          'text-field': ['get', 'line'], 'text-size': 11, 'text-offset': [0, 1.1], 'text-anchor': 'top',
+          'text-font': ['Noto Sans Bold'], 'text-allow-overlap': false }, paint: {
+          'text-color': '#2b2620', 'text-halo-color': '#f4efe4', 'text-halo-width': 1.3 } });
+        kart.addLayer({ id: 'skip-t', type: 'symbol', source: 'skip', minzoom: 12.5, layout: {
+          'text-field': ['get', 'navn'], 'text-size': 10, 'text-offset': [0, 1], 'text-anchor': 'top',
+          'text-font': ['Noto Sans Regular'] }, paint: {
+          'text-color': '#4a4238', 'text-halo-color': '#f4efe4', 'text-halo-width': 1 } });
+        hentAlle();
+      });
+    } else {
+      kart.resize();
+      hentAlle();
+    }
+    stoppTimere();
+    Object.keys(lag).forEach(function (navn) {
+      kartTimere.push(setInterval(function () { hent(navn); }, lag[navn].hvert));
+    });
+    if (!kartRaf) kartRaf = requestAnimationFrame(tegn);
+  }
+
+  /**
+     * Varmt tema: beige land, blaagroenn fjord, oransje hovedveier og bygninger
+     * i 3D med terreng under. Samme uttrykk som Thomas Heggelunds Oslo-kart.
+     *
+     * Basiskartet er OpenFreeMap sin «liberty»-stil. Vi endrer bare farger paa
+     * lagene som finnes der fra foer, og legger til terreng fra Mapterhorn.
+     */
+    function varmTema(kart) {
+      const S = (id, egenskap, verdi) => {
+        if (!kart.getLayer(id)) return;
+        try { kart.setPaintProperty(id, egenskap, verdi); } catch (e) { /* laget har ikke den egenskapen */ }
+      };
+      const skjul = (id) => { if (kart.getLayer(id)) kart.setLayoutProperty(id, 'visibility', 'none'); };
+    
+      const LAND = '#ede7d8', TEKST = '#4a4238', GLORIE = '#f4efe4';
+    
+      S('background', 'background-color', LAND);
+      skjul('natural_earth');
+    
+      // Flater
+      ['landuse_residential', 'landuse_hospital', 'landuse_school', 'aeroway_fill', 'road_area_pattern']
+        .forEach((id) => S(id, 'fill-color', '#e6dfce'));
+      ['park', 'landcover_grass', 'landuse_pitch', 'landuse_track', 'landuse_cemetery']
+        .forEach((id) => S(id, 'fill-color', '#d3e0bf'));
+      S('park', 'fill-opacity', 0.9);
+      S('landcover_wood', 'fill-color', '#c6d7b0');
+      S('landcover_wood', 'fill-opacity', 0.8);
+      S('landcover_wetland', 'fill-opacity', 0.35);
+      S('landcover_sand', 'fill-color', '#efe4c4');
+      S('landcover_ice', 'fill-color', '#eef0ea');
+      S('park_outline', 'line-color', '#bccaa6');
+    
+      // Vann
+      S('water', 'fill-color', '#a9cdd6');
+      ['waterway_river', 'waterway_other', 'waterway_tunnel']
+        .forEach((id) => S(id, 'line-color', '#8fbcc8'));
+    
+      // Veier: oransje hovedveier, lyse smaaveier, brune kanter.
+      kart.getStyle().layers.forEach((lag) => {
+        if (lag.type !== 'line') return;
+        const id = lag.id;
+        const hoved = /motorway|trunk_primary|secondary_tertiary|_link/.test(id) && !/casing/.test(id);
+        if (/_casing$/.test(id)) {
+          S(id, 'line-color', /motorway|trunk_primary|secondary_tertiary|_link/.test(id) ? '#d08a48' : '#d6cbb5');
+          S(id, 'line-opacity', 0.9);
+        } else if (hoved && /^(road|bridge|tunnel)_/.test(id)) {
+          S(id, 'line-color', '#eaa15c');
+        } else if (/^(road|bridge|tunnel)_/.test(id) && !/rail|hatching|path_pedestrian/.test(id)) {
+          S(id, 'line-color', '#faf6ec');
+        } else if (/rail/.test(id)) {
+          S(id, 'line-color', '#b3a894');
+        } else if (/path_pedestrian/.test(id)) {
+          S(id, 'line-color', '#e8dfca');
+        } else if (/^boundary/.test(id)) {
+          S(id, 'line-color', '#b3a894');
+        }
+      });
+    
+      // Bygninger: varm sandfarge med lys topp og moerkere vegger.
+      S('building', 'fill-color', '#e2d7c0');
+      S('building', 'fill-outline-color', '#cbbfa4');
+      S('building-3d', 'fill-extrusion-color', '#e6dcc6');
+      S('building-3d', 'fill-extrusion-opacity', 1);
+      S('building-3d', 'fill-extrusion-vertical-gradient', true);
+    
+      // Tekst
+      kart.getStyle().layers.forEach((lag) => {
+        if (lag.type !== 'symbol') return;
+        S(lag.id, 'text-color', TEKST);
+        S(lag.id, 'text-halo-color', GLORIE);
+        S(lag.id, 'text-halo-width', 1.4);
+        S(lag.id, 'icon-opacity', 0.5);
+      });
+    
+      // Rydd bort det som konkurrerer med vaare egne punkter.
+      ['poi_r20', 'poi_r7', 'poi_r1', 'poi_transit',
+       'road_one_way_arrow', 'road_one_way_arrow_opposite',
+       'highway-shield-non-us', 'highway-shield-us-interstate', 'road_shield_us'
+      ].forEach(skjul);
+    
+      // Terreng fra Mapterhorn (aapne hoeydedata, ingen noekkel), med skyggelegging
+      // rett under bygningene saa aasene rundt byen faar form.
+      if (!kart.getSource('terreng')) {
+        kart.addSource('terreng', {
+          type: 'raster-dem',
+          tiles: ['https://tiles.mapterhorn.com/{z}/{x}/{y}.webp'],
+          encoding: 'terrarium',
+          tileSize: 512,
+          maxzoom: 14,
+          attribution: '<a href="https://mapterhorn.com/attribution">© Mapterhorn</a>'
+        });
+        kart.addLayer({
+          id: 'terreng-skygge', type: 'hillshade', source: 'terreng',
+          paint: {
+            'hillshade-shadow-color': '#b9a784',
+            'hillshade-highlight-color': '#fffdf6',
+            'hillshade-accent-color': '#cdbd9c',
+            'hillshade-exaggeration': 0.45
+          }
+        }, kart.getLayer('building') ? 'building' : undefined);
+      }
+      try { kart.setTerrain({ source: 'terreng', exaggeration: 1.3 }); } catch (e) { /* eldre maplibre */ }
+      try {
+        kart.setSky({
+          'sky-color': '#cfe3ec', 'horizon-color': '#f1e9d6', 'fog-color': '#ede7d8',
+          'sky-horizon-blend': 0.6, 'horizon-fog-blend': 0.7, 'fog-ground-blend': 0.5
+        });
+      } catch (e) { /* eldre maplibre */ }
+    }
+    
+
+  function stoppTimere() { kartTimere.forEach(clearInterval); kartTimere = []; }
+  function stoppKart() { stoppTimere(); if (kartRaf) { cancelAnimationFrame(kartRaf); kartRaf = 0; } }
+
+  function hentAlle() { Object.keys(lag).forEach(hent); }
+
+  function hent(navn) {
+    var l = lag[navn];
+    fetch(l.url).then(function (r) { return r.json(); }).then(function (svar) {
+      var rader = (svar.data && svar.data[l.liste]) || [];
+      var na = performance.now(), sett = {};
+      var hentet = Date.parse((svar._meta && svar._meta.retrieved_at) || '') || Date.now();
+      rader.forEach(function (rad) {
+        if (rad.lat == null || rad.lon == null) return;
+        if (l.ferskSek && rad.last_updated && hentet - Date.parse(rad.last_updated) > l.ferskSek * 1000) return;
+        var id = String(rad[l.id]);
+        sett[id] = true;
+        var p = l.punkter[id];
+        if (p) { p.fra = p.na.slice(); p.til = [rad.lon, rad.lat]; p.t0 = na; p.rad = rad; }
+        else l.punkter[id] = { fra: [rad.lon, rad.lat], til: [rad.lon, rad.lat], na: [rad.lon, rad.lat], t0: na, rad: rad };
+      });
+      Object.keys(l.punkter).forEach(function (id) { if (!sett[id]) delete l.punkter[id]; });
+      oppdaterTellere();
+      document.getElementById('kart-status').textContent = 'Oppdatert ' + new Date().toLocaleTimeString('nb-NO') + '. Nye posisjoner hvert 30. sekund. Kjøretøy som ikke har rapportert på tre minutter, er skjult.';
+    }).catch(function (e) {
+      document.getElementById('kart-status').textContent = 'Fikk ikke hentet ' + navn + ': ' + e.message;
+    });
+  }
+
+  function oppdaterTellere() {
+    var b = 0, t = 0, k = lag.kollektiv.punkter;
+    Object.keys(k).forEach(function (id) { var m = k[id].rad.mode; if (m === 'BUS' || m === 'COACH') b++; else t++; });
+    document.getElementById('tell-buss').textContent = b + ' busser';
+    document.getElementById('tell-tog').textContent = t + ' tog';
+    document.getElementById('tell-skip').textContent = Object.keys(lag.skip.punkter).length + ' skip';
+  }
+
+  function tegn() {
+    kartRaf = requestAnimationFrame(tegn);
+    if (!kart || !kart.isStyleLoaded()) return;
+    var na = performance.now();
+    Object.keys(lag).forEach(function (navn) {
+      var l = lag[navn], feats = [];
+      Object.keys(l.punkter).forEach(function (id) {
+        var p = l.punkter[id], f = Math.min(1, (na - p.t0) / l.hvert);
+        p.na = [p.fra[0] + (p.til[0] - p.fra[0]) * f, p.fra[1] + (p.til[1] - p.fra[1]) * f];
+        feats.push({ type: 'Feature', geometry: { type: 'Point', coordinates: p.na },
+          properties: { mode: p.rad.mode || '', line: p.rad.line || '', navn: p.rad.navn || '' } });
+      });
+      var src = kart.getSource(navn);
+      if (src) src.setData({ type: 'FeatureCollection', features: feats });
+    });
+  }
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { vis(na + 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { vis(na - 1); e.preventDefault(); }
+    else if (e.key === 'Home') { vis(0); e.preventDefault(); }
+    else if (e.key === 'End') { vis(lysbilder.length - 1); e.preventDefault(); }
+    else if (e.key === 't' || e.key === 'T') {
+      var rot = document.documentElement;
+      var mork = rot.getAttribute('data-theme') === 'dark' ||
+        (!rot.getAttribute('data-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      rot.setAttribute('data-theme', mork ? 'light' : 'dark');
+    }
+  });
+
+  var start = parseInt(String(location.hash).replace('#', ''), 10);
+  vis(isNaN(start) ? 0 : start - 1);
+})();
+</script>
+
+</body>
+</html>
