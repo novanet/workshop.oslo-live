@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prerequisites · Mini-Nils</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="deltaker.css">
+</head>
+<body>
+<main class="page">
+  <nav class="toppnav" aria-label="Kursressurser">
+    <a href="index.html">Status</a>
+    <a href="presentasjon.html">Presentasjon</a>
+    <a class="aktiv" href="prerequisites.html">Prerequisites</a>
+    <a href="lab1.html">Lab 1</a>
+    <a href="lab2.html">Lab 2</a>
+    <a href="lab3.html">Lab 3</a>
+    <a href="teknisk.html">Teknisk</a>
+    <a href="https://ca-oslolive.thankfulwave-6bdee498.norwayeast.azurecontainerapps.io/" target="_blank" rel="noopener">Oslo Live</a>
+  </nav>
+
+  <header class="hero">
+    <div class="eyebrow">Før kursstart · Mini-Nils</div>
+    <h1>Prerequisites</h1>
+    <p class="lede">Dette må være på plass før du begynner å bygge agenten. Du trenger ikke ha deployet noe på forhånd; kurset tar deg gjennom resten.</p>
+    <div class="facts">
+      <div class="fact"><b>Forberedelse</b><span>15–30 minutter hvis du bruker devcontainer.</span></div>
+      <div class="fact"><b>Miljø</b><span>Codespace eller lokal devcontainer er anbefalt.</span></div>
+      <div class="fact"><b>Første mål</b><span>Få en grønn miljøsjekk før Lab 1.</span></div>
+    </div>
+  </header>
+
+  <section>
+    <h2>Dette trenger du</h2>
+    <p class="intro">Kryss av listen før kursdagen, eller bruk den som startpunkt når du åpner <code>mini-nils.zip</code>.</p>
+    <ul class="checklist">
+      <li>En GitHub-konto som kan opprette et privat repository.</li>
+      <li>Tilgang til <a href="https://github.com/novanet/workshop.oslo-live" target="_blank" rel="noopener"><code>novanet/workshop.oslo-live</code></a> gjennom kursets GitHub-token.</li>
+      <li>En laptop der du kan åpne Codespaces eller kjøre en devcontainer, alternativt tilgang til en ferdig kursmaskin.</li>
+      <li>En kopi av <code>mini-nils.zip</code>, lastet ned og pakket ut lokalt.</li>
+      <li>En nettleser som kan logge inn på GitHub og Azure med kurskontoene dine.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Velg arbeidsmiljø</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Devcontainer eller Codespace</h3>
+        <p>Anbefalt. Starter-kitet har et ferdig miljø med .NET 10, GitHub CLI, Azure CLI, Node.js og Claude Code. Du slipper å feilsøke lokale versjoner.</p>
+      </div>
+      <div class="card">
+        <h3>Lokalt miljø</h3>
+        <p>Installer .NET 10 SDK, Git, <code>gh</code>, Azure CLI, Node.js og Claude Code selv. Lab 2 trenger også <code>curl</code> og <code>jq</code>.</p>
+      </div>
+      <div class="card">
+        <h3>Hvis noe er blokkert</h3>
+        <p>Si fra før Lab 1. Codespaces eller en kursmaskin er fallback, slik at miljøoppsett ikke spiser tiden til oppgaven.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Tilganger fra kurslederen</h2>
+    <p class="intro">Du skal ikke gjette deg fram til kursverdier eller bruke private produksjonsressurser.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Tilgang</th><th>Når</th><th>Hvem leverer den</th><th>Hva du gjør</th></tr></thead>
+        <tbody>
+          <tr><td><code>ANTHROPIC_API_KEY</code></td><td>Lab 1</td><td>Kurslederen</td><td>Legg den i lokal <code>.env</code>. Ikke commit eller send den i chat.</td></tr>
+          <tr><td><code>RESOURCE_GROUP</code></td><td>Lab 2</td><td>Kurslederen</td><td>Bruk ressursgruppen du får tildelt; ikke opprett en tilfeldig privat gruppe.</td></tr>
+          <tr><td><code>WEBHOOK_SECRET</code></td><td>Lab 2</td><td>Kurslederen</td><td>Bruk samme verdi som kurslederen registrerer på GitHub-webhooken.</td></tr>
+          <tr><td>Azure subscription</td><td>Lab 2</td><td>Kurslederen</td><td>Logg inn med kurskontoen og velg riktig subscription med <code>az account show</code>.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout warn"><b>Ikke bruk repository secrets</b><code>GH_TOKEN</code> lager du selv som et personlig fine-grained token på <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub</a>. Det legges i lokal <code>.env</code>; <a href="https://github.com/novanet/workshop.oslo-live/settings/secrets/agents" target="_blank" rel="noopener">Secrets/agents-siden</a> er ikke riktig sted for lokal Lab 1.</div>
+  </section>
+
+  <section>
+    <h2>Lag ditt GitHub-token</h2>
+    <p class="intro">Tokenet brukes av workeren mot øvingsrepoet. Det er separat fra <code>gh auth login</code>, som du bruker med din egen GitHub-konto for å opprette agentrepoet.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <div>
+          <h3>Åpne fine-grained tokens</h3>
+          <p>Gå til <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub → New fine-grained token</a>. Velg bare <code>novanet/workshop.oslo-live</code> under repository access.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <div>
+          <h3>Gi minst mulig tilgang</h3>
+          <p>Velg <code>Contents</code>, <code>Issues</code> og <code>Pull requests</code> med read/write, og <code>Metadata</code> med read.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <div>
+          <h3>Lagre verdien lokalt</h3>
+          <pre>cp .env.example .env
+GH_TOKEN=github_pat_...</pre>
+          <p>GitHub viser tokenverdien bare én gang. Ikke legg den i repository secrets, kode, issue, PR eller skjermbilde.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Miljøsjekk</h2>
+    <p class="intro">Kjør dette fra mappen der du pakket ut starter-kitet. Versjonsnumrene kan være nyere, men kommandoene skal svare uten feil.</p>
+    <pre>dotnet --version
+git --version
+gh --version
+az --version
+node --version
+claude --version
+dotnet build</pre>
+    <div class="callout"><b>Ferdig</b>Du er klar for Lab 1 når verktøyene svarer, løsningen bygger grønt og du har fått bekreftet at <code>.env</code> inneholder verdiene du trenger.</div>
+  </section>
+
+  <section>
+    <h2>Ikke nødvendig før start</h2>
+    <ul class="checklist">
+      <li>Du trenger ikke opprette Azure-ressurser selv før kurset.</li>
+      <li>Du trenger ikke lage en egen webhook før kurslederen har gitt deg URL og hemmelighet.</li>
+      <li>Du trenger ikke forstå hele workeren før Lab 1; du implementerer <code>RunStages</code> steg for steg.</li>
+    </ul>
+  </section>
+
+  <footer class="footer">
+    <a href="index.html">Til Status</a>
+    <a href="lab1.html">Start Lab 1</a>
+    <a href="teknisk.html">Les teknisk oversikt</a>
+  </footer>
+</main>
+</body>
+</html>
