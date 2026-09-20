@@ -80,12 +80,12 @@ dotnet build</pre>
         <div>
           <p class="meta">Reservasjon · før modellkallet</p>
           <h3>Hindre at to agenter tar samme issue</h3>
-          <p>Bytt ut kommentaren om reservasjon med <code>Reservasjon.Opptatt</code> og <code>Reservasjon.Ta</code>. Når <code>--force</code> er satt, skal sjekken hoppes over.</p>
+          <p>Bytt ut kommentaren om reservasjon med <code>Reservation.IsBusy</code> og <code>Reservation.Claim</code>. Når <code>--force</code> er satt, skal sjekken hoppes over.</p>
           <pre>if (!force)
 {
-    var grunn = await Reservasjon.Opptatt(task, AgentNavn);
-    if (grunn is not null) return 0;
-    await Reservasjon.Ta(task);
+    var reason = await Reservation.IsBusy(task, AgentName);
+    if (reason is not null) return 0;
+    await Reservation.Claim(task);
 }</pre>
           <p class="small">Sjekk: <code>dotnet build</code>. Reservasjon er deterministisk kode, ikke en instruksjon til modellen.</p>
         </div>
@@ -98,7 +98,7 @@ dotnet build</pre>
           <p>Bruk <code>Repository.Clone</code> og <code>CreateBranch</code>. Modellen skal arbeide i en fersk checkout fra oppdatert <code>main</code>, aldri i agentrepoet.</p>
           <pre>var repo = await Repository.Clone(task.Repo, workspace);
 await repo.CreateBranch(task.BranchName);
-await Kommenter(repo, task, Startlinje(task));</pre>
+await Comment(repo, task, StartMarker(task));</pre>
           <p class="small">Sjekk: <code>dotnet build</code>. Agentnavnet inngår i branchnavnet, slik at flere kan jobbe parallelt.</p>
         </div>
       </article>
@@ -109,8 +109,8 @@ await Kommenter(repo, task, Startlinje(task));</pre>
           <h3>Installer skills og bygg systemprompten</h3>
           <p>Kall <code>InstallSkills</code>, les hukommelsen og bygg prompten med <code>BuildSystemPrompt</code>. Hold konteksten lesbar og versjonert.</p>
           <pre>InstallSkills();
-var minne = await LesHukommelse();
-var systemPrompt = BuildSystemPrompt(minne);
+var memory = await ReadMemory();
+var systemPrompt = BuildSystemPrompt(memory);
 var previousOutput = "";</pre>
           <p class="small">Sjekk: <code>dotnet build</code>.</p>
         </div>
@@ -142,8 +142,8 @@ var previousOutput = "";</pre>
           <p>Et godt svar uten kode er ikke en leveranse. Bruk <code>repo.HasChanges()</code>; kommenter og husk resultatet hvis diffen er tom.</p>
           <pre>if (!await repo.HasChanges())
 {
-    await Kommenter(repo, task, "Ingen kodeendring.");
-    await Husk(task, "ingen kodeendring", runs);
+    await Comment(repo, task, "Ingen kodeendring.");
+    await Remember(task, "ingen kodeendring", runs);
     return 0;
 }</pre>
           <p class="small">Sjekk: <code>dotnet build</code>.</p>
@@ -158,7 +158,7 @@ var previousOutput = "";</pre>
           <pre>var (verified, verifyLog) = await Verify(repo.Path);
 if (!verified && config.StopOnVerifyFailure)
 {
-    await Kommenter(repo, task, Fence(verifyLog, 2000));
+    await Comment(repo, task, Fence(verifyLog, 2000));
     return 2;
 }</pre>
           <p class="small">Sjekk: <code>dotnet build</code>.</p>
