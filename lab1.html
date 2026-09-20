@@ -38,7 +38,7 @@
     <p class="intro">Ha dette klart før du begynner:</p>
     <ul class="checklist">
       <li>Et eget privat repo for agenten din.</li>
-      <li>Skrivetilgang til <a href="https://github.com/novanet/workshop.oslo-live">novanet/workshop.oslo-live</a> via et GitHub-token med <strong>Contents</strong>, <strong>Issues</strong> og <strong>Pull requests</strong> med read/write.</li>
+      <li>Skrivetilgang til <a href="https://github.com/novanet/workshop.oslo-live">novanet/workshop.oslo-live</a> via et fine-grained GitHub-token med <strong>Contents</strong>, <strong>Issues</strong> og <strong>Pull requests</strong> read/write, samt <strong>Metadata</strong> read-only. Autoriser tokenet for Novanet SSO hvis GitHub ber om det.</li>
       <li>En kopi av <code>mini-nils.zip</code>, pakket ut i mappen der du skal jobbe.</li>
       <li>En devcontainer eller Codespace med .NET 10, <code>gh</code> og Claude Code.</li>
     </ul>
@@ -58,7 +58,7 @@ gh repo create mini-kari --private --source . --push</pre>
         <pre>AGENT_NAME=Mini-Kari
 GH_TOKEN=github_pat_...
 ANTHROPIC_API_KEY=sk-ant-...</pre>
-        <p class="small">Tokenet trenger Contents, Issues og Pull requests med read/write på øvingsrepoet.</p>
+        <p class="small">Tokenet trenger Contents, Issues og Pull requests med read/write på øvingsrepoet. Feilen <code>Resource not accessible ... (addComment)</code> betyr vanligvis manglende Issues write eller SSO-godkjenning.</p>
       </div>
       <div class="card">
         <h3>Sjekk verktøyene</h3>
@@ -66,7 +66,7 @@ ANTHROPIC_API_KEY=sk-ant-...</pre>
 gh --version
 claude --version
 dotnet build</pre>
-        <p class="small">Bruk devcontainer eller Codespaces hvis noe mangler.</p>
+        <p class="small">Bruk devcontainer eller Codespaces hvis noe mangler. På Windows kan du installere Claude Code med <code>npm install -g @anthropic-ai/claude-code</code>.</p>
       </div>
     </div>
   </section>

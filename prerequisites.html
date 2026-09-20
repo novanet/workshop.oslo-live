@@ -94,7 +94,7 @@
         <div class="step-number">2</div>
         <div>
           <h3>Gi minst mulig tilgang</h3>
-          <p>Velg <code>Contents</code>, <code>Issues</code> og <code>Pull requests</code> med read/write, og <code>Metadata</code> med read.</p>
+          <p>Velg <code>Contents</code>, <code>Issues</code> og <code>Pull requests</code> med read/write, og <code>Metadata</code> med read. Autoriser tokenet for Novanet SSO hvis GitHub ber om det.</p>
         </div>
       </div>
       <div class="step">
@@ -103,7 +103,7 @@
           <h3>Lagre verdien lokalt</h3>
           <pre>cp .env.example .env
 GH_TOKEN=github_pat_...</pre>
-          <p>GitHub viser tokenverdien bare én gang. Ikke legg den i repository secrets, kode, issue, PR eller skjermbilde.</p>
+          <p>GitHub viser tokenverdien bare én gang. Ikke legg den i repository secrets, kode, issue, PR eller skjermbilde. Hvis workeren logger <code>Resource not accessible ... (addComment)</code>, kontroller Issues write, repository access og SSO.</p>
         </div>
       </div>
     </div>
