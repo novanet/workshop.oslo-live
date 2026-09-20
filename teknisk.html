@@ -103,6 +103,16 @@ CLAUDE_MODEL=claude-sonnet-5</pre>
       <li><strong>Webhook-hemmelighet:</strong> Be kurslederen om den felles <code>WEBHOOK_SECRET</code>-verdien etter at du har deployet. Kurslederen kobler mottaks-URL-en din til Oslo Live og bruker samme hemmelighet på GitHub-webhooken.</li>
     </ol>
     <div class="callout warn"><b>Behandle disse som passord</b>Ikke commit <code>.env</code>, lim nøkler inn i issue eller PR, legg dem i JavaScript, eller send dem i chat. Hvis en nøkkel lekker: si fra med en gang, tilbakekall den i leverandørens portal, og få en ny.</div>
+    <h3>Logg inn i verktøyene</h3>
+    <pre># GitHub CLI – brukes når du oppretter agentrepoet
+gh auth login
+gh auth status
+
+# Azure CLI – kurslederen gir deg brukeren og subscription-tilgangen
+az login --use-device-code
+az account show
+az account list -o table</pre>
+    <p><code>gh auth login</code> er innloggingen for din egen GitHub-konto og brukes til å opprette det private agentrepoet. <code>GH_TOKEN</code> er tokenet workeren bruker mot <code>novanet/workshop.oslo-live</code>; de to tilgangene kan være forskjellige. For Azure logger du inn med kurskontoen du har fått, og velger riktig subscription hvis du har flere.</p>
   </section>
 
   <section>
