@@ -404,7 +404,7 @@
     </div>
     <div>
       <h3>Harness som motor</h3>
-      <p>Workeren kjører Claude Code headless (<code>claude -p</code>) i et utsjekket repo. Claude Code har verktøyene for å lese, endre og kjøre. Tiden går til trigger, orkestrering, prompt, skills og porter.</p>
+      <p>Workeren kjører Claude Code headless (<code>claude -p</code>) i et utsjekket repo. Claude Code har verktøyene for å lese, endre og kjøre. Tiden går til trigger, orkestrering, prompt, skills og kvalitetsporter.</p>
     </div>
     <div>
       <h3>Sjekkpunkt som følger med zippen</h3>
@@ -518,7 +518,7 @@
         <h3>Lab 3: Målbar forbedring</h3>
         <p>Lagene velger ett spor. Alle sporene bygger på det som kjører i skyen fra Lab 2. Lab 3 er valgfri: sprekker Lab 2 på tid, går vi rett til demo.</p>
         <ul>
-          <li><strong>Porter:</strong> del kjøringen i research, implementer og selvreview. Planen sjekkes av en billigere modell før koding. Rødt bygg stopper PR-en.</li>
+          <li><strong>Kvalitetsporter:</strong> legg inn kontrollpunkter som må bestås før agenten går videre. Del kjøringen i research, implementer og selvreview. Planen sjekkes av en billigere modell før koding. Rødt bygg stopper PR-en.</li>
           <li><strong>Skills og hukommelse:</strong> agenten skriver én lærdom til <code>memory.md</code> etter hver oppgave. Kjør samme oppgave tre ganger og se om den blir billigere.</li>
           <li><strong>Sikkerhet:</strong> lesende og skrivende verktøyliste per steg. Plant en prompt-injeksjon i en issue og se hva som skjer.</li>
           <li><strong>Praktisk forbedring:</strong> velg et konkret problem i agentens arbeidsflyt, mål det før og etter, og dokumenter effekten.</li>
@@ -573,7 +573,7 @@
     <div class="idea">
       <h3>Kvalitetsport</h3>
       <p>Legg inn en self-review-stage uten skriveverktøy. Den skal sjekke akseptansekriteriene og stoppe leveransen når et kriterium ikke er verifisert.</p>
-      <div class="why"><strong>Fra Cato:</strong> Review-fanout og deterministiske porter gjør kvalitetssjekken eksplisitt før en PR kan merges.</div>
+      <div class="why"><strong>Fra Cato:</strong> Review-fanout og deterministiske kvalitetsporter gjør kvalitetssjekken eksplisitt før en PR kan merges.</div>
     </div>
     <div class="idea">
       <h3>Prompt-injeksjonsjakt</h3>

@@ -37,7 +37,7 @@
     <ul class="checklist">
       <li>Lab 2 er nådd, eller agenten din kan allerede kjøre en oppgave i Azure.</li>
       <li>Du har én issue og én sammenlignbar kjøring å bruke som utgangspunkt.</li>
-      <li>Du velger én variabel: porter, hukommelse, sikkerhet, modell, prompt eller persona.</li>
+      <li>Du velger én variabel: kvalitetsporter, hukommelse, sikkerhet, modell, prompt eller persona.</li>
       <li>Du bestemmer på forhånd hva du skal måle: resultat, tid, tokens eller kostnad.</li>
     </ul>
   </section>
@@ -45,7 +45,7 @@
   <section>
     <h2>Velg ett spor</h2>
     <div class="grid">
-      <div class="card"><h3>A · Porter</h3><p>Del arbeidet i research, implementering og self-review. Sammenlign kvalitet og kostnad med én stage.</p></div>
+      <div class="card"><h3>A · Kvalitetsporter</h3><p>Legg inn kontrollpunkter som må bestås før agenten går videre. Del arbeidet i research, implementering og self-review.</p></div>
       <div class="card"><h3>B · Skills og hukommelse</h3><p>Se hva agenten tar med seg mellom kjøringer, og hva som skjer når hukommelsen er feil eller for stor.</p></div>
       <div class="card"><h3>C · Sikkerhet</h3><p>Test prompt-injeksjon fra en issue og stram inn verktøyprofilen.</p></div>
       <div class="card"><h3>D · Praktisk forbedring</h3><p>Velg et konkret problem i agentens arbeidsflyt, mål det før og etter, og dokumenter hva som faktisk ble bedre.</p></div>
@@ -54,8 +54,8 @@
   </section>
 
   <section>
-    <h2>Spor A: Porter</h2>
-    <p class="intro">Bytt <code>stages</code> i <code>agent/stages.json</code>. Prompt-filene ligger allerede i <code>agent/prompts/</code>.</p>
+    <h2>Spor A: Kvalitetsporter</h2>
+    <p class="intro">En kvalitetsport er et kontrollpunkt som må være bestått før pipelinen får gå videre. Bytt <code>stages</code> i <code>agent/stages.json</code> og sammenlign én stage med flere stages. Prompt-filene ligger allerede i <code>agent/prompts/</code>.</p>
     <pre>"stopOnVerifyFailure": true,
 "stages": [
   {

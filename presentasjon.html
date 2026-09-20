@@ -585,7 +585,7 @@
           <li>Strammere autorisasjon og isolasjon</li>
           <li>Tak på kjøringer, tid og kostnad</li>
           <li>Robust deduplisering, retry og observability</li>
-          <li>Testede porter og en tydelig menneskelig eier</li>
+          <li>Testede kvalitetsporter og en tydelig menneskelig eier</li>
         </ul>
       </div>
     </div>
@@ -612,7 +612,7 @@
       <li><b>Hent <code>mini-nils.zip</code> fra kurslederen og lag ditt eget private repo.</b> <span>Dette er agentens kode og det du tar med deg videre.</span></li>
       <li><b>Fyll inn <code>.env</code>.</b> <span>Agentnavn, GitHub-token og Anthropic-nøkkel.</span></li>
       <li><b>Åpne <code>docs/lab1.md</code> og skjelettet i <code>Pipeline.cs</code>.</b> <span>Oppskriften beskriver sju steg og hvilke hjelpefunksjoner du skal bruke.</span></li>
-      <li><b>Implementer <code>RunStages</code> og bygg etter hvert steg.</b> <span>Reservasjon, arbeidsområde, kontekst, modellsteg, porter og levering.</span></li>
+      <li><b>Implementer <code>RunStages</code> og bygg etter hvert steg.</b> <span>Reservasjon, arbeidsområde, kontekst, modellsteg, kvalitetsporter og levering.</span></li>
       <li><b>Kjør agenten mot issue 1.</b> <span>Sjekkpunktet er nådd når din egen pipeline har åpnet en pull request.</span></li>
     </ul>
     <div class="lenker">
@@ -642,7 +642,7 @@
     <h2>Lab 3: gjør agenten merkbart annerledes</h2>
     <p class="ingress">Velg ett spor. Endre én ting, kjør samme type oppgave igjen og sammenlign resultatet.</p>
     <div class="kort-rad">
-      <div class="kort"><span class="navn">Flere porter</span><span class="om">Del opp i research, implementering og review. La bygg eller test stoppe leveransen.</span></div>
+      <div class="kort"><span class="navn">Flere kvalitetsporter</span><span class="om">Legg inn kontrollpunkter før leveransen går videre. Del opp i research, implementering og review, og la bygg eller test stoppe leveransen.</span></div>
       <div class="kort"><span class="navn">Mindre kontekst</span><span class="om">Kort ned input, bytt modell eller reduser antall turer. Sammenlign kvalitet og tokens.</span></div>
       <div class="kort"><span class="navn">Strammere tilgang</span><span class="om">Skill mellom lesende og skrivende steg. Test hva som skjer med en uønsket instruksjon.</span></div>
       <div class="kort"><span class="navn">Monitorering</span><span class="om">Bygg en side som viser issues, status, pull requests og forbruk uten å sende hemmeligheter til nettleseren.</span></div>
