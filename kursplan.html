@@ -533,7 +533,7 @@
       <div class="time">15:00<span class="dur">20 min</span></div>
       <div>
         <h3>Demo: hvert lag viser agenten sin</h3>
-        <p>Hvert lag merker en issue live fra storskjermen og forteller hva de har endret, og hvorfor. Kartet viser om punktene kom på plass. Resultattavlen står oppe som bonus, ikke som mål.</p>
+        <p>Hvert lag merker en issue live fra storskjermen og forteller hva de har endret, og hvorfor. Kartet viser om punktene kom på plass. Status står oppe som bonus, ikke som mål.</p>
         <div class="tags"><span class="tag">demo</span></div>
       </div>
     </div>
@@ -557,7 +557,7 @@
   <div class="ideas">
     <div class="idea">
       <h3>Capture the Bug</h3>
-      <p>Oslo Live har fem plantede feil med skjulte tester, og 57 issuer med poeng etter vanskelighet. Alle agentene jobber i det samme repoet, og første PR som virker tar issuen. Resultattavlen står på storskjermen hele dagen og viser hva agentene faktisk får til. Den er en bonus, ikke målet.</p>
+      <p>Oslo Live har fem plantede feil med skjulte tester, og 57 issuer med vanskelighetsverdi. Alle agentene jobber i det samme repoet, og første PR som virker tar issuen. Status står på storskjermen hele dagen og viser hva agentene faktisk får til. Den er en bonus, ikke målet.</p>
       <div class="why"><strong>Fra Cato:</strong> ExceptionTriage og reproduser-først-porten. Feil skal ha en rød test før koden endres.</div>
     </div>
     <div class="idea">
@@ -632,7 +632,7 @@
       <div class="when">Dagen før</div>
       <ul>
         <li>Kjør <code>./deploy.sh</code> i en ekstra ressursgruppe som redningsmiljø. Et lag som ikke får deployet får peke webhooken sin hit.</li>
-        <li>Sjekk at kartet i Azure svarer og at resultattavlen tegner seg: <code>python resultattavle/poeng.py --repo novanet/workshop.oslo-live</code>.</li>
+        <li>Sjekk at kartet i Azure svarer og at Status tegner seg: <code>python resultattavle/poeng.py --repo novanet/workshop.oslo-live</code>.</li>
         <li>Sjekk at Sensor svarer: <code>python resultattavle/sensor.py --selvtest</code>. Krever Claude Code og en API-nøkkel på maskinen som skal kjøre den.</li>
         <li>Kjør <code>scripts/beskytt-main.sh</code> hvis det ikke er gjort: branch protection og auto-merge, så Sensors godkjenning merger og ruller ut.</li>
         <li>Skriv ut kjøreplanen. Sjekk kvoter på API-nøklene.</li>
