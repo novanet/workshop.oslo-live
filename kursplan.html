@@ -396,11 +396,11 @@
 <section>
   <div class="eyebrow">Kort svar</div>
   <h2>Hvordan du klarer dette på én dag</h2>
-  <p class="intro">Deltakerne får ferdige byggeklosser og et script som installerer baselinen. Målet er en fungerende agent lokalt, så i skyen, og til slutt en som gjør noe de selv har bestemt. Derfor styres dagen etter sjekkpunkter, ikke klokkeslett.</p>
+  <p class="intro">Deltakerne får ferdige byggeklosser og en tekstlig oppskrift. Målet er en fungerende agent lokalt, så i skyen, og til slutt en som gjør noe de selv har bestemt. Derfor styres dagen etter sjekkpunkter, ikke klokkeslett.</p>
   <div class="three">
     <div>
       <h3>Byggesett med oppskrift</h3>
-      <p><code>mini-nils.zip</code> har ferdige deler for GitHub, git, Claude Code, bygg, test og Azure. <code>setup-lab1.py</code> installerer en fungerende baseline, slik at deltakerne kan lese orkestreringen og endre én policy uten å bruke tid på stor kopier-og-lim-kode.</p>
+      <p><code>mini-nils.zip</code> har ferdige deler for GitHub, git, Claude Code, bygg, test og Azure. <code>Pipeline.cs</code> er et kompilérbart skjelett, og <code>docs/lab1.md</code> beskriver kontrakten deltakerne skal implementere uten å kopiere en ferdig løsning.</p>
     </div>
     <div>
       <h3>Harness som motor</h3>
@@ -408,7 +408,7 @@
     </div>
     <div>
       <h3>Sjekkpunkt som følger med zippen</h3>
-      <p><code>python setup-lab1.py</code> tar vare på forsøket og legger inn den komplette baselinen. <code>./sjekkpunkt.sh lab1</code> er et Bash-alias for samme handling. Den som faller av kan være med i Lab 2 på to minutter.</p>
+      <p><code>./sjekkpunkt.sh lab1</code> tar vare på forsøket og legger inn den komplette pipelinen som redningsnett. Den som faller av kan være med i Lab 2 på to minutter.</p>
     </div>
   </div>
 </section>
@@ -441,7 +441,7 @@
     <div class="arrow">→</div>
     <div class="node"><div class="t">Leveranse</div><div class="n">Pull request</div><div class="d">Kommentar tilbake på issuen</div></div>
   </div>
-  <p>Workeren er et lite .NET-konsollprogram på rundt 1500 linjer. Deltakerne får ferdige komponenter og et script som installerer rekkefølgen i <code>Pipeline.cs</code>. Deretter styrer de oppførselen med <code>system.md</code>, <code>conventions.md</code>, promptene per steg og <code>stages.json</code>.</p>
+  <p>Workeren er et lite .NET-konsollprogram på rundt 1500 linjer. Deltakerne får ferdige komponenter og implementerer rekkefølgen i <code>Pipeline.cs</code> etter en tekstlig oppskrift. Deretter styrer de oppførselen med <code>system.md</code>, <code>conventions.md</code>, promptene per steg og <code>stages.json</code>.</p>
   <div class="tablewrap">
   <table>
     <thead><tr><th>Del</th><th>Mini-Nils (kurset)</th><th>Nils Georg (Cato)</th></tr></thead>
@@ -479,11 +479,11 @@
         <h3>Lab 1: Monter agenten</h3>
         <ul>
           <li>Pakk ut <code>mini-nils.zip</code>, lag eget repo, legg nøklene i <code>.env</code>. Miljøsjekk med hjelperne på gulvet: <code>dotnet --version</code>, <code>gh --version</code>, <code>claude --version</code>.</li>
-          <li>Kjør <code>python setup-lab1.py</code> og <code>dotnet build</code>. Scriptet tar vare på forsøket ditt og installerer baselinen.</li>
-          <li>Les de sju kontrollene i <code>Pipeline.cs</code> og gjør én bevisst policyendring.</li>
+          <li>Åpne <code>docs/lab1.md</code> og skjelettet i <code>Pipeline.cs</code>.</li>
+          <li>Implementer <code>RunStages</code> etter oppskriften og kjør <code>dotnet build</code> etter hvert steg.</li>
           <li>Kjør agenten mot issue 1 og les diffen i pull requesten.</li>
         </ul>
-        <div class="checkpoint"><b>Sjekkpunkt 1</b>Baselinen med policyendringen har åpnet en pull request, og deltakeren kan forklare hva som er deterministisk kode og hvor modellen brukes.</div>
+        <div class="checkpoint"><b>Sjekkpunkt 1</b>Deltakerens egen pipeline har åpnet en pull request, bygget er grønt, og deltakeren kan forklare hva som er deterministisk kode og hvor modellen brukes.</div>
         <div class="tags"><span class="tag">lab</span><span class="tag">sjekkpunkt: lab1</span><span class="tag">LM 2</span><span class="tag">LM 4</span></div>
       </div>
     </div>
@@ -504,9 +504,10 @@
           <li><code>./deploy.sh</code> mot lagets ressursgruppe: Bicep for mottak, Storage Queue, Container Apps-miljø og jobb, Key Vault og Container Registry.</li>
           <li>Skriptet bygger bildene med <code>az acr build</code>. Ingen lokal Docker.</li>
           <li>Registrer webhooken i Oslo Live. Merk en issue med <code>mini-&lt;navn&gt;</code>. Se jobben skalere fra null i portalen og loggen i Log Analytics.</li>
+          <li>Test at en feil hemmelighet gir <code>401</code>, endre <code>pollingInterval</code> i Bicep fra 30 til 15 og rull ut med <code>./deploy.sh --images</code>.</li>
           <li>Lukk laptopen mens den jobber. Poenget er at den ikke trengs.</li>
         </ul>
-        <div class="checkpoint"><b>Sjekkpunkt 2</b>En issue merket i GitHub gir en pull request fra Azure, med laptopen lukket.</div>
+        <div class="checkpoint"><b>Sjekkpunkt 2</b>En issue merket i GitHub gir en pull request fra Azure, og deltakeren kan vise både <code>401</code>-testen og den nye polling-verdien etter ny deploy.</div>
         <div class="tags"><span class="tag">lab</span><span class="tag">sjekkpunkt 2</span><span class="tag">LM 3</span></div>
       </div>
     </div>

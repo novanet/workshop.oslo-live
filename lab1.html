@@ -24,11 +24,11 @@
   <header class="hero">
     <div class="eyebrow">Sjekkpunkt 1 · lokalt</div>
     <h1>Lab 1: Monter agenten</h1>
-    <p class="lede">Kjør en fungerende baseline fra GitHub-issue til pull request, les orkestreringen og gjør én bevisst policyendring. Du skal ikke bruke labtid på å kopiere store kodeblokker.</p>
+    <p class="lede">Implementer forbindelsen fra GitHub-issue til pull request i <code>Pipeline.cs</code>. Du får ferdige komponenter og en tekstlig oppskrift, men skriver selv orkestreringen.</p>
     <div class="facts">
       <div class="fact"><b>Mål</b><span>En agent som lager en reviewbar PR.</span></div>
       <div class="fact"><b>Arbeidssted</b><span>Ditt eget repo og din lokale devcontainer.</span></div>
-      <div class="fact"><b>Ferdig når</b><span>Baselinen har kjørt, og du kan forklare policyendringen din.</span></div>
+      <div class="fact"><b>Ferdig når</b><span>Din egen <code>RunStages</code> har åpnet en PR.</span></div>
     </div>
   </header>
 
@@ -71,32 +71,74 @@ dotnet build</pre>
   </section>
 
   <section>
-    <h2>Monter baseline med et script</h2>
-    <p class="intro">Det er unødvendig å bruke labtid på å kopiere rundt 100 linjer med orkestreringskode. Scriptet installerer baselinen og tar vare på det som stod der fra før.</p>
-    <pre>    python setup-lab1.py
+    <h2>Start med et kompilérbart skjelett</h2>
+    <p class="intro">Scriptet legger inn en skjelettfil med den ytterste <code>Run</code>-metoden og alle hjelpeklassene du trenger. <code>RunStages</code> er din oppgave.</p>
+    <pre>python setup-lab1.py
 dotnet build</pre>
-    <p>Baselinen legges i <code>src/Worker/Pipeline.cs</code>. Det forrige forsøket ligger i <code>.kurs/Pipeline.forsok.cs</code>. Åpne pipeline-filen og les gjennom disse sju kontrollene:</p>
-    <div class="grid">
-      <div class="card"><h3>1. Reservasjon</h3><p><code>Reservation.IsBusy</code> og <code>Reservation.Claim</code> hindrer kollisjoner. <code>--force</code> er et eksplisitt unntak.</p></div>
-      <div class="card"><h3>2. Arbeidsområde</h3><p>Repoet klones og får en egen branch. Modellen jobber aldri direkte på <code>main</code>.</p></div>
-      <div class="card"><h3>3. Kontekst</h3><p>Systemregler, skills og minne er eksplisitt input som kan leses og versjoneres.</p></div>
-      <div class="card"><h3>4. Modellsteg</h3><p>Hvert steg får prompt, modell, verktøy og budsjett fra konfigurasjonen.</p></div>
-      <div class="card"><h3>5. Endringskontroll</h3><p>En god tekst uten diff blir ikke til en tom pull request.</p></div>
-      <div class="card"><h3>6. Verifisering</h3><p>Bygg og test kjøres utenfor modellen og kan stoppe leveransen.</p></div>
-      <div class="card"><h3>7. Levering</h3><p>Branchen committes, pushes og leveres som en reviewbar pull request.</p></div>
-    </div>
+    <p>Det som stod der fra før lagres i <code>.kurs/Pipeline.forsok.cs</code>. Ikke åpne sjekkpunktet ennå; det er den ferdige løsningen som skal brukes hvis du faller av.</p>
   </section>
 
   <section>
-    <h2>Gjør én bevisst endring</h2>
-    <p class="intro">Velg én policy, endre bare den, bygg og kjør på nytt. Skriv ned forventningen din før du starter.</p>
-    <ul class="checklist">
-      <li>Sett <code>stopOnVerifyFailure</code> til <code>true</code> i <code>agent/stages.json</code>.</li>
-      <li>Reduser <code>maxTurns</code> for ett modellsteg.</li>
-      <li>Bytt modell for ett steg.</li>
-      <li>Fjern ett verktøy fra <code>allowedTools</code>.</li>
-    </ul>
-    <p>Sammenlign logg, diff, tokenforbruk og tid med baselinen. Da ser du forskjellen mellom kode som styrer flyten og modellen som gjør selve kodeendringen.</p>
+    <h2>Oppskriften for <code>RunStages</code></h2>
+    <p class="intro">Implementer ett steg om gangen. Kjør <code>dotnet build</code> etter hvert steg. Oppskriften beskriver kontrakten, men ikke C#-løsningen.</p>
+    <div class="steps">
+      <article class="step">
+        <div class="step-number">1</div>
+        <div>
+          <p class="meta">Reservasjon · før modellkallet</p>
+          <h3>Reserver oppgaven</h3>
+          <p>Med <code>--force</code> logger du at reservasjonen hoppes over. Ellers kaller du <code>Reservation.IsBusy(task, AgentName)</code>. Ved årsak kommenterer du på issuen og returnerer <code>0</code>; ellers kaller du <code>Reservation.Claim(task)</code>.</p>
+        </div>
+      </article>
+      <article class="step">
+        <div class="step-number">2</div>
+        <div>
+          <p class="meta">Arbeidsområde · ren start</p>
+          <h3>Klon repoet og lag branch</h3>
+          <p>Kall <code>Repository.Clone(task.Repo, workspace)</code>, lag <code>task.BranchName</code> med <code>CreateBranch</code>, logg <code>repo.Path</code> og kommenter <code>StartMarker(task)</code>. Modellen skal aldri jobbe direkte på <code>main</code>.</p>
+        </div>
+      </article>
+      <article class="step">
+        <div class="step-number">3</div>
+        <div>
+          <p class="meta">Kontekst · eksplisitt input</p>
+          <h3>Bygg systemprompt og kontekst</h3>
+          <p>Kall <code>InstallSkills()</code>, <code>ReadMemory()</code> og <code>BuildSystemPrompt(memory)</code>. Start <code>previousOutput</code> som en tom streng. Regler, konvensjoner og hukommelse skal være lesbar input.</p>
+        </div>
+      </article>
+      <article class="step">
+        <div class="step-number">4</div>
+        <div>
+          <p class="meta">Modellsteg · styrt tilgang</p>
+          <h3>Kjør <code>config.Stages</code></h3>
+          <p>For hvert steg velger du <code>stage.Model</code> eller <code>config.Model</code>, bygger prompt med <code>BuildPrompt</code>, kaller <code>ClaudeRunner.Run</code>, legger resultatet i <code>runs</code> og logger <code>LogUsage</code>. Ved feil kommenterer du, bruker <code>EndMarker</code> og returnerer <code>1</code>.</p>
+        </div>
+      </article>
+      <article class="step">
+        <div class="step-number">5</div>
+        <div>
+          <p class="meta">Diff-port · ingen tom PR</p>
+          <h3>Krev en faktisk endring</h3>
+          <p>Kall <code>repo.HasChanges()</code>. Ved tom diff kommenterer du siste svar, husker utfallet med <code>Remember</code>, legger ved forbruk og returnerer <code>0</code>.</p>
+        </div>
+      </article>
+      <article class="step">
+        <div class="step-number">6</div>
+        <div>
+          <p class="meta">Verifisering · utenfor modellen</p>
+          <h3>Kjør bygg og test som en port</h3>
+          <p>Kall <code>Verify(repo.Path)</code>. Når verifiseringen feiler og <code>StopOnVerifyFailure</code> er sann, kommenterer du <code>verifyLog</code>, husker utfallet og returnerer <code>2</code> uten PR.</p>
+        </div>
+      </article>
+      <article class="step">
+        <div class="step-number">7</div>
+        <div>
+          <p class="meta">Leveranse · reviewbar PR</p>
+          <h3>Commit, push og opprett PR</h3>
+          <p>Kall <code>CommitAndPush</code>, bygg PR-teksten med <code>PrBody</code> og kall <code>CreatePullRequest</code>. Bruk utkast når verifiseringen er rød, og aktiver auto-merge bare når den er grønn. Skriv sammendrag og husk utfallet.</p>
+        </div>
+      </article>
+    </div>
   </section>
 
   <section>
@@ -105,30 +147,29 @@ dotnet build</pre>
   --issue 1 `
   --repo novanet/workshop.oslo-live `
   --force</pre>
-    <p>På macOS/Linux kan du bruke <code>\</code> i stedet for PowerShells linjefortsettelse. Følg loggen: oppgaven hentes, repoet klones, modellen kjører, bygg/test kjøres og PR-adressen skrives ut.</p>
-    <div class="callout"><b>Sjekkpunkt 1</b>Baselinen har åpnet en PR, du har dokumentert én policyendring, og du kan peke på hva som er deterministisk kode og hvor modellen brukes.</div>
+    <p>Følg loggen: reservasjonen kontrolleres, repoet klones, modellstegene kjører, bygg/test kjøres og PR-adressen skrives ut.</p>
+    <div class="callout"><b>Sjekkpunkt 1</b>Din egen implementasjon av <code>RunStages</code> har åpnet en PR, bygget er grønt, og du kan forklare hva som er deterministisk kode og hvor modellen brukes.</div>
   </section>
 
   <section>
     <h2>Hvis du faller av</h2>
-    <p>Scriptet tar vare på forsøket ditt før baselinen kopieres inn:</p>
-    <pre>    python setup-lab1.py
+    <p>Forsøket ditt blir tatt vare på før den ferdige løsningen kopieres inn:</p>
+    <pre>./sjekkpunkt.sh lab1
 dotnet build</pre>
-    <p>Det gamle aliaset fungerer også i Bash:</p>
-    <pre>./sjekkpunkt.sh lab1</pre>
-    <p>I PowerShell kan du se forskjellen mellom forsøket og baselinen slik:</p>
+    <p>I PowerShell kan du se forskjellen slik:</p>
     <pre>code --diff .kurs\Pipeline.forsok.cs src\Worker\Pipeline.cs</pre>
-    <div class="callout warn"><b>Ikke skjul feilen</b>Les gjerne diffen i forsøket ditt etterpå. Scriptet er et redningsnett, ikke en erstatning for å forstå rekkefølgen.</div>
+    <div class="callout warn"><b>Redningsnett</b>Les den ferdige pipelinen etterpå og finn ut hvilket steg du manglet før du går videre til Lab 2.</div>
   </section>
 
   <section>
     <h2>Hvis man blir tidlig ferdig</h2>
     <ul class="checklist">
-      <li>Gjør <code>stopOnVerifyFailure</code> strengere eller mer ettergivende.</li>
-      <li>Gi implementeringssteget færre turer.</li>
-      <li>Tillat ett ekstra verktøy og vurder om det faktisk hjelper.</li>
+      <li>Flytt en kontroll og begrunn hvorfor den fortsatt er deterministisk.</li>
+      <li>Endre hva som skjer når verifisering feiler.</li>
+      <li>Logg en ekstra måling i PR-rapporten.</li>
+      <li>Gi et modellsteg mindre verktøytilgang.</li>
     </ul>
-    <p>Sammenlign med baselinen og dokumenter hva som ble bedre, hva som ble dårligere og hvilken måling som viser forskjellen.</p>
+    <p>Dokumenter hva som ble bedre, hva som ble dårligere og hvilken måling som viser forskjellen.</p>
   </section>
 
   <footer class="footer">

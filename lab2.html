@@ -24,7 +24,7 @@
   <header class="hero">
     <div class="eyebrow">Sjekkpunkt 2 · Azure</div>
     <h1>Lab 2: Til skyen</h1>
-    <p class="lede">Deploy den samme workeren slik at en merket GitHub-issue gir en pull request fra Azure, uten at laptopen din er involvert.</p>
+    <p class="lede">Deploy den samme workeren slik at en merket GitHub-issue gir en pull request fra Azure, uten at laptopen din er involvert. Test sikkerhetsporten og gjør én liten driftsendring som krever ny deploy.</p>
     <div class="facts">
       <div class="fact"><b>Mål</b><span>En issue starter en jobb fra null i Azure.</span></div>
       <div class="fact"><b>Arbeidssted</b><span>Din ressursgruppe i kursets Azure-tenant.</span></div>
@@ -34,7 +34,7 @@
 
   <section>
     <h2>Før du starter</h2>
-    <p class="intro">Lab 2 bygger på agenten du monterte i Lab 1. Kryss av dette før du deployer:</p>
+    <p class="intro">Lab 2 bygger på agenten du implementerte i Lab 1. Kryss av dette før du deployer:</p>
     <ul class="checklist">
       <li>Lab 1 er nådd, eller du har kjørt <code>./sjekkpunkt.sh lab1</code> og <code>dotnet build</code> er grønt.</li>
       <li>Du har en Azure-bruker, riktig subscription og en ressursgruppe fra kurslederen.</li>
@@ -121,7 +121,7 @@ WEBHOOK_SECRET=&lt;felles hemmelighet fra kurslederen&gt;</pre>
   -g $RESOURCE_GROUP -n caj-$NAME-worker `
   --container worker --follow</pre>
           <p>Lukk laptopen mens jobben kjører. PR-en skal komme fra workeren i Azure, ikke fra terminalen din.</p>
-          <div class="callout"><b>Sjekkpunkt 2</b>En merket issue har gitt en pull request som er opprettet av Azure-jobben. Vis kjøringen i Azure-portalen til kurslederen.</div>
+          <div class="callout"><b>Mellommål</b>En merket issue har gitt en pull request som er opprettet av Azure-jobben. Vis kjøringen i Azure-portalen før du går videre.</div>
         </div>
       </article>
     </div>
@@ -135,6 +135,27 @@ WEBHOOK_SECRET=&lt;felles hemmelighet fra kurslederen&gt;</pre>
 | where Log_s contains "LLM request completed"
 | project TimeGenerated, Log_s
 | order by TimeGenerated desc</pre>
+  </section>
+
+  <section>
+    <h2>Feilsøk en kontrollert feil og deploy en endring</h2>
+    <p class="intro">Test først at mottaket avviser en ugyldig intern kømelding. Dette skal ikke starte en jobb.</p>
+    <pre>curl -i -X POST "$(jq -r .receiverUrl.value .deploy-outputs.json)/tasks" `
+  -H "X-Webhook-Secret: deliberately-wrong" `
+  -H "Content-Type: application/json" `
+  -d '{"repo":"novanet/workshop.oslo-live","issueNumber":2}'</pre>
+    <p>Forvent <code>401 Unauthorized</code>. Finn kontrollen i <code>src/Receiver/Program.cs</code> og forklar hvorfor hemmeligheten ikke skal ligge i URL-en eller i kildekoden.</p>
+    <p>Gjør deretter én liten endring i <code>infra/main.bicep</code>:</p>
+    <ul class="checklist">
+      <li>Endre <code>pollingInterval</code> i KEDA-regelen fra <code>30</code> til <code>15</code>.</li>
+      <li>Kjør <code>./deploy.sh --images</code> for å bygge og rulle ut på nytt.</li>
+      <li>Bekreft verdien med kommandoen under.</li>
+    </ul>
+    <pre>az containerapp job show `
+  -g $RESOURCE_GROUP `
+  -n "caj-$NAME-worker" `
+  --query properties.configuration.eventTriggerConfig.scale.pollingInterval</pre>
+    <div class="callout"><b>Sjekkpunkt 2</b>Vis både <code>401</code>-testen og den nye polling-verdien i Azure.</div>
   </section>
 
   <section>
