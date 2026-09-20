@@ -34,6 +34,18 @@
   </header>
 
   <section>
+    <h2>Før du starter</h2>
+    <p class="intro">Lab 2 bygger på agenten du monterte i Lab 1. Kryss av dette før du deployer:</p>
+    <ul class="checklist">
+      <li>Lab 1 er nådd, eller du har kjørt <code>./sjekkpunkt.sh lab1</code> og <code>dotnet build</code> er grønt.</li>
+      <li>Du har en Azure-bruker, riktig subscription og en ressursgruppe fra kurslederen.</li>
+      <li><code>GH_TOKEN</code> og <code>ANTHROPIC_API_KEY</code> fungerer i agentrepoet ditt.</li>
+      <li>Du har fått den felles <code>WEBHOOK_SECRET</code>-verdien fra kurslederen.</li>
+      <li><code>az</code>, <code>curl</code> og <code>jq</code> er tilgjengelige i terminalen.</li>
+    </ul>
+  </section>
+
+  <section>
     <h2>Dette deployer du</h2>
     <div class="grid">
       <div class="card"><h3>Receiver</h3><p>En Container App som validerer webhook-signaturen og legger en melding i Storage Queue. Den har <code>minReplicas: 0</code>.</p></div>

@@ -35,7 +35,14 @@
 
   <section>
     <h2>Før du begynner</h2>
-    <p class="intro">Du trenger et eget privat repo for agenten og skrivetilgang til øvingsrepoet. Agenten din endrer aldri sitt eget repo; den kloner <a href="https://github.com/novanet/workshop.oslo-live">novanet/workshop.oslo-live</a> og åpner PR der.</p>
+    <p class="intro">Ha dette klart før du begynner:</p>
+    <ul class="checklist">
+      <li>Et eget privat repo for agenten din.</li>
+      <li>Skrivetilgang til <a href="https://github.com/novanet/workshop.oslo-live">novanet/workshop.oslo-live</a> via et GitHub-token med <strong>Contents</strong>, <strong>Issues</strong> og <strong>Pull requests</strong> med read/write.</li>
+      <li>En kopi av <code>mini-nils.zip</code>, pakket ut i mappen der du skal jobbe.</li>
+      <li>En devcontainer eller Codespace med .NET 10, <code>gh</code> og Claude Code.</li>
+    </ul>
+    <p>Agenten endrer ikke sitt eget repo. Den kloner øvingsrepoet, lager en branch der og åpner pull requesten der.</p>
     <div class="grid">
       <div class="card">
         <h3>Lag agentrepoet</h3>
