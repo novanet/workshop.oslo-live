@@ -282,7 +282,10 @@
     font-family: "IBM Plex Mono", monospace; font-size: 15px; padding-top: 2px;
   }
   .nummerert .steg b { display: block; font-size: clamp(17px, 1.9vw, 22px); }
-  .nummerert .steg span { display: block; color: var(--muted); font-size: clamp(15px, 1.6vw, 18px); }
+  .nummerert .steg span {
+    display: block; grid-column: 2; color: var(--muted);
+    font-size: clamp(15px, 1.6vw, 18px);
+  }
   @media (min-width: 640px) {
     .lysbilde.tett .nummerert { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: none; }
     .lysbilde.tett .nummerert .steg:last-child { grid-column: 1 / -1; }
