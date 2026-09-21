@@ -41,8 +41,10 @@
       <li>Du har en Azure-bruker, riktig subscription og en ressursgruppe fra kurslederen.</li>
       <li><code>GH_TOKEN</code> og <code>ANTHROPIC_API_KEY</code> fungerer i agentrepoet ditt. GitHub-tokenet må ha <strong>Contents</strong>, <strong>Issues</strong> og <strong>Pull requests</strong> read/write, samt <strong>Metadata</strong> read-only, på akkurat <code>novanet/workshop.oslo-live</code>. Anthropic-nøkkelen kommer normalt fra kurslederen; du skal ikke betale selv.</li>
       <li>Du har fått den felles <code>WEBHOOK_SECRET</code>-verdien fra kurslederen.</li>
+      <li>Starter-kitet inneholder <code>ACR_NAME</code>, <code>ACR_RESOURCE_GROUP</code> og <code>ACR_PULL_IDENTITY_RESOURCE_ID</code> for kursets delte Container Registry. Azure-brukeren din må ha <code>AcrPush</code>, <code>Container Registry Tasks Contributor</code> og <code>Managed Identity Operator</code>.</li>
       <li><code>az</code>, <code>curl</code> og <code>jq</code> er tilgjengelige i terminalen. <code>jq</code> er et lite kommandolinjeverktøy som leser JSON og plukker ut verdier fra deploy-resultatet.</li>
     </ul>
+    <div class="callout"><b>Første virkelige kjøring</b>Lab 1 var lokal og skrivebeskyttet. Ikke opprett PR, skriv kommentar eller tildel issue manuelt. Etter webhook-koblingen er det Azure-workeren som reserverer issue, skriver start/sluttkommentarer og oppretter PR.</div>
   </section>
 
   <section>
@@ -53,7 +55,7 @@
       <div class="card"><h3>Worker</h3><p>En Container Apps Job kloner repoet, kjører <code>claude -p</code>, bygger, tester og åpner PR.</p></div>
       <div class="card"><h3>Hemmeligheter</h3><p>GitHub-token, Anthropic-nøkkel og webhook-hemmelighet leses fra Key Vault med managed identity.</p></div>
     </div>
-    <div class="callout"><b>Viktig skille</b>Issuen og PR-en bor i fellesrepoet. Receiver, worker, kø og hemmeligheter bor i din ressursgruppe og bygges fra ditt agentrepo.</div>
+    <div class="callout"><b>Viktig skille</b>Issuen og PR-en bor i fellesrepoet. Receiver, worker, kø og hemmeligheter bor i din ressursgruppe og bygges fra ditt agentrepo. Container Registryet er felles for kurset, men bildene ligger under <code>mini-nils/&lt;agent-label&gt;/</code>, slik at deltakerne ikke overskriver hverandre.</div>
   </section>
 
   <section>
@@ -84,6 +86,7 @@
           <h3>Logg inn i riktig tenant</h3>
           <p>Bruk et InPrivate-vindu slik at jobbbrukeren ikke blandes med kursbrukeren.</p>
           <pre>az login --use-device-code
+az account set --subscription 821c1e3e-f764-4d36-911a-a23a80dfa197
 az account show</pre>
           <p class="small">Sjekk at subscriptionen som vises er kursets subscription.</p>
         </div>
@@ -93,9 +96,12 @@ az account show</pre>
         <div>
           <p class="meta">Konfigurasjon</p>
           <h3>Fyll inn Azure-verdiene</h3>
-          <p>Legg verdiene i <code>.env</code> i agentrepoet. Behold <code>GH_TOKEN</code> og <code>ANTHROPIC_API_KEY</code> fra Lab 1. Kjør gjerne <code>--dry-run</code> på nytt før deploy for å avsløre feil repo-tilgang uten API-kall. Workeren trenger fortsatt Contents, Issues og Pull requests read/write mot Oslo Live; Azure kopierer tokenet til Key Vault.</p>
+          <p>Legg verdiene i <code>.env</code> i agentrepoet. Behold <code>GH_TOKEN</code> og <code>ANTHROPIC_API_KEY</code> fra Lab 1. Kjør gjerne <code>--dry-run</code> på nytt før deploy for å avsløre feil repo-tilgang uten API-kall. Workeren trenger Contents, Issues og Pull requests read/write mot Oslo Live; Azure kopierer tokenet til Key Vault. Dette er første gang tokenets skrive-tilgang brukes i kursflyten.</p>
           <pre>RESOURCE_GROUP=rg-mini-kari
 NAME=kari
+ACR_NAME=acrmininilsnovanet2
+ACR_RESOURCE_GROUP=rg-mininils-shared
+ACR_PULL_IDENTITY_RESOURCE_ID=/subscriptions/821c1e3e-f764-4d36-911a-a23a80dfa197/resourceGroups/rg-mininils-shared/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id-mininils-acr-pull
 WEBHOOK_SECRET=&lt;felles hemmelighet fra kurslederen&gt;</pre>
           <p class="small"><code>NAME</code> brukes i ressursnavnene. <code>AGENT_NAME</code> bestemmer etiketten agenten lytter etter.</p>
         </div>
@@ -106,7 +112,7 @@ WEBHOOK_SECRET=&lt;felles hemmelighet fra kurslederen&gt;</pre>
           <p class="meta">Infrastruktur og bilder</p>
           <h3>Kjør deploy</h3>
           <pre>./deploy.sh</pre>
-          <p>Skriptet deployer først infrastrukturen med plassholderbilde, bygger Receiver og Worker i Azure Container Registry med <code>az acr build</code>, og deployer deretter med de ekte bildene.</p>
+          <p>Skriptet deployer først dine ressurser med plassholderbilde, bygger Receiver og Worker som namespacede images i kursets felles Azure Container Registry med <code>az acr build</code>, og deployer deretter med de ekte bildene. ACR-et opprettes én gang av kurslederen.</p>
           <p class="small">Ingen Docker lokalt. Noter URL-en til mottaket og åpne <code>infra/main.bicep</code> mens bygget kjører.</p>
         </div>
       </article>
@@ -126,7 +132,7 @@ WEBHOOK_SECRET=&lt;felles hemmelighet fra kurslederen&gt;</pre>
         <div>
           <p class="meta">Trigger</p>
           <h3>Merk en issue med agentetiketten</h3>
-          <p>Åpne <a href="https://github.com/novanet/workshop.oslo-live/issues" target="_blank" rel="noopener">GitHub Issues</a>, velg en ledig oppgave kurslederen har anbefalt, og sett etiketten til navnet fra deployen. Receiveren mottar alle hendelser, men sender bare dine videre.</p>
+          <p>Åpne <a href="https://github.com/novanet/workshop.oslo-live/issues" target="_blank" rel="noopener">GitHub Issues</a>, velg en ledig oppgave kurslederen har anbefalt, og sett etiketten til navnet fra deployen. Receiveren mottar alle hendelser, men sender bare dine videre. Ikke tildel issue, skriv startkommentar eller opprett PR selv; workeren gjør dette fra Azure.</p>
           <pre>az containerapp job execution list `
   -g $RESOURCE_GROUP -n caj-$NAME-worker -o table</pre>
           <p class="small">KEDA sjekker køen hvert 30. sekund, så opptil 30 sekunders venting er normalt.</p>
@@ -142,9 +148,20 @@ WEBHOOK_SECRET=&lt;felles hemmelighet fra kurslederen&gt;</pre>
   -g $RESOURCE_GROUP -n caj-$NAME-worker `
   --container worker --follow</pre>
           <p>Lukk laptopen mens jobben kjører. PR-en skal komme fra workeren i Azure, ikke fra terminalen din.</p>
-          <div class="callout"><b>Mellommål</b>En merket issue har gitt en pull request som er opprettet av Azure-jobben. Vis kjøringen i Azure-portalen før du går videre.</div>
+          <div class="callout"><b>Mellommål</b>En merket issue er tildelt av agenten, har fått agentens start/sluttkommentarer, og har gitt en pull request som er opprettet av Azure-jobben. Vis kjøringen i Azure-portalen før du går videre.</div>
         </div>
       </article>
+    </div>
+  </section>
+
+  <section>
+    <h2>Valgfritt: bygg fra GitHub Actions</h2>
+    <p class="intro">Starter-kitet inneholder en workflow som kan bygge og rulle ut fra deltakerrepoet, uten Docker eller Azure-passord i GitHub.</p>
+    <div class="grid">
+      <div class="card"><h3>1. Opprett infrastrukturen</h3><p>Kjør <code>./deploy.sh --infra</code> én gang lokalt. Da opprettes dine Container Apps-ressurser med plassholderbildet.</p></div>
+      <div class="card"><h3>2. Kurslederen konfigurerer OIDC</h3><p>Kurslederen konfigurerer alle repoene samlet med <code>scripts/setup-participant-actions.sh participants.txt</code>. Du skal ikke kjøre Azure-oppsett selv. Repoet får en egen identitet med <code>AcrPush</code>, <code>Container Registry Tasks Contributor</code> og tilgang til din ressursgruppe.</p></div>
+      <div class="card"><h3>3. Legg inn GitHub-verdier</h3><p>Legg <code>AZURE_CLIENT_ID</code> som repository variable (det er ikke et passord), og <code>AZURE_RESOURCE_GROUP</code>, <code>AZURE_NAME</code> og <code>AGENT_NAME</code> som repository variables.</p></div>
+      <div class="card"><h3>4. Push til main</h3><p>Workflowen bygger namespacede images i felles ACR og oppdaterer <code>ca-&lt;navn&gt;-receiver</code> og <code>caj-&lt;navn&gt;-worker</code>. <code>./deploy.sh</code> er fortsatt fallback.</p></div>
     </div>
   </section>
 

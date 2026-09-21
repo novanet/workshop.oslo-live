@@ -79,7 +79,7 @@
         </tbody>
       </table>
     </div>
-    <div class="callout warn"><b>Ikke bruk repository secrets</b><code>GH_TOKEN</code> lager du selv som et personlig fine-grained token på <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub</a>. Velg akkurat <code>novanet/workshop.oslo-live</code> under repository access; tokenet for agentrepoet ditt er ikke nok. Det legges i lokal <code>.env</code>; <a href="https://github.com/novanet/workshop.oslo-live/settings/secrets/agents" target="_blank" rel="noopener">Secrets/agents-siden</a> er ikke riktig sted for lokal Lab 1.</div>
+    <div class="callout warn"><b>Ikke bruk repository secrets</b><code>GH_TOKEN</code> lager du selv som et personlig fine-grained token på <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub</a>. Velg akkurat <code>novanet/workshop.oslo-live</code> under repository access; tokenet for agentrepoet ditt er ikke nok. Lab 1 bruker tokenet bare i lesende dry-run. Lab 2 trenger read/write for at Azure-workeren skal tildele issue, skrive kommentarer, pushe og opprette PR. Det legges i lokal <code>.env</code>; <a href="https://github.com/novanet/workshop.oslo-live/settings/secrets/agents" target="_blank" rel="noopener">Secrets/agents-siden</a> er ikke riktig sted for lokal Lab 1.</div>
   </section>
 
   <section>
@@ -106,7 +106,7 @@
           <h3>Lagre verdien lokalt</h3>
           <pre>cp .env.example .env
 GH_TOKEN=github_pat_...</pre>
-          <p>GitHub viser tokenverdien bare én gang. Ikke legg den i repository secrets, kode, issue, PR eller skjermbilde. Hvis workeren logger <code>addComment</code> eller <code>replaceActorsForAssignable</code>, kontroller først at tokenet gjelder riktig repo, deretter Issues write og brukerens skrivetilgang.</p>
+          <p>GitHub viser tokenverdien bare én gang. Ikke legg den i repository secrets, kode, issue, PR eller skjermbilde. Hvis Azure-workeren logger <code>addComment</code> eller <code>replaceActorsForAssignable</code>, kontroller først at tokenet gjelder riktig repo, deretter Issues write og brukerens skrivetilgang.</p>
         </div>
       </div>
     </div>
@@ -122,7 +122,7 @@ az --version
 node --version
 claude --version
 dotnet build</pre>
-    <div class="callout"><b>Ferdig</b>Du er klar for Lab 1 når verktøyene svarer, løsningen bygger grønt og kurslederen har gitt deg <code>ANTHROPIC_API_KEY</code>. Test GitHub-tokenet uten API-kall med <code>dotnet run --project src/Worker -- --issue 1 --repo novanet/workshop.oslo-live --dry-run</code>.</div>
+    <div class="callout"><b>Ferdig</b>Du er klar for Lab 1 når verktøyene svarer, løsningen bygger grønt og kurslederen har gitt deg <code>ANTHROPIC_API_KEY</code>. Test GitHub-tokenet uten API-kall med <code>dotnet run --project src/Worker -- --issue 1 --repo novanet/workshop.oslo-live --dry-run</code>. Ingen lokal issue-kjøring skal reservere, kommentere eller opprette PR; det skjer først fra Azure i Lab 2.</div>
   </section>
 
   <section>

@@ -397,7 +397,7 @@
 <section>
   <div class="eyebrow">Kort svar</div>
   <h2>Hvordan du klarer dette på én dag</h2>
-  <p class="intro">Deltakerne får ferdige byggeklosser og en tekstlig oppskrift. Målet er en fungerende agent lokalt, så i skyen, og til slutt en som gjør noe de selv har bestemt. Derfor styres dagen etter sjekkpunkter, ikke klokkeslett.</p>
+  <p class="intro">Deltakerne får ferdige byggeklosser og en tekstlig oppskrift. Målet er en fungerende agent lokalt, så i skyen, og til slutt en som gjør noe de selv har bestemt. Klokkeslettene følger administratorens program; sjekkpunktene viser hva laget skal ha levert underveis.</p>
   <div class="three">
     <div>
       <h3>Byggesett med oppskrift</h3>
@@ -419,7 +419,7 @@
   <h2>Etter kurset kan deltakerne</h2>
   <ol class="goals">
     <li><p>Tegne opp anatomien til en autonom utviklingsagent (trigger → kø → worker → verktøy → leveranse) og forklare hvorfor HTTP-mottaket og LLM-kjøringen er to separate kjøremiljøer.</p></li>
-    <li><p>Montere og kjøre en agentpipeline som tar en oppgave fra en issue, endrer kode i et repo, bygger, tester og åpner en pull request.</p></li>
+    <li><p>Montere og klargjøre en agentpipeline lokalt, og deretter la Azure-workeren ta en issue fra webhook til bygg, test og pull request.</p></li>
     <li><p>Deploye agenten til Azure som Container Apps Job med scale-to-zero, webhook-trigger og hemmeligheter i Key Vault, og lese loggene i Log Analytics.</p></li>
     <li><p>Styre agentens atferd med instruksjoner, skills og konvensjonsfil, og se effekten i resultat, tokens og kostnad.</p></li>
     <li><p>Legge inn kvalitetsporter (plan-kritikk, build/test, selvreview) og begrunne hva som bør automatiseres og hva som ikke bør.</p></li>
@@ -452,7 +452,7 @@
       <tr><td>Kø og trigger</td><td>Storage Queue + KEDA-scaler</td><td>PostgreSQL + ARM-start av jobben</td></tr>
       <tr><td>Worker</td><td>Container Apps Job, én oppgave og avslutt</td><td>Container Apps Job i batch-modus, samme prinsipp</td></tr>
       <tr><td>Motor</td><td><code>claude -p</code> med liste over lovlige verktøy</td><td>Copilot SDK med C#-verktøy</td></tr>
-      <tr><td>Steg</td><td>Ett i Lab 1, tre i Lab 3</td><td>Fem, pluss review med flere modeller</td></tr>
+      <tr><td>Steg</td><td>Fem faser: research, plan review, implement, self-review og build/deliver</td><td>Fem, pluss review-fanout med flere modeller</td></tr>
       <tr><td>Hemmeligheter</td><td>Key Vault via managed identity</td><td>Samme</td></tr>
     </tbody>
   </table>
@@ -461,90 +461,98 @@
 
 <section>
   <div class="eyebrow">Kjøreplan</div>
-  <h2>Dagen, styrt av sjekkpunkter</h2>
-  <p class="intro">Tre labber med økende avstand til laptopen. Bare start, lunsj, demo og slutt har klokkeslett. Labbene går til laget har nådd sjekkpunktet; i Lab 1 finnes et ferdig sjekkpunkt som redningsnett.</p>
+  <h2>Programmet følger faste tider</h2>
+  <p class="intro">Intro og den separate presentasjonen kommer først. Deretter følger Lab 1, Lab 2 og Lab 3 i rekkefølge, med pauser og lunsj på tidene fra administratoren. Sjekkpunktene gjør det tydelig hva laget skal ha levert før neste del.</p>
   <div class="runsheet">
 
     <div class="slot">
-      <div class="time">08:30<span class="dur">ca. 30 min</span></div>
+      <div class="time">08:30–09:00<span class="dur">ca. 30 min</span></div>
       <div>
-        <h3>Fra issue til pull request</h3>
-        <p><a href="presentasjon.html">Presentasjonen</a>. Hva deltakerne skal bygge og hvorfor. Nils Georg som konkret eksempel, arbeidsdelingen mellom kode og modell, hvor agenten og Oslo Live bor, hvordan begge deployes, og hva som skiller Mini-Nils fra et produksjonsoppsett.</p>
-        <div class="tags"><span class="tag">forelesning</span><span class="tag">LM 1</span><span class="tag">LM 5</span></div>
+        <h3>Intro + separat presentasjon</h3>
+        <p><a href="presentasjon.html">Presentasjonen</a> og den separate presentasjonen deler denne første halvtimen: formål, arkitektur, kjøreplan og eksempelet fra produksjon.</p>
+        <div class="tags"><span class="tag">intro</span><span class="tag">separat presentasjon</span></div>
       </div>
     </div>
 
     <div class="slot">
-      <div class="time">etterpå<span class="dur">til sjekkpunkt 1</span></div>
+      <div class="time">09:00–11:00<span class="dur">120 min</span></div>
       <div>
         <h3>Lab 1: Monter agenten</h3>
         <ul>
-          <li>Pakk ut <code>mini-nils.zip</code>, lag eget repo, legg nøklene i <code>.env</code>. Miljøsjekk med hjelperne på gulvet: <code>dotnet --version</code>, <code>gh --version</code>, <code>claude --version</code>.</li>
-          <li>Åpne <code>docs/lab1.md</code> og skjelettet i <code>Pipeline.cs</code>.</li>
-          <li>Implementer <code>RunStages</code> etter oppskriften og kjør <code>dotnet build</code> etter hvert steg.</li>
-          <li>Kjør agenten mot issue 1 og les diffen i pull requesten.</li>
+          <li>Pakk ut <code>mini-nils.zip</code>, lag eget repo og fyll inn <code>.env</code>.</li>
+          <li>Implementer <code>RunStages</code> etter oppskriften og bygg underveis.</li>
         </ul>
-        <div class="checkpoint"><b>Sjekkpunkt 1</b>Deltakerens egen pipeline har åpnet en pull request, bygget er grønt, og deltakeren kan forklare hva som er deterministisk kode og hvor modellen brukes.</div>
+        <div class="checkpoint"><b>Sjekkpunkt 1</b>Den lokale pipelinen bygger grønt, dry-run er ren, og laget kan forklare leveringsflyten uten å skrive til GitHub.</div>
         <div class="tags"><span class="tag">lab</span><span class="tag">sjekkpunkt: lab1</span><span class="tag">LM 2</span><span class="tag">LM 4</span></div>
       </div>
     </div>
 
     <div class="slot break">
-      <div class="time">11:15<span class="dur">45 min</span></div>
+      <div class="time">11:00<span class="dur">pause</span></div>
       <div>
-        <h3>Lunsj</h3>
-        <p>Lag som ikke har nådd sjekkpunkt 1, kjører <code>./sjekkpunkt.sh lab1</code> etter lunsj. Forsøket deres blir tatt vare på før den komplette pipelinen legges inn.</p>
+        <h3>Pause med lett servering</h3>
+        <p>Lab 1 fortsetter etter pausen.</p>
       </div>
     </div>
 
     <div class="slot">
-      <div class="time">når klar<span class="dur">til sjekkpunkt 2</span></div>
+      <div class="time">11:15–12:15<span class="dur">60 min</span></div>
+      <div>
+        <h3>Lab 1: nå sjekkpunktet</h3>
+        <ul>
+          <li>Kjør dry-run mot issue 1 og gå gjennom at lokal kjøring ikke reserverer, kommenterer eller oppretter PR.</li>
+          <li>Bruk <code>./sjekkpunkt.sh lab1</code> som redningsnett hvis laget trenger en fungerende baseline.</li>
+        </ul>
+        <div class="checkpoint"><b>Før lunsj</b>Lagene skal enten ha nådd sjekkpunkt 1 eller ha en fungerende baseline å ta med videre.</div>
+      </div>
+    </div>
+
+    <div class="slot break">
+      <div class="time">12:15–13:00<span class="dur">lunsj</span></div>
+      <div>
+        <h3>Felles lunsj</h3>
+        <p>Etter lunsj flyttes samme agent til Azure; der skjer første virkelige issue-tildeling, kommentar og PR.</p>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="time">13:00–14:00<span class="dur">60 min</span></div>
       <div>
         <h3>Lab 2: Til skyen</h3>
         <ul>
-          <li><code>./deploy.sh</code> mot lagets ressursgruppe: Bicep for mottak, Storage Queue, Container Apps-miljø og jobb, Key Vault og Container Registry.</li>
-          <li>Skriptet bygger bildene med <code>az acr build</code>. Ingen lokal Docker.</li>
-          <li>Registrer webhooken i Oslo Live. Merk en issue med <code>mini-&lt;navn&gt;</code>. Se jobben skalere fra null i portalen og loggen i Log Analytics.</li>
-          <li>Test at en feil hemmelighet gir <code>401</code>, endre <code>pollingInterval</code> i Bicep fra 30 til 15 og rull ut med <code>./deploy.sh --images</code>.</li>
-          <li>Lukk laptopen mens den jobber. Poenget er at den ikke trengs.</li>
+          <li><code>./deploy.sh</code> oppretter mottak, kø, jobb, Key Vault og logger.</li>
+          <li>Koble webhooken, merk en issue og se jobben starte fra null.</li>
+          <li>Test <code>401</code> og deploy en liten Bicep-endring på nytt.</li>
         </ul>
-        <div class="checkpoint"><b>Sjekkpunkt 2</b>En issue merket i GitHub gir en pull request fra Azure, og deltakeren kan vise både <code>401</code>-testen og den nye polling-verdien etter ny deploy.</div>
+        <div class="checkpoint"><b>Sjekkpunkt 2</b>En issue merket i GitHub gir en pull request fra Azure.</div>
         <div class="tags"><span class="tag">lab</span><span class="tag">sjekkpunkt 2</span><span class="tag">LM 3</span></div>
       </div>
     </div>
 
+    <div class="slot break">
+      <div class="time">14:00<span class="dur">pause</span></div>
+      <div>
+        <h3>Pause med lett servering</h3>
+        <p>Gjør klar siste endring og demo.</p>
+      </div>
+    </div>
+
     <div class="slot">
-      <div class="time">når klar<span class="dur">til sjekkpunkt 3</span></div>
+      <div class="time">14:15–15:00<span class="dur">45 min</span></div>
       <div>
         <h3>Lab 3: Målbar forbedring</h3>
-        <p>Lagene velger ett spor. Alle sporene bygger på det som kjører i skyen fra Lab 2. Lab 3 er valgfri: sprekker Lab 2 på tid, går vi rett til demo.</p>
-        <ul>
-          <li><strong>Kvalitetsporter:</strong> legg inn kontrollpunkter som må bestås før agenten går videre. Del kjøringen i research, implementer og selvreview. Planen sjekkes av en billigere modell før koding. Rødt bygg stopper PR-en.</li>
-          <li><strong>Skills og hukommelse:</strong> agenten skriver én lærdom til <code>memory.md</code> etter hver oppgave. Kjør samme oppgave tre ganger og se om den blir billigere.</li>
-          <li><strong>Sikkerhet:</strong> lesende og skrivende verktøyliste per steg. Plant en prompt-injeksjon i en issue og se hva som skjer.</li>
-          <li><strong>Praktisk forbedring:</strong> velg et konkret problem i agentens arbeidsflyt, mål det før og etter, og dokumenter effekten.</li>
-          <li><strong>Monitoreringsside:</strong> bruk den forhåndsopprettede Table Storage-tabellen <code>agentRuns</code> til sanert kjøringsstatus, og bygg en liten nettside som viser issues, status, pull requests og forbruk. Bruk et trygt statusendepunkt, oppdater automatisk og hold Azure-hemmeligheter ute av nettleseren.</li>
-        </ul>
-        <div class="checkpoint"><b>Sjekkpunkt 3</b>Agenten oppfører seg annerledes enn før, eller laget kan følge agentens livssyklus i en monitoreringsside og forklare sikkerhetsgrensen.</div>
+        <p>Velg én variabel, kjør samme type oppgave før og etter, og vis forskjellen. I tillegg til kvalitetsporter, hukommelse, sikkerhet, praktisk forbedring og monitorering kan laget velge guardrails, et kontinuerlig forbedrings-playbook eller gradert autonomi.</p>
+        <div class="checkpoint"><b>Sjekkpunkt 3</b>Én endring er målt og forklart, eller monitoreringen viser livssyklusen.</div>
         <div class="tags"><span class="tag">lab</span><span class="tag">sjekkpunkt 3</span><span class="tag">LM 4</span><span class="tag">LM 5</span><span class="tag">LM 6</span></div>
       </div>
     </div>
 
     <div class="slot">
-      <div class="time">15:00<span class="dur">20 min</span></div>
+      <div class="time">15:00–15:30<span class="dur">30 min</span></div>
       <div>
-        <h3>Demo: hvert lag viser agenten sin</h3>
-        <p>Hvert lag merker en issue live fra storskjermen og forteller hva de har endret, og hvorfor. Kartet viser om punktene kom på plass. Status står oppe som bonus, ikke som mål.</p>
-        <div class="tags"><span class="tag">demo</span></div>
-      </div>
-    </div>
-
-    <div class="slot">
-      <div class="time">15:20<span class="dur">10 min</span></div>
-      <div>
-        <h3>Oppsummering og veien videre</h3>
-        <p>Hva som skiller Mini-Nils fra Nils Georg i prod: review med flere modeller, mottakerbevissthet, dedup, integrasjonen mot Azure DevOps. Hva en levert PR faktisk koster. Hvor du starter hos egen kunde.</p>
-        <div class="tags"><span class="tag">LM 6</span></div>
+        <h3>Outro og demo</h3>
+        <p>Hvert lag viser oppgaven, PR-en, endringen og setningen «Forskjellen var X, og den kom av Y.»</p>
+        <div class="tags"><span class="tag">demo</span><span class="tag">oppsummering</span></div>
       </div>
     </div>
 
@@ -653,9 +661,9 @@
     <div class="risk"><div class="r">Webhooken når ikke fram.</div><div class="m">Vis «Recent deliveries» og redeliver i GitHub. Nødløsning: legg meldingen i køen manuelt fra portalen.</div></div>
     <div class="risk"><div class="r">Kostnad og rate limits.</div><div class="m">Egen nøkkel per agent med tak. Sonnet og Haiku i labbene, Opus bare i demo.</div></div>
     <div class="risk"><div class="r">Agenten gjør noe dumt i repoet.</div><div class="m">Alt går via pull request. Sensor eller en hjelper godkjenner, auto-merge merger. Liste over lovlige verktøy i headless-kjøringen, ingen skrivetilgang utenfor repoet. Slå på branch protection på main før kurset.</div></div>
-    <div class="risk"><div class="r">Lab 2 sprekker på tid.</div><div class="m">Lab 3 er valgfri. Slå den sammen med demo-runden og la lagene vise det de har.</div></div>
+    <div class="risk"><div class="r">Lab 2 sprekker på tid.</div><div class="m">Begrens Lab 3 til én liten, målbar endring, men behold sjekkpunktet og den korte demoen.</div></div>
     <div class="risk"><div class="r">Sensor er nede eller tar feil.</div><div class="m">Du og hjelperne godkjenner for hånd i GitHub; en menneskelig Approve teller like mye. Sjekk terminalvinduet den kjører i, og start den på nytt.</div></div>
-    <div class="risk"><div class="r">To agenter tar samme issue.</div><div class="m">Workeren sjekker først om noen andre er i gang eller har fått issuen tildelt, og lar den i så fall ligge. Reservasjonen går ut etter en time. Ender to likevel med PR, vinner den som merges først. I Lab 1 kjører alle issue 1 med <code>--skip-reservation</code>, men agentnavnet i branchnavnet hindrer at kjøringene overskriver hverandre.</div></div>
+    <div class="risk"><div class="r">Flere agenter tar samme issue.</div><div class="m">Det er tillatt: alle kan levere hver sin PR, første mergete PR vinner, og Sensor avviser konkurrerende åpne PR-er etterpå. Agentnavnet i branchnavnet hindrer at parallelle kjøringer overskriver hverandre.</div></div>
     <div class="risk"><div class="r">Kollektivlaget ser tomt ut.</div><div class="m">Ruter sender ikke sanntidsposisjoner til Entur. Bare et titalls kjøretøy rapporterer live i Oslo, mest flybusser. Si det på forhånd, så tror ingen agenten har feilet.</div></div>
   </div>
 </section>
@@ -663,7 +671,7 @@
 <div class="assume">
   <strong>Antakelser i planen.</strong> Si fra så justerer jeg.
   <ul>
-    <li>08:30 til 15:30, fysisk hos Novanet. Bare start, lunsj, demo og slutt er faste; labbene går etter sjekkpunkter.</li>
+    <li>08:30 til 15:30, fysisk hos Novanet. Pausene kl. 11:00 og 14:00 samt lunsj kl. 12:15 følger administratorens program.</li>
     <li>Azure og GitHub. GitHub fordi issuer og webhooks er raskest å sette opp, og alle har konto. Tabellen over viser mappingen til Azure DevOps for de som skal dit hos kunde.</li>
     <li>Starter-kit i .NET med Claude Code headless som motor. Orkestreringen er liten nok til at Node eller Python fungerer like godt om deltakerne er blandet.</li>
     <li>Én agent hver, alene eller to og to. Agentene heter Mini-deltaker: Mini-Kari, Mini-Ola. Åtte til tolv deltakere passer med to hjelpere.</li>

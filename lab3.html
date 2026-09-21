@@ -51,46 +51,64 @@
       <div class="card"><h3>C · Sikkerhet</h3><p>Test prompt-injeksjon fra en issue og stram inn verktøyprofilen.</p></div>
       <div class="card"><h3>D · Praktisk forbedring</h3><p>Velg et konkret problem i agentens arbeidsflyt, mål det før og etter, og dokumenter hva som faktisk ble bedre.</p></div>
       <div class="card"><h3>E · Monitoreringsside</h3><p>Bygg en liten nettside som viser oppgaver, kjøringsstatus, PR-er og forbruk uten å legge hemmeligheter i nettleseren.</p></div>
+      <div class="card"><h3>F · Guardrails</h3><p>Gjør lange kjøringer tryggere med stopp, responsgrenser, trygg push eller checkpoint.</p></div>
+      <div class="card"><h3>G · Playbook</h3><p>Gjør feil om til regler, synliggjør fremdrift og skriv kortere instruksjoner agenten kan handle på.</p></div>
+      <div class="card"><h3>H · Gradert autonomi</h3><p>Definer hvilke endringer som krever menneskelig review, og hvilke lavrisikoendringer som kan gå videre med grønne porter.</p></div>
     </div>
   </section>
 
   <section>
     <h2>Spor A: Kvalitetsporter</h2>
-    <p class="intro">En kvalitetsport er et kontrollpunkt som må være bestått før pipelinen får gå videre. Bytt <code>stages</code> i <code>agent/stages.json</code> og sammenlign én stage med flere stages. Prompt-filene ligger allerede i <code>agent/prompts/</code>.</p>
+    <p class="intro">En kvalitetsport er et kontrollpunkt som må være bestått før pipelinen får gå videre. Starter-kitet har fem faser: research, plan review, implement, self-review og build/deliver. De fire modellfasene bruker ulike Claude-modeller; build/deliver er deterministisk worker-kode.</p>
     <pre>"stopOnVerifyFailure": true,
 "stages": [
   {
     "name": "research",
     "prompt": "research.md",
     "model": "claude-opus-5",
-    "allowedTools": ["Read", "Glob", "Grep"],
+    "allowedTools": ["Read", "Glob", "Grep",
+      "Bash(git diff:*)", "Bash(git log:*)", "Bash(git show:*)"],
     "maxTurns": 25,
     "timeoutMinutes": 8
   },
   {
+    "name": "plan-review",
+    "prompt": "plan-review.md",
+    "model": "claude-haiku-4.5",
+    "allowedTools": ["Read", "Glob", "Grep"],
+    "maxTurns": 15,
+    "timeoutMinutes": 6
+  },
+  {
     "name": "implement",
     "prompt": "implement-from-plan.md",
+    "model": "claude-sonnet-5",
     "allowedTools": ["Read", "Glob", "Grep", "Edit", "Write",
-      "Bash(dotnet build:*)", "Bash(dotnet test:*)"],
+      "Bash(dotnet build:*)", "Bash(dotnet test:*)",
+      "Bash(git diff:*)", "Bash(git status:*)", "mcp__allemannsdata"],
     "maxTurns": 60,
     "timeoutMinutes": 15
   },
   {
     "name": "self-review",
     "prompt": "self-review.md",
+    "model": "claude-opus-5",
     "allowedTools": ["Read", "Glob", "Grep", "Edit",
-      "Bash(git diff:*)", "Bash(dotnet test:*)"],
+      "Bash(git diff:*)", "Bash(git status:*)",
+      "Bash(dotnet build:*)", "Bash(dotnet test:*)"],
     "maxTurns": 30,
     "timeoutMinutes": 10
   }
 ]</pre>
-    <p>Kjør issue 22, som er sammensatt nok til å vise forskjellen:</p>
-    <pre>dotnet run --project src/Worker -- `
-      --issue 22 --repo novanet/workshop.oslo-live --skip-reservation</pre>
+    <p>Merk issue 22 etter at Lab 2 er grønn. Den sammensatte oppgaven går
+      gjennom webhooken og Azure-workeren, slik at agenten selv reserverer,
+      kommenterer og leverer PR-en:</p>
+    <pre>gh issue edit 22 --repo novanet/workshop.oslo-live --add-label mini-kari</pre>
     <ul class="checklist">
       <li>Ble planen fulgt? Les forrige stage-output i loggen.</li>
+      <li>Stopper en plan som starter med <code>PLAN MANGLER</code> før implementering?</li>
       <li>Fant self-review noe? Den skal gi PASS/FAIL per akseptansekriterium.</li>
-      <li>Hva kostet tre stager mot én? Sammenlign forbrukstabellen i PR-ene.</li>
+      <li>Hva kostet fire modellsteg mot én? Sammenlign forbrukstabellen i PR-ene.</li>
     </ul>
   </section>
 
@@ -187,6 +205,38 @@ GET https://api.github.com/repos/novanet/workshop.oslo-live/issues/{nummer}/comm
       <li>Forklar én ting siden kan se, én ting den ikke kan se, og hvorfor.</li>
     </ol>
     <p><strong>Utvidelse:</strong> Legg til en tidslinje for <code>queued → running → pr-ready</code>, filtrering på status eller et lite diagram for kostnad per kjøring. Kjøringen skal komme fra <code>agentRuns</code>, ikke fra en hardkodet testverdi.</p>
+  </section>
+
+  <section>
+    <h2>Spor F: Guardrails og robusthet</h2>
+    <p class="intro">Gjør en lang eller uforutsigbar kjøring tryggere. Velg én guardrail og mål før og etter.</p>
+    <div class="grid">
+      <div class="card"><h3>Hard stop</h3><p>Senk <code>maxTurns</code> eller <code>timeoutMinutes</code> for én stage. Vis at kjøringen avsluttes kontrollert.</p></div>
+      <div class="card"><h3>Responsgrense</h3><p>Begrens stage-output som sendes videre eller publiseres, uten å skjule feilen i loggen.</p></div>
+      <div class="card"><h3>Trygg push</h3><p>Forklar hvordan <code>--force-with-lease</code>, agent-branch og branch protection begrenser skade.</p></div>
+      <div class="card"><h3>Checkpoint</h3><p>Lagre research- eller plan-output slik at en senere kjøring kan fortsette uten å starte helt på nytt.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Spor G: Playbook for kontinuerlig forbedring</h2>
+    <p class="intro">Bruk de samme vanene som gjør en juniorutvikler bedre: lær av feil, gjør fremdrift synlig og skriv instruksjoner agenten kan handle på.</p>
+    <div class="grid">
+      <div class="card"><h3>Post-mortem</h3><p>Gjør én konkret feil om til en regel i <code>conventions.md</code>, en prompt eller hukommelsen.</p></div>
+      <div class="card"><h3>Status</h3><p>Gjør stage, status, tid, tokens og kostnad synlig i monitoreringssporet eller PR-rapporten.</p></div>
+      <div class="card"><h3>Instruksjoner</h3><p>Skriv om en lang prompt til korte, bokstavelige handlingsregler og sammenlign samme issue før og etter.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Spor H: Tillit og gradert autonomi</h2>
+    <p class="intro">Ikke fjern mennesket fra loopen i kurset. Mål heller hvor mye autonomi som er forsvarlig.</p>
+    <ol class="checklist">
+      <li>Definer hva som alltid krever review, for eksempel sikkerhet, migreringer eller produksjonskonfigurasjon.</li>
+      <li>Definer lavrisikoendringer som kan få auto-merge når bygg, tester, branch protection og godkjenning er grønne.</li>
+      <li>Bruk statusdata til å vise rene merger, røde bygg og avvik per område.</li>
+    </ol>
+    <div class="callout warn"><b>Policy, ikke knapp</b>Målet er en eksplisitt regel for når agenten kan gå videre, ikke generell fjerning av human approval.</div>
   </section>
 
   <section>
