@@ -102,7 +102,7 @@ WEBHOOK_SECRET=...
 # Valgfritt
 AGENT_LABEL=
 AGENT_MENTION=
-CLAUDE_MODEL=sonnet</pre>
+CLAUDE_MODEL=claude-fable-5</pre>
     <div class="tablewrap">
       <table>
         <thead><tr><th>Variabel</th><th>Påkrevd</th><th>Hva den brukes til</th><th>Hvem lager eller leverer den</th></tr></thead>
@@ -190,15 +190,15 @@ az account list -o table</pre>
       <table>
         <thead><tr><th>Stage</th><th>Typisk tilgang</th><th>Hvorfor</th></tr></thead>
         <tbody>
-          <tr><td>Research</td><td><code>opus</code>; <code>Read</code>, <code>Glob</code>, <code>Grep</code></td><td>Forstå oppgaven og skrive en plan uten å endre kode.</td></tr>
-          <tr><td>Plan review</td><td><code>haiku</code>; lesing</td><td>Finne hull i planen billig; alt annet enn <code>PLAN GODKJENT</code> stopper kjøringen.</td></tr>
-          <tr><td>Implement</td><td><code>sonnet</code>; lesing, <code>Edit</code>, <code>Write</code>, bygg og test</td><td>Gjøre endringen etter planen.</td></tr>
-          <tr><td>Self-review</td><td><code>opus</code>; lesing, diff, Edit og test</td><td>Finne og rette feil før den deterministiske leveransen.</td></tr>
+          <tr><td>Research</td><td><code>claude-opus-5</code>; <code>Read</code>, <code>Glob</code>, <code>Grep</code></td><td>Forstå oppgaven og skrive en plan uten å endre kode.</td></tr>
+          <tr><td>Plan review</td><td><code>claude-haiku-4.5</code>; lesing</td><td>Finne hull i planen billig; alt annet enn <code>PLAN GODKJENT</code> stopper kjøringen.</td></tr>
+          <tr><td>Implement</td><td><code>claude-fable-5</code>; lesing, <code>Edit</code>, <code>Write</code>, bygg og test</td><td>Gjøre endringen etter planen.</td></tr>
+          <tr><td>Self-review</td><td><code>claude-opus-5</code>; lesing, diff, Edit og test</td><td>Finne og rette feil før den deterministiske leveransen.</td></tr>
           <tr><td>Build &amp; deliver</td><td>Deterministisk kode</td><td>Bygg, test, commit, push og PR uten modellskjønn.</td></tr>
         </tbody>
       </table>
     </div>
-    <p>GPT-modellene i noen sammenlignbare pipeline-tegninger kan ikke settes direkte inn her: denne starterkoden bruker <code>claude -p</code> og Anthropic-modeller. Modellvalget er likevel en eksplisitt stage-konfigurasjon i <code>agent/stages.json</code>. Der bruker vi Claude Code-aliasene <code>sonnet</code>, <code>haiku</code> og <code>opus</code>, slik at de peker på modeller kontoen faktisk har tilgang til.</p>
+    <p>GPT-modellene i noen sammenlignbare pipeline-tegninger kan ikke settes direkte inn her: denne starterkoden bruker <code>claude -p</code> og Anthropic-modeller. Modellvalget er likevel en eksplisitt stage-konfigurasjon i <code>agent/stages.json</code>. Her bruker vi modell-ID-er som må være tilgjengelige for kursnøkkelen, med <code>claude-fable-5</code> som standard.</p>
     <p>Minst mulig tilgang er et teknisk valg. Fjerner du <code>Write</code>, kan agenten fortsatt gjøre mye med <code>Edit</code>. Legger du til et bredt <code>Bash</code>-mønster, øker konsekvensen av en feil instruksjon.</p>
   </section>
 
