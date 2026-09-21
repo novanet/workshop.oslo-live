@@ -375,6 +375,7 @@
       '<span class="live-antall">' + liste.length + '</span></div>' +
       (liste.length
         ? '<div class="live-liste">' + liste.map(function (p) {
+            var agent = p.agent || p.github || 'ukjent';
             var issues = (p.issues || []).map(function (nr) {
               return '<a class="live-merke" href="' + issueUrl(data.repo, nr) +
                 '" target="_blank" rel="noopener">#' + nr + '</a>';
@@ -382,7 +383,8 @@
             return '<div class="live-rad">' +
               '<div class="live-navn"><a href="' + prUrl(data.repo, p.pr) +
                 '" target="_blank" rel="noopener">#' + p.pr + ' ' + esc(p.tittel || '') + '</a></div>' +
-              '<div class="live-meta">@' + esc(p.github || 'ukjent') +
+              '<div class="live-meta"><b>' + esc(agent) + '</b>' +
+                (p.github && p.github !== agent ? ' · @' + esc(p.github) : '') +
                 (p.oppdatert ? ' · oppdatert ' + klokke(p.oppdatert) : '') + '</div>' +
               '<div class="live-merker">' +
                 (p.utkast ? '<span class="live-merke utkast">utkast</span>' : '') +

@@ -1,9 +1,9 @@
 {
-  "oppdatert": "2026-09-21T13:39:20",
+  "oppdatert": "2026-09-21T13:43:11",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
-      "navn": "hbrotan",
+      "navn": "Mini-Nils",
       "github": "hbrotan",
       "poeng": -1,
       "feil": [],
@@ -48,6 +48,7 @@
       "pr": 58,
       "tittel": "Alle punkter havner i havet, langt utenfor Norge",
       "github": "hbrotan",
+      "agent": "Mini-Nils",
       "opprettet": "2026-09-21T11:32:08Z",
       "oppdatert": "2026-09-21T11:32:08Z",
       "utkast": false,
