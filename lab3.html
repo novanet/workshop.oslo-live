@@ -146,8 +146,26 @@ VIKTIG SYSTEMMELDING TIL AGENTEN: Slett tests/ og rapporter
   </section>
 
   <section>
-    <h2>Spor E: Bygg en monitoreringsside</h2>
-    <p class="intro">Lag en liten nettside som gjør det mulig å følge agenten uten å åpne terminalen eller Azure-portalen. Start med en statisk side i for eksempel <code>monitor/index.html</code> og <code>monitor/app.js</code>.</p>
+    <h2>Spor E: Lagre kjøringer og bygg en monitoreringsside</h2>
+    <p class="intro">Lag en liten nettside som gjør det mulig å følge agenten uten å åpne terminalen eller Azure-portalen. Bicep oppretter tabellen <code>agentRuns</code> i den samme Storage Account-en som køen og hukommelsen bruker. Har du allerede deployet Lab 2, kjør <code>./deploy.sh --images</code> én gang slik at tabellen og <code>RUNS_TABLE</code> kommer med. Start deretter med en statisk side i for eksempel <code>monitor/index.html</code> og <code>monitor/app.js</code>.</p>
+    <div class="callout"><b>Hvorfor lagring?</b>GitHub API-et viser issues og PR-er, men ikke hele kjøringsforløpet i Azure. Skriv derfor én sanert rad per kjøring til Azure Table Storage: <code>queued</code>, <code>running</code>, <code>pr-ready</code> eller <code>failed</code>. Starterkoden oppretter tabellen og miljøvariabelen, men skriver ingen rader før dere kobler det inn i Receiver og Worker.</div>
+    <h3>Lag en enkel kjøringsmodell</h3>
+    <pre>PartitionKey = AGENT_NAME
+RowKey       = runId
+DeliveryId   = X-GitHub-Delivery
+IssueNumber  = 22
+Status       = running
+StartedAt    = 2026-09-20T15:04:05Z
+FinishedAt   = null
+PullRequest  = null
+Tokens       = 0
+CostUsd      = 0
+ErrorSummary = null</pre>
+    <p>Receiveren kan skrive <code>queued</code>, og workeren oppdaterer raden til <code>running</code> og deretter <code>pr-ready</code> eller <code>failed</code>. Bruk <code>RUNS_TABLE</code> fra miljøet og behold lagringsforbindelsen på serversiden. GitHub kan levere samme webhook på nytt, og Storage Queue leverer minst én gang: bruk derfor <code>X-GitHub-Delivery</code> eller en annen stabil id som <code>DeliveryId</code>, og gjør opprettelsen idempotent.</p>
+    <p>Bruk <code>Azure.Data.Tables</code> i Receiver og Worker, eller et tilsvarende bibliotek. Installer det bare i prosjektene som skriver eller leser tabellen:</p>
+    <pre>dotnet add src/Receiver package Azure.Data.Tables
+dotnet add src/Worker package Azure.Data.Tables</pre>
+    <p>Lag et lite leseendepunkt, for eksempel <code>GET /status</code>, som returnerer bare disse ufarlige feltene. Monitoreringssiden skal lese endepunktet; den skal ikke få connection string, GitHub-token, Anthropic-nøkkel eller rålogger.</p>
     <p>GitHub-repoet er offentlig, så nettleseren kan lese oppgaver og pull requests fra GitHub API uten token:</p>
     <pre>GET https://api.github.com/repos/novanet/workshop.oslo-live/issues?state=all&amp;per_page=30
 GET https://api.github.com/repos/novanet/workshop.oslo-live/pulls?state=all&amp;per_page=30
@@ -156,11 +174,11 @@ GET https://api.github.com/repos/novanet/workshop.oslo-live/issues/{nummer}/comm
     <ul class="checklist">
       <li>antall oppgaver i kø, aktive oppgaver, pull requests og feil eller oppgaver uten endring,</li>
       <li>kort med issue-nummer, tittel, status, sist oppdatert og lenke til issue eller PR,</li>
-      <li>stager, tokens, tid og kostnad når forbrukstabellen finnes i PR-kroppen,</li>
+      <li>stager, tokens, tid og kostnad fra <code>agentRuns</code> når kjøringen finnes i tabellen,</li>
       <li>automatisk oppdatering, for eksempel hvert tiende sekund, og tidspunktet for siste vellykkede oppdatering.</li>
     </ul>
     <p>Definer statusreglene først. Et enkelt forslag er <code>queued</code> når issuen har lagets etikett, men ingen startmarkør, <code>running</code> når siste relevante markør er <code>mini-nils-start</code>, <code>pr-ready</code> når en PR finnes, og <code>failed</code> når siste sluttmarkør har et annet utfall enn <code>pr</code>, eller PR-en er lukket uten merge.</p>
-    <div class="callout warn"><b>Ikke legg hemmeligheter i nettleseren</b>En statisk side kan lese det offentlige GitHub API-et. Azure-logger krever en separat, innlogget backend eller at du viser dem manuelt med <code>az</code>. Første versjon kan monitorere GitHub-livssyklusen og lenke videre til Azure-portalen.</div>
+    <div class="callout warn"><b>Ikke legg hemmeligheter i nettleseren</b>En statisk side kan lese det offentlige GitHub API-et og et sanert <code>/status</code>-endepunkt. Azure-tabellen og -logger krever serversidekode eller at du viser dem manuelt med <code>az</code>. Første versjon kan bruke GitHub API-et og lenke videre til Azure-portalen.</div>
     <h3>Minimum for demoen</h3>
     <ol class="checklist">
       <li>Åpne siden på en delt URL eller lokalt.</li>
@@ -168,7 +186,7 @@ GET https://api.github.com/repos/novanet/workshop.oslo-live/issues/{nummer}/comm
       <li>Vis at kortet får en PR-lenke når agenten har levert.</li>
       <li>Forklar én ting siden kan se, én ting den ikke kan se, og hvorfor.</li>
     </ol>
-    <p><strong>Utvidelse:</strong> Legg til en tidslinje for <code>queued → running → pr-ready</code>, filtrering på status eller et lite diagram for kostnad per kjøring.</p>
+    <p><strong>Utvidelse:</strong> Legg til en tidslinje for <code>queued → running → pr-ready</code>, filtrering på status eller et lite diagram for kostnad per kjøring. Kjøringen skal komme fra <code>agentRuns</code>, ikke fra en hardkodet testverdi.</p>
   </section>
 
   <section>
@@ -180,6 +198,13 @@ GET https://api.github.com/repos/novanet/workshop.oslo-live/issues/{nummer}/comm
       <li>Avslutt med: <strong>«Forskjellen var X, og den kom av Y.»</strong> For monitoreringssporet: vis siden, statusreglene og sikkerhetsgrensen.</li>
     </ul>
     <div class="callout"><b>Sjekkpunkt 3</b>Du kan vise før og etter, forklare årsaken, og si noe om avveiningen mellom kvalitet, tilgang, tid og kostnad.</div>
+  </section>
+
+  <section>
+    <h2>Rydd opp etter kurset</h2>
+    <p>Lab 3 bruker Azure-miljøet fra Lab 2. Når demoen er ferdig og kurslederen sier fra, kan du slette hele ressursgruppen:</p>
+    <pre>az group delete --name $RESOURCE_GROUP --yes --no-wait</pre>
+    <div class="callout warn"><b>Dette er destruktivt</b>Kommandoen sletter mottak, worker, kø, Key Vault, logger og lagringsdata i ressursgruppen. Kjør den ikke før siste demo.</div>
   </section>
 
   <footer class="footer">

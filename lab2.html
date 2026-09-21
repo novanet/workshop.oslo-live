@@ -41,7 +41,7 @@
       <li>Du har en Azure-bruker, riktig subscription og en ressursgruppe fra kurslederen.</li>
       <li><code>GH_TOKEN</code> og <code>ANTHROPIC_API_KEY</code> fungerer i agentrepoet ditt. GitHub-tokenet må ha <strong>Contents</strong>, <strong>Issues</strong> og <strong>Pull requests</strong> read/write, samt <strong>Metadata</strong> read-only, på akkurat <code>novanet/workshop.oslo-live</code>. Anthropic-nøkkelen kommer normalt fra kurslederen; du skal ikke betale selv.</li>
       <li>Du har fått den felles <code>WEBHOOK_SECRET</code>-verdien fra kurslederen.</li>
-      <li><code>az</code>, <code>curl</code> og <code>jq</code> er tilgjengelige i terminalen.</li>
+      <li><code>az</code>, <code>curl</code> og <code>jq</code> er tilgjengelige i terminalen. <code>jq</code> er et lite kommandolinjeverktøy som leser JSON og plukker ut verdier fra deploy-resultatet.</li>
     </ul>
   </section>
 
@@ -49,11 +49,29 @@
     <h2>Dette deployer du</h2>
     <div class="grid">
       <div class="card"><h3>Receiver</h3><p>En Container App som validerer webhook-signaturen og legger en melding i Storage Queue. Den har <code>minReplicas: 0</code>.</p></div>
-      <div class="card"><h3>Queue</h3><p>Storage Queue holder oppgaven til KEDA ser meldingen og starter en jobbkø.</p></div>
+      <div class="card"><h3>Queue</h3><p>Storage Queue holder oppgaven til KEDA ser meldingen og starter en worker-kjøring.</p></div>
       <div class="card"><h3>Worker</h3><p>En Container Apps Job kloner repoet, kjører <code>claude -p</code>, bygger, tester og åpner PR.</p></div>
       <div class="card"><h3>Hemmeligheter</h3><p>GitHub-token, Anthropic-nøkkel og webhook-hemmelighet leses fra Key Vault med managed identity.</p></div>
     </div>
     <div class="callout"><b>Viktig skille</b>Issuen og PR-en bor i fellesrepoet. Receiver, worker, kø og hemmeligheter bor i din ressursgruppe og bygges fra ditt agentrepo.</div>
+  </section>
+
+  <section>
+    <h2>Hva er jq og KEDA?</h2>
+    <div class="grid">
+      <div class="card">
+        <h3><code>jq</code> leser JSON</h3>
+        <p><code>deploy.sh</code> lagrer Azure-output i <code>.deploy-outputs.json</code>. Kommandoen under henter bare URL-en fra feltet <code>receiverUrl.value</code>:</p>
+        <pre>jq -r .receiverUrl.value .deploy-outputs.json</pre>
+        <p><code>-r</code> betyr «raw»: skriv ut en vanlig tekststreng uten JSON-anførselstegn. <code>curl</code> bruker deretter URL-en til å teste mottaket.</p>
+      </div>
+      <div class="card">
+        <h3>KEDA starter jobben</h3>
+        <p>KEDA betyr <em>Kubernetes Event-driven Autoscaling</em>. Azure Container Apps bruker KEDA til å følge med på antall meldinger i Storage Queue og starte Container Apps Job når køen ikke er tom.</p>
+        <p>Jobben står normalt på null kjøringer. KEDA sjekker køen hvert 30. sekund, starter en kjøring når den finner en melding, og workeren henter én melding før den avslutter. Derfor er en liten forsinkelse normalt, og det finnes ingen worker som står og kjører hele tiden.</p>
+      </div>
+    </div>
+    <div class="callout"><b>Følg verdiene i Bicep</b><code>minExecutions: 0</code> gir scale-to-zero, <code>maxExecutions: 3</code> begrenser hvor mange kjøringer skalaen kan starte, og <code>pollingInterval: 30</code> bestemmer hvor ofte KEDA sjekker køen. KEDA er ikke selve workeren; den er mekanismen som starter den.</div>
   </section>
 
   <section>
@@ -100,6 +118,7 @@ WEBHOOK_SECRET=&lt;felles hemmelighet fra kurslederen&gt;</pre>
           <p>Du har ikke admin på fellesrepoet. Si fra når deployen er ferdig; kurslederen registrerer webhooken, lager etiketten og kobler URL-en til repoet.</p>
           <pre>curl "$(jq -r .receiverUrl.value .deploy-outputs.json)/"</pre>
           <p class="small">Svaret skal fortelle at Mini-Nils-mottaket lytter etter etiketten din, for eksempel <code>mini-kari</code>.</p>
+          <p class="small">Vil du aktivere svar på PR-mentions, sett <code>AGENT_MENTION=github-loginet-ditt</code> i <code>.env</code> før deploy. Bruk loginet som <code>GH_TOKEN</code> tilhører. Kurslederens webhook-skript registrerer da også <code>issue_comment</code>, <code>pull_request_review_comment</code> og <code>pull_request_review</code>.</p>
         </div>
       </article>
       <article class="step">
@@ -110,7 +129,8 @@ WEBHOOK_SECRET=&lt;felles hemmelighet fra kurslederen&gt;</pre>
           <p>Åpne <a href="https://github.com/novanet/workshop.oslo-live/issues" target="_blank" rel="noopener">GitHub Issues</a>, velg en ledig oppgave kurslederen har anbefalt, og sett etiketten til navnet fra deployen. Receiveren mottar alle hendelser, men sender bare dine videre.</p>
           <pre>az containerapp job execution list `
   -g $RESOURCE_GROUP -n caj-$NAME-worker -o table</pre>
-          <p class="small">KEDA kan bruke opptil 30 sekunder på å se meldingen.</p>
+          <p class="small">KEDA sjekker køen hvert 30. sekund, så opptil 30 sekunders venting er normalt.</p>
+          <div class="callout"><b>PR-mention</b>Skriv <code>@github-loginet-ditt</code> i en PR-kommentar eller inline review-kommentar. Agenten får kommentaren som en egen kømelding, leser PR-en uten å endre kode og svarer. Inline review-kommentarer får svar i samme tråd; en vanlig PR-kommentar får et nytt svar i PR-samtalen.</div>
         </div>
       </article>
       <article class="step">
@@ -172,9 +192,9 @@ WEBHOOK_SECRET=&lt;felles hemmelighet fra kurslederen&gt;</pre>
   </section>
 
   <section>
-    <h2>Rydd opp etter kurset</h2>
-    <p>Ikke slett ressursgruppen før kurslederen sier fra. Når alt er ferdig:</p>
-    <pre>az group delete --name $RESOURCE_GROUP --yes --no-wait</pre>
+    <h2>Behold miljøet til Lab 3</h2>
+    <p>Ikke slett ressursgruppen etter Lab 2. Lab 3 bygger videre på denne deployen og bruker samme Container Apps Job, Storage Queue, Key Vault, webhook og Azure-logger. Gjør eventuelle endringer i agenten lokalt først, og rull dem ut med <code>./deploy.sh --images</code>.</p>
+    <div class="callout warn"><b>Rydding skjer etter siste lab</b>Vent med <code>az group delete</code> til Lab 3 og demoen er ferdig, og kurslederen sier fra.</div>
   </section>
 
   <footer class="footer">

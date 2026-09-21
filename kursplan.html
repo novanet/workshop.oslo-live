@@ -523,7 +523,7 @@
           <li><strong>Skills og hukommelse:</strong> agenten skriver én lærdom til <code>memory.md</code> etter hver oppgave. Kjør samme oppgave tre ganger og se om den blir billigere.</li>
           <li><strong>Sikkerhet:</strong> lesende og skrivende verktøyliste per steg. Plant en prompt-injeksjon i en issue og se hva som skjer.</li>
           <li><strong>Praktisk forbedring:</strong> velg et konkret problem i agentens arbeidsflyt, mål det før og etter, og dokumenter effekten.</li>
-          <li><strong>Monitoreringsside:</strong> bygg en liten nettside som viser issues, status, pull requests og forbruk. Bruk det offentlige GitHub API-et, oppdater automatisk og hold Azure-hemmeligheter ute av nettleseren.</li>
+          <li><strong>Monitoreringsside:</strong> bruk den forhåndsopprettede Table Storage-tabellen <code>agentRuns</code> til sanert kjøringsstatus, og bygg en liten nettside som viser issues, status, pull requests og forbruk. Bruk et trygt statusendepunkt, oppdater automatisk og hold Azure-hemmeligheter ute av nettleseren.</li>
         </ul>
         <div class="checkpoint"><b>Sjekkpunkt 3</b>Agenten oppfører seg annerledes enn før, eller laget kan følge agentens livssyklus i en monitoreringsside og forklare sikkerhetsgrensen.</div>
         <div class="tags"><span class="tag">lab</span><span class="tag">sjekkpunkt 3</span><span class="tag">LM 4</span><span class="tag">LM 5</span><span class="tag">LM 6</span></div>

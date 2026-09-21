@@ -53,13 +53,14 @@
       </div>
       <div class="card">
         <h3>Lokalt miljø</h3>
-        <p>Installer .NET 10 SDK, Git, <code>gh</code>, Azure CLI, Node.js og Claude Code selv. Lab 2 trenger også <code>curl</code> og <code>jq</code>.</p>
+        <p>Installer .NET 10 SDK, Git, <code>gh</code>, Azure CLI, Node.js og Claude Code selv. Lab 2 trenger også <code>curl</code> og <code>jq</code>. <code>jq</code> leser JSON-filer fra Azure og plukker ut for eksempel mottaks-URL-en.</p>
       </div>
       <div class="card">
         <h3>Hvis noe er blokkert</h3>
         <p>Si fra før Lab 1. Codespaces eller en kursmaskin er fallback, slik at miljøoppsett ikke spiser tiden til oppgaven.</p>
       </div>
     </div>
+    <div class="callout"><b>KEDA i Lab 2</b>KEDA (<em>Kubernetes Event-driven Autoscaling</em>) følger med på Storage Queue og starter Azure-jobben når det ligger en melding der. Det gjør at workeren kan skalere til null når køen er tom i stedet for å kjøre hele tiden. Lab 2 forklarer hvordan polling-intervallet påvirker ventetiden.</div>
   </section>
 
   <section>
@@ -70,8 +71,10 @@
         <thead><tr><th>Tilgang</th><th>Når</th><th>Hvem leverer den</th><th>Hva du gjør</th></tr></thead>
         <tbody>
           <tr><td><code>ANTHROPIC_API_KEY</code></td><td>Lab 1</td><td>Kurslederen</td><td>Legg kursnøkkelen i lokal <code>.env</code>. Du skal normalt ikke betale selv; Claude.ai og Anthropic API er separate tjenester.</td></tr>
+          <tr><td><code>ANTHROPIC_WORKSPACE_ID</code></td><td>Standard i zip</td><td>Kurslederen</td><td>Kursets workspace-ID ligger i starter-kitet og brukes som fallback hvis en eldre <code>.env</code>-fil mangler variabelen. API-nøkkelen må ha tilgang til workspace-et.</td></tr>
           <tr><td><code>RESOURCE_GROUP</code></td><td>Lab 2</td><td>Kurslederen</td><td>Bruk ressursgruppen du får tildelt; ikke opprett en tilfeldig privat gruppe.</td></tr>
           <tr><td><code>WEBHOOK_SECRET</code></td><td>Lab 2</td><td>Kurslederen</td><td>Bruk samme verdi som kurslederen registrerer på GitHub-webhooken.</td></tr>
+          <tr><td><code>AGENT_MENTION</code></td><td>Valgfritt, Lab 2</td><td>Deltakeren</td><td>GitHub-login uten <code>@</code>. Aktiverer svar på mentions i PR-kommentarer og review-tråder.</td></tr>
           <tr><td>Azure subscription</td><td>Lab 2</td><td>Kurslederen</td><td>Logg inn med kurskontoen og velg riktig subscription med <code>az account show</code>.</td></tr>
         </tbody>
       </table>
@@ -125,7 +128,7 @@ dotnet build</pre>
   <section>
     <h2>Hvis betalingen eller nøkkelen stopper deg</h2>
     <p class="intro">Du skal normalt ikke kjøpe API-kreditt selv for kurset. Claude.ai-abonnement og Anthropic API-betaling er separate.</p>
-    <div class="callout warn"><b><code>Payment failed</code></b>Be kurslederen om kursnøkkelen fra Anthropic-workspace-et med kostnadstak. Ikke send betalingskort eller API-nøkkel i chat. Hvis workeren logger <code>Mangler eller ikke utfylt: ANTHROPIC_API_KEY</code>, legg nøkkelen i lokal <code>.env</code>. <code>--dry-run</code> kan fortsatt brukes uten nøkkel.</div>
+    <div class="callout warn"><b>Anthropic workspace-feil</b>Den nyeste starter-koden setter kursets workspace-ID automatisk hvis <code>.env</code> mangler variabelen. Hvis feilen fortsatt vises, hent den nyeste <code>mini-nils.zip</code> og kontroller at oppstartloggen sier at Anthropic workspace-ID er satt. API-nøkkelen må komme fra kurslederen og ha tilgang til workspace-et. Ikke send API-nøkkel i chat. <code>--dry-run</code> kan fortsatt brukes uten nøkkel.</div>
   </section>
 
   <section>

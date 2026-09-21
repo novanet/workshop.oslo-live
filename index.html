@@ -156,6 +156,61 @@
   .kjoering b { font-weight: 600; }
   .kjoering .hva { color: var(--muted); }
   .kjoering .tid { font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--muted); }
+  .tildelt .kjoering .prikk { background: var(--gull); }
+
+  .live-grid {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px; margin-bottom: 20px;
+  }
+  .live-panel {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+    padding: 18px 20px; min-width: 0;
+  }
+  .live-topp {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+    margin-bottom: 12px;
+  }
+  .live-tittel {
+    font-family: "IBM Plex Mono", monospace; font-size: 11.5px; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .live-antall {
+    font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--muted);
+    white-space: nowrap;
+  }
+  .live-liste { display: grid; gap: 9px; }
+  .live-rad {
+    border: 1px solid var(--line); border-radius: 9px; padding: 10px 12px;
+    min-width: 0;
+  }
+  .live-rad a { color: var(--accent); text-decoration: none; }
+  .live-rad a:hover { text-decoration: underline; }
+  .live-navn { font-weight: 600; overflow-wrap: anywhere; }
+  .live-meta {
+    color: var(--muted); font-family: "IBM Plex Mono", monospace; font-size: 11.5px;
+    margin-top: 3px;
+  }
+  .live-meta a { color: inherit; }
+  .live-merker { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 7px; }
+  .live-merke {
+    background: var(--accent-soft); color: var(--accent); border-radius: 999px;
+    font-family: "IBM Plex Mono", monospace; font-size: 11px; padding: 2px 7px;
+  }
+  .live-merke.utkast { background: var(--warn-soft); color: var(--warn); }
+  .live-tom { color: var(--muted); font-size: 14px; }
+  @media (max-width: 720px) {
+    .live-grid { grid-template-columns: 1fr; }
+  }
+
+  .score-topp {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+    margin: 8px 0 12px;
+  }
+  .score-topp h2 {
+    font-family: "Bricolage Grotesque", system-ui, sans-serif; font-size: 25px;
+    line-height: 1; margin: 0;
+  }
+  .score-topp span { color: var(--muted); font-size: 14px; }
 
   footer {
     margin-top: 26px; display: flex; gap: 10px; flex-wrap: wrap;
@@ -188,6 +243,10 @@
   </header>
 
   <div id="framdrift"></div>
+  <div class="live-grid">
+    <section id="tildelt" aria-live="polite"></section>
+    <section id="aapne" aria-live="polite"></section>
+  </div>
   <div id="kjoerer"></div>
 
   <div id="innhold">
@@ -212,6 +271,14 @@
     if (!iso) return '–';
     var d = new Date(iso);
     return isNaN(d) ? '–' : d.toLocaleTimeString('no-NO', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  }
+
+  function issueUrl(repo, nr) {
+    return 'https://github.com/' + encodeURI(repo || '') + '/issues/' + encodeURIComponent(nr);
+  }
+
+  function prUrl(repo, nr) {
+    return 'https://github.com/' + encodeURI(repo || '') + '/pull/' + encodeURIComponent(nr);
   }
 
   function rad(d) {
@@ -279,10 +346,58 @@
       }).join('') + '</div>';
   }
 
+  function tegnTildelt(data) {
+    var liste = data.tildelt || [];
+    var el = document.getElementById('tildelt');
+    el.innerHTML = '<div class="live-panel">' +
+      '<div class="live-topp"><span class="live-tittel">Tildelte issues</span>' +
+      '<span class="live-antall">' + liste.length + '</span></div>' +
+      (liste.length
+        ? '<div class="live-liste">' + liste.map(function (k) {
+            return '<div class="live-rad">' +
+              '<div class="live-navn"><a href="' + issueUrl(data.repo, k.issue) + '" target="_blank" rel="noopener">#' +
+                k.issue + ' ' + esc(k.navn || '') + '</a></div>' +
+              '<div class="live-meta">tildelt til @' + esc(k.github || 'ukjent') +
+                (k.oppdatert ? ' · oppdatert ' + klokke(k.oppdatert) : '') + '</div>' +
+              '</div>';
+          }).join('') + '</div>'
+        : '<div class="live-tom">Ingen åpne issues er tildelt akkurat nå.</div>') +
+      '</div>';
+  }
+
+  function tegnAapne(data) {
+    var liste = data.aapne || [];
+    var el = document.getElementById('aapne');
+    el.innerHTML = '<div class="live-panel">' +
+      '<div class="live-topp"><span class="live-tittel">Åpne pull requests</span>' +
+      '<span class="live-antall">' + liste.length + '</span></div>' +
+      (liste.length
+        ? '<div class="live-liste">' + liste.map(function (p) {
+            var issues = (p.issues || []).map(function (nr) {
+              return '<a class="live-merke" href="' + issueUrl(data.repo, nr) +
+                '" target="_blank" rel="noopener">#' + nr + '</a>';
+            }).join('');
+            return '<div class="live-rad">' +
+              '<div class="live-navn"><a href="' + prUrl(data.repo, p.pr) +
+                '" target="_blank" rel="noopener">#' + p.pr + ' ' + esc(p.tittel || '') + '</a></div>' +
+              '<div class="live-meta">@' + esc(p.github || 'ukjent') +
+                (p.oppdatert ? ' · oppdatert ' + klokke(p.oppdatert) : '') + '</div>' +
+              '<div class="live-merker">' +
+                (p.utkast ? '<span class="live-merke utkast">utkast</span>' : '') +
+                (issues || '<span class="live-merke">ingen koblet issue</span>') +
+              '</div>' +
+              '</div>';
+          }).join('') + '</div>'
+        : '<div class="live-tom">Ingen åpne pull requests akkurat nå.</div>') +
+      '</div>';
+  }
+
   function tegn(data) {
     var folk = data.deltakere || [];
     document.getElementById('oppdatert').textContent = 'oppdatert ' + klokke(data.oppdatert);
     tegnFramdrift(data);
+    tegnTildelt(data);
+    tegnAapne(data);
     tegnKjoerer(data);
 
     if (!folk.length) {
@@ -290,6 +405,7 @@
         '<div class="beskjed">Ingen pull requests ennå. Slipp agenten løs.</div>';
     } else {
       document.getElementById('innhold').innerHTML =
+        '<div class="score-topp"><h2>Poengtavle</h2><span>Poeng og kostnad per deltaker</span></div>' +
         '<div class="rull"><table>' +
           '<thead><tr>' +
             '<th>#</th><th>Agent</th><th>Løst</th><th>Bygg</th>' +

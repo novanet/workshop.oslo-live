@@ -1,7 +1,33 @@
 {
-  "oppdatert": "2026-09-18T09:07:42",
+  "oppdatert": "2026-09-21T13:39:20",
   "repo": "novanet/workshop.oslo-live",
-  "deltakere": [],
+  "deltakere": [
+    {
+      "navn": "hbrotan",
+      "github": "hbrotan",
+      "poeng": -1,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 0.234,
+      "tokens": 447346,
+      "sekunder": 65,
+      "pr": 1,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 1,
+      "utenPr": 0,
+      "bygg": [],
+      "plass": 1
+    }
+  ],
+  "kjoerer": [],
+  "main": {
+    "groent": true,
+    "siden": "2026-09-17T21:19:00Z",
+    "pr": null,
+    "kjoeringer": 13
+  },
   "produkt": {
     "testerBestatt": 6,
     "testerFeilet": 20,
@@ -9,6 +35,27 @@
     "antallIssuer": 57,
     "feilmelding": null
   },
+  "tildelt": [
+    {
+      "issue": 1,
+      "navn": "Alle punkter havner i havet, langt utenfor Norge",
+      "github": "hbrotan",
+      "oppdatert": "2026-09-21T11:35:17Z"
+    }
+  ],
+  "aapne": [
+    {
+      "pr": 58,
+      "tittel": "Alle punkter havner i havet, langt utenfor Norge",
+      "github": "hbrotan",
+      "opprettet": "2026-09-21T11:32:08Z",
+      "oppdatert": "2026-09-21T11:32:08Z",
+      "utkast": false,
+      "issues": [
+        1
+      ]
+    }
+  ],
   "regler": {
     "vanskelighet": [
       1,
@@ -18,7 +65,9 @@
       8
     ],
     "utkast": -1,
-    "perDollar": -1
+    "perDollar": -1,
+    "brekk": -2,
+    "fiks": 2
   },
   "potten": 179
 }

@@ -480,7 +480,7 @@
     <p class="ingress">Du får delene og en tekstlig oppskrift. I Lab 1 implementerer du pipelinen som kobler en issue til en pull request, uten å skrive GitHub- eller modellintegrasjonen fra bunnen.</p>
     <div class="kort-rad">
       <div class="kort"><span class="tall">1</span><span class="navn">Delene følger med</span><span class="om">GitHub, git, Claude Code, bygg, test, rapportering og Azure er ferdige komponenter.</span></div>
-      <div class="kort"><span class="tall">2</span><span class="navn">Du skriver flyten</span><span class="om"><code>Pipeline.cs</code> er et kompilérbart skjelett. Etter oppskriften implementerer du rekkefølgen, modellkallet og kontrollene.</span></div>
+      <div class="kort"><span class="tall">2</span><span class="navn">Du skriver flyten</span><span class="om">Etter oppskriften implementerer du rekkefølgen, modellkallet og kontrollene i pipelinen.</span></div>
       <div class="kort"><span class="tall">3</span><span class="navn">Agenten jobber i Oslo Live</span><span class="om">Et felles kart over Oslo med offentlige sanntidsdata. Agenten henter en issue og leverer en pull request.</span></div>
     </div>
     <div class="notis" style="margin-top:24px"><b>Nils Georg:</b> Azure DevOps, egne C#-verktøy og flere modellsteg. <b>Mini-Nils:</b> GitHub, Claude Code og ett steg til å begynne med. Begge følger samme løype fra oppgave til pull request.</div>
@@ -512,10 +512,10 @@
     <div class="kort-rad">
       <div class="kort"><span class="tall">1</span><span class="navn"><code>./deploy.sh</code></span><span class="om">Leser konfigurasjonen din og deployer Bicep til ressursgruppen du har fått.</span></div>
       <div class="kort"><span class="tall">2</span><span class="navn">Azure bygger bildene</span><span class="om"><code>az acr build</code> bygger mottak og worker. Du trenger ikke Docker lokalt.</span></div>
-      <div class="kort"><span class="tall">3</span><span class="navn">Ressursene starter fra null</span><span class="om">Container App mottar webhooken. Storage Queue og KEDA starter en Container Apps Job.</span></div>
+      <div class="kort"><span class="tall">3</span><span class="navn">Ressursene starter fra null</span><span class="om">Container App mottar webhooken. KEDA følger med på Storage Queue og starter en Container Apps Job når det finnes arbeid.</span></div>
       <div class="kort"><span class="tall">4</span><span class="navn">Nøkler ligger i Key Vault</span><span class="om">Mottak og worker leser dem med managed identity.</span></div>
     </div>
-    <div class="notis" style="margin-top:26px">Kurslederen kobler GitHub til mottaket ditt. Når en oppgave sendes til agenten, legger mottaket den i kø og svarer GitHub med en gang. KEDA starter jobben.</div>
+    <div class="notis" style="margin-top:26px"><b>Hvorfor webhook?</b> GitHub er stedet der oppgaven oppstår, mens agenten kjører i Azure. Webhooken sender en signert HTTP-beskjed når en issue eller <code>@mention</code> skjer; Receiver validerer beskjeden og legger jobben i kø. Uten webhook måtte en prosess spurt GitHub hele tiden, brukt ressurser og gitt forsinkelse. Med webhook kan mottaket og jobben skalere til null mellom oppgaver. Kurslederen kobler GitHub til mottaket ditt, og KEDA starter jobben når kømeldingen kommer.</div>
   </section>
 
   <!-- 11 Deploy av Oslo Live -------------------------------------------- -->
@@ -602,7 +602,6 @@
       <div class="kort"><span class="tall">2</span><span class="navn">PR fra Azure</span><span class="om">Deploy agenten, test sikkerhetsporten og start en oppgave fra GitHub mens laptopen er lukket.</span></div>
       <div class="kort"><span class="tall">3</span><span class="navn">En forklart forbedring</span><span class="om">Legg til en port, hukommelse, bedre sikkerhet eller en egen idé. Vis årsak og virkning.</span></div>
     </div>
-    <div class="notis" style="margin-top:26px">Faller du av, kjører du <code>./sjekkpunkt.sh lab1</code>. Forsøket ditt tas vare på, og du kan fortsette med Lab 2.</div>
   </section>
 
   <!-- 16 Lab 1 ----------------------------------------------------------- -->
@@ -616,6 +615,7 @@
       <li><b>Implementer <code>RunStages</code> og bygg etter hvert steg.</b> <span>Reservasjon, arbeidsområde, kontekst, modellsteg, kvalitetsporter og levering.</span></li>
       <li><b>Test først, kjør så.</b> <span><code>--dry-run</code> sjekker GitHub-oppsettet uten API-kall. Deretter kjører du issue 1 med <code>--skip-reservation</code>; sjekkpunktet er nådd når din egen pipeline har åpnet en pull request.</span></li>
     </ul>
+    <div class="notis" style="margin-top:22px"><b>Hvis du faller av i Lab 1:</b> Du skal fortsatt kunne delta videre. Start med et kompilérbart skjelett ved å kjøre <code>./sjekkpunkt.sh lab1</code>; da får du en fungerende baseline å lese, teste og bygge videre på i Lab 2.</div>
     <div class="lenker">
       <a class="lenke" href="https://github.com/novanet/workshop.oslo-live/issues" target="_blank" rel="noopener">Oslo Live <span class="mono">issuene</span></a>
       <a class="lenke" href="https://allemannsdata.com" target="_blank" rel="noopener">Allemannsdata <span class="mono">datakildene</span></a>
@@ -646,7 +646,7 @@
       <div class="kort"><span class="navn">Flere kvalitetsporter</span><span class="om">Legg inn kontrollpunkter før leveransen går videre. Del opp i research, implementering og review, og la bygg eller test stoppe leveransen.</span></div>
       <div class="kort"><span class="navn">Mindre kontekst</span><span class="om">Kort ned input, bytt modell eller reduser antall turer. Sammenlign kvalitet og tokens.</span></div>
       <div class="kort"><span class="navn">Strammere tilgang</span><span class="om">Skill mellom lesende og skrivende steg. Test hva som skjer med en uønsket instruksjon.</span></div>
-      <div class="kort"><span class="navn">Monitorering</span><span class="om">Bygg en side som viser issues, status, pull requests og forbruk uten å sende hemmeligheter til nettleseren.</span></div>
+      <div class="kort"><span class="navn">Monitorering</span><span class="om">Skriv sanert kjøringsstatus til Table Storage og bygg en side som viser issues, status, pull requests og forbruk uten å sende hemmeligheter til nettleseren.</span></div>
     </div>
     <div class="notis" style="margin-top:22px"><b>Sjekkpunkt 3:</b> Du kan vise forskjellen før og etter, eller vise monitoreringssiden og forklare statusreglene og sikkerhetsgrensen.</div>
   </section>
