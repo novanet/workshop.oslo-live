@@ -102,8 +102,7 @@ WEBHOOK_SECRET=...
 # Valgfritt
 AGENT_LABEL=
 AGENT_MENTION=
-CLAUDE_MODEL=claude-fable-5
-ANTHROPIC_API_CHECK_MODEL=claude-haiku-4.5</pre>
+CLAUDE_MODEL=claude-fable-5</pre>
     <div class="tablewrap">
       <table>
         <thead><tr><th>Variabel</th><th>Påkrevd</th><th>Hva den brukes til</th><th>Hvem lager eller leverer den</th></tr></thead>
@@ -121,7 +120,6 @@ ANTHROPIC_API_CHECK_MODEL=claude-haiku-4.5</pre>
           <tr><td><code>AGENT_LABEL</code></td><td>Nei</td><td>GitHub-etiketten som starter akkurat din agent.</td><td><strong>Azure lager den automatisk.</strong> La den stå tom. <code>deploy.sh</code> lager for eksempel <code>mini-kari</code> fra <code>AGENT_NAME</code>.</td></tr>
           <tr><td><code>AGENT_MENTION</code></td><td>Nei</td><td>GitHub-loginet som kan nevne agenten på en PR. Aktiverer read-only svarmodus.</td><td><strong>Du velger.</strong> Skriv loginet uten <code>@</code>, for eksempel <code>kari-hansen</code>. La stå tomt hvis mention-modus ikke skal brukes.</td></tr>
           <tr><td><code>CLAUDE_MODEL</code></td><td>Nei</td><td>Standardmodell for stages som ikke overstyrer modellen selv.</td><td><strong>Fallback.</strong> Starter-kitet velger modell per stage; denne variabelen brukes bare der <code>model</code> mangler i <code>stages.json</code>.</td></tr>
-          <tr><td><code>ANTHROPIC_API_CHECK_MODEL</code></td><td>Nei</td><td>Modellen for den korte lokale API-prechecken før skrivebeskyttelsesmeldingen.</td><td><strong>Rimelig standard.</strong> Bruker <code>claude-haiku-4.5</code> og påvirker ikke modellvalget i pipelinen.</td></tr>
         </tbody>
       </table>
     </div>
