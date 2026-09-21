@@ -55,6 +55,14 @@ public class GeoTester
     {
         Assert.True(Geo.IOslo(59.9139, 10.7522));
     }
+
+    [Fact]
+    public void Koordinater_kommer_i_geojson_rekkefolge_lengdegrad_forst()
+    {
+        var punkt = Geo.Punkt(59.9139, 10.7522);
+
+        Assert.Equal(new[] { 10.7522, 59.9139 }, punkt.Coordinates);
+    }
 }
 
 public class AllemannsdataTester
