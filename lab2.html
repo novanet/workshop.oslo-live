@@ -155,12 +155,12 @@ WEBHOOK_SECRET=&lt;felles hemmelighet fra kurslederen&gt;</pre>
   </section>
 
   <section>
-    <h2>Valgfritt: bygg fra GitHub Actions</h2>
+    <h2>Deploy fra GitHub Actions</h2>
     <p class="intro">Starter-kitet inneholder en workflow som kan bygge og rulle ut fra deltakerrepoet, uten Docker eller Azure-passord i GitHub.</p>
     <div class="grid">
       <div class="card"><h3>1. Opprett infrastrukturen</h3><p>Kjør <code>./deploy.sh --infra</code> én gang lokalt. Da opprettes dine Container Apps-ressurser med plassholderbildet.</p></div>
-      <div class="card"><h3>2. Kurslederen konfigurerer OIDC</h3><p>Kurslederen konfigurerer alle repoene samlet med <code>scripts/setup-participant-actions.sh participants.txt</code>. Du skal ikke kjøre Azure-oppsett selv. Repoet får en egen identitet med <code>AcrPush</code>, <code>Container Registry Tasks Contributor</code> og tilgang til din ressursgruppe.</p></div>
-      <div class="card"><h3>3. Legg inn GitHub-verdier</h3><p>Legg <code>AZURE_CLIENT_ID</code> som repository variable (det er ikke et passord), og <code>AZURE_RESOURCE_GROUP</code>, <code>AZURE_NAME</code> og <code>AGENT_NAME</code> som repository variables.</p></div>
+      <div class="card"><h3>2. Legg inn Azure-secret</h3><p>Legg Azure service-principalens komplette JSON som repository secret med navnet <code>AZURE_CREDENTIALS</code>.</p></div>
+      <div class="card"><h3>3. Legg inn GitHub-verdier</h3><p>Sett <code>AZURE_RESOURCE_GROUP</code>, <code>AZURE_NAME</code> og <code>AGENT_NAME</code> som repository variables.</p></div>
       <div class="card"><h3>4. Push til main</h3><p>Workflowen bygger namespacede images i felles ACR og oppdaterer <code>ca-&lt;navn&gt;-receiver</code> og <code>caj-&lt;navn&gt;-worker</code>. <code>./deploy.sh</code> er fortsatt fallback.</p></div>
     </div>
   </section>
