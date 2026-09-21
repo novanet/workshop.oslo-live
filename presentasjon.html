@@ -366,8 +366,8 @@
     <p class="ingress stor">Fra GitHub-issue til pull request — på én kursdag.</p>
     <div class="kort-rad" style="max-width:900px">
       <div class="kort"><span class="tall">1</span><span class="navn">Forstå flyten</span><span class="om">Se hva som skjer mellom webhook, kø, worker og PR.</span></div>
-      <div class="kort"><span class="tall">2</span><span class="navn">Bygg selv</span><span class="om">Monter pipelinen og styr modellens rammer.</span></div>
-      <div class="kort"><span class="tall">3</span><span class="navn">Sett i drift</span><span class="om">Deploy agenten til Azure og mål en forbedring.</span></div>
+      <div class="kort"><span class="tall">2</span><span class="navn">Bygg pipelinen</span><span class="om">Koble sammen stegene og bestem hva agenten får gjøre.</span></div>
+      <div class="kort"><span class="tall">3</span><span class="navn">Kjør i Azure</span><span class="om">Deploy agenten og følg en jobb fra GitHub.</span></div>
     </div>
     <p class="ingress" style="margin-top:24px">Hallstein Brøtan</p>
   </section>
@@ -375,22 +375,22 @@
   <!-- 2 Formål ----------------------------------------------------------- -->
   <section class="lysbilde">
     <p class="merkelapp">Formålet med kurset</p>
-    <h2>Du skal kunne forklare og kjøre hele løypa</h2>
+    <h2>Målet med dagen</h2>
     <div class="to-spalter">
       <div>
-        <p class="spalte-tittel">Når dagen er ferdig</p>
+        <p class="spalte-tittel">Ved slutten av dagen</p>
         <ul class="punkter">
           <li><b>Du har en agent du eier.</b> <span>Koden, instruksjonene og oppsettet ligger i ditt repo.</span></li>
-          <li><b>Du har sett den levere.</b> <span>En issue blir til en verifisert pull request.</span></li>
-          <li><b>Du kan styre den.</b> <span>Modell, verktøy, kontekst og kvalitetsporter er synlige valg.</span></li>
+          <li><b>Du har fått en PR.</b> <span>En issue er behandlet av agenten og levert til review.</span></li>
+          <li><b>Du kan endre den.</b> <span>Modell, verktøy og regler ligger i repoet ditt.</span></li>
         </ul>
       </div>
       <div>
-        <p class="spalte-tittel">Det vi øver på</p>
+        <p class="spalte-tittel">Dette øver vi på</p>
         <ul class="punkter">
-          <li><b>Arbeidsflyt, ikke chat.</b> <span>Agenten jobber asynkront i et avgrenset repo.</span></li>
-          <li><b>Kode rundt modellen.</b> <span>Trigger, git, bygg, test og PR styres deterministisk.</span></li>
-          <li><b>Målbar læring.</b> <span>Endre én ting og se hva som skjer med kvalitet, tid eller kostnad.</span></li>
+          <li><b>Fra issue til PR.</b> <span>Vi følger oppgaven fra GitHub til ferdig forslag.</span></li>
+          <li><b>Kode rundt modellen.</b> <span>Webhook, git, bygg, test og PR ligger i workeren.</span></li>
+          <li><b>Én forbedring.</b> <span>Du endrer én ting og ser hva det gjør med resultatet.</span></li>
         </ul>
       </div>
     </div>
@@ -399,23 +399,23 @@
   <!-- 3 Kjøreplan -------------------------------------------------------- -->
   <section class="lysbilde">
     <p class="merkelapp">Kjøreplan · 08:30–15:30</p>
-    <h2>Først forstå. Så bygge. Til slutt vise.</h2>
+    <h2>Dette skjer i løpet av dagen</h2>
     <div class="tidslinje">
       <div class="tidspunkt"><div class="tid">08:30–09:00</div><div><b>Intro</b><span>Ca. 30 min om kursets mål, arkitektur og kjøreplan.</span></div></div>
-      <div class="tidspunkt"><div class="tid">09:00–12:15</div><div><b>Lab 1 · monter pipelinen</b><span>Bygg lokalt, kjør dry-run og gjør agenten klar for skyen.</span></div></div>
+      <div class="tidspunkt"><div class="tid">09:00–12:15</div><div><b>Lab 1 · bygg pipelinen</b><span>Implementer lokalt, bygg og kjør dry-run. Ingen skriver til GitHub ennå.</span></div></div>
       <div class="tidspunkt pause"><div class="tid">11:00</div><div><b>Pause med lett servering</b><span>Ta en kort stopp før Lab 1 fortsetter.</span></div></div>
       <div class="tidspunkt pause"><div class="tid">12:15–13:00</div><div><b>Felles lunsj</b><span>Etter lunsj går agenten fra laptop til Azure.</span></div></div>
-      <div class="tidspunkt"><div class="tid">13:00–14:00</div><div><b>Lab 2 · flytt agenten til Azure</b><span>Webhook, kø, KEDA og Container Apps Job. Sjekkpunkt 2: PR fra skyen.</span></div></div>
+      <div class="tidspunkt"><div class="tid">13:00–14:00</div><div><b>Lab 2 · deploy agenten til Azure</b><span>Koble webhook, kø og jobb. Sjekkpunkt 2: PR fra skyen.</span></div></div>
       <div class="tidspunkt pause"><div class="tid">14:00–14:15</div><div><b>Pause med lett servering</b><span>Gjør klar siste endring og demo.</span></div></div>
-      <div class="tidspunkt"><div class="tid">14:15–15:00</div><div><b>Lab 3 · gjør forskjellen målbar</b><span>Velg én forbedring, kjør på nytt og sammenlign.</span></div></div>
-      <div class="tidspunkt"><div class="tid">15:00–15:30</div><div><b>Outro og demo</b><span>Vis én forskjell som betyr noe, og hva du tar med deg videre.</span></div></div>
+      <div class="tidspunkt"><div class="tid">14:15–15:00</div><div><b>Lab 3 · velg en forbedring</b><span>Endre én ting, kjør på nytt og sammenlign.</span></div></div>
+      <div class="tidspunkt"><div class="tid">15:00–15:30</div><div><b>Oppsummering og demo</b><span>Vis hva du har laget og hva du har lært.</span></div></div>
     </div>
   </section>
 
   <!-- 4 Arkitektur ------------------------------------------------------- -->
   <section class="lysbilde tett">
     <p class="merkelapp">Mini-Nils · arkitektur</p>
-    <h2>En issue starter en kortvarig jobb</h2>
+    <h2>Slik henger delene sammen</h2>
     <figure class="tegning">
       <svg viewBox="0 0 1200 300" role="img" aria-label="GitHub issue går via webhook, Receiver, Storage Queue, KEDA og Worker til pull request">
         <defs>
@@ -462,14 +462,14 @@
         <text x="1125" y="153" text-anchor="middle" class="under-tekst">diff + rapport</text>
         <text x="1125" y="170" text-anchor="middle" class="under-tekst">til review</text>
       </svg>
-      <figcaption>Receiveren svarer raskt på webhooken. Den lengre modellkjøringen skjer først når køen og KEDA starter workeren.</figcaption>
+      <figcaption>Webhooken skal svare raskt. Selve jobben starter først når meldingen ligger i køen.</figcaption>
     </figure>
   </section>
 
   <!-- 5 Hvor ting bor ---------------------------------------------------- -->
   <section class="lysbilde tett">
     <p class="merkelapp">Deployment · tre steder</p>
-    <h2>Agenten din, Azure og øvingsrepoet har ulike roller</h2>
+    <h2>Hvor ligger hva?</h2>
     <figure class="tegning">
       <svg viewBox="0 0 1100 300" role="img" aria-label="Deltakerens repo deployes til Azure og arbeider mot Oslo Live-repoet">
         <defs>
@@ -496,66 +496,66 @@
         <text x="795" y="163" class="under-tekst">oppgaver og kode agenten skal endre</text>
         <text x="795" y="184" class="under-tekst">PR-en blir reviewet her</text>
       </svg>
-      <figcaption>Du deployer agenten fra ditt eget repo. Agenten jobber på oppgaver i det felles Oslo Live-repoet, mens kjøringen skjer i din Azure-ressursgruppe.</figcaption>
+      <figcaption>Du har koden i ditt eget repo. Agenten jobber på oppgaver i Oslo Live, og kjører i ressursgruppen din i Azure.</figcaption>
     </figure>
   </section>
 
   <!-- 6 Webhook ---------------------------------------------------------- -->
   <section class="lysbilde tett">
     <p class="merkelapp">Triggeren · GitHub webhook</p>
-    <h2>Hvorfor starter jobben uten polling?</h2>
+    <h2>Hva skjer når GitHub sender en webhook?</h2>
     <div class="nummerert">
-      <div class="steg"><b>GitHub sender en hendelse</b><span>En issue får etiketten, eller en relevant @mention skjer.</span></div>
-      <div class="steg"><b>Receiveren validerer og køer</b><span>Signatur og etikett sjekkes; HTTP-svaret er raskt.</span></div>
-      <div class="steg"><b>KEDA starter jobben</b><span>Køen går fra 0 til 1, og Azure starter én kjøring.</span></div>
-      <div class="steg"><b>Workeren leverer</b><span>Clone, branch, Claude Code, bygg, test og pull request.</span></div>
+      <div class="steg"><b>GitHub sender en hendelse</b><span>En issue får agentens etikett, eller noen nevner agenten.</span></div>
+      <div class="steg"><b>Receiveren sjekker</b><span>Signaturen og etiketten sjekkes før oppgaven legges i kø.</span></div>
+      <div class="steg"><b>KEDA starter jobben</b><span>Når køen har en melding, starter Azure en kjøring.</span></div>
+      <div class="steg"><b>Workeren gjør jobben</b><span>Den kloner, endrer, bygger, tester og åpner en PR.</span></div>
     </div>
-    <div class="notis" style="margin-top:20px"><b>Resultat:</b> Laptopen kan være lukket. Azure kjører bare når GitHub faktisk har sendt en oppgave.</div>
+    <div class="notis" style="margin-top:20px"><b>Resultat:</b> Når webhooken er koblet til, trenger ikke laptopen din å være med.</div>
   </section>
 
   <!-- 7 Pipeline --------------------------------------------------------- -->
   <section class="lysbilde">
     <p class="merkelapp">Pipeline · fem faser</p>
-    <h2>Riktig modell til riktig jobb</h2>
+    <h2>Fem steg fra issue til PR</h2>
     <div class="pipeline-rad">
       <div class="pipeline-steg">
         <span class="nummer">1</span><b>Research</b>
-        <span>Finn relevant kode og skriv planen.</span>
+        <span>Finn relevant kode og lag en plan.</span>
         <span class="modell">claude-opus-5</span>
       </div>
       <div class="pipeline-steg">
         <span class="nummer">2</span><b>Plan review</b>
-        <span>En rimelig modell leter etter hull før kode skrives.</span>
+        <span>Sjekk planen før vi skriver kode.</span>
         <span class="modell">claude-haiku-4.5</span>
       </div>
       <div class="pipeline-steg">
         <span class="nummer">3</span><b>Implement</b>
-        <span>Skriv endringen etter den godkjente planen.</span>
+        <span>Gjør endringen i repoet.</span>
         <span class="modell">claude-sonnet-5</span>
       </div>
       <div class="pipeline-steg">
         <span class="nummer">4</span><b>Self-review</b>
-        <span>Les diffen, rett feil og kjør testene på nytt.</span>
+        <span>Se over diffen og rett feil.</span>
         <span class="modell">claude-opus-5</span>
       </div>
       <div class="pipeline-steg">
         <span class="nummer">5</span><b>Build &amp; deliver</b>
-        <span>Bygg, test, commit, push og åpne PR.</span>
+        <span>Bygg, test, push og opprett PR.</span>
         <span class="modell">kode, ikke LLM</span>
       </div>
     </div>
-    <div class="notis" style="margin-top:22px"><b>Viktig:</b> Mini-Nils kjører Claude Code, så modellene i konfigurasjonen er Claude-modeller. Build, test og PR-levering er deterministisk kode og skal ikke overlates til modellen.</div>
+    <div class="notis" style="margin-top:22px"><b>Husk:</b> Mini-Nils bruker Claude Code. Bygg, test og PR skjer i worker-koden, ikke som et valg modellen tar.</div>
   </section>
 
   <!-- 8 Lab 1 ------------------------------------------------------------ -->
   <section class="lysbilde">
     <p class="merkelapp">09:00–12:15 · sjekkpunkt 1</p>
-    <h2>Lab 1: monter pipelinen lokalt</h2>
-    <p class="ingress">Start med en jobbende agent på maskinen din. Du implementerer flyten, ikke GitHub-klienten eller modellmotoren.</p>
+    <h2>Lab 1: bygg pipelinen lokalt</h2>
+    <p class="ingress">Start med å koble sammen delene på maskinen din. GitHub-klienten og modellkallet følger med.</p>
     <div class="kort-rad">
       <div class="kort"><span class="tall">1</span><span class="navn">Gjør klart</span><span class="om"><code>mini-nils.zip</code>, eget repo, <code>.env</code> og en dry-run.</span></div>
-      <div class="kort"><span class="tall">2</span><span class="navn">Skriv flyten</span><span class="om">Implementer <code>RunStages</code>: reservasjon, kontekst, modellsteg og verifisering.</span></div>
-      <div class="kort"><span class="tall">3</span><span class="navn">Gjør klar</span><span class="om">Bygg, kjør dry-run og gå gjennom leveringsflyten uten å skrive til GitHub.</span></div>
+      <div class="kort"><span class="tall">2</span><span class="navn">Implementer flyten</span><span class="om">Koble sammen <code>RunStages</code>: kontekst, modellsteg og verifisering.</span></div>
+      <div class="kort"><span class="tall">3</span><span class="navn">Sjekk oppsettet</span><span class="om">Bygg og kjør dry-run. Lokal kjøring skal ikke skrive til GitHub.</span></div>
     </div>
     <div class="notis" style="margin-top:22px"><b>Sjekkpunkt 1:</b> Din egen <code>RunStages</code> bygger grønt, dry-run er ren, og du kan forklare hvordan workeren senere skal reservere issue, kommentere og åpne PR fra Azure. Direkte issue-kjøring er skrivebeskyttet.</div>
     <div class="notis" style="margin-top:12px"><b>Redningsnett:</b> <code>./sjekkpunkt.sh lab1</code> tar vare på forsøket ditt og legger inn en fungerende baseline.</div>
@@ -564,12 +564,12 @@
   <!-- 9 Lab 2 ------------------------------------------------------------ -->
   <section class="lysbilde">
     <p class="merkelapp">13:00–14:00 · sjekkpunkt 2</p>
-    <h2>Lab 2: flytt agenten til Azure</h2>
-    <p class="ingress">Den samme workeren skal nå starte fra GitHub, kjøre uten laptop og levere PR fra skyen.</p>
+    <h2>Lab 2: deploy agenten til Azure</h2>
+    <p class="ingress">Nå skal agenten starte fra GitHub og levere PR fra Azure uten at laptopen din er med.</p>
     <div class="kort-rad">
       <div class="kort"><span class="tall">1</span><span class="navn">Deploy</span><span class="om"><code>./deploy.sh</code> oppretter Receiver, kø, jobb, Key Vault og logger.</span></div>
-      <div class="kort"><span class="tall">2</span><span class="navn">Koble webhook</span><span class="om">Kurslederen peker Oslo Live mot mottaket ditt og etiketten din.</span></div>
-      <div class="kort"><span class="tall">3</span><span class="navn">Følg jobben</span><span class="om">Se KEDA starte jobben, les loggen og test en ugyldig hemmelighet med <code>401</code>.</span></div>
+      <div class="kort"><span class="tall">2</span><span class="navn">Koble webhook</span><span class="om">Kurslederen kobler Oslo Live til mottaket og etiketten din.</span></div>
+      <div class="kort"><span class="tall">3</span><span class="navn">Følg jobben</span><span class="om">Se jobben starte, les loggen og test at en feil hemmelighet gir <code>401</code>.</span></div>
     </div>
     <div class="notis" style="margin-top:22px"><b>Sjekkpunkt 2:</b> En issue merket i GitHub gir en pull request fra Azure. Vis også en liten Bicep-endring som er deployet på nytt.</div>
   </section>
@@ -577,48 +577,48 @@
   <!-- 10 Lab 3 ----------------------------------------------------------- -->
   <section class="lysbilde">
     <p class="merkelapp">14:15–15:00 · sjekkpunkt 3</p>
-    <h2>Lab 3: gjør agenten merkbart annerledes</h2>
-    <p class="ingress">Velg én variabel. Kjør samme type oppgave før og etter, og dokumenter hva som endret seg.</p>
+    <h2>Lab 3: velg en forbedring</h2>
+    <p class="ingress">Velg én ting du vil forbedre. Kjør samme type oppgave før og etter, og vis forskjellen.</p>
     <div class="kort-rad">
-      <div class="kort"><span class="navn">Kvalitetsporter</span><span class="om">Del opp i research, implementering og self-review. La rødt bygg stoppe leveransen.</span></div>
-      <div class="kort"><span class="navn">Skills og hukommelse</span><span class="om">Se om agenten lærer noe som gjør neste kjøring bedre eller billigere.</span></div>
-      <div class="kort"><span class="navn">Sikkerhet</span><span class="om">Skill lesende og skrivende verktøy. Test en instruksjon som kommer fra en issue.</span></div>
-      <div class="kort"><span class="navn">Monitorering</span><span class="om">Vis status, PR, tid og forbruk med sanerte kjøringsdata.</span></div>
+      <div class="kort"><span class="navn">Kvalitetsporter</span><span class="om">Legg inn kontroller mellom stegene, og la rødt bygg stoppe leveransen.</span></div>
+      <div class="kort"><span class="navn">Skills og hukommelse</span><span class="om">Se hva agenten tar med seg til neste kjøring.</span></div>
+      <div class="kort"><span class="navn">Sikkerhet</span><span class="om">Begrens verktøyene, og test en instruksjon som kommer fra en issue.</span></div>
+      <div class="kort"><span class="navn">Monitorering</span><span class="om">Vis status, PR, tid og forbruk på en enkel side.</span></div>
     </div>
-    <div class="notis" style="margin-top:22px"><b>Sjekkpunkt 3:</b> Du kan vise forskjellen før og etter — eller en monitoreringsside med tydelige statusregler. Flere spor: guardrails, playbook eller gradert autonomi.</div>
+    <div class="notis" style="margin-top:22px"><b>Sjekkpunkt 3:</b> Vis forskjellen før og etter, eller vis monitoreringssiden og forklar hvordan statusen beregnes. Du kan også velge stopp og grenser, lære av feilene eller bestemme når agenten skal få gå videre.</div>
   </section>
 
   <!-- 11 Sjekkpunkter ---------------------------------------------------- -->
   <section class="lysbilde">
     <p class="merkelapp">Slik holder vi kursen</p>
-    <h2>Tre leveranser, én rød tråd</h2>
+    <h2>Tre ting du skal vise</h2>
     <div class="skala">
-      <div class="trinn"><div class="verdi">1</div><div class="hva"><b>Lokal pipeline</b><span>RunStages → bygg → dry-run, uten GitHub-skriving.</span></div><div class="antall">Lab 1</div></div>
-      <div class="trinn"><div class="verdi">2</div><div class="hva"><b>Skyjobb</b><span>Webhook → Azure → tildeling, kommentarer og PR.</span></div><div class="antall">Lab 2</div></div>
-      <div class="trinn"><div class="verdi">3</div><div class="hva"><b>Målbar forbedring</b><span>En endring med en forklaring på årsak og virkning.</span></div><div class="antall">Lab 3</div></div>
+      <div class="trinn"><div class="verdi">1</div><div class="hva"><b>Lokal pipeline</b><span>RunStages bygger grønt, og dry-run skriver ikke til GitHub.</span></div><div class="antall">Lab 1</div></div>
+      <div class="trinn"><div class="verdi">2</div><div class="hva"><b>PR fra Azure</b><span>Webhook → Azure → agenten tildeler, kommenterer og oppretter PR.</span></div><div class="antall">Lab 2</div></div>
+      <div class="trinn"><div class="verdi">3</div><div class="hva"><b>En forbedring</b><span>En endring med en forklaring på hva som ble bedre.</span></div><div class="antall">Lab 3</div></div>
     </div>
-    <div class="notis" style="margin-top:22px"><b>Prioritet:</b> Nå sjekkpunktet før du pynter. Det følger med redningsnett og hjelpere hele veien.</div>
+    <div class="notis" style="margin-top:22px"><b>Prioritet:</b> Nå sjekkpunktet først. Hjelperne og redningsnettet er der hvis du trenger dem.</div>
   </section>
 
   <!-- 12 Avslutning ------------------------------------------------------ -->
   <section class="lysbilde">
     <p class="merkelapp">15:00–15:30 · outro</p>
-    <h2>Vis én forskjell som betyr noe</h2>
+    <h2>Oppsummering og demo</h2>
     <div class="to-spalter">
       <div>
         <p class="spalte-tittel">I demoen</p>
         <ul class="punkter">
-          <li><b>Vis oppgaven og PR-en.</b> <span>La diffen være beviset.</span></li>
-          <li><b>Vis endringen i agenten.</b> <span>Prompt, modell, verktøy eller port.</span></li>
-          <li><b>Avslutt med én setning.</b> <span>«Forskjellen var X, og den kom av Y.»</span></li>
+          <li><b>Vis oppgaven og PR-en.</b> <span>Vis kort hva agenten endret.</span></li>
+          <li><b>Vis hva du endret.</b> <span>Det kan være prompt, modell, verktøy eller en kontroll.</span></li>
+          <li><b>Fortell hva du fant ut.</b> <span>Hva ble bedre, og hva ville du jobbet videre med?</span></li>
         </ul>
       </div>
       <div>
         <p class="spalte-tittel">Dette tar du med deg</p>
         <ul class="punkter">
-          <li>En issue kan bli en reviewbar pull request.</li>
-          <li>Webhook, kø og worker gir en asynkron arbeidsflyt.</li>
-          <li>Grenser rundt modellen er en del av løsningen.</li>
+          <li>En issue kan bli en pull request.</li>
+          <li>Webhook, kø og worker gjør at jobben kan kjøre i Azure.</li>
+          <li>Reglene rundt modellen er en del av agenten.</li>
         </ul>
       </div>
     </div>

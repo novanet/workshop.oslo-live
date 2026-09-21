@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lab 1 · Monter agenten</title>
+<title>Lab 1 · Bygg pipelinen</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -24,10 +24,10 @@
 
   <header class="hero">
     <div class="eyebrow">Sjekkpunkt 1 · lokalt, uten levering</div>
-    <h1>Lab 1: Monter agenten</h1>
-    <p class="lede">Implementer forbindelsen fra GitHub-issue til pull request i <code>Pipeline.cs</code>, men test bare lokalt. Du får ferdige komponenter og en tekstlig oppskrift, men skriver selv orkestreringen.</p>
+    <h1>Lab 1: Bygg pipelinen</h1>
+    <p class="lede">Koble sammen delene fra GitHub-issue til pull request i <code>Pipeline.cs</code>, men test bare lokalt. Du får ferdige komponenter og en oppskrift, men skriver selv rekkefølgen.</p>
     <div class="facts">
-      <div class="fact"><b>Mål</b><span>En agentpipeline som er klar for Azure.</span></div>
+      <div class="fact"><b>Mål</b><span>En pipeline som er klar for Azure.</span></div>
       <div class="fact"><b>Arbeidssted</b><span>Ditt eget repo og din lokale devcontainer.</span></div>
       <div class="fact"><b>Ferdig når</b><span><code>RunStages</code> bygger grønt og dry-run er ren.</span></div>
     </div>
@@ -73,7 +73,7 @@ dotnet build</pre>
   </section>
 
   <section>
-    <h2>Test uten å starte agenten</h2>
+    <h2>Sjekk oppsettet først</h2>
     <p class="intro">Sjekk at issuen er tilgjengelig uten å klone repoet, bruke modellkall eller skrive noe til GitHub.</p>
     <pre>dotnet run --project src/Worker -- `
   --issue 1 `
@@ -84,21 +84,21 @@ dotnet build</pre>
   </section>
 
   <section>
-    <h2>Start med et kompilérbart skjelett</h2>
-    <p class="intro">Scriptet legger inn en skjelettfil med den ytterste <code>Run</code>-metoden og alle hjelpeklassene du trenger. <code>RunStages</code> er din oppgave.</p>
+    <h2>Start med skjelettet</h2>
+    <p class="intro">Scriptet legger inn en skjelettfil med den ytterste <code>Run</code>-metoden og hjelpeklassene du trenger. <code>RunStages</code> er din oppgave.</p>
     <pre>python setup-lab1.py
 dotnet build</pre>
     <p>Det som stod der fra før lagres i <code>.kurs/Pipeline.forsok.cs</code>. Ikke åpne sjekkpunktet ennå; det er den ferdige løsningen som skal brukes hvis du faller av.</p>
   </section>
 
   <section>
-    <h2>Oppskriften for <code>RunStages</code></h2>
-    <p class="intro">Implementer ett steg om gangen. Kjør <code>dotnet build</code> etter hvert steg. Oppskriften beskriver kontrakten, men ikke C#-løsningen.</p>
+    <h2>Slik gjør du det i <code>RunStages</code></h2>
+    <p class="intro">Ta ett steg om gangen. Kjør <code>dotnet build</code> etter hvert steg. Oppskriften beskriver hva som skal skje, men ikke C#-løsningen.</p>
     <div class="steps">
       <article class="step">
         <div class="step-number">1</div>
         <div>
-          <p class="meta">Issue-status · før modellkallet</p>
+          <p class="meta">Issue-status · før modellen</p>
           <h3>Kontroller at issuen er åpen</h3>
           <p>Når workeren kjører fra Azure, kaller du <code>Reservation.IsBusy(task, AgentName)</code>. Ved lukket issue kommenterer du og returnerer <code>0</code>; ellers kaller du <code>Reservation.Claim(task)</code>. Tildelingen er synlig, ikke eksklusiv: flere deltakere kan jobbe parallelt, og første mergete PR vinner.</p>
         </div>
@@ -106,7 +106,7 @@ dotnet build</pre>
       <article class="step">
         <div class="step-number">2</div>
         <div>
-          <p class="meta">Arbeidsområde · ren start</p>
+          <p class="meta">Arbeidsområde</p>
           <h3>Klon repoet og lag branch</h3>
           <p>Kall <code>Repository.Clone(task.Repo, workspace)</code>, lag <code>task.BranchName</code> med <code>CreateBranch</code>, logg <code>repo.Path</code> og kommenter <code>StartMarker(task)</code>. Modellen skal aldri jobbe direkte på <code>main</code>.</p>
         </div>
@@ -114,7 +114,7 @@ dotnet build</pre>
       <article class="step">
         <div class="step-number">3</div>
         <div>
-          <p class="meta">Kontekst · eksplisitt input</p>
+          <p class="meta">Kontekst</p>
           <h3>Bygg systemprompt og kontekst</h3>
           <p>Kall <code>InstallSkills()</code>, <code>ReadMemory()</code> og <code>BuildSystemPrompt(memory)</code>. Start <code>previousOutput</code> som en tom streng. Regler, konvensjoner og hukommelse skal være lesbar input.</p>
         </div>
@@ -122,32 +122,32 @@ dotnet build</pre>
       <article class="step">
         <div class="step-number">4</div>
         <div>
-          <p class="meta">Modellsteg · styrt tilgang</p>
+          <p class="meta">Modellsteg</p>
           <h3>Kjør <code>config.Stages</code></h3>
-          <p>For hvert steg velger du <code>stage.Model</code> eller <code>config.Model</code>, bygger prompt med <code>BuildPrompt</code>, kaller <code>ClaudeRunner.Run</code>, legger resultatet i <code>runs</code> og logger <code>LogUsage</code>. Starter-kitet viser research, plan review, implement og self-review med ulike Claude-modeller; build/deliver skjer deterministisk etterpå. Ved feil kommenterer du, bruker <code>EndMarker</code> og returnerer <code>1</code>.</p>
+          <p>For hvert steg velger du <code>stage.Model</code> eller <code>config.Model</code>, bygger prompt med <code>BuildPrompt</code>, kaller <code>ClaudeRunner.Run</code>, legger resultatet i <code>runs</code> og logger <code>LogUsage</code>. Starter-kitet viser research, plan review, implement og self-review med ulike Claude-modeller. Deretter gjør workeren bygg, test og levering. Ved feil kommenterer du, bruker <code>EndMarker</code> og returnerer <code>1</code>.</p>
         </div>
       </article>
       <article class="step">
         <div class="step-number">5</div>
         <div>
-          <p class="meta">Diff-port · ingen tom PR</p>
-          <h3>Krev en faktisk endring</h3>
+          <p class="meta">Endring · ingen tom PR</p>
+          <h3>Sjekk at det finnes en endring</h3>
           <p>Kall <code>repo.HasChanges()</code>. Ved tom diff kommenterer du siste svar, husker utfallet med <code>Remember</code>, legger ved forbruk og returnerer <code>0</code>.</p>
         </div>
       </article>
       <article class="step">
         <div class="step-number">6</div>
         <div>
-          <p class="meta">Verifisering · utenfor modellen</p>
-          <h3>Kjør bygg og test som en port</h3>
+          <p class="meta">Verifisering</p>
+          <h3>Kjør bygg og test</h3>
           <p>Kall <code>Verify(repo.Path)</code>. Når verifiseringen feiler og <code>StopOnVerifyFailure</code> er sann, kommenterer du <code>verifyLog</code>, husker utfallet og returnerer <code>2</code> uten PR.</p>
         </div>
       </article>
       <article class="step">
         <div class="step-number">7</div>
         <div>
-          <p class="meta">Leveranse · reviewbar PR</p>
-          <h3>Forbered commit, push og PR</h3>
+          <p class="meta">Leveranse</p>
+          <h3>Lever endringen</h3>
           <p>Kall <code>CommitAndPush</code>, bygg PR-teksten med <code>PrBody</code> og kall <code>CreatePullRequest</code> når workeren kjører fra Azure-køen. Bruk utkast når verifiseringen er rød, og aktiver auto-merge bare når den er grønn. Skriv sammendrag og husk utfallet.</p>
         </div>
       </article>
@@ -155,7 +155,7 @@ dotnet build</pre>
   </section>
 
   <section>
-    <h2>Kjør den lokale kontrollen</h2>
+    <h2>Nå sjekkpunkt 1</h2>
     <pre>dotnet build
 dotnet run --project src/Worker -- `
   --issue 1 `
@@ -166,7 +166,7 @@ dotnet run --project src/Worker -- `
   </section>
 
   <section>
-    <h2>Hvis du faller av</h2>
+    <h2>Hvis du trenger hjelp</h2>
     <p>Forsøket ditt blir tatt vare på før den ferdige løsningen kopieres inn:</p>
     <pre>./sjekkpunkt.sh lab1
 dotnet build</pre>
@@ -176,9 +176,9 @@ dotnet build</pre>
   </section>
 
   <section>
-    <h2>Hvis man blir tidlig ferdig</h2>
+    <h2>Hvis du blir tidlig ferdig</h2>
     <ul class="checklist">
-      <li>Flytt en kontroll og begrunn hvorfor den fortsatt er deterministisk.</li>
+      <li>Flytt en kontroll og forklar hvorfor den fortsatt skjer på samme måte.</li>
       <li>Endre hva som skjer når verifisering feiler.</li>
       <li>Logg en ekstra måling i PR-rapporten.</li>
       <li>Gi et modellsteg mindre verktøytilgang.</li>

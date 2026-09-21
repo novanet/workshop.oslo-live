@@ -384,7 +384,7 @@
 <header>
   <div class="eyebrow">Endagskurs for utviklere · Novanet</div>
   <h1>Bygg din egen kodeagent,</h1>
-  <p class="lede">Deltakerne bygger en autonom utviklingsagent som tar en oppgave fra en issue, endrer kode, bygger, tester og åpner en pull request, og de setter den i drift i Azure før dagen er omme. Modellen er det Hallstein og Jan har bygget for Cato i Nordic Corporate Bank.</p>
+  <p class="lede">Deltakerne bygger en kodeagent som tar en oppgave fra en issue, endrer kode, bygger, tester og åpner en pull request. Før dagen er omme kjører agenten i Azure.</p>
   <div class="facts">
     <div><div class="k">Tid</div><div class="v">08:30 til 15:30</div></div>
     <div><div class="k">Format</div><div class="v">Fysisk, hands-on, én agent hver, alene eller to og to</div></div>
@@ -396,7 +396,7 @@
 
 <section>
   <div class="eyebrow">Kort svar</div>
-  <h2>Hvordan du klarer dette på én dag</h2>
+  <h2>Slik gjennomfører vi dagen</h2>
   <p class="intro">Deltakerne får ferdige byggeklosser og en tekstlig oppskrift. Målet er en fungerende agent lokalt, så i skyen, og til slutt en som gjør noe de selv har bestemt. Klokkeslettene følger administratorens program; sjekkpunktene viser hva laget skal ha levert underveis.</p>
   <div class="three">
     <div>
@@ -404,8 +404,8 @@
       <p><code>mini-nils.zip</code> har ferdige deler for GitHub, git, Claude Code, bygg, test og Azure. <code>Pipeline.cs</code> er et kompilérbart skjelett, og <code>docs/lab1.md</code> beskriver kontrakten deltakerne skal implementere uten å kopiere en ferdig løsning.</p>
     </div>
     <div>
-      <h3>Harness som motor</h3>
-      <p>Workeren kjører Claude Code headless (<code>claude -p</code>) i et utsjekket repo. Claude Code har verktøyene for å lese, endre og kjøre. Tiden går til trigger, orkestrering, prompt, skills og kvalitetsporter.</p>
+      <h3>Workeren gjør jobben</h3>
+      <p>Workeren kjører Claude Code (<code>claude -p</code>) i repoet som skal endres. Koden rundt modellen tar imot oppgaven, lager branch, kjører bygg og test og oppretter PR.</p>
     </div>
     <div>
       <h3>Sjekkpunkt som følger med zippen</h3>
@@ -418,8 +418,8 @@
   <div class="eyebrow">Læringsmål</div>
   <h2>Etter kurset kan deltakerne</h2>
   <ol class="goals">
-    <li><p>Tegne opp anatomien til en autonom utviklingsagent (trigger → kø → worker → verktøy → leveranse) og forklare hvorfor HTTP-mottaket og LLM-kjøringen er to separate kjøremiljøer.</p></li>
-    <li><p>Montere og klargjøre en agentpipeline lokalt, og deretter la Azure-workeren ta en issue fra webhook til bygg, test og pull request.</p></li>
+    <li><p>Tegne opp hvordan en kodeagent henter en oppgave (trigger → kø → worker → verktøy → leveranse) og forklare hvorfor HTTP-mottaket og modellkjøringen er to separate kjøremiljøer.</p></li>
+    <li><p>Bygge og klargjøre en agentpipeline lokalt, og deretter la Azure-workeren ta en issue fra webhook til bygg, test og pull request.</p></li>
     <li><p>Deploye agenten til Azure som Container Apps Job med scale-to-zero, webhook-trigger og hemmeligheter i Key Vault, og lese loggene i Log Analytics.</p></li>
     <li><p>Styre agentens atferd med instruksjoner, skills og konvensjonsfil, og se effekten i resultat, tokens og kostnad.</p></li>
     <li><p>Legge inn kvalitetsporter (plan-kritikk, build/test, selvreview) og begrunne hva som bør automatiseres og hva som ikke bør.</p></li>
@@ -462,22 +462,22 @@
 <section>
   <div class="eyebrow">Kjøreplan</div>
   <h2>Programmet følger faste tider</h2>
-  <p class="intro">Intro og den separate presentasjonen kommer først. Deretter følger Lab 1, Lab 2 og Lab 3 i rekkefølge, med pauser og lunsj på tidene fra administratoren. Sjekkpunktene gjør det tydelig hva laget skal ha levert før neste del.</p>
+  <p class="intro">Vi starter med 30 minutter intro. Deretter følger Lab 1, Lab 2 og Lab 3 i rekkefølge, med pauser og lunsj på tidene fra administratoren. Sjekkpunktene viser hva laget skal ha levert før neste del.</p>
   <div class="runsheet">
 
     <div class="slot">
       <div class="time">08:30–09:00<span class="dur">ca. 30 min</span></div>
       <div>
-        <h3>Intro + separat presentasjon</h3>
-        <p><a href="presentasjon.html">Presentasjonen</a> og den separate presentasjonen deler denne første halvtimen: formål, arkitektur, kjøreplan og eksempelet fra produksjon.</p>
-        <div class="tags"><span class="tag">intro</span><span class="tag">separat presentasjon</span></div>
+        <h3>Intro</h3>
+        <p><a href="presentasjon.html">Presentasjonen</a> bruker denne første halvtimen på formål, arkitektur og kjøreplan.</p>
+        <div class="tags"><span class="tag">intro</span><span class="tag">30 min</span></div>
       </div>
     </div>
 
     <div class="slot">
       <div class="time">09:00–11:00<span class="dur">120 min</span></div>
       <div>
-        <h3>Lab 1: Monter agenten</h3>
+        <h3>Lab 1: Bygg pipelinen</h3>
         <ul>
           <li>Pakk ut <code>mini-nils.zip</code>, lag eget repo og fyll inn <code>.env</code>.</li>
           <li>Implementer <code>RunStages</code> etter oppskriften og bygg underveis.</li>
@@ -540,8 +540,8 @@
     <div class="slot">
       <div class="time">14:15–15:00<span class="dur">45 min</span></div>
       <div>
-        <h3>Lab 3: Målbar forbedring</h3>
-        <p>Velg én variabel, kjør samme type oppgave før og etter, og vis forskjellen. I tillegg til kvalitetsporter, hukommelse, sikkerhet, praktisk forbedring og monitorering kan laget velge guardrails, et kontinuerlig forbedrings-playbook eller gradert autonomi.</p>
+        <h3>Lab 3: Velg en forbedring</h3>
+        <p>Velg én ting å endre, kjør samme type oppgave før og etter, og vis forskjellen. Velg mellom kontroller, hukommelse, sikkerhet, praktisk endring, monitorering, stopp og grenser, læring av feil eller når agenten skal få gå videre.</p>
         <div class="checkpoint"><b>Sjekkpunkt 3</b>Én endring er målt og forklart, eller monitoreringen viser livssyklusen.</div>
         <div class="tags"><span class="tag">lab</span><span class="tag">sjekkpunkt 3</span><span class="tag">LM 4</span><span class="tag">LM 5</span><span class="tag">LM 6</span></div>
       </div>
