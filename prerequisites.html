@@ -70,16 +70,18 @@
       <table>
         <thead><tr><th>Tilgang</th><th>Når</th><th>Hvem leverer den</th><th>Hva du gjør</th></tr></thead>
         <tbody>
-          <tr><td><code>ANTHROPIC_API_KEY</code></td><td>Lab 1</td><td>Kurslederen</td><td>Legg kursnøkkelen i lokal <code>.env</code>. Du skal normalt ikke betale selv; Claude.ai og Anthropic API er separate tjenester.</td></tr>
+          <tr><td><code>ANTHROPIC_API_KEY</code></td><td>Lab 1 og 2</td><td>Kurslederen</td><td>Legg kursnøkkelen i lokal <code>.env</code> for dry-run og som repository secret for Azure-deploy. Du skal normalt ikke betale selv; Claude.ai og Anthropic API er separate tjenester.</td></tr>
           <tr><td><code>ANTHROPIC_WORKSPACE_ID</code></td><td>Standard i zip</td><td>Kurslederen</td><td>Kursets workspace-ID ligger i starter-kitet og brukes som fallback hvis en eldre <code>.env</code>-fil mangler variabelen. API-nøkkelen må ha tilgang til workspace-et.</td></tr>
-          <tr><td><code>RESOURCE_GROUP</code></td><td>Lab 2</td><td>Kurslederen</td><td>Bruk ressursgruppen du får tildelt; ikke opprett en tilfeldig privat gruppe.</td></tr>
-          <tr><td><code>WEBHOOK_SECRET</code></td><td>Lab 2</td><td>Kurslederen</td><td>Bruk samme verdi som kurslederen registrerer på GitHub-webhooken.</td></tr>
+          <tr><td>Azure-kursverdier</td><td>Lab 2</td><td>Starter-kitet</td><td>GitHub Actions bruker <code>rg-agentic-workshop</code>, felles ACR og pull-identitet automatisk.</td></tr>
+          <tr><td><code>WEBHOOK_SECRET</code></td><td>Lab 2</td><td>Kurslederen</td><td>Legg samme verdi som kurslederen registrerer på GitHub-webhooken, som repository secret.</td></tr>
+          <tr><td><code>AZURE_CREDENTIALS</code></td><td>Actions</td><td>Kurslederen</td><td>Repository secret med service-principalens komplette JSON. Workflowen bruker den til å opprette, bygge og deploye deltakerens ressurser.</td></tr>
           <tr><td><code>AGENT_MENTION</code></td><td>Valgfritt, Lab 2</td><td>Deltakeren</td><td>GitHub-login uten <code>@</code>. Aktiverer svar på mentions i PR-kommentarer og review-tråder.</td></tr>
           <tr><td>Azure subscription</td><td>Lab 2</td><td>Kurslederen</td><td>Logg inn med kurskontoen og velg riktig subscription med <code>az account show</code>.</td></tr>
         </tbody>
       </table>
     </div>
-    <div class="callout warn"><b>Ikke bruk repository secrets</b><code>GH_TOKEN</code> lager du selv som et personlig fine-grained token på <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub</a>. Velg akkurat <code>novanet/workshop.oslo-live</code> under repository access; tokenet for agentrepoet ditt er ikke nok. Lab 1 bruker tokenet bare i lesende dry-run. Lab 2 trenger read/write for at Azure-workeren skal tildele issue, skrive kommentarer, pushe og opprette PR. Det legges i lokal <code>.env</code>; <a href="https://github.com/novanet/workshop.oslo-live/settings/secrets/agents" target="_blank" rel="noopener">Secrets/agents-siden</a> er ikke riktig sted for lokal Lab 1.</div>
+    <div class="callout"><b>GitHub Actions-innstillinger før Lab 2</b><strong>Repository variable:</strong> <code>AGENT_NAME</code> (påkrevd), eventuelt <code>AGENT_MENTION</code> og <code>CLAUDE_MODEL</code>. <strong>Repository secrets:</strong> <code>AZURE_CREDENTIALS</code>, <code>GH_TOKEN</code>, <code>ANTHROPIC_API_KEY</code> og <code>WEBHOOK_SECRET</code> (alle påkrevd). Ingen andre variables eller secrets er nødvendige.</div>
+    <div class="callout"><b>Repo-scoped kurs-token</b><code>GH_TOKEN</code> lager du selv som et personlig fine-grained token på <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub</a>. Velg akkurat <code>novanet/workshop.oslo-live</code> under repository access; tokenet for agentrepoet ditt er ikke nok. Lab 1 bruker tokenet fra lokal <code>.env</code> i lesende dry-run. Til Lab 2 legges tokenet som repository secret <code>GH_TOKEN</code> i deltakerrepoet.</div>
   </section>
 
   <section>
@@ -106,7 +108,7 @@
           <h3>Lagre verdien lokalt</h3>
           <pre>cp .env.example .env
 GH_TOKEN=github_pat_...</pre>
-          <p>GitHub viser tokenverdien bare én gang. Ikke legg den i repository secrets, kode, issue, PR eller skjermbilde. Hvis Azure-workeren logger <code>addComment</code> eller <code>replaceActorsForAssignable</code>, kontroller først at tokenet gjelder riktig repo, deretter Issues write og brukerens skrivetilgang.</p>
+          <p>GitHub viser tokenverdien bare én gang. Legg den som repository secret med navnet <code>GH_TOKEN</code>; ikke legg den i kode, issue, PR eller skjermbilde. Hvis Azure-workeren logger <code>addComment</code> eller <code>replaceActorsForAssignable</code>, kontroller først at tokenet gjelder riktig repo, deretter Issues write og brukerens skrivetilgang.</p>
         </div>
       </div>
     </div>

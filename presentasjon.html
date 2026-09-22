@@ -523,7 +523,7 @@
         </defs>
         <line x1="330" y1="145" x2="385" y2="145" stroke="var(--accent)" stroke-width="2" marker-end="url(#pil-deploy)"></line>
         <line x1="715" y1="145" x2="770" y2="145" stroke="var(--accent)" stroke-width="2" marker-end="url(#pil-deploy)"></line>
-        <text x="335" y="126" class="pil-tekst">deploy.sh / GitHub Actions</text>
+        <text x="335" y="126" class="pil-tekst">GitHub Actions</text>
         <text x="720" y="126" class="pil-tekst">issues + pull requests</text>
         <rect x="30" y="74" width="300" height="145" rx="14" class="boks-fyll boks-kant"></rect>
         <text x="55" y="105" class="sone-tekst">DITT REPO</text>
@@ -535,7 +535,7 @@
         <text x="410" y="111" class="tittel-tekst">Receiver + Storage Queue</text>
         <text x="410" y="135" class="under-tekst">tar imot og venter på arbeid</text>
         <text x="410" y="173" class="tittel-tekst">Container Apps Job</text>
-        <text x="410" y="197" class="under-tekst">worker, Key Vault og logger</text>
+        <text x="410" y="197" class="under-tekst">worker, secrets fra deploy og logger</text>
         <rect x="770" y="74" width="300" height="145" rx="14" class="boks-fyll boks-kant"></rect>
         <text x="795" y="105" class="sone-tekst">FELLES REPO</text>
         <text x="795" y="139" class="tittel-tekst">novanet/workshop.oslo-live</text>
@@ -629,7 +629,7 @@
     <h2>Lab 2: deploy agenten til Azure</h2>
     <p class="ingress">Nå skal agenten starte fra GitHub og levere PR fra Azure uten at laptopen din er med.</p>
     <div class="kort-rad">
-      <div class="kort"><span class="tall">1</span><span class="navn">Deploy</span><span class="om"><code>./deploy.sh</code> oppretter Receiver, kø, jobb, Key Vault og logger.</span></div>
+      <div class="kort"><span class="tall">1</span><span class="navn">Deploy</span><span class="om">GitHub Actions bruker repository secrets og oppretter Receiver, kø, jobb og logger.</span></div>
       <div class="kort"><span class="tall">2</span><span class="navn">Koble webhook</span><span class="om">Kurslederen kobler Oslo Live til mottaket og etiketten din.</span></div>
       <div class="kort"><span class="tall">3</span><span class="navn">Følg jobben</span><span class="om">Se jobben starte, les loggen og test at en feil hemmelighet gir <code>401</code>.</span></div>
     </div>

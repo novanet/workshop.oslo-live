@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-21T23:12:24",
+  "oppdatert": "2026-09-22T11:02:52",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -21,7 +21,16 @@
       "plass": 1
     }
   ],
-  "kjoerer": [],
+  "kjoerer": [
+    {
+      "agent": "mini-halle",
+      "github": "hbrotan",
+      "issue": 59,
+      "navn": "",
+      "startet": "2026-09-22T08:59:02.8109987+00:00",
+      "minutter": 3
+    }
+  ],
   "main": {
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
@@ -41,6 +50,12 @@
       "navn": "Alle punkter havner i havet, langt utenfor Norge",
       "github": "hbrotan",
       "oppdatert": "2026-09-21T11:35:17Z"
+    },
+    {
+      "issue": 59,
+      "navn": "Overlapping boxes",
+      "github": "hbrotan",
+      "oppdatert": "2026-09-22T08:59:03Z"
     }
   ],
   "aapne": [

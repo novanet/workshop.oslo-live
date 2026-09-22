@@ -28,7 +28,7 @@
     <div class="facts">
       <div class="fact"><b>Språk</b><span>C# på .NET 10.</span></div>
       <div class="fact"><b>Modell</b><span>Claude Code headless via <code>claude -p</code>.</span></div>
-      <div class="fact"><b>Drift</b><span>Azure Container Apps, Storage Queue og Key Vault.</span></div>
+      <div class="fact"><b>Drift</b><span>Azure Container Apps, Storage Queue og GitHub Actions secrets.</span></div>
     </div>
   </header>
 
@@ -56,7 +56,7 @@ Storage Queue ── KEDA ──► Worker (Container Apps Job)
     <h2>KEDA og jq i Lab 2</h2>
     <div class="grid">
       <div class="card"><h3>KEDA er skaleringskomponenten</h3><p>KEDA betyr <em>Kubernetes Event-driven Autoscaling</em>. I Azure Container Apps overvåker den Storage Queue og starter Container Apps Job når køen har meldinger. <code>minExecutions: 0</code> gir scale-to-zero, <code>pollingInterval: 30</code> bestemmer hvor ofte køen sjekkes, og <code>maxExecutions: 3</code> setter en øvre grense for kjøringer.</p></div>
-      <div class="card"><h3><code>jq</code> er JSON-leseren</h3><p><code>deploy.sh</code> skriver Azure-output til <code>.deploy-outputs.json</code>. Kommandoen <code>jq -r .receiverUrl.value .deploy-outputs.json</code> henter mottaks-URL-en fra JSON-filen slik at den kan brukes i <code>curl</code>. Den gjør ingen endring i Azure.</p></div>
+      <div class="card"><h3><code>jq</code> er JSON-leseren</h3><p>GitHub Actions skriver Azure-output til <code>.deploy-outputs.json</code>. Kommandoen <code>jq -r .receiverUrl.value .deploy-outputs.json</code> henter mottaks-URL-en fra JSON-filen slik at den kan brukes i <code>curl</code>. Den gjør ingen endring i Azure.</p></div>
     </div>
     <div class="callout"><b>Normal flyt</b>Webhooken treffer Receiveren, Receiveren legger én melding i køen, KEDA oppdager meldingen og starter en job execution, og workeren henter meldingen og avslutter. En forsinkelse på opptil polling-intervallet er forventet.</div>
   </section>
@@ -79,7 +79,7 @@ Storage Queue ── KEDA ──► Worker (Container Apps Job)
     <h2>Koder, nøkler og miljøvariabler</h2>
     <p class="intro">Kopier <code>.env.example</code> til <code>.env</code> i agentrepoet. Noen verdier lager du selv, noen velger du, og noen får du av kurslederen:</p>
     <pre># Du velger navnet
-AGENT_NAME=Mini-Kari
+AGENT_NAME=litj-nils
 
 # Du lager tokenet selv
 GH_TOKEN=github_pat_...
@@ -88,47 +88,36 @@ GH_TOKEN=github_pat_...
 ANTHROPIC_API_KEY=sk-ant-...
 
 # Lab 2
-# Kurslederen deler ressursgruppen og webhook-hemmeligheten
-RESOURCE_GROUP=rg-mini-kari
-
-# Du velger prefikset
-NAME=kari
-LOCATION=norwayeast
-ACR_NAME=acrmininilsnovanet2
-ACR_RESOURCE_GROUP=rg-mininils-shared
-ACR_PULL_IDENTITY_RESOURCE_ID=/subscriptions/821c1e3e-f764-4d36-911a-a23a80dfa197/resourceGroups/rg-mininils-shared/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id-mininils-acr-pull
+# GitHub Actions bruker kursverdiene automatisk
 WEBHOOK_SECRET=...
 
 # Valgfritt
-AGENT_LABEL=
 AGENT_MENTION=
 CLAUDE_MODEL=claude-fable-5</pre>
     <div class="tablewrap">
       <table>
         <thead><tr><th>Variabel</th><th>Påkrevd</th><th>Hva den brukes til</th><th>Hvem lager eller leverer den</th></tr></thead>
         <tbody>
-          <tr><td><code>AGENT_NAME</code></td><td>Ja</td><td>Navnet som står på commits, PR-er, logger og Status.</td><td><strong>Du velger.</strong> Bruk et unikt navn på formen <code>Mini-&lt;navn&gt;</code>, for eksempel <code>Mini-Kari</code>.</td></tr>
+          <tr><td><code>AGENT_NAME</code></td><td>Ja</td><td>Den eneste deltaker-identiteten. Brukes på commits, PR-er, logger, Status, Azure-navn og ACR-namespace.</td><td><strong>Du velger.</strong> Bruk et unikt navn, for eksempel <code>litj-nils</code>. Ressurs-suffiks og etikett avledes automatisk.</td></tr>
           <tr><td><code>GH_TOKEN</code></td><td>Ja</td><td>Leser issues lokalt; i Lab 2 skriver Azure-workeren kommentarer, pusher brancher og oppretter pull requests til Oslo Live.</td><td><strong>Du lager.</strong> Åpne <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub-siden for fine-grained tokens</a>. Gi tokenet bare tilgang til akkurat <code>novanet/workshop.oslo-live</code>, og <code>Contents</code>, <code>Issues</code> og <code>Pull requests</code> read/write samt <code>Metadata</code> read. SSO er bare relevant hvis GitHub viser en SSO-godkjenning.</td></tr>
           <tr><td><code>ANTHROPIC_API_KEY</code></td><td>Ja</td><td>Autoriserer og betaler for Claude Code-kjøringene i workeren.</td><td><strong>Kurslederen leverer.</strong> Du får en nøkkel fra kursets Anthropic-workspace med kostnadstak. Claude.ai-abonnement og Anthropic API-betaling er separate; ikke be deltakerne kjøpe API-kreditt selv.</td></tr>
-          <tr><td><code>ANTHROPIC_WORKSPACE_ID</code></td><td>Standard i zip</td><td>Velger workspace når API-nøkkelen ikke er bundet til ett workspace.</td><td>Kursets workspace-ID ligger i starter-kitet. Workeren oversetter den til <code>ANTHROPIC_CUSTOM_HEADERS</code> med <code>anthropic-workspace-id</code>, og <code>deploy.sh</code> bruker samme fallback for eldre <code>.env</code>-filer.</td></tr>
-          <tr><td><code>RESOURCE_GROUP</code></td><td>Lab 2</td><td>Azure-ressursgruppen der mottak, worker, kø, Key Vault og logger opprettes.</td><td><strong>Kurslederen leverer.</strong> Bruk gruppen du har fått, for eksempel <code>rg-mini-kari</code>. Ikke bruk en tilfeldig privat ressursgruppe.</td></tr>
-          <tr><td><code>NAME</code></td><td>Lab 2</td><td>Kort prefiks foran Azure-ressursene.</td><td><strong>Du velger.</strong> Bruk små bokstaver og tall, for eksempel <code>kari</code>. Det må være 3–12 tegn.</td></tr>
-          <tr><td><code>LOCATION</code></td><td>Nei</td><td>Azure-regionen for ressursene.</td><td><strong>Du velger standarden.</strong> Bruk <code>norwayeast</code> hvis kurslederen ikke sier noe annet.</td></tr>
-          <tr><td><code>ACR_NAME</code>, <code>ACR_RESOURCE_GROUP</code></td><td>Lab 2</td><td>Det felles Container Registryet der <code>az acr build</code> legger image under deltakerens namespace.</td><td><strong>Felles kursverdi.</strong> Bruk <code>acrmininilsnovanet2</code> og <code>rg-mininils-shared</code>.</td></tr>
-          <tr><td><code>ACR_PULL_IDENTITY_RESOURCE_ID</code></td><td>Lab 2</td><td>Resource ID for den kurs-eide managed identity-en som har <code>AcrPull</code> på fellesregistryet.</td><td><strong>Felles kursverdi.</strong> Starter-kitet inneholder ID-en. Deltakeren trenger <code>Managed Identity Operator</code> på denne identiteten, samt <code>AcrPush</code> og <code>Container Registry Tasks Contributor</code> på registryet.</td></tr>
+          <tr><td><code>ANTHROPIC_WORKSPACE_ID</code></td><td>Standard i zip</td><td>Velger workspace når API-nøkkelen ikke er bundet til ett workspace.</td><td>Kursets workspace-ID ligger i starter-kitet. Workeren oversetter den til <code>ANTHROPIC_CUSTOM_HEADERS</code> med <code>anthropic-workspace-id</code> og bruker samme fallback for eldre <code>.env</code>-filer.</td></tr>
+          <tr><td>Azure-kursverdier</td><td>Lab 2</td><td>Ressursgruppe, region, felles ACR og pull-identitet for Container Apps.</td><td><strong>Automatisk.</strong> GitHub Actions bruker kursets faste verdier; du skal ikke sette <code>RESOURCE_GROUP</code>, <code>NAME</code>, <code>ACR_NAME</code> eller <code>ACR_PULL_IDENTITY_RESOURCE_ID</code>.</td></tr>
           <tr><td><code>WEBHOOK_SECRET</code></td><td>Lab 2</td><td>Kontrollerer at meldinger til mottaket faktisk kommer fra den registrerte GitHub-webhooken.</td><td><strong>Kurslederen leverer i kurset.</strong> Kurslederen registrerer samme verdi på webhooken; ikke lag en egen verdi som ikke er registrert. I et helt eget oppsett kan du lage en med <code>openssl rand -hex 32</code> og konfigurere den samme verdien begge steder.</td></tr>
-          <tr><td><code>AGENT_LABEL</code></td><td>Nei</td><td>GitHub-etiketten som starter akkurat din agent.</td><td><strong>Azure lager den automatisk.</strong> La den stå tom. <code>deploy.sh</code> lager for eksempel <code>mini-kari</code> fra <code>AGENT_NAME</code>.</td></tr>
+          <tr><td><code>AZURE_CREDENTIALS</code></td><td>Actions</td><td>Logger GitHub Actions inn i Azure og gir workflowen lov til å deploye deltakerressursene.</td><td><strong>Kurslederen setter den opp.</strong> Legg service-principalens komplette JSON som repository secret.</td></tr>
+          <tr><td><code>AGENT_LABEL</code></td><td>Nei</td><td>GitHub-etiketten som starter akkurat din agent.</td><td><strong>Azure lager den automatisk.</strong> Workflowen avleder den fra <code>AGENT_NAME</code>.</td></tr>
           <tr><td><code>AGENT_MENTION</code></td><td>Nei</td><td>GitHub-loginet som kan nevne agenten på en PR. Aktiverer read-only svarmodus.</td><td><strong>Du velger.</strong> Skriv loginet uten <code>@</code>, for eksempel <code>kari-hansen</code>. La stå tomt hvis mention-modus ikke skal brukes.</td></tr>
           <tr><td><code>CLAUDE_MODEL</code></td><td>Nei</td><td>Standardmodell for stages som ikke overstyrer modellen selv.</td><td><strong>Fallback.</strong> Starter-kitet velger modell per stage; denne variabelen brukes bare der <code>model</code> mangler i <code>stages.json</code>.</td></tr>
         </tbody>
       </table>
     </div>
-    <div class="callout warn"><b>Ikke repository secrets</b><code>GH_TOKEN</code> skal ikke lages eller lagres på <a href="https://github.com/novanet/workshop.oslo-live/settings/secrets/agents" target="_blank" rel="noopener">Secrets/agents-siden til Oslo Live</a>. Den siden brukes til repository secrets, ikke til den lokale workeren. Lag tokenet som et personlig fine-grained token på <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub → New fine-grained token</a>, legg det i den lokale <code>.env</code>-fila, og la <code>deploy.sh</code> håndtere Azure-lagringen i Lab 2.</div>
+    <div class="callout"><b>GitHub Actions-innstillinger</b><strong>Repository variable:</strong> <code>AGENT_NAME</code> (påkrevd), eventuelt <code>AGENT_MENTION</code> og <code>CLAUDE_MODEL</code>. <strong>Repository secrets:</strong> <code>AZURE_CREDENTIALS</code>, <code>GH_TOKEN</code>, <code>ANTHROPIC_API_KEY</code> og <code>WEBHOOK_SECRET</code> (alle påkrevd). Ingen andre variables eller secrets er nødvendige.</div>
+    <div class="callout"><b>Repo-scoped kurs-token</b><code>GH_TOKEN</code> gjelder bare <code>novanet/workshop.oslo-live</code>, har kort utløp og settes som repository secret i deltakerrepoet. Det sendes secure fra GitHub Actions til den enkelte deployen. Ikke bruk tokenet mot andre repoer.</div>
     <h3>Slik lager eller får du de tre viktigste nøklene</h3>
     <ol class="checklist">
-      <li><strong>GitHub-token — lag selv:</strong> Åpne <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub → New fine-grained token</a> (alternativt: Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token). Gi tokenet et navn som <code>mini-kari-workshop</code>, velg kort utløpsdato, velg bare <code>novanet/workshop.oslo-live</code> under repository access, sett <code>Contents</code>, <code>Issues</code> og <code>Pull requests</code> til read/write og <code>Metadata</code> til read. SSO er bare relevant hvis GitHub viser en godkjenning. Trykk Generate token, kopier verdien med én gang til <code>.env</code>, og test med <code>--dry-run</code>.</li>
-      <li><strong>Anthropic-nøkkel — få fra kurslederen:</strong> Del en separat nøkkel per deltaker eller agent fra kursets Anthropic-workspace med kostnadstak. Nøkkelen skal bare ligge i <code>.env</code> lokalt og i Azure Key Vault via <code>./deploy.sh</code>. Deltakeren trenger ikke egen betaling; Claude.ai-abonnement er ikke det samme som API-kreditt.</li>
-      <li><strong>Webhook-hemmelighet — få fra kurslederen:</strong> Be om den felles <code>WEBHOOK_SECRET</code>-verdien etter at du har deployet. Kurslederen kobler mottaks-URL-en din til Oslo Live og bruker samme hemmelighet på GitHub-webhooken. Ved et helt eget oppsett lager du den selv med <code>openssl rand -hex 32</code>.</li>
+      <li><strong>GitHub-token — lag selv:</strong> Åpne <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub → New fine-grained token</a> (alternativt: Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token). Gi tokenet et navn som <code>mini-kari-workshop</code>, velg kort utløpsdato, velg bare <code>novanet/workshop.oslo-live</code> under repository access, sett <code>Contents</code>, <code>Issues</code> og <code>Pull requests</code> til read/write og <code>Metadata</code> til read. SSO er bare relevant hvis GitHub viser en godkjenning. Trykk Generate token, kopier verdien til <code>.env</code> for Lab 1, og legg den også som repository secret <code>GH_TOKEN</code> for Lab 2.</li>
+      <li><strong>Anthropic-nøkkel — få fra kurslederen:</strong> Del en separat nøkkel per deltaker eller agent fra kursets Anthropic-workspace med kostnadstak. Legg den i lokal <code>.env</code> for Lab 1 og som repository secret <code>ANTHROPIC_API_KEY</code> for Lab 2. Deltakeren trenger ikke egen betaling; Claude.ai-abonnement er ikke det samme som API-kreditt.</li>
+      <li><strong>Webhook-hemmelighet — få fra kurslederen:</strong> Legg <code>WEBHOOK_SECRET</code> som repository secret og bruk samme verdi på GitHub-webhooken når mottaks-URL-en din er klar.</li>
     </ol>
     <div class="callout warn"><b>Hvis GitHub-operasjoner feiler</b>Logger workeren <code>addComment</code> eller <code>replaceActorsForAssignable</code> når tokenet gjelder feil repo eller mangler Issues write. Kontroller repository access før du leter etter SSO; det er normalt å ikke se en SSO-knapp. <code>gh auth login</code> og <code>GH_TOKEN</code> er separate innlogginger; workeren bruker tokenet i den lokale <code>.env</code>-fila.</div>
     <div class="callout warn"><b>Hvis Claude-nøkkelen mangler eller mangler workspace</b>Logger workeren <code>Mangler eller ikke utfylt: ANTHROPIC_API_KEY</code> hvis nøkkelen mangler. Den nyeste workeren bruker kursets workspace-ID automatisk når <code>.env</code> mangler den. Hvis feilen fortsatt vises, hent nyeste <code>mini-nils.zip</code> og kontroller oppstartloggen for <code>Anthropic workspace-ID: satt</code>. <code>--dry-run</code> kan brukes uten denne nøkkelen.</div>
@@ -147,16 +136,16 @@ az account list -o table</pre>
 
   <section>
     <h2>Verdier du ikke skal fylle inn selv</h2>
-    <p class="intro">Deployen lager resten og legger hemmelighetene i Key Vault. Du trenger ikke finne eller kopiere disse inn i <code>.env</code>:</p>
+    <p class="intro">GitHub Actions lager resten. Workflowen sender repository secrets til Bicep som secure parametere. Du trenger ikke finne eller kopiere disse inn i <code>.env</code> for Azure:</p>
     <div class="tablewrap">
       <table>
         <thead><tr><th>Verdi</th><th>Hvor den kommer fra</th><th>Hva du gjør</th></tr></thead>
         <tbody>
-          <tr><td><code>QUEUE_CONNECTION</code></td><td>Storage-kontoen som Bicep oppretter.</td><td>La <code>deploy.sh</code> og Azure håndtere den.</td></tr>
+          <tr><td><code>QUEUE_CONNECTION</code></td><td>Storage-kontoen som Bicep oppretter.</td><td>La workflowen og Azure håndtere den.</td></tr>
           <tr><td><code>MEMORY_CONNECTION</code></td><td>Samme Storage-konto; brukes til bloben <code>hukommelse/memory.md</code>.</td><td>Ikke legg connection string i repoet.</td></tr>
           <tr><td><code>QUEUE_NAME</code></td><td>Settes av Bicep til <code>agent-tasks</code>.</td><td>Ikke endre den uten å endre både mottak og worker.</td></tr>
-          <tr><td>Key Vault-hemmeligheter</td><td><code>./deploy.sh</code> skriver API-nøkkel, GitHub-token og webhook-hemmelighet til Key Vault.</td><td>Bruk managed identity; ikke kopier verdiene inn i Bicep eller containerbildet.</td></tr>
-          <tr><td><code>AZURE_CREDENTIALS</code></td><td>Azure-innlogging for den valgfrie GitHub Actions-workflowen.</td><td><strong>Kun ved Actions-oppsett.</strong> Kurslederen leverer service-principalens komplette JSON. Legg den som repository secret med dette navnet. Ressursgruppe, navn og agentnavn ligger som vanlige repository variables. Lokal <code>./deploy.sh</code> bruker fortsatt <code>az login</code>.</td></tr>
+          <tr><td>Repository secrets</td><td><code>GH_TOKEN</code>, <code>ANTHROPIC_API_KEY</code>, <code>WEBHOOK_SECRET</code> og <code>AZURE_CREDENTIALS</code>.</td><td><strong>Kun ved Actions-oppsett.</strong> Legg dem inn i deltakerrepoet. De sendes secure til deployen og skal ikke legges i image eller ACR.</td></tr>
+          <tr><td><code>AGENT_NAME</code></td><td>Agentidentitet for workflowen.</td><td>Sett som repository variable. Lokal deploy er deaktivert.</td></tr>
         </tbody>
       </table>
     </div>
@@ -168,8 +157,8 @@ az account list -o table</pre>
       <div class="card"><h3><code>src/Worker/</code></h3><p><code>Pipeline.cs</code> er orkestreringen deltakerne implementerer i Lab 1. <code>Repository.cs</code> håndterer klon, branch, commit og PR. <code>ClaudeRunner.cs</code> kjører modellen.</p></div>
       <div class="card"><h3><code>src/Receiver/</code></h3><p>En liten ASP.NET Core-app som validerer webhooken og skriver til køen. Den har ingen LLM og ingen git.</p></div>
       <div class="card"><h3><code>agent/</code></h3><p><code>system.md</code>, <code>conventions.md</code>, prompts, skills, stages og hukommelse styrer modellens oppførsel.</p></div>
-      <div class="card"><h3><code>infra/</code></h3><p><code>main.bicep</code> beskriver Container Apps, jobben, køen, Key Vault, identitet og miljøvariabler.</p></div>
-      <div class="card"><h3><code>deploy.sh</code></h3><p>Deployer deltakerens ressurser, bygger namespacede images i kursets felles ACR og ruller ut den nye revisjonen.</p></div>
+      <div class="card"><h3><code>infra/</code></h3><p><code>main.bicep</code> beskriver Container Apps, jobben, køen, secure deploy-parametere og miljøvariabler.</p></div>
+      <div class="card"><h3>GitHub Actions</h3><p>Logger inn, oppretter deltakerens ressurser, bygger namespacede images i kursets felles ACR og ruller ut den nye revisjonen.</p></div>
       <div class="card"><h3><code>.env</code></h3><p>Lokale hemmeligheter og navn. Filen skal aldri committes eller legges i issue, PR eller logg.</p></div>
     </div>
   </section>
@@ -212,7 +201,7 @@ az account list -o table</pre>
           <tr><td>Worker</td><td>Terminal/devcontainer, uten levering</td><td>Container Apps Job med tildeling, kommentarer og PR</td></tr>
           <tr><td>Hukommelse</td><td><code>agent/memory.md</code></td><td>Bloben <code>hukommelse/memory.md</code></td></tr>
           <tr><td>Kjøringsdata</td><td>Logg i terminalen</td><td>Table Storage <code>agentRuns</code>, lest via et sanert statusendepunkt</td></tr>
-          <tr><td>Hemmeligheter</td><td><code>.env</code> lokalt</td><td>Key Vault + managed identity</td></tr>
+          <tr><td>Hemmeligheter</td><td><code>.env</code> lokalt</td><td>GitHub repository secrets → secure deploy-parametere</td></tr>
           <tr><td>Logger</td><td>Terminalen</td><td>Container logs og Log Analytics</td></tr>
         </tbody>
       </table>
@@ -236,10 +225,10 @@ az account list -o table</pre>
     dotnet build --nologo -v quiet
     dotnet run --project src/Worker -- --issue 1 --repo novanet/workshop.oslo-live --dry-run
 
-# Azure
-./deploy.sh
-az containerapp job execution list -g $RESOURCE_GROUP -n caj-$NAME-worker -o table
-az containerapp job logs show -g $RESOURCE_GROUP -n caj-$NAME-worker --container worker --follow
+# Azure deploy
+# Push til main eller kjør Actions → Build and deploy Mini-Nils → Run workflow
+az containerapp job execution list -g rg-agentic-workshop -n "$(jq -r '.workerJobName.value' .deploy-outputs.json)" -o table
+az containerapp job logs show -g rg-agentic-workshop -n "$(jq -r '.workerJobName.value' .deploy-outputs.json)" --container worker --follow
 
 # målrepo
 gh issue list --repo novanet/workshop.oslo-live

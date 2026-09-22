@@ -420,7 +420,7 @@
   <ol class="goals">
     <li><p>Tegne opp hvordan en kodeagent henter en oppgave (trigger → kø → worker → verktøy → leveranse) og forklare hvorfor HTTP-mottaket og modellkjøringen er to separate kjøremiljøer.</p></li>
     <li><p>Bygge og klargjøre en agentpipeline lokalt, og deretter la Azure-workeren ta en issue fra webhook til bygg, test og pull request.</p></li>
-    <li><p>Deploye agenten til Azure som Container Apps Job med scale-to-zero, webhook-trigger og hemmeligheter i Key Vault, og lese loggene i Log Analytics.</p></li>
+    <li><p>Deploye agenten til Azure som Container Apps Job med scale-to-zero, webhook-trigger og repository-injiserte hemmeligheter, og lese loggene i Log Analytics.</p></li>
     <li><p>Styre agentens atferd med instruksjoner, skills og konvensjonsfil, og se effekten i resultat, tokens og kostnad.</p></li>
     <li><p>Legge inn kvalitetsporter (plan-kritikk, build/test, selvreview) og begrunne hva som bør automatiseres og hva som ikke bør.</p></li>
     <li><p>Vurdere risiko: verktøytilgang, skrivetilgang til repo, kostnadstak og prompt-injeksjon fra issues og kommentarer.</p></li>
@@ -453,7 +453,7 @@
       <tr><td>Worker</td><td>Container Apps Job, én oppgave og avslutt</td><td>Container Apps Job i batch-modus, samme prinsipp</td></tr>
       <tr><td>Motor</td><td><code>claude -p</code> med liste over lovlige verktøy</td><td>Copilot SDK med C#-verktøy</td></tr>
       <tr><td>Steg</td><td>Fem faser: research, plan review, implement, self-review og build/deliver</td><td>Fem, pluss review-fanout med flere modeller</td></tr>
-      <tr><td>Hemmeligheter</td><td>Key Vault via managed identity</td><td>Samme</td></tr>
+      <tr><td>Hemmeligheter</td><td>GitHub repository secrets via deploy</td><td>Samme</td></tr>
     </tbody>
   </table>
   </div>
@@ -520,7 +520,7 @@
       <div>
         <h3>Lab 2: Til skyen</h3>
         <ul>
-          <li><code>./deploy.sh</code> oppretter mottak, kø, jobb, Key Vault og logger.</li>
+          <li>GitHub Actions bruker repository secrets og oppretter mottak, kø, jobb og logger.</li>
           <li>Koble webhooken, merk en issue og se jobben starte fra null.</li>
           <li>Test <code>401</code> og deploy en liten Bicep-endring på nytt.</li>
         </ul>
@@ -640,7 +640,7 @@
     <div class="row">
       <div class="when">Dagen før</div>
       <ul>
-        <li>Kjør <code>./deploy.sh</code> i en ekstra ressursgruppe som redningsmiljø. Et lag som ikke får deployet får peke webhooken sin hit.</li>
+        <li>Bruk GitHub Actions i en ekstra ressursgruppe som redningsmiljø. Et lag som ikke får deployet får peke webhooken sin hit.</li>
         <li>Sjekk at kartet i Azure svarer og at Status tegner seg: <code>python resultattavle/poeng.py --repo novanet/workshop.oslo-live</code>.</li>
         <li>Sjekk at Sensor svarer: <code>python resultattavle/sensor.py --selvtest</code>. Krever Claude Code og en API-nøkkel på maskinen som skal kjøre den.</li>
         <li>Kjør <code>scripts/beskytt-main.sh</code> hvis det ikke er gjort: branch protection og auto-merge, så Sensors godkjenning merger og ruller ut.</li>

@@ -56,7 +56,7 @@ gh repo create mini-kari --private --source . --push</pre>
       <div class="card">
         <h3>Fyll inn miljøet</h3>
         <pre>cp .env.example .env</pre>
-        <pre>AGENT_NAME=Mini-Kari
+        <pre>AGENT_NAME=litj-nils
 GH_TOKEN=github_pat_...
 ANTHROPIC_API_KEY=sk-ant-...</pre>
         <p class="small">Tokenet trenger senere Contents, Issues og Pull requests med read/write på akkurat øvingsrepoet. Feilen <code>addComment</code> eller <code>replaceActorsForAssignable</code> i Lab 2 betyr ofte at tokenet gjelder feil repo. Hvis workeren sier <code>Mangler eller ikke utfylt: ANTHROPIC_API_KEY</code>, må du be kurslederen om Claude-nøkkelen og legge den i <code>.env</code>. Hvis Claude fortsatt sier at nøkkelen ikke er scoped til et workspace, må du hente den nyeste <code>mini-nils.zip</code> eller oppdatere worker-koden og kontrollere at loggen sier at Anthropic workspace-ID er satt. <code>--dry-run</code> kan kjøres uten Anthropic-nøkkel.</p>
