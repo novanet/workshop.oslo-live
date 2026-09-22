@@ -37,7 +37,7 @@
     <p class="intro">Kryss av listen før kursdagen, eller bruk den som startpunkt når du åpner <code>mini-nils.zip</code>.</p>
     <ul class="checklist">
       <li>En GitHub-konto som kan opprette et privat repository.</li>
-      <li>Tilgang til <a href="https://github.com/novanet/workshop.oslo-live" target="_blank" rel="noopener"><code>novanet/workshop.oslo-live</code></a> gjennom et personlig fine-grained GitHub-token du lager for akkurat dette repoet.</li>
+      <li>Tilgang til <a href="https://github.com/novanet/workshop.oslo-live" target="_blank" rel="noopener"><code>novanet/workshop.oslo-live</code></a> gjennom et klassisk GitHub-token med bare <code>public_repo</code>. Kurslederen legger deg til som collaborator med Write først; godta invitasjonen på e-post eller på repoet.</li>
       <li>En laptop der du kan åpne Codespaces eller kjøre en devcontainer, alternativt tilgang til en ferdig kursmaskin.</li>
       <li>En kopi av <code>mini-nils.zip</code>, lastet ned og pakket ut lokalt.</li>
       <li>En nettleser som kan logge inn på GitHub og Azure med kurskontoene dine.</li>
@@ -81,7 +81,7 @@
       </table>
     </div>
     <div class="callout"><b>GitHub Actions-innstillinger før Lab 2</b><strong>Repository variable:</strong> <code>AGENT_NAME</code> (påkrevd), eventuelt <code>AGENT_MENTION</code> og <code>CLAUDE_MODEL</code>. <strong>Repository secrets:</strong> <code>AZURE_CREDENTIALS</code>, <code>GH_TOKEN</code>, <code>ANTHROPIC_API_KEY</code> og <code>WEBHOOK_SECRET</code> (alle påkrevd). Ingen andre variables eller secrets er nødvendige.</div>
-    <div class="callout"><b>Repo-scoped kurs-token</b><code>GH_TOKEN</code> lager du selv som et personlig fine-grained token på <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub</a>. Velg akkurat <code>novanet/workshop.oslo-live</code> under repository access; tokenet for agentrepoet ditt er ikke nok. Lab 1 bruker tokenet fra lokal <code>.env</code> i lesende dry-run. Til Lab 2 legges tokenet som repository secret <code>GH_TOKEN</code> i deltakerrepoet.</div>
+    <div class="callout"><b>Repo-scoped kurs-token</b><code>GH_TOKEN</code> lager du selv som et klassisk token med bare <code>public_repo</code> på <a href="https://github.com/settings/tokens/new?scopes=public_repo&amp;description=oslo-live-workshop" target="_blank" rel="noopener">GitHub</a>. Oslo Live er et offentlig repo, så tokenet når ikke private repoer. Du må ha godtatt collaborator-invitasjonen til <code>novanet/workshop.oslo-live</code>, ellers får tokenet ikke skrive. Lab 1 bruker tokenet fra lokal <code>.env</code> i lesende dry-run. Til Lab 2 legges tokenet som repository secret <code>GH_TOKEN</code> i deltakerrepoet.</div>
   </section>
 
   <section>
@@ -91,15 +91,15 @@
       <div class="step">
         <div class="step-number">1</div>
         <div>
-          <h3>Åpne fine-grained tokens</h3>
-          <p>Gå til <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub → New fine-grained token</a>. Velg bare <code>novanet/workshop.oslo-live</code> under repository access.</p>
+          <h3>Åpne klassiske tokens</h3>
+          <p>Gå til <a href="https://github.com/settings/tokens/new?scopes=public_repo&amp;description=oslo-live-workshop" target="_blank" rel="noopener">GitHub → New personal access token (classic)</a>. Lenken fyller inn navn og scope for deg. Fine-grained funker ikke for collaborators utenfor Novanet-orgen.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-number">2</div>
         <div>
           <h3>Gi minst mulig tilgang</h3>
-          <p>Velg <code>Contents</code>, <code>Issues</code> og <code>Pull requests</code> med read/write, og <code>Metadata</code> med read. SSO er bare relevant hvis GitHub faktisk viser en SSO-godkjenning; det er normalt å ikke se en slik knapp.</p>
+          <p>Kryss bare av <code>public_repo</code>. Ikke velg hele <code>repo</code>, da får tokenet tilgang til alle private repoer du har. Velg kort utløp, for eksempel 7 dager.</p>
         </div>
       </div>
       <div class="step">
@@ -107,8 +107,8 @@
         <div>
           <h3>Lagre verdien lokalt</h3>
           <pre>cp .env.example .env
-GH_TOKEN=github_pat_...</pre>
-          <p>GitHub viser tokenverdien bare én gang. Legg den som repository secret med navnet <code>GH_TOKEN</code>; ikke legg den i kode, issue, PR eller skjermbilde. Hvis Azure-workeren logger <code>addComment</code> eller <code>replaceActorsForAssignable</code>, kontroller først at tokenet gjelder riktig repo, deretter Issues write og brukerens skrivetilgang.</p>
+GH_TOKEN=ghp_...</pre>
+          <p>GitHub viser tokenverdien bare én gang. Legg den som repository secret med navnet <code>GH_TOKEN</code>; ikke legg den i kode, issue, PR eller skjermbilde. Hvis Azure-workeren logger <code>addComment</code> eller <code>replaceActorsForAssignable</code>, kontroller først at du har godtatt collaborator-invitasjonen, deretter at tokenet har <code>public_repo</code>.</p>
         </div>
       </div>
     </div>
