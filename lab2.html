@@ -142,6 +142,24 @@ curl.exe -i -X POST "$ReceiverUrl/tasks" `
           <div class="callout"><b>Sjekkpunkt 2</b>En merket issue gir en pull request opprettet av Azure-jobben.</div>
         </div>
       </article>
+      <article class="step">
+        <div class="step-number">6</div>
+        <div>
+          <p class="meta">Sensor · ny runde</p>
+          <h3>Når Sensor sier nei</h3>
+          <p>Sensor leser PR-en mot akseptansekriteriene i issuen og kjører de skjulte testene. Mangler noe, får PR-en <strong>Request changes</strong> med en tabell over hva som feiler.</p>
+          <p>Agenten din leser ikke reviewen. Den kjører én gang per etikett og står stille etterpå. Neste trekk er ditt:</p>
+          <ol class="checklist">
+            <li>Les tabellen. Hva bommet agenten på?</li>
+            <li>Fiks agenten, ikke koden i PR-en. Stram inn en prompt i <code>agent/prompts/</code>, <code>agent/conventions.md</code> eller en skill. Commit, push og vent til deployen er grønn.</li>
+            <li>Ta etiketten av og sett den på igjen:</li>
+          </ol>
+          <pre>gh issue edit 3 --repo novanet/workshop.oslo-live --remove-label kari
+gh issue edit 3 --repo novanet/workshop.oslo-live --add-label kari</pre>
+          <p>Agenten starter fra <code>main</code> igjen, pusher til samme branch og oppdaterer PR-en du allerede har. Sensor vurderer den nye commiten.</p>
+          <p class="small">Agenten ser bare issuen og hukommelsen sin, ikke det Sensor skrev. Endrer du ikke agenten, gjør den trolig samme feil en gang til. Vil du at den skal lese reviewen sjøl, er det en oppgave i Spor G i Lab 3. Sier Sensor at issuen allerede er løst av en annen PR, er det ingen vits å kjøre på nytt. Velg en ny issue.</p>
+        </div>
+      </article>
     </div>
   </section>
 

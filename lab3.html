@@ -199,6 +199,7 @@ GET https://api.github.com/repos/novanet/workshop.oslo-live/issues/{nummer}/comm
       <div class="card"><h3>Post-mortem</h3><p>Gjør én konkret feil om til en regel i <code>conventions.md</code>, en prompt eller hukommelsen.</p></div>
       <div class="card"><h3>Status</h3><p>Gjør stage, status, tid, tokens og kostnad synlig i monitoreringssporet eller PR-rapporten.</p></div>
       <div class="card"><h3>Instruksjoner</h3><p>Skriv om en lang prompt til korte, bokstavelige handlingsregler og sammenlign samme issue før og etter.</p></div>
+      <div class="card"><h3>Lær av Sensor</h3><p>Når agenten kjøres på nytt for en issue som allerede har en åpen PR, hent Sensors siste review med Request changes (<code>gh pr view &lt;branch&gt; --json reviews</code>) og legg den inn i promptet til research. Vis at andre runde retter det Sensor pekte på.</p></div>
     </div>
   </section>
 
