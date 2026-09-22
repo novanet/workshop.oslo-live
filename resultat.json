@@ -1,11 +1,11 @@
 {
-  "oppdatert": "2026-09-22T11:29:07",
+  "oppdatert": "2026-09-22T11:29:45",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
       "navn": "Mini-Nils",
       "github": "hbrotan",
-      "poeng": -4,
+      "poeng": 0,
       "feil": [],
       "lag": [],
       "levert": [],
@@ -40,13 +40,24 @@
       "issue": 1,
       "navn": "Alle punkter havner i havet, langt utenfor Norge",
       "github": "hbrotan",
-      "oppdatert": "2026-09-21T11:35:17Z"
+      "oppdatert": "2026-09-21T11:35:17Z",
+      "etiketter": [
+        "bug",
+        "P1",
+        "2 poeng"
+      ]
     },
     {
       "issue": 59,
       "navn": "Overlapping boxes",
       "github": "hbrotan",
-      "oppdatert": "2026-09-22T09:10:56Z"
+      "oppdatert": "2026-09-22T09:10:56Z",
+      "etiketter": [
+        "bug",
+        "P3",
+        "1 poeng",
+        "mini-halle"
+      ]
     }
   ],
   "aapne": [
@@ -85,6 +96,7 @@
     ],
     "utkast": -1,
     "perDollar": -1,
+    "dollarPerPoeng": 10,
     "brekk": -2,
     "fiks": 2
   },

@@ -62,6 +62,19 @@ Storage Queue ── KEDA ──► Worker (Container Apps Job)
   </section>
 
   <section>
+    <h2>Følg alle agentene samtidig</h2>
+    <p class="intro">Hver deltaker får sitt eget Log Analytics-workspace, men kurslederen trenger ikke en database bare for å følge kjøringene. Scriptet <code>scripts/stream-course-logs.ps1</code> finner kurs-workspace-ene, samler receiver- og worker-loggene og skriver nye linjer fortløpende. Med <code>-Publish</code> legges en sanert feed i <code>live-log.json</code> på status-siden.</p>
+    <pre>Log Analytics-workspaces
+       │
+       ├─ ca-&lt;agent&gt;-receiver
+       └─ caj-&lt;agent&gt;-worker
+              │
+              ▼
+      PowerShell stream / Azure Monitor Workbook</pre>
+    <p>Dette er nær-live operasjonell overvåking. Den sanerte tabellen <code>agentRuns</code> er fortsatt kilden for varig kjøringsstatus og resultattavlen. GitHub Pages kan ikke lese Azure direkte; kurslederens maskin må derfor publisere utvalgte livssyklusmeldinger. Issue-body, modelloutput og hemmeligheter skal ikke publiseres. Ikke eksponer Log Analytics-nøkler i en offentlig nettside.</p>
+  </section>
+
+  <section>
     <h2>De to repoene</h2>
     <div class="tablewrap">
       <table>
