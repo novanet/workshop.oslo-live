@@ -423,7 +423,7 @@
     document.getElementById('regler').innerHTML =
       '<span>Hver issue gir ' + skala + ' poeng etter vanskelighet</span>' +
       '<span>' + (r.utkast != null ? r.utkast : -1) + ' per PR som ikke bygger</span>' +
-      '<span>' + (r.perDollar != null ? r.perDollar : -1) + ' per påbegynte dollar</span>' +
+      '<span>' + (r.perDollar != null ? r.perDollar : -1) + ' per påbegynte ' + (r.dollarPerStraff || 10) + ' dollar</span>' +
       (r.brekk != null ? '<span>' + r.brekk + ' for å gjøre main rød, +' + r.fiks + ' for å gjøre den grønn</span>' : '') +
       (data.potten ? '<span>' + data.potten + ' poeng i potten</span>' : '');
   }
