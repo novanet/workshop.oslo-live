@@ -23,13 +23,13 @@
   </nav>
 
   <header class="hero">
-    <div class="eyebrow">Sjekkpunkt 1 · lokalt, uten levering</div>
+    <div class="eyebrow">Sjekkpunkt 1 · lokalt, så første deploy</div>
     <h1>Lab 1: Bygg pipelinen</h1>
-    <p class="lede">Koble sammen delene fra GitHub-issue til pull request i <code>Pipeline.cs</code>, men test bare lokalt. Du får ferdige komponenter og en oppskrift, men skriver selv rekkefølgen.</p>
+    <p class="lede">Koble sammen delene fra GitHub-issue til pull request i <code>Pipeline.cs</code>, og test lokalt med dry-run. Før lunsj setter du secrets og kjører første deploy fra GitHub Actions. Du får ferdige komponenter og en oppskrift, men skriver selv rekkefølgen.</p>
     <div class="facts">
-      <div class="fact"><b>Mål</b><span>En pipeline som er klar for Azure.</span></div>
-      <div class="fact"><b>Arbeidssted</b><span>Ditt eget repo og din lokale devcontainer.</span></div>
-      <div class="fact"><b>Ferdig når</b><span><code>RunStages</code> bygger grønt og dry-run er ren.</span></div>
+      <div class="fact"><b>Mål</b><span>En pipeline som er deployet til Azure.</span></div>
+      <div class="fact"><b>Arbeidssted</b><span>Ditt eget repo, <code>pwsh</code> lokalt og GitHub Actions.</span></div>
+      <div class="fact"><b>Ferdig når</b><span><code>RunStages</code> bygger grønt, dry-run er ren og første deploy er grønn.</span></div>
     </div>
   </header>
 
@@ -37,13 +37,13 @@
     <h2>Før du begynner</h2>
     <p class="intro">Ha dette klart før du begynner:</p>
     <ul class="checklist">
-      <li>Et eget privat repo for agenten din.</li>
-      <li>Et klassisk GitHub-token med bare <strong>public_repo</strong>, og godtatt collaborator-invitasjon til <a href="https://github.com/novanet/workshop.oslo-live">novanet/workshop.oslo-live</a>. Lab 1 bruker det bare i lesende dry-run; Lab 2 skriver med det. Fine-grained funker ikke for collaborators utenfor Novanet-orgen.</li>
-      <li>En <code>ANTHROPIC_API_KEY</code> fra kurslederen. Du skal normalt ikke betale selv; Claude.ai-abonnement og Anthropic API-betaling er separate. Zip-filen har kursets <code>ANTHROPIC_WORKSPACE_ID</code> som standard, og workeren bruker den også som fallback hvis en eldre <code>.env</code>-fil mangler variabelen.</li>
+      <li>Et klassisk GitHub-token med bare <strong>public_repo</strong> og kort utløp, og godtatt collaborator-invitasjon til <a href="https://github.com/novanet/workshop.oslo-live">novanet/workshop.oslo-live</a>. Lab 1 bruker det bare i lesende dry-run; i Lab 2 skriver Azure-workeren med det. Fine-grained funker ikke for collaborators utenfor Novanet-orgen.</li>
+      <li>Et agentnavn, for eksempel <code>kari</code>: 3–12 tegn, små bokstaver, tall og bindestrek, og det må starte med en bokstav.</li>
       <li>En kopi av <code>mini-nils.zip</code>, pakket ut i mappen der du skal jobbe.</li>
-      <li>En devcontainer eller Codespace med .NET 10, <code>gh</code> og Claude Code.</li>
+      <li><code>pwsh</code> 7, .NET 10 SDK, Git, <code>gh</code> og Python 3. Devcontainer eller Codespace er fallback.</li>
+      <li>Mot slutten av labben gir kurslederen deg <code>AZURE_CREDENTIALS</code>, <code>ANTHROPIC_API_KEY</code> og <code>WEBHOOK_SECRET</code>. Du trenger ingen Anthropic-nøkkel lokalt.</li>
     </ul>
-    <p>Agenten endrer ikke sitt eget repo. Den vil senere klone øvingsrepoet, lage en branch der og åpne pull requesten fra Azure. I Lab 1 skal ingen lokal kjøring reservere issue, skrive kommentarer, pushe eller opprette PR.</p>
+    <p>Agenten endrer ikke sitt eget repo. Den vil senere klone øvingsrepoet, lage en branch der og åpne pull requesten fra Azure. I Lab 1 skal ingen lokal kjøring reservere issue, skrive kommentarer, pushe til Oslo Live eller opprette PR.</p>
     <div class="grid">
       <div class="card">
         <h3>Lag agentrepoet</h3>
@@ -51,23 +51,22 @@
 git add -A
 git commit -m "Start fra delene til Mini-Nils"
 gh repo create mini-kari --private --source . --push</pre>
-        <p class="small">Bytt <code>kari</code> med navnet ditt.</p>
+        <p class="small">Bytt <code>kari</code> med navnet ditt. Pushen starter deploy-workflowen, men den hopper over med en notis fordi <code>AGENT_NAME</code> ikke er satt ennå. Det er som det skal.</p>
       </div>
       <div class="card">
         <h3>Fyll inn miljøet</h3>
-        <pre>cp .env.example .env</pre>
-        <pre>AGENT_NAME=litj-nils
-GH_TOKEN=ghp_...
-ANTHROPIC_API_KEY=sk-ant-...</pre>
-        <p class="small">Tokenet trenger bare <code>public_repo</code>. Feilen <code>addComment</code> eller <code>replaceActorsForAssignable</code> i Lab 2 betyr ofte at du ikke har godtatt collaborator-invitasjonen til øvingsrepoet. Hvis workeren sier <code>Mangler eller ikke utfylt: ANTHROPIC_API_KEY</code>, må du be kurslederen om Claude-nøkkelen og legge den i <code>.env</code>. Hvis Claude fortsatt sier at nøkkelen ikke er scoped til et workspace, må du hente den nyeste <code>mini-nils.zip</code> eller oppdatere worker-koden og kontrollere at loggen sier at Anthropic workspace-ID er satt. <code>--dry-run</code> kan kjøres uten Anthropic-nøkkel.</p>
+        <pre>Copy-Item .env.example .env</pre>
+        <pre>AGENT_NAME=kari
+GH_TOKEN=ghp_...</pre>
+        <p class="small">Tokenet trenger bare <code>public_repo</code>. Feilen <code>addComment</code> eller <code>replaceActorsForAssignable</code> i Lab 2 betyr ofte at du ikke har godtatt collaborator-invitasjonen til øvingsrepoet. Du trenger ikke <code>ANTHROPIC_API_KEY</code> lokalt; dry-run kaller ikke Claude.</p>
       </div>
       <div class="card">
         <h3>Sjekk verktøyene</h3>
         <pre>dotnet --version
 gh --version
-claude --version
+python --version
 dotnet build</pre>
-        <p class="small">Bruk devcontainer eller Codespaces hvis noe mangler. På Windows kan du installere Claude Code med <code>npm install -g @anthropic-ai/claude-code</code>.</p>
+        <p class="small">Bruk devcontainer eller Codespaces hvis noe mangler. Claude Code trengs ikke lokalt; det ligger i worker-imaget i Azure.</p>
       </div>
     </div>
   </section>
@@ -80,7 +79,7 @@ dotnet build</pre>
   --repo novanet/workshop.oslo-live `
   --dry-run</pre>
     <p><code>--dry-run</code> leser issue-status og stopper før reservasjon, clone, issue-kommentar, Claude Code, commit og PR. Direkte issue-kjøring uten <code>--dry-run</code> er blokkert i starter-kitet. Først når agenten er deployet og webhooken leverer en kømelding, kan den reservere issue, kommentere og opprette PR. Dry-run krever ikke <code>ANTHROPIC_API_KEY</code> og kan bare brukes med <code>--issue</code> og <code>--repo</code>, ikke kømodus.</p>
-    <div class="callout warn"><b>Betaling feilet?</b>Du skal normalt ikke kjøpe API-kreditt selv. Be kurslederen om nøkkelen fra kursets Anthropic-workspace. Claude.ai-abonnementet gir ikke automatisk API-kreditt.</div>
+    <div class="callout warn"><b>Ingen nøkkel lokalt</b>Du skal ikke kjøpe API-kreditt selv. Kurset har én felles Anthropic-nøkkel som du legger inn som repository secret på slutten av labben. Claude.ai-abonnementet gir ikke API-kreditt.</div>
   </section>
 
   <section>
@@ -88,7 +87,7 @@ dotnet build</pre>
     <p class="intro">Scriptet legger inn en skjelettfil med den ytterste <code>Run</code>-metoden og hjelpeklassene du trenger. <code>RunStages</code> er din oppgave.</p>
     <pre>python setup-lab1.py
 dotnet build</pre>
-    <p>Det som stod der fra før lagres i <code>.kurs/Pipeline.forsok.cs</code>. Ikke åpne sjekkpunktet ennå; det er den ferdige løsningen som skal brukes hvis du faller av.</p>
+    <p>Det som stod der fra før lagres i <code>.kurs/Pipeline.forsok.cs</code>. Ikke åpne sjekkpunktet ennå; det er den ferdige løsningen som skal brukes hvis du faller av. Dry-run håndteres i <code>Run</code> før <code>RunStages</code>, så du trenger ikke tenke på den i oppskriften under.</p>
   </section>
 
   <section>
@@ -100,7 +99,7 @@ dotnet build</pre>
         <div>
           <p class="meta">Issue-status · før modellen</p>
           <h3>Kontroller at issuen er åpen</h3>
-          <p>Når workeren kjører fra Azure, kaller du <code>Reservation.IsBusy(task, AgentName)</code>. Ved lukket issue kommenterer du og returnerer <code>0</code>; ellers kaller du <code>Reservation.Claim(task)</code>. Tildelingen er synlig, ikke eksklusiv: flere deltakere kan jobbe parallelt, og første mergete PR vinner.</p>
+          <p>Hvis <code>skipReservation</code> er satt, logger du at kontrollen hoppes over. Ellers kaller du <code>Reservation.IsBusy(task, AgentName)</code>. Får du en grunn tilbake, kommenterer du den og returnerer <code>0</code>; ellers kaller du <code>Reservation.Claim(task)</code>. Tildelingen er synlig, ikke eksklusiv: flere deltakere kan jobbe parallelt, og første mergete PR vinner.</p>
         </div>
       </article>
       <article class="step">
@@ -124,7 +123,15 @@ dotnet build</pre>
         <div>
           <p class="meta">Modellsteg</p>
           <h3>Kjør <code>config.Stages</code></h3>
-          <p>For hvert steg velger du <code>stage.Model</code> eller <code>config.Model</code>, bygger prompt med <code>BuildPrompt</code>, kaller <code>ClaudeRunner.Run</code>, legger resultatet i <code>runs</code> og logger <code>LogUsage</code>. Starter-kitet viser research, plan review, implement og self-review med ulike Claude-modeller. Deretter gjør workeren bygg, test og levering. Ved feil kommenterer du, bruker <code>EndMarker</code> og returnerer <code>1</code>.</p>
+          <p>For hvert steg velger du <code>stage.Model</code> eller <code>config.Model</code>, bygger prompt med <code>BuildPrompt</code>, kaller <code>ClaudeRunner.Run</code>, legger resultatet i <code>runs</code> og logger <code>LogUsage</code>. Starter-kitet har fire steg i <code>agent/stages.json</code>: research med <code>claude-opus-5-5</code>, plan-review med <code>claude-haiku-4-5</code>, implement og self-review med <code>claude-sonnet-5</code>. Etter de fire stegene kommer levering, som er kode og ikke modell. Ved feil kommenterer du, bruker <code>EndMarker</code> og returnerer <code>1</code>.</p>
+        </div>
+      </article>
+      <article class="step">
+        <div class="step-number">4b</div>
+        <div>
+          <p class="meta">Plan-gate · før implement</p>
+          <h3>Stopp hvis planen ikke er godkjent</h3>
+          <p>Rett etter plan-review sjekker du svaret. Starter det ikke med <code>PLAN GODKJENT</code>, kommenterer du svaret med <code>Fence</code>, forbruk og <code>EndMarker</code>, kaller <code>Remember</code> og returnerer <code>1</code>. Implement skal aldri starte på en plan som ikke er godkjent.</p>
         </div>
       </article>
       <article class="step">
@@ -140,7 +147,7 @@ dotnet build</pre>
         <div>
           <p class="meta">Verifisering</p>
           <h3>Kjør bygg og test</h3>
-          <p>Kall <code>Verify(repo.Path)</code>. Når verifiseringen feiler og <code>StopOnVerifyFailure</code> er sann, kommenterer du <code>verifyLog</code>, husker utfallet og returnerer <code>2</code> uten PR.</p>
+          <p>Kall <code>Verify(repo.Path)</code>. Når verifiseringen feiler og <code>StopOnVerifyFailure</code> er sann, kommenterer du <code>verifyLog</code>, husker utfallet og returnerer <code>2</code> uten PR. Standard er <code>false</code>, og da går du videre og leverer PR som utkast.</p>
         </div>
       </article>
       <article class="step">
@@ -148,31 +155,82 @@ dotnet build</pre>
         <div>
           <p class="meta">Leveranse</p>
           <h3>Lever endringen</h3>
-          <p>Kall <code>CommitAndPush</code>, bygg PR-teksten med <code>PrBody</code> og kall <code>CreatePullRequest</code> når workeren kjører fra Azure-køen. Bruk utkast når verifiseringen er rød, og aktiver auto-merge bare når den er grønn. Skriv sammendrag og husk utfallet.</p>
+          <p>Kall <code>CommitAndPush</code>, bygg PR-teksten med <code>PrBody</code> og kall <code>CreatePullRequest</code>. Bruk utkast når verifiseringen er rød. Kommenter PR-adressen, skriv sammendrag og husk utfallet. Agenten merger aldri selv; PR-en går til review, og et menneske merger.</p>
         </div>
       </article>
     </div>
   </section>
 
   <section>
-    <h2>Nå sjekkpunkt 1</h2>
+    <h2>Bygg og kjør dry-run</h2>
     <pre>dotnet build
 dotnet run --project src/Worker -- `
   --issue 1 `
   --repo novanet/workshop.oslo-live `
   --dry-run</pre>
     <p>Dry-run bekrefter at issue og token er tilgjengelige, men skriver ikke assignee, kommentar, branch, commit eller PR. Den første virkelige kjøringen skal komme fra Azure etter at webhooken er koblet til.</p>
-    <div class="callout"><b>Sjekkpunkt 1</b>Din egen implementasjon av <code>RunStages</code> bygger grønt, dry-run er ren, og du kan forklare hvor workeren senere reserverer issue, kommenterer og leverer PR.</div>
+    <p>Commit og push koden din når bygget er grønt. Det er dette som blir deployet.</p>
+    <pre>git add -A
+git commit -m "Implementer RunStages"
+git push</pre>
+  </section>
+
+  <section>
+    <h2>Før lunsj: secrets og første deploy</h2>
+    <p class="intro">Deployen skriver ingenting til issues i Oslo Live. Den lager bare dine ressurser i Azure. Grensen mellom lokal kjøring og sky holder fortsatt.</p>
+    <div class="steps">
+      <article class="step">
+        <div class="step-number">1</div>
+        <div>
+          <p class="meta">Repository secrets</p>
+          <h3>Legg inn secrets</h3>
+          <p>Kurslederen gir deg <code>ANTHROPIC_API_KEY</code>, <code>WEBHOOK_SECRET</code> og <code>AZURE_CREDENTIALS</code>. <code>GH_TOKEN</code> er tokenet du laget selv. Kjør fra mappen til agentrepoet. <code>gh</code> ber deg lime inn verdien, så den havner ikke i terminalhistorikken.</p>
+          <pre>gh secret set GH_TOKEN
+gh secret set ANTHROPIC_API_KEY
+gh secret set WEBHOOK_SECRET</pre>
+          <p><code>AZURE_CREDENTIALS</code> er JSON over flere linjer. Lim den inn i nettleseren: <strong>Settings → Secrets and variables → Actions → New repository secret</strong>. Den gir Contributor på den delte ressursgruppen <code>rg-agentic-workshop</code>. Bruk den bare i GitHub Actions, aldri lokalt, og ikke del den videre.</p>
+        </div>
+      </article>
+      <article class="step">
+        <div class="step-number">2</div>
+        <div>
+          <p class="meta">Repository variable</p>
+          <h3>Sett agentnavnet</h3>
+          <pre>gh variable set AGENT_NAME --body kari
+gh secret list
+gh variable list</pre>
+          <p class="small">Bruk samme navn som i <code>.env</code>. Listene skal vise fire secrets og <code>AGENT_NAME</code>. Ingen andre trengs.</p>
+        </div>
+      </article>
+      <article class="step">
+        <div class="step-number">3</div>
+        <div>
+          <p class="meta">Deploy</p>
+          <h3>Kjør workflowen</h3>
+          <p>Åpne <strong>Actions → Build and deploy Mini-Nils → Run workflow</strong>. Workflowen logger inn med <code>AZURE_CREDENTIALS</code>, oppretter ressursene dine, bygger bildene i kursets felles ACR og deployer. Første gang tar det rundt 10 minutter.</p>
+          <p class="small">Du skal ikke logge inn i Azure, kjøre <code>docker login</code> eller kjøre deploy-skriptet lokalt.</p>
+        </div>
+      </article>
+      <article class="step">
+        <div class="step-number">4</div>
+        <div>
+          <p class="meta">Actions Summary</p>
+          <h3>Si fra til kurslederen</h3>
+          <p>Åpne den ferdige kjøringen og velg <strong>Summary</strong>. Der står <code>Receiver URL</code>, <code>Issue label</code> (<code>kari</code>) og <code>Worker job</code>. Når <code>Receiver URL</code> vises, sier du fra til kurslederen. Webhooken kobles til i lunsjen.</p>
+        </div>
+      </article>
+    </div>
+    <div class="callout"><b>Sjekkpunkt 1</b>Din egen implementasjon av <code>RunStages</code> bygger grønt, dry-run er ren, og første deploy fra Actions er grønn med <code>Receiver URL</code> i Summary.</div>
   </section>
 
   <section>
     <h2>Hvis du trenger hjelp</h2>
     <p>Forsøket ditt blir tatt vare på før den ferdige løsningen kopieres inn:</p>
-    <pre>./sjekkpunkt.sh lab1
+    <pre>./sjekkpunkt.ps1 lab1
 dotnet build</pre>
-    <p>I PowerShell kan du se forskjellen slik:</p>
+    <p>Virker ikke skriptet, kjør <code>python setup-lab1.py --checkpoint</code>. Du kan se forskjellen slik:</p>
     <pre>code --diff .kurs\Pipeline.forsok.cs src\Worker\Pipeline.cs</pre>
-    <div class="callout warn"><b>Redningsnett</b>Les den ferdige pipelinen etterpå og finn ut hvilket steg du manglet før du går videre til Lab 2.</div>
+    <div class="callout warn"><b>Redningsnett</b>Les den ferdige pipelinen etterpå og finn ut hvilket steg du manglet. Commit, push og kjør deployen før lunsj uansett.</div>
   </section>
 
   <section>

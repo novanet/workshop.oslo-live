@@ -24,10 +24,10 @@
   <header class="hero">
     <div class="eyebrow">Før kursstart · Mini-Nils</div>
     <h1>Prerequisites</h1>
-    <p class="lede">Dette må være på plass før du begynner å bygge agenten. Du trenger ikke ha deployet noe på forhånd; kurset tar deg gjennom resten.</p>
+    <p class="lede">Dette må være på plass før du begynner å bygge agenten. Du trenger ikke ha deployet noe på forhånd, og du trenger ingen Azure-innlogging. Deployen går fra GitHub Actions.</p>
     <div class="facts">
-      <div class="fact"><b>Forberedelse</b><span>15–30 minutter hvis du bruker devcontainer.</span></div>
-      <div class="fact"><b>Miljø</b><span>Codespace eller lokal devcontainer er anbefalt.</span></div>
+      <div class="fact"><b>Forberedelse</b><span>15–30 minutter.</span></div>
+      <div class="fact"><b>Miljø</b><span>PowerShell 7 lokalt. Devcontainer eller Codespace er fallback.</span></div>
       <div class="fact"><b>Første mål</b><span>Få en grønn miljøsjekk før Lab 1.</span></div>
     </div>
   </header>
@@ -38,9 +38,9 @@
     <ul class="checklist">
       <li>En GitHub-konto som kan opprette et privat repository.</li>
       <li>Tilgang til <a href="https://github.com/novanet/workshop.oslo-live" target="_blank" rel="noopener"><code>novanet/workshop.oslo-live</code></a> gjennom et klassisk GitHub-token med bare <code>public_repo</code>. Kurslederen legger deg til som collaborator med Write først; godta invitasjonen på e-post eller på repoet.</li>
-      <li>En laptop der du kan åpne Codespaces eller kjøre en devcontainer, alternativt tilgang til en ferdig kursmaskin.</li>
+      <li>En laptop med PowerShell 7 (<code>pwsh</code>), .NET 10 SDK, Git, <code>gh</code> og Python 3.</li>
       <li>En kopi av <code>mini-nils.zip</code>, lastet ned og pakket ut lokalt.</li>
-      <li>En nettleser som kan logge inn på GitHub og Azure med kurskontoene dine.</li>
+      <li>En nettleser der du er logget inn på GitHub.</li>
     </ul>
   </section>
 
@@ -48,12 +48,12 @@
     <h2>Velg arbeidsmiljø</h2>
     <div class="grid">
       <div class="card">
-        <h3>Devcontainer eller Codespace</h3>
-        <p>Anbefalt. Starter-kitet har et ferdig miljø med .NET 10, GitHub CLI, Azure CLI, Node.js og Claude Code. Du slipper å feilsøke lokale versjoner.</p>
+        <h3>Lokalt med pwsh</h3>
+        <p>Hovedsporet. Installer PowerShell 7, .NET 10 SDK, Git, <code>gh</code> og Python 3. Alle kommandoene i labbene er skrevet for <code>pwsh</code>. Du trenger ikke <code>az</code>, <code>jq</code>, Docker, Node.js eller Claude Code lokalt. Dry-run kaller ikke Claude, og Claude Code ligger i worker-imaget i Azure.</p>
       </div>
       <div class="card">
-        <h3>Lokalt miljø</h3>
-        <p>Installer .NET 10 SDK, Git, <code>gh</code>, Azure CLI, Node.js og Claude Code selv. Lab 2 trenger også <code>curl</code> og <code>jq</code>. <code>jq</code> leser JSON-filer fra Azure og plukker ut for eksempel mottaks-URL-en.</p>
+        <h3>Devcontainer eller Codespace</h3>
+        <p>Fallback hvis du ikke får installert verktøyene. Starter-kitet har et ferdig miljø med .NET 10, <code>gh</code> og <code>pwsh</code>. Start <code>pwsh</code> i terminalen, så virker kommandoene i labbene likt.</p>
       </div>
       <div class="card">
         <h3>Hvis noe er blokkert</h3>
@@ -64,24 +64,24 @@
   </section>
 
   <section>
-    <h2>Tilganger fra kurslederen</h2>
-    <p class="intro">Du skal ikke gjette deg fram til kursverdier eller bruke private produksjonsressurser.</p>
+    <h2>Tilganger og verdier</h2>
+    <p class="intro">Du skal ikke gjette deg fram til kursverdier eller bruke private produksjonsressurser. Tre verdier får du av kurslederen, to lager du selv. Alt legges inn i ditt eget agentrepo mot slutten av Lab 1.</p>
     <div class="tablewrap">
       <table>
-        <thead><tr><th>Tilgang</th><th>Når</th><th>Hvem leverer den</th><th>Hva du gjør</th></tr></thead>
+        <thead><tr><th>Verdi</th><th>Når</th><th>Hvem leverer den</th><th>Hva du gjør</th></tr></thead>
         <tbody>
-          <tr><td><code>ANTHROPIC_API_KEY</code></td><td>Lab 1 og 2</td><td>Kurslederen</td><td>Legg kursnøkkelen i lokal <code>.env</code> for dry-run og som repository secret for Azure-deploy. Du skal normalt ikke betale selv; Claude.ai og Anthropic API er separate tjenester.</td></tr>
-          <tr><td><code>ANTHROPIC_WORKSPACE_ID</code></td><td>Standard i zip</td><td>Kurslederen</td><td>Kursets workspace-ID ligger i starter-kitet og brukes som fallback hvis en eldre <code>.env</code>-fil mangler variabelen. API-nøkkelen må ha tilgang til workspace-et.</td></tr>
-          <tr><td>Azure-kursverdier</td><td>Lab 2</td><td>Starter-kitet</td><td>GitHub Actions bruker <code>rg-agentic-workshop</code>, felles ACR og pull-identitet automatisk.</td></tr>
-          <tr><td><code>WEBHOOK_SECRET</code></td><td>Lab 2</td><td>Kurslederen</td><td>Legg samme verdi som kurslederen registrerer på GitHub-webhooken, som repository secret.</td></tr>
-          <tr><td><code>AZURE_CREDENTIALS</code></td><td>Actions</td><td>Kurslederen</td><td>Repository secret med service-principalens komplette JSON. Workflowen bruker den til å opprette, bygge og deploye deltakerens ressurser.</td></tr>
-          <tr><td><code>AGENT_MENTION</code></td><td>Valgfritt, Lab 2</td><td>Deltakeren</td><td>GitHub-login uten <code>@</code>. Aktiverer svar på mentions i PR-kommentarer og review-tråder.</td></tr>
-          <tr><td>Azure subscription</td><td>Lab 2</td><td>Kurslederen</td><td>Logg inn med kurskontoen og velg riktig subscription med <code>az account show</code>.</td></tr>
+          <tr><td><code>GH_TOKEN</code></td><td>Før Lab 1</td><td>Du selv</td><td>Klassisk token med bare <code>public_repo</code> og kort utløp. Legg det i lokal <code>.env</code> for dry-run og som repository secret.</td></tr>
+          <tr><td><code>AGENT_NAME</code></td><td>Før Lab 1</td><td>Du selv</td><td>Agentnavnet ditt, for eksempel <code>kari</code>. 3–12 tegn, små bokstaver, tall og bindestrek, og det må starte med en bokstav. Legg det i lokal <code>.env</code> og som repository variable. Det er også etiketten agenten lytter etter.</td></tr>
+          <tr><td><code>AZURE_CREDENTIALS</code></td><td>Slutten av Lab 1</td><td>Kurslederen</td><td>Repository secret. Gir Contributor på den delte ressursgruppen <code>rg-agentic-workshop</code>. Bruk den bare i GitHub Actions, aldri lokalt, og ikke del den videre.</td></tr>
+          <tr><td><code>ANTHROPIC_API_KEY</code></td><td>Slutten av Lab 1</td><td>Kurslederen</td><td>Repository secret. Én felles kursnøkkel med ett felles kostnadstak. Du trenger den ikke lokalt, dry-run kaller ikke Claude.</td></tr>
+          <tr><td><code>WEBHOOK_SECRET</code></td><td>Slutten av Lab 1</td><td>Kurslederen</td><td>Repository secret. Samme verdi som kurslederen bruker når webhooken registreres.</td></tr>
+          <tr><td><code>ANTHROPIC_WORKSPACE_ID</code></td><td>Standard i zip</td><td>Kurslederen</td><td>Kursets workspace-ID ligger allerede i starter-kitet. Du gjør ingenting.</td></tr>
+          <tr><td>Azure-kursverdier</td><td>Lab 1 og 2</td><td>Starter-kitet</td><td>GitHub Actions bruker <code>rg-agentic-workshop</code>, felles ACR og pull-identitet automatisk.</td></tr>
         </tbody>
       </table>
     </div>
-    <div class="callout"><b>GitHub Actions-innstillinger før Lab 2</b><strong>Repository variable:</strong> <code>AGENT_NAME</code> (påkrevd), eventuelt <code>AGENT_MENTION</code> og <code>CLAUDE_MODEL</code>. <strong>Repository secrets:</strong> <code>AZURE_CREDENTIALS</code>, <code>GH_TOKEN</code>, <code>ANTHROPIC_API_KEY</code> og <code>WEBHOOK_SECRET</code> (alle påkrevd). Ingen andre variables eller secrets er nødvendige.</div>
-    <div class="callout"><b>Repo-scoped kurs-token</b><code>GH_TOKEN</code> lager du selv som et klassisk token med bare <code>public_repo</code> på <a href="https://github.com/settings/tokens/new?scopes=public_repo&amp;description=oslo-live-workshop" target="_blank" rel="noopener">GitHub</a>. Oslo Live er et offentlig repo, så tokenet når ikke private repoer. Du må ha godtatt collaborator-invitasjonen til <code>novanet/workshop.oslo-live</code>, ellers får tokenet ikke skrive. Lab 1 bruker tokenet fra lokal <code>.env</code> i lesende dry-run. Til Lab 2 legges tokenet som repository secret <code>GH_TOKEN</code> i deltakerrepoet.</div>
+    <div class="callout"><b>GitHub Actions-innstillinger</b><strong>Repository variable:</strong> <code>AGENT_NAME</code>. <strong>Repository secrets:</strong> <code>AZURE_CREDENTIALS</code>, <code>GH_TOKEN</code>, <code>ANTHROPIC_API_KEY</code> og <code>WEBHOOK_SECRET</code>. Ingen andre variables eller secrets er nødvendige.</div>
+    <div class="callout"><b>Kurs-tokenet med public_repo</b><code>GH_TOKEN</code> lager du selv som et klassisk token med bare <code>public_repo</code> på <a href="https://github.com/settings/tokens/new?scopes=public_repo&amp;description=oslo-live-workshop" target="_blank" rel="noopener">GitHub</a>. Vær klar over hva det gir: <code>public_repo</code> når alle offentlige repoer du kan skrive til, ikke bare Oslo Live. Derfor skal det ha kort utløp, og workeren er låst til <code>TARGET_REPO</code> (<code>novanet/workshop.oslo-live</code>) og avviser andre repoer. Du må ha godtatt collaborator-invitasjonen, ellers får tokenet ikke skrive. Lab 1 bruker tokenet fra lokal <code>.env</code> i lesende dry-run. Azure-workeren får det som repository secret.</div>
   </section>
 
   <section>
@@ -106,9 +106,11 @@
         <div class="step-number">3</div>
         <div>
           <h3>Lagre verdien lokalt</h3>
-          <pre>cp .env.example .env
-GH_TOKEN=ghp_...</pre>
-          <p>GitHub viser tokenverdien bare én gang. Legg den som repository secret med navnet <code>GH_TOKEN</code>; ikke legg den i kode, issue, PR eller skjermbilde. Hvis Azure-workeren logger <code>addComment</code> eller <code>replaceActorsForAssignable</code>, kontroller først at du har godtatt collaborator-invitasjonen, deretter at tokenet har <code>public_repo</code>.</p>
+          <pre>Copy-Item .env.example .env</pre>
+          <p>Åpne <code>.env</code> og fyll inn:</p>
+          <pre>GH_TOKEN=ghp_...
+AGENT_NAME=kari</pre>
+          <p>GitHub viser tokenverdien bare én gang. Mot slutten av Lab 1 legger du den også inn som repository secret <code>GH_TOKEN</code>. Ikke legg den i kode, issue, PR eller skjermbilde. Hvis Azure-workeren logger <code>addComment</code> eller <code>replaceActorsForAssignable</code>, sjekk først at du har godtatt collaborator-invitasjonen, deretter at tokenet har <code>public_repo</code>.</p>
         </div>
       </div>
     </div>
@@ -116,28 +118,29 @@ GH_TOKEN=ghp_...</pre>
 
   <section>
     <h2>Miljøsjekk</h2>
-    <p class="intro">Kjør dette fra mappen der du pakket ut starter-kitet. Versjonsnumrene kan være nyere, men kommandoene skal svare uten feil.</p>
-    <pre>dotnet --version
+    <p class="intro">Kjør dette i <code>pwsh</code> fra mappen der du pakket ut starter-kitet. Versjonsnumrene kan være nyere, men kommandoene skal svare uten feil.</p>
+    <pre>$PSVersionTable.PSVersion
+dotnet --version
 git --version
 gh --version
-az --version
-node --version
-claude --version
+gh auth status
+python --version
 dotnet build</pre>
-    <div class="callout"><b>Ferdig</b>Du er klar for Lab 1 når verktøyene svarer, løsningen bygger grønt og kurslederen har gitt deg <code>ANTHROPIC_API_KEY</code>. Test GitHub-tokenet uten API-kall med <code>dotnet run --project src/Worker -- --issue 1 --repo novanet/workshop.oslo-live --dry-run</code>. Ingen lokal issue-kjøring skal reservere, kommentere eller opprette PR; det skjer først fra Azure i Lab 2.</div>
+    <div class="callout"><b>Ferdig</b>Du er klar for Lab 1 når verktøyene svarer, <code>gh auth status</code> viser at du er logget inn, og løsningen bygger grønt. Test GitHub-tokenet uten API-kall med <code>dotnet run --project src/Worker -- --issue 1 --repo novanet/workshop.oslo-live --dry-run</code>. Ingen lokal issue-kjøring skal reservere, kommentere eller opprette PR. Det skjer først fra Azure i Lab 2.</div>
   </section>
 
   <section>
     <h2>Hvis betalingen eller nøkkelen stopper deg</h2>
-    <p class="intro">Du skal normalt ikke kjøpe API-kreditt selv for kurset. Claude.ai-abonnement og Anthropic API-betaling er separate.</p>
-    <div class="callout warn"><b>Anthropic workspace-feil</b>Den nyeste starter-koden setter kursets workspace-ID automatisk hvis <code>.env</code> mangler variabelen. Hvis feilen fortsatt vises, hent den nyeste <code>mini-nils.zip</code> og kontroller at oppstartloggen sier at Anthropic workspace-ID er satt. API-nøkkelen må komme fra kurslederen og ha tilgang til workspace-et. Ikke send API-nøkkel i chat. <code>--dry-run</code> kan fortsatt brukes uten nøkkel.</div>
+    <p class="intro">Du skal ikke kjøpe API-kreditt selv. Claude.ai-abonnement og Anthropic API-betaling er separate.</p>
+    <div class="callout warn"><b>Anthropic-nøkkelen</b>Kurset har én felles Anthropic-nøkkel med ett felles kostnadstak. Den legges bare som repository secret og brukes av Azure-workeren. Du trenger den ikke lokalt, <code>--dry-run</code> virker uten. Ikke send nøkkelen i chat. Feiler Azure-jobben på nøkkel eller workspace, si fra til kurslederen.</div>
   </section>
 
   <section>
     <h2>Ikke nødvendig før start</h2>
     <ul class="checklist">
-      <li>Du trenger ikke opprette Azure-ressurser selv før kurset.</li>
-      <li>Du trenger ikke lage en egen webhook før kurslederen har gitt deg URL og hemmelighet.</li>
+      <li>Du trenger ingen Azure-konto, Azure-innlogging eller <code>az</code>. Deployen kjører fra GitHub Actions.</li>
+      <li>Du trenger ikke opprette Azure-ressurser selv.</li>
+      <li>Du trenger ikke lage webhooken. Kurslederen kobler den til i lunsjen.</li>
       <li>Du trenger ikke forstå hele workeren før Lab 1; du implementerer <code>RunStages</code> steg for steg.</li>
     </ul>
   </section>

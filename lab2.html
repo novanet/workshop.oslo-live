@@ -25,36 +25,47 @@
   <header class="hero">
     <div class="eyebrow">Sjekkpunkt 2 · Azure</div>
     <h1>Lab 2: Til skyen</h1>
-    <p class="lede">Deploy agenten slik at en merket GitHub-issue gir en pull request fra Azure, uten at laptopen din er med. Test mottaket og gjør én liten endring som krever ny deploy.</p>
+    <p class="lede">Agenten din er deployet, og kurslederen koblet webhooken i lunsjen. Nå merker du en issue og ser at Azure-jobben leverer en pull request, uten at laptopen din er med.</p>
     <div class="facts">
       <div class="fact"><b>Mål</b><span>En issue starter en jobb fra null i Azure.</span></div>
       <div class="fact"><b>Arbeidssted</b><span>Kursets felles ressursgruppe og ACR, med din egen agent-identitet.</span></div>
-      <div class="fact"><b>Ferdig når</b><span>PR-en er opprettet av Container Apps Job.</span></div>
+      <div class="fact"><b>Ferdig når</b><span>En merket issue gir en PR opprettet av Azure-jobben.</span></div>
     </div>
   </header>
 
   <section>
     <h2>Før du starter</h2>
-    <p class="intro">Lab 2 bygger på agenten du implementerte i Lab 1. Kryss av dette før du deployer:</p>
+    <p class="intro">Lab 2 bygger på det du gjorde før lunsj. Kryss av dette:</p>
     <ul class="checklist">
-      <li>Lab 1 er nådd, eller du har kjørt <code>./sjekkpunkt.sh lab1</code> og <code>dotnet build</code> er grønt.</li>
-      <li>Kurslederen gir deg <code>AZURE_CREDENTIALS</code>, <code>GH_TOKEN</code>, <code>ANTHROPIC_API_KEY</code> og <code>WEBHOOK_SECRET</code>. Du legger dem selv som repository secrets i agentrepoet ditt, og setter <code>AGENT_NAME</code> som repository variable.</li>
-      <li><code>AZURE_CREDENTIALS</code> er et service-principal-JSON som GitHub Actions bruker. Du trenger ikke en personlig Azure-bruker med Contributor-tilgang for å deploye.</li>
-      <li><code>GH_TOKEN</code> er et klassisk token med <strong>public_repo</strong>, og du må ha godtatt collaborator-invitasjonen til <code>novanet/workshop.oslo-live</code>. Anthropic-nøkkelen kommer normalt fra kurslederen; du skal ikke betale selv.</li>
-      <li>Starter-kitet bruker kursets felles ressursgruppe, registry og pull-identitet automatisk. <code>az</code> er bare nødvendig hvis du har fått separat lesetilgang til Azure; <code>curl</code> holder for helsesjekken.</li>
+      <li>Sjekkpunkt 1 er nådd: <code>RunStages</code> bygger grønt, eller du har kjørt <code>./sjekkpunkt.ps1 lab1</code>, og første deploy fra Actions er grønn.</li>
+      <li>Du har <code>Receiver URL</code> og <code>Issue label</code> fra <strong>Actions → Summary</strong>. Med <code>AGENT_NAME=kari</code> er etiketten <code>kari</code>.</li>
+      <li>Kurslederen har koblet webhooken din til Oslo Live i lunsjen.</li>
     </ul>
-    <div class="callout"><b>Første virkelige kjøring</b>Lab 1 var lokal og skrivebeskyttet. Ikke opprett PR, skriv kommentar eller tildel issue manuelt. Etter at webhooken er koblet til, er det Azure-workeren som tildeler issue, skriver kommentarer og oppretter PR.</div>
+    <div class="callout"><b>Første virkelige kjøring</b>Lab 1 var lokal og skrivebeskyttet. Ikke opprett PR, skriv kommentar eller tildel issue manuelt. Nå er det Azure-workeren som tildeler issue, skriver kommentarer og oppretter PR.</div>
   </section>
 
   <section>
-    <h2>Dette deployer du</h2>
+    <h2>Dette kjører i Azure</h2>
     <div class="grid">
-      <div class="card"><h3>Receiver</h3><p>En Container App som validerer webhook-signaturen og legger en melding i Storage Queue. Den har <code>minReplicas: 0</code>.</p></div>
+      <div class="card"><h3>Receiver</h3><p>En Container App som validerer webhook-signaturen og legger en melding i Storage Queue. Under kurset har den <code>minReplicas: 1</code>, så GitHub ikke venter på kaldstart. GitHub gir opp etter 10 sekunder.</p></div>
       <div class="card"><h3>Queue</h3><p>Storage Queue holder oppgaven til KEDA ser meldingen og starter en worker-kjøring.</p></div>
-      <div class="card"><h3>Worker</h3><p>En Container Apps Job kloner repoet, kjører <code>claude -p</code>, bygger, tester og åpner PR.</p></div>
-      <div class="card"><h3>Konfigurasjon</h3><p>GitHub Actions logger inn med <code>AZURE_CREDENTIALS</code> og sender <code>GH_TOKEN</code>, <code>ANTHROPIC_API_KEY</code> og <code>WEBHOOK_SECRET</code> secure til deployen.</p></div>
+      <div class="card"><h3>Worker</h3><p>En Container Apps Job som skalerer til null. Den kloner repoet, kjører <code>claude -p</code>, bygger, tester og åpner PR.</p></div>
+      <div class="card"><h3>Konfigurasjon</h3><p>GitHub Actions logget inn med <code>AZURE_CREDENTIALS</code> og sendte <code>GH_TOKEN</code>, <code>ANTHROPIC_API_KEY</code> og <code>WEBHOOK_SECRET</code> secure til deployen.</p></div>
     </div>
-    <div class="callout"><b>Viktig skille</b>Issuen og PR-en bor i fellesrepoet. Receiver, worker, kø og hemmeligheter ligger i kursets felles ressursgruppe, med unike navn avledet fra <code>AGENT_NAME</code>. Container Registryet er felles for kurset, men bildene ligger under <code>mini-nils/&lt;agent-label&gt;/</code>, slik at deltakerne ikke overskriver hverandre.</div>
+    <div class="callout"><b>Viktig skille</b>Issuen og PR-en bor i fellesrepoet. Receiver, worker og kø ligger i kursets felles ressursgruppe, med unike navn avledet fra <code>AGENT_NAME</code>. Container Registryet er felles for kurset, men bildene ligger under <code>mini-nils/kari/</code>, slik at deltakerne ikke overskriver hverandre. Receiver og worker godtar bare <code>TARGET_REPO</code>, som er <code>novanet/workshop.oslo-live</code>.</div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>GitHub-innstilling</th><th>Navn</th><th>Bruk</th></tr></thead>
+        <tbody>
+          <tr><td>Repository variable</td><td><code>AGENT_NAME</code></td><td>Agentnavnet, for eksempel <code>kari</code>. Gir etikett, Azure-navn og ACR-namespace.</td></tr>
+          <tr><td>Repository secret</td><td><code>AZURE_CREDENTIALS</code></td><td>Contributor på den delte ressursgruppen. Bare i GitHub Actions.</td></tr>
+          <tr><td>Repository secret</td><td><code>GH_TOKEN</code></td><td>Ditt klassiske token med <code>public_repo</code>.</td></tr>
+          <tr><td>Repository secret</td><td><code>ANTHROPIC_API_KEY</code></td><td>Kursets felles Anthropic-nøkkel.</td></tr>
+          <tr><td>Repository secret</td><td><code>WEBHOOK_SECRET</code></td><td>Samme verdi som webhooken er registrert med.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="small">Dette satte du i Lab 1, og det er hele listen.</p>
   </section>
 
   <section>
@@ -63,9 +74,8 @@
       <div class="card">
         <h3>Les Actions Summary</h3>
         <p>Åpne den ferdige workflow-kjøringen og velg <strong>Summary</strong>. Der finner du <code>Receiver URL</code>, <code>Issue label</code> og <code>Worker job</code>. <code>.deploy-outputs.json</code> ligger bare på den midlertidige Actions-runneren og skal ikke forventes lokalt.</p>
-        <pre>RECEIVER_URL='https://ca-...azurecontainerapps.io'
-WORKER_JOB_NAME='caj-...-worker'</pre>
-        <p>Kopier verdiene fra sammendraget til terminalen når du skal teste mottaket eller følge jobben.</p>
+        <pre>$ReceiverUrl = 'https://ca-...azurecontainerapps.io'</pre>
+        <p>Kopier adressen fra sammendraget inn i terminalen.</p>
       </div>
       <div class="card">
         <h3>KEDA starter jobben</h3>
@@ -77,105 +87,67 @@ WORKER_JOB_NAME='caj-...-worker'</pre>
   </section>
 
   <section>
-    <h2>Deploy i seks trinn</h2>
+    <h2>Fra issue til PR i fem trinn</h2>
     <div class="steps">
       <article class="step">
         <div class="step-number">1</div>
         <div>
-          <p class="meta">Repository settings</p>
-          <h3>Gjør repoet klart for Actions</h3>
-          <p>Kurslederen gir deg verdiene. Legg <code>AZURE_CREDENTIALS</code>, <code>GH_TOKEN</code>, <code>ANTHROPIC_API_KEY</code> og <code>WEBHOOK_SECRET</code> som repository secrets, og sett <code>AGENT_NAME</code> som repository variable.</p>
-          <pre>AGENT_NAME=litj-nils
-gh variable set AGENT_NAME --repo OWNER/REPO --body "$AGENT_NAME"</pre>
-          <p class="small"><code>AZURE_CREDENTIALS</code> brukes av <code>azure/login@v2</code>. Ikke kopier den til <code>.env</code> eller bruk den som lokal Azure-innlogging.</p>
+          <p class="meta">Mottaket</p>
+          <h3>Sjekk at receiveren svarer</h3>
+          <pre>$ReceiverUrl = 'https://ca-...azurecontainerapps.io'
+Invoke-RestMethod "$ReceiverUrl/"</pre>
+          <p class="small">Forvent: <code>Mini-Nils receiver. Listening for the «kari» label.</code> <code>curl.exe "$ReceiverUrl/"</code> gir det samme.</p>
         </div>
       </article>
       <article class="step">
         <div class="step-number">2</div>
         <div>
-          <p class="meta">Deploy</p>
-          <h3>Start workflowen</h3>
-          <p>Push til <code>main</code>, eller åpne <strong>Actions → Build and deploy Mini-Nils → Run workflow</strong>. Workflowen logger inn med <code>AZURE_CREDENTIALS</code>, oppretter eller oppdaterer ressursene, bygger bildene i kursets felles ACR og deployer på nytt med de namespacede bildene.</p>
-          <p class="small">Du skal ikke opprette eget ACR, kjøre deploy-skriptet lokalt, kjøre <code>az login</code> eller bruke <code>docker login</code>.</p>
+          <p class="meta">Trigger</p>
+          <h3>Merk en issue med etiketten din</h3>
+          <p>Åpne <a href="https://github.com/novanet/workshop.oslo-live/issues" target="_blank" rel="noopener">GitHub Issues</a> og velg en av <strong>Feil 2 til 5</strong> som ingen har tatt ennå. Sett etiketten fra Summary på den, i nettleseren eller slik:</p>
+          <pre>gh issue edit 3 --repo novanet/workshop.oslo-live --add-label kari</pre>
+          <p class="small">Bytt <code>3</code> med issuen du valgte. Receiveren mottar alle hendelser, men sender bare dine videre. Ikke tildel issuen, skriv startkommentar eller opprett PR selv.</p>
         </div>
       </article>
       <article class="step">
         <div class="step-number">3</div>
         <div>
-          <p class="meta">Actions Summary</p>
-          <h3>Kontroller deployen</h3>
-          <p>Åpne den ferdige workflow-kjøringen og velg <strong>Summary</strong>. Kopier <code>Receiver URL</code>, <code>Issue label</code> og <code>Worker job</code> derfra.</p>
-          <pre>RECEIVER_URL='https://ca-...azurecontainerapps.io'
-WORKER_JOB_NAME='caj-...-worker'
-curl "$RECEIVER_URL/"</pre>
-          <p class="small">Forvent: <code>Mini-Nils receiver. Listening for the «mini-kari» label.</code> Output-filen <code>.deploy-outputs.json</code> ligger bare på Actions-runneren.</p>
+          <p class="meta">Mens du venter · 401</p>
+          <h3>Test at mottaket avviser feil hemmelighet</h3>
+          <pre>$Body = '{"repo":"novanet/workshop.oslo-live","issueNumber":2}'
+curl.exe -i -X POST "$ReceiverUrl/tasks" `
+  -H "X-Webhook-Secret: deliberately-wrong" `
+  -H "Content-Type: application/json" `
+  --data-raw $Body</pre>
+          <p>Forvent <code>401 Unauthorized</code>. Dette starter ingen jobb. Finn kontrollen i <code>src/Receiver/Program.cs</code>. <code>/tasks</code> krever hemmeligheten i en header, og webhooken fra GitHub er signert med HMAC. Selve kømeldingen er ikke signert, så mottaket er porten.</p>
         </div>
       </article>
       <article class="step">
         <div class="step-number">4</div>
         <div>
-          <p class="meta">Webhook · kursleder</p>
-          <h3>Be om kobling til Oslo Live</h3>
-          <p>Du har ikke admin på fellesrepoet. Si fra når deployen er ferdig; kurslederen registrerer webhooken, lager etiketten og kobler URL-en til repoet.</p>
-          <p class="small">Vil du aktivere svar på PR-mentions, sett <code>AGENT_MENTION</code> som repository variable. Bruk loginet som <code>GH_TOKEN</code> tilhører. Kurslederens webhook-skript registrerer de nødvendige kommentar- og review-hendelsene.</p>
+          <p class="meta">Følg jobben</p>
+          <h3>Les issue-kommentarene</h3>
+          <pre>gh issue view 3 --repo novanet/workshop.oslo-live --comments</pre>
+          <p>KEDA sjekker køen hvert 30. sekund, så litt venting er normalt. Først kommer startkommentaren fra agenten, så sluttkommentaren med PR-adresse og forbrukstabell. Lukk laptopen mens jobben kjører. PR-en skal komme fra workeren i Azure, ikke fra terminalen din.</p>
+          <p class="small">Worker-loggen i Azure kan kurslederen vise. Ved feilsøking kan kurslederen midlertidig sette <code>CLAUDE_VERBOSE=true</code> i <code>env:</code>-blokken øverst i <code>.github/workflows/deploy-azure.yml</code> før en ny kjøring. Sett verdien tilbake etterpå.</p>
         </div>
       </article>
       <article class="step">
         <div class="step-number">5</div>
         <div>
-          <p class="meta">Trigger</p>
-          <h3>Merk en issue med agentetiketten</h3>
-          <p>Åpne <a href="https://github.com/novanet/workshop.oslo-live/issues" target="_blank" rel="noopener">GitHub Issues</a>, velg en ledig oppgave kurslederen har anbefalt, og sett etiketten til navnet fra deployen. Receiveren mottar alle hendelser, men sender bare dine videre. Ikke tildel issue, skriv startkommentar eller opprett PR selv; workeren gjør dette fra Azure.</p>
-          <pre>az containerapp job execution list -g rg-agentic-workshop `
-  -n "$WORKER_JOB_NAME" -o table</pre>
-          <p class="small">KEDA sjekker køen hvert 30. sekund, så opptil 30 sekunders venting er normalt.</p>
-          <div class="callout"><b>PR-mention</b>Skriv <code>@github-loginet-ditt</code> i en PR-kommentar eller inline review-kommentar. Agenten får kommentaren som en egen kømelding, leser PR-en uten å endre kode og svarer. Inline review-kommentarer får svar i samme tråd; en vanlig PR-kommentar får et nytt svar i PR-samtalen.</div>
+          <p class="meta">Pull request · sjekkpunkt</p>
+          <h3>Les PR-en</h3>
+          <pre>gh pr list --repo novanet/workshop.oslo-live --author "@me"</pre>
+          <p>Åpne PR-en og les rapporten og forbrukstabellen. Agenten merger ikke selv; PR-en venter på review fra et menneske. Var bygget rødt, er PR-en et utkast.</p>
+          <div class="callout"><b>Sjekkpunkt 2</b>En merket issue gir en pull request opprettet av Azure-jobben.</div>
         </div>
       </article>
-      <article class="step">
-        <div class="step-number">6</div>
-        <div>
-          <p class="meta">Logger · sjekkpunkt</p>
-          <h3>Følg kjøringen og les loggen</h3>
-          <pre>az containerapp job logs show -g rg-agentic-workshop `
-  -n "$WORKER_JOB_NAME" --container worker --follow</pre>
-          <p>Lukk laptopen mens jobben kjører. PR-en skal komme fra workeren i Azure, ikke fra terminalen din.</p>
-          <p class="small">Ved feilsøking kan kurslederen midlertidig sette <code>CLAUDE_VERBOSE=true</code> i <code>env:</code>-blokken øverst i <code>.github/workflows/deploy-azure.yml</code> før en ny kjøring. Sett verdien tilbake etterpå.</p>
-          <div class="callout"><b>Sjekkpunkt 2</b>En merket issue er tildelt av agenten, har fått agentens kommentarer, og har gitt en pull request som er opprettet av Azure-jobben. Vis kjøringen i Azure-portalen før du går videre.</div>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <section>
-    <h2>Deploy fra GitHub Actions</h2>
-    <p class="intro">Starter-kitet inneholder en workflow som kan bygge og rulle ut fra deltakerrepoet, uten Docker lokalt. Applikasjonshemmelighetene ligger som repository secrets og brukes bare under deploy.</p>
-    <div class="tablewrap">
-      <table>
-        <thead><tr><th>GitHub-innstilling</th><th>Navn</th><th>Påkrevd</th><th>Bruk</th></tr></thead>
-        <tbody>
-          <tr><td>Repository variable</td><td><code>AGENT_NAME</code></td><td>Ja</td><td>Unikt agentnavn, for eksempel <code>litj-nils</code>.</td></tr>
-          <tr><td>Repository variable</td><td><code>AGENT_MENTION</code></td><td>Nei</td><td>GitHub-login uten <code>@</code> for mention-svar.</td></tr>
-          <tr><td>Repository variable</td><td><code>CLAUDE_MODEL</code></td><td>Nei</td><td>Fallback-modell hvis <code>stages.json</code> ikke angir modell.</td></tr>
-          <tr><td>Repository secret</td><td><code>AZURE_CREDENTIALS</code></td><td>Ja</td><td>Service-principalens komplette Azure-credentials-JSON.</td></tr>
-          <tr><td>Repository secret</td><td><code>GH_TOKEN</code></td><td>Ja</td><td>Klassisk token med <code>public_repo</code>. Du må være collaborator på <code>novanet/workshop.oslo-live</code>.</td></tr>
-          <tr><td>Repository secret</td><td><code>ANTHROPIC_API_KEY</code></td><td>Ja</td><td>Kurslederens Anthropic API-nøkkel.</td></tr>
-          <tr><td>Repository secret</td><td><code>WEBHOOK_SECRET</code></td><td>Ja</td><td>Samme verdi som brukes ved GitHub-webhooken.</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="small">Dette er hele listen. Du trenger ingen andre GitHub variables eller repository secrets for deploy.</p>
-    <div class="grid">
-      <div class="card"><h3>1. Repository secrets</h3><p>Legg <code>GH_TOKEN</code>, <code>ANTHROPIC_API_KEY</code>, <code>WEBHOOK_SECRET</code> og <code>AZURE_CREDENTIALS</code> som repository secrets i deltakerrepoet.</p></div>
-      <div class="card"><h3>2. Bruk repository secret</h3><p>Workflowen sender de tre applikasjonshemmelighetene som secure deploy-parametere. De lagres ikke i Key Vault, ACR eller image-lag.</p></div>
-      <div class="card"><h3>3. Legg inn agent-identiteten</h3><p>Sett bare <code>AGENT_NAME</code> som repository variable, for eksempel <code>litj-nils</code>. Ressursgruppe, Azure-suffiks og ACR-namespace avledes automatisk.</p></div>
-      <div class="card"><h3>4. Start deployen</h3><p>Push til <code>main</code>, eller åpne <strong>Actions → Build and deploy Mini-Nils → Run workflow</strong> og start den manuelt. Workflowen oppretter, bygger og deployer alt fra GitHub Actions.</p></div>
     </div>
   </section>
 
   <section>
     <h2>Se kostnaden i Log Analytics</h2>
-    <p class="intro">Workeren skriver en <code>LLM request completed</code>-linje for hver modellkjøring. Det er denne linjen som brukes i forbrukstabellen på PR-en og i Status.</p>
+    <p class="intro">Kurslederen kan vise dette i Azure-portalen. Workeren skriver en <code>LLM request completed</code>-linje for hver modellkjøring. Det er denne linjen som brukes i forbrukstabellen på PR-en og i Status.</p>
     <pre>ContainerAppConsoleLogs_CL
 | where ContainerName_s == "worker"
 | where Log_s contains "LLM request completed"
@@ -184,25 +156,15 @@ curl "$RECEIVER_URL/"</pre>
   </section>
 
   <section>
-    <h2>Feilsøk en kontrollert feil og deploy en endring</h2>
-    <p class="intro">Test først at mottaket avviser en ugyldig intern kømelding. Dette skal ikke starte en jobb.</p>
-    <pre>curl -i -X POST "$RECEIVER_URL/tasks" `
-  -H "X-Webhook-Secret: deliberately-wrong" `
-  -H "Content-Type: application/json" `
-  -d '{"repo":"novanet/workshop.oslo-live","issueNumber":2}'</pre>
-    <p>Forvent <code>401 Unauthorized</code>. Finn kontrollen i <code>src/Receiver/Program.cs</code> og forklar hvorfor hemmeligheten ikke skal ligge i URL-en, kildekoden eller terminalhistorikken.</p>
-    <p>Gjør deretter én liten endring i <code>infra/main.bicep</code>:</p>
+    <h2>Hvis du blir tidlig ferdig</h2>
+    <p class="intro">Gjør én liten endring i <code>infra/main.bicep</code> som krever ny deploy.</p>
     <ul class="checklist">
       <li>Endre <code>pollingInterval</code> i KEDA-regelen fra <code>30</code> til <code>15</code>.</li>
-      <li>Push endringen og start <strong>Actions → Build and deploy Mini-Nils → Run workflow</strong> for å bygge og rulle ut på nytt.</li>
-      <li>Bekreft verdien med kommandoen under.</li>
+      <li>Commit og push til <code>main</code>. Deployen starter av seg selv i Actions.</li>
+      <li>Be kurslederen bekrefte den nye verdien i Azure.</li>
     </ul>
-    <pre>az containerapp job show `
-  -g rg-agentic-workshop `
-  -n "$WORKER_JOB_NAME" `
-  --query properties.configuration.eventTriggerConfig.scale.pollingInterval</pre>
-    <p class="small">Kommandoen krever separat Azure-lesetilgang. Uten den ber du kurslederen bekrefte verdien i portalen.</p>
-    <div class="callout"><b>Sjekkpunkt 2</b>Vis både <code>401</code>-testen og den nye polling-verdien i Azure.</div>
+    <p class="small">Du ber KEDA sjekke køen oftere. Du endrer ikke hvordan workeren behandler meldingen.</p>
+    <p>Finn også i <code>infra/main.bicep</code> hvor KEDA-regelen står, hvor repository secrets blir til jobbens miljøvariabler, og hvorfor mottaket har <code>minReplicas: 1</code> under kurset.</p>
   </section>
 
   <section>
@@ -210,14 +172,14 @@ curl "$RECEIVER_URL/"</pre>
     <div class="grid">
       <div class="card"><h3>Webhooken når ikke fram</h3><p>Ikke legg <code>WEBHOOK_SECRET</code> i terminalhistorikk eller del den i en issue. Be kurslederen kontrollere <strong>Recent deliveries</strong> og redelivere webhooken med kurslederens oppsett.</p></div>
       <div class="card"><h3>Deploy feiler på rettigheter</h3><p>Kontroller at <code>AZURE_CREDENTIALS</code> finnes som repository secret og at <code>AGENT_NAME</code> er satt. Hvis feilen fortsetter, må kurslederen rette service-principalens roller.</p></div>
-      <div class="card"><h3>Jobben feiler med en gang</h3><p>Hvis du har Azure-lesetilgang, les <code>az containerapp job logs show</code>; ellers be kurslederen hente loggen. Manglende miljøvariabler ligger vanligvis under <code>env:</code> i <code>infra/main.bicep</code>.</p></div>
+      <div class="card"><h3>Jobben feiler med en gang</h3><p>Be kurslederen hente worker-loggen. Manglende miljøvariabler ligger vanligvis under <code>env:</code> i <code>infra/main.bicep</code>.</p></div>
     </div>
   </section>
 
   <section>
     <h2>Behold miljøet til Lab 3</h2>
-    <p>Ikke slett ressursgruppen etter Lab 2. Lab 3 bygger videre på denne deployen og bruker samme Container Apps Job, Storage Queue, webhook og Azure-logger. Gjør eventuelle endringer i agenten lokalt først, push dem, og rull dem ut fra <strong>Actions → Build and deploy Mini-Nils → Run workflow</strong>.</p>
-    <div class="callout warn"><b>Rydding skjer etter siste lab</b>Vent med <code>az group delete</code> til Lab 3 og demoen er ferdig, og kurslederen sier fra.</div>
+    <p>Lab 3 bygger videre på denne deployen og bruker samme Container Apps Job, Storage Queue, webhook og Azure-logger. Gjør endringer i agenten lokalt, push dem, og deployen kjører fra Actions.</p>
+    <div class="callout warn"><b>Ikke slett noe</b>Ressursgruppen er delt av hele kurset. Ikke slett noe. Kurslederen rydder etter kurset.</div>
   </section>
 
   <footer class="footer">
