@@ -216,10 +216,7 @@
     th, td { padding: 10px 20px 10px 0; }
     table { font-size: clamp(17px, 1.8vw, 22px); }
     .kort { padding: 16px 18px; }
-    .tidslinje { gap: 6px 14px; }
-    .tidspunkt { grid-template-columns: minmax(125px, 160px) 1fr; gap: 14px; padding: 8px 14px; }
-    .tidspunkt b { line-height: 1.2; }
-    .tidspunkt span { line-height: 1.3; }
+    .tidspunkt { padding: 9px 10px 11px; }
     .lenker { margin-top: 4px; }
   }
 
@@ -259,24 +256,32 @@
   .modell-tekst { font-family: "IBM Plex Mono", monospace; font-size: 13px; fill: var(--accent); }
   .pil-tekst { font-family: "IBM Plex Mono", monospace; font-size: 13px; fill: var(--muted); }
   .sone-tekst { font-family: "IBM Plex Mono", monospace; font-size: 13px; letter-spacing: .09em; text-transform: uppercase; fill: var(--accent); }
-  .tidslinje { display: grid; gap: 6px; max-width: 980px; }
-  @media (min-width: 900px) {
-    .tidslinje { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 18px; max-width: none; }
-  }
+  /* Horisontal tidslinje: bredden på hver blokk følger varigheten (flex-grow = minutter). */
+  .tidslinje { display: flex; gap: 6px; align-items: stretch; width: 100%; }
   .tidspunkt {
-    display: grid; grid-template-columns: minmax(135px, 190px) 1fr; gap: 18px;
-    align-items: center; padding: 10px 16px; background: var(--surface);
-    border: 1px solid var(--line); border-radius: 10px;
+    flex: var(--min) 1 0; min-width: 0;
+    display: flex; flex-direction: column; gap: 6px;
+    padding: 12px 12px 14px; background: var(--surface);
+    border: 1px solid var(--line); border-top: 5px solid var(--accent); border-radius: 10px;
   }
-  .tidspunkt.pause { background: var(--mark-soft); border-color: var(--mark); }
+  .tidspunkt.pause { background: var(--mark-soft); border-color: var(--mark); border-top-color: var(--mark); padding-left: 6px; padding-right: 6px; }
   .tidspunkt .tid {
     color: var(--accent); font-family: "IBM Plex Mono", monospace;
-    font-size: clamp(17px, 1.8vw, 22px); font-variant-numeric: tabular-nums;
+    font-size: clamp(13px, 1.15vw, 17px); font-variant-numeric: tabular-nums; white-space: nowrap;
   }
-  .tidspunkt b { display: block; font-size: clamp(19px, 2vw, 25px); }
-  .tidspunkt span { color: var(--muted); font-size: clamp(17px, 1.7vw, 20px); }
-  @media (max-width: 640px) {
-    .tidspunkt { grid-template-columns: 1fr; gap: 4px; }
+  .tidspunkt.pause .tid { color: var(--mark); }
+  .tidspunkt b { display: block; font-size: clamp(16px, 1.45vw, 21px); line-height: 1.2; }
+  .tidspunkt span { display: block; color: var(--muted); font-size: clamp(14px, 1.2vw, 17px); line-height: 1.3; margin-top: 4px; }
+  .tidspunkt.smal b { font-size: clamp(13px, 1.1vw, 16px); font-weight: 600; }
+  /* Korte pauser: stående tekst så de får plass i en smal blokk. */
+  .tidspunkt.smal { align-items: center; justify-content: center; }
+  .tidspunkt.smal .tid, .tidspunkt.smal b { writing-mode: vertical-rl; transform: rotate(180deg); }
+  @media (max-width: 900px) {
+    .tidslinje { flex-direction: column; }
+    .tidspunkt, .tidspunkt.pause { flex: none; border-top-width: 1px; border-left: 5px solid var(--accent); }
+    .tidspunkt.pause { border-left-color: var(--mark); }
+    .tidspunkt.smal { align-items: flex-start; }
+    .tidspunkt.smal .tid, .tidspunkt.smal b { writing-mode: horizontal-tb; transform: none; }
   }
   .nummerert { counter-reset: steg; display: grid; gap: 12px; max-width: 980px; }
   .nummerert .steg {
@@ -446,16 +451,16 @@
   <section class="lysbilde">
     <p class="merkelapp">Kjøreplan · 08:30–15:30</p>
     <h2>Dette skjer i løpet av dagen</h2>
-    <div class="tidslinje">
-      <div class="tidspunkt"><div class="tid">08:30–09:00</div><div><b>Intro</b><span>Ca. 30 min om kursets mål, arkitektur og kjøreplan.</span></div></div>
-      <div class="tidspunkt"><div class="tid">09:00–11:00</div><div><b>Lab 1 · bygg pipelinen</b><span>Implementer lokalt, bygg og kjør dry-run. Ingen skriver til GitHub ennå.</span></div></div>
-      <div class="tidspunkt pause"><div class="tid">11:00</div><div><b>Pause med lett servering</b><span>Ta en kort stopp før Lab 1 fortsetter.</span></div></div>
-      <div class="tidspunkt"><div class="tid">11:15–12:15</div><div><b>Lab 1 · sjekkpunkt og første deploy</b><span>Sett secrets og <code>AGENT_NAME</code>, og kjør første deploy fra Actions.</span></div></div>
-      <div class="tidspunkt pause"><div class="tid">12:15–13:00</div><div><b>Felles lunsj</b><span>Kurslederen registrerer webhooks mens vi spiser.</span></div></div>
-      <div class="tidspunkt"><div class="tid">13:00–14:00</div><div><b>Lab 2 · fra issue til PR i Azure</b><span>Merk en issue og følg jobben. Sjekkpunkt 2: PR fra skyen.</span></div></div>
-      <div class="tidspunkt pause"><div class="tid">14:00–14:15</div><div><b>Pause med lett servering</b><span>Gjør klar siste endring og demo.</span></div></div>
-      <div class="tidspunkt"><div class="tid">14:15–15:00</div><div><b>Lab 3 · velg en forbedring</b><span>Endre én ting, kjør på nytt og sammenlign.</span></div></div>
-      <div class="tidspunkt"><div class="tid">15:00–15:30</div><div><b>Oppsummering og demo</b><span>Vis hva du har laget og hva du har lært.</span></div></div>
+    <div class="tidslinje" aria-label="Kjøreplan fra 08:30 til 15:30">
+      <div class="tidspunkt" style="--min:30"><div class="tid">08:30</div><b>Intro</b><span>Mål, arkitektur og plan.</span></div>
+      <div class="tidspunkt" style="--min:120"><div class="tid">09:00–11:00</div><b>Lab 1 · bygg pipelinen</b><span>Implementer RunStages, bygg og kjør dry-run. Ingen skriver til GitHub.</span></div>
+      <div class="tidspunkt pause smal" style="--min:15"><div class="tid">11:00</div><b>Pause</b></div>
+      <div class="tidspunkt" style="--min:60"><div class="tid">11:15–12:15</div><b>Lab 1 · deploy</b><span>Secrets og første deploy. Merk en issue før lunsj hvis du rekker det.</span></div>
+      <div class="tidspunkt pause" style="--min:45"><div class="tid">12:15</div><b>Lunsj</b><span>Agenten jobber mens vi spiser.</span></div>
+      <div class="tidspunkt" style="--min:60"><div class="tid">13:00–14:00</div><b>Lab 2 · issue til PR</b><span>Følg jobben og les PR-en. Velg Lab 3-spor mens du venter.</span></div>
+      <div class="tidspunkt pause smal" style="--min:15"><div class="tid">14:00</div><b>Pause</b></div>
+      <div class="tidspunkt" style="--min:45"><div class="tid">14:15–15:00</div><b>Lab 3 · én forbedring</b><span>Push, merk en issue, sammenlign.</span></div>
+      <div class="tidspunkt" style="--min:30"><div class="tid">15:00</div><b>Demo</b><span>Hva ble bedre?</span></div>
     </div>
   </section>
 
@@ -628,7 +633,7 @@
   <section class="lysbilde">
     <p class="merkelapp">13:00–14:00 · sjekkpunkt 2</p>
     <h2>Lab 2: fra issue til PR i Azure</h2>
-    <p class="ingress">Webhooken ble koblet i lunsjen. Nå skal agenten starte fra GitHub og levere PR fra Azure uten at laptopen din er med.</p>
+    <p class="ingress">Webhooken er koblet. Nå skal agenten starte fra GitHub og levere PR fra Azure uten at laptopen din er med. Merket du en issue før lunsj, kan PR-en allerede ligge der.</p>
     <div class="kort-rad">
       <div class="kort"><span class="tall">1</span><span class="navn">Sjekk receiveren</span><span class="om">Kall <code>Receiver URL</code> fra Actions Summary, og se at en usignert melding gir <code>401</code>.</span></div>
       <div class="kort"><span class="tall">2</span><span class="navn">Merk en issue</span><span class="om">Sett etiketten din på en issue i Oslo Live.</span></div>

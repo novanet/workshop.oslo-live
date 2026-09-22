@@ -25,7 +25,7 @@
   <header class="hero">
     <div class="eyebrow">Sjekkpunkt 2 · Azure</div>
     <h1>Lab 2: Til skyen</h1>
-    <p class="lede">Agenten din er deployet, og kurslederen koblet webhooken i lunsjen. Nå merker du en issue og ser at Azure-jobben leverer en pull request, uten at laptopen din er med.</p>
+    <p class="lede">Agenten din er deployet, og kurslederen har koblet webhooken. Nå merker du en issue og ser at Azure-jobben leverer en pull request, uten at laptopen din er med. Merket du en issue før lunsj, hopper du rett til steg 4.</p>
     <div class="facts">
       <div class="fact"><b>Mål</b><span>En issue starter en jobb fra null i Azure.</span></div>
       <div class="fact"><b>Arbeidssted</b><span>Kursets felles ressursgruppe og ACR, med din egen agent-identitet.</span></div>
@@ -39,7 +39,7 @@
     <ul class="checklist">
       <li>Sjekkpunkt 1 er nådd: <code>RunStages</code> bygger grønt, eller du har kjørt <code>./sjekkpunkt.ps1 lab1</code>, og første deploy fra Actions er grønn.</li>
       <li>Du har <code>Receiver URL</code> og <code>Issue label</code> fra <strong>Actions → Summary</strong>. Med <code>AGENT_NAME=kari</code> er etiketten <code>kari</code>.</li>
-      <li>Kurslederen har koblet webhooken din til Oslo Live i lunsjen.</li>
+      <li>Kurslederen har koblet webhooken din til Oslo Live, før eller i lunsjen.</li>
     </ul>
     <div class="callout"><b>Første virkelige kjøring</b>Lab 1 var lokal og skrivebeskyttet. Ikke opprett PR, skriv kommentar eller tildel issue manuelt. Nå er det Azure-workeren som tildeler issue, skriver kommentarer og oppretter PR.</div>
   </section>
@@ -112,8 +112,9 @@ Invoke-RestMethod "$ReceiverUrl/"</pre>
       <article class="step">
         <div class="step-number">3</div>
         <div>
-          <p class="meta">Mens du venter · 401</p>
-          <h3>Test at mottaket avviser feil hemmelighet</h3>
+          <p class="meta">Mens du venter</p>
+          <h3>Velg Lab 3-spor og test 401</h3>
+          <p>En kjøring tar typisk 10 til 20 minutter. Velg Lab 3-spor og gjør endringen lokalt, men ikke push før jobben din er ferdig. Test så at mottaket avviser feil hemmelighet:</p>
           <pre>$Body = '{"repo":"novanet/workshop.oslo-live","issueNumber":2}'
 curl.exe -i -X POST "$ReceiverUrl/tasks" `
   -H "X-Webhook-Secret: deliberately-wrong" `

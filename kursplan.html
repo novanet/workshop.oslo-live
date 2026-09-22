@@ -462,7 +462,7 @@
 <section>
   <div class="eyebrow">Kjøreplan</div>
   <h2>Programmet følger faste tider</h2>
-  <p class="intro">Vi starter med 30 minutter intro. Første deploy skjer før lunsj, og kurslederen registrerer webhooks mens vi spiser. Etter lunsj merker alle en issue og får en PR fra Azure. Sjekkpunktene viser hva laget skal ha levert før neste del.</p>
+  <p class="intro">Vi starter med 30 minutter intro. Første deploy skjer før lunsj, og kurslederen kobler webhooks fortløpende fra ca. 11:30 og resten i lunsjen. Etter lunsj merker alle en issue og får en PR fra Azure. Sjekkpunktene viser hva laget skal ha levert før neste del.</p>
   <div class="runsheet">
 
     <div class="slot">
@@ -503,6 +503,7 @@
           <li>Legg inn repository secrets (<code>AZURE_CREDENTIALS</code>, <code>GH_TOKEN</code>, <code>ANTHROPIC_API_KEY</code>, <code>WEBHOOK_SECRET</code>) og variabelen <code>AGENT_NAME</code>.</li>
           <li>Kjør første deploy fra Actions med <strong>Run workflow</strong>. Deployen skriver ikke til issues, så grensen mellom lokalt og sky holder.</li>
           <li>Bruk <code>./sjekkpunkt.ps1 lab1</code> som redningsnett hvis laget trenger en fungerende baseline.</li>
+          <li>Er webhooken koblet før lunsj, merker du en issue med én gang. Da jobber agenten mens du spiser.</li>
         </ul>
         <div class="checkpoint"><b>Sjekkpunkt 1</b>Din egen <code>RunStages</code> bygger grønt, dry-run er ren, og første deploy fra Actions er grønn med <code>Receiver URL</code> i Summary.</div>
         <div class="tags"><span class="tag">lab</span><span class="tag">sjekkpunkt 1</span><span class="tag">LM 3</span></div>
@@ -513,7 +514,7 @@
       <div class="time">12:15–13:00<span class="dur">lunsj</span></div>
       <div>
         <h3>Felles lunsj</h3>
-        <p>Kurslederen registrerer webhooks for alle agentene. Etter lunsj skjer første virkelige issue-tildeling, kommentar og PR, fra Azure.</p>
+        <p>Kurslederen kobler resten av webhookene. Den som merket en issue før lunsj, har en agent som jobber mens vi spiser. Tildeling, kommentarer og PR skjer alltid fra Azure.</p>
       </div>
     </div>
 
