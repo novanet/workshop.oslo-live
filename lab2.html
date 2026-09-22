@@ -38,7 +38,7 @@
     <p class="intro">Lab 2 bygger på agenten du implementerte i Lab 1. Kryss av dette før du deployer:</p>
     <ul class="checklist">
       <li>Lab 1 er nådd, eller du har kjørt <code>./sjekkpunkt.sh lab1</code> og <code>dotnet build</code> er grønt.</li>
-      <li>Kurslederen har lagt <code>AZURE_CREDENTIALS</code>, <code>GH_TOKEN</code>, <code>ANTHROPIC_API_KEY</code> og <code>WEBHOOK_SECRET</code> som repository secrets i agentrepoet ditt, og satt <code>AGENT_NAME</code> som repository variable.</li>
+      <li>Kurslederen gir deg <code>AZURE_CREDENTIALS</code>, <code>GH_TOKEN</code>, <code>ANTHROPIC_API_KEY</code> og <code>WEBHOOK_SECRET</code>. Du legger dem selv som repository secrets i agentrepoet ditt, og setter <code>AGENT_NAME</code> som repository variable.</li>
       <li><code>AZURE_CREDENTIALS</code> er et service-principal-JSON som GitHub Actions bruker. Du trenger ikke en personlig Azure-bruker med Contributor-tilgang for å deploye.</li>
       <li><code>GH_TOKEN</code> må ha <strong>Contents</strong>, <strong>Issues</strong> og <strong>Pull requests</strong> read/write, samt <strong>Metadata</strong> read-only, på akkurat <code>novanet/workshop.oslo-live</code>. Anthropic-nøkkelen kommer normalt fra kurslederen; du skal ikke betale selv.</li>
       <li>Starter-kitet bruker kursets felles ressursgruppe, registry og pull-identitet automatisk. <code>az</code> er bare nødvendig hvis du har fått separat lesetilgang til Azure; <code>curl</code> holder for helsesjekken.</li>
@@ -84,7 +84,7 @@ WORKER_JOB_NAME='caj-...-worker'</pre>
         <div>
           <p class="meta">Repository settings</p>
           <h3>Gjør repoet klart for Actions</h3>
-          <p>Kurslederen legger <code>AZURE_CREDENTIALS</code>, <code>GH_TOKEN</code>, <code>ANTHROPIC_API_KEY</code> og <code>WEBHOOK_SECRET</code> som repository secrets. Sett <code>AGENT_NAME</code> som repository variable hvis den ikke allerede er satt.</p>
+          <p>Kurslederen gir deg verdiene. Legg <code>AZURE_CREDENTIALS</code>, <code>GH_TOKEN</code>, <code>ANTHROPIC_API_KEY</code> og <code>WEBHOOK_SECRET</code> som repository secrets, og sett <code>AGENT_NAME</code> som repository variable.</p>
           <pre>AGENT_NAME=litj-nils
 gh variable set AGENT_NAME --repo OWNER/REPO --body "$AGENT_NAME"</pre>
           <p class="small"><code>AZURE_CREDENTIALS</code> brukes av <code>azure/login@v2</code>. Ikke kopier den til <code>.env</code> eller bruk den som lokal Azure-innlogging.</p>
