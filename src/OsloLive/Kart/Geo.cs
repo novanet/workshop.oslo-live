@@ -74,7 +74,7 @@ public static class Geo
         var rene = punkter
             .Where(p => p is not null)
             .Select(p => p!)
-            .DistinctBy(p => p.Properties["kilde"])
+            .DistinctBy(p => p.Properties["id"])
             .ToList();
 
         return new Kartlag("FeatureCollection", rene);
