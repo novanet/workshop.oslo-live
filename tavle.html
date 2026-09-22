@@ -3,794 +3,383 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Status · Oslo Live</title>
+<title>Status</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
   :root {
-    --ground: #071311;
-    --ground-raised: #0b1b18;
-    --surface: #0d211e;
-    --surface-strong: #102a26;
-    --surface-soft: #112520;
-    --line: #1e3a35;
-    --line-bright: #2b4d47;
-    --ink: #edf8f4;
-    --muted: #8ea9a1;
-    --faint: #5f7b73;
-    --accent: #20d8cc;
-    --accent-soft: #0c4641;
-    --blue: #5ba9ff;
-    --blue-soft: #123a5a;
-    --green: #26d49c;
-    --green-soft: #0b4536;
-    --purple: #ab78ff;
-    --purple-soft: #352052;
-    --yellow: #e9b431;
-    --yellow-soft: #4b3a11;
-    --red: #ff637b;
-    --red-soft: #4c202b;
-    --shadow: 0 18px 50px rgba(0, 0, 0, .2);
+    --ground: #F6F8F5;
+    --surface: #FFFFFF;
+    --ink: #17231F;
+    --muted: #5A6A64;
+    --line: #D6DDD8;
+    --accent: #0E6D69;
+    --accent-soft: #E1F0EE;
+    --gull: #B97F0E;
+    --gull-soft: #F7EBCF;
+    --warn: #A33A2C;
+    --warn-soft: #F8E4E0;
+    --ok: #2E7D47;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0F1715; --surface: #16201D; --ink: #E4EBE7; --muted: #93A39D;
+      --line: #27332F; --accent: #43B5AE; --accent-soft: #14302E;
+      --gull: #E2A83B; --gull-soft: #33280F; --warn: #E07A6A; --warn-soft: #3A1B16;
+      --ok: #4FC172;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0F1715; --surface: #16201D; --ink: #E4EBE7; --muted: #93A39D;
+    --line: #27332F; --accent: #43B5AE; --accent-soft: #14302E;
+    --gull: #E2A83B; --gull-soft: #33280F; --warn: #E07A6A; --warn-soft: #3A1B16;
+    --ok: #4FC172;
   }
 
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
   body {
-    margin: 0;
-    min-width: 320px;
-    background:
-      radial-gradient(circle at 73% -10%, rgba(21, 103, 96, .28), transparent 31rem),
-      var(--ground);
-    color: var(--ink);
+    margin: 0; background: var(--ground); color: var(--ink);
     font-family: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
-    font-size: 15px;
-    line-height: 1.45;
+    font-size: 16px; line-height: 1.45;
   }
-  a { color: inherit; }
-  button, a { -webkit-tap-highlight-color: transparent; }
-  .app { display: grid; grid-template-columns: 220px minmax(0, 1fr); min-height: 100vh; }
-
-  .sidebar {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    padding: 21px 14px 15px;
-    background: rgba(5, 18, 16, .86);
-    border-right: 1px solid var(--line);
+  .layout { display: flex; min-height: 100vh; }
+  .side {
+    width: 220px; flex: 0 0 220px; padding: 24px 16px;
+    border-right: 1px solid var(--line); background: var(--surface);
   }
-  .brand {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 0 14px 26px;
-    font-family: "Bricolage Grotesque", system-ui, sans-serif;
-    font-size: 20px;
-    font-weight: 700;
-    letter-spacing: -.03em;
+  .side-brand {
+    display: flex; align-items: center; gap: 9px; color: var(--ink);
+    font-family: "Bricolage Grotesque", system-ui, sans-serif; font-size: 20px;
+    font-weight: 700; text-decoration: none; margin: 0 8px 32px;
   }
-  .brand-mark {
-    color: var(--accent);
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 25px;
-    line-height: 1;
+  .side-mark {
+    display: grid; place-items: center; width: 28px; height: 28px;
+    border-radius: 7px; background: var(--accent); color: #fff;
+    font-family: "IBM Plex Mono", monospace; font-size: 14px;
   }
   .side-nav { display: grid; gap: 4px; }
   .side-nav a {
-    display: flex;
-    align-items: center;
-    gap: 13px;
-    min-height: 43px;
-    padding: 9px 13px;
-    border: 1px solid transparent;
-    border-radius: 10px;
-    color: var(--muted);
-    text-decoration: none;
-    font-size: 14px;
-    transition: background .18s ease, color .18s ease, border-color .18s ease;
+    display: block; color: var(--muted); border-radius: 7px; padding: 9px 10px;
+    text-decoration: none; font-size: 14px;
   }
-  .side-nav a:hover,
-  .side-nav a.aktiv {
-    background: rgba(14, 86, 79, .7);
-    border-color: #176c63;
-    color: var(--ink);
+  .side-nav a:hover, .side-nav a.aktiv { color: var(--accent); background: var(--accent-soft); }
+  .side-note {
+    margin: 32px 8px 0; padding-top: 16px; border-top: 1px solid var(--line);
+    color: var(--muted); font-family: "IBM Plex Mono", monospace; font-size: 11px;
   }
-  .side-nav .ikon {
-    width: 19px;
-    color: currentColor;
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 18px;
-    text-align: center;
-  }
-  .side-bottom {
-    display: grid;
-    gap: 12px;
-    margin-top: auto;
-    padding: 12px 10px 0;
-    color: var(--muted);
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 11px;
-  }
-  .side-health {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 11px;
-    border-radius: 9px;
-    background: rgba(11, 69, 54, .64);
-    color: var(--green);
-  }
-  .side-health .prikk { width: 8px; height: 8px; background: currentColor; }
-  .side-repo { overflow-wrap: anywhere; color: var(--ink); }
-  .side-updated { display: flex; align-items: center; gap: 8px; }
+  .page { flex: 1; min-width: 0; }
+  .ramme { padding: clamp(20px, 3.5vw, 48px); max-width: 1300px; margin: 0 auto; }
 
-  .content { min-width: 0; padding: 20px clamp(18px, 3vw, 46px) 34px; }
-  .topbar {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 10px;
-    min-height: 42px;
-    margin-bottom: 27px;
+  header { display: flex; align-items: flex-end; justify-content: space-between; gap: 18px; flex-wrap: wrap; margin-bottom: 18px; }
+  .merkelapp {
+    font-family: "IBM Plex Mono", monospace; font-size: 12px;
+    letter-spacing: .15em; text-transform: uppercase; color: var(--accent); margin: 0 0 6px;
   }
-  .topbar a {
-    padding: 8px 13px;
-    border-radius: 999px;
-    color: var(--muted);
-    font-size: 12px;
-    text-decoration: none;
-  }
-  .topbar a:hover,
-  .topbar a.aktiv {
-    background: var(--accent-soft);
-    color: var(--accent);
-  }
-  .topbar a.aktiv { box-shadow: inset 0 -1px 0 var(--accent); }
-
-  .page-head {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 24px;
-    margin-bottom: 23px;
-  }
-  .eyebrow {
-    margin: 0 0 4px;
-    color: var(--accent);
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 12px;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-  }
-  h1, h2, h3 { font-family: "Bricolage Grotesque", system-ui, sans-serif; }
   h1 {
-    margin: 0;
-    font-size: clamp(38px, 4vw, 58px);
-    line-height: .98;
-    letter-spacing: -.045em;
+    font-family: "Bricolage Grotesque", system-ui, sans-serif; font-weight: 700;
+    font-size: clamp(30px, 4.4vw, 54px); line-height: 1; letter-spacing: -.025em; margin: 0;
   }
-  .lede { margin: 10px 0 0; color: var(--muted); font-size: 17px; }
-  .head-facts { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; }
-  .fact {
-    min-width: 145px;
-    padding: 12px 15px;
-    border: 1px solid var(--line);
-    border-radius: 11px;
-    background: rgba(13, 33, 30, .84);
+  .status { text-align: right; font-family: "IBM Plex Mono", monospace; font-size: 14px; color: var(--muted); }
+  .status .puls { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--ok); margin-right: 7px; }
+  .navigasjon { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; margin-top: 10px; }
+  .navigasjon a {
+    color: var(--accent); background: var(--accent-soft); border-radius: 999px;
+    padding: 5px 11px; text-decoration: none; font-size: 12px;
   }
-  .fact.repo-fact { min-width: 245px; }
-  .fact-label {
-    display: block;
-    margin-bottom: 4px;
-    color: var(--faint);
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 10px;
-    letter-spacing: .08em;
-    text-transform: uppercase;
+  .navigasjon a:hover { text-decoration: underline; }
+  @media (prefers-reduced-motion: no-preference) {
+    .status .puls { animation: blink 2.4s ease-in-out infinite; }
   }
-  .fact-value { color: var(--ink); font-family: "IBM Plex Mono", monospace; font-size: 12px; }
-  .fact-value a { color: var(--ink); text-decoration: none; }
-  .fact-value a:hover { color: var(--accent); }
-  .pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    padding: 4px 9px;
-    border-radius: 999px;
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 11px;
-    white-space: nowrap;
-  }
-  .pill.ok { background: var(--green-soft); color: var(--green); }
-  .pill.bad { background: var(--red-soft); color: var(--red); }
-  .pill.wait { background: var(--blue-soft); color: var(--blue); }
-  .pill.build { background: var(--yellow-soft); color: var(--yellow); }
-  .pill .prikk { width: 7px; height: 7px; background: currentColor; }
+  @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: .25; } }
 
-  .metrics {
-    display: grid;
-    grid-template-columns: repeat(6, minmax(130px, 1fr));
-    gap: 12px;
-    margin-bottom: 20px;
+  .rull { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; min-width: 820px; }
+  thead th {
+    font-family: "IBM Plex Mono", monospace; font-size: 10.5px; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--muted); font-weight: 600;
+    text-align: left; padding: 0 12px 7px 0; white-space: nowrap;
   }
-  .metric {
-    min-width: 0;
-    padding: 17px 17px 15px;
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    background: linear-gradient(145deg, rgba(16, 42, 38, .98), rgba(9, 28, 25, .98));
-    box-shadow: var(--shadow);
-    text-decoration: none;
+  thead th.h { text-align: right; padding-right: 0; }
+  tbody tr { background: var(--surface); }
+  tbody td {
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    padding: 11px 12px 11px 0; vertical-align: middle;
   }
-  .metric:hover { border-color: var(--line-bright); transform: translateY(-1px); }
-  .metric-top { display: flex; align-items: center; justify-content: space-between; gap: 9px; }
-  .metric-icon {
-    display: grid;
-    place-items: center;
-    width: 33px;
-    height: 33px;
-    border-radius: 50%;
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 18px;
-  }
-  .metric-icon.blue { background: var(--blue-soft); color: var(--blue); }
-  .metric-icon.green { background: var(--green-soft); color: var(--green); }
-  .metric-icon.purple { background: var(--purple-soft); color: var(--purple); }
-  .metric-icon.yellow { background: var(--yellow-soft); color: var(--yellow); }
-  .metric-number {
-    margin-top: 11px;
-    color: var(--ink);
-    font-family: "Bricolage Grotesque", system-ui, sans-serif;
-    font-size: 27px;
-    font-weight: 700;
-    line-height: 1;
-  }
-  .metric-name { margin-top: 5px; color: var(--muted); font-size: 12px; }
-  .metric-arrow { color: var(--faint); font-size: 17px; }
+  tbody td:first-child { border-left: 1px solid var(--line); border-radius: 10px 0 0 10px; padding-left: 13px; }
+  tbody td:last-child { border-right: 1px solid var(--line); border-radius: 0 10px 10px 0; padding-right: 13px; text-align: right; }
+  tbody tr.mellom td { border: 0; padding: 0; height: 10px; background: transparent; }
 
-  .dashboard-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1.65fr) minmax(310px, .85fr);
-    align-items: start;
-    gap: 15px;
+  .plass {
+    font-family: "Bricolage Grotesque", system-ui, sans-serif; font-weight: 700;
+    font-size: clamp(20px, 2.2vw, 28px); color: var(--muted);
+    font-variant-numeric: tabular-nums; width: 1%; white-space: nowrap;
   }
-  .panel {
-    min-width: 0;
-    border: 1px solid var(--line);
-    border-radius: 13px;
-    background: rgba(10, 30, 27, .94);
-    box-shadow: var(--shadow);
-  }
-  .panel-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    padding: 17px 19px 14px;
-    border-bottom: 1px solid var(--line);
-  }
-  .panel-title {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    min-width: 0;
-  }
-  .panel-title .panel-icon { color: var(--yellow); font-size: 23px; }
-  .panel-title h2 { margin: 0; font-size: 22px; line-height: 1; letter-spacing: -.025em; }
-  .panel-subtitle { margin: 3px 0 0; color: var(--muted); font-size: 12px; }
-  .panel-link { color: var(--accent); font-size: 12px; text-decoration: none; white-space: nowrap; }
-  .panel-link:hover { text-decoration: underline; }
-  .table-wrap { overflow-x: auto; padding: 0 12px 12px; }
-  table { width: 100%; min-width: 680px; border-collapse: collapse; }
-  th {
-    padding: 12px 10px 9px;
-    color: var(--faint);
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: .1em;
-    text-align: left;
-    text-transform: uppercase;
-    white-space: nowrap;
-  }
-  th.right, td.right { text-align: right; }
-  td {
-    padding: 12px 10px;
-    border-top: 1px solid rgba(30, 58, 53, .8);
-    vertical-align: middle;
-  }
-  .rank {
-    width: 34px;
-    color: var(--faint);
-    font-family: "Bricolage Grotesque", system-ui, sans-serif;
-    font-size: 22px;
-    font-weight: 700;
-  }
-  tr:first-child .rank { color: var(--yellow); }
-  .agent-cell { display: flex; align-items: center; gap: 10px; min-width: 170px; }
-  .avatar {
-    display: grid;
-    flex: 0 0 auto;
-    place-items: center;
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    color: #fff;
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 12px;
-    font-weight: 600;
-  }
-  .avatar.a0 { background: #08aab4; }
-  .avatar.a1 { background: #7554c9; }
-  .avatar.a2 { background: #3c72d8; }
-  .avatar.a3 { background: #e9a027; }
-  .avatar.a4 { background: #e74f6b; }
-  .avatar.a5 { background: #149da2; }
-  .avatar.a6 { background: #8a5ed8; }
-  .avatar.a7 { background: #de704c; }
-  .agent-name { color: var(--ink); font-size: 15px; font-weight: 600; }
-  .agent-meta { margin-top: 2px; color: var(--muted); font-family: "IBM Plex Mono", monospace; font-size: 10px; }
-  .number { font-family: "IBM Plex Mono", monospace; font-size: 13px; font-variant-numeric: tabular-nums; }
-  .cost { color: var(--ink); font-family: "IBM Plex Mono", monospace; font-size: 13px; }
-  .cost-under { display: block; margin-top: 2px; color: var(--muted); font-size: 10px; }
-  .score { color: var(--accent); font-family: "Bricolage Grotesque", system-ui, sans-serif; font-size: 27px; font-weight: 700; }
-  .score.muted { color: var(--muted); }
-  .empty { padding: 28px 19px; color: var(--muted); text-align: center; }
+  tr.topp .plass { color: var(--gull); }
+  tr.topp td:first-child { box-shadow: inset 3px 0 0 var(--gull); }
 
-  .side-panels { display: grid; gap: 15px; }
-  .item-list { display: grid; gap: 8px; padding: 12px; }
-  .item {
-    min-width: 0;
-    padding: 11px 12px;
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    background: rgba(16, 42, 38, .53);
-  }
-  .item:hover { border-color: var(--line-bright); }
-  .item-top { display: flex; align-items: flex-start; gap: 9px; }
-  .issue-no, .pr-no {
-    flex: 0 0 auto;
-    min-width: 39px;
-    padding: 4px 6px;
-    border-radius: 999px;
-    color: var(--blue);
-    background: var(--blue-soft);
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 11px;
-    text-align: center;
-  }
-  .issue-no:nth-child(odd) { color: var(--red); background: var(--red-soft); }
-  .item-title {
-    display: block;
-    min-width: 0;
-    overflow: hidden;
-    color: var(--ink);
-    font-size: 13px;
-    font-weight: 600;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    text-decoration: none;
-  }
-  .item-title:hover { color: var(--accent); }
-  .item-meta { margin: 5px 0 0 48px; color: var(--muted); font-family: "IBM Plex Mono", monospace; font-size: 10px; }
-  .item-bottom { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 8px 0 0 48px; }
-  .tag {
-    display: inline-flex;
-    padding: 3px 7px;
-    border: 1px solid var(--line-bright);
-    border-radius: 999px;
-    color: var(--muted);
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 10px;
-  }
-  .tag.bug { border-color: #854150; color: var(--red); }
-  .tag.feature, .tag.enhancement { border-color: #67509e; color: var(--purple); }
-  .tag.refactor { border-color: #277065; color: var(--accent); }
-  .pr-no { color: var(--purple); background: var(--purple-soft); }
-  .pr-state { color: var(--green); font-family: "IBM Plex Mono", monospace; font-size: 10px; }
-  .pr-state.draft { color: var(--yellow); }
-  .pr-issues { display: flex; flex-wrap: wrap; gap: 5px; }
-  .mini-link { color: var(--accent); text-decoration: none; }
-  .mini-link:hover { text-decoration: underline; }
+  .navn { font-weight: 600; font-size: clamp(16px, 1.5vw, 19px); }
+  .repo { font-family: "IBM Plex Mono", monospace; font-size: 12.5px; color: var(--muted); }
 
-  .progress {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin: 17px 0 20px;
-    padding: 13px 16px;
-    border: 1px solid var(--line);
-    border-radius: 11px;
-    background: rgba(13, 33, 30, .72);
+  .poeng {
+    font-family: "Bricolage Grotesque", system-ui, sans-serif; font-weight: 700;
+    font-size: clamp(24px, 2.8vw, 36px); line-height: 1; color: var(--accent);
+    font-variant-numeric: tabular-nums;
   }
-  .progress-copy { flex: 0 0 auto; color: var(--muted); font-size: 12px; }
-  .progress-copy b { color: var(--ink); font-family: "IBM Plex Mono", monospace; font-size: 17px; }
-  .progress-track { flex: 1; min-width: 90px; height: 8px; overflow: hidden; border-radius: 999px; background: var(--line); }
-  .progress-track i { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--accent), var(--green)); transition: width .5s ease; }
-  .progress-repo { color: var(--faint); font-family: "IBM Plex Mono", monospace; font-size: 10px; }
+  .poeng.negativ { color: var(--warn); }
 
-  .logg-panel { margin-top: 15px; border: 1px solid #24443e; border-radius: 13px; background: #081c18; }
-  .logg-panel .panel-head { border-bottom-color: #24443e; }
-  .logg-panel .panel-title .panel-icon { color: var(--accent); }
-  .logg-list { display: grid; gap: 3px; max-height: 350px; overflow-y: auto; padding: 13px 17px 16px; font-family: "IBM Plex Mono", monospace; font-size: 11px; }
-  .logg-row { display: grid; grid-template-columns: 72px minmax(150px, 250px) 1fr; gap: 9px; padding: 3px 0; }
-  .logg-time, .logg-agent { color: #83bdb1; white-space: nowrap; }
-  .logg-message { color: #e0efea; overflow-wrap: anywhere; }
-  .logg-empty { padding: 18px; color: var(--muted); font-size: 13px; }
-
-  .status-error { margin-top: 14px; color: var(--red); font-family: "IBM Plex Mono", monospace; font-size: 11px; }
-  .footer { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; color: var(--faint); font-family: "IBM Plex Mono", monospace; font-size: 10px; }
-  .footer span { padding: 5px 9px; border: 1px solid var(--line); border-radius: 999px; }
-
-  @media (max-width: 1200px) {
-    .metrics { grid-template-columns: repeat(3, minmax(130px, 1fr)); }
-    .page-head { align-items: flex-start; flex-direction: column; }
-    .head-facts { justify-content: flex-start; }
+  .merker { display: flex; flex-wrap: wrap; gap: 6px; }
+  .merke {
+    font-family: "IBM Plex Mono", monospace; font-size: 10.5px;
+    padding: 2px 7px; border-radius: 999px; white-space: nowrap;
+    background: var(--accent-soft); color: var(--accent); border: 1px solid transparent;
   }
-  @media (max-width: 930px) {
-    .app { display: block; }
-    .sidebar { position: static; height: auto; display: block; padding: 12px 14px; border-right: 0; border-bottom: 1px solid var(--line); }
-    .brand { display: inline-flex; padding: 0 4px 10px; }
-    .side-nav { display: flex; flex-wrap: wrap; gap: 3px; }
-    .side-nav a { min-height: 34px; padding: 6px 9px; }
-    .side-nav .ikon { display: none; }
-    .side-bottom { display: none; }
-    .topbar { display: none; }
+  .merke.lag { background: transparent; border-color: var(--line); color: var(--muted); }
+  .merke b { font-weight: 600; margin-left: 3px; color: var(--ink); }
+  .merke.ingen { background: transparent; border-color: var(--line); color: var(--muted); font-style: italic; }
+  .merke.brakk { background: var(--warn-soft); color: var(--warn); }
+  .merke.fikset { background: var(--gull-soft); color: var(--gull); }
+
+  .tall { font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums; font-size: 15px; }
+  .tall.dyrt { color: var(--warn); }
+  .under { display: block; font-size: 12px; color: var(--muted); font-family: "IBM Plex Sans", sans-serif; }
+
+  .pille {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: "IBM Plex Mono", monospace; font-size: 12px;
+    padding: 4px 10px; border-radius: 999px;
   }
+  .pille.groenn { background: var(--accent-soft); color: var(--ok); }
+  .pille.roed { background: var(--warn-soft); color: var(--warn); }
+  .prikk { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+
+  .beskjed {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+    padding: 34px; color: var(--muted); text-align: center;
+  }
+  .feil { color: var(--warn); font-size: 12.5px; margin-top: 5px; font-family: "IBM Plex Mono", monospace; }
+
+  .framdrift {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+    padding: 12px 16px; margin-bottom: 14px;
+    display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+  }
+  .framdrift .tekst { font-size: 15px; color: var(--muted); }
+  .framdrift .tekst b { color: var(--ink); font-size: 19px; font-family: "IBM Plex Mono", monospace; }
+  .stripe { flex: 1; min-width: 200px; height: 10px; background: var(--line); border-radius: 999px; overflow: hidden; }
+  .stripe i { display: block; height: 100%; background: var(--accent); border-radius: 999px; transition: width .6s ease; }
+  .framdrift .repo { font-size: 12.5px; }
+
+  .kjoerer { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 14px; }
+  .kjoerer .tittel { font-family: "IBM Plex Mono", monospace; font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-right: 4px; }
+  .kjoering {
+    display: inline-flex; align-items: center; gap: 9px;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 999px;
+    padding: 7px 14px 7px 11px; font-size: 14.5px;
+  }
+  .kjoering .prikk { width: 8px; height: 8px; background: var(--ok); }
+  @media (prefers-reduced-motion: no-preference) { .kjoering .prikk { animation: blink 1.6s ease-in-out infinite; } }
+  .kjoering b { font-weight: 600; }
+  .kjoering .hva { color: var(--muted); }
+  .kjoering .tid { font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--muted); }
+  .tildelt .kjoering .prikk { background: var(--gull); }
+
+  .score-topp {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+    margin: 6px 0 9px;
+  }
+  .score-topp h2 {
+    font-family: "Bricolage Grotesque", system-ui, sans-serif; font-size: 22px;
+    line-height: 1; margin: 0;
+  }
+  .score-topp span { color: var(--muted); font-size: 13px; }
+
+  footer {
+    margin-top: 26px; display: flex; gap: 10px; flex-wrap: wrap;
+    font-family: "IBM Plex Mono", monospace; font-size: 12.5px; color: var(--muted);
+  }
+  footer span { background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 5px 13px; }
   @media (max-width: 760px) {
-    .content { padding: 20px 13px 28px; }
-    .metrics { grid-template-columns: repeat(2, minmax(130px, 1fr)); }
-    .dashboard-grid { grid-template-columns: 1fr; }
-    .head-facts { display: grid; grid-template-columns: 1fr 1fr; width: 100%; }
-    .fact, .fact.repo-fact { min-width: 0; }
-    .logg-row { grid-template-columns: 61px 1fr; }
-    .logg-message { grid-column: 1 / -1; }
-  }
-  @media (max-width: 430px) {
-    .head-facts { grid-template-columns: 1fr; }
-    .metrics { grid-template-columns: 1fr 1fr; gap: 8px; }
-    .metric { padding: 13px; }
-    .metric-number { font-size: 23px; }
+    .layout { display: block; }
+    .side { width: auto; padding: 12px 16px; border-right: 0; border-bottom: 1px solid var(--line); }
+    .side-brand { margin: 0 0 10px; }
+    .side-nav { display: flex; flex-wrap: wrap; gap: 3px; }
+    .side-nav a { padding: 6px 8px; font-size: 13px; }
+    .side-note { display: none; }
   }
 </style>
 </head>
 <body>
-<div class="app">
-  <aside class="sidebar">
-    <a class="brand" href="index.html"><span class="brand-mark">&lt;/&gt;</span><span>Kodeagent</span></a>
+<div class="layout">
+  <aside class="side">
+    <a class="side-brand" href="tavle.html"><span class="side-mark">&lt;/&gt;</span><span>Status</span></a>
     <nav class="side-nav" aria-label="Statusnavigasjon">
-      <a class="aktiv" href="#status"><span class="ikon">⌂</span><span>Status</span></a>
-      <a href="#leaderboard"><span class="ikon">▥</span><span>Leaderboard</span></a>
-      <a href="#issues"><span class="ikon">□</span><span>Issues</span></a>
-      <a href="#pullrequests"><span class="ikon">⑂</span><span>Pull requests</span></a>
-      <a href="#builds"><span class="ikon">⚙</span><span>Bygg</span></a>
-      <a href="#costs"><span class="ikon">▤</span><span>Kostnader</span></a>
-      <a href="teknisk.html"><span class="ikon">⚙</span><span>Innstillinger</span></a>
-    </nav>
-    <div class="side-bottom">
-      <div id="side-health" class="side-health"><span class="prikk"></span><span>main sjekkes …</span></div>
-      <div id="side-repo" class="side-repo">novanet/workshop.oslo-live</div>
-      <div class="side-updated"><span>↻</span><span id="side-updated">laster …</span></div>
-    </div>
-  </aside>
-
-  <main id="status" class="content">
-    <nav class="topbar" aria-label="Kursressurser">
-      <a class="aktiv" href="presentasjon.html">Presentasjon</a>
+      <a class="aktiv" href="tavle.html">Oversikt</a>
+      <a href="issues.html">Tildelte issues</a>
+      <a href="pullrequests.html">Pull requests</a>
+      <a href="live-log.html">Live-logg</a>
+      <a href="#regler">Poengregler</a>
+      <a href="presentasjon.html">Presentasjon</a>
       <a href="prerequisites.html">Prerequisites</a>
       <a href="lab1.html">Lab 1</a>
       <a href="lab2.html">Lab 2</a>
       <a href="lab3.html">Lab 3</a>
       <a href="teknisk.html">Teknisk</a>
-      <a href="https://ca-oslolive.thankfulwave-6bdee498.norwayeast.azurecontainerapps.io/" target="_blank" rel="noopener">Oslo Live</a>
     </nav>
+    <div class="side-note">novanet/workshop.oslo-live<br><br>oppdateres automatisk</div>
+  </aside>
+  <main class="page">
+  <div class="ramme">
 
-    <header class="page-head">
-      <div>
-        <p class="eyebrow">Bygg din egen kodeagent</p>
-        <h1>Status</h1>
-        <p class="lede">Oversikt over issues, pull requests, bygg, kostnader og poeng.</p>
-      </div>
-      <div class="head-facts">
-        <div class="fact repo-fact">
-          <span class="fact-label">Repository</span>
-          <span class="fact-value"><a id="repo-link" href="#" target="_blank" rel="noopener">novanet/workshop.oslo-live</a></span>
-        </div>
-        <div class="fact">
-          <span class="fact-label">Main</span>
-          <span id="main-pill" class="pill wait"><span class="prikk"></span>laster …</span>
-        </div>
-        <div class="fact">
-          <span class="fact-label">Sist oppdatert</span>
-          <span id="updated" class="fact-value">laster …</span>
-        </div>
-      </div>
-    </header>
-
-    <section id="metrics" class="metrics" aria-label="Nøkkeltall"></section>
-    <div id="progress"></div>
-
-    <div class="dashboard-grid">
-      <section id="leaderboard" class="panel">
-        <div class="panel-head">
-          <div class="panel-title">
-            <span class="panel-icon">♛</span>
-            <div><h2>Poengtavle</h2><p class="panel-subtitle">Poeng og kostnad per deltaker</p></div>
-          </div>
-          <a class="panel-link" href="#costs">Se kostnader →</a>
-        </div>
-        <div id="leaderboard-content" class="table-wrap"></div>
-      </section>
-
-      <div class="side-panels">
-        <section id="issues" class="panel">
-          <div class="panel-head">
-            <div class="panel-title"><span class="panel-icon">□</span><h2>Nylig tildelte issues</h2></div>
-            <a class="panel-link" href="https://github.com/novanet/workshop.oslo-live/issues" target="_blank" rel="noopener">Se alle →</a>
-          </div>
-          <div id="assigned-content" class="item-list"></div>
-        </section>
-
-        <section id="pullrequests" class="panel">
-          <div class="panel-head">
-            <div class="panel-title"><span class="panel-icon" style="color:var(--purple)">⑂</span><h2>Åpne pull requests</h2></div>
-            <a class="panel-link" href="https://github.com/novanet/workshop.oslo-live/pulls" target="_blank" rel="noopener">Se alle →</a>
-          </div>
-          <div id="prs-content" class="item-list"></div>
-        </section>
-      </div>
+  <header>
+    <div>
+      <p class="merkelapp">Bygg din egen kodeagent,</p>
+      <h1>Status</h1>
     </div>
+    <div class="status">
+      <div><span class="puls"></span><span id="oppdatert">laster …</span></div>
+      <div id="neste"></div>
+    </div>
+  </header>
 
-    <section id="builds" class="panel logg-panel">
-      <div class="panel-head">
-        <div class="panel-title"><span class="panel-icon">◉</span><div><h2>Live agentlogg</h2><p class="panel-subtitle">Sanerte livssyklusmeldinger fra Container Apps</p></div></div>
-        <span id="log-updated" class="panel-subtitle">venter på feed</span>
-      </div>
-      <div id="log-content"></div>
-    </section>
+  <div id="framdrift"></div>
+  <div id="kjoerer"></div>
 
-    <div id="status-error" class="status-error"></div>
-    <footer id="costs" class="footer"></footer>
+  <div id="innhold">
+    <div class="beskjed">Leser <span class="repo">resultat.json</span> …</div>
+  </div>
+
+  <footer id="regler"></footer>
+
+</div>
   </main>
 </div>
 
 <script>
 (function () {
-  var STATUS_INTERVAL = 45000;
-  var LOG_INTERVAL = 30000;
-  var lastStatus = null;
+  var HENT_HVERT = 45000;
 
-  function esc(value) {
-    return String(value == null ? '' : value).replace(/[&<>"]/g, function (c) {
+  function esc(t) {
+    return String(t == null ? '' : t).replace(/[&<>"]/g, function (c) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
     });
   }
 
   function klokke(iso) {
     if (!iso) return '–';
-    var date = new Date(iso);
-    return isNaN(date) ? '–' : date.toLocaleTimeString('no-NO', {
-      hour: '2-digit', minute: '2-digit', second: '2-digit'
+    var d = new Date(iso);
+    return isNaN(d) ? '–' : d.toLocaleTimeString('no-NO', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  }
+
+  function rad(d) {
+    var merker = [];
+    function merke(x, klasse) {
+      var p = x.poeng != null ? ' <b>' + x.poeng + '</b>' : '';
+      return '<span class="merke' + klasse + '">#' + x.issue + ' ' + esc(x.navn) + p + '</span>';
+    }
+    (d.feil || []).forEach(function (f) { merker.push(merke(f, '')); });
+    (d.lag || []).forEach(function (l) { merker.push(merke(l, ' lag')); });
+    (d.levert || []).forEach(function (l) { merker.push(merke(l, ' lag')); });
+    (d.bygg || []).forEach(function (b) {
+      merker.push('<span class="merke ' + b.type + '">' + (b.type === 'brakk' ? 'brakk main' : 'fikset main') +
+        (b.pr ? ' #' + b.pr : '') + ' <b>' + (b.poeng > 0 ? '+' : '') + b.poeng + '</b></span>');
     });
+    if (!merker.length) merker.push('<span class="merke ingen">ingenting ennå</span>');
+
+    var dyrt = (d.dollar || 0) >= 5 ? ' dyrt' : '';
+
+    return '' +
+      '<tr class="' + (d.plass === 1 && d.poeng > 0 ? 'topp' : '') + '">' +
+        '<td class="plass">' + d.plass + '</td>' +
+        '<td><div class="navn">' + esc(d.navn) + '</div>' +
+            '<div class="repo">' + (d.github && d.github !== d.navn ? esc(d.github) + ' · ' : '') + (d.merget || 0) + ' merget av ' + (d.pr || 0) + ' PR</div></td>' +
+        '<td><div class="merker">' + merker.join('') + '</div></td>' +
+        '<td>' + (d.utkast
+            ? '<span class="pille roed"><span class="prikk"></span>' + d.utkast + ' utkast</span>'
+            : '<span class="pille groenn"><span class="prikk"></span>alle bygger</span>') + '</td>' +
+        '<td><span class="tall' + dyrt + '">$' + (d.dollar || 0).toFixed(2) + '</span>' +
+            '<span class="under">' + Math.round((d.tokens || 0) / 1000) + 'k tokens' +
+            (d.utenPr ? ' · ' + d.utenPr + ' uten PR' : '') + '</span></td>' +
+        '<td><span class="poeng' + (d.poeng < 0 ? ' negativ' : '') + '">' + d.poeng + '</span></td>' +
+      '</tr>' +
+      '<tr class="mellom"><td colspan="6"></td></tr>';
   }
 
-  function dato(iso) {
-    if (!iso) return '–';
-    var date = new Date(iso);
-    return isNaN(date) ? '–' : date.toLocaleDateString('no-NO', {
-      day: '2-digit', month: '2-digit'
-    }) + ' · ' + klokke(iso);
+  function tegnFramdrift(data) {
+    var pr = data.produkt || {};
+    var lost = (pr.issuerLost || []).length;
+    var alle = pr.antallIssuer || 25;
+    var andel = alle ? Math.round((lost / alle) * 100) : 0;
+
+    document.getElementById('framdrift').innerHTML =
+      '<div class="framdrift">' +
+        '<span class="tekst"><b>' + lost + '</b> av ' + alle + ' issuer løst</span>' +
+        '<span class="stripe"><i style="width:' + andel + '%"></i></span>' +
+        '<span class="repo">' + esc(data.repo || '') + '</span>' +
+        (data.main ? (data.main.groent
+            ? '<span class="pille groenn"><span class="prikk"></span>main er grønn</span>'
+            : '<span class="pille roed"><span class="prikk"></span>main er rød siden ' + klokke(data.main.siden) +
+              (data.main.pr ? ' (#' + data.main.pr + ')' : '') + '</span>') : '') +
+        (pr.feilmelding ? '<span class="feil">' + esc(pr.feilmelding).slice(0, 120) + '</span>' : '') +
+      '</div>';
   }
 
-  function issueUrl(repo, number) {
-    return 'https://github.com/' + encodeURI(repo || '') + '/issues/' + encodeURIComponent(number);
+  function tegnKjoerer(data) {
+    var liste = data.kjoerer || [];
+    var el = document.getElementById('kjoerer');
+    if (!liste.length) { el.innerHTML = ''; return; }
+    el.innerHTML = '<div class="kjoerer"><span class="tittel">Kjører nå</span>' +
+      liste.map(function (k) {
+        return '<span class="kjoering"><span class="prikk"></span><b>' + esc(k.agent) + '</b>' +
+          '<span class="hva">#' + k.issue + ' ' + esc(k.navn || '') + '</span>' +
+          '<span class="tid">' + (k.minutter || 0) + ' min</span></span>';
+      }).join('') + '</div>';
   }
 
-  function prUrl(repo, number) {
-    return 'https://github.com/' + encodeURI(repo || '') + '/pull/' + encodeURIComponent(number);
-  }
+  function tegn(data) {
+    var folk = data.deltakere || [];
+    document.getElementById('oppdatert').textContent = 'oppdatert ' + klokke(data.oppdatert);
+    tegnFramdrift(data);
+    tegnKjoerer(data);
 
-  function initials(name) {
-    var words = String(name || '?').replace(/[^A-Za-z0-9 æøåÆØÅ-]/g, ' ').trim().split(/\s+/);
-    if (!words.length || !words[0]) return '?';
-    return (words.length === 1 ? words[0].slice(0, 2) : words[0][0] + words[words.length - 1][0]).toUpperCase();
-  }
-
-  function totalSolved(row) {
-    return (row.feil || []).length + (row.lag || []).length + (row.levert || []).length;
-  }
-
-  function activeFor(data, agent) {
-    return (data.kjoerer || []).filter(function (run) {
-      return run.agent === agent || run.github === agent;
-    }).length;
-  }
-
-  function metric(icon, color, number, name, target) {
-    return '<a class="metric" href="' + target + '">' +
-      '<div class="metric-top"><span class="metric-icon ' + color + '">' + icon + '</span><span class="metric-arrow">›</span></div>' +
-      '<div class="metric-number">' + number + '</div><div class="metric-name">' + name + '</div></a>';
-  }
-
-  function renderMetrics(data) {
-    var product = data.produkt || {};
-    var participants = data.deltakere || [];
-    var solved = (product.issuerLost || []).length;
-    var cost = participants.reduce(function (sum, row) { return sum + Number(row.dollar || 0); }, 0);
-    document.getElementById('metrics').innerHTML =
-      metric('□', 'blue', product.antallIssuer || 0, 'Totalt issues', '#issues') +
-      metric('✓', 'green', solved, 'Løste issues', '#leaderboard') +
-      metric('⑂', 'purple', (data.aapne || []).length, 'Åpne pull requests', '#pullrequests') +
-      metric('⚙', 'green', (data.kjoerer || []).length, 'Aktive bygg', '#builds') +
-      metric('◉', 'yellow', '$' + cost.toFixed(2), 'Total kostnad', '#costs') +
-      metric('♛', 'yellow', data.potten || 0, 'Poeng i potten', '#leaderboard');
-  }
-
-  function renderHeader(data) {
-    var repo = data.repo || 'novanet/workshop.oslo-live';
-    var main = data.main || {};
-    var green = main.groent !== false;
-    var mainPill = document.getElementById('main-pill');
-    mainPill.className = 'pill ' + (green ? 'ok' : 'bad');
-    mainPill.innerHTML = '<span class="prikk"></span>' + (green ? 'main er grønn' : 'main er rød');
-    document.getElementById('updated').textContent = klokke(data.oppdatert);
-    document.getElementById('side-updated').textContent = 'Oppdatert ' + klokke(data.oppdatert);
-    document.getElementById('side-repo').textContent = repo;
-    var repoLink = document.getElementById('repo-link');
-    repoLink.textContent = repo;
-    repoLink.href = 'https://github.com/' + encodeURI(repo);
-    var health = document.getElementById('side-health');
-    health.className = 'side-health';
-    health.innerHTML = '<span class="prikk"></span><span>' + (green ? 'main er grønn' : 'main er rød') + '</span>';
-  }
-
-  function renderProgress(data) {
-    var product = data.produkt || {};
-    var solved = (product.issuerLost || []).length;
-    var total = product.antallIssuer || 0;
-    var percent = total ? Math.round(solved / total * 100) : 0;
-    document.getElementById('progress').innerHTML =
-      '<div class="progress"><span class="progress-copy"><b>' + solved + '</b> av ' + total + ' issues løst</span>' +
-      '<span class="progress-track"><i style="width:' + percent + '%"></i></span>' +
-      '<span class="progress-repo">' + percent + '%</span></div>';
-  }
-
-  function renderLeaderboard(data) {
-    var rows = data.deltakere || [];
-    var target = document.getElementById('leaderboard-content');
-    if (!rows.length) {
-      target.innerHTML = '<div class="empty">Ingen pull requests ennå. Slipp agenten løs.</div>';
-      return;
+    if (!folk.length) {
+      document.getElementById('innhold').innerHTML =
+        '<div class="beskjed">Ingen pull requests ennå. Slipp agenten løs.</div>';
+    } else {
+      document.getElementById('innhold').innerHTML =
+        '<div class="score-topp"><h2>Poengtavle</h2><span>Poeng og kostnad per deltaker</span></div>' +
+        '<div class="rull"><table>' +
+          '<thead><tr>' +
+            '<th>#</th><th>Agent</th><th>Løst</th><th>Bygg</th>' +
+            '<th>Kostnad</th><th class="h">Poeng</th>' +
+          '</tr></thead><tbody>' + folk.map(rad).join('') + '</tbody>' +
+        '</table></div>';
     }
-    var head = '<table><thead><tr><th>#</th><th>Agent</th><th>Løst</th><th>Pågående</th><th>Bygg</th><th id="costs-head">Kostnad</th><th class="right">Poeng</th></tr></thead><tbody>';
-    var body = rows.map(function (row, index) {
-      var agent = row.navn || row.github || 'ukjent';
-      var active = activeFor(data, agent) + (agent !== row.github ? activeFor(data, row.github) : 0);
-      var build = active ? '<span class="pill build"><span class="prikk"></span>bygger</span>' :
-        (row.utkast ? '<span class="pill wait"><span class="prikk"></span>venter</span>' :
-          '<span class="pill ok"><span class="prikk"></span>klar</span>');
-      return '<tr>' +
-        '<td class="rank">' + (row.plass || index + 1) + '</td>' +
-        '<td><div class="agent-cell"><span class="avatar a' + (index % 8) + '">' + esc(initials(agent)) + '</span><div><div class="agent-name">' + esc(agent) + '</div><div class="agent-meta">@' + esc(row.github || '') + ' · ' + (row.merget || 0) + ' merget av ' + (row.pr || 0) + ' PR</div></div></div></td>' +
-        '<td class="number">' + totalSolved(row) + '</td>' +
-        '<td class="number">' + active + '</td>' +
-        '<td>' + build + '</td>' +
-        '<td class="cost">$' + Number(row.dollar || 0).toFixed(2) + '<span class="cost-under">' + Math.round(Number(row.tokens || 0) / 1000) + 'k tokens</span></td>' +
-        '<td class="right"><span class="score' + (Number(row.poeng || 0) < 0 ? ' muted' : '') + '">' + (row.poeng || 0) + '</span></td>' +
-      '</tr>';
-    }).join('');
-    target.innerHTML = head + body + '</tbody></table>';
+
+    var r = data.regler || {};
+    var skala = (r.vanskelighet || [1, 2, 3, 5, 8]).join(' · ');
+    document.getElementById('regler').innerHTML =
+      '<span>Hver issue gir ' + skala + ' poeng etter vanskelighet</span>' +
+      '<span>' + (r.utkast != null ? r.utkast : -1) + ' per PR som ikke bygger</span>' +
+      '<span>' + (r.perDollar != null ? r.perDollar : -1) + ' poeng per $' + (r.dollarPerPoeng || 10) + '</span>' +
+      (r.brekk != null ? '<span>' + r.brekk + ' for å gjøre main rød, +' + r.fiks + ' for å gjøre den grønn</span>' : '') +
+      (data.potten ? '<span>' + data.potten + ' poeng i potten</span>' : '');
   }
 
-  function labelClass(label) {
-    return String(label || 'issue').toLowerCase().replace(/[^a-z0-9_-]/g, '');
-  }
-
-  function renderAssigned(data) {
-    var rows = (data.tildelt || []).slice().sort(function (a, b) {
-      return String(b.oppdatert || '').localeCompare(String(a.oppdatert || ''));
-    }).slice(0, 5);
-    var target = document.getElementById('assigned-content');
-    if (!rows.length) {
-      target.innerHTML = '<div class="empty">Ingen åpne issues er tildelt akkurat nå.</div>';
-      return;
-    }
-    target.innerHTML = rows.map(function (row, index) {
-      var labels = row.etiketter || [];
-      var label = labels[0] || (Number(row.issue) <= 5 ? 'bug' : 'feature');
-      return '<article class="item"><div class="item-top">' +
-        '<span class="issue-no">#' + esc(row.issue) + '</span>' +
-        '<a class="item-title" href="' + issueUrl(data.repo, row.issue) + '" target="_blank" rel="noopener">' + esc(row.navn || '') + '</a>' +
-        '</div><div class="item-meta">@' + esc(row.github || 'ukjent') + ' · ' + dato(row.oppdatert) + '</div>' +
-        '<div class="item-bottom"><span class="tag ' + labelClass(label) + '">' + esc(label) + '</span></div></article>';
-    }).join('');
-  }
-
-  function renderPullRequests(data) {
-    var rows = (data.aapne || []).slice(0, 5);
-    var target = document.getElementById('prs-content');
-    if (!rows.length) {
-      target.innerHTML = '<div class="empty">Ingen åpne pull requests akkurat nå.</div>';
-      return;
-    }
-    target.innerHTML = rows.map(function (row) {
-      var agent = row.agent || row.github || 'ukjent';
-      var issueLinks = (row.issues || []).map(function (number) {
-        return '<a class="mini-link" href="' + issueUrl(data.repo, number) + '" target="_blank" rel="noopener">#' + number + '</a>';
-      }).join(' · ');
-      return '<article class="item"><div class="item-top">' +
-        '<span class="pr-no">#' + esc(row.pr) + '</span>' +
-        '<a class="item-title" href="' + prUrl(data.repo, row.pr) + '" target="_blank" rel="noopener">' + esc(row.tittel || '') + '</a>' +
-        '</div><div class="item-meta">@' + esc(agent) + ' · ' + dato(row.oppdatert || row.opprettet) + '</div>' +
-        '<div class="item-bottom"><span class="pr-issues">' + (issueLinks || '<span class="tag">ingen issue</span>') + '</span>' +
-        '<span class="pr-state' + (row.utkast ? ' draft' : '') + '">' + (row.utkast ? 'utkast' : 'åpen') + '</span></div></article>';
-    }).join('');
-  }
-
-  function renderFooter(data) {
-    var rules = data.regler || {};
-    var participants = data.deltakere || [];
-    var cost = participants.reduce(function (sum, row) { return sum + Number(row.dollar || 0); }, 0);
-    document.getElementById('costs').innerHTML =
-      '<span>Hver issue gir ' + (rules.vanskelighet || [1, 2, 3, 5, 8]).join(' · ') + ' poeng</span>' +
-      '<span>' + (rules.utkast != null ? rules.utkast : -1) + ' per PR som ikke bygger</span>' +
-      '<span>' + (rules.perDollar != null ? rules.perDollar : -1) + ' poeng per $' + (rules.dollarPerPoeng || 10) + '</span>' +
-      '<span id="cost-summary">Totalt $' + cost.toFixed(2) + '</span>';
-  }
-
-  function renderStatus(data) {
-    lastStatus = data;
-    renderHeader(data);
-    renderMetrics(data);
-    renderProgress(data);
-    renderLeaderboard(data);
-    renderAssigned(data);
-    renderPullRequests(data);
-    renderFooter(data);
-    document.getElementById('status-error').textContent = data.produkt && data.produkt.feilmelding
-      ? 'Siste statusrunde: ' + data.produkt.feilmelding : '';
-  }
-
-  function renderLog(data) {
-    var rows = data.linjer || [];
-    document.getElementById('log-updated').textContent = data.oppdatert ? 'publisert ' + klokke(data.oppdatert) : 'venter på feed';
-    document.getElementById('log-content').innerHTML = rows.length
-      ? '<div class="logg-list">' + rows.map(function (row) {
-          return '<div class="logg-row"><span class="logg-time">' + klokke(row.tid) + '</span>' +
-            '<span class="logg-agent">' + esc(row.agent || 'agent') + '</span>' +
-            '<span class="logg-message">' + esc(row.melding || '') + '</span></div>';
-        }).join('') + '</div>'
-      : '<div class="logg-empty">Ingen publiserte agenthendelser ennå.</div>';
-  }
-
-  function fetchStatus() {
+  function hent() {
     fetch('resultat.json?t=' + Date.now(), { cache: 'no-store' })
-      .then(function (response) {
-        if (!response.ok) throw new Error('HTTP ' + response.status);
-        return response.json();
-      })
-      .then(renderStatus)
-      .catch(function (error) {
-        document.getElementById('status-error').textContent = 'Status kunne ikke lastes: ' + error.message;
+      .then(function (s) { if (!s.ok) throw new Error('HTTP ' + s.status); return s.json(); })
+      .then(tegn)
+      .catch(function () {
+        document.getElementById('oppdatert').textContent = 'fant ikke resultat.json';
+        document.getElementById('innhold').innerHTML =
+          '<div class="beskjed">Fant ingen <span class="repo">resultat.json</span> ved siden av denne siden.<br>' +
+          'Kjør <span class="repo">python poeng.py --repo novanet/workshop.oslo-live</span> først.</div>';
       });
   }
 
-  function fetchLog() {
-    fetch('live-log.json?t=' + Date.now(), { cache: 'no-store' })
-      .then(function (response) {
-        if (!response.ok) throw new Error('HTTP ' + response.status);
-        return response.json();
-      })
-      .then(renderLog)
-      .catch(function () { renderLog({ linjer: [], oppdatert: null }); });
-  }
-
-  fetchStatus();
-  fetchLog();
-  setInterval(fetchStatus, STATUS_INTERVAL);
-  setInterval(fetchLog, LOG_INTERVAL);
+  hent();
+  setInterval(hent, HENT_HVERT);
 })();
 </script>
 </body>

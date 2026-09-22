@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Live-logg · Status</title>
+<link rel="stylesheet" href="status.css">
+</head>
+<body>
+<div class="page-shell">
+  <aside class="sidebar">
+    <a class="brand" href="tavle.html"><span class="brand-mark">&lt;/&gt;</span><span>Status</span></a>
+    <nav class="side-nav" aria-label="Statusnavigasjon">
+      <a href="tavle.html">Oversikt</a>
+      <a href="issues.html">Tildelte issues</a>
+      <a href="pullrequests.html">Pull requests</a>
+      <a class="active" href="live-log.html">Live-logg</a>
+      <a href="tavle.html#regler">Poengregler</a>
+      <a href="presentasjon.html">Presentasjon</a>
+      <a href="prerequisites.html">Prerequisites</a>
+      <a href="lab1.html">Lab 1</a>
+      <a href="lab2.html">Lab 2</a>
+      <a href="lab3.html">Lab 3</a>
+      <a href="teknisk.html">Teknisk</a>
+    </nav>
+    <div class="sidebar-note">novanet/workshop.oslo-live</div>
+  </aside>
+  <main class="content">
+    <div class="content-inner">
+      <header class="page-header">
+        <div>
+          <p class="eyebrow">Operasjon</p>
+          <h1>Live-logg</h1>
+          <p class="lede">Sanerte livssyklusmeldinger fra agentene.</p>
+        </div>
+        <div id="updated" class="updated">laster …</div>
+      </header>
+      <section class="panel">
+        <div class="panel-heading"><h2>Siste hendelser</h2><span id="count" class="count"></span></div>
+        <div id="content">Leser live-log.json …</div>
+      </section>
+      <footer>Feed fra live-log.json · oppdateres automatisk hvert 30. sekund</footer>
+    </div>
+  </main>
+</div>
+<script>
+(function () {
+  var interval = 30000;
+  function esc(value) {
+    return String(value == null ? '' : value).replace(/[&<>"]/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+    });
+  }
+  function time(value) {
+    if (!value) return '–';
+    var date = new Date(value);
+    return isNaN(date) ? '–' : date.toLocaleTimeString('no-NO', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  }
+  function load() {
+    fetch('live-log.json?t=' + Date.now(), { cache: 'no-store' })
+      .then(function (response) { if (!response.ok) throw new Error(response.status); return response.json(); })
+      .then(function (data) {
+        var rows = (data.linjer || []).slice().sort(function (a, b) { return String(b.tid || '').localeCompare(String(a.tid || '')); });
+        document.getElementById('updated').textContent = 'feed oppdatert ' + time(data.oppdatert);
+        document.getElementById('count').textContent = rows.length + ' meldinger';
+        document.getElementById('content').innerHTML = rows.length ? '<div class="log-list">' +
+          rows.map(function (row) {
+            var messageClass = /feilet|feil|klarte ikke/i.test(row.melding || '') ? ' status-warn' : '';
+            return '<div class="log-row"><div class="log-time">' + time(row.tid) + '</div><div class="log-agent">' + esc(row.agent || 'ukjent') + '</div><div class="log-message' + messageClass + '">' + esc(row.melding || '') + (row.komponent ? ' <span class="count">(' + esc(row.komponent) + ')</span>' : '') + '</div></div>';
+          }).join('') + '</div>' : '<div class="empty">Ingen publiserte logghendelser ennå.</div>';
+      })
+      .catch(function () { document.getElementById('content').innerHTML = '<div class="empty">Fant ikke live-log.json.</div>'; });
+  }
+  load();
+  setInterval(load, interval);
+})();
+</script>
+</body>
+</html>

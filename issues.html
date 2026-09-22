@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tildelte issues · Status</title>
+<link rel="stylesheet" href="status.css">
+</head>
+<body>
+<div class="page-shell">
+  <aside class="sidebar">
+    <a class="brand" href="tavle.html"><span class="brand-mark">&lt;/&gt;</span><span>Status</span></a>
+    <nav class="side-nav" aria-label="Statusnavigasjon">
+      <a href="tavle.html">Oversikt</a>
+      <a class="active" href="issues.html">Tildelte issues</a>
+      <a href="pullrequests.html">Pull requests</a>
+      <a href="live-log.html">Live-logg</a>
+      <a href="tavle.html#regler">Poengregler</a>
+      <a href="presentasjon.html">Presentasjon</a>
+      <a href="prerequisites.html">Prerequisites</a>
+      <a href="lab1.html">Lab 1</a>
+      <a href="lab2.html">Lab 2</a>
+      <a href="lab3.html">Lab 3</a>
+      <a href="teknisk.html">Teknisk</a>
+    </nav>
+    <div class="sidebar-note">novanet/workshop.oslo-live</div>
+  </aside>
+  <main class="content">
+    <div class="content-inner">
+      <header class="page-header">
+        <div>
+          <p class="eyebrow">Status</p>
+          <h1>Tildelte issues</h1>
+          <p class="lede">Issues som en agent arbeider med akkurat nå.</p>
+        </div>
+        <div id="updated" class="updated">laster …</div>
+      </header>
+      <section class="panel">
+        <div class="panel-heading"><h2>Åpne issues</h2><span id="count" class="count"></span></div>
+        <div id="content">Leser resultat.json …</div>
+      </section>
+      <footer>Data fra resultat.json · oppdateres automatisk hvert 45. sekund</footer>
+    </div>
+  </main>
+</div>
+<script>
+(function () {
+  var interval = 45000;
+  function esc(value) {
+    return String(value == null ? '' : value).replace(/[&<>"]/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+    });
+  }
+  function time(value) {
+    if (!value) return '–';
+    var date = new Date(value);
+    return isNaN(date) ? '–' : date.toLocaleString('no-NO', { dateStyle: 'short', timeStyle: 'short' });
+  }
+  function load() {
+    fetch('resultat.json?t=' + Date.now(), { cache: 'no-store' })
+      .then(function (response) { if (!response.ok) throw new Error(response.status); return response.json(); })
+      .then(function (data) {
+        var rows = data.tildelt || [];
+        document.getElementById('updated').textContent = 'oppdatert ' + time(data.oppdatert);
+        document.getElementById('count').textContent = rows.length + ' tildelt';
+        document.getElementById('content').innerHTML = rows.length ? '<div class="table-wrap"><table>' +
+          '<thead><tr><th>Issue</th><th>Beskrivelse</th><th>Agent</th><th>Labels</th><th>Oppdatert</th></tr></thead><tbody>' +
+          rows.map(function (row) {
+            var labels = (row.etiketter || []).map(function (label) { return '<span class="label">' + esc(label) + '</span>'; }).join('');
+            return '<tr><td class="number"><a href="https://github.com/' + encodeURI(data.repo || '') + '/issues/' + encodeURIComponent(row.issue) + '" target="_blank" rel="noopener">#' + row.issue + '</a></td>' +
+              '<td class="title">' + esc(row.navn) + '</td><td class="meta">@' + esc(row.github || 'ukjent') + '</td>' +
+              '<td><div class="labels">' + (labels || '<span class="label">–</span>') + '</div></td><td class="meta">' + time(row.oppdatert) + '</td></tr>';
+          }).join('') + '</tbody></table></div>' : '<div class="empty">Ingen åpne issues er tildelt akkurat nå.</div>';
+      })
+      .catch(function () { document.getElementById('content').innerHTML = '<div class="empty">Fant ikke resultat.json.</div>'; });
+  }
+  load();
+  setInterval(load, interval);
+})();
+</script>
+</body>
+</html>
