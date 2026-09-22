@@ -9,6 +9,28 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
   :root {
+    --ground: #F6F8F5;
+    --surface: #FFFFFF;
+    --ink: #17231F;
+    --muted: #5A6A64;
+    --line: #D6DDD8;
+    --accent: #0E6D69;
+    --accent-soft: #E1F0EE;
+    --gull: #B97F0E;
+    --gull-soft: #F7EBCF;
+    --warn: #A33A2C;
+    --warn-soft: #F8E4E0;
+    --ok: #2E7D47;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0F1715; --surface: #16201D; --ink: #E4EBE7; --muted: #93A39D;
+      --line: #27332F; --accent: #43B5AE; --accent-soft: #14302E;
+      --gull: #E2A83B; --gull-soft: #33280F; --warn: #E07A6A; --warn-soft: #3A1B16;
+      --ok: #4FC172;
+    }
+  }
+  :root[data-theme="dark"] {
     --ground: #0F1715; --surface: #16201D; --ink: #E4EBE7; --muted: #93A39D;
     --line: #27332F; --accent: #43B5AE; --accent-soft: #14302E;
     --gull: #E2A83B; --gull-soft: #33280F; --warn: #E07A6A; --warn-soft: #3A1B16;
@@ -21,33 +43,7 @@
     font-family: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
     font-size: 16px; line-height: 1.45;
   }
-  .layout { display: flex; min-height: 100vh; }
-  .side {
-    width: 220px; flex: 0 0 220px; padding: 24px 16px;
-    border-right: 1px solid var(--line); background: var(--surface);
-  }
-  .side-brand {
-    display: flex; align-items: center; gap: 9px; color: var(--ink);
-    font-family: "Bricolage Grotesque", system-ui, sans-serif; font-size: 20px;
-    font-weight: 700; text-decoration: none; margin: 0 8px 32px;
-  }
-  .side-mark {
-    display: grid; place-items: center; width: 28px; height: 28px;
-    border-radius: 7px; background: var(--accent); color: #fff;
-    font-family: "IBM Plex Mono", monospace; font-size: 14px;
-  }
-  .side-nav { display: grid; gap: 4px; }
-  .side-nav a {
-    display: block; color: var(--muted); border-radius: 7px; padding: 9px 10px;
-    text-decoration: none; font-size: 14px;
-  }
-  .side-nav a:hover, .side-nav a.aktiv { color: var(--accent); background: var(--accent-soft); }
-  .side-note {
-    margin: 32px 8px 0; padding-top: 16px; border-top: 1px solid var(--line);
-    color: var(--muted); font-family: "IBM Plex Mono", monospace; font-size: 11px;
-  }
-  .page { flex: 1; min-width: 0; }
-  .ramme { padding: clamp(20px, 3.5vw, 48px); max-width: 1300px; margin: 0 auto; }
+  .ramme { padding: clamp(16px, 2.6vw, 34px); padding-block: clamp(16px, 2.6vw, 34px); max-width: 1600px; margin: 0 auto; }
 
   header { display: flex; align-items: flex-end; justify-content: space-between; gap: 18px; flex-wrap: wrap; margin-bottom: 18px; }
   .merkelapp {
@@ -162,6 +158,52 @@
   .kjoering .tid { font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--muted); }
   .tildelt .kjoering .prikk { background: var(--gull); }
 
+  .live-grid {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px; margin-bottom: 14px;
+  }
+  .live-panel {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+    padding: 12px 14px; min-width: 0;
+  }
+  .live-topp {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+    margin-bottom: 8px;
+  }
+  .live-tittel {
+    font-family: "IBM Plex Mono", monospace; font-size: 10.5px; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .live-antall {
+    font-family: "IBM Plex Mono", monospace; font-size: 11px; color: var(--muted);
+    white-space: nowrap;
+  }
+  .live-liste {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 6px;
+    max-height: min(36vh, 360px); overflow-y: auto; padding-right: 3px;
+  }
+  .live-rad {
+    border: 1px solid var(--line); border-radius: 7px; padding: 7px 9px;
+    min-width: 0;
+  }
+  .live-rad a { color: var(--accent); text-decoration: none; }
+  .live-rad a:hover { text-decoration: underline; }
+  .live-navn { font-weight: 600; overflow-wrap: anywhere; }
+  .live-meta {
+    color: var(--muted); font-family: "IBM Plex Mono", monospace; font-size: 10.5px;
+    margin-top: 3px;
+  }
+  .live-merker { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 5px; }
+  .live-merke {
+    background: var(--accent-soft); color: var(--accent); border-radius: 999px;
+    font-family: "IBM Plex Mono", monospace; font-size: 10px; padding: 1px 6px;
+  }
+  .live-merke.utkast { background: var(--warn-soft); color: var(--warn); }
+  .live-tom { color: var(--muted); font-size: 13px; }
+  @media (max-width: 720px) {
+    .live-grid { grid-template-columns: 1fr; }
+  }
+
   .score-topp {
     display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
     margin: 6px 0 9px;
@@ -177,37 +219,10 @@
     font-family: "IBM Plex Mono", monospace; font-size: 12.5px; color: var(--muted);
   }
   footer span { background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 5px 13px; }
-  @media (max-width: 760px) {
-    .layout { display: block; }
-    .side { width: auto; padding: 12px 16px; border-right: 0; border-bottom: 1px solid var(--line); }
-    .side-brand { margin: 0 0 10px; }
-    .side-nav { display: flex; flex-wrap: wrap; gap: 3px; }
-    .side-nav a { padding: 6px 8px; font-size: 13px; }
-    .side-note { display: none; }
-  }
 </style>
 </head>
 <body>
-<div class="layout">
-  <aside class="side">
-    <a class="side-brand" href="tavle.html"><span class="side-mark">&lt;/&gt;</span><span>Status</span></a>
-    <nav class="side-nav" aria-label="Statusnavigasjon">
-      <a class="aktiv" href="tavle.html">Oversikt</a>
-      <a href="issues.html">Tildelte issues</a>
-      <a href="pullrequests.html">Pull requests</a>
-      <a href="live-log.html">Live-logg</a>
-      <a href="#regler">Poengregler</a>
-      <a href="presentasjon.html">Presentasjon</a>
-      <a href="prerequisites.html">Prerequisites</a>
-      <a href="lab1.html">Lab 1</a>
-      <a href="lab2.html">Lab 2</a>
-      <a href="lab3.html">Lab 3</a>
-      <a href="teknisk.html">Teknisk</a>
-    </nav>
-    <div class="side-note">novanet/workshop.oslo-live<br><br>oppdateres automatisk</div>
-  </aside>
-  <main class="page">
-  <div class="ramme">
+<div class="ramme">
 
   <header>
     <div>
@@ -217,10 +232,23 @@
     <div class="status">
       <div><span class="puls"></span><span id="oppdatert">laster …</span></div>
       <div id="neste"></div>
+      <nav class="navigasjon" aria-label="Kursressurser">
+        <a href="presentasjon.html">Presentasjon</a>
+        <a href="prerequisites.html">Prerequisites</a>
+        <a href="lab1.html">Lab 1</a>
+        <a href="lab2.html">Lab 2</a>
+        <a href="lab3.html">Lab 3</a>
+        <a href="teknisk.html">Teknisk</a>
+        <a href="https://ca-oslolive.thankfulwave-6bdee498.norwayeast.azurecontainerapps.io/" target="_blank" rel="noopener">Oslo Live</a>
+      </nav>
     </div>
   </header>
 
   <div id="framdrift"></div>
+  <div class="live-grid">
+    <section id="tildelt" aria-live="polite"></section>
+    <section id="aapne" aria-live="polite"></section>
+  </div>
   <div id="kjoerer"></div>
 
   <div id="innhold">
@@ -229,8 +257,6 @@
 
   <footer id="regler"></footer>
 
-</div>
-  </main>
 </div>
 
 <script>
@@ -247,6 +273,14 @@
     if (!iso) return '–';
     var d = new Date(iso);
     return isNaN(d) ? '–' : d.toLocaleTimeString('no-NO', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  }
+
+  function issueUrl(repo, nr) {
+    return 'https://github.com/' + encodeURI(repo || '') + '/issues/' + encodeURIComponent(nr);
+  }
+
+  function prUrl(repo, nr) {
+    return 'https://github.com/' + encodeURI(repo || '') + '/pull/' + encodeURIComponent(nr);
   }
 
   function rad(d) {
@@ -314,10 +348,60 @@
       }).join('') + '</div>';
   }
 
+  function tegnTildelt(data) {
+    var liste = data.tildelt || [];
+    var el = document.getElementById('tildelt');
+    el.innerHTML = '<div class="live-panel">' +
+      '<div class="live-topp"><span class="live-tittel">Tildelte issues</span>' +
+      '<span class="live-antall">' + liste.length + '</span></div>' +
+      (liste.length
+        ? '<div class="live-liste">' + liste.map(function (k) {
+            return '<div class="live-rad">' +
+              '<div class="live-navn"><a href="' + issueUrl(data.repo, k.issue) + '" target="_blank" rel="noopener">#' +
+                k.issue + ' ' + esc(k.navn || '') + '</a></div>' +
+              '<div class="live-meta">tildelt til @' + esc(k.github || 'ukjent') +
+                (k.oppdatert ? ' · oppdatert ' + klokke(k.oppdatert) : '') + '</div>' +
+              '</div>';
+          }).join('') + '</div>'
+        : '<div class="live-tom">Ingen åpne issues er tildelt akkurat nå.</div>') +
+      '</div>';
+  }
+
+  function tegnAapne(data) {
+    var liste = data.aapne || [];
+    var el = document.getElementById('aapne');
+    el.innerHTML = '<div class="live-panel">' +
+      '<div class="live-topp"><span class="live-tittel">Åpne pull requests</span>' +
+      '<span class="live-antall">' + liste.length + '</span></div>' +
+      (liste.length
+        ? '<div class="live-liste">' + liste.map(function (p) {
+            var agent = p.agent || p.github || 'ukjent';
+            var issues = (p.issues || []).map(function (nr) {
+              return '<a class="live-merke" href="' + issueUrl(data.repo, nr) +
+                '" target="_blank" rel="noopener">#' + nr + '</a>';
+            }).join('');
+            return '<div class="live-rad">' +
+              '<div class="live-navn"><a href="' + prUrl(data.repo, p.pr) +
+                '" target="_blank" rel="noopener">#' + p.pr + ' ' + esc(p.tittel || '') + '</a></div>' +
+              '<div class="live-meta"><b>' + esc(agent) + '</b>' +
+                (p.github && p.github !== agent ? ' · @' + esc(p.github) : '') +
+                (p.oppdatert ? ' · oppdatert ' + klokke(p.oppdatert) : '') + '</div>' +
+              '<div class="live-merker">' +
+                (p.utkast ? '<span class="live-merke utkast">utkast</span>' : '') +
+                (issues || '<span class="live-merke">ingen koblet issue</span>') +
+              '</div>' +
+              '</div>';
+          }).join('') + '</div>'
+        : '<div class="live-tom">Ingen åpne pull requests akkurat nå.</div>') +
+      '</div>';
+  }
+
   function tegn(data) {
     var folk = data.deltakere || [];
     document.getElementById('oppdatert').textContent = 'oppdatert ' + klokke(data.oppdatert);
     tegnFramdrift(data);
+    tegnTildelt(data);
+    tegnAapne(data);
     tegnKjoerer(data);
 
     if (!folk.length) {
@@ -339,7 +423,7 @@
     document.getElementById('regler').innerHTML =
       '<span>Hver issue gir ' + skala + ' poeng etter vanskelighet</span>' +
       '<span>' + (r.utkast != null ? r.utkast : -1) + ' per PR som ikke bygger</span>' +
-      '<span>' + (r.perDollar != null ? r.perDollar : -1) + ' poeng per $' + (r.dollarPerPoeng || 10) + '</span>' +
+      '<span>' + (r.perDollar != null ? r.perDollar : -1) + ' per påbegynte dollar</span>' +
       (r.brekk != null ? '<span>' + r.brekk + ' for å gjøre main rød, +' + r.fiks + ' for å gjøre den grønn</span>' : '') +
       (data.potten ? '<span>' + data.potten + ' poeng i potten</span>' : '');
   }
