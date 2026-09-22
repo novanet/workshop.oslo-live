@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-22T22:52:34",
+  "oppdatert": "2026-09-22T22:53:46",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [],
   "kjoerer": [],
@@ -28,6 +28,7 @@
     ],
     "utkast": -1,
     "perDollar": -1,
+    "dollarPerStraff": 10,
     "brekk": -2,
     "fiks": 2
   },
