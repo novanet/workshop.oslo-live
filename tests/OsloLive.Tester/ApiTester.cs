@@ -1,5 +1,6 @@
 using System.Net;
 using System.Net.Http.Json;
+using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc.Testing;
 
 namespace OsloLive.Tester;
@@ -44,6 +45,26 @@ public class ApiTester(WebApplicationFactory<Program> vert) : IClassFixture<WebA
         var svar = await Klient.GetAsync("/api/lag/finnes-ikke");
 
         Assert.Equal(HttpStatusCode.NotFound, svar.StatusCode);
+    }
+
+    [Fact]
+    public async Task Kameraknappene_ligger_i_kartets_kontrollstabel()
+    {
+        var side = await Klient.GetStringAsync("/");
+
+        Assert.Contains("class=\"kamera maplibregl-ctrl\"", side);
+        Assert.Matches(@"addControl\([^;]*kameraboks[^;]*'bottom-right'\)", side);
+    }
+
+    [Fact]
+    public async Task Kameraknappene_er_ikke_fritt_plassert_over_kartet()
+    {
+        var side = await Klient.GetStringAsync("/");
+
+        var regel = Regex.Match(side, @"\.kamera\s*\{[^}]*\}");
+
+        Assert.True(regel.Success, "Fant ingen CSS-regel for .kamera i index.html");
+        Assert.DoesNotMatch(@"position\s*:\s*(absolute|fixed)", regel.Value);
     }
 
     private sealed record Lagoppforing(string Id, string Navn, string Beskrivelse, string Ikon);

@@ -41,8 +41,8 @@
   .bunn { margin-top: 12px; padding-top: 12px; border-top: 1px solid #e5e7eb; font-size: 11px; color: var(--dempet); display: flex; justify-content: space-between; }
 
   .kamera {
-    position: absolute; bottom: 24px; right: 16px; z-index: 10;
     display: flex; flex-direction: column; gap: 6px;
+    pointer-events: auto; /* hjørnet MapLibre legger kontrollene i har pointer-events: none */
   }
   .kamera button {
     background: rgba(255,255,255,.95);
@@ -93,7 +93,7 @@
   </div>
 </div>
 
-<div class="kamera">
+<div class="kamera maplibregl-ctrl">
   <button id="snurr" type="button" aria-pressed="false">Snurr</button>
   <button id="flatt" type="button">2D</button>
   <button id="hjem" type="button">Sentrum</button>
@@ -115,6 +115,11 @@ const kart = new maplibregl.Map({
 });
 
 kart.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), 'bottom-right');
+
+// Kameraknappene inn i MapLibre sin kontrollstabel, saa de ikke legger seg
+// oppaa navigasjonsknappene og attribusjonen i samme hjoerne.
+const kameraboks = document.querySelector('.kamera');
+kart.addControl({ onAdd: () => kameraboks, onRemove: () => kameraboks.remove() }, 'bottom-right');
 
 kart.on('style.load', () => {
   varmTema(kart);
