@@ -469,7 +469,7 @@
     <p class="merkelapp">Mini-Nils · arkitektur</p>
     <h2>Slik henger delene sammen</h2>
     <figure class="tegning">
-      <svg viewBox="0 0 1200 300" role="img" aria-label="GitHub issue går via webhook, Receiver, Storage Queue, KEDA og Worker til pull request">
+      <svg viewBox="0 20 1200 380" role="img" aria-label="GitHub issue går via webhook, Receiver, Storage Queue, KEDA og Worker til pull request. Sensor vurderer PR-en. Godkjent gir merge til storskjermen, nei sender deg tilbake for å fikse agenten og merke på nytt.">
         <defs>
           <marker id="pil-arkitektur" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="var(--accent)"></path></marker>
         </defs>
@@ -513,8 +513,21 @@
         <text x="1125" y="132" text-anchor="middle" class="tittel-tekst">PR</text>
         <text x="1125" y="153" text-anchor="middle" class="under-tekst">diff + rapport</text>
         <text x="1125" y="170" text-anchor="middle" class="under-tekst">til review</text>
+        <line x1="1125" y1="185" x2="1125" y2="273" stroke="var(--accent)" stroke-width="2" marker-end="url(#pil-arkitektur)"></line>
+        <rect x="1040" y="275" width="140" height="80" rx="10" class="boks-aksent"></rect>
+        <text x="1110" y="302" text-anchor="middle" class="tittel-tekst">Sensor</text>
+        <text x="1110" y="323" text-anchor="middle" class="under-tekst">kriterier + skjulte</text>
+        <text x="1110" y="340" text-anchor="middle" class="under-tekst">tester</text>
+        <line x1="1040" y1="315" x2="945" y2="315" stroke="var(--accent)" stroke-width="2" marker-end="url(#pil-arkitektur)"></line>
+        <text x="955" y="303" class="pil-tekst">godkjent</text>
+        <rect x="775" y="275" width="168" height="80" rx="10" class="boks-fyll boks-kant"></rect>
+        <text x="859" y="302" text-anchor="middle" class="tittel-tekst">Merge til main</text>
+        <text x="859" y="323" text-anchor="middle" class="under-tekst">storskjermen</text>
+        <text x="859" y="340" text-anchor="middle" class="under-tekst">oppdateres</text>
+        <polyline points="1110,355 1110,385 95,385 95,189" fill="none" stroke="var(--accent)" stroke-width="2" stroke-dasharray="6 6" marker-end="url(#pil-arkitektur)"></polyline>
+        <text x="120" y="376" class="pil-tekst">nei: fiks agenten, sett etiketten på igjen</text>
       </svg>
-      <figcaption>Receiveren svarer raskt. KEDA følger med på køen og starter en worker når det ligger arbeid der.</figcaption>
+      <figcaption>Receiveren svarer raskt. KEDA følger med på køen og starter en worker når det ligger arbeid der. Sensor bestemmer om PR-en blir merget.</figcaption>
     </figure>
   </section>
 
@@ -638,6 +651,7 @@
       <div class="kort"><span class="tall">1</span><span class="navn">Sjekk receiveren</span><span class="om">Kall <code>Receiver URL</code> fra Actions Summary, og se at en usignert melding gir <code>401</code>.</span></div>
       <div class="kort"><span class="tall">2</span><span class="navn">Merk en issue</span><span class="om">Sett etiketten din på en issue i Oslo Live.</span></div>
       <div class="kort"><span class="tall">3</span><span class="navn">Følg jobben</span><span class="om">Agenten kommenterer på issuen og legger rapporten i PR-en.</span></div>
+      <div class="kort"><span class="tall">4</span><span class="navn">Sensor ser på PR-en</span><span class="om">Sier den nei, fiks agenten og sett etiketten på igjen.</span></div>
     </div>
     <div class="notis" style="margin-top:22px"><b>Sjekkpunkt 2:</b> En merket issue gir en pull request opprettet av Azure-jobben.</div>
   </section>
