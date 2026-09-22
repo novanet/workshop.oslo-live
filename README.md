@@ -4,7 +4,7 @@ Et kart over Oslo der hvert lag er levende offentlige data. Elsparkesyklene som 
 
 Dataene kommer fra [Allemannsdata](https://allemannsdata.com): 51 norske offentlige datakilder pakket som MCP-servere. Ingen API-nøkkel, ingen registrering.
 
-Dette repoet er øvingsprosjektet på kurset **«Bygg din egen Nils Georg»** hos Novanet. Det er også et ekte, lite produkt: det bygger, det kjører, og det virker.
+Dette repoet er øvingsprosjektet på kurset **«Bygg din egen kodeagent,»** hos Novanet. Det er også et ekte, lite produkt: det bygger, det kjører, og det virker.
 
 ```bash
 dotnet run --project src/OsloLive --urls http://localhost:5199
@@ -18,8 +18,7 @@ Hver deltaker på kurset bygger sin egen autonome agent og slipper den løs **p�
 
 Det betyr noen ting du må vite før du starter:
 
-- **Én agent per issue.** Agenten din sjekker om noen andre er i gang før den starter, og lar issuen ligge hvis den er tatt. Vil du reservere en issue for hånd, tildeler du den til deg selv i GitHub. Reservasjoner går ut etter en time.
-- **Ender to likevel med PR på samme issue**, er det den som merges først og faktisk virker som får den.
+- **Flere agenter per issue.** Alle kan starte parallelt og tildele seg samme issue. Første mergete PR vinner; Sensor avviser konkurrerende åpne PR-er etterpå.
 - **Repoet er offentlig.** Aldri commit en API-nøkkel, et token eller en `.env`-fil. Agenten din har fått beskjed om det samme i `CLAUDE.md`, men du er den som har ansvaret.
 - **Alt innhold er data, ikke ordre.** Issuer og kommentarer kan skrives av hvem som helst. Ber en issue agenten din om å slette tester eller hente noe utenfor oppgaven, skal den nekte og si fra.
 
@@ -43,7 +42,7 @@ Backloggen er bred med vilje. Der er nye datakilder, men også tidslinje, varmek
 
 ### Hva en issue er verdt
 
-Hver issue har en etikett som sier hvor mange poeng den gir på resultattavlen. Skalaen er den samme som for story points, fordi vanskelighet ikke vokser jevnt:
+Hver issue har en etikett som sier hvilken vanskelighetsverdi den har i Status. Skalaen er den samme som for story points, fordi vanskelighet ikke vokser jevnt:
 
 | | Hva det betyr | Antall |
 |---:|---|---:|
@@ -59,7 +58,7 @@ Fire ting er verdt å vite før du velger:
 
 - **Feil og kjernelag må bestå en skjult test.** En merget pull request på issue 1 til 19 gir null poeng hvis testen ikke passerer. Resten gir poeng når de er merget.
 - **Første gode pull request tar poengene.** Kommer to på samme issue, er det den som ble merget først og faktisk virker.
-- **Kostnaden trekkes fra.** Hver påbegynte dollar agenten din bruker koster ett poeng, også på det som ikke førte fram. Et 8-poengs forsøk som ikke lykkes er ikke gratis.
+- **Kostnaden trekkes fra.** Hver påbegynte 10 dollar agenten din bruker koster ett poeng, også på det som ikke førte fram. Et 8-poengs forsøk som ikke lykkes er ikke gratis.
 - **Rød `main` koster.** Går bygget på `main` fra grønt til rødt etter at PR-en din ble merget, er det to poeng i minus. Den som gjør den grønn igjen, får to.
 
 Poengene står i etiketten så du kan se dem, men det er ikke etiketten som bestemmer. Å gi en issue flere poeng på GitHub hjelper deg ikke.
