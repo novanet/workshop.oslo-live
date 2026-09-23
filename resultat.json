@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T15:28:07",
+  "oppdatert": "2026-09-23T15:28:49",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -288,13 +288,13 @@
           "poeng": 1
         }
       ],
-      "dollar": 44.363,
-      "tokens": 70703268,
-      "sekunder": 13604,
+      "dollar": 44.416,
+      "tokens": 70914400,
+      "sekunder": 13634,
       "pr": 15,
       "utkast": 3,
       "merget": 8,
-      "kjoeringer": 32,
+      "kjoeringer": 33,
       "utenPr": 14,
       "bygg": [],
       "estimert": false,
@@ -456,8 +456,8 @@
       "pr": 4,
       "utkast": 0,
       "merget": 1,
-      "kjoeringer": 18,
-      "utenPr": 9,
+      "kjoeringer": 19,
+      "utenPr": 10,
       "bygg": [],
       "estimert": false,
       "plass": 11
@@ -696,14 +696,6 @@
   ],
   "kjoerer": [
     {
-      "agent": "mini-wilma",
-      "github": "larsajakobsen",
-      "issue": 193,
-      "navn": "Nytt lag: hjertestartere",
-      "startet": "2026-09-23T13:20:02.3717642+00:00",
-      "minutter": 8
-    },
-    {
       "agent": "mini-frode",
       "github": "FrodeBl",
       "issue": 186,
@@ -717,7 +709,7 @@
       "issue": 184,
       "navn": "Neste avganger når du klikker på en holdeplass",
       "startet": "2026-09-23T13:24:18.5982608+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-wilma",
@@ -725,7 +717,7 @@
       "issue": 183,
       "navn": "Regner det i Oslo sentrum de neste to timene?",
       "startet": "2026-09-23T13:24:20.6110309+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-frode",
@@ -733,7 +725,7 @@
       "issue": 48,
       "navn": "Parallell henting",
       "startet": "2026-09-23T13:24:27.3250644+00:00",
-      "minutter": 3
+      "minutter": 4
     }
   ],
   "main": {
@@ -889,7 +881,7 @@
       "issue": 55,
       "navn": "Kartet blir tregt med mange punkter",
       "github": "sin-rha",
-      "oppdatert": "2026-09-23T13:27:34Z"
+      "oppdatert": "2026-09-23T13:28:44Z"
     },
     {
       "issue": 57,
@@ -1153,13 +1145,13 @@
       "issue": 193,
       "navn": "Nytt lag: hjertestartere",
       "github": "SasaRad",
-      "oppdatert": "2026-09-23T13:20:03Z"
+      "oppdatert": "2026-09-23T13:28:17Z"
     },
     {
       "issue": 193,
       "navn": "Nytt lag: hjertestartere",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T13:20:03Z"
+      "oppdatert": "2026-09-23T13:28:17Z"
     },
     {
       "issue": 195,
@@ -1247,7 +1239,7 @@
       "github": "larsajakobsen",
       "agent": "mini-wilma",
       "opprettet": "2026-09-23T13:27:44Z",
-      "oppdatert": "2026-09-23T13:27:45Z",
+      "oppdatert": "2026-09-23T13:28:06Z",
       "utkast": false,
       "issues": [
         193
