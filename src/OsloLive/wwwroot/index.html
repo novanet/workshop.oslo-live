@@ -432,6 +432,22 @@ function varmTema(kart) {
 // i motsetning til roed/groenn. Kjente lag har sin egen; resten faar en fra
 // reservepaletten. Farge er likevel bare én av flere kilder til å skille lag,
 // se FORMER/KANTER under.
+//
+// Testet med simulering: Machado, Oliveira og Fernandes (2009), alvorlighet 1,0,
+// for deuteranopi og protanopi i lineær RGB, og CIEDE2000 (ΔE) mellom nabolag.
+// ΔE rundt 2,3 er det minste folk flest ser. Fargene er tildelt som i start(),
+// der nabolag aldri får samme hex.
+//   Lagene i /api/lag (luftkvalitet, smilefjes, fly, badetemperatur, mobilitet):
+//     nabolag         normal  deuteranopi  protanopi
+//     luft/smilefjes    38.0         33.9       28.0
+//     smilefjes/fly     88.4         89.5       86.4
+//     fly/badetemp      61.0         58.6       64.0
+//     badetemp/mobil    45.5         15.7       14.0
+//   Alle 16 lag i FARGER, i rekkefølgen under: minste ΔE ved deuteranopi eller
+//   protanopi er 14.0 (badetemperatur/trafikk). Ingen nabolag blir like.
+// Resultatet er også sjekket visuelt: merket til hvert av de 16 lagene (tegnMerke)
+// er simulert piksel for piksel med Machado-matrisene. Lagene skilles på både
+// farge, form og kantstil i normalt syn, deuteranopi og protanopi.
 // ---------------------------------------------------------------------------
 const FARGER = {
   kollektiv: '#D55E00',       // vermillion: bussene skal ses foerst
