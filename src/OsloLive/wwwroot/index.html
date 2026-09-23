@@ -52,8 +52,9 @@
     border-radius: 8px; padding: 8px 12px; font-size: 12px; cursor: pointer;
     backdrop-filter: blur(8px); font-family: inherit; font-weight: 500;
   }
-  .kamera button:hover { background: #111; color: #fff; }
+  .kamera button:hover:not(:disabled) { background: #111; color: #fff; }
   .kamera button[aria-pressed="true"] { background: #111; color: #fff; }
+  .kamera button:disabled { opacity: .45; cursor: default; }
 
   #demotekst {
     position: fixed; inset: 0; z-index: 20; pointer-events: none;
@@ -121,7 +122,7 @@
 </div>
 
 <div class="kamera">
-  <button id="demo" type="button" aria-pressed="false">Demo</button>
+  <button id="demo" type="button" aria-pressed="false" disabled>Demo</button>
   <button id="snurr" type="button" aria-pressed="false">Snurr</button>
   <button id="flatt" type="button">2D</button>
   <button id="hjem" type="button">Sentrum</button>
@@ -406,6 +407,12 @@ async function hent(id) {
     teller.textContent = oppf.antall;
     teller.className = 'antall ' + (oppf.antall ? 'ok' : '');
   } catch (e) {
+    // Ta bort punktene fra forrige henting, ellers blir de stående i kartet
+    // selv om laget er markert som feilende og demoen hopper over det.
+    for (const m of oppf.markorer) m.remove();
+    oppf.markorer = [];
+    oppf.punkter = [];
+    varmekart(id, []);
     oppf.antall = 0;
     oppf.feil = true;
     teller.textContent = 'feil';
@@ -477,6 +484,9 @@ async function start() {
   });
 
   setInterval(() => lagene.forEach((_, id) => hent(id)), 15000);
+
+  // Først nå finnes lagene, så demoen har noe å vise og noe å sette tilbake etterpå.
+  document.getElementById('demo').disabled = false;
 }
 
 // ---------------------------------------------------------------------------
@@ -660,6 +670,7 @@ function avbryt(ev) {
 }
 
 function startDemo() {
+  if (!lagene.size) return;   // start() har ikke bygget lagene ennå; knappen er også slått av til da
   snurrer = false;
   document.getElementById('snurr').setAttribute('aria-pressed', 'false');
   if (snurrId) cancelAnimationFrame(snurrId);
