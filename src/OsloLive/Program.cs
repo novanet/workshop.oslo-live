@@ -71,6 +71,7 @@ builder.Services.AddSingleton<ILag, KaierLag>();
 builder.Services.AddSingleton<ILag, BomstasjonerLag>();
 builder.Services.AddSingleton<ILag, VaerstasjonerLag>();
 builder.Services.AddSingleton<ILag, IdrettsanleggLag>();
+builder.Services.AddSingleton<ILag, LadestasjonerLag>();
 
 // Bakgrunnssjekk av kildehelse, se Helse/HelseSjekker.cs.
 builder.Services.Configure<HelseValg>(builder.Configuration.GetSection("Helse"));
