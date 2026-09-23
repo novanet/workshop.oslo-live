@@ -1,11 +1,11 @@
 {
-  "oppdatert": "2026-09-23T14:25:12",
+  "oppdatert": "2026-09-23T14:26:15",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
       "navn": "mini-richard",
       "github": "randsu",
-      "poeng": 37,
+      "poeng": 39,
       "feil": [
         {
           "issue": 3,
@@ -14,6 +14,11 @@
         }
       ],
       "lag": [
+        {
+          "issue": 6,
+          "navn": "Delt mobilitet",
+          "poeng": 2
+        },
         {
           "issue": 9,
           "navn": "Badetemperatur",
@@ -239,6 +244,37 @@
       "plass": 6
     },
     {
+      "navn": "mini-leif",
+      "github": "leif-larsen",
+      "poeng": 5,
+      "feil": [
+        {
+          "issue": 2,
+          "navn": "Utsnittet",
+          "poeng": 2
+        }
+      ],
+      "lag": [],
+      "levert": [
+        {
+          "issue": 141,
+          "navn": "Tydelige kartsymboler: båter som ser ut som båter",
+          "poeng": 3
+        }
+      ],
+      "dollar": 9.336,
+      "tokens": 20483881,
+      "sekunder": 3408,
+      "pr": 4,
+      "utkast": 0,
+      "merget": 2,
+      "kjoeringer": 15,
+      "utenPr": 6,
+      "bygg": [],
+      "estimert": false,
+      "plass": 7
+    },
+    {
       "navn": "mini-kirsten",
       "github": "jthagesk",
       "poeng": 4,
@@ -261,7 +297,7 @@
       "utenPr": 7,
       "bygg": [],
       "estimert": false,
-      "plass": 7
+      "plass": 8
     },
     {
       "navn": "mini-jon",
@@ -286,7 +322,7 @@
       "utenPr": 6,
       "bygg": [],
       "estimert": false,
-      "plass": 8
+      "plass": 9
     },
     {
       "navn": "henrik",
@@ -311,7 +347,7 @@
       "utenPr": 4,
       "bygg": [],
       "estimert": false,
-      "plass": 9
+      "plass": 10
     },
     {
       "navn": "Dmitry-agent",
@@ -336,7 +372,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 10
+      "plass": 11
     },
     {
       "navn": "mini-aud",
@@ -361,7 +397,7 @@
       "utenPr": 5,
       "bygg": [],
       "estimert": false,
-      "plass": 11
+      "plass": 12
     },
     {
       "navn": "helstein",
@@ -384,31 +420,6 @@
       "merget": 1,
       "kjoeringer": 13,
       "utenPr": 10,
-      "bygg": [],
-      "estimert": false,
-      "plass": 12
-    },
-    {
-      "navn": "mini-leif",
-      "github": "leif-larsen",
-      "poeng": 2,
-      "feil": [
-        {
-          "issue": 2,
-          "navn": "Utsnittet",
-          "poeng": 2
-        }
-      ],
-      "lag": [],
-      "levert": [],
-      "dollar": 9.336,
-      "tokens": 20483881,
-      "sekunder": 3408,
-      "pr": 4,
-      "utkast": 0,
-      "merget": 1,
-      "kjoeringer": 15,
-      "utenPr": 6,
       "bygg": [],
       "estimert": false,
       "plass": 13
@@ -579,7 +590,7 @@
       "issue": 198,
       "navn": "",
       "startet": "2026-09-23T12:16:25.0295863+00:00",
-      "minutter": 8
+      "minutter": 9
     },
     {
       "agent": "mini-richard",
@@ -595,7 +606,7 @@
       "issue": 190,
       "navn": "",
       "startet": "2026-09-23T12:19:34.8533908+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-frode",
@@ -603,7 +614,7 @@
       "issue": 128,
       "navn": "Simulering: tsunami i Oslofjorden",
       "startet": "2026-09-23T12:19:38.2554331+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-kirsten",
@@ -611,7 +622,7 @@
       "issue": 29,
       "navn": "Museer",
       "startet": "2026-09-23T12:19:47.6786683+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-wilma",
@@ -619,7 +630,7 @@
       "issue": 129,
       "navn": "Simulering: meteornedslag",
       "startet": "2026-09-23T12:20:25.1910717+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-taco",
@@ -627,7 +638,7 @@
       "issue": 133,
       "navn": "Havet stiger: hva havner under vann?",
       "startet": "2026-09-23T12:20:40.4209313+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-jon",
@@ -635,7 +646,7 @@
       "issue": 197,
       "navn": "",
       "startet": "2026-09-23T12:20:43.3709734+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "martin-holth",
@@ -643,7 +654,7 @@
       "issue": 111,
       "navn": "Nytt lag: kaier og ferjekaier",
       "startet": "2026-09-23T12:20:50.7551895+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-knive",
@@ -651,7 +662,7 @@
       "issue": 28,
       "navn": "Tog",
       "startet": "2026-09-23T12:21:43.7886322+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-astrid",
@@ -659,7 +670,7 @@
       "issue": 188,
       "navn": "",
       "startet": "2026-09-23T12:23:41.4076789+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-richard",
@@ -683,7 +694,7 @@
       "issue": 194,
       "navn": "",
       "startet": "2026-09-23T12:24:21.6258713+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-johan",
@@ -691,7 +702,7 @@
       "issue": 10,
       "navn": "Trafikk",
       "startet": "2026-09-23T12:24:28.6299515+00:00",
-      "minutter": 0
+      "minutter": 1
     }
   ],
   "main": {
@@ -701,14 +712,15 @@
     "kjoeringer": 44
   },
   "produkt": {
-    "testerBestatt": 17,
-    "testerFeilet": 9,
+    "testerBestatt": 18,
+    "testerFeilet": 8,
     "issuerLost": [
       1,
       2,
       3,
       4,
       5,
+      6,
       7,
       8,
       9,
@@ -826,7 +838,7 @@
       "issue": 114,
       "navn": "Nytt lag: Kristiania i 1910",
       "github": "monet820",
-      "oppdatert": "2026-09-23T12:25:07Z"
+      "oppdatert": "2026-09-23T12:25:13Z"
     },
     {
       "issue": 115,
@@ -868,7 +880,7 @@
       "issue": 118,
       "navn": "Nyhetslinje nederst på skjermen",
       "github": "leif-larsen",
-      "oppdatert": "2026-09-23T11:39:26Z"
+      "oppdatert": "2026-09-23T12:25:49Z"
     },
     {
       "issue": 119,
@@ -1062,18 +1074,6 @@
       "utkast": false,
       "issues": [
         30
-      ]
-    },
-    {
-      "pr": 144,
-      "tittel": "Tydelige kartsymboler: båter som ser ut som båter (#141)",
-      "github": "leif-larsen",
-      "agent": "mini-leif",
-      "opprettet": "2026-09-23T11:58:52Z",
-      "oppdatert": "2026-09-23T12:23:58Z",
-      "utkast": false,
-      "issues": [
-        141
       ]
     },
     {
