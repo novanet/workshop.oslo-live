@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:33:04",
+  "oppdatert": "2026-09-23T10:33:30",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -293,7 +293,7 @@
       "issue": 45,
       "navn": "Varsler",
       "startet": "2026-09-23T08:22:20.0747631+00:00",
-      "minutter": 10
+      "minutter": 11
     },
     {
       "agent": "mini-kirsten",
@@ -301,7 +301,7 @@
       "issue": 29,
       "navn": "Museer",
       "startet": "2026-09-23T08:23:16.9053574+00:00",
-      "minutter": 9
+      "minutter": 10
     },
     {
       "agent": "mini-astrid",
@@ -333,7 +333,7 @@
       "issue": 41,
       "navn": "Fargeblindhet",
       "startet": "2026-09-23T08:28:15.5659433+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-richard",
@@ -341,7 +341,7 @@
       "issue": 38,
       "navn": "Demomodus",
       "startet": "2026-09-23T08:30:23.0330294+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-richard",
@@ -357,7 +357,7 @@
       "issue": 46,
       "navn": "Bydelsgrenser",
       "startet": "2026-09-23T08:31:07.3634724+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-richard",
@@ -381,7 +381,7 @@
       "issue": 41,
       "navn": "Fargeblindhet",
       "startet": "2026-09-23T08:32:12.9324331+00:00",
-      "minutter": 0
+      "minutter": 1
     }
   ],
   "main": {
@@ -607,6 +607,12 @@
       "navn": "Mål hva som skjer",
       "github": "FrodeBl",
       "oppdatert": "2026-09-23T08:27:52Z"
+    },
+    {
+      "issue": 53,
+      "navn": "En helsesjekk som betyr noe",
+      "github": "Buggz",
+      "oppdatert": "2026-09-23T08:33:25Z"
     },
     {
       "issue": 54,
