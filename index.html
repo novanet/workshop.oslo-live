@@ -261,7 +261,7 @@
 
 <script>
 (function () {
-  var HENT_HVERT = 45000;
+  var HENT_HVERT = 15000;
 
   function esc(t) {
     return String(t == null ? '' : t).replace(/[&<>"]/g, function (c) {
@@ -423,7 +423,7 @@
     document.getElementById('regler').innerHTML =
       '<span>Hver issue gir ' + skala + ' poeng etter vanskelighet</span>' +
       '<span>' + (r.utkast != null ? r.utkast : -1) + ' per PR som ikke bygger</span>' +
-      '<span>' + (r.perDollar != null ? r.perDollar : -1) + ' per påbegynte ' + (r.dollarPerStraff || 10) + ' dollar</span>' +
+      '<span>' + (r.perDollar != null ? r.perDollar : -1) + ' per hele ' + (r.dollarPerStraff || 10) + ' dollar brukt</span>' +
       (r.brekk != null ? '<span>' + r.brekk + ' for å gjøre main rød, +' + r.fiks + ' for å gjøre den grønn</span>' : '') +
       (data.potten ? '<span>' + data.potten + ' poeng i potten</span>' : '');
   }

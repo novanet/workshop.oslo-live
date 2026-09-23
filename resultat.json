@@ -1,11 +1,11 @@
 {
-  "oppdatert": "2026-09-23T09:58:36",
+  "oppdatert": "2026-09-23T10:00:28",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
       "navn": "mini-leif",
       "github": "leif-larsen",
-      "poeng": 1,
+      "poeng": 2,
       "feil": [
         {
           "issue": 2,
@@ -28,28 +28,9 @@
       "plass": 1
     },
     {
-      "navn": "mini-frode",
-      "github": "FrodeBl",
-      "poeng": 0,
-      "feil": [],
-      "lag": [],
-      "levert": [],
-      "dollar": 0.0,
-      "tokens": 0,
-      "sekunder": 0,
-      "pr": 0,
-      "utkast": 0,
-      "merget": 0,
-      "kjoeringer": 2,
-      "utenPr": 2,
-      "bygg": [],
-      "estimert": false,
-      "plass": 2
-    },
-    {
       "navn": "mini-richard",
       "github": "randsu",
-      "poeng": 0,
+      "poeng": 1,
       "feil": [
         {
           "issue": 3,
@@ -69,12 +50,31 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
+      "plass": 2
+    },
+    {
+      "navn": "mini-sindre",
+      "github": "sin-rha",
+      "poeng": 0,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 0.235,
+      "tokens": 226801,
+      "sekunder": 79,
+      "pr": 0,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 1,
+      "utenPr": 1,
+      "bygg": [],
+      "estimert": false,
       "plass": 3
     },
     {
       "navn": "mini-ingve",
       "github": "ingvevs",
-      "poeng": -1,
+      "poeng": 0,
       "feil": [],
       "lag": [],
       "levert": [],
@@ -91,9 +91,28 @@
       "plass": 4
     },
     {
+      "navn": "mini-frode",
+      "github": "FrodeBl",
+      "poeng": 0,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 0.591,
+      "tokens": 953832,
+      "sekunder": 198,
+      "pr": 1,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 3,
+      "utenPr": 2,
+      "bygg": [],
+      "estimert": false,
+      "plass": 5
+    },
+    {
       "navn": "mini-gir",
       "github": "GIR75",
-      "poeng": -1,
+      "poeng": 0,
       "feil": [],
       "lag": [],
       "levert": [],
@@ -107,12 +126,12 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 5
+      "plass": 6
     },
     {
       "navn": "Andy3000",
       "github": "coffeelyfe",
-      "poeng": -1,
+      "poeng": 0,
       "feil": [],
       "lag": [],
       "levert": [],
@@ -126,7 +145,7 @@
       "utenPr": 0,
       "bygg": [],
       "estimert": false,
-      "plass": 6
+      "plass": 7
     }
   ],
   "kjoerer": [
@@ -136,23 +155,7 @@
       "issue": 56,
       "navn": "Flytrafikk",
       "startet": "2026-09-23T07:53:20.1148991+00:00",
-      "minutter": 5
-    },
-    {
-      "agent": "mini-frode",
-      "github": "FrodeBl",
-      "issue": 48,
-      "navn": "Parallell henting",
-      "startet": "2026-09-23T07:55:41.4156158+00:00",
-      "minutter": 2
-    },
-    {
-      "agent": "mini-sindre",
-      "github": "sin-rha",
-      "issue": 59,
-      "navn": "",
-      "startet": "2026-09-23T07:57:40.0451264+00:00",
-      "minutter": 0
+      "minutter": 7
     }
   ],
   "main": {
@@ -206,7 +209,7 @@
       "issue": 48,
       "navn": "Hent lagene parallelt",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T07:55:42Z"
+      "oppdatert": "2026-09-23T07:59:20Z"
     },
     {
       "issue": 56,
@@ -224,10 +227,22 @@
       "issue": 59,
       "navn": "Overlapping boxes",
       "github": "sin-rha",
-      "oppdatert": "2026-09-23T07:57:41Z"
+      "oppdatert": "2026-09-23T07:59:05Z"
     }
   ],
   "aapne": [
+    {
+      "pr": 67,
+      "tittel": "Hent lagene parallelt",
+      "github": "FrodeBl",
+      "agent": "mini-frode",
+      "opprettet": "2026-09-23T07:59:18Z",
+      "oppdatert": "2026-09-23T07:59:19Z",
+      "utkast": false,
+      "issues": [
+        48
+      ]
+    },
     {
       "pr": 64,
       "tittel": "Tall i URL-ene får norsk desimalkomma",
