@@ -1,11 +1,11 @@
 {
-  "oppdatert": "2026-09-23T14:20:45",
+  "oppdatert": "2026-09-23T14:21:54",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
       "navn": "mini-richard",
       "github": "randsu",
-      "poeng": 39,
+      "poeng": 37,
       "feil": [
         {
           "issue": 3,
@@ -14,11 +14,6 @@
         }
       ],
       "lag": [
-        {
-          "issue": 6,
-          "navn": "Delt mobilitet",
-          "poeng": 2
-        },
         {
           "issue": 9,
           "navn": "Badetemperatur",
@@ -171,6 +166,48 @@
       "plass": 4
     },
     {
+      "navn": "mini-wilma",
+      "github": "larsajakobsen",
+      "poeng": 6,
+      "feil": [
+        {
+          "issue": 1,
+          "navn": "Koordinatrekkefølge",
+          "poeng": 2
+        }
+      ],
+      "lag": [
+        {
+          "issue": 8,
+          "navn": "Hendelser",
+          "poeng": 2
+        }
+      ],
+      "levert": [
+        {
+          "issue": 32,
+          "navn": "Strømpris",
+          "poeng": 2
+        },
+        {
+          "issue": 112,
+          "navn": "Nytt lag: målestasjoner i elvene",
+          "poeng": 2
+        }
+      ],
+      "dollar": 26.804,
+      "tokens": 46174277,
+      "sekunder": 8070,
+      "pr": 7,
+      "utkast": 0,
+      "merget": 4,
+      "kjoeringer": 22,
+      "utenPr": 13,
+      "bygg": [],
+      "estimert": false,
+      "plass": 5
+    },
+    {
       "navn": "mini-ingve",
       "github": "ingvevs",
       "poeng": 5,
@@ -199,7 +236,7 @@
       "utenPr": 4,
       "bygg": [],
       "estimert": false,
-      "plass": 5
+      "plass": 6
     },
     {
       "navn": "mini-kirsten",
@@ -222,42 +259,6 @@
       "merget": 1,
       "kjoeringer": 14,
       "utenPr": 7,
-      "bygg": [],
-      "estimert": false,
-      "plass": 6
-    },
-    {
-      "navn": "mini-wilma",
-      "github": "larsajakobsen",
-      "poeng": 4,
-      "feil": [
-        {
-          "issue": 1,
-          "navn": "Koordinatrekkefølge",
-          "poeng": 2
-        }
-      ],
-      "lag": [],
-      "levert": [
-        {
-          "issue": 32,
-          "navn": "Strømpris",
-          "poeng": 2
-        },
-        {
-          "issue": 112,
-          "navn": "Nytt lag: målestasjoner i elvene",
-          "poeng": 2
-        }
-      ],
-      "dollar": 26.804,
-      "tokens": 46174277,
-      "sekunder": 8070,
-      "pr": 7,
-      "utkast": 0,
-      "merget": 3,
-      "kjoeringer": 22,
-      "utenPr": 13,
       "bygg": [],
       "estimert": false,
       "plass": 7
@@ -586,7 +587,7 @@
       "issue": 157,
       "navn": "",
       "startet": "2026-09-23T12:19:02.3675258+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-richard",
@@ -594,7 +595,7 @@
       "issue": 191,
       "navn": "",
       "startet": "2026-09-23T12:19:02.7888497+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-leif",
@@ -602,7 +603,7 @@
       "issue": 141,
       "navn": "Tydelige kartsymboler: båter som ser ut som båter",
       "startet": "2026-09-23T12:19:28.1326146+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-richard",
@@ -610,7 +611,7 @@
       "issue": 169,
       "navn": "",
       "startet": "2026-09-23T12:19:32.4225991+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-wilma",
@@ -618,7 +619,7 @@
       "issue": 190,
       "navn": "",
       "startet": "2026-09-23T12:19:34.8533908+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-frode",
@@ -626,7 +627,7 @@
       "issue": 128,
       "navn": "Simulering: tsunami i Oslofjorden",
       "startet": "2026-09-23T12:19:38.2554331+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-kirsten",
@@ -634,7 +635,7 @@
       "issue": 29,
       "navn": "Museer",
       "startet": "2026-09-23T12:19:47.6786683+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-ingve",
@@ -642,7 +643,7 @@
       "issue": 11,
       "navn": "Kollektiv",
       "startet": "2026-09-23T12:20:06.5087944+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "helstein",
@@ -650,6 +651,46 @@
       "issue": 116,
       "navn": "Nytt lag: værstasjoner",
       "startet": "2026-09-23T12:20:17.4874427+00:00",
+      "minutter": 1
+    },
+    {
+      "agent": "mini-wilma",
+      "github": "larsajakobsen",
+      "issue": 129,
+      "navn": "Simulering: meteornedslag",
+      "startet": "2026-09-23T12:20:25.1910717+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "helstein",
+      "github": "nilsgs",
+      "issue": 46,
+      "navn": "Bydelsgrenser",
+      "startet": "2026-09-23T12:20:35.6518254+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-taco",
+      "github": "Puiu",
+      "issue": 133,
+      "navn": "Havet stiger: hva havner under vann?",
+      "startet": "2026-09-23T12:20:40.4209313+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-jon",
+      "github": "yonzo",
+      "issue": 197,
+      "navn": "",
+      "startet": "2026-09-23T12:20:43.3709734+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "martin-holth",
+      "github": "martinrholth",
+      "issue": 111,
+      "navn": "Nytt lag: kaier og ferjekaier",
+      "startet": "2026-09-23T12:20:50.7551895+00:00",
       "minutter": 0
     }
   ],
@@ -668,8 +709,8 @@
       3,
       4,
       5,
-      6,
       7,
+      8,
       9,
       12,
       15,
@@ -731,7 +772,7 @@
       "issue": 28,
       "navn": "Nytt lag: togtrafikk",
       "github": "Buggz",
-      "oppdatert": "2026-09-23T12:19:07Z"
+      "oppdatert": "2026-09-23T12:21:17Z"
     },
     {
       "issue": 29,
@@ -791,7 +832,7 @@
       "issue": 46,
       "navn": "Tegn bydelsgrensene",
       "github": "nilsgs",
-      "oppdatert": "2026-09-23T12:19:26Z"
+      "oppdatert": "2026-09-23T12:20:37Z"
     },
     {
       "issue": 47,
@@ -857,7 +898,7 @@
       "issue": 111,
       "navn": "Nytt lag: kaier og ferjekaier",
       "github": "martinrholth",
-      "oppdatert": "2026-09-23T12:20:00Z"
+      "oppdatert": "2026-09-23T12:20:51Z"
     },
     {
       "issue": 113,
@@ -971,7 +1012,7 @@
       "issue": 129,
       "navn": "Simulering: meteornedslag",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T12:17:22Z"
+      "oppdatert": "2026-09-23T12:20:26Z"
     },
     {
       "issue": 130,
@@ -1008,6 +1049,12 @@
       "navn": "Ekte sollys på 3D-byggene",
       "github": "nilsgs",
       "oppdatert": "2026-09-23T12:19:01Z"
+    },
+    {
+      "issue": 133,
+      "navn": "Havet stiger: hva havner under vann?",
+      "github": "Puiu",
+      "oppdatert": "2026-09-23T12:20:41Z"
     },
     {
       "issue": 141,
@@ -1064,6 +1111,12 @@
       "oppdatert": "2026-09-23T12:19:03Z"
     },
     {
+      "issue": 197,
+      "navn": "Beskytt storskjermen mot innbrenning",
+      "github": "yonzo",
+      "oppdatert": "2026-09-23T12:20:44Z"
+    },
+    {
       "issue": 198,
       "navn": "Et lite pling når noe nytt dukker opp",
       "github": "larsajakobsen",
@@ -1111,18 +1164,6 @@
       "utkast": false,
       "issues": [
         132
-      ]
-    },
-    {
-      "pr": 80,
-      "tittel": "Nytt lag: politilogg og nyhetshendelser",
-      "github": "larsajakobsen",
-      "agent": "mini-wilma",
-      "opprettet": "2026-09-23T08:30:50Z",
-      "oppdatert": "2026-09-23T12:18:39Z",
-      "utkast": false,
-      "issues": [
-        8
       ]
     },
     {
