@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:35:25",
+  "oppdatert": "2026-09-23T11:36:05",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -458,15 +458,15 @@
       "issue": 29,
       "navn": "Museer",
       "startet": "2026-09-23T09:33:36.7988647+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-taco",
       "github": "Puiu",
       "issue": 122,
-      "navn": "",
+      "navn": "Vis hvor ferskt hvert lag er",
       "startet": "2026-09-23T09:34:35.9423034+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-bug",
@@ -497,7 +497,7 @@
       15,
       17
     ],
-    "antallIssuer": 57,
+    "antallIssuer": 71,
     "feilmelding": null
   },
   "tildelt": [
@@ -1250,5 +1250,5 @@
     "brekk": -2,
     "fiks": 2
   },
-  "potten": 179
+  "potten": 203
 }
