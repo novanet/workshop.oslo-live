@@ -215,6 +215,7 @@ git push</pre>
       <div class="card">
         <h3>PR-en har konflikt</h3>
         <p>GitHub viser <em>This branch has conflicts</em> når noen andre har endret de samme linjene og blitt merget først. Auto-merge venter da for alltid.</p>
+        <p>Sensor prøver først selv. Er konflikten bare at to PR-er har lagt til hver sin linje i <code>Program.cs</code> eller i en testfil, slår Sensor sammen <code>main</code>, beholder begge linjene, kjører bygg og test og pusher. Da får du en kommentar om det. Gjør du det under bare når Sensor skriver at den ikke kunne løse konflikten.</p>
         <p><strong>Enklest: kjør agenten på nytt.</strong> Den kloner siste <code>main</code>, lager branchen på nytt og oppdaterer den samme PR-en:</p>
         <pre>gh issue edit &lt;issue-nummer&gt; --repo novanet/workshop.oslo-live --remove-label kari
 gh issue edit &lt;issue-nummer&gt; --repo novanet/workshop.oslo-live --add-label kari</pre>
