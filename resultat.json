@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:16:28",
+  "oppdatert": "2026-09-23T14:17:08",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -64,12 +64,12 @@
       ],
       "dollar": 17.498,
       "tokens": 34580100,
-      "sekunder": 6063,
+      "sekunder": 6065,
       "pr": 11,
       "utkast": 0,
       "merget": 10,
-      "kjoeringer": 17,
-      "utenPr": 6,
+      "kjoeringer": 19,
+      "utenPr": 8,
       "bygg": [],
       "estimert": false,
       "plass": 1
@@ -130,12 +130,12 @@
       "levert": [],
       "dollar": 10.005,
       "tokens": 17101880,
-      "sekunder": 3333,
+      "sekunder": 3335,
       "pr": 3,
       "utkast": 0,
       "merget": 2,
-      "kjoeringer": 22,
-      "utenPr": 19,
+      "kjoeringer": 24,
+      "utenPr": 21,
       "bygg": [],
       "estimert": false,
       "plass": 3
@@ -191,12 +191,12 @@
       ],
       "dollar": 3.981,
       "tokens": 7410019,
-      "sekunder": 1401,
+      "sekunder": 1402,
       "pr": 2,
       "utkast": 0,
       "merget": 2,
-      "kjoeringer": 5,
-      "utenPr": 3,
+      "kjoeringer": 6,
+      "utenPr": 4,
       "bygg": [],
       "estimert": false,
       "plass": 5
@@ -277,12 +277,12 @@
       ],
       "dollar": 8.364,
       "tokens": 18349601,
-      "sekunder": 2648,
+      "sekunder": 2649,
       "pr": 1,
       "utkast": 0,
       "merget": 1,
-      "kjoeringer": 6,
-      "utenPr": 5,
+      "kjoeringer": 7,
+      "utenPr": 6,
       "bygg": [],
       "estimert": false,
       "plass": 8
@@ -586,7 +586,7 @@
       "issue": 132,
       "navn": "Ekte sollys på 3D-byggene",
       "startet": "2026-09-23T12:07:36.4342939+00:00",
-      "minutter": 8
+      "minutter": 9
     },
     {
       "agent": "mini-wilma",
@@ -594,14 +594,14 @@
       "issue": 8,
       "navn": "Hendelser",
       "startet": "2026-09-23T12:10:34.6234355+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
-      "agent": "mini-gir",
-      "github": "GIR75",
-      "issue": 51,
-      "navn": "Logging",
-      "startet": "2026-09-23T12:16:17.8388957+00:00",
+      "agent": "mini-wilma",
+      "github": "larsajakobsen",
+      "issue": 198,
+      "navn": "",
+      "startet": "2026-09-23T12:16:25.0295863+00:00",
       "minutter": 0
     }
   ],
@@ -707,7 +707,7 @@
       "issue": 33,
       "navn": "Nytt lag: sykkelparkering",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T12:15:52Z"
+      "oppdatert": "2026-09-23T12:16:42Z"
     },
     {
       "issue": 37,
@@ -980,10 +980,28 @@
       "oppdatert": "2026-09-23T12:16:17Z"
     },
     {
+      "issue": 170,
+      "navn": "Fortell en historie med kartet, styrt med presentasjonsklikker",
+      "github": "randsu",
+      "oppdatert": "2026-09-23T12:16:40Z"
+    },
+    {
+      "issue": 181,
+      "navn": "Døgnet på ett minutt: reprise av byen",
+      "github": "randsu",
+      "oppdatert": "2026-09-23T12:16:46Z"
+    },
+    {
       "issue": 198,
       "navn": "Et lite pling når noe nytt dukker opp",
       "github": "larsajakobsen",
       "oppdatert": "2026-09-23T12:16:25Z"
+    },
+    {
+      "issue": 199,
+      "navn": "Styr storskjermen fra mobilen",
+      "github": "yonzo",
+      "oppdatert": "2026-09-23T12:16:48Z"
     }
   ],
   "aapne": [
