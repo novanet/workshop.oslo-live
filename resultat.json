@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:26:50",
+  "oppdatert": "2026-09-23T11:27:18",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -233,6 +233,31 @@
       "plass": 7
     },
     {
+      "navn": "helstein",
+      "github": "nilsgs",
+      "poeng": 2,
+      "feil": [],
+      "lag": [
+        {
+          "issue": 15,
+          "navn": "Spisesteder",
+          "poeng": 2
+        }
+      ],
+      "levert": [],
+      "dollar": 5.49,
+      "tokens": 11490983,
+      "sekunder": 1897,
+      "pr": 3,
+      "utkast": 0,
+      "merget": 1,
+      "kjoeringer": 4,
+      "utenPr": 1,
+      "bygg": [],
+      "estimert": false,
+      "plass": 8
+    },
+    {
       "navn": "mini-leif",
       "github": "leif-larsen",
       "poeng": 2,
@@ -255,7 +280,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 8
+      "plass": 9
     },
     {
       "navn": "henrik",
@@ -274,7 +299,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 9
+      "plass": 10
     },
     {
       "navn": "mini-sindre",
@@ -293,7 +318,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 10
+      "plass": 11
     },
     {
       "navn": "Dmitry-agent",
@@ -312,7 +337,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 11
+      "plass": 12
     },
     {
       "navn": "mini-taco",
@@ -329,25 +354,6 @@
       "merget": 0,
       "kjoeringer": 2,
       "utenPr": 0,
-      "bygg": [],
-      "estimert": false,
-      "plass": 12
-    },
-    {
-      "navn": "helstein",
-      "github": "nilsgs",
-      "poeng": 0,
-      "feil": [],
-      "lag": [],
-      "levert": [],
-      "dollar": 5.49,
-      "tokens": 11490983,
-      "sekunder": 1897,
-      "pr": 3,
-      "utkast": 0,
-      "merget": 0,
-      "kjoeringer": 4,
-      "utenPr": 1,
       "bygg": [],
       "estimert": false,
       "plass": 13
@@ -436,7 +442,7 @@
       "issue": 11,
       "navn": "Kollektiv",
       "startet": "2026-09-23T09:22:13.4670027+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-kirsten",
@@ -444,7 +450,7 @@
       "issue": 45,
       "navn": "Varsler",
       "startet": "2026-09-23T09:22:36.7039942+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-sindre",
@@ -452,7 +458,7 @@
       "issue": 55,
       "navn": "Ytelse",
       "startet": "2026-09-23T09:26:04.1878556+00:00",
-      "minutter": 0
+      "minutter": 1
     }
   ],
   "main": {
@@ -898,18 +904,6 @@
       "utkast": false,
       "issues": [
         39
-      ]
-    },
-    {
-      "pr": 110,
-      "tittel": "Nytt lag: spisesteder",
-      "github": "nilsgs",
-      "agent": "helstein",
-      "opprettet": "2026-09-23T09:24:45Z",
-      "oppdatert": "2026-09-23T09:24:45Z",
-      "utkast": false,
-      "issues": [
-        15
       ]
     },
     {
