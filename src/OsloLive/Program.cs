@@ -51,6 +51,7 @@ builder.Services.AddSingleton<ILag, FlyLag>();
 builder.Services.AddSingleton<ILag, BadetemperaturLag>();
 builder.Services.AddSingleton<ILag, MobilitetLag>();
 builder.Services.AddSingleton<ILag, SpisestederLag>();
+builder.Services.AddSingleton<ILag, ArbeidsplasserLag>();
 
 // Bakgrunnssjekk av kildehelse, se Helse/HelseSjekker.cs.
 builder.Services.Configure<HelseValg>(builder.Configuration.GetSection("Helse"));
