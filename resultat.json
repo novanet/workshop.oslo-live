@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:07:02",
+  "oppdatert": "2026-09-23T14:07:41",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -107,7 +107,7 @@
     {
       "navn": "mini-gir",
       "github": "GIR75",
-      "poeng": 11,
+      "poeng": 10,
       "feil": [
         {
           "issue": 5,
@@ -123,13 +123,13 @@
         }
       ],
       "levert": [],
-      "dollar": 8.791,
-      "tokens": 14498175,
-      "sekunder": 2978,
-      "pr": 2,
+      "dollar": 10.005,
+      "tokens": 17101880,
+      "sekunder": 3331,
+      "pr": 3,
       "utkast": 0,
       "merget": 2,
-      "kjoeringer": 19,
+      "kjoeringer": 20,
       "utenPr": 17,
       "bygg": [],
       "estimert": false,
@@ -222,12 +222,12 @@
       ],
       "dollar": 19.451,
       "tokens": 33569390,
-      "sekunder": 6072,
+      "sekunder": 6073,
       "pr": 7,
       "utkast": 0,
       "merget": 3,
-      "kjoeringer": 19,
-      "utenPr": 12,
+      "kjoeringer": 20,
+      "utenPr": 13,
       "bygg": [],
       "estimert": false,
       "plass": 6
@@ -573,7 +573,7 @@
       "issue": 44,
       "navn": "Sammenlign tid",
       "startet": "2026-09-23T11:57:22.3942011+00:00",
-      "minutter": 9
+      "minutter": 10
     },
     {
       "agent": "mini-wilma",
@@ -581,15 +581,7 @@
       "issue": 26,
       "navn": "Skoler",
       "startet": "2026-09-23T12:00:11.8740211+00:00",
-      "minutter": 6
-    },
-    {
-      "agent": "mini-gir",
-      "github": "GIR75",
-      "issue": 33,
-      "navn": "Sykkelparkering",
-      "startet": "2026-09-23T12:00:56.0494312+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-wilma",
@@ -597,7 +589,7 @@
       "issue": 8,
       "navn": "Hendelser",
       "startet": "2026-09-23T12:01:11.9782453+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-taco",
@@ -605,7 +597,7 @@
       "issue": 54,
       "navn": "Rate limit",
       "startet": "2026-09-23T12:01:39.5119902+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-ingve",
@@ -629,7 +621,7 @@
       "issue": 50,
       "navn": "Metrikker",
       "startet": "2026-09-23T12:04:40.5122615+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-frode",
@@ -637,7 +629,15 @@
       "issue": 48,
       "navn": "Parallell henting",
       "startet": "2026-09-23T12:05:19.7031269+00:00",
-      "minutter": 1
+      "minutter": 2
+    },
+    {
+      "agent": "mini-leif",
+      "github": "leif-larsen",
+      "issue": 141,
+      "navn": "Tydelige kartsymboler: båter som ser ut som båter",
+      "startet": "2026-09-23T12:07:21.8184109+00:00",
+      "minutter": 0
     }
   ],
   "main": {
@@ -765,7 +765,7 @@
       "issue": 33,
       "navn": "Nytt lag: sykkelparkering",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T12:00:57Z"
+      "oppdatert": "2026-09-23T12:07:12Z"
     },
     {
       "issue": 37,
@@ -1017,19 +1017,19 @@
       "issue": 132,
       "navn": "Ekte sollys på 3D-byggene",
       "github": "audmaha",
-      "oppdatert": "2026-09-23T12:06:41Z"
+      "oppdatert": "2026-09-23T12:07:37Z"
     },
     {
       "issue": 132,
       "navn": "Ekte sollys på 3D-byggene",
       "github": "nilsgs",
-      "oppdatert": "2026-09-23T12:06:41Z"
+      "oppdatert": "2026-09-23T12:07:37Z"
     },
     {
       "issue": 141,
       "navn": "Tydelige kartsymboler: båter som ser ut som båter",
       "github": "leif-larsen",
-      "oppdatert": "2026-09-23T12:06:31Z"
+      "oppdatert": "2026-09-23T12:07:22Z"
     },
     {
       "issue": 142,
@@ -1039,6 +1039,30 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 144,
+      "tittel": "Tydelige kartsymboler: båter som ser ut som båter (#141)",
+      "github": "leif-larsen",
+      "agent": "mini-leif",
+      "opprettet": "2026-09-23T11:58:52Z",
+      "oppdatert": "2026-09-23T12:07:21Z",
+      "utkast": false,
+      "issues": [
+        141
+      ]
+    },
+    {
+      "pr": 146,
+      "tittel": "Nytt lag: sykkelparkering",
+      "github": "GIR75",
+      "agent": "mini-gir",
+      "opprettet": "2026-09-23T12:07:10Z",
+      "oppdatert": "2026-09-23T12:07:11Z",
+      "utkast": false,
+      "issues": [
+        33
+      ]
+    },
     {
       "pr": 145,
       "tittel": "#142: Kurs på skipene",
@@ -1061,18 +1085,6 @@
       "utkast": false,
       "issues": [
         21
-      ]
-    },
-    {
-      "pr": 144,
-      "tittel": "Tydelige kartsymboler: båter som ser ut som båter (#141)",
-      "github": "leif-larsen",
-      "agent": "mini-leif",
-      "opprettet": "2026-09-23T11:58:52Z",
-      "oppdatert": "2026-09-23T12:00:31Z",
-      "utkast": false,
-      "issues": [
-        141
       ]
     },
     {
