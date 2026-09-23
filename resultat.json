@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:30:25",
+  "oppdatert": "2026-09-23T10:30:52",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -274,7 +274,7 @@
       "issue": 57,
       "navn": "Avgangstavle",
       "startet": "2026-09-23T08:16:36.122853+00:00",
-      "minutter": 13
+      "minutter": 14
     },
     {
       "agent": "mini-jon",
@@ -314,7 +314,7 @@
       "issue": 42,
       "navn": "Nærmeste punkt",
       "startet": "2026-09-23T08:25:30.8766176+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-frode",
@@ -322,7 +322,7 @@
       "issue": 48,
       "navn": "Parallell henting",
       "startet": "2026-09-23T08:26:31.7269134+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-frode",
@@ -330,7 +330,7 @@
       "issue": 50,
       "navn": "Metrikker",
       "startet": "2026-09-23T08:27:51.3617499+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-frode",
@@ -347,6 +347,22 @@
       "navn": "Fargeblindhet",
       "startet": "2026-09-23T08:28:15.5659433+00:00",
       "minutter": 2
+    },
+    {
+      "agent": "mini-richard",
+      "github": "randsu",
+      "issue": 38,
+      "navn": "Demomodus",
+      "startet": "2026-09-23T08:30:23.0330294+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-richard",
+      "github": "randsu",
+      "issue": 9,
+      "navn": "Badetemperatur",
+      "startet": "2026-09-23T08:30:34.0929688+00:00",
+      "minutter": 0
     }
   ],
   "main": {
@@ -460,6 +476,12 @@
       "oppdatert": "2026-09-23T08:22:52Z"
     },
     {
+      "issue": 9,
+      "navn": "Nytt lag: badetemperaturer",
+      "github": "randsu",
+      "oppdatert": "2026-09-23T08:30:34Z"
+    },
+    {
       "issue": 11,
       "navn": "Nytt lag: kollektivtrafikk som beveger seg",
       "github": "coffeelyfe",
@@ -499,7 +521,7 @@
       "issue": 38,
       "navn": "Demomodus for storskjerm",
       "github": "randsu",
-      "oppdatert": "2026-09-23T08:30:20Z"
+      "oppdatert": "2026-09-23T08:30:24Z"
     },
     {
       "issue": 41,
@@ -529,7 +551,7 @@
       "issue": 46,
       "navn": "Tegn bydelsgrensene",
       "github": "nilsgs",
-      "oppdatert": "2026-09-23T08:09:10Z"
+      "oppdatert": "2026-09-23T08:30:39Z"
     },
     {
       "issue": 48,
