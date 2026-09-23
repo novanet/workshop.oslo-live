@@ -43,7 +43,6 @@
   .bunn { margin-top: 12px; padding-top: 12px; border-top: 1px solid #e5e7eb; font-size: 11px; color: var(--dempet); display: flex; justify-content: space-between; }
 
   .kamera {
-    position: absolute; bottom: 24px; right: 16px; z-index: 10;
     display: flex; flex-direction: column; gap: 6px;
   }
   .kamera button {
@@ -81,7 +80,7 @@
   .maplibregl-popup-content .rad span { color: var(--tekst); }
   .maplibregl-ctrl-group { border: 1.5px solid var(--kant) !important; box-shadow: none !important; }
 
-  .panel.naermest { left: auto; right: 16px; width: 280px; }
+  .panel.naermest { left: auto; right: 16px; width: 280px; max-height: calc(100% - 200px); }
   .naermest .topp { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
   .naermest h2 { margin: 0; font-size: 16px; }
   .naermest .lukk { border: 0; background: none; font-size: 18px; cursor: pointer; color: var(--dempet); }
@@ -106,7 +105,7 @@
   </div>
 </div>
 
-<div class="kamera">
+<div class="kamera maplibregl-ctrl">
   <button id="snurr" type="button" aria-pressed="false">Snurr</button>
   <button id="flatt" type="button">2D</button>
   <button id="hjem" type="button">Sentrum</button>
@@ -133,6 +132,12 @@ const kart = new maplibregl.Map({
 });
 
 kart.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), 'bottom-right');
+
+// Kameraknappene legges i samme hjørne som navigasjonen, så MapLibre stabler dem uten overlapp.
+kart.addControl({
+  onAdd: () => document.querySelector('.kamera'),
+  onRemove: () => {}
+}, 'bottom-right');
 
 kart.on('style.load', () => {
   varmTema(kart);
