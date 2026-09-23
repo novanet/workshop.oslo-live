@@ -1,4 +1,8 @@
 using System.Globalization;
+using System.Net;
+using System.Text;
+using System.Text.Json;
+using Microsoft.Extensions.Logging;
 using OsloLive.Kart;
 
 namespace OsloLive.Tester;
@@ -216,6 +220,38 @@ public class GeoTester
 
         Assert.Equal(frem, tilbake, precision: 6);
     }
+
+    private static readonly (double Lat, double Lon)[] Kvadrat =
+    [
+        (59.90, 10.70),
+        (59.90, 10.80),
+        (60.00, 10.80),
+        (60.00, 10.70),
+    ];
+
+    [Fact]
+    public void Punkt_innenfor_polygonet_gir_true()
+    {
+        Assert.True(Geo.IPolygon(59.95, 10.75, Kvadrat));
+    }
+
+    [Fact]
+    public void Punkt_utenfor_polygonet_gir_false()
+    {
+        Assert.False(Geo.IPolygon(59.95, 11.00, Kvadrat));
+    }
+
+    [Fact]
+    public void Punkt_paa_kanten_av_polygonet_gir_true()
+    {
+        Assert.True(Geo.IPolygon(59.90, 10.75, Kvadrat));
+    }
+
+    [Fact]
+    public void Polygon_med_faerre_enn_tre_hjoerner_gir_false()
+    {
+        Assert.False(Geo.IPolygon(59.95, 10.75, [(59.90, 10.70), (60.00, 10.80)]));
+    }
 }
 
 public class AllemannsdataTester
@@ -320,5 +356,215 @@ public class AllemannsdataTester
             Assert.Contains("limit=50", url);
             Assert.Contains("navn=Oslo", url);
         });
+    }
+}
+
+/// <summary>Tester nye forsøk i <see cref="Allemannsdata.Hent"/> mot en falsk <see cref="HttpMessageHandler"/>.</summary>
+public class AllemannsdataForsøkTester
+{
+    private static readonly IReadOnlyDictionary<string, object> Parametre = new Dictionary<string, object> { ["limit"] = 1 };
+
+    [Fact]
+    public async Task Lykkes_paa_andre_forsoek_etter_femhundretre_svar()
+    {
+        var håndterer = new FalskHandler(forsøk => forsøk == 1
+            ? new HttpResponseMessage(HttpStatusCode.ServiceUnavailable)
+            : LagJsonSvar(1));
+        var data = new Allemannsdata(new HttpClient(håndterer), new OpptakLogg(), new StraksTid());
+
+        var svar = await data.Hent("test-retry-1", "operasjon", Parametre);
+
+        Assert.Equal(1, svar.GetProperty("verdi").GetInt32());
+        Assert.Equal(2, håndterer.Forsøk);
+    }
+
+    [Fact]
+    public async Task Nettverksfeil_proeves_paa_nytt()
+    {
+        var håndterer = new FalskHandler(forsøk => forsøk == 1
+            ? throw new HttpRequestException("Nettverksfeil")
+            : LagJsonSvar(2));
+        var data = new Allemannsdata(new HttpClient(håndterer), new OpptakLogg(), new StraksTid());
+
+        var svar = await data.Hent("test-retry-2", "operasjon", Parametre);
+
+        Assert.Equal(2, svar.GetProperty("verdi").GetInt32());
+        Assert.Equal(2, håndterer.Forsøk);
+    }
+
+    [Fact]
+    public async Task Tidsavbrudd_proeves_paa_nytt()
+    {
+        var håndterer = new FalskHandler(forsøk => forsøk == 1
+            ? throw new TaskCanceledException("Tidsavbrudd", new TimeoutException())
+            : LagJsonSvar(3));
+        var data = new Allemannsdata(new HttpClient(håndterer), new OpptakLogg(), new StraksTid());
+
+        var svar = await data.Hent("test-retry-3", "operasjon", Parametre);
+
+        Assert.Equal(3, svar.GetProperty("verdi").GetInt32());
+        Assert.Equal(2, håndterer.Forsøk);
+    }
+
+    [Fact]
+    public async Task Kall_med_404_proeves_ikke_paa_nytt()
+    {
+        var håndterer = new FalskHandler(_ => new HttpResponseMessage(HttpStatusCode.NotFound));
+        var data = new Allemannsdata(new HttpClient(håndterer), new OpptakLogg(), new StraksTid());
+
+        await Assert.ThrowsAsync<HttpRequestException>(
+            () => data.Hent("test-retry-4", "operasjon", Parametre));
+
+        Assert.Equal(1, håndterer.Forsøk);
+    }
+
+    [Fact]
+    public async Task Gir_opp_etter_tredje_forsoek()
+    {
+        var håndterer = new FalskHandler(_ => new HttpResponseMessage(HttpStatusCode.ServiceUnavailable));
+        var data = new Allemannsdata(new HttpClient(håndterer), new OpptakLogg(), new StraksTid());
+
+        await Assert.ThrowsAsync<HttpRequestException>(
+            () => data.Hent("test-retry-5", "operasjon", Parametre));
+
+        Assert.Equal(3, håndterer.Forsøk);
+    }
+
+    [Fact]
+    public async Task Svar_fra_nytt_forsoek_blir_mellomlagret()
+    {
+        var håndterer = new FalskHandler(forsøk => forsøk == 1
+            ? new HttpResponseMessage(HttpStatusCode.ServiceUnavailable)
+            : LagJsonSvar(4));
+        var data = new Allemannsdata(new HttpClient(håndterer), new OpptakLogg(), new StraksTid());
+
+        await data.Hent("test-retry-6", "operasjon", Parametre);
+        await data.Hent("test-retry-6", "operasjon", Parametre);
+
+        Assert.Equal(2, håndterer.Forsøk);
+    }
+
+    [Fact]
+    public async Task Nye_forsoek_logges_som_advarsel_med_kilde_operasjon_og_forsoeksnummer()
+    {
+        var håndterer = new FalskHandler(forsøk => forsøk switch
+        {
+            1 or 2 => new HttpResponseMessage(HttpStatusCode.ServiceUnavailable),
+            _ => LagJsonSvar(5),
+        });
+        var logg = new OpptakLogg();
+        var data = new Allemannsdata(new HttpClient(håndterer), logg, new StraksTid());
+
+        await data.Hent("min-kilde", "min-operasjon", Parametre);
+
+        var advarsler = logg.Oppføringer.Where(o => o.Nivå == LogLevel.Warning).ToList();
+        Assert.Equal(2, advarsler.Count);
+        Assert.Contains("min-kilde", advarsler[0].Melding);
+        Assert.Contains("min-operasjon", advarsler[0].Melding);
+        Assert.Contains("2", advarsler[0].Melding);
+        Assert.Contains("3", advarsler[1].Melding);
+    }
+
+    [Fact]
+    public async Task Foerste_forsoek_som_lykkes_logger_ingen_advarsel()
+    {
+        var håndterer = new FalskHandler(_ => LagJsonSvar(6));
+        var logg = new OpptakLogg();
+        var data = new Allemannsdata(new HttpClient(håndterer), logg, new StraksTid());
+
+        await data.Hent("test-retry-7", "operasjon", Parametre);
+
+        Assert.DoesNotContain(logg.Oppføringer, o => o.Nivå == LogLevel.Warning);
+    }
+
+    [Fact]
+    public async Task Kansellert_token_stopper_uten_flere_forsoek()
+    {
+        using var kilde = new CancellationTokenSource();
+        var håndterer = new FalskHandler(forsøk =>
+        {
+            if (forsøk == 1)
+            {
+                kilde.Cancel();
+                throw new TaskCanceledException("Avbrutt", null, kilde.Token);
+            }
+
+            return LagJsonSvar(7);
+        });
+        var data = new Allemannsdata(new HttpClient(håndterer), new OpptakLogg(), new StraksTid());
+
+        await Assert.ThrowsAsync<TaskCanceledException>(
+            () => data.Hent("test-retry-8", "operasjon", Parametre, kilde.Token));
+
+        Assert.Equal(1, håndterer.Forsøk);
+    }
+
+    private static HttpResponseMessage LagJsonSvar(int verdi)
+    {
+        var json = JsonSerializer.Serialize(new { data = new { verdi } });
+        return new HttpResponseMessage(HttpStatusCode.OK)
+        {
+            Content = new StringContent(json, Encoding.UTF8, "application/json"),
+        };
+    }
+}
+
+/// <summary>Falsk <see cref="HttpMessageHandler"/> som svarer ut fra forsøksnummeret, uten nettverk.</summary>
+internal sealed class FalskHandler(Func<int, HttpResponseMessage> svar) : HttpMessageHandler
+{
+    public int Forsøk { get; private set; }
+
+    protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+    {
+        Forsøk++;
+        return Task.FromResult(svar(Forsøk));
+    }
+}
+
+/// <summary>Fanger opp loggoppføringer slik at tester kan se etter varsler om nye forsøk.</summary>
+internal sealed class OpptakLogg : ILogger<Allemannsdata>
+{
+    public List<(LogLevel Nivå, string Melding)> Oppføringer { get; } = [];
+
+    public IDisposable BeginScope<TState>(TState state) where TState : notnull => NullScope.Instans;
+
+    public bool IsEnabled(LogLevel logLevel) => true;
+
+    public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
+    {
+        Oppføringer.Add((logLevel, formatter(state, exception)));
+    }
+
+    private sealed class NullScope : IDisposable
+    {
+        public static readonly NullScope Instans = new();
+
+        public void Dispose()
+        {
+        }
+    }
+}
+
+/// <summary>TimeProvider som utløser tidsurer nesten øyeblikkelig, slik at tester ikke venter i sanntid.</summary>
+internal sealed class StraksTid : TimeProvider
+{
+    public override long GetTimestamp() => 0;
+
+    public override ITimer CreateTimer(TimerCallback callback, object? state, TimeSpan dueTime, TimeSpan period)
+    {
+        var tidsur = new FalskTimer();
+        _ = Task.Run(() => callback(state));
+        return tidsur;
+    }
+
+    private sealed class FalskTimer : ITimer
+    {
+        public bool Change(TimeSpan dueTime, TimeSpan period) => true;
+
+        public void Dispose()
+        {
+        }
+
+        public ValueTask DisposeAsync() => ValueTask.CompletedTask;
     }
 }

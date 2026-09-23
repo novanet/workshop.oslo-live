@@ -49,6 +49,58 @@ public static class Geo
         (lat >= MinLat && lat <= MaksLat) && (lon >= MinLon && lon <= MaksLon);
 
     /// <summary>
+    /// Ligger punktet innenfor polygonet? Hjørnene er en liste av (lat, lon)
+    /// i den rekkefølgen de ble tegnet; polygonet trenger ikke gjentakelse av
+    /// første hjørne til slutt. Et punkt nøyaktig på en kant regnes som innenfor.
+    /// Ray casting etter Jordan-kurve-teoremet.
+    /// </summary>
+    public static bool IPolygon(double lat, double lon, IReadOnlyList<(double Lat, double Lon)> hjørner)
+    {
+        if (hjørner.Count < 3)
+        {
+            return false;
+        }
+
+        for (var i = 0; i < hjørner.Count; i++)
+        {
+            if (PåKant(lat, lon, hjørner[i], hjørner[(i + 1) % hjørner.Count]))
+            {
+                return true;
+            }
+        }
+
+        var innenfor = false;
+        for (int i = 0, j = hjørner.Count - 1; i < hjørner.Count; j = i++)
+        {
+            var (latI, lonI) = hjørner[i];
+            var (latJ, lonJ) = hjørner[j];
+
+            if ((lonI > lon) != (lonJ > lon)
+                && lat < ((latJ - latI) * (lon - lonI) / (lonJ - lonI)) + latI)
+            {
+                innenfor = !innenfor;
+            }
+        }
+
+        return innenfor;
+    }
+
+    /// <summary>Ligger punktet nøyaktig på linjestykket fra <paramref name="a"/> til <paramref name="b"/>?</summary>
+    private static bool PåKant(double lat, double lon, (double Lat, double Lon) a, (double Lat, double Lon) b)
+    {
+        const double Epsilon = 1e-9;
+
+        var kryssprodukt = ((b.Lon - a.Lon) * (lat - a.Lat)) - ((b.Lat - a.Lat) * (lon - a.Lon));
+        if (Math.Abs(kryssprodukt) > Epsilon)
+        {
+            return false;
+        }
+
+        return lon >= Math.Min(a.Lon, b.Lon) - Epsilon && lon <= Math.Max(a.Lon, b.Lon) + Epsilon
+            && lat >= Math.Min(a.Lat, b.Lat) - Epsilon && lat <= Math.Max(a.Lat, b.Lat) + Epsilon;
+    }
+
+    /// <summary>
     /// Lager ett kartpunkt, eller null hvis punktet ligger utenfor Oslo.
     /// Alle lag skal gå via denne, slik at alle punkter får de samme
     /// egenskapene: id, navn og kilde er alltid med.
