@@ -1,3 +1,4 @@
+using System.Globalization;
 using OsloLive.Kart;
 
 namespace OsloLive.Tester;
@@ -145,5 +146,75 @@ public class AllemannsdataTester
     public void Levetid_bruker_konstanten_i_sekunder()
     {
         Assert.Equal(TimeSpan.FromSeconds(Allemannsdata.LevetidSekunder), Allemannsdata.Levetid);
+    }
+
+    private static void MedNorskKultur(Action handling)
+    {
+        var forrigeKultur = CultureInfo.CurrentCulture;
+        CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("nb-NO");
+        try
+        {
+            handling();
+        }
+        finally
+        {
+            CultureInfo.CurrentCulture = forrigeKultur;
+        }
+    }
+
+    [Fact]
+    public void Url_bruker_punktum_for_double_med_norsk_kultur()
+    {
+        MedNorskKultur(() =>
+        {
+            Assert.Equal(",", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
+
+            var url = Allemannsdata.ByggUrl("luftkvalitet", "get_air_quality_nearby",
+                new Dictionary<string, object> { ["lat"] = 59.9139, ["lon"] = 10.7522 });
+
+            Assert.Contains("lat=59.9139", url);
+            Assert.Contains("lon=10.7522", url);
+            Assert.DoesNotContain("59,9139", url);
+            Assert.DoesNotContain("59%2C9139", url);
+        });
+    }
+
+    [Fact]
+    public void Url_bruker_punktum_for_float_med_norsk_kultur()
+    {
+        MedNorskKultur(() =>
+        {
+            var url = Allemannsdata.ByggUrl("luftkvalitet", "get_air_quality_nearby",
+                new Dictionary<string, object> { ["lat"] = 59.5f });
+
+            Assert.Contains("lat=59.5", url);
+            Assert.DoesNotContain("%2C", url);
+        });
+    }
+
+    [Fact]
+    public void Url_bruker_punktum_for_decimal_med_norsk_kultur()
+    {
+        MedNorskKultur(() =>
+        {
+            var url = Allemannsdata.ByggUrl("luftkvalitet", "get_air_quality_nearby",
+                new Dictionary<string, object> { ["lat"] = 59.9139m });
+
+            Assert.Contains("lat=59.9139", url);
+            Assert.DoesNotContain("%2C", url);
+        });
+    }
+
+    [Fact]
+    public void Heltall_formateres_som_foer_med_norsk_kultur()
+    {
+        MedNorskKultur(() =>
+        {
+            var url = Allemannsdata.ByggUrl("luftkvalitet", "get_air_quality_nearby",
+                new Dictionary<string, object> { ["limit"] = 50, ["navn"] = "Oslo" });
+
+            Assert.Contains("limit=50", url);
+            Assert.Contains("navn=Oslo", url);
+        });
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Concurrent;
+using System.Globalization;
 using System.Text.Json;
 
 namespace OsloLive.Kart;
@@ -44,9 +45,9 @@ public sealed class Allemannsdata(HttpClient http, ILogger<Allemannsdata> logg)
 
     private static string Formater(object verdi) => verdi switch
     {
-        double d => d.ToString(),
-        decimal d => d.ToString(),
-        float f => f.ToString(),
+        double d => d.ToString(CultureInfo.InvariantCulture),
+        decimal d => d.ToString(CultureInfo.InvariantCulture),
+        float f => f.ToString(CultureInfo.InvariantCulture),
         bool b => b ? "true" : "false",
         _ => verdi.ToString() ?? "",
     };
