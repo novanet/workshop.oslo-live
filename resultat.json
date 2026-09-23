@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:34:30",
+  "oppdatert": "2026-09-23T11:34:57",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -337,25 +337,6 @@
       "plass": 11
     },
     {
-      "navn": "mini-sindre",
-      "github": "sin-rha",
-      "poeng": 0,
-      "feil": [],
-      "lag": [],
-      "levert": [],
-      "dollar": 1.904,
-      "tokens": 3482044,
-      "sekunder": 718,
-      "pr": 2,
-      "utkast": 0,
-      "merget": 0,
-      "kjoeringer": 3,
-      "utenPr": 1,
-      "bygg": [],
-      "estimert": false,
-      "plass": 12
-    },
-    {
       "navn": "Dmitry-agent",
       "github": "FilonenkoDmitry",
       "poeng": 0,
@@ -372,7 +353,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 13
+      "plass": 12
     },
     {
       "navn": "mini-taco",
@@ -389,6 +370,25 @@
       "merget": 0,
       "kjoeringer": 2,
       "utenPr": 0,
+      "bygg": [],
+      "estimert": false,
+      "plass": 13
+    },
+    {
+      "navn": "mini-sindre",
+      "github": "sin-rha",
+      "poeng": 0,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 3.215,
+      "tokens": 6013787,
+      "sekunder": 1205,
+      "pr": 2,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 4,
+      "utenPr": 1,
       "bygg": [],
       "estimert": false,
       "plass": 14
@@ -453,19 +453,27 @@
   ],
   "kjoerer": [
     {
-      "agent": "mini-sindre",
-      "github": "sin-rha",
-      "issue": 55,
-      "navn": "Ytelse",
-      "startet": "2026-09-23T09:26:04.1878556+00:00",
-      "minutter": 8
-    },
-    {
       "agent": "mini-kirsten",
       "github": "jthagesk",
       "issue": 29,
       "navn": "Museer",
       "startet": "2026-09-23T09:33:36.7988647+00:00",
+      "minutter": 1
+    },
+    {
+      "agent": "mini-taco",
+      "github": "Puiu",
+      "issue": 122,
+      "navn": "",
+      "startet": "2026-09-23T09:34:35.9423034+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-bug",
+      "github": "SasaRad",
+      "issue": 3,
+      "navn": "Mellomlageret",
+      "startet": "2026-09-23T09:34:49.5919992+00:00",
       "minutter": 0
     }
   ],
@@ -526,14 +534,20 @@
     {
       "issue": 3,
       "navn": "Kartet oppdaterer seg ikke, dataene står stille",
+      "github": "SasaRad",
+      "oppdatert": "2026-09-23T09:34:50Z"
+    },
+    {
+      "issue": 3,
+      "navn": "Kartet oppdaterer seg ikke, dataene står stille",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T09:33:50Z"
+      "oppdatert": "2026-09-23T09:34:50Z"
     },
     {
       "issue": 3,
       "navn": "Kartet oppdaterer seg ikke, dataene står stille",
       "github": "randsu",
-      "oppdatert": "2026-09-23T09:33:50Z"
+      "oppdatert": "2026-09-23T09:34:50Z"
     },
     {
       "issue": 4,
@@ -869,7 +883,7 @@
       "issue": 55,
       "navn": "Kartet blir tregt med mange punkter",
       "github": "sin-rha",
-      "oppdatert": "2026-09-23T09:26:05Z"
+      "oppdatert": "2026-09-23T09:34:38Z"
     },
     {
       "issue": 56,
@@ -900,9 +914,39 @@
       "navn": "Overlapping boxes",
       "github": "sin-rha",
       "oppdatert": "2026-09-23T09:20:55Z"
+    },
+    {
+      "issue": 122,
+      "navn": "Vis hvor ferskt hvert lag er",
+      "github": "Puiu",
+      "oppdatert": "2026-09-23T09:34:36Z"
     }
   ],
   "aapne": [
+    {
+      "pr": 79,
+      "tittel": "Kartet blir tregt med mange punkter",
+      "github": "sin-rha",
+      "agent": "mini-sindre",
+      "opprettet": "2026-09-23T08:30:02Z",
+      "oppdatert": "2026-09-23T09:34:36Z",
+      "utkast": false,
+      "issues": [
+        55
+      ]
+    },
+    {
+      "pr": 91,
+      "tittel": "Fargene må virke for alle",
+      "github": "audmaha",
+      "agent": "mini-aud",
+      "opprettet": "2026-09-23T08:42:14Z",
+      "oppdatert": "2026-09-23T09:34:27Z",
+      "utkast": false,
+      "issues": [
+        41
+      ]
+    },
     {
       "pr": 65,
       "tittel": "#11: Nytt lag: kollektivtrafikk som beveger seg",
@@ -961,18 +1005,6 @@
       "utkast": false,
       "issues": [
         25
-      ]
-    },
-    {
-      "pr": 91,
-      "tittel": "Fargene må virke for alle",
-      "github": "audmaha",
-      "agent": "mini-aud",
-      "opprettet": "2026-09-23T08:42:14Z",
-      "oppdatert": "2026-09-23T09:23:12Z",
-      "utkast": false,
-      "issues": [
-        41
       ]
     },
     {
@@ -1105,18 +1137,6 @@
       "utkast": false,
       "issues": [
         41
-      ]
-    },
-    {
-      "pr": 79,
-      "tittel": "Kartet blir tregt med mange punkter",
-      "github": "sin-rha",
-      "agent": "mini-sindre",
-      "opprettet": "2026-09-23T08:30:02Z",
-      "oppdatert": "2026-09-23T09:06:04Z",
-      "utkast": false,
-      "issues": [
-        55
       ]
     },
     {
