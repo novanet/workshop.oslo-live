@@ -73,6 +73,17 @@ public class ApiTester(VertUtenBakgrunnssjekk vert) : IClassFixture<VertUtenBakg
     }
 
     [Fact]
+    public async Task Lagoversikten_har_badetemperaturlaget()
+    {
+        var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
+
+        var badetemperatur = lag!.Single(l => l.Id == "badetemperatur");
+        Assert.Equal("Badetemperatur", badetemperatur.Navn);
+        Assert.False(string.IsNullOrWhiteSpace(badetemperatur.Beskrivelse));
+        Assert.False(string.IsNullOrWhiteSpace(badetemperatur.Ikon));
+    }
+
+    [Fact]
     public async Task Lagoversikten_har_mobilitetslaget()
     {
         var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
