@@ -21,6 +21,7 @@ builder.Services.AddHttpClient<Allemannsdata>(klient =>
 // Lagene på kartet. Nytt lag? Legg til én linje her.
 // ---------------------------------------------------------------------------
 builder.Services.AddSingleton<ILag, LuftkvalitetLag>();
+builder.Services.AddSingleton<ILag, ArterLag>();
 
 var app = builder.Build();
 

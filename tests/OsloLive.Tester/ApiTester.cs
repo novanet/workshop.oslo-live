@@ -39,6 +39,17 @@ public class ApiTester(WebApplicationFactory<Program> vert) : IClassFixture<WebA
     }
 
     [Fact]
+    public async Task Lagoversikten_har_arter()
+    {
+        var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
+
+        var arter = lag!.Single(l => l.Id == "arter");
+        Assert.Equal("Artsobservasjoner", arter.Navn);
+        Assert.False(string.IsNullOrWhiteSpace(arter.Beskrivelse));
+        Assert.False(string.IsNullOrWhiteSpace(arter.Ikon));
+    }
+
+    [Fact]
     public async Task Ukjent_lag_gir_404()
     {
         var svar = await Klient.GetAsync("/api/lag/finnes-ikke");
