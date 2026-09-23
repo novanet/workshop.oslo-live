@@ -1,7 +1,32 @@
 {
-  "oppdatert": "2026-09-23T10:12:49",
+  "oppdatert": "2026-09-23T10:13:22",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
+    {
+      "navn": "mini-ingve",
+      "github": "ingvevs",
+      "poeng": 2,
+      "feil": [
+        {
+          "issue": 4,
+          "navn": "Duplikatfjerning",
+          "poeng": 2
+        }
+      ],
+      "lag": [],
+      "levert": [],
+      "dollar": 1.014,
+      "tokens": 1725789,
+      "sekunder": 335,
+      "pr": 1,
+      "utkast": 0,
+      "merget": 1,
+      "kjoeringer": 2,
+      "utenPr": 1,
+      "bygg": [],
+      "estimert": false,
+      "plass": 1
+    },
     {
       "navn": "mini-leif",
       "github": "leif-larsen",
@@ -25,7 +50,7 @@
       "utenPr": 0,
       "bygg": [],
       "estimert": false,
-      "plass": 1
+      "plass": 2
     },
     {
       "navn": "mini-richard",
@@ -50,7 +75,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 2
+      "plass": 3
     },
     {
       "navn": "mini-sindre",
@@ -69,7 +94,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 3
+      "plass": 4
     },
     {
       "navn": "henrik",
@@ -88,7 +113,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 4
+      "plass": 5
     },
     {
       "navn": "mini-wilma",
@@ -105,25 +130,6 @@
       "merget": 0,
       "kjoeringer": 1,
       "utenPr": 0,
-      "bygg": [],
-      "estimert": false,
-      "plass": 5
-    },
-    {
-      "navn": "mini-ingve",
-      "github": "ingvevs",
-      "poeng": 0,
-      "feil": [],
-      "lag": [],
-      "levert": [],
-      "dollar": 1.014,
-      "tokens": 1725789,
-      "sekunder": 335,
-      "pr": 1,
-      "utkast": 0,
-      "merget": 0,
-      "kjoeringer": 2,
-      "utenPr": 1,
       "bygg": [],
       "estimert": false,
       "plass": 6
@@ -201,7 +207,7 @@
       "issue": 11,
       "navn": "Kollektiv",
       "startet": "2026-09-23T08:04:09.8675976+00:00",
-      "minutter": 8
+      "minutter": 9
     },
     {
       "agent": "mini-gir",
@@ -209,7 +215,7 @@
       "issue": 17,
       "navn": "Smilefjes",
       "startet": "2026-09-23T08:10:01.588657+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-jon",
@@ -227,11 +233,12 @@
     "kjoeringer": 15
   },
   "produkt": {
-    "testerBestatt": 9,
-    "testerFeilet": 17,
+    "testerBestatt": 10,
+    "testerFeilet": 16,
     "issuerLost": [
       2,
-      3
+      3,
+      4
     ],
     "antallIssuer": 57,
     "feilmelding": null
@@ -348,6 +355,18 @@
   ],
   "aapne": [
     {
+      "pr": 69,
+      "tittel": "#56: Nytt lag: fly i lufta over Oslo",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:10:46Z",
+      "oppdatert": "2026-09-23T08:12:37Z",
+      "utkast": false,
+      "issues": [
+        56
+      ]
+    },
+    {
       "pr": 72,
       "tittel": "Søk etter adresse og hopp dit på kartet (#21)",
       "github": "leif-larsen",
@@ -378,30 +397,6 @@
       "agent": "mini-wilma",
       "opprettet": "2026-09-23T08:12:06Z",
       "oppdatert": "2026-09-23T08:12:07Z",
-      "utkast": false,
-      "issues": [
-        4
-      ]
-    },
-    {
-      "pr": 69,
-      "tittel": "#56: Nytt lag: fly i lufta over Oslo",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:10:46Z",
-      "oppdatert": "2026-09-23T08:10:47Z",
-      "utkast": false,
-      "issues": [
-        56
-      ]
-    },
-    {
-      "pr": 68,
-      "tittel": "Hvert lag viser bare ett eneste punkt",
-      "github": "ingvevs",
-      "agent": "mini-ingve",
-      "opprettet": "2026-09-23T08:05:41Z",
-      "oppdatert": "2026-09-23T08:05:41Z",
       "utkast": false,
       "issues": [
         4
