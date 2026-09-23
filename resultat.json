@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:43:40",
+  "oppdatert": "2026-09-23T10:44:07",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -362,7 +362,7 @@
       "issue": 6,
       "navn": "Delt mobilitet",
       "startet": "2026-09-23T08:36:06.1007878+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "mini-wilma",
@@ -370,7 +370,7 @@
       "issue": 32,
       "navn": "Strømpris",
       "startet": "2026-09-23T08:37:51.7658572+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-kirsten",
@@ -410,7 +410,7 @@
       "issue": 35,
       "navn": "Varmekart",
       "startet": "2026-09-23T08:39:47.6963928+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-taco",
@@ -418,7 +418,7 @@
       "issue": 47,
       "navn": "Søk på tvers",
       "startet": "2026-09-23T08:39:51.4798178+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-kirsten",
@@ -426,7 +426,7 @@
       "issue": 52,
       "navn": "Konfigurerbar bbox",
       "startet": "2026-09-23T08:42:06.8631198+00:00",
-      "minutter": 1
+      "minutter": 2
     }
   ],
   "main": {
@@ -740,11 +740,29 @@
     {
       "issue": 59,
       "navn": "Overlapping boxes",
+      "github": "jthagesk",
+      "oppdatert": "2026-09-23T08:43:26Z"
+    },
+    {
+      "issue": 59,
+      "navn": "Overlapping boxes",
       "github": "sin-rha",
       "oppdatert": "2026-09-23T08:43:26Z"
     }
   ],
   "aapne": [
+    {
+      "pr": 79,
+      "tittel": "Kartet blir tregt med mange punkter",
+      "github": "sin-rha",
+      "agent": "mini-sindre",
+      "opprettet": "2026-09-23T08:30:02Z",
+      "oppdatert": "2026-09-23T08:43:58Z",
+      "utkast": false,
+      "issues": [
+        55
+      ]
+    },
     {
       "pr": 78,
       "tittel": "Nytt lag: smilefjes fra Mattilsynet",
@@ -911,18 +929,6 @@
       "utkast": false,
       "issues": [
         57
-      ]
-    },
-    {
-      "pr": 79,
-      "tittel": "Kartet blir tregt med mange punkter",
-      "github": "sin-rha",
-      "agent": "mini-sindre",
-      "opprettet": "2026-09-23T08:30:02Z",
-      "oppdatert": "2026-09-23T08:31:04Z",
-      "utkast": false,
-      "issues": [
-        55
       ]
     },
     {
