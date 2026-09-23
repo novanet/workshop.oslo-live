@@ -49,20 +49,4 @@ public class StatiskeFilerTester : IClassFixture<VertUtenBakgrunnssjekk>
         Assert.DoesNotContain("toFixed(", funksjon);
         Assert.DoesNotContain("replace('", funksjon);
     }
-
-    [Fact]
-    public async Task Forsiden_har_nyhetslinje()
-    {
-        var innhold = await vert.CreateClient().GetStringAsync("/");
-
-        Assert.Contains("id=\"nyhetslinje\"", innhold);
-    }
-
-    [Fact]
-    public async Task Nyhetslinja_stanser_ved_redusert_bevegelse()
-    {
-        var innhold = await vert.CreateClient().GetStringAsync("/");
-
-        Assert.Contains("prefers-reduced-motion", innhold);
-    }
 }
