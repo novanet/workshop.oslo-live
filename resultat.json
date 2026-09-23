@@ -1,11 +1,11 @@
 {
-  "oppdatert": "2026-09-23T15:15:21",
+  "oppdatert": "2026-09-23T15:16:36",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
       "navn": "mini-richard",
       "github": "randsu",
-      "poeng": 40,
+      "poeng": 38,
       "feil": [
         {
           "issue": 3,
@@ -14,11 +14,6 @@
         }
       ],
       "lag": [
-        {
-          "issue": 6,
-          "navn": "Delt mobilitet",
-          "poeng": 2
-        },
         {
           "issue": 9,
           "navn": "Badetemperatur",
@@ -221,13 +216,13 @@
           "poeng": 2
         }
       ],
-      "dollar": 20.645,
-      "tokens": 33467140,
-      "sekunder": 6691,
-      "pr": 5,
+      "dollar": 21.995,
+      "tokens": 34803252,
+      "sekunder": 7064,
+      "pr": 6,
       "utkast": 0,
       "merget": 3,
-      "kjoeringer": 27,
+      "kjoeringer": 28,
       "utenPr": 19,
       "bygg": [],
       "estimert": false,
@@ -533,6 +528,31 @@
       "plass": 14
     },
     {
+      "navn": "mini-johan",
+      "github": "pr0nin",
+      "poeng": 2,
+      "feil": [],
+      "lag": [
+        {
+          "issue": 13,
+          "navn": "Veiarbeid",
+          "poeng": 2
+        }
+      ],
+      "levert": [],
+      "dollar": 7.749,
+      "tokens": 14547577,
+      "sekunder": 2015,
+      "pr": 3,
+      "utkast": 0,
+      "merget": 1,
+      "kjoeringer": 12,
+      "utenPr": 9,
+      "bygg": [],
+      "estimert": false,
+      "plass": 15
+    },
+    {
       "navn": "mini-jon",
       "github": "yonzo",
       "poeng": 2,
@@ -555,7 +575,7 @@
       "utenPr": 9,
       "bygg": [],
       "estimert": true,
-      "plass": 15
+      "plass": 16
     },
     {
       "navn": "mini-taco",
@@ -580,7 +600,7 @@
       "utenPr": 6,
       "bygg": [],
       "estimert": false,
-      "plass": 16
+      "plass": 17
     },
     {
       "navn": "mini-tom",
@@ -599,7 +619,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 17
+      "plass": 18
     },
     {
       "navn": "mini-bug",
@@ -618,7 +638,7 @@
       "utenPr": 3,
       "bygg": [],
       "estimert": false,
-      "plass": 18
+      "plass": 19
     },
     {
       "navn": "mini-sindre",
@@ -635,25 +655,6 @@
       "merget": 0,
       "kjoeringer": 12,
       "utenPr": 8,
-      "bygg": [],
-      "estimert": false,
-      "plass": 19
-    },
-    {
-      "navn": "mini-johan",
-      "github": "pr0nin",
-      "poeng": 0,
-      "feil": [],
-      "lag": [],
-      "levert": [],
-      "dollar": 7.749,
-      "tokens": 14547577,
-      "sekunder": 2015,
-      "pr": 3,
-      "utkast": 0,
-      "merget": 0,
-      "kjoeringer": 12,
-      "utenPr": 9,
       "bygg": [],
       "estimert": false,
       "plass": 20
@@ -685,7 +686,7 @@
       "issue": 11,
       "navn": "Kollektiv",
       "startet": "2026-09-23T13:05:41.9082982+00:00",
-      "minutter": 9
+      "minutter": 10
     },
     {
       "agent": "mini-gir",
@@ -701,15 +702,7 @@
       "issue": 189,
       "navn": "Travlere enn vanlig på veiene",
       "startet": "2026-09-23T13:08:36.0345655+00:00",
-      "minutter": 6
-    },
-    {
-      "agent": "mini-frode",
-      "github": "FrodeBl",
-      "issue": 186,
-      "navn": "Nytt lag: bysykkelstasjoner som fyllingsringer",
-      "startet": "2026-09-23T13:09:04.334225+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-frode",
@@ -717,7 +710,7 @@
       "issue": 192,
       "navn": "Nytt lag: Wikipedia-artikler rundt deg",
       "startet": "2026-09-23T13:11:25.786562+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-aud",
@@ -725,7 +718,7 @@
       "issue": 211,
       "navn": "Statistikken viser ikke «Nyeste» for vannmålere og smilefjes",
       "startet": "2026-09-23T13:11:37.8328465+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-wilma",
@@ -733,7 +726,7 @@
       "issue": 206,
       "navn": "Popupene viser rådata: ISO-tider, «ikon: 😊» og tall uten enhet",
       "startet": "2026-09-23T13:13:02.1051821+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-johan",
@@ -741,7 +734,7 @@
       "issue": 115,
       "navn": "Nytt lag: parker og torg",
       "startet": "2026-09-23T13:13:50.233699+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-johan",
@@ -749,7 +742,7 @@
       "issue": 27,
       "navn": "Verneområder",
       "startet": "2026-09-23T13:13:51.5701165+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-leif",
@@ -757,7 +750,7 @@
       "issue": 187,
       "navn": "Skipets spor det siste døgnet",
       "startet": "2026-09-23T13:13:58.9663843+00:00",
-      "minutter": 1
+      "minutter": 2
     }
   ],
   "main": {
@@ -775,11 +768,11 @@
       3,
       4,
       5,
-      6,
       7,
       8,
       9,
       12,
+      13,
       14,
       15,
       17,
@@ -1141,13 +1134,13 @@
       "issue": 180,
       "navn": "Simulering: strømstans i en bydel",
       "github": "randsu",
-      "oppdatert": "2026-09-23T12:59:04Z"
+      "oppdatert": "2026-09-23T13:16:00Z"
     },
     {
       "issue": 186,
       "navn": "Nytt lag: bysykkelstasjoner som fyllingsringer",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T13:09:05Z"
+      "oppdatert": "2026-09-23T13:15:48Z"
     },
     {
       "issue": 187,
@@ -1201,7 +1194,7 @@
       "issue": 196,
       "navn": "Nytt lag: forsinkelser på knutepunktene",
       "github": "randsu",
-      "oppdatert": "2026-09-23T12:59:01Z"
+      "oppdatert": "2026-09-23T13:15:58Z"
     },
     {
       "issue": 197,
@@ -1266,6 +1259,30 @@
   ],
   "aapne": [
     {
+      "pr": 252,
+      "tittel": "Nytt lag: bysykkelstasjoner som fyllingsringer",
+      "github": "FrodeBl",
+      "agent": "mini-frode",
+      "opprettet": "2026-09-23T13:15:46Z",
+      "oppdatert": "2026-09-23T13:15:47Z",
+      "utkast": false,
+      "issues": [
+        186
+      ]
+    },
+    {
+      "pr": 250,
+      "tittel": "Nytt lag: avvik i kollektivtrafikken (#195)",
+      "github": "Buggz",
+      "agent": "mini-knive",
+      "opprettet": "2026-09-23T13:13:41Z",
+      "oppdatert": "2026-09-23T13:15:29Z",
+      "utkast": false,
+      "issues": [
+        195
+      ]
+    },
+    {
       "pr": 140,
       "tittel": "Vis endringen per lag i lagvelgeren",
       "github": "larsajakobsen",
@@ -1287,30 +1304,6 @@
       "utkast": false,
       "issues": [
         50
-      ]
-    },
-    {
-      "pr": 251,
-      "tittel": "Nytt lag: veiarbeid og stengte veier",
-      "github": "pr0nin",
-      "agent": "mini-johan",
-      "opprettet": "2026-09-23T13:13:46Z",
-      "oppdatert": "2026-09-23T13:13:47Z",
-      "utkast": false,
-      "issues": [
-        13
-      ]
-    },
-    {
-      "pr": 250,
-      "tittel": "Nytt lag: avvik i kollektivtrafikken (#195)",
-      "github": "Buggz",
-      "agent": "mini-knive",
-      "opprettet": "2026-09-23T13:13:41Z",
-      "oppdatert": "2026-09-23T13:13:42Z",
-      "utkast": false,
-      "issues": [
-        195
       ]
     },
     {
