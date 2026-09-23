@@ -213,9 +213,9 @@
 <div class="panel snarveier" id="snarveier" hidden>
   <div class="topp"><h2>Tastatursnarveier</h2><button class="lukk" id="lukk-snarveier" type="button" aria-label="Lukk">×</button></div>
   <dl>
-    <dt>1–9</dt><dd>Slå lag av/på</dd>
+    <dt>1, 2, 4–9</dt><dd>Slå lag av/på</dd>
     <dt>r</dt><dd>Snurr</dd>
-    <dt>t</dt><dd>2D/3D</dd>
+    <dt>3</dt><dd>2D/3D</dd>
     <dt>h</dt><dd>Sentrum</dd>
     <dt>?</dt><dd>Vis/skjul denne listen</dd>
   </dl>
@@ -879,14 +879,16 @@ document.addEventListener('keydown', (ev) => {
   const mål = ev.target;
   if (['INPUT', 'TEXTAREA', 'SELECT'].includes(mål.tagName) || mål.isContentEditable) return;
 
-  if (ev.key >= '1' && ev.key <= '9') { slaAvPaaLag(Number(ev.key)); return; }
+  // Issuen gir tasten 3 to oppgaver (lag 3 og 2D/3D). 2D/3D er det mest
+  // konkrete kravet, så 3 veksler visning og lag 3 har ingen tast.
   switch (ev.key) {
-    case 'r': document.getElementById('snurr').click(); break;
-    case 't': document.getElementById('flatt').click(); break;
-    case 'h': document.getElementById('hjem').click(); break;
-    case '?': veksleSnarveier(); break;
-    case 'Escape': veksleSnarveier(false); break;
+    case '3': document.getElementById('flatt').click(); return;
+    case 'r': document.getElementById('snurr').click(); return;
+    case 'h': document.getElementById('hjem').click(); return;
+    case '?': veksleSnarveier(); return;
+    case 'Escape': veksleSnarveier(false); return;
   }
+  if (ev.key >= '1' && ev.key <= '9') slaAvPaaLag(Number(ev.key));
 });
 
 // ---------------------------------------------------------------------------
