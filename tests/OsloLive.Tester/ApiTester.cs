@@ -802,8 +802,10 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
 
         Assert.Equal(HttpStatusCode.OK, svar.StatusCode);
         var innhold = await svar.Content.ReadFromJsonAsync<JsonElement>();
-        Assert.True(innhold.TryGetProperty("naa", out _));
-        Assert.True(innhold.TryGetProperty("billigst", out _));
+        Assert.True(innhold.TryGetProperty("naa", out var naa));
+        Assert.Equal(JsonValueKind.Number, naa.ValueKind);
+        Assert.True(innhold.TryGetProperty("billigst", out var billigst));
+        Assert.Equal(JsonValueKind.Number, billigst.GetProperty("pris").ValueKind);
         Assert.True(innhold.TryGetProperty("dyrest", out _));
         Assert.Equal(24, innhold.GetProperty("timer").GetArrayLength());
         Allemannsdata.TømMellomlager();
