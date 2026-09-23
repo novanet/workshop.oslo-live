@@ -1,11 +1,11 @@
 {
-  "oppdatert": "2026-09-23T11:14:39",
+  "oppdatert": "2026-09-23T11:15:26",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
       "navn": "mini-richard",
       "github": "randsu",
-      "poeng": 14,
+      "poeng": 19,
       "feil": [
         {
           "issue": 3,
@@ -27,6 +27,11 @@
       ],
       "levert": [
         {
+          "issue": 24,
+          "navn": "Bydeler",
+          "poeng": 5
+        },
+        {
           "issue": 38,
           "navn": "Demomodus",
           "poeng": 3
@@ -42,7 +47,7 @@
       "sekunder": 5772,
       "pr": 10,
       "utkast": 0,
-      "merget": 5,
+      "merget": 6,
       "kjoeringer": 14,
       "utenPr": 4,
       "bygg": [],
@@ -334,42 +339,23 @@
       "plass": 12
     },
     {
-      "navn": "Andy3000",
-      "github": "coffeelyfe",
-      "poeng": 0,
-      "feil": [],
-      "lag": [],
-      "levert": [],
-      "dollar": 5.075,
-      "tokens": 11011923,
-      "sekunder": 1468,
-      "pr": 1,
-      "utkast": 0,
-      "merget": 0,
-      "kjoeringer": 4,
-      "utenPr": 2,
-      "bygg": [],
-      "estimert": false,
-      "plass": 13
-    },
-    {
       "navn": "helstein",
       "github": "nilsgs",
       "poeng": 0,
       "feil": [],
       "lag": [],
       "levert": [],
-      "dollar": 5.447,
-      "tokens": 11071938,
-      "sekunder": 2122,
+      "dollar": 3.959,
+      "tokens": 8144568,
+      "sekunder": 1452,
       "pr": 2,
       "utkast": 0,
       "merget": 0,
-      "kjoeringer": 4,
+      "kjoeringer": 3,
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 14
+      "plass": 13
     },
     {
       "navn": "mini-aud",
@@ -386,6 +372,25 @@
       "merget": 0,
       "kjoeringer": 7,
       "utenPr": 3,
+      "bygg": [],
+      "estimert": false,
+      "plass": 14
+    },
+    {
+      "navn": "Andy3000",
+      "github": "coffeelyfe",
+      "poeng": 0,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 7.229,
+      "tokens": 15094376,
+      "sekunder": 2064,
+      "pr": 1,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 5,
+      "utenPr": 2,
       "bygg": [],
       "estimert": false,
       "plass": 15
@@ -436,15 +441,7 @@
       "issue": 26,
       "navn": "Skoler",
       "startet": "2026-09-23T09:03:43.3920206+00:00",
-      "minutter": 10
-    },
-    {
-      "agent": "Andy3000",
-      "github": "coffeelyfe",
-      "issue": 11,
-      "navn": "Kollektiv",
-      "startet": "2026-09-23T09:04:10.6494291+00:00",
-      "minutter": 10
+      "minutter": 11
     },
     {
       "agent": "mini-leif",
@@ -460,7 +457,7 @@
       "issue": 72,
       "navn": "",
       "startet": "2026-09-23T09:12:59.4083914+00:00",
-      "minutter": 1
+      "minutter": 2
     }
   ],
   "main": {
@@ -688,7 +685,7 @@
       "issue": 27,
       "navn": "Nytt lag: verneområder og naturtyper",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T09:14:31Z"
+      "oppdatert": "2026-09-23T09:14:43Z"
     },
     {
       "issue": 28,
@@ -896,22 +893,10 @@
       "github": "coffeelyfe",
       "agent": "Andy3000",
       "opprettet": "2026-09-23T07:50:13Z",
-      "oppdatert": "2026-09-23T09:14:34Z",
+      "oppdatert": "2026-09-23T09:14:35Z",
       "utkast": false,
       "issues": [
         11
-      ]
-    },
-    {
-      "pr": 103,
-      "tittel": "#24: Tell punkter per bydel",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:56:50Z",
-      "oppdatert": "2026-09-23T09:14:02Z",
-      "utkast": false,
-      "issues": [
-        24
       ]
     },
     {
