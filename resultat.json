@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:56:11",
+  "oppdatert": "2026-09-23T14:56:52",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -174,13 +174,13 @@
           "poeng": 2
         }
       ],
-      "dollar": 17.052,
-      "tokens": 29837546,
-      "sekunder": 5722,
+      "dollar": 18.005,
+      "tokens": 31007756,
+      "sekunder": 6012,
       "pr": 5,
       "utkast": 0,
       "merget": 3,
-      "kjoeringer": 24,
+      "kjoeringer": 25,
       "utenPr": 18,
       "bygg": [],
       "estimert": false,
@@ -665,7 +665,7 @@
       "issue": 203,
       "navn": "Popupen havner bak lagpanelet på PC",
       "startet": "2026-09-23T12:49:33.0669163+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-richard",
@@ -684,20 +684,12 @@
       "minutter": 5
     },
     {
-      "agent": "mini-frode",
-      "github": "FrodeBl",
-      "issue": 48,
-      "navn": "Parallell henting",
-      "startet": "2026-09-23T12:51:10.1948683+00:00",
-      "minutter": 5
-    },
-    {
       "agent": "mini-richard",
       "github": "randsu",
       "issue": 155,
       "navn": "Vis siste gode svar når kilden svikter",
       "startet": "2026-09-23T12:52:27.6280109+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-frode",
@@ -705,7 +697,7 @@
       "issue": 50,
       "navn": "Metrikker",
       "startet": "2026-09-23T12:52:40.434133+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-kirsten",
@@ -714,13 +706,21 @@
       "navn": "Museer",
       "startet": "2026-09-23T12:53:54.4756747+00:00",
       "minutter": 2
+    },
+    {
+      "agent": "mini-leif",
+      "github": "leif-larsen",
+      "issue": 118,
+      "navn": "Nyhetslinje nederst på skjermen",
+      "startet": "2026-09-23T12:56:29.1961936+00:00",
+      "minutter": 0
     }
   ],
   "main": {
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
     "pr": null,
-    "kjoeringer": 57
+    "kjoeringer": 58
   },
   "produkt": {
     "testerBestatt": 20,
@@ -839,7 +839,7 @@
       "issue": 48,
       "navn": "Hent lagene parallelt",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T12:51:11Z"
+      "oppdatert": "2026-09-23T12:56:33Z"
     },
     {
       "issue": 50,
@@ -863,7 +863,7 @@
       "issue": 55,
       "navn": "Kartet blir tregt med mange punkter",
       "github": "sin-rha",
-      "oppdatert": "2026-09-23T12:51:48Z"
+      "oppdatert": "2026-09-23T12:56:49Z"
     },
     {
       "issue": 57,
@@ -941,7 +941,7 @@
       "issue": 118,
       "navn": "Nyhetslinje nederst på skjermen",
       "github": "leif-larsen",
-      "oppdatert": "2026-09-23T12:55:51Z"
+      "oppdatert": "2026-09-23T12:56:30Z"
     },
     {
       "issue": 119,
@@ -1168,6 +1168,54 @@
   ],
   "aapne": [
     {
+      "pr": 221,
+      "tittel": "#191: Et døgn med bysykkelturer på 90 sekunder",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T12:29:48Z",
+      "oppdatert": "2026-09-23T12:56:35Z",
+      "utkast": false,
+      "issues": [
+        191
+      ]
+    },
+    {
+      "pr": 67,
+      "tittel": "Hent lagene parallelt",
+      "github": "FrodeBl",
+      "agent": "mini-frode",
+      "opprettet": "2026-09-23T07:59:18Z",
+      "oppdatert": "2026-09-23T12:56:31Z",
+      "utkast": false,
+      "issues": [
+        48
+      ]
+    },
+    {
+      "pr": 228,
+      "tittel": "Nyhetslinje nederst på skjermen (#118)",
+      "github": "leif-larsen",
+      "agent": "mini-leif",
+      "opprettet": "2026-09-23T12:41:18Z",
+      "oppdatert": "2026-09-23T12:56:28Z",
+      "utkast": false,
+      "issues": [
+        118
+      ]
+    },
+    {
+      "pr": 225,
+      "tittel": "#114: Nytt lag: Kristiania i 1910",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T12:38:28Z",
+      "oppdatert": "2026-09-23T12:56:17Z",
+      "utkast": false,
+      "issues": [
+        114
+      ]
+    },
+    {
       "pr": 244,
       "tittel": "Statistikken viser ikke «Nyeste» for vannmålere og smilefjes",
       "github": "audmaha",
@@ -1237,18 +1285,6 @@
       "utkast": false,
       "issues": [
         188
-      ]
-    },
-    {
-      "pr": 225,
-      "tittel": "#114: Nytt lag: Kristiania i 1910",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T12:38:28Z",
-      "oppdatert": "2026-09-23T12:54:03Z",
-      "utkast": false,
-      "issues": [
-        114
       ]
     },
     {
@@ -1348,30 +1384,6 @@
       ]
     },
     {
-      "pr": 228,
-      "tittel": "Nyhetslinje nederst på skjermen (#118)",
-      "github": "leif-larsen",
-      "agent": "mini-leif",
-      "opprettet": "2026-09-23T12:41:18Z",
-      "oppdatert": "2026-09-23T12:49:52Z",
-      "utkast": false,
-      "issues": [
-        118
-      ]
-    },
-    {
-      "pr": 67,
-      "tittel": "Hent lagene parallelt",
-      "github": "FrodeBl",
-      "agent": "mini-frode",
-      "opprettet": "2026-09-23T07:59:18Z",
-      "oppdatert": "2026-09-23T12:49:39Z",
-      "utkast": false,
-      "issues": [
-        48
-      ]
-    },
-    {
       "pr": 233,
       "tittel": "Lagvelgeren er for høy: historikkgrafen tar en egen rad per lag",
       "github": "larsajakobsen",
@@ -1381,18 +1393,6 @@
       "utkast": true,
       "issues": [
         214
-      ]
-    },
-    {
-      "pr": 221,
-      "tittel": "#191: Et døgn med bysykkelturer på 90 sekunder",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T12:29:48Z",
-      "oppdatert": "2026-09-23T12:48:35Z",
-      "utkast": false,
-      "issues": [
-        191
       ]
     },
     {
