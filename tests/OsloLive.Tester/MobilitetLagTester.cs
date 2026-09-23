@@ -36,6 +36,77 @@ public class MobilitetLagTester
         Assert.Equal(forventet, MobilitetLag.Operatør(systemId, operatør));
     }
 
+    [Theory]
+    [InlineData("ELECTRIC", "elektrisk")]
+    [InlineData("ELECTRIC_ASSIST", "elektrisk")]
+    [InlineData("COMBUSTION", "fossil")]
+    [InlineData("COMBUSTION_DIESEL", "fossil")]
+    [InlineData("HYBRID", "hybrid")]
+    [InlineData("PLUG_IN_HYBRID", "hybrid")]
+    [InlineData("HUMAN", "tråkk")]
+    public void Drivstoff_oversettes_fra_propulsion(string propulsion, string forventet)
+    {
+        Assert.Equal(forventet, MobilitetLag.Drivstoff(propulsion));
+    }
+
+    [Theory]
+    [InlineData("HYDROGEN")]
+    [InlineData("electric")]
+    [InlineData(null)]
+    public void Ukjent_drivstoff_gir_null(string? propulsion)
+    {
+        Assert.Null(MobilitetLag.Drivstoff(propulsion));
+    }
+
+    [Theory]
+    [InlineData("COMBUSTION", "fossil")]
+    [InlineData("ELECTRIC", "elektrisk")]
+    public void Kjøretøy_får_drivstoff_på_norsk(string propulsion, string forventet)
+    {
+        var punkt = MobilitetLag.FraKjøretøy(Rad($$"""
+            {
+                "id": "HYR:Vehicle:1",
+                "form_factor": "CAR",
+                "propulsion": "{{propulsion}}",
+                "lat": 59.912,
+                "lon": 10.752,
+                "range_m": 83000,
+                "reserved": false,
+                "disabled": false,
+                "operator": "Hyre",
+                "system_id": "hyrenorge"
+            }
+            """));
+
+        Assert.NotNull(punkt);
+        Assert.Equal(forventet, punkt!.Properties["drivstoff"]);
+    }
+
+    [Theory]
+    [InlineData("\"propulsion\": \"HYDROGEN\",")]
+    [InlineData("\"propulsion\": 3,")]
+    [InlineData("\"propulsion\": null,")]
+    [InlineData("")]
+    public void Kjøretøy_med_ukjent_eller_manglende_drivstoff_mangler_feltet(string propulsionFragment)
+    {
+        var punkt = MobilitetLag.FraKjøretøy(Rad($$"""
+            {
+                "id": "HYR:Vehicle:1",
+                "form_factor": "CAR",
+                {{propulsionFragment}}
+                "lat": 59.912,
+                "lon": 10.752,
+                "reserved": false,
+                "disabled": false,
+                "operator": "Hyre",
+                "system_id": "hyrenorge"
+            }
+            """));
+
+        Assert.NotNull(punkt);
+        Assert.False(punkt!.Properties.ContainsKey("drivstoff"));
+    }
+
     [Fact]
     public void Ledig_kjøretøy_gir_punkt_med_lon_lat()
     {

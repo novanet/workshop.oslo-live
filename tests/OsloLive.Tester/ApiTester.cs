@@ -1,3 +1,4 @@
+using System.Collections.Concurrent;
 using System.Globalization;
 using System.Net;
 using System.Net.Http.Json;
@@ -90,11 +91,40 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
     }
 
     [Fact]
+    public async Task Lagoversikten_har_veiarbeid()
+    {
+        var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
+
+        var veiarbeid = lag!.Single(l => l.Id == "veiarbeid");
+        Assert.Equal("Veiarbeid", veiarbeid.Navn);
+        Assert.False(string.IsNullOrWhiteSpace(veiarbeid.Beskrivelse));
+        Assert.False(string.IsNullOrWhiteSpace(veiarbeid.Ikon));
+    }
+
+    [Fact]
     public async Task Ukjent_lag_gir_404()
     {
         var svar = await Klient.GetAsync("/api/lag/finnes-ikke");
 
         Assert.Equal(HttpStatusCode.NotFound, svar.StatusCode);
+    }
+
+    [Fact]
+    public async Task Sok_uten_q_gir_400()
+    {
+        var svar = await Klient.GetAsync("/api/sok");
+
+        Assert.Equal(HttpStatusCode.BadRequest, svar.StatusCode);
+    }
+
+    [Theory]
+    [InlineData("/api/sok?q=")]
+    [InlineData("/api/sok?q=%20%20")]
+    public async Task Sok_med_tom_q_gir_400(string url)
+    {
+        var svar = await Klient.GetAsync(url);
+
+        Assert.Equal(HttpStatusCode.BadRequest, svar.StatusCode);
     }
 
     [Fact]
@@ -199,6 +229,18 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
     }
 
     [Fact]
+    public async Task Lagoversikten_har_skolelaget()
+    {
+        var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
+
+        var skoler = lag!.Single(l => l.Id == "skoler");
+        Assert.Equal("Skoler", skoler.Navn);
+        Assert.False(string.IsNullOrWhiteSpace(skoler.Beskrivelse));
+        Assert.EndsWith(".", skoler.Beskrivelse);
+        Assert.Equal(1, skoler.Beskrivelse!.Count(t => t == '.'));
+        Assert.False(string.IsNullOrWhiteSpace(skoler.Ikon));
+    }
+    
     public async Task Lagoversikten_har_kaier()
     {
         var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
@@ -537,6 +579,73 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
         }
     }
 
+    [Fact]
+    public async Task Metrikker_svarer_med_siden_og_kilder()
+    {
+        var svar = await Klient.GetAsync("/api/metrikker");
+        var json = await svar.Content.ReadFromJsonAsync<JsonElement>();
+
+        Assert.Equal(HttpStatusCode.OK, svar.StatusCode);
+        Assert.True(DateTimeOffset.TryParse(json.GetProperty("siden").GetString(), CultureInfo.InvariantCulture, out _));
+        Assert.Equal(JsonValueKind.Array, json.GetProperty("kilder").ValueKind);
+    }
+
+    [Fact]
+    public async Task To_kall_til_luftkvalitet_gir_ett_treff_og_en_bom()
+    {
+        // Ingen stasjoner i svaret, så laget gjør bare ett oppslag per forespørsel og ingen varselkall.
+        const string svar = """{ "source": "luftkvalitet", "operation": "get_air_quality_nearby", "parameters": {}, "data": [] }""";
+        using var vertUtenNett = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient<Allemannsdata>().ConfigurePrimaryHttpMessageHandler(() => new FastSvarHandler(svar))));
+        var klient = vertUtenNett.CreateClient();
+
+        Allemannsdata.TømMellomlager();
+        try
+        {
+            await klient.GetAsync("/api/lag/luftkvalitet");
+            await klient.GetAsync("/api/lag/luftkvalitet");
+            var json = await klient.GetFromJsonAsync<JsonElement>("/api/metrikker");
+
+            var luft = json.GetProperty("kilder").EnumerateArray().Single(k => k.GetProperty("kilde").GetString() == "luftkvalitet");
+            Assert.Equal(2, luft.GetProperty("kall").GetInt64());
+            Assert.Equal(1, luft.GetProperty("treff").GetInt64());
+            Assert.Equal(1, luft.GetProperty("bom").GetInt64());
+            Assert.Equal(0, luft.GetProperty("feil").GetInt64());
+            Assert.True(luft.GetProperty("snittMs").GetDouble() >= 0);
+        }
+        finally
+        {
+            Allemannsdata.TømMellomlager();
+        }
+    }
+
+    [Fact]
+    public async Task Metrikker_nullstilles_ikke_ved_oppslag()
+    {
+        const string svar = """{ "data": [] }""";
+        using var vertUtenNett = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient<Allemannsdata>().ConfigurePrimaryHttpMessageHandler(() => new FastSvarHandler(svar))));
+        var klient = vertUtenNett.CreateClient();
+
+        Allemannsdata.TømMellomlager();
+        try
+        {
+            await klient.GetAsync("/api/lag/luftkvalitet");
+            var første = await klient.GetFromJsonAsync<JsonElement>("/api/metrikker");
+            var andre = await klient.GetFromJsonAsync<JsonElement>("/api/metrikker");
+
+            Assert.Equal(første.GetProperty("siden").GetString(), andre.GetProperty("siden").GetString());
+            var førsteKilde = første.GetProperty("kilder").EnumerateArray().Single(k => k.GetProperty("kilde").GetString() == "luftkvalitet");
+            var andreKilde = andre.GetProperty("kilder").EnumerateArray().Single(k => k.GetProperty("kilde").GetString() == "luftkvalitet");
+            Assert.Equal(1, førsteKilde.GetProperty("kall").GetInt64());
+            Assert.True(andreKilde.GetProperty("kall").GetInt64() >= førsteKilde.GetProperty("kall").GetInt64());
+        }
+        finally
+        {
+            Allemannsdata.TømMellomlager();
+        }
+    }
+
     private sealed class OpptakendeSvarHandler(string svar) : HttpMessageHandler
     {
         public Uri? SisteAdresse { get; private set; }
@@ -547,6 +656,167 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
             return Task.FromResult(new HttpResponseMessage(HttpStatusCode.OK)
             {
                 Content = new StringContent(svar, Encoding.UTF8, "application/json"),
+            });
+        }
+    }
+
+    [Fact]
+    public async Task Skolelaget_gir_featurecollection_uten_nett()
+    {
+        var handler = new SkoleHandler();
+        using var vertUtenNett = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient<Allemannsdata>().ConfigurePrimaryHttpMessageHandler(() => handler)));
+        var klient = vertUtenNett.CreateClient();
+
+        Allemannsdata.TømMellomlager();
+        try
+        {
+            var respons = await klient.GetAsync("/api/lag/skoler");
+            var lag = JsonDocument.Parse(await respons.Content.ReadAsStringAsync()).RootElement;
+
+            Assert.Equal(HttpStatusCode.OK, respons.StatusCode);
+            Assert.Equal("FeatureCollection", lag.GetProperty("type").GetString());
+
+            var features = lag.GetProperty("features").EnumerateArray();
+            var skole = features.Single(f => f.GetProperty("properties").GetProperty("id").GetString() == "skole:999000001");
+            var barnehage = features.Single(f => f.GetProperty("properties").GetProperty("id").GetString() == "barnehage:999000002");
+            var skoleKoordinater = skole.GetProperty("geometry").GetProperty("coordinates").EnumerateArray().Select(c => c.GetDouble()).ToArray();
+            var barnehageKoordinater = barnehage.GetProperty("geometry").GetProperty("coordinates").EnumerateArray().Select(c => c.GetDouble()).ToArray();
+            Assert.Equal([10.78188, 59.91101], skoleKoordinater);
+            Assert.Equal([10.78188, 59.91101], barnehageKoordinater);
+
+            Assert.DoesNotContain(handler.Adresser, url => url.Contains("geonorge"));
+            Assert.True(handler.Adresser.Count(url => url.Contains("search_schools") || url.Contains("search_kindergartens")) <= 2);
+            Assert.True(handler.Adresser.Count(url => url.Contains("get_unit")) <= 60);
+        }
+        finally
+        {
+            Allemannsdata.TømMellomlager();
+        }
+    }
+
+    [Fact]
+    public async Task Popupen_viser_type_og_eierform_for_skolelaget()
+    {
+        var handler = new SkoleHandler();
+        using var vertUtenNett = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient<Allemannsdata>().ConfigurePrimaryHttpMessageHandler(() => handler)));
+        var klient = vertUtenNett.CreateClient();
+
+        Allemannsdata.TømMellomlager();
+        try
+        {
+            var respons = await klient.GetAsync("/api/lag/skoler");
+            var lag = JsonDocument.Parse(await respons.Content.ReadAsStringAsync()).RootElement;
+
+            var skole = lag.GetProperty("features").EnumerateArray()
+                .Single(f => f.GetProperty("properties").GetProperty("id").GetString() == "skole:999000001")
+                .GetProperty("properties");
+            var barnehage = lag.GetProperty("features").EnumerateArray()
+                .Single(f => f.GetProperty("properties").GetProperty("id").GetString() == "barnehage:999000002")
+                .GetProperty("properties");
+
+            Assert.Equal("grunnskole", skole.GetProperty("type").GetString());
+            Assert.Equal("kommunal", skole.GetProperty("eierform").GetString());
+            Assert.Equal("barnehage", barnehage.GetProperty("type").GetString());
+            Assert.Equal("privat", barnehage.GetProperty("eierform").GetString());
+
+            var html = await Klient.GetStringAsync("/index.html");
+            var match = System.Text.RegularExpressions.Regex.Match(
+                html, @"function popup\(e\)\s*\{\s*const skjul = new Set\(\[([^\]]*)\]\)");
+            Assert.True(match.Success, "Fant ikke skjul-settet i popup() i index.html.");
+
+            var skjulteFelt = match.Groups[1].Value
+                .Split(',')
+                .Select(s => s.Trim().Trim('\'', '"'))
+                .Where(s => s.Length > 0)
+                .ToHashSet();
+
+            Assert.Equal(new HashSet<string> { "id", "navn", "kilde" }, skjulteFelt);
+            Assert.DoesNotContain("type", skjulteFelt);
+            Assert.DoesNotContain("eierform", skjulteFelt);
+        }
+        finally
+        {
+            Allemannsdata.TømMellomlager();
+        }
+    }
+
+    /// <summary>
+    /// Ruter på hvilken operasjon adressen ber om: skolesøk, barnehagesøk eller enhetsoppslag.
+    /// Registrerer hver kalte adresse, slik at testen kan telle kall og sjekke at ingen går til Kartverket.
+    /// </summary>
+    private sealed class SkoleHandler : HttpMessageHandler
+    {
+        public ConcurrentBag<string> Adresser { get; } = [];
+
+        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage forespørsel, CancellationToken stopp)
+        {
+            var url = forespørsel.RequestUri!.ToString();
+            Adresser.Add(url);
+
+            var kropp = url switch
+            {
+                var u when u.Contains("search_schools") => """
+                    {
+                        "source": "utdanning",
+                        "operation": "search_schools",
+                        "parameters": {},
+                        "data": {
+                            "total": 1,
+                            "returned": 1,
+                            "units": [
+                                {
+                                    "organization_id": "999000001",
+                                    "Navn": "Testskolen",
+                                    "ErAktiv": true,
+                                    "ErGrunnskole": true,
+                                    "ErVideregaaendeSkole": false,
+                                    "ErPrivatskole": false,
+                                    "ErOffentligSkole": true
+                                }
+                            ]
+                        }
+                    }
+                    """,
+                var u when u.Contains("search_kindergartens") => """
+                    {
+                        "source": "utdanning",
+                        "operation": "search_kindergartens",
+                        "parameters": {},
+                        "data": {
+                            "total": 1,
+                            "returned": 1,
+                            "units": [
+                                {
+                                    "organization_id": "999000002",
+                                    "Navn": "Testbarnehagen",
+                                    "ErAktiv": true,
+                                    "ErBarnehage": true,
+                                    "ErOffentligBarnehage": false,
+                                    "ErPrivatBarnehage": true
+                                }
+                            ]
+                        }
+                    }
+                    """,
+                _ => """
+                    {
+                        "source": "utdanning",
+                        "operation": "get_unit",
+                        "parameters": {},
+                        "data": {
+                            "ErAktiv": true,
+                            "Koordinat": {"Lengdegrad": 10.78188, "Breddegrad": 59.91101, "Zoom": 15, "GeoKilde": "GeoNorge"},
+                            "Beliggenhetsadresse": {"Adresse": "Testveien 1", "Postnr": "0655", "Poststed": "OSLO"}
+                        }
+                    }
+                    """,
+            };
+
+            return Task.FromResult(new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(kropp, Encoding.UTF8, "application/json"),
             });
         }
     }
@@ -908,4 +1178,98 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
     private sealed record Lagoppforing(string Id, string Navn, string Beskrivelse, string Ikon);
 
     private sealed record Statistikkoppforing(string Id, string Navn, int? Antall, DateTimeOffset? Eldste, DateTimeOffset? Nyeste, DateTimeOffset? Hentet, bool Feiler);
+}
+
+/// <summary>
+/// Tester hele /api/sok-kjeden mot et ekte svar fra Geonorge, hentet via
+/// Allemannsdata-MCP-serveren 2026-09-23 (kilde geonorge, operasjon
+/// search_address, text=Karl+Johans+gate+1, kommunenummer=0301). Dette
+/// bekrefter at feltene address/lat/lon faktisk kommer i dette formatet, og
+/// at treffet ligger i Oslo sentrum - uten at testen selv går mot nettet.
+/// </summary>
+public class SokEndepunktTester(WebApplicationFactory<Program> vert) : IClassFixture<WebApplicationFactory<Program>>
+{
+    private const string EktSvarFraGeonorge = """
+        {
+          "source": "geonorge",
+          "operation": "search_address",
+          "data": {
+            "total_count": 1,
+            "addresses": [
+              {
+                "address": "Karl Johans gate 1",
+                "postnummer": "0154",
+                "poststed": "OSLO",
+                "kommunenummer": "0301",
+                "kommunenavn": "OSLO",
+                "lat": 59.9113775,
+                "lon": 10.749404,
+                "epsg": "EPSG:4326"
+              }
+            ]
+          }
+        }
+        """;
+
+    [Fact]
+    public async Task Sok_etter_karl_johans_gate_1_gir_treff_i_oslo_sentrum()
+    {
+        Allemannsdata.TømMellomlager();
+
+        var vertMedFalsktSvar = vert.WithWebHostBuilder(bygg => bygg.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient<Allemannsdata>()
+                .ConfigurePrimaryHttpMessageHandler(() => new FastSvarHandler(EktSvarFraGeonorge))));
+
+        var treff = await vertMedFalsktSvar.CreateClient()
+            .GetFromJsonAsync<List<Program.Søketreff>>("/api/sok?q=Karl+Johans+gate+1");
+
+        Assert.NotNull(treff);
+        var forste = Assert.Single(treff!);
+        Assert.Equal("Karl Johans gate 1", forste.Navn);
+        Assert.True(Geo.IOslo(forste.Lat, forste.Lon));
+    }
+
+    private sealed class FastSvarHandler(string json) : HttpMessageHandler
+    {
+        protected override Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage forespørsel, CancellationToken stopp)
+        {
+            var svar = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(json, Encoding.UTF8, "application/json"),
+            };
+            return Task.FromResult(svar);
+        }
+    }
+}
+
+/// <summary>Tester som leser adressesøkrader uten nettverk.</summary>
+public class SøketreffTester
+{
+    [Fact]
+    public void Soketreff_leses_fra_en_rad()
+    {
+        var rad = JsonDocument.Parse("""
+            { "address": "Karl Johans gate 1", "postnummer": "0154", "poststed": "OSLO",
+              "kommunenummer": "0301", "kommunenavn": "OSLO", "lat": 59.9113775, "lon": 10.749404,
+              "epsg": "EPSG:4326" }
+            """).RootElement;
+
+        var treff = Program.TilSøketreff(rad);
+
+        Assert.NotNull(treff);
+        Assert.Equal("Karl Johans gate 1", treff.Navn);
+        Assert.Equal(59.9113775, treff.Lat);
+        Assert.Equal(10.749404, treff.Lon);
+    }
+
+    [Fact]
+    public void Soketreff_uten_adresse_blir_null()
+    {
+        var rad = JsonDocument.Parse("""{ "lat": 59.91, "lon": 10.75 }""").RootElement;
+
+        var treff = Program.TilSøketreff(rad);
+
+        Assert.Null(treff);
+    }
 }
