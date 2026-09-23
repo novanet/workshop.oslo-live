@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:24:53",
+  "oppdatert": "2026-09-23T10:25:26",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -53,6 +53,31 @@
       "plass": 2
     },
     {
+      "navn": "mini-wilma",
+      "github": "larsajakobsen",
+      "poeng": 2,
+      "feil": [
+        {
+          "issue": 1,
+          "navn": "Koordinatrekkefølge",
+          "poeng": 2
+        }
+      ],
+      "lag": [],
+      "levert": [],
+      "dollar": 1.763,
+      "tokens": 3200469,
+      "sekunder": 713,
+      "pr": 2,
+      "utkast": 0,
+      "merget": 1,
+      "kjoeringer": 4,
+      "utenPr": 2,
+      "bygg": [],
+      "estimert": false,
+      "plass": 3
+    },
+    {
       "navn": "mini-leif",
       "github": "leif-larsen",
       "poeng": 2,
@@ -75,7 +100,7 @@
       "utenPr": 0,
       "bygg": [],
       "estimert": false,
-      "plass": 3
+      "plass": 4
     },
     {
       "navn": "mini-richard",
@@ -100,7 +125,7 @@
       "utenPr": 2,
       "bygg": [],
       "estimert": false,
-      "plass": 4
+      "plass": 5
     },
     {
       "navn": "henrik",
@@ -119,7 +144,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 5
+      "plass": 6
     },
     {
       "navn": "mini-jon",
@@ -138,7 +163,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 6
+      "plass": 7
     },
     {
       "navn": "mini-sindre",
@@ -154,25 +179,6 @@
       "utkast": 0,
       "merget": 0,
       "kjoeringer": 2,
-      "utenPr": 1,
-      "bygg": [],
-      "estimert": false,
-      "plass": 7
-    },
-    {
-      "navn": "mini-wilma",
-      "github": "larsajakobsen",
-      "poeng": 0,
-      "feil": [],
-      "lag": [],
-      "levert": [],
-      "dollar": 1.402,
-      "tokens": 2623990,
-      "sekunder": 512,
-      "pr": 2,
-      "utkast": 0,
-      "merget": 0,
-      "kjoeringer": 3,
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
@@ -243,7 +249,7 @@
       "issue": 17,
       "navn": "Smilefjes",
       "startet": "2026-09-23T08:10:01.588657+00:00",
-      "minutter": 14
+      "minutter": 15
     },
     {
       "agent": "mini-ingve",
@@ -251,7 +257,7 @@
       "issue": 49,
       "navn": "Nytt forsøk",
       "startet": "2026-09-23T08:16:16.8577675+00:00",
-      "minutter": 8
+      "minutter": 9
     },
     {
       "agent": "mini-knive",
@@ -262,20 +268,12 @@
       "minutter": 8
     },
     {
-      "agent": "mini-wilma",
-      "github": "larsajakobsen",
-      "issue": 2,
-      "navn": "Utsnittet",
-      "startet": "2026-09-23T08:21:26.6777013+00:00",
-      "minutter": 3
-    },
-    {
       "agent": "mini-jon",
       "github": "yonzo",
       "issue": 20,
       "navn": "Luftvarsel",
       "startet": "2026-09-23T08:22:06.0655338+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-kirsten",
@@ -299,7 +297,7 @@
       "issue": 29,
       "navn": "Museer",
       "startet": "2026-09-23T08:23:16.9053574+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-sindre",
@@ -307,7 +305,7 @@
       "issue": 55,
       "navn": "Ytelse",
       "startet": "2026-09-23T08:24:11.6549987+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-wilma",
@@ -325,9 +323,10 @@
     "kjoeringer": 17
   },
   "produkt": {
-    "testerBestatt": 11,
-    "testerFeilet": 15,
+    "testerBestatt": 12,
+    "testerFeilet": 14,
     "issuerLost": [
+      1,
       2,
       3,
       4,
@@ -353,19 +352,19 @@
       "issue": 2,
       "navn": "Steder langt utenfor Oslo slipper inn i kartet",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T08:21:27Z"
+      "oppdatert": "2026-09-23T08:24:57Z"
     },
     {
       "issue": 2,
       "navn": "Steder langt utenfor Oslo slipper inn i kartet",
       "github": "leif-larsen",
-      "oppdatert": "2026-09-23T08:21:27Z"
+      "oppdatert": "2026-09-23T08:24:57Z"
     },
     {
       "issue": 2,
       "navn": "Steder langt utenfor Oslo slipper inn i kartet",
       "github": "randsu",
-      "oppdatert": "2026-09-23T08:21:27Z"
+      "oppdatert": "2026-09-23T08:24:57Z"
     },
     {
       "issue": 3,
@@ -559,18 +558,6 @@
       "utkast": false,
       "issues": [
         21
-      ]
-    },
-    {
-      "pr": 75,
-      "tittel": "Alle punkter havner i havet, langt utenfor Norge",
-      "github": "larsajakobsen",
-      "agent": "mini-wilma",
-      "opprettet": "2026-09-23T08:23:37Z",
-      "oppdatert": "2026-09-23T08:23:38Z",
-      "utkast": false,
-      "issues": [
-        1
       ]
     },
     {
