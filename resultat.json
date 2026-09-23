@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T15:06:24",
+  "oppdatert": "2026-09-23T15:07:40",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -361,34 +361,9 @@
       "plass": 9
     },
     {
-      "navn": "mini-kirsten",
-      "github": "jthagesk",
-      "poeng": 3,
-      "feil": [],
-      "lag": [],
-      "levert": [
-        {
-          "issue": 45,
-          "navn": "Varsler",
-          "poeng": 5
-        }
-      ],
-      "dollar": 20.648,
-      "tokens": 46597333,
-      "sekunder": 6594,
-      "pr": 4,
-      "utkast": 0,
-      "merget": 1,
-      "kjoeringer": 18,
-      "utenPr": 9,
-      "bygg": [],
-      "estimert": false,
-      "plass": 10
-    },
-    {
       "navn": "mini-wilma",
       "github": "larsajakobsen",
-      "poeng": 3,
+      "poeng": 4,
       "feil": [
         {
           "issue": 1,
@@ -418,16 +393,46 @@
           "issue": 198,
           "navn": "Et lite pling når noe nytt dukker opp",
           "poeng": 1
+        },
+        {
+          "issue": 207,
+          "navn": "Delt mobilitet viser «drivstoff: ELECTRIC» og «COMBUSTION»",
+          "poeng": 1
         }
       ],
-      "dollar": 40.04,
-      "tokens": 66226553,
-      "sekunder": 12204,
+      "dollar": 40.105,
+      "tokens": 66386441,
+      "sekunder": 12245,
       "pr": 12,
       "utkast": 2,
-      "merget": 5,
-      "kjoeringer": 28,
+      "merget": 6,
+      "kjoeringer": 29,
       "utenPr": 14,
+      "bygg": [],
+      "estimert": false,
+      "plass": 10
+    },
+    {
+      "navn": "mini-kirsten",
+      "github": "jthagesk",
+      "poeng": 3,
+      "feil": [],
+      "lag": [],
+      "levert": [
+        {
+          "issue": 45,
+          "navn": "Varsler",
+          "poeng": 5
+        }
+      ],
+      "dollar": 21.101,
+      "tokens": 46937309,
+      "sekunder": 6764,
+      "pr": 4,
+      "utkast": 0,
+      "merget": 1,
+      "kjoeringer": 19,
+      "utenPr": 10,
       "bygg": [],
       "estimert": false,
       "plass": 11
@@ -660,20 +665,12 @@
   ],
   "kjoerer": [
     {
-      "agent": "mini-wilma",
-      "github": "larsajakobsen",
-      "issue": 207,
-      "navn": "Delt mobilitet viser «drivstoff: ELECTRIC» og «COMBUSTION»",
-      "startet": "2026-09-23T13:02:39.5485012+00:00",
-      "minutter": 3
-    },
-    {
       "agent": "mini-johan",
       "github": "pr0nin",
       "issue": 13,
       "navn": "Veiarbeid",
       "startet": "2026-09-23T13:02:49.243038+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-johan",
@@ -681,7 +678,7 @@
       "issue": 16,
       "navn": "Ladestasjoner",
       "startet": "2026-09-23T13:02:49.4778489+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-leif",
@@ -689,7 +686,7 @@
       "issue": 118,
       "navn": "Nyhetslinje nederst på skjermen",
       "startet": "2026-09-23T13:03:29.1360578+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-wilma",
@@ -697,7 +694,7 @@
       "issue": 204,
       "navn": "Lagraden sprenger panelet når navnet er langt",
       "startet": "2026-09-23T13:03:40.229746+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-knive",
@@ -705,7 +702,7 @@
       "issue": 195,
       "navn": "Nytt lag: avvik i kollektivtrafikken",
       "startet": "2026-09-23T13:04:43.4543256+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-ingve",
@@ -713,7 +710,7 @@
       "issue": 11,
       "navn": "Kollektiv",
       "startet": "2026-09-23T13:05:41.9082982+00:00",
-      "minutter": 0
+      "minutter": 1
     }
   ],
   "main": {
@@ -745,6 +742,18 @@
     "feilmelding": null
   },
   "tildelt": [
+    {
+      "issue": 11,
+      "navn": "Nytt lag: kollektivtrafikk som beveger seg",
+      "github": "coffeelyfe",
+      "oppdatert": "2026-09-23T13:05:43Z"
+    },
+    {
+      "issue": 11,
+      "navn": "Nytt lag: kollektivtrafikk som beveger seg",
+      "github": "ingvevs",
+      "oppdatert": "2026-09-23T13:05:43Z"
+    },
     {
       "issue": 13,
       "navn": "Nytt lag: veiarbeid og stengte veier",
@@ -1160,18 +1169,6 @@
       "oppdatert": "2026-09-23T12:39:40Z"
     },
     {
-      "issue": 207,
-      "navn": "Delt mobilitet viser «drivstoff: ELECTRIC» og «COMBUSTION»",
-      "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T13:02:40Z"
-    },
-    {
-      "issue": 207,
-      "navn": "Delt mobilitet viser «drivstoff: ELECTRIC» og «COMBUSTION»",
-      "github": "randsu",
-      "oppdatert": "2026-09-23T13:02:40Z"
-    },
-    {
       "issue": 208,
       "navn": "Skipslaget viser «destinasjon: N/A» og fart uten enhet",
       "github": "randsu",
@@ -1204,15 +1201,15 @@
   ],
   "aapne": [
     {
-      "pr": 247,
-      "tittel": "Delt mobilitet viser «drivstoff: ELECTRIC» og «COMBUSTION»",
-      "github": "larsajakobsen",
-      "agent": "mini-wilma",
-      "opprettet": "2026-09-23T13:05:49Z",
-      "oppdatert": "2026-09-23T13:05:50Z",
+      "pr": 229,
+      "tittel": "Nytt lag: Kristiania i 1910",
+      "github": "monet820",
+      "agent": "henrik",
+      "opprettet": "2026-09-23T12:41:30Z",
+      "oppdatert": "2026-09-23T13:06:17Z",
       "utkast": false,
       "issues": [
-        207
+        114
       ]
     },
     {
@@ -1393,18 +1390,6 @@
       "utkast": false,
       "issues": [
         51
-      ]
-    },
-    {
-      "pr": 229,
-      "tittel": "Nytt lag: Kristiania i 1910",
-      "github": "monet820",
-      "agent": "henrik",
-      "opprettet": "2026-09-23T12:41:30Z",
-      "oppdatert": "2026-09-23T12:55:12Z",
-      "utkast": false,
-      "issues": [
-        114
       ]
     },
     {
