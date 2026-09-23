@@ -32,7 +32,7 @@
   .lag { display: flex; align-items: center; gap: 9px; padding: 7px 8px; border-radius: 7px; cursor: pointer; }
   .lag:hover { background: #f3f4f6; }
   .lag input { accent-color: #111; width: 15px; height: 15px; cursor: pointer; flex: none; }
-  .lag .prikk { width: 15px; height: 15px; border-radius: 50%; border: 1.5px solid #111; flex: none; }
+  .lag .merke { flex: none; }
   .lag .navn { flex: 1; font-size: 14px; }
   .lag .antall { font-size: 12px; color: var(--dempet); font-variant-numeric: tabular-nums; }
   .lag .antall.feil { color: var(--feil); }
@@ -53,18 +53,38 @@
   .kamera button:hover { background: #111; color: #fff; }
   .kamera button[aria-pressed="true"] { background: #111; color: #fff; }
 
-  /* Markører: farget skive med mørk ring, så punktene står fram
-     mot det beige kartet. */
-  .merke {
-    width: 28px; height: 28px; border-radius: 50%;
+  /* Markører: hvert lag har egen farge, egen form og ikonet i en hvit
+     sirkel, saa punktene skilles paa mer enn bare farge. Formen ligger paa
+     et barn av .merke, fordi MapLibre selv styrer transform paa .merke for
+     aa plassere den paa kartet. */
+  .merke { width: 34px; height: 34px; cursor: pointer; }
+  .merke.merke--liten { width: 24px; height: 24px; }
+
+  .form {
+    width: 100%; height: 100%;
     border: 2px solid #111;
     display: grid; place-items: center;
-    font-size: 14px; line-height: 1; cursor: pointer;
     box-shadow: 0 2px 5px rgba(0,0,0,.3);
     transition: transform .12s ease;
-    text-shadow: 0 0 3px rgba(255,255,255,.95);
   }
-  .merke:hover { transform: scale(1.32); }
+  .merke:hover .form { transform: scale(1.32); }
+
+  .form-sirkel   { border-radius: 50%; }
+  .form-kvadrat  { border-radius: 5px; }
+  .form-trekant  { border-radius: 3px; clip-path: polygon(50% 2%, 2% 98%, 98% 98%); }
+  .form-diamant  { clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); }
+  .form-sekskant { clip-path: polygon(25% 4%, 75% 4%, 100% 50%, 75% 96%, 25% 96%, 0% 50%); }
+  .form-femkant  { clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%); }
+
+  /* Ikonet ligger paa en hvit sirkel og gjoeres om til en svart silhuett,
+     saa kontrasten mot bakgrunnen blir hoey uansett lagets farge. */
+  .ikonboks {
+    width: 62%; height: 62%; border-radius: 50%;
+    background: #fff;
+    display: grid; place-items: center;
+  }
+  .ikonboks span { font-size: 13px; line-height: 1; filter: grayscale(1) brightness(0); }
+  .merke--liten .ikonboks span { font-size: 10px; }
 
   .maplibregl-popup-content {
     background: #fff; color: var(--tekst);
@@ -232,32 +252,70 @@ function varmTema(kart) {
 }
 
 // ---------------------------------------------------------------------------
-// Farger per lag. Kjente lag har sin egen; resten faar en fra reservepaletten.
+// Farger per lag. Paletten er Okabe-Ito, laget for aa vaere skillbar ved
+// deuteranopi og protanopi (roed-groenn fargeblindhet). Kjente lag har sin
+// egen farge; resten faar en fra reservepaletten.
 // ---------------------------------------------------------------------------
 const FARGER = {
-  kollektiv: '#e11d48',       // roed: bussene skal ses foerst
-  fly: '#0f172a',             // naesten svart: flyene er hoeyt over alt annet
-  skip: '#1d4ed8',
-  mobilitet: '#16a34a',
-  hendelser: '#ea580c',
-  luftkvalitet: '#0d9488',
-  badetemperatur: '#0891b2',
-  trafikk: '#7c3aed',
-  holdeplasser: '#be123c',
-  veiarbeid: '#ca8a04',
-  idrettsanlegg: '#65a30d',
-  spisesteder: '#92400e',
-  ladestasjoner: '#047857',
-  smilefjes: '#f59e0b',
-  kulturminner: '#78350f',
-  arter: '#15803d'
+  kollektiv: '#D55E00',       // roedoransje: bussene skal ses foerst
+  fly: '#000000',             // svart: flyene er hoeyt over alt annet
+  skip: '#0072B2',            // blaa
+  mobilitet: '#009E73',       // blaagroenn
+  hendelser: '#E69F00',       // oransje
+  luftkvalitet: '#56B4E9',    // himmelblaa
+  badetemperatur: '#CC79A7',  // roedlilla
+  trafikk: '#F0E442',         // gul
+  holdeplasser: '#D55E00',
+  veiarbeid: '#000000',
+  idrettsanlegg: '#0072B2',
+  spisesteder: '#009E73',
+  ladestasjoner: '#E69F00',
+  smilefjes: '#56B4E9',
+  kulturminner: '#CC79A7',
+  arter: '#F0E442'
 };
 
-const RESERVE = ['#dc2626', '#2563eb', '#059669', '#d97706',
-                 '#7c3aed', '#0891b2', '#be185d', '#4d7c0f'];
+const RESERVE = ['#0072B2', '#E69F00', '#CC79A7', '#009E73',
+                 '#000000', '#56B4E9', '#D55E00', '#F0E442'];
 
-function fargeFor(id, nr) {
-  return FARGER[id] || RESERVE[nr % RESERVE.length];
+const ALLE_FARGER = [...new Set([...Object.values(FARGER), ...RESERVE])];
+
+// To lag ved siden av hverandre i /api/lag skal aldri faa samme farge, selv
+// om de tilfeldigvis er tildelt samme farge i FARGER eller RESERVE.
+function fargeFor(id, nr, forrige) {
+  const farge = FARGER[id] || RESERVE[nr % RESERVE.length];
+  if (farge !== forrige) return farge;
+  return ALLE_FARGER.find((f) => f !== forrige) || farge;
+}
+
+// Former per lag. Kombinert med farge og ikon gir dette tre uavhengige
+// signaler, saa lagene skilles selv uten fargesyn.
+const FORMER = ['sirkel', 'kvadrat', 'trekant', 'diamant', 'sekskant', 'femkant'];
+
+function formFor(nr) {
+  return FORMER[nr % FORMER.length];
+}
+
+// Bygger en markoer eller en lagvelger-prikk: farget form, med ikonet som
+// en svart silhuett paa en hvit sirkel. Samme funksjon begge steder, saa
+// prikken i lagvelgeren og punktet paa kartet alltid stemmer overens.
+function symbol(farge, form, ikon, liten) {
+  const boks = document.createElement('div');
+  boks.className = 'merke' + (liten ? ' merke--liten' : '');
+
+  const formEl = document.createElement('div');
+  formEl.className = 'form form-' + form;
+  formEl.style.background = farge;
+
+  const ikonboks = document.createElement('div');
+  ikonboks.className = 'ikonboks';
+  const ikonSpan = document.createElement('span');
+  ikonSpan.textContent = ikon;
+  ikonboks.appendChild(ikonSpan);
+
+  formEl.appendChild(ikonboks);
+  boks.appendChild(formEl);
+  return boks;
 }
 
 // ---------------------------------------------------------------------------
@@ -289,10 +347,7 @@ async function hent(id) {
       const c = f.geometry?.coordinates;
       if (!Array.isArray(c) || c.length < 2) continue;
 
-      const el = document.createElement('div');
-      el.className = 'merke';
-      el.style.background = oppf.farge;
-      el.textContent = oppf.ikon;
+      const el = symbol(oppf.farge, oppf.form, oppf.ikon);
 
       const m = new maplibregl.Marker({ element: el })
         .setLngLat([c[0], c[1]])
@@ -335,20 +390,34 @@ async function start() {
   }
 
   liste.innerHTML = '';
+  let forrige = null;
   lag.forEach((l, nr) => {
-    const farge = fargeFor(l.id, nr);
-    lagene.set(l.id, { ikon: l.ikon || '📍', farge, markorer: [], antall: 0, på: true });
+    const farge = fargeFor(l.id, nr, forrige);
+    forrige = farge;
+    const form = formFor(nr);
+    const ikon = l.ikon || '📍';
+    lagene.set(l.id, { ikon, farge, form, markorer: [], antall: 0, på: true });
 
     const rad = document.createElement('label');
     rad.className = 'lag';
     rad.title = l.beskrivelse ?? '';
-    rad.innerHTML =
-      `<input type="checkbox" checked>` +
-      `<span class="prikk" style="background:${farge}"></span>` +
-      `<span class="navn">${l.navn}</span>` +
-      `<span class="antall" id="antall-${l.id}">…</span>`;
 
-    rad.querySelector('input').addEventListener('change', (ev) => {
+    const avkryss = document.createElement('input');
+    avkryss.type = 'checkbox';
+    avkryss.checked = true;
+
+    const navn = document.createElement('span');
+    navn.className = 'navn';
+    navn.textContent = l.navn;
+
+    const antall = document.createElement('span');
+    antall.className = 'antall';
+    antall.id = 'antall-' + l.id;
+    antall.textContent = '…';
+
+    rad.append(avkryss, symbol(farge, form, ikon, true), navn, antall);
+
+    avkryss.addEventListener('change', (ev) => {
       const oppf = lagene.get(l.id);
       oppf.på = ev.target.checked;
       for (const m of oppf.markorer) {
