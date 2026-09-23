@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:43:08",
+  "oppdatert": "2026-09-23T14:43:48",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -463,14 +463,14 @@
           "poeng": 3
         }
       ],
-      "dollar": 15.981,
-      "tokens": 29643699,
-      "sekunder": 5487,
+      "dollar": 14.74,
+      "tokens": 26859836,
+      "sekunder": 5115,
       "pr": 4,
       "utkast": 0,
       "merget": 1,
-      "kjoeringer": 23,
-      "utenPr": 18,
+      "kjoeringer": 22,
+      "utenPr": 17,
       "bygg": [],
       "estimert": false,
       "plass": 14
@@ -488,13 +488,13 @@
           "poeng": 1
         }
       ],
-      "dollar": 2.254,
-      "tokens": 4113023,
-      "sekunder": 663,
-      "pr": 1,
+      "dollar": 2.951,
+      "tokens": 5643970,
+      "sekunder": 918,
+      "pr": 2,
       "utkast": 0,
       "merget": 1,
-      "kjoeringer": 7,
+      "kjoeringer": 8,
       "utenPr": 6,
       "bygg": [],
       "estimert": false,
@@ -628,7 +628,7 @@
       "issue": 214,
       "navn": "Lagvelgeren er for høy: historikkgrafen tar en egen rad per lag",
       "startet": "2026-09-23T12:31:25.313151+00:00",
-      "minutter": 11
+      "minutter": 12
     },
     {
       "agent": "mini-knive",
@@ -636,7 +636,7 @@
       "issue": 215,
       "navn": "Svarte klynger dekker sentrum og skjuler hvilke lag som er der",
       "startet": "2026-09-23T12:34:13.5766398+00:00",
-      "minutter": 8
+      "minutter": 9
     },
     {
       "agent": "mini-kirsten",
@@ -644,7 +644,7 @@
       "issue": 29,
       "navn": "Museer",
       "startet": "2026-09-23T12:34:23.8175869+00:00",
-      "minutter": 8
+      "minutter": 9
     },
     {
       "agent": "mini-jon",
@@ -652,7 +652,7 @@
       "issue": 189,
       "navn": "Travlere enn vanlig på veiene",
       "startet": "2026-09-23T12:34:43.2826697+00:00",
-      "minutter": 8
+      "minutter": 9
     },
     {
       "agent": "mini-gir",
@@ -660,7 +660,7 @@
       "issue": 51,
       "navn": "Logging",
       "startet": "2026-09-23T12:35:46.639797+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "mini-gir",
@@ -668,7 +668,7 @@
       "issue": 33,
       "navn": "Sykkelparkering",
       "startet": "2026-09-23T12:35:47.0074899+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "helstein",
@@ -676,15 +676,7 @@
       "issue": 194,
       "navn": "Nytt lag: bomstasjoner",
       "startet": "2026-09-23T12:36:39.65381+00:00",
-      "minutter": 6
-    },
-    {
-      "agent": "martin-holth",
-      "github": "martinrholth",
-      "issue": 205,
-      "navn": "Strømprisen vises med desimalpunktum",
-      "startet": "2026-09-23T12:38:19.4975108+00:00",
-      "minutter": 4
+      "minutter": 7
     },
     {
       "agent": "mini-richard",
@@ -692,7 +684,7 @@
       "issue": 119,
       "navn": "Mørkt kart når sola går ned i Oslo",
       "startet": "2026-09-23T12:39:26.8247317+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-ingve",
@@ -700,7 +692,7 @@
       "issue": 11,
       "navn": "Kollektiv",
       "startet": "2026-09-23T12:42:10.8697351+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-johan",
@@ -708,7 +700,7 @@
       "issue": 10,
       "navn": "Trafikk",
       "startet": "2026-09-23T12:42:27.1051764+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-astrid",
@@ -716,7 +708,7 @@
       "issue": 188,
       "navn": "Vinden som strømmer over byen",
       "startet": "2026-09-23T12:42:40.4886016+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-richard",
@@ -733,13 +725,37 @@
       "navn": "Idrettsanlegg",
       "startet": "2026-09-23T12:42:57.8459655+00:00",
       "minutter": 0
+    },
+    {
+      "agent": "mini-frode",
+      "github": "FrodeBl",
+      "issue": 209,
+      "navn": "Bysykkelstasjoner blir 33 punkter oppå hverandre",
+      "startet": "2026-09-23T12:43:09.4165177+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "helstein",
+      "github": "nilsgs",
+      "issue": 212,
+      "navn": "Feilmeldingene fra API-et er engelske unntakstekster",
+      "startet": "2026-09-23T12:43:30.6513419+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "henrik",
+      "github": "monet820",
+      "issue": 114,
+      "navn": "Nytt lag: Kristiania i 1910",
+      "startet": "2026-09-23T12:43:33.13049+00:00",
+      "minutter": 0
     }
   ],
   "main": {
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
     "pr": null,
-    "kjoeringer": 50
+    "kjoeringer": 51
   },
   "produkt": {
     "testerBestatt": 18,
@@ -850,7 +866,7 @@
       "issue": 55,
       "navn": "Kartet blir tregt med mange punkter",
       "github": "sin-rha",
-      "oppdatert": "2026-09-23T12:34:25Z"
+      "oppdatert": "2026-09-23T12:43:16Z"
     },
     {
       "issue": 57,
@@ -892,13 +908,13 @@
       "issue": 114,
       "navn": "Nytt lag: Kristiania i 1910",
       "github": "monet820",
-      "oppdatert": "2026-09-23T12:43:03Z"
+      "oppdatert": "2026-09-23T12:43:34Z"
     },
     {
       "issue": 114,
       "navn": "Nytt lag: Kristiania i 1910",
       "github": "randsu",
-      "oppdatert": "2026-09-23T12:43:03Z"
+      "oppdatert": "2026-09-23T12:43:34Z"
     },
     {
       "issue": 115,
@@ -1156,13 +1172,19 @@
       "issue": 209,
       "navn": "Bysykkelstasjoner blir 33 punkter oppå hverandre",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T12:42:41Z"
+      "oppdatert": "2026-09-23T12:43:10Z"
     },
     {
       "issue": 211,
       "navn": "Statistikken viser ikke «Nyeste» for vannmålere og smilefjes",
       "github": "randsu",
       "oppdatert": "2026-09-23T12:38:08Z"
+    },
+    {
+      "issue": 212,
+      "navn": "Feilmeldingene fra API-et er engelske unntakstekster",
+      "github": "nilsgs",
+      "oppdatert": "2026-09-23T12:43:31Z"
     },
     {
       "issue": 214,
@@ -1184,10 +1206,34 @@
       "github": "leif-larsen",
       "agent": "mini-leif",
       "opprettet": "2026-09-23T09:02:50Z",
-      "oppdatert": "2026-09-23T12:42:57Z",
+      "oppdatert": "2026-09-23T12:43:29Z",
       "utkast": false,
       "issues": [
         14
+      ]
+    },
+    {
+      "pr": 73,
+      "tittel": "Vær grei mot kildene (#54)",
+      "github": "Puiu",
+      "agent": "mini-taco",
+      "opprettet": "2026-09-23T08:15:23Z",
+      "oppdatert": "2026-09-23T12:43:29Z",
+      "utkast": false,
+      "issues": [
+        54
+      ]
+    },
+    {
+      "pr": 231,
+      "tittel": "Strømprisen vises med desimalpunktum",
+      "github": "martinrholth",
+      "agent": "martin-holth",
+      "opprettet": "2026-09-23T12:43:03Z",
+      "oppdatert": "2026-09-23T12:43:04Z",
+      "utkast": false,
+      "issues": [
+        205
       ]
     },
     {
@@ -1404,18 +1450,6 @@
       "utkast": false,
       "issues": [
         197
-      ]
-    },
-    {
-      "pr": 73,
-      "tittel": "Vær grei mot kildene (#54)",
-      "github": "Puiu",
-      "agent": "mini-taco",
-      "opprettet": "2026-09-23T08:15:23Z",
-      "oppdatert": "2026-09-23T12:09:02Z",
-      "utkast": false,
-      "issues": [
-        54
       ]
     },
     {
