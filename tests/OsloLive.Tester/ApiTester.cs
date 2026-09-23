@@ -928,6 +928,69 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
     private sealed record Statistikkoppforing(string Id, string Navn, int? Antall, DateTimeOffset? Eldste, DateTimeOffset? Nyeste, DateTimeOffset? Hentet, bool Feiler);
 }
 
+/// <summary>
+/// Tester hele /api/sok-kjeden mot et ekte svar fra Geonorge, hentet via
+/// Allemannsdata-MCP-serveren 2026-09-23 (kilde geonorge, operasjon
+/// search_address, text=Karl+Johans+gate+1, kommunenummer=0301). Dette
+/// bekrefter at feltene address/lat/lon faktisk kommer i dette formatet, og
+/// at treffet ligger i Oslo sentrum - uten at testen selv går mot nettet.
+/// </summary>
+public class SokEndepunktTester(WebApplicationFactory<Program> vert) : IClassFixture<WebApplicationFactory<Program>>
+{
+    private const string EktSvarFraGeonorge = """
+        {
+          "source": "geonorge",
+          "operation": "search_address",
+          "data": {
+            "total_count": 1,
+            "addresses": [
+              {
+                "address": "Karl Johans gate 1",
+                "postnummer": "0154",
+                "poststed": "OSLO",
+                "kommunenummer": "0301",
+                "kommunenavn": "OSLO",
+                "lat": 59.9113775,
+                "lon": 10.749404,
+                "epsg": "EPSG:4326"
+              }
+            ]
+          }
+        }
+        """;
+
+    [Fact]
+    public async Task Sok_etter_karl_johans_gate_1_gir_treff_i_oslo_sentrum()
+    {
+        Allemannsdata.TømMellomlager();
+
+        var vertMedFalsktSvar = vert.WithWebHostBuilder(bygg => bygg.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient<Allemannsdata>()
+                .ConfigurePrimaryHttpMessageHandler(() => new FastSvarHandler(EktSvarFraGeonorge))));
+
+        var treff = await vertMedFalsktSvar.CreateClient()
+            .GetFromJsonAsync<List<Program.Søketreff>>("/api/sok?q=Karl+Johans+gate+1");
+
+        Assert.NotNull(treff);
+        var forste = Assert.Single(treff!);
+        Assert.Equal("Karl Johans gate 1", forste.Navn);
+        Assert.True(Geo.IOslo(forste.Lat, forste.Lon));
+    }
+
+    private sealed class FastSvarHandler(string json) : HttpMessageHandler
+    {
+        protected override Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage forespørsel, CancellationToken stopp)
+        {
+            var svar = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(json, Encoding.UTF8, "application/json"),
+            };
+            return Task.FromResult(svar);
+        }
+    }
+}
+
 /// <summary>Tester som leser adressesøkrader uten nettverk.</summary>
 public class SøketreffTester
 {
