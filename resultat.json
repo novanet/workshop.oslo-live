@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T13:40:38",
+  "oppdatert": "2026-09-23T13:41:17",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -119,8 +119,8 @@
       "pr": 2,
       "utkast": 0,
       "merget": 2,
-      "kjoeringer": 12,
-      "utenPr": 10,
+      "kjoeringer": 15,
+      "utenPr": 13,
       "bygg": [],
       "estimert": false,
       "plass": 3
@@ -143,13 +143,13 @@
           "poeng": 3
         }
       ],
-      "dollar": 9.742,
-      "tokens": 17981676,
-      "sekunder": 3497,
+      "dollar": 8.168,
+      "tokens": 14859390,
+      "sekunder": 2866,
       "pr": 3,
       "utkast": 0,
       "merget": 2,
-      "kjoeringer": 7,
+      "kjoeringer": 6,
       "utenPr": 3,
       "bygg": [],
       "estimert": false,
@@ -405,8 +405,8 @@
       "pr": 0,
       "utkast": 0,
       "merget": 0,
-      "kjoeringer": 2,
-      "utenPr": 2,
+      "kjoeringer": 3,
+      "utenPr": 3,
       "bygg": [],
       "estimert": false,
       "plass": 14
@@ -560,14 +560,14 @@
       "issue": 129,
       "navn": "Simulering: meteornedslag",
       "startet": "2026-09-23T11:35:47.7322329+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
-      "agent": "mini-gir",
-      "github": "GIR75",
-      "issue": 18,
-      "navn": "Kulturminner",
-      "startet": "2026-09-23T11:40:28.2628432+00:00",
+      "agent": "mini-wilma",
+      "github": "larsajakobsen",
+      "issue": 112,
+      "navn": "Nytt lag: målestasjoner i elvene",
+      "startet": "2026-09-23T11:41:09.4028616+00:00",
       "minutter": 0
     }
   ],
@@ -606,7 +606,7 @@
       "issue": 10,
       "navn": "Nytt lag: trafikkregistreringspunkt",
       "github": "pr0nin",
-      "oppdatert": "2026-09-23T11:39:50Z"
+      "oppdatert": "2026-09-23T11:41:03Z"
     },
     {
       "issue": 11,
@@ -624,7 +624,7 @@
       "issue": 13,
       "navn": "Nytt lag: veiarbeid og stengte veier",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T11:40:36Z"
+      "oppdatert": "2026-09-23T11:40:59Z"
     },
     {
       "issue": 14,
@@ -642,7 +642,7 @@
       "issue": 18,
       "navn": "Nytt lag: kulturminner",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T11:40:29Z"
+      "oppdatert": "2026-09-23T11:40:53Z"
     },
     {
       "issue": 19,
@@ -774,7 +774,7 @@
       "issue": 51,
       "navn": "Strukturert logging",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T11:40:35Z"
+      "oppdatert": "2026-09-23T11:40:58Z"
     },
     {
       "issue": 52,
@@ -822,7 +822,7 @@
       "issue": 112,
       "navn": "Nytt lag: målestasjoner i elvene",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T11:40:29Z"
+      "oppdatert": "2026-09-23T11:41:10Z"
     },
     {
       "issue": 113,
@@ -918,7 +918,7 @@
       "issue": 124,
       "navn": "Punkter som flytter seg, glir til ny posisjon",
       "github": "novanettor",
-      "oppdatert": "2026-09-23T11:39:51Z"
+      "oppdatert": "2026-09-23T11:40:52Z"
     },
     {
       "issue": 128,
