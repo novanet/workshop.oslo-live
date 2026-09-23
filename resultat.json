@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:11:05",
+  "oppdatert": "2026-09-23T10:11:31",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -72,6 +72,25 @@
       "plass": 3
     },
     {
+      "navn": "henrik",
+      "github": "monet820",
+      "poeng": 0,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 0.304,
+      "tokens": 221022,
+      "sekunder": 119,
+      "pr": 0,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 1,
+      "utenPr": 1,
+      "bygg": [],
+      "estimert": false,
+      "plass": 4
+    },
+    {
       "navn": "mini-frode",
       "github": "FrodeBl",
       "poeng": 0,
@@ -88,7 +107,7 @@
       "utenPr": 2,
       "bygg": [],
       "estimert": false,
-      "plass": 4
+      "plass": 5
     },
     {
       "navn": "mini-ingve",
@@ -107,7 +126,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 5
+      "plass": 6
     },
     {
       "navn": "mini-gir",
@@ -126,7 +145,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 6
+      "plass": 7
     },
     {
       "navn": "Andy3000",
@@ -145,7 +164,7 @@
       "utenPr": 0,
       "bygg": [],
       "estimert": false,
-      "plass": 7
+      "plass": 8
     }
   ],
   "kjoerer": [
@@ -155,7 +174,7 @@
       "issue": 54,
       "navn": "Rate limit",
       "startet": "2026-09-23T08:03:17.9589775+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "mini-frode",
@@ -171,7 +190,7 @@
       "issue": 11,
       "navn": "Kollektiv",
       "startet": "2026-09-23T08:04:09.8675976+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-leif",
@@ -190,14 +209,6 @@
       "minutter": 2
     },
     {
-      "agent": "henrik",
-      "github": "monet820",
-      "issue": 7,
-      "navn": "Skipstrafikk",
-      "startet": "2026-09-23T08:09:09.002856+00:00",
-      "minutter": 1
-    },
-    {
       "agent": "mini-gir",
       "github": "GIR75",
       "issue": 17,
@@ -211,7 +222,7 @@
       "issue": 44,
       "navn": "Sammenlign tid",
       "startet": "2026-09-23T08:10:18.2408581+00:00",
-      "minutter": 0
+      "minutter": 1
     }
   ],
   "main": {
@@ -271,7 +282,7 @@
       "issue": 7,
       "navn": "Nytt lag: skip i Oslofjorden",
       "github": "monet820",
-      "oppdatert": "2026-09-23T08:09:10Z"
+      "oppdatert": "2026-09-23T08:11:15Z"
     },
     {
       "issue": 11,
