@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T15:10:16",
+  "oppdatert": "2026-09-23T15:10:57",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -366,9 +366,34 @@
       "plass": 9
     },
     {
+      "navn": "mini-kirsten",
+      "github": "jthagesk",
+      "poeng": 3,
+      "feil": [],
+      "lag": [],
+      "levert": [
+        {
+          "issue": 45,
+          "navn": "Varsler",
+          "poeng": 5
+        }
+      ],
+      "dollar": 20.648,
+      "tokens": 46597333,
+      "sekunder": 6594,
+      "pr": 4,
+      "utkast": 0,
+      "merget": 1,
+      "kjoeringer": 18,
+      "utenPr": 9,
+      "bygg": [],
+      "estimert": false,
+      "plass": 10
+    },
+    {
       "navn": "mini-wilma",
       "github": "larsajakobsen",
-      "poeng": 4,
+      "poeng": 3,
       "feil": [
         {
           "issue": 1,
@@ -405,39 +430,14 @@
           "poeng": 1
         }
       ],
-      "dollar": 40.105,
-      "tokens": 66386441,
-      "sekunder": 12245,
-      "pr": 12,
-      "utkast": 2,
+      "dollar": 41.238,
+      "tokens": 67589232,
+      "sekunder": 12624,
+      "pr": 13,
+      "utkast": 3,
       "merget": 6,
       "kjoeringer": 29,
       "utenPr": 14,
-      "bygg": [],
-      "estimert": false,
-      "plass": 10
-    },
-    {
-      "navn": "mini-kirsten",
-      "github": "jthagesk",
-      "poeng": 3,
-      "feil": [],
-      "lag": [],
-      "levert": [
-        {
-          "issue": 45,
-          "navn": "Varsler",
-          "poeng": 5
-        }
-      ],
-      "dollar": 20.648,
-      "tokens": 46597333,
-      "sekunder": 6594,
-      "pr": 4,
-      "utkast": 0,
-      "merget": 1,
-      "kjoeringer": 18,
-      "utenPr": 9,
       "bygg": [],
       "estimert": false,
       "plass": 11
@@ -675,7 +675,7 @@
       "issue": 13,
       "navn": "Veiarbeid",
       "startet": "2026-09-23T13:02:49.243038+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "mini-wilma",
@@ -683,7 +683,7 @@
       "issue": 204,
       "navn": "Lagraden sprenger panelet når navnet er langt",
       "startet": "2026-09-23T13:03:40.229746+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-knive",
@@ -691,7 +691,7 @@
       "issue": 195,
       "navn": "Nytt lag: avvik i kollektivtrafikken",
       "startet": "2026-09-23T13:04:43.4543256+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-ingve",
@@ -699,7 +699,7 @@
       "issue": 11,
       "navn": "Kollektiv",
       "startet": "2026-09-23T13:05:41.9082982+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-frode",
@@ -731,7 +731,7 @@
       "issue": 189,
       "navn": "Travlere enn vanlig på veiene",
       "startet": "2026-09-23T13:08:36.0345655+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-frode",
@@ -747,7 +747,7 @@
       "issue": 21,
       "navn": "Adressesøk",
       "startet": "2026-09-23T13:09:40.703571+00:00",
-      "minutter": 0
+      "minutter": 1
     }
   ],
   "main": {
@@ -1221,7 +1221,7 @@
       "issue": 211,
       "navn": "Statistikken viser ikke «Nyeste» for vannmålere og smilefjes",
       "github": "audmaha",
-      "oppdatert": "2026-09-23T12:52:35Z"
+      "oppdatert": "2026-09-23T13:10:54Z"
     },
     {
       "issue": 213,
@@ -1243,6 +1243,42 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 249,
+      "tittel": "Lagraden sprenger panelet når navnet er langt",
+      "github": "larsajakobsen",
+      "agent": "mini-wilma",
+      "opprettet": "2026-09-23T13:10:31Z",
+      "oppdatert": "2026-09-23T13:10:31Z",
+      "utkast": true,
+      "issues": [
+        204
+      ]
+    },
+    {
+      "pr": 109,
+      "tittel": "Nytt lag: skoler og barnehager",
+      "github": "larsajakobsen",
+      "agent": "mini-wilma",
+      "opprettet": "2026-09-23T09:21:55Z",
+      "oppdatert": "2026-09-23T13:10:09Z",
+      "utkast": false,
+      "issues": [
+        26
+      ]
+    },
+    {
+      "pr": 226,
+      "tittel": "Popupene viser rådata: ISO-tider, «ikon: 😊» og tall uten enhet",
+      "github": "larsajakobsen",
+      "agent": "mini-wilma",
+      "opprettet": "2026-09-23T12:38:36Z",
+      "oppdatert": "2026-09-23T13:09:58Z",
+      "utkast": false,
+      "issues": [
+        206
+      ]
+    },
     {
       "pr": 248,
       "tittel": "Nytt lag: ladestasjoner for elbil",
@@ -1277,18 +1313,6 @@
       "utkast": false,
       "issues": [
         29
-      ]
-    },
-    {
-      "pr": 226,
-      "tittel": "Popupene viser rådata: ISO-tider, «ikon: 😊» og tall uten enhet",
-      "github": "larsajakobsen",
-      "agent": "mini-wilma",
-      "opprettet": "2026-09-23T12:38:36Z",
-      "oppdatert": "2026-09-23T13:08:27Z",
-      "utkast": false,
-      "issues": [
-        206
       ]
     },
     {
@@ -1529,18 +1553,6 @@
       "utkast": false,
       "issues": [
         33
-      ]
-    },
-    {
-      "pr": 109,
-      "tittel": "Nytt lag: skoler og barnehager",
-      "github": "larsajakobsen",
-      "agent": "mini-wilma",
-      "opprettet": "2026-09-23T09:21:55Z",
-      "oppdatert": "2026-09-23T12:42:13Z",
-      "utkast": false,
-      "issues": [
-        26
       ]
     },
     {
