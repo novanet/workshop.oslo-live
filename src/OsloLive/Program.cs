@@ -31,6 +31,7 @@ builder.Services.AddMemoryCache();
 // ---------------------------------------------------------------------------
 builder.Services.AddSingleton<ILag, LuftkvalitetLag>();
 builder.Services.AddSingleton<ILag, FlyLag>();
+builder.Services.AddSingleton<ILag, BadetemperaturLag>();
 
 var app = builder.Build();
 

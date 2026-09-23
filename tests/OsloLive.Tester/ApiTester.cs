@@ -59,6 +59,17 @@ public class ApiTester(WebApplicationFactory<Program> vert) : IClassFixture<WebA
     }
 
     [Fact]
+    public async Task Lagoversikten_har_badetemperaturlaget()
+    {
+        var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
+
+        var badetemperatur = lag!.Single(l => l.Id == "badetemperatur");
+        Assert.Equal("Badetemperatur", badetemperatur.Navn);
+        Assert.False(string.IsNullOrWhiteSpace(badetemperatur.Beskrivelse));
+        Assert.False(string.IsNullOrWhiteSpace(badetemperatur.Ikon));
+    }
+
+    [Fact]
     public async Task Svikt_i_flykilden_gir_502_bare_for_flylaget()
     {
         // Bytt ut flylagets HttpClient med en som alltid feiler, slik kilden gjør når den er nede.
