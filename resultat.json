@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:26:15",
+  "oppdatert": "2026-09-23T14:26:54",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -200,10 +200,10 @@
           "poeng": 2
         }
       ],
-      "dollar": 26.804,
-      "tokens": 46174277,
-      "sekunder": 8070,
-      "pr": 7,
+      "dollar": 28.441,
+      "tokens": 48486286,
+      "sekunder": 8617,
+      "pr": 8,
       "utkast": 0,
       "merget": 4,
       "kjoeringer": 22,
@@ -312,13 +312,13 @@
           "poeng": 3
         }
       ],
-      "dollar": 8.364,
-      "tokens": 18349601,
-      "sekunder": 2649,
-      "pr": 1,
+      "dollar": 9.286,
+      "tokens": 20307448,
+      "sekunder": 2964,
+      "pr": 2,
       "utkast": 0,
       "merget": 1,
-      "kjoeringer": 7,
+      "kjoeringer": 8,
       "utenPr": 6,
       "bygg": [],
       "estimert": false,
@@ -590,7 +590,7 @@
       "issue": 198,
       "navn": "",
       "startet": "2026-09-23T12:16:25.0295863+00:00",
-      "minutter": 9
+      "minutter": 10
     },
     {
       "agent": "mini-richard",
@@ -598,7 +598,7 @@
       "issue": 191,
       "navn": "",
       "startet": "2026-09-23T12:19:02.7888497+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-wilma",
@@ -606,7 +606,7 @@
       "issue": 190,
       "navn": "",
       "startet": "2026-09-23T12:19:34.8533908+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-frode",
@@ -614,7 +614,7 @@
       "issue": 128,
       "navn": "Simulering: tsunami i Oslofjorden",
       "startet": "2026-09-23T12:19:38.2554331+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-kirsten",
@@ -622,7 +622,7 @@
       "issue": 29,
       "navn": "Museer",
       "startet": "2026-09-23T12:19:47.6786683+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-wilma",
@@ -630,7 +630,7 @@
       "issue": 129,
       "navn": "Simulering: meteornedslag",
       "startet": "2026-09-23T12:20:25.1910717+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-taco",
@@ -638,15 +638,7 @@
       "issue": 133,
       "navn": "Havet stiger: hva havner under vann?",
       "startet": "2026-09-23T12:20:40.4209313+00:00",
-      "minutter": 5
-    },
-    {
-      "agent": "mini-jon",
-      "github": "yonzo",
-      "issue": 197,
-      "navn": "",
-      "startet": "2026-09-23T12:20:43.3709734+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "martin-holth",
@@ -654,7 +646,7 @@
       "issue": 111,
       "navn": "Nytt lag: kaier og ferjekaier",
       "startet": "2026-09-23T12:20:50.7551895+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-knive",
@@ -662,7 +654,7 @@
       "issue": 28,
       "navn": "Tog",
       "startet": "2026-09-23T12:21:43.7886322+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-astrid",
@@ -670,7 +662,7 @@
       "issue": 188,
       "navn": "",
       "startet": "2026-09-23T12:23:41.4076789+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-richard",
@@ -678,7 +670,7 @@
       "issue": 158,
       "navn": "",
       "startet": "2026-09-23T12:24:01.7531547+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-richard",
@@ -686,7 +678,7 @@
       "issue": 170,
       "navn": "",
       "startet": "2026-09-23T12:24:03.3026673+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "helstein",
@@ -694,7 +686,7 @@
       "issue": 194,
       "navn": "",
       "startet": "2026-09-23T12:24:21.6258713+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-johan",
@@ -702,7 +694,23 @@
       "issue": 10,
       "navn": "Trafikk",
       "startet": "2026-09-23T12:24:28.6299515+00:00",
-      "minutter": 1
+      "minutter": 2
+    },
+    {
+      "agent": "henrik",
+      "github": "monet820",
+      "issue": 114,
+      "navn": "Nytt lag: Kristiania i 1910",
+      "startet": "2026-09-23T12:26:11.5734946+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-leif",
+      "github": "leif-larsen",
+      "issue": 118,
+      "navn": "Nyhetslinje nederst på skjermen",
+      "startet": "2026-09-23T12:26:25.0299132+00:00",
+      "minutter": 0
     }
   ],
   "main": {
@@ -732,6 +740,12 @@
     "feilmelding": null
   },
   "tildelt": [
+    {
+      "issue": 39,
+      "navn": "Tastatursnarveier",
+      "github": "audmaha",
+      "oppdatert": "2026-09-23T09:00:43Z"
+    },
     {
       "issue": 41,
       "navn": "Fargene må virke for alle",
@@ -838,7 +852,7 @@
       "issue": 114,
       "navn": "Nytt lag: Kristiania i 1910",
       "github": "monet820",
-      "oppdatert": "2026-09-23T12:25:13Z"
+      "oppdatert": "2026-09-23T12:26:12Z"
     },
     {
       "issue": 115,
@@ -880,7 +894,7 @@
       "issue": 118,
       "navn": "Nyhetslinje nederst på skjermen",
       "github": "leif-larsen",
-      "oppdatert": "2026-09-23T12:25:49Z"
+      "oppdatert": "2026-09-23T12:26:26Z"
     },
     {
       "issue": 119,
@@ -979,12 +993,6 @@
       "oppdatert": "2026-09-23T12:20:41Z"
     },
     {
-      "issue": 141,
-      "navn": "Tydelige kartsymboler: båter som ser ut som båter",
-      "github": "leif-larsen",
-      "oppdatert": "2026-09-23T12:23:59Z"
-    },
-    {
       "issue": 142,
       "navn": "Kurs på skipene",
       "github": "randsu",
@@ -1048,7 +1056,7 @@
       "issue": 197,
       "navn": "Beskytt storskjermen mot innbrenning",
       "github": "yonzo",
-      "oppdatert": "2026-09-23T12:20:44Z"
+      "oppdatert": "2026-09-23T12:26:24Z"
     },
     {
       "issue": 198,
@@ -1064,6 +1072,30 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 217,
+      "tittel": "Beskytt storskjermen mot innbrenning",
+      "github": "yonzo",
+      "agent": "mini-jon",
+      "opprettet": "2026-09-23T12:26:22Z",
+      "oppdatert": "2026-09-23T12:26:23Z",
+      "utkast": false,
+      "issues": [
+        197
+      ]
+    },
+    {
+      "pr": 216,
+      "tittel": "Et lite pling når noe nytt dukker opp",
+      "github": "larsajakobsen",
+      "agent": "mini-wilma",
+      "opprettet": "2026-09-23T12:25:57Z",
+      "oppdatert": "2026-09-23T12:25:58Z",
+      "utkast": false,
+      "issues": [
+        198
+      ]
+    },
     {
       "pr": 100,
       "tittel": "Vis vannstanden i fjorden",
