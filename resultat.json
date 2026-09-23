@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:53:05",
+  "oppdatert": "2026-09-23T10:53:33",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -373,7 +373,7 @@
       "issue": 24,
       "navn": "Bydeler",
       "startet": "2026-09-23T08:45:28.8651408+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "mini-frode",
@@ -381,7 +381,7 @@
       "issue": 50,
       "navn": "Metrikker",
       "startet": "2026-09-23T08:47:21.1306878+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-richard",
@@ -397,7 +397,7 @@
       "issue": 12,
       "navn": "Holdeplasser",
       "startet": "2026-09-23T08:48:05.3217109+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-knive",
@@ -534,7 +534,7 @@
       "issue": 7,
       "navn": "Nytt lag: skip i Oslofjorden",
       "github": "monet820",
-      "oppdatert": "2026-09-23T08:11:15Z"
+      "oppdatert": "2026-09-23T08:53:29Z"
     },
     {
       "issue": 8,
@@ -558,7 +558,7 @@
       "issue": 14,
       "navn": "Nytt lag: idretts- og friluftsanlegg",
       "github": "leif-larsen",
-      "oppdatert": "2026-09-23T08:46:42Z"
+      "oppdatert": "2026-09-23T08:53:18Z"
     },
     {
       "issue": 17,
@@ -790,10 +790,22 @@
       "github": "randsu",
       "agent": "mini-richard",
       "opprettet": "2026-09-23T08:44:44Z",
-      "oppdatert": "2026-09-23T08:53:00Z",
+      "oppdatert": "2026-09-23T08:53:15Z",
       "utkast": false,
       "issues": [
         6
+      ]
+    },
+    {
+      "pr": 78,
+      "tittel": "Nytt lag: smilefjes fra Mattilsynet",
+      "github": "GIR75",
+      "agent": "mini-gir",
+      "opprettet": "2026-09-23T08:28:36Z",
+      "oppdatert": "2026-09-23T08:53:10Z",
+      "utkast": false,
+      "issues": [
+        17
       ]
     },
     {
@@ -986,18 +998,6 @@
       "utkast": false,
       "issues": [
         55
-      ]
-    },
-    {
-      "pr": 78,
-      "tittel": "Nytt lag: smilefjes fra Mattilsynet",
-      "github": "GIR75",
-      "agent": "mini-gir",
-      "opprettet": "2026-09-23T08:28:36Z",
-      "oppdatert": "2026-09-23T08:43:25Z",
-      "utkast": false,
-      "issues": [
-        17
       ]
     },
     {
