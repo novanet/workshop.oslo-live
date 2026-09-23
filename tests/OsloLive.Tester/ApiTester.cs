@@ -47,6 +47,17 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
     }
 
     [Fact]
+    public async Task Lagoversikten_har_arter()
+    {
+        var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
+
+        var arter = lag!.Single(l => l.Id == "arter");
+        Assert.Equal("Artsobservasjoner", arter.Navn);
+        Assert.False(string.IsNullOrWhiteSpace(arter.Beskrivelse));
+        Assert.False(string.IsNullOrWhiteSpace(arter.Ikon));
+    }
+
+    [Fact]
     public async Task Lagoversikten_har_hendelser_med_navn_beskrivelse_og_ikon()
     {
         var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
@@ -66,6 +77,17 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
         Assert.Equal("Smilefjes", smilefjes.Navn);
         Assert.False(string.IsNullOrWhiteSpace(smilefjes.Beskrivelse));
         Assert.False(string.IsNullOrWhiteSpace(smilefjes.Ikon));
+    }
+
+    [Fact]
+    public async Task Lagoversikten_har_idrettsanlegg()
+    {
+        var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
+
+        var anlegg = lag!.Single(l => l.Id == "idrettsanlegg");
+        Assert.Equal("Idrettsanlegg", anlegg.Navn);
+        Assert.False(string.IsNullOrWhiteSpace(anlegg.Beskrivelse));
+        Assert.False(string.IsNullOrWhiteSpace(anlegg.Ikon));
     }
 
     [Fact]
@@ -188,6 +210,27 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
         Assert.EndsWith(".", skoler.Beskrivelse);
         Assert.Equal(1, skoler.Beskrivelse!.Count(t => t == '.'));
         Assert.False(string.IsNullOrWhiteSpace(skoler.Ikon));
+    }
+    
+    public async Task Lagoversikten_har_kaier()
+    {
+        var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
+
+        var kaier = lag!.Single(l => l.Id == "kaier");
+        Assert.Equal("Kaier", kaier.Navn);
+        Assert.False(string.IsNullOrWhiteSpace(kaier.Beskrivelse));
+        Assert.False(string.IsNullOrWhiteSpace(kaier.Ikon));
+    }
+
+    [Fact]
+    public async Task Lagoversikten_har_vaerstasjoner()
+    {
+        var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
+
+        var vaerstasjoner = lag!.Single(l => l.Id == "vaerstasjoner");
+        Assert.Equal("Værstasjoner", vaerstasjoner.Navn);
+        Assert.False(string.IsNullOrWhiteSpace(vaerstasjoner.Beskrivelse));
+        Assert.False(string.IsNullOrWhiteSpace(vaerstasjoner.Ikon));
     }
 
     [Fact]
@@ -449,6 +492,57 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
             Assert.Equal([10.75348, 59.91945], lag.Features[0].Geometry.Coordinates);
             Assert.Contains("nve/find_hydro_stations", handler.SisteAdresse!.ToString());
             Assert.Contains("has_recent_data=true", handler.SisteAdresse!.ToString());
+        }
+        finally
+        {
+            Allemannsdata.TømMellomlager();
+        }
+    }
+
+    [Fact]
+    public async Task Kaierlaget_gir_featurecollection_uten_nett()
+    {
+        const string svar = """
+            {
+                "source": "kystdatahuset",
+                "operation": "find_ports_nearby",
+                "parameters": {},
+                "data": {
+                    "havner": [
+                        {
+                            "port_id": 2467069,
+                            "navn": "Salt brygge FK",
+                            "kode": "NOOSL",
+                            "type": "Ferjekai",
+                            "kommune": "Oslo",
+                            "fylke": "Oslo",
+                            "lat": 59.906647,
+                            "lon": 10.747188,
+                            "avstand_km": 0.4
+                        }
+                    ],
+                    "radius_km": 20
+                }
+            }
+            """;
+
+        var handler = new OpptakendeSvarHandler(svar);
+        using var vertUtenNett = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient<Allemannsdata>().ConfigurePrimaryHttpMessageHandler(() => handler)));
+        var klient = vertUtenNett.CreateClient();
+
+        Allemannsdata.TømMellomlager();
+        try
+        {
+            var respons = await klient.GetAsync("/api/lag/kaier");
+            var lag = await respons.Content.ReadFromJsonAsync<Kartlag>();
+
+            Assert.Equal(HttpStatusCode.OK, respons.StatusCode);
+            Assert.Equal("FeatureCollection", lag!.Type);
+            Assert.NotEmpty(lag.Features);
+            Assert.Equal([10.747188, 59.906647], lag.Features[0].Geometry.Coordinates);
+            Assert.Contains("kystdatahuset/find_ports_nearby", handler.SisteAdresse!.ToString());
+            Assert.Contains("radius_km=", handler.SisteAdresse!.ToString());
         }
         finally
         {
@@ -904,8 +998,10 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
 
         Assert.Equal(HttpStatusCode.OK, svar.StatusCode);
         var innhold = await svar.Content.ReadFromJsonAsync<JsonElement>();
-        Assert.True(innhold.TryGetProperty("naa", out _));
-        Assert.True(innhold.TryGetProperty("billigst", out _));
+        Assert.True(innhold.TryGetProperty("naa", out var naa));
+        Assert.Equal(JsonValueKind.Number, naa.ValueKind);
+        Assert.True(innhold.TryGetProperty("billigst", out var billigst));
+        Assert.Equal(JsonValueKind.Number, billigst.GetProperty("pris").ValueKind);
         Assert.True(innhold.TryGetProperty("dyrest", out _));
         Assert.Equal(24, innhold.GetProperty("timer").GetArrayLength());
         Allemannsdata.TømMellomlager();
@@ -935,6 +1031,26 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
     {
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage forespørsel, CancellationToken stopp) =>
             throw new HttpRequestException("Kilden er nede.");
+    }
+
+    [Fact]
+    public async Task Flykilden_som_svarer_403_gir_feil_kilden_svarte_403()
+    {
+        using var vertMedForbud = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient("fly").ConfigurePrimaryHttpMessageHandler(() => new StatuskodeHandler(HttpStatusCode.Forbidden))));
+        var klient = vertMedForbud.CreateClient();
+
+        var svar = await klient.GetAsync("/api/lag/fly");
+        var kropp = await svar.Content.ReadFromJsonAsync<JsonElement>();
+
+        Assert.Equal(HttpStatusCode.BadGateway, svar.StatusCode);
+        Assert.Equal("Kilden svarte 403.", kropp.GetProperty("feil").GetString());
+    }
+
+    private sealed class StatuskodeHandler(HttpStatusCode kode) : HttpMessageHandler
+    {
+        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage forespørsel, CancellationToken stopp) =>
+            Task.FromResult(new HttpResponseMessage(kode));
     }
 
     /// <summary>Svarer med tidsserien til «naa» eller tabellen til «neste», avhengig av hvilken operasjon adressen ber om.</summary>
