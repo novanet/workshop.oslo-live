@@ -108,8 +108,8 @@ public sealed class MobilitetLag(Allemannsdata data) : ILag
 
     /// <summary>
     /// Oslo Bysykkel listes ikke som enkeltkjøretøy hos kilden, bare som
-    /// stasjoner med antall ledige sykler. Vi lager derfor ett punkt per ledig
-    /// sykkel på stasjonens koordinat, med unik id «stasjonsid:løpenummer».
+    /// stasjoner med antall ledige sykler. Én stasjon blir ett punkt med
+    /// stasjonens id, og antallet vises som «ledige sykler» i popupen.
     /// En stasjon uten ledige sykler gir ingen punkter.
     /// </summary>
     public static IEnumerable<Kartpunkt?> FraBysykkelstasjon(JsonElement stasjon)
@@ -131,18 +131,19 @@ public sealed class MobilitetLag(Allemannsdata data) : ILag
         var lon = stasjon.GetProperty("lon").GetDouble();
         var stasjonNavn = stasjon.GetProperty("name").GetString() ?? "Ukjent stasjon";
 
-        return Enumerable.Range(1, ledige).Select(i => Geo.Lag(
-            id: $"{stasjonId}:{i}",
+        return [Geo.Lag(
+            id: stasjonId,
             lat: lat,
             lon: lon,
-            navn: $"{stasjonNavn} ({i} av {ledige})",
+            navn: stasjonNavn,
             kilde: "Entur delt mobilitet",
             detaljer: new Dictionary<string, object?>
             {
                 ["operatør"] = "Oslo Bysykkel",
                 ["type"] = "sykkel",
                 ["stasjon"] = stasjonNavn,
-            }));
+                ["ledige sykler"] = ledige,
+            })];
     }
 
     public static Kartlag Samle(IEnumerable<JsonElement> kjøretøy, IEnumerable<JsonElement> stasjoner) =>
