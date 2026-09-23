@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:28:31",
+  "oppdatert": "2026-09-23T10:28:57",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -15,13 +15,13 @@
       ],
       "lag": [],
       "levert": [],
-      "dollar": 1.026,
-      "tokens": 1809158,
-      "sekunder": 337,
-      "pr": 1,
+      "dollar": 3.63,
+      "tokens": 7126981,
+      "sekunder": 1434,
+      "pr": 2,
       "utkast": 0,
       "merget": 1,
-      "kjoeringer": 2,
+      "kjoeringer": 3,
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
@@ -244,20 +244,12 @@
   ],
   "kjoerer": [
     {
-      "agent": "mini-gir",
-      "github": "GIR75",
-      "issue": 17,
-      "navn": "Smilefjes",
-      "startet": "2026-09-23T08:10:01.588657+00:00",
-      "minutter": 18
-    },
-    {
       "agent": "mini-knive",
       "github": "Buggz",
       "issue": 57,
       "navn": "Avgangstavle",
       "startet": "2026-09-23T08:16:36.122853+00:00",
-      "minutter": 11
+      "minutter": 12
     },
     {
       "agent": "mini-jon",
@@ -281,7 +273,7 @@
       "issue": 8,
       "navn": "Hendelser",
       "startet": "2026-09-23T08:22:51.9896553+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-kirsten",
@@ -305,7 +297,7 @@
       "issue": 42,
       "navn": "Nærmeste punkt",
       "startet": "2026-09-23T08:25:30.8766176+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-frode",
@@ -313,7 +305,7 @@
       "issue": 48,
       "navn": "Parallell henting",
       "startet": "2026-09-23T08:26:31.7269134+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-richard",
@@ -321,7 +313,7 @@
       "issue": 6,
       "navn": "Delt mobilitet",
       "startet": "2026-09-23T08:26:52.0303298+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-aud",
@@ -329,7 +321,7 @@
       "issue": 4,
       "navn": "Duplikatfjerning",
       "startet": "2026-09-23T08:27:45.2786784+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-frode",
@@ -337,7 +329,7 @@
       "issue": 50,
       "navn": "Metrikker",
       "startet": "2026-09-23T08:27:51.3617499+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-frode",
@@ -476,7 +468,7 @@
       "issue": 17,
       "navn": "Nytt lag: smilefjes fra Mattilsynet",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T08:10:02Z"
+      "oppdatert": "2026-09-23T08:28:37Z"
     },
     {
       "issue": 19,
@@ -588,6 +580,18 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 78,
+      "tittel": "Nytt lag: smilefjes fra Mattilsynet",
+      "github": "GIR75",
+      "agent": "mini-gir",
+      "opprettet": "2026-09-23T08:28:36Z",
+      "oppdatert": "2026-09-23T08:28:36Z",
+      "utkast": false,
+      "issues": [
+        17
+      ]
+    },
     {
       "pr": 69,
       "tittel": "#56: Nytt lag: fly i lufta over Oslo",
