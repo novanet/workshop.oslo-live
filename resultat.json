@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:13:48",
+  "oppdatert": "2026-09-23T10:14:15",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -207,7 +207,7 @@
       "issue": 11,
       "navn": "Kollektiv",
       "startet": "2026-09-23T08:04:09.8675976+00:00",
-      "minutter": 9
+      "minutter": 10
     },
     {
       "agent": "mini-gir",
@@ -215,7 +215,7 @@
       "issue": 17,
       "navn": "Smilefjes",
       "startet": "2026-09-23T08:10:01.588657+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-jon",
@@ -224,6 +224,14 @@
       "navn": "Sammenlign tid",
       "startet": "2026-09-23T08:10:18.2408581+00:00",
       "minutter": 3
+    },
+    {
+      "agent": "mini-frode",
+      "github": "FrodeBl",
+      "issue": 19,
+      "navn": "Artsobservasjoner",
+      "startet": "2026-09-23T08:14:02.4941234+00:00",
+      "minutter": 0
     }
   ],
   "main": {
@@ -299,6 +307,12 @@
       "oppdatert": "2026-09-23T08:10:02Z"
     },
     {
+      "issue": 19,
+      "navn": "Nytt lag: artsobservasjoner",
+      "github": "FrodeBl",
+      "oppdatert": "2026-09-23T08:14:03Z"
+    },
+    {
       "issue": 21,
       "navn": "Søk etter adresse og hopp dit på kartet",
       "github": "leif-larsen",
@@ -354,6 +368,18 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 64,
+      "tittel": "Tall i URL-ene får norsk desimalkomma",
+      "github": "GIR75",
+      "agent": "mini-gir",
+      "opprettet": "2026-09-23T07:47:43Z",
+      "oppdatert": "2026-09-23T08:13:52Z",
+      "utkast": false,
+      "issues": [
+        5
+      ]
+    },
     {
       "pr": 67,
       "tittel": "Hent lagene parallelt",
@@ -412,18 +438,6 @@
       "utkast": false,
       "issues": [
         4
-      ]
-    },
-    {
-      "pr": 64,
-      "tittel": "Tall i URL-ene får norsk desimalkomma",
-      "github": "GIR75",
-      "agent": "mini-gir",
-      "opprettet": "2026-09-23T07:47:43Z",
-      "oppdatert": "2026-09-23T07:57:12Z",
-      "utkast": false,
-      "issues": [
-        5
       ]
     },
     {
