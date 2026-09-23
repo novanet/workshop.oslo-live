@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:25:53",
+  "oppdatert": "2026-09-23T10:26:19",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -249,7 +249,7 @@
       "issue": 17,
       "navn": "Smilefjes",
       "startet": "2026-09-23T08:10:01.588657+00:00",
-      "minutter": 15
+      "minutter": 16
     },
     {
       "agent": "mini-ingve",
@@ -257,7 +257,7 @@
       "issue": 49,
       "navn": "Nytt forsøk",
       "startet": "2026-09-23T08:16:16.8577675+00:00",
-      "minutter": 9
+      "minutter": 10
     },
     {
       "agent": "mini-knive",
@@ -273,7 +273,7 @@
       "issue": 20,
       "navn": "Luftvarsel",
       "startet": "2026-09-23T08:22:06.0655338+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-kirsten",
@@ -297,7 +297,7 @@
       "issue": 29,
       "navn": "Museer",
       "startet": "2026-09-23T08:23:16.9053574+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-sindre",
@@ -305,7 +305,7 @@
       "issue": 55,
       "navn": "Ytelse",
       "startet": "2026-09-23T08:24:11.6549987+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-wilma",
@@ -486,7 +486,7 @@
       "issue": 48,
       "navn": "Hent lagene parallelt",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T07:59:20Z"
+      "oppdatert": "2026-09-23T08:26:00Z"
     },
     {
       "issue": 49,
@@ -539,6 +539,18 @@
   ],
   "aapne": [
     {
+      "pr": 76,
+      "tittel": "Nytt lag: artsobservasjoner",
+      "github": "FrodeBl",
+      "agent": "mini-frode",
+      "opprettet": "2026-09-23T08:24:27Z",
+      "oppdatert": "2026-09-23T08:25:46Z",
+      "utkast": false,
+      "issues": [
+        19
+      ]
+    },
+    {
       "pr": 69,
       "tittel": "#56: Nytt lag: fly i lufta over Oslo",
       "github": "randsu",
@@ -548,18 +560,6 @@
       "utkast": false,
       "issues": [
         56
-      ]
-    },
-    {
-      "pr": 76,
-      "tittel": "Nytt lag: artsobservasjoner",
-      "github": "FrodeBl",
-      "agent": "mini-frode",
-      "opprettet": "2026-09-23T08:24:27Z",
-      "oppdatert": "2026-09-23T08:24:28Z",
-      "utkast": false,
-      "issues": [
-        19
       ]
     },
     {
