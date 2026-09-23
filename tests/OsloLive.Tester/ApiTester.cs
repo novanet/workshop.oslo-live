@@ -176,6 +176,17 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
     }
 
     [Fact]
+    public async Task Lagoversikten_har_tog()
+    {
+        var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
+
+        var tog = lag!.Single(l => l.Id == "tog");
+        Assert.Equal("Tog", tog.Navn);
+        Assert.False(string.IsNullOrWhiteSpace(tog.Beskrivelse));
+        Assert.False(string.IsNullOrWhiteSpace(tog.Ikon));
+    }
+
+    [Fact]
     public async Task Spisestederlaget_gir_featurecollection_uten_nett()
     {
         const string svar = """
