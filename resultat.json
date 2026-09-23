@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:09:46",
+  "oppdatert": "2026-09-23T11:10:14",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -56,14 +56,14 @@
         }
       ],
       "levert": [],
-      "dollar": 5.063,
-      "tokens": 9244002,
-      "sekunder": 1823,
+      "dollar": 5.528,
+      "tokens": 9891428,
+      "sekunder": 1985,
       "pr": 2,
       "utkast": 0,
       "merget": 2,
-      "kjoeringer": 6,
-      "utenPr": 4,
+      "kjoeringer": 7,
+      "utenPr": 5,
       "bygg": [],
       "estimert": false,
       "plass": 2
@@ -439,7 +439,7 @@
       "issue": 11,
       "navn": "Kollektiv",
       "startet": "2026-09-23T09:04:10.6494291+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-gir",
@@ -447,15 +447,7 @@
       "issue": 51,
       "navn": "Logging",
       "startet": "2026-09-23T09:06:55.8322066+00:00",
-      "minutter": 2
-    },
-    {
-      "agent": "mini-gir",
-      "github": "GIR75",
-      "issue": 33,
-      "navn": "Sykkelparkering",
-      "startet": "2026-09-23T09:06:56.2114677+00:00",
-      "minutter": 2
+      "minutter": 3
     }
   ],
   "main": {
@@ -886,12 +878,24 @@
   ],
   "aapne": [
     {
+      "pr": 96,
+      "tittel": "#22: Slå sammen punkter som ligger oppå hverandre",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:46:40Z",
+      "oppdatert": "2026-09-23T09:09:46Z",
+      "utkast": false,
+      "issues": [
+        22
+      ]
+    },
+    {
       "pr": 101,
       "tittel": "#34: Skru tiden tilbake med en tidslinje",
       "github": "randsu",
       "agent": "mini-richard",
       "opprettet": "2026-09-23T08:51:10Z",
-      "oppdatert": "2026-09-23T09:09:21Z",
+      "oppdatert": "2026-09-23T09:09:39Z",
       "utkast": false,
       "issues": [
         34
@@ -931,18 +935,6 @@
       "utkast": false,
       "issues": [
         24
-      ]
-    },
-    {
-      "pr": 96,
-      "tittel": "#22: Slå sammen punkter som ligger oppå hverandre",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:46:40Z",
-      "oppdatert": "2026-09-23T09:08:47Z",
-      "utkast": false,
-      "issues": [
-        22
       ]
     },
     {
