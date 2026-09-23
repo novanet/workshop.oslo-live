@@ -28,6 +28,16 @@ builder.Services.AddHttpClient("fly", klient =>
     klient.Timeout = TimeSpan.FromSeconds(10);
     klient.DefaultRequestHeaders.UserAgent.ParseAdd("OsloLive/1.0 (kurs)");
 });
+
+// Bomstasjonene hentes fra NVDB (Statens vegvesen), som heller ikke er en Allemannsdata-kilde,
+// og krever headeren X-Client. Se BomstasjonerLag.cs.
+builder.Services.AddHttpClient("bomstasjoner", klient =>
+{
+    klient.Timeout = TimeSpan.FromSeconds(15);
+    klient.DefaultRequestHeaders.UserAgent.ParseAdd("OsloLive/1.0 (kurs)");
+    klient.DefaultRequestHeaders.Add("X-Client", "OsloLive");
+    klient.DefaultRequestHeaders.Accept.ParseAdd("application/json");
+});
 builder.Services.AddMemoryCache();
 builder.Services.AddSingleton<Lagstatistikk>();
 
@@ -59,6 +69,7 @@ builder.Services.AddSingleton<ILag, SkipLag>();
 builder.Services.AddSingleton<ILag, VannmaalereLag>();
 builder.Services.AddSingleton<ILag, KaierLag>();
 builder.Services.AddSingleton<ILag, FolketellingLag>();
+builder.Services.AddSingleton<ILag, BomstasjonerLag>();
 builder.Services.AddSingleton<ILag, VaerstasjonerLag>();
 builder.Services.AddSingleton<ILag, IdrettsanleggLag>();
 
@@ -111,7 +122,7 @@ app.MapGet("/api/lag/{id}", async (string id, string? tid, IEnumerable<ILag> lag
         }
 
         app.Logger.LogError(ex, "Laget {Id} feilet", id);
-        return Results.Json(new { feil = ex.Message }, statusCode: 502);
+        return Results.Json(new { feil = Feiltekst.Fra(ex) }, statusCode: 502);
     }
 });
 
@@ -163,7 +174,7 @@ app.MapGet("/api/lag/{id}/bydeler", async (string id, string? tid, IEnumerable<I
     catch (Exception ex)
     {
         app.Logger.LogError(ex, "Bydelstelling for laget {Id} feilet", id);
-        return Results.Json(new { feil = ex.Message }, statusCode: 502);
+        return Results.Json(new { feil = Feiltekst.Fra(ex) }, statusCode: 502);
     }
 });
 
@@ -190,7 +201,7 @@ app.MapGet("/api/stroempris", async (Allemannsdata data, CancellationToken stopp
     catch (Exception ex)
     {
         app.Logger.LogError(ex, "Strømprisen feilet");
-        return Results.Json(new { feil = ex.Message }, statusCode: 502);
+        return Results.Json(new { feil = Feiltekst.Fra(ex) }, statusCode: 502);
     }
 });
 
@@ -224,7 +235,7 @@ app.MapGet("/api/vannstand", async (Allemannsdata data, CancellationToken stopp)
     catch (Exception ex)
     {
         app.Logger.LogError(ex, "Vannstand feilet");
-        return Results.Json(new { feil = ex.Message }, statusCode: 502);
+        return Results.Json(new { feil = Feiltekst.Fra(ex) }, statusCode: 502);
     }
 });
 
