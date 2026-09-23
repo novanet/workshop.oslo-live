@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:35:26",
+  "oppdatert": "2026-09-23T14:36:06",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -62,14 +62,14 @@
           "poeng": 8
         }
       ],
-      "dollar": 21.895,
-      "tokens": 40995474,
-      "sekunder": 7931,
+      "dollar": 22.32,
+      "tokens": 42239769,
+      "sekunder": 8046,
       "pr": 12,
       "utkast": 0,
       "merget": 10,
-      "kjoeringer": 25,
-      "utenPr": 13,
+      "kjoeringer": 26,
+      "utenPr": 14,
       "bygg": [],
       "estimert": false,
       "plass": 1
@@ -607,7 +607,7 @@
       "issue": 188,
       "navn": "Vinden som strømmer over byen",
       "startet": "2026-09-23T12:23:41.4076789+00:00",
-      "minutter": 11
+      "minutter": 12
     },
     {
       "agent": "mini-wilma",
@@ -615,7 +615,7 @@
       "issue": 26,
       "navn": "Skoler",
       "startet": "2026-09-23T12:28:26.4775068+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-wilma",
@@ -631,7 +631,7 @@
       "issue": 114,
       "navn": "Nytt lag: Kristiania i 1910",
       "startet": "2026-09-23T12:32:02.4130394+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-wilma",
@@ -644,18 +644,10 @@
     {
       "agent": "mini-richard",
       "github": "randsu",
-      "issue": 115,
-      "navn": "Nytt lag: parker og torg",
-      "startet": "2026-09-23T12:33:36.8322183+00:00",
-      "minutter": 1
-    },
-    {
-      "agent": "mini-richard",
-      "github": "randsu",
       "issue": 114,
       "navn": "Nytt lag: Kristiania i 1910",
       "startet": "2026-09-23T12:33:37.8320639+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-knive",
@@ -679,7 +671,7 @@
       "issue": 118,
       "navn": "Nyhetslinje nederst på skjermen",
       "startet": "2026-09-23T12:34:25.9928919+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-richard",
@@ -687,7 +679,7 @@
       "issue": 116,
       "navn": "Nytt lag: værstasjoner",
       "startet": "2026-09-23T12:34:27.1286355+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-jon",
@@ -695,6 +687,38 @@
       "issue": 189,
       "navn": "Travlere enn vanlig på veiene",
       "startet": "2026-09-23T12:34:43.2826697+00:00",
+      "minutter": 1
+    },
+    {
+      "agent": "mini-gir",
+      "github": "GIR75",
+      "issue": 18,
+      "navn": "Kulturminner",
+      "startet": "2026-09-23T12:35:26.9487115+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-gir",
+      "github": "GIR75",
+      "issue": 13,
+      "navn": "Veiarbeid",
+      "startet": "2026-09-23T12:35:36.9770034+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-gir",
+      "github": "GIR75",
+      "issue": 51,
+      "navn": "Logging",
+      "startet": "2026-09-23T12:35:46.639797+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-gir",
+      "github": "GIR75",
+      "issue": 33,
+      "navn": "Sykkelparkering",
+      "startet": "2026-09-23T12:35:47.0074899+00:00",
       "minutter": 0
     }
   ],
@@ -729,7 +753,7 @@
       "issue": 33,
       "navn": "Nytt lag: sykkelparkering",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T12:35:21Z"
+      "oppdatert": "2026-09-23T12:35:47Z"
     },
     {
       "issue": 37,
@@ -789,7 +813,7 @@
       "issue": 51,
       "navn": "Strukturert logging",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T12:35:14Z"
+      "oppdatert": "2026-09-23T12:35:47Z"
     },
     {
       "issue": 52,
@@ -855,19 +879,19 @@
       "issue": 115,
       "navn": "Nytt lag: parker og torg",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T12:33:37Z"
+      "oppdatert": "2026-09-23T12:35:38Z"
     },
     {
       "issue": 115,
       "navn": "Nytt lag: parker og torg",
       "github": "novanettor",
-      "oppdatert": "2026-09-23T12:33:37Z"
+      "oppdatert": "2026-09-23T12:35:38Z"
     },
     {
       "issue": 115,
       "navn": "Nytt lag: parker og torg",
       "github": "randsu",
-      "oppdatert": "2026-09-23T12:33:37Z"
+      "oppdatert": "2026-09-23T12:35:38Z"
     },
     {
       "issue": 116,
@@ -1071,7 +1095,7 @@
       "issue": 194,
       "navn": "Nytt lag: bomstasjoner",
       "github": "nilsgs",
-      "oppdatert": "2026-09-23T12:31:31Z"
+      "oppdatert": "2026-09-23T12:35:35Z"
     },
     {
       "issue": 197,
