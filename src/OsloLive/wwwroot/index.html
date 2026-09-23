@@ -81,6 +81,38 @@
   .maplibregl-popup-content .rad span { color: var(--tekst); }
   .maplibregl-ctrl-group { border: 1.5px solid var(--kant) !important; box-shadow: none !important; }
 
+  /* Mobilvisning: panelet ligger nederst, sammenslått til én linje som kan dras eller trykkes opp. */
+  @media (max-width: 699.98px) {
+    #hovedpanel {
+      position: fixed; top: auto; left: 0; right: 0; bottom: 0; width: 100%;
+      border-radius: 14px 14px 0 0;
+      max-height: 20vh; max-height: 20dvh;
+      padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+      display: flex; flex-direction: column;
+      overflow: hidden;
+      transition: max-height .25s ease;
+    }
+    #hovedpanel.apen { max-height: 60vh; max-height: 60dvh; }
+
+    #hovedpanel .panel-header {
+      display: flex; align-items: center; gap: 10px; flex: none;
+      padding: 4px 0; cursor: pointer; touch-action: none;
+    }
+    #hovedpanel .handtak { width: 36px; height: 5px; border-radius: 3px; background: #d1d5db; flex: none; }
+    #hovedpanel h1 { font-size: 16px; margin: 0; }
+    #hovedpanel .under { display: none; }
+    #hovedpanel #lagliste { display: none; overflow-y: auto; flex: 1; min-height: 0; }
+    #hovedpanel .bunn { display: none; flex: none; }
+    #hovedpanel.apen .under { display: block; }
+    #hovedpanel.apen .bunn { display: flex; }
+    #hovedpanel.apen #lagliste { display: block; }
+
+    .kamera {
+      left: 12px; right: auto; bottom: calc(var(--panelhoyde, 20vh) + 12px);
+      flex-direction: row;
+    }
+  }
+
   .panel.naermest { left: auto; right: 16px; width: 280px; }
   .naermest .topp { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
   .naermest h2 { margin: 0; font-size: 16px; }
@@ -101,8 +133,11 @@
 <body>
 <div id="kart"></div>
 
-<div class="panel">
-  <h1>Oslo Live</h1>
+<div class="panel" id="hovedpanel">
+  <div class="panel-header" id="panel-header">
+    <span class="handtak" aria-hidden="true"></span>
+    <h1>Oslo Live</h1>
+  </div>
   <p class="under">Levende data fra Allemannsdata</p>
   <div id="lagliste"><p class="tom">Laster lag …</p></div>
   <div class="bunn">
@@ -141,7 +176,9 @@ const kart = new maplibregl.Map({
   bearing: -20,
   antialias: true,
   preserveDrawingBuffer: true,
-  attributionControl: { compact: true }
+  attributionControl: { compact: true },
+  touchPitch: true,
+  touchZoomRotate: true
 });
 
 kart.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), 'bottom-right');
@@ -381,10 +418,12 @@ async function hent(id) {
       el.style.background = p.advarsel ? '#b91c1c' : oppf.farge;
       el.textContent = p.advarsel ? '⚠️' : (p.ikon ?? oppf.ikon);
 
+      const boble = new maplibregl.Popup({ offset: 18, closeButton: true }).setHTML(popup(p));
+      boble.on('open', () => sikreSynligPopup(boble));
+
       const m = new maplibregl.Marker({ element: el })
         .setLngLat([c[0], c[1]])
-        .setPopup(new maplibregl.Popup({ offset: 18, closeButton: true })
-          .setHTML(popup(p)));
+        .setPopup(boble);
 
       if (oppf.på && !oppf.varme) m.addTo(kart);
       oppf.markorer.push(m);
@@ -549,6 +588,73 @@ kart.on('touchmove', (e) => {
   if (trykkStart && (Math.abs(e.point.x - trykkStart.x) > 10 || Math.abs(e.point.y - trykkStart.y) > 10)) clearTimeout(trykkTimer);
 });
 ['touchend', 'touchcancel', 'dragstart', 'zoomstart'].forEach((h) => kart.on(h, () => clearTimeout(trykkTimer)));
+
+// ---------------------------------------------------------------------------
+// Mobilpanel: under 700px ligger panelet nederst, sammenslått til én linje
+// som kan dras eller trykkes opp. --panelhoyde holder kameraknappene unna.
+// ---------------------------------------------------------------------------
+const hovedpanel = document.getElementById('hovedpanel');
+const panelHeader = document.getElementById('panel-header');
+
+function erMobil() {
+  return window.matchMedia('(max-width: 699.98px)').matches;
+}
+
+function oppdaterPanelhoyde() {
+  document.documentElement.style.setProperty('--panelhoyde', hovedpanel.offsetHeight + 'px');
+}
+
+function settPanelApen(apen) {
+  hovedpanel.classList.toggle('apen', apen);
+}
+
+new ResizeObserver(oppdaterPanelhoyde).observe(hovedpanel);
+window.addEventListener('resize', oppdaterPanelhoyde);
+oppdaterPanelhoyde();
+
+let panelDragY = null, panelDratt = false;
+
+panelHeader.addEventListener('touchstart', (e) => {
+  if (!erMobil() || e.touches.length !== 1) return;
+  panelDragY = e.touches[0].clientY;
+  panelDratt = false;
+}, { passive: true });
+
+panelHeader.addEventListener('touchmove', (e) => {
+  if (panelDragY === null) return;
+  if (Math.abs(panelDragY - e.touches[0].clientY) > 6) panelDratt = true;
+}, { passive: true });
+
+panelHeader.addEventListener('touchend', (e) => {
+  if (panelDragY === null) return;
+  const dy = panelDragY - (e.changedTouches[0]?.clientY ?? panelDragY);
+  panelDragY = null;
+  if (Math.abs(dy) > 30) { settPanelApen(dy > 0); e.preventDefault(); }
+  else if (!panelDratt) { settPanelApen(!hovedpanel.classList.contains('apen')); e.preventDefault(); }
+});
+
+panelHeader.addEventListener('click', () => {
+  if (!erMobil() || panelDratt) { panelDratt = false; return; }
+  settPanelApen(!hovedpanel.classList.contains('apen'));
+});
+
+/** Lukker panelet og flytter kartet slik at en nyåpnet popup ikke havner bak det, på mobil. */
+function sikreSynligPopup(boble) {
+  if (!erMobil()) return;
+  settPanelApen(false);
+  const flytt = () => {
+    requestAnimationFrame(() => {
+      if (!boble.isOpen()) return;
+      const el = boble.getElement();
+      if (!el) return;
+      const boks = el.getBoundingClientRect();
+      const grense = window.innerHeight - hovedpanel.offsetHeight - 12;
+      const overheng = boks.bottom - grense;
+      if (overheng > 0) kart.panBy([0, overheng], { duration: 300 });
+    });
+  };
+  if (kart.isMoving()) kart.once('moveend', flytt); else flytt();
+}
 
 // ---------------------------------------------------------------------------
 // Kamera
