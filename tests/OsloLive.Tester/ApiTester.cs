@@ -46,5 +46,17 @@ public class ApiTester(WebApplicationFactory<Program> vert) : IClassFixture<WebA
         Assert.Equal(HttpStatusCode.NotFound, svar.StatusCode);
     }
 
+    [Fact]
+    public async Task Forsiden_serveres_med_kameraknappene()
+    {
+        var svar = await Klient.GetAsync("/");
+        Assert.Equal(HttpStatusCode.OK, svar.StatusCode);
+
+        var html = await svar.Content.ReadAsStringAsync();
+        Assert.Contains("id=\"snurr\"", html);
+        Assert.Contains("id=\"flatt\"", html);
+        Assert.Contains("id=\"hjem\"", html);
+    }
+
     private sealed record Lagoppforing(string Id, string Navn, string Beskrivelse, string Ikon);
 }
