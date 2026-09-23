@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T15:17:18",
+  "oppdatert": "2026-09-23T15:18:00",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -686,7 +686,7 @@
       "issue": 211,
       "navn": "Statistikken viser ikke «Nyeste» for vannmålere og smilefjes",
       "startet": "2026-09-23T13:11:37.8328465+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-wilma",
@@ -1197,6 +1197,30 @@
   ],
   "aapne": [
     {
+      "pr": 226,
+      "tittel": "Popupene viser rådata: ISO-tider, «ikon: 😊» og tall uten enhet",
+      "github": "larsajakobsen",
+      "agent": "mini-wilma",
+      "opprettet": "2026-09-23T12:38:36Z",
+      "oppdatert": "2026-09-23T13:17:32Z",
+      "utkast": false,
+      "issues": [
+        206
+      ]
+    },
+    {
+      "pr": 253,
+      "tittel": "Nytt lag: Wikipedia-artikler rundt deg",
+      "github": "FrodeBl",
+      "agent": "mini-frode",
+      "opprettet": "2026-09-23T13:16:03Z",
+      "oppdatert": "2026-09-23T13:17:26Z",
+      "utkast": false,
+      "issues": [
+        192
+      ]
+    },
+    {
       "pr": 71,
       "tittel": "Mål hva som skjer",
       "github": "FrodeBl",
@@ -1218,18 +1242,6 @@
       "utkast": false,
       "issues": [
         186
-      ]
-    },
-    {
-      "pr": 253,
-      "tittel": "Nytt lag: Wikipedia-artikler rundt deg",
-      "github": "FrodeBl",
-      "agent": "mini-frode",
-      "opprettet": "2026-09-23T13:16:03Z",
-      "oppdatert": "2026-09-23T13:16:31Z",
-      "utkast": false,
-      "issues": [
-        192
       ]
     },
     {
@@ -1326,18 +1338,6 @@
       "utkast": true,
       "issues": [
         204
-      ]
-    },
-    {
-      "pr": 226,
-      "tittel": "Popupene viser rådata: ISO-tider, «ikon: 😊» og tall uten enhet",
-      "github": "larsajakobsen",
-      "agent": "mini-wilma",
-      "opprettet": "2026-09-23T12:38:36Z",
-      "oppdatert": "2026-09-23T13:09:58Z",
-      "utkast": false,
-      "issues": [
-        206
       ]
     },
     {
