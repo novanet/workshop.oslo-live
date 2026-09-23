@@ -369,13 +369,63 @@ kart.on('moveend', skrivUtsnitt);
 
 kart.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), 'bottom-right');
 
+// Tema styres av sola over Oslo, med mindre ?tema=natt/dag overstyrer den.
+const temaOverstyring = new URLSearchParams(location.search).get('tema'); // 'natt' | 'dag' | null
+let nattemodusPaa = null; // ukjent til foerste sjekk
+
+function erNatt(naa) {
+  if (temaOverstyring === 'natt') return true;
+  if (temaOverstyring === 'dag') return false;
+  const { opp, ned } = solOppOgNed(naa);
+  return naa < opp || naa > ned;
+}
+
+// Lagene appen selv legger på kartet: punkter og klynger, varmekart, området
+// som tegnes, terrengskyggen og effektene. Temaene skal bare farge basiskartets
+// egne lag, så disse hoppes over når varmTema/nattTema går gjennom
+// kart.getStyle().layers. Uten det ville et temabytte etter leggTilPunktlag()
+// gjort markørene halvt gjennomsiktige (icon-opacity 0.5) og farget om
+// klyngetallene.
+const EGNE_LAG = /^(punkter|varme-|omrade|terreng|tsunami)/;
+function erEgetLag(id) { return EGNE_LAG.test(id); }
+function basislag(kart) { return kart.getStyle().layers.filter((lag) => !erEgetLag(lag.id)); }
+
+// Appens egne lag får farger som står mot bakgrunnen i hvert tema: klyngene er
+// mørk skive med lys kant om dagen og lys skive med mørk kant om natta.
+// Enkeltpunktene er alltid helt ugjennomsiktige; ringen rundt dem settes i
+// tegnMerke og konturen på SVG-symbolene i temaTilpassSymbol.
+function temaPaaEgneLag() {
+  const natt = !!nattemodusPaa;
+  const S = (id, egenskap, verdi) => { if (kart.getLayer(id)) kart.setPaintProperty(id, egenskap, verdi); };
+  S('punkter-klynge', 'circle-color', natt ? '#f4efe4' : '#111');
+  S('punkter-klynge', 'circle-stroke-color', natt ? '#111' : '#fff');
+  S('punkter-antall', 'text-color', natt ? '#111' : '#fff');
+  S('punkter-enkelt', 'icon-opacity', 1);
+}
+
+function oppdaterTema() {
+  const skalVaereNatt = erNatt(new Date());
+  if (skalVaereNatt === nattemodusPaa) return;
+  nattemodusPaa = skalVaereNatt;
+  (nattemodusPaa ? nattTema : varmTema)(kart);
+  // Ved oppstart kjører dette før leggTilPunktlag(), og da finnes verken punktkilden eller
+  // merkene ennå: temaet settes bare på kartstilen, og leggTilPunktlag() tegner punktene med
+  // riktig tema etterpå. Ved bytte hvert minutt finnes kilden, og punktene tegnes om uten omlasting.
+  if (!kart.getSource('punkter')) return;
+  temaPaaEgneLag();
+  tegnOmMerker();   // merkene tegnes på nytt med ring som passer temaet
+  oppdaterKilde();  // punktene får SVG-symboler med kontur som passer temaet
+}
+
 kart.on('style.load', () => {
-  varmTema(kart);
+  nattemodusPaa = null; // en nylastet stil har standardfargene, så temaet må settes på nytt
+  oppdaterTema();
   settOppOmrade();
   leggTilPunktlag();
   start();
   hentStroem();
   setInterval(hentStroem, 60000); // maks én gang i minuttet, ikke som lagene hvert 15. sekund
+  setInterval(oppdaterTema, 60000);
 });
 
 // Vannstanden er ikke knyttet til lagene og skal oppdateres selv om ingen lag finnes.
@@ -420,7 +470,7 @@ function varmTema(kart) {
     .forEach((id) => S(id, 'line-color', '#8fbcc8'));
 
   // Veier: oransje hovedveier, lyse smaaveier, brune kanter.
-  kart.getStyle().layers.forEach((lag) => {
+  basislag(kart).forEach((lag) => {
     if (lag.type !== 'line') return;
     const id = lag.id;
     const hoved = /motorway|trunk_primary|secondary_tertiary|_link/.test(id) && !/casing/.test(id);
@@ -447,8 +497,8 @@ function varmTema(kart) {
   S('building-3d', 'fill-extrusion-opacity', 1);
   S('building-3d', 'fill-extrusion-vertical-gradient', true);
 
-  // Tekst
-  kart.getStyle().layers.forEach((lag) => {
+  // Tekst (bare basiskartets egne symbollag, ikke appens punkter og klyngetall)
+  basislag(kart).forEach((lag) => {
     if (lag.type !== 'symbol') return;
     S(lag.id, 'text-color', TEKST);
     S(lag.id, 'text-halo-color', GLORIE);
@@ -462,8 +512,27 @@ function varmTema(kart) {
    'highway-shield-non-us', 'highway-shield-us-interstate', 'road_shield_us'
   ].forEach(skjul);
 
-  // Terreng fra Mapterhorn (aapne hoeydedata, ingen noekkel), med skyggelegging
-  // rett under bygningene saa aasene rundt byen faar form.
+  // Terreng med varm, solbelyst skyggelegging.
+  leggTilTerreng(kart, {
+    'hillshade-shadow-color': '#b9a784',
+    'hillshade-highlight-color': '#fffdf6',
+    'hillshade-accent-color': '#cdbd9c'
+  });
+  try {
+    kart.setSky({
+      'sky-color': '#cfe3ec', 'horizon-color': '#f1e9d6', 'fog-color': '#ede7d8',
+      'sky-horizon-blend': 0.6, 'horizon-fog-blend': 0.7, 'fog-ground-blend': 0.5
+    });
+  } catch (e) { /* eldre maplibre */ }
+}
+
+/**
+ * Terreng fra Mapterhorn (aapne hoeydedata, ingen noekkel), med skyggelegging
+ * rett under bygningene saa aasene rundt byen faar form. Begge temaene kaller
+ * denne, saa terrenget finnes uansett hvilket tema siden starter i, og
+ * skyggefargene byttes naar temaet bytter i stedet for aa bli staaende fra dag.
+ */
+function leggTilTerreng(kart, skyggefarger) {
   if (!kart.getSource('terreng')) {
     kart.addSource('terreng', {
       type: 'raster-dem',
@@ -473,20 +542,153 @@ function varmTema(kart) {
       maxzoom: 14,
       attribution: '<a href="https://mapterhorn.com/attribution">© Mapterhorn</a>'
     });
+  }
+  if (!kart.getLayer('terreng-skygge')) {
     kart.addLayer({
       id: 'terreng-skygge', type: 'hillshade', source: 'terreng',
-      paint: {
-        'hillshade-shadow-color': '#b9a784',
-        'hillshade-highlight-color': '#fffdf6',
-        'hillshade-accent-color': '#cdbd9c',
-        'hillshade-exaggeration': 0.45
-      }
+      paint: { ...skyggefarger, 'hillshade-exaggeration': 0.45 }
     }, kart.getLayer('building') ? 'building' : undefined);
+  } else {
+    for (const [egenskap, verdi] of Object.entries(skyggefarger)) {
+      try { kart.setPaintProperty('terreng-skygge', egenskap, verdi); } catch (e) { /* eldre maplibre */ }
+    }
   }
   try { kart.setTerrain({ source: 'terreng', exaggeration: 1.3 }); } catch (e) { /* eldre maplibre */ }
+}
+
+/**
+ * Soloppgang og solnedgang for Oslo sentrum (59,91 N, 10,75 Ø), etter den
+ * forenklede NOAA-formelen. Regner i minutter siden midnatt UTC for datoens
+ * kalenderdag, saa CET/CEST-forskyvningen kommer automatisk naar Date-en
+ * vises i Europe/Oslo-tid.
+ *
+ * Resultat for de to datoene i #119, kjørt med node på nøyaktig denne
+ * funksjonen (TZ=Europe/Oslo) og vist som lokal tid i Oslo. Begge ligger
+ * innenfor vinduene i akseptansekriteriene:
+ *
+ *   2026-06-21  soloppgang 03:53:10 CEST (01:53:10 UTC)   krav 03:45–04:05
+ *               solnedgang 22:43:28 CEST (20:43:28 UTC)   krav 22:35–22:55
+ *   2026-12-21  soloppgang 09:17:42 CET  (08:17:42 UTC)   krav 09:05–09:30
+ *               solnedgang 15:11:57 CET  (14:11:57 UTC)   krav 15:00–15:25
+ *
+ * Slik gjentar du det: kopier funksjonen til en fil, legg til
+ *   for (const d of [new Date(2026, 5, 21, 12), new Date(2026, 11, 21, 12)])
+ *     console.log(solOppOgNed(d).opp.toISOString(), solOppOgNed(d).ned.toISOString());
+ * og kjør `TZ=Europe/Oslo node fil.js`.
+ */
+function solOppOgNed(dato) {
+  const RAD = Math.PI / 180;
+  const LAT = 59.91, LON = 10.75;
+  const midnattUTC = Date.UTC(dato.getFullYear(), dato.getMonth(), dato.getDate());
+  const dagI = Math.round((midnattUTC - Date.UTC(dato.getFullYear(), 0, 1)) / 86400000) + 1;
+  const gamma = 2 * Math.PI / 365 * (dagI - 1);
+
+  const eqTid = 229.18 * (0.000075 + 0.001868 * Math.cos(gamma) - 0.032077 * Math.sin(gamma)
+              - 0.014615 * Math.cos(2 * gamma) - 0.040849 * Math.sin(2 * gamma));
+  const dekl = 0.006918 - 0.399912 * Math.cos(gamma) + 0.070257 * Math.sin(gamma)
+             - 0.006758 * Math.cos(2 * gamma) + 0.000907 * Math.sin(2 * gamma)
+             - 0.002697 * Math.cos(3 * gamma) + 0.00148 * Math.sin(3 * gamma);
+
+  const zenith = 90.833 * RAD;
+  const latRad = LAT * RAD;
+  const cosVinkel = Math.cos(zenith) / (Math.cos(latRad) * Math.cos(dekl)) - Math.tan(latRad) * Math.tan(dekl);
+  const vinkelGrader = Math.acos(Math.min(1, Math.max(-1, cosVinkel))) / RAD;
+
+  const soloppMin = 720 - 4 * (LON + vinkelGrader) - eqTid;
+  const solnedMin = 720 - 4 * (LON - vinkelGrader) - eqTid;
+  return {
+    opp: new Date(midnattUTC + soloppMin * 60000),
+    ned: new Date(midnattUTC + solnedMin * 60000)
+  };
+}
+
+/**
+ * Moerkt nattema: samme lag-id-er som varmTema, bare med en moerk palett saa
+ * kartet passer til en storskjerm som staar paa utover kvelden.
+ */
+function nattTema(kart) {
+  const S = (id, egenskap, verdi) => {
+    if (!kart.getLayer(id)) return;
+    try { kart.setPaintProperty(id, egenskap, verdi); } catch (e) { /* laget har ikke den egenskapen */ }
+  };
+  const skjul = (id) => { if (kart.getLayer(id)) kart.setLayoutProperty(id, 'visibility', 'none'); };
+
+  const TEKST = '#e8e3d6', GLORIE = '#12161b';
+
+  S('background', 'background-color', '#151c24');
+  skjul('natural_earth');
+
+  // Flater
+  ['landuse_residential', 'landuse_hospital', 'landuse_school', 'aeroway_fill', 'road_area_pattern']
+    .forEach((id) => S(id, 'fill-color', '#232b30'));
+  ['park', 'landcover_grass', 'landuse_pitch', 'landuse_track', 'landuse_cemetery']
+    .forEach((id) => S(id, 'fill-color', '#1f2e22'));
+  S('park', 'fill-opacity', 0.9);
+  S('landcover_wood', 'fill-color', '#16241a');
+  S('landcover_wood', 'fill-opacity', 0.8);
+  S('landcover_wetland', 'fill-opacity', 0.35);
+  S('landcover_sand', 'fill-color', '#2a2416');
+  S('landcover_ice', 'fill-color', '#2b3038');
+  S('park_outline', 'line-color', '#2c3b2c');
+
+  // Vann
+  S('water', 'fill-color', '#0d2430');
+  ['waterway_river', 'waterway_other', 'waterway_tunnel']
+    .forEach((id) => S(id, 'line-color', '#2f6b78'));
+
+  // Veier: moerke smaaveier, oransje hovedveier saa arteriene fortsatt leses som «lyst».
+  basislag(kart).forEach((lag) => {
+    if (lag.type !== 'line') return;
+    const id = lag.id;
+    const hoved = /motorway|trunk_primary|secondary_tertiary|_link/.test(id) && !/casing/.test(id);
+    if (/_casing$/.test(id)) {
+      S(id, 'line-color', /motorway|trunk_primary|secondary_tertiary|_link/.test(id) ? '#5c3a1a' : '#33302a');
+      S(id, 'line-opacity', 0.9);
+    } else if (hoved && /^(road|bridge|tunnel)_/.test(id)) {
+      S(id, 'line-color', '#e08a3c');
+    } else if (/^(road|bridge|tunnel)_/.test(id) && !/rail|hatching|path_pedestrian/.test(id)) {
+      S(id, 'line-color', '#2c2a24');
+    } else if (/rail/.test(id)) {
+      S(id, 'line-color', '#4a463c');
+    } else if (/path_pedestrian/.test(id)) {
+      S(id, 'line-color', '#3a362c');
+    } else if (/^boundary/.test(id)) {
+      S(id, 'line-color', '#4a463c');
+    }
+  });
+
+  // Bygninger
+  S('building', 'fill-color', '#2a2620');
+  S('building', 'fill-outline-color', '#3c352a');
+  S('building-3d', 'fill-extrusion-color', '#2f2a22');
+  S('building-3d', 'fill-extrusion-opacity', 1);
+  S('building-3d', 'fill-extrusion-vertical-gradient', true);
+
+  // Tekst (bare basiskartets egne symbollag; appens punkter og klyngetall
+  // beholder full dekkevne og sine egne farger, se temaPaaEgneLag)
+  basislag(kart).forEach((lag) => {
+    if (lag.type !== 'symbol') return;
+    S(lag.id, 'text-color', TEKST);
+    S(lag.id, 'text-halo-color', GLORIE);
+    S(lag.id, 'text-halo-width', 1.4);
+    S(lag.id, 'icon-opacity', 0.5);
+  });
+
+  // Rydd bort det som konkurrerer med vaare egne punkter.
+  ['poi_r20', 'poi_r7', 'poi_r1', 'poi_transit',
+   'road_one_way_arrow', 'road_one_way_arrow_opposite',
+   'highway-shield-non-us', 'highway-shield-us-interstate', 'road_shield_us'
+  ].forEach(skjul);
+
+  // Terreng med moerk, blaagraa skyggelegging som ikke lyser opp natta.
+  leggTilTerreng(kart, {
+    'hillshade-shadow-color': '#0b1016',
+    'hillshade-highlight-color': '#2b3644',
+    'hillshade-accent-color': '#1a2430'
+  });
   try {
     kart.setSky({
-      'sky-color': '#cfe3ec', 'horizon-color': '#f1e9d6', 'fog-color': '#ede7d8',
+      'sky-color': '#0a1622', 'horizon-color': '#16202b', 'fog-color': '#0d1620',
       'sky-horizon-blend': 0.6, 'horizon-fog-blend': 0.7, 'fog-ground-blend': 0.5
     });
   } catch (e) { /* eldre maplibre */ }
@@ -570,7 +772,8 @@ function kontrastFor(bakgrunn) {
 // Tegner et merke på et kvadratisk lerret med side s: lagets form fylt med
 // fargen, kanten i lagets stil, og ikonet helt svart eller hvitt etter WCAG-
 // kontrast mot fargen. Brukes både av punktene på kartet og prikken i lagvelgeren.
-function tegnMerke(s, farge, ikon, form, kant) {
+// natt styrer glorien rundt kanten: kartet følger temaet, lagvelgeren er alltid lys.
+function tegnMerke(s, farge, ikon, form, kant, natt = !!nattemodusPaa) {
   const c = document.createElement('canvas');
   c.width = c.height = s;
   const g = c.getContext('2d');
@@ -593,8 +796,16 @@ function tegnMerke(s, farge, ikon, form, kant) {
   g.fillStyle = farge;
   g.fill();
 
-  // Mørk skygge rundt lyse kanter, så merket står fram mot det beige kartet.
-  if (lys) { g.lineWidth = 7; g.strokeStyle = 'rgba(17,17,17,.85)'; g.setLineDash([]); g.stroke(); }
+  // Glorie rundt kanten som ellers ville forsvinne mot bakgrunnen: mørk ring
+  // rundt lys kant mot det beige dagtemaet, lys ring rundt mørk kant mot det
+  // mørke nattemaet. Merker med lys kant har allerede en lys ring om natta.
+  const trengerGlorie = natt ? !lys : lys;
+  if (trengerGlorie) {
+    g.lineWidth = 7;
+    g.strokeStyle = natt ? 'rgba(244,239,228,.9)' : 'rgba(17,17,17,.85)';
+    g.setLineDash([]);
+    g.stroke();
+  }
   g.strokeStyle = strek;
   g.lineCap = 'round';
   if (kant === 'double') {
@@ -626,7 +837,8 @@ function tegnMerke(s, farge, ikon, form, kant) {
 function prikkBilde(id, oppf) {
   const symbol = typeof window.lagSymbol === 'function' ? window.lagSymbol(id, {}, oppf.farge) : null;
   if (symbol) return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(new XMLSerializer().serializeToString(symbol));
-  return tegnMerke(48, oppf.farge, oppf.ikon, oppf.form, oppf.kant).toDataURL();
+  // Panelet er lyst uansett tema, så prikken tegnes alltid som om dagen.
+  return tegnMerke(48, oppf.farge, oppf.ikon, oppf.form, oppf.kant, false).toDataURL();
 }
 
 // Punkter eller varmekart per lag, husket i localStorage.
@@ -677,10 +889,23 @@ function tidTekst(d) {
 }
 
 // Merket et lag tegnes med på kartet: lagets farge, form og kantstil, ikonet i midten.
+// Registeret husker parameterne slik at tegnOmMerker() kan tegne bildet på nytt
+// når temaet bytter, uten å røre punktene som allerede er lagt til kartet.
+const merkeRegister = new Map(); // navn -> { farge, ikon, form, kant }
+
 function lagMerkebilde(navn, farge, ikon, form = 'sirkel', kant = 'solid') {
+  merkeRegister.set(navn, { farge, ikon, form, kant });
   if (kart.hasImage(navn)) return;
   const s = 60, g = tegnMerke(s, farge, ikon, form, kant).getContext('2d');
   kart.addImage(navn, g.getImageData(0, 0, s, s), { pixelRatio: 2 });
+}
+
+function tegnOmMerker() {
+  for (const [navn, { farge, ikon, form, kant }] of merkeRegister) {
+    if (!kart.hasImage(navn)) continue; // bildet ble borte med stilen; lages igjen ved behov
+    const s = 60, g = tegnMerke(s, farge, ikon, form, kant).getContext('2d');
+    kart.updateImage(navn, g.getImageData(0, 0, s, s));
+  }
 }
 
 // SVG-symboler fra effekter/symboler.js blir MapLibre-bilder. SVG-en må
@@ -695,12 +920,26 @@ function kortHash(str) {
   return Math.abs(h).toString(36);
 }
 
+// Symbolene fra effekter/symboler.js har mørk kontur (KONTUR = '#111') som
+// forsvinner mot nattebakgrunnen, det svarte flyet aller mest. I nattemaet
+// byttes konturen til en lys her, uten å røre symboler.js. Bildenavnet i
+// symbolbilde har hash av SVG-teksten, så dag- og nattutgaven lever side om
+// side i kartet, og oppdaterKilde() etter et temabytte velger riktig utgave.
+const SYMBOL_KONTUR_DAG = '#111', SYMBOL_KONTUR_NATT = '#f4efe4';
+function temaTilpassSymbol(el) {
+  if (!nattemodusPaa) return el;
+  el.querySelectorAll(`[stroke="${SYMBOL_KONTUR_DAG}"]`)
+    .forEach((n) => n.setAttribute('stroke', SYMBOL_KONTUR_NATT));
+  return el;
+}
+
 // Bilde for lagets eget symbol (skip, fly, mobilitet), eller null når laget
 // ikke har et, eller symbolet ennå ikke er lastet.
 function symbolbilde(id, oppf, p) {
   if (typeof window.lagSymbol !== 'function') return null;
   const el = window.lagSymbol(id, p.egenskaper, oppf.farge);
   if (!el) return null;
+  temaTilpassSymbol(el);
   const svgTekst = new XMLSerializer().serializeToString(el);
   const navn = 'symbol-' + id + '-' + kortHash(svgTekst);
   if (kart.hasImage(navn)) return navn;
@@ -813,6 +1052,7 @@ function leggTilPunktlag() {
       'icon-size': 1,
       'icon-allow-overlap': true, 'icon-ignore-placement': true
     } });
+  temaPaaEgneLag(); // klyngefargene skal passe temaet som allerede er på
 
   // Klikk på en klynge zoomer inn til den sprer seg.
   kart.on('click', 'punkter-klynge', async (e) => {
