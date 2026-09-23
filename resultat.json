@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:05:44",
+  "oppdatert": "2026-09-23T14:06:23",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -63,8 +63,8 @@
       "pr": 11,
       "utkast": 0,
       "merget": 10,
-      "kjoeringer": 16,
-      "utenPr": 5,
+      "kjoeringer": 17,
+      "utenPr": 6,
       "bygg": [],
       "estimert": false,
       "plass": 1
@@ -554,7 +554,7 @@
       "issue": 44,
       "navn": "Sammenlign tid",
       "startet": "2026-09-23T11:57:22.3942011+00:00",
-      "minutter": 8
+      "minutter": 9
     },
     {
       "agent": "mini-wilma",
@@ -562,7 +562,7 @@
       "issue": 26,
       "navn": "Skoler",
       "startet": "2026-09-23T12:00:11.8740211+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-gir",
@@ -570,7 +570,7 @@
       "issue": 33,
       "navn": "Sykkelparkering",
       "startet": "2026-09-23T12:00:56.0494312+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-wilma",
@@ -578,7 +578,7 @@
       "issue": 8,
       "navn": "Hendelser",
       "startet": "2026-09-23T12:01:11.9782453+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-taco",
@@ -594,7 +594,7 @@
       "issue": 11,
       "navn": "Kollektiv",
       "startet": "2026-09-23T12:01:44.272017+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-kirsten",
@@ -602,7 +602,7 @@
       "issue": 29,
       "navn": "Museer",
       "startet": "2026-09-23T12:01:56.5636433+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-frode",
@@ -618,6 +618,14 @@
       "issue": 48,
       "navn": "Parallell henting",
       "startet": "2026-09-23T12:05:19.7031269+00:00",
+      "minutter": 1
+    },
+    {
+      "agent": "mini-tom",
+      "github": "renaa",
+      "issue": 37,
+      "navn": "Eksport",
+      "startet": "2026-09-23T12:06:13.9571235+00:00",
       "minutter": 0
     }
   ],
@@ -747,6 +755,12 @@
       "navn": "Nytt lag: sykkelparkering",
       "github": "GIR75",
       "oppdatert": "2026-09-23T12:00:57Z"
+    },
+    {
+      "issue": 37,
+      "navn": "Eksporter det du ser",
+      "github": "renaa",
+      "oppdatert": "2026-09-23T12:06:19Z"
     },
     {
       "issue": 39,
