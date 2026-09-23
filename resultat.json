@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T15:01:07",
+  "oppdatert": "2026-09-23T15:01:50",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -293,8 +293,8 @@
       "pr": 5,
       "utkast": 0,
       "merget": 3,
-      "kjoeringer": 22,
-      "utenPr": 9,
+      "kjoeringer": 23,
+      "utenPr": 10,
       "bygg": [],
       "estimert": false,
       "plass": 7
@@ -658,16 +658,7 @@
       "plass": 21
     }
   ],
-  "kjoerer": [
-    {
-      "agent": "mini-leif",
-      "github": "leif-larsen",
-      "issue": 118,
-      "navn": "Nyhetslinje nederst på skjermen",
-      "startet": "2026-09-23T13:00:59.4896158+00:00",
-      "minutter": 0
-    }
-  ],
+  "kjoerer": [],
   "main": {
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
@@ -905,7 +896,7 @@
       "issue": 118,
       "navn": "Nyhetslinje nederst på skjermen",
       "github": "leif-larsen",
-      "oppdatert": "2026-09-23T13:01:00Z"
+      "oppdatert": "2026-09-23T13:01:06Z"
     },
     {
       "issue": 119,
@@ -1049,7 +1040,7 @@
       "issue": 189,
       "navn": "Travlere enn vanlig på veiene",
       "github": "yonzo",
-      "oppdatert": "2026-09-23T12:52:14Z"
+      "oppdatert": "2026-09-23T13:01:25Z"
     },
     {
       "issue": 190,
@@ -1144,6 +1135,42 @@
   ],
   "aapne": [
     {
+      "pr": 97,
+      "tittel": "Søk på tvers av alle lag (#47)",
+      "github": "Puiu",
+      "agent": "mini-taco",
+      "opprettet": "2026-09-23T08:46:56Z",
+      "oppdatert": "2026-09-23T13:01:08Z",
+      "utkast": false,
+      "issues": [
+        47
+      ]
+    },
+    {
+      "pr": 222,
+      "tittel": "Havet stiger: hva havner under vann? (#133)",
+      "github": "Puiu",
+      "agent": "mini-taco",
+      "opprettet": "2026-09-23T12:30:27Z",
+      "oppdatert": "2026-09-23T13:01:01Z",
+      "utkast": false,
+      "issues": [
+        133
+      ]
+    },
+    {
+      "pr": 228,
+      "tittel": "Nyhetslinje nederst på skjermen (#118)",
+      "github": "leif-larsen",
+      "agent": "mini-leif",
+      "opprettet": "2026-09-23T12:41:18Z",
+      "oppdatert": "2026-09-23T13:00:59Z",
+      "utkast": false,
+      "issues": [
+        118
+      ]
+    },
+    {
       "pr": 67,
       "tittel": "Hent lagene parallelt",
       "github": "FrodeBl",
@@ -1153,18 +1180,6 @@
       "utkast": false,
       "issues": [
         48
-      ]
-    },
-    {
-      "pr": 222,
-      "tittel": "Havet stiger: hva havner under vann? (#133)",
-      "github": "Puiu",
-      "agent": "mini-taco",
-      "opprettet": "2026-09-23T12:30:27Z",
-      "oppdatert": "2026-09-23T13:00:56Z",
-      "utkast": false,
-      "issues": [
-        133
       ]
     },
     {
@@ -1213,18 +1228,6 @@
       "utkast": false,
       "issues": [
         203
-      ]
-    },
-    {
-      "pr": 228,
-      "tittel": "Nyhetslinje nederst på skjermen (#118)",
-      "github": "leif-larsen",
-      "agent": "mini-leif",
-      "opprettet": "2026-09-23T12:41:18Z",
-      "oppdatert": "2026-09-23T12:57:05Z",
-      "utkast": false,
-      "issues": [
-        118
       ]
     },
     {
@@ -1441,18 +1444,6 @@
       "utkast": true,
       "issues": [
         129
-      ]
-    },
-    {
-      "pr": 97,
-      "tittel": "Søk på tvers av alle lag (#47)",
-      "github": "Puiu",
-      "agent": "mini-taco",
-      "opprettet": "2026-09-23T08:46:56Z",
-      "oppdatert": "2026-09-23T12:31:33Z",
-      "utkast": false,
-      "issues": [
-        47
       ]
     },
     {
