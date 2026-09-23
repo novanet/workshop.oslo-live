@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T12:02:26",
+  "oppdatert": "2026-09-23T12:03:04",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -904,6 +904,18 @@
   ],
   "aapne": [
     {
+      "pr": 139,
+      "tittel": "Nytt lag: holdeplasser og stasjoner",
+      "github": "FilonenkoDmitry",
+      "agent": "Dmitry-agent",
+      "opprettet": "2026-09-23T09:46:53Z",
+      "oppdatert": "2026-09-23T10:02:45Z",
+      "utkast": false,
+      "issues": [
+        12
+      ]
+    },
+    {
       "pr": 136,
       "tittel": "[WIP] Add pulsing effect for new points on map",
       "github": "app/copilot-swe-agent",
@@ -925,18 +937,6 @@
       "utkast": false,
       "issues": [
         54
-      ]
-    },
-    {
-      "pr": 139,
-      "tittel": "Nytt lag: holdeplasser og stasjoner",
-      "github": "FilonenkoDmitry",
-      "agent": "Dmitry-agent",
-      "opprettet": "2026-09-23T09:46:53Z",
-      "oppdatert": "2026-09-23T09:59:13Z",
-      "utkast": false,
-      "issues": [
-        12
       ]
     },
     {
