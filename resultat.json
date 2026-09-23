@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:49:48",
+  "oppdatert": "2026-09-23T11:50:27",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -545,7 +545,16 @@
       "plass": 21
     }
   ],
-  "kjoerer": [],
+  "kjoerer": [
+    {
+      "agent": "henrik",
+      "github": "monet820",
+      "issue": 130,
+      "navn": "",
+      "startet": "2026-09-23T09:50:01.9813722+00:00",
+      "minutter": 0
+    }
+  ],
   "main": {
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
@@ -623,7 +632,7 @@
       "issue": 19,
       "navn": "Nytt lag: artsobservasjoner",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T08:52:50Z"
+      "oppdatert": "2026-09-23T09:50:24Z"
     },
     {
       "issue": 21,
@@ -737,13 +746,13 @@
       "issue": 48,
       "navn": "Hent lagene parallelt",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T08:50:29Z"
+      "oppdatert": "2026-09-23T09:50:14Z"
     },
     {
       "issue": 50,
       "navn": "Mål hva som skjer",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T08:56:02Z"
+      "oppdatert": "2026-09-23T09:50:01Z"
     },
     {
       "issue": 51,
@@ -761,7 +770,7 @@
       "issue": 55,
       "navn": "Kartet blir tregt med mange punkter",
       "github": "sin-rha",
-      "oppdatert": "2026-09-23T09:34:38Z"
+      "oppdatert": "2026-09-23T09:50:03Z"
     },
     {
       "issue": 57,
@@ -869,13 +878,19 @@
       "issue": 130,
       "navn": "Fyrverkeri over Rådhuset når en PR blir merget",
       "github": "Copilot",
-      "oppdatert": "2026-09-23T09:49:39Z"
+      "oppdatert": "2026-09-23T09:50:25Z"
     },
     {
       "issue": 130,
       "navn": "Fyrverkeri over Rådhuset når en PR blir merget",
       "github": "SasaRad",
-      "oppdatert": "2026-09-23T09:49:39Z"
+      "oppdatert": "2026-09-23T09:50:25Z"
+    },
+    {
+      "issue": 130,
+      "navn": "Fyrverkeri over Rådhuset når en PR blir merget",
+      "github": "monet820",
+      "oppdatert": "2026-09-23T09:50:25Z"
     },
     {
       "issue": 132,
