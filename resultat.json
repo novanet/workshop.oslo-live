@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T15:03:14",
+  "oppdatert": "2026-09-23T15:03:56",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -665,7 +665,7 @@
       "issue": 207,
       "navn": "Delt mobilitet viser «drivstoff: ELECTRIC» og «COMBUSTION»",
       "startet": "2026-09-23T13:02:39.5485012+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-johan",
@@ -673,7 +673,7 @@
       "issue": 13,
       "navn": "Veiarbeid",
       "startet": "2026-09-23T13:02:49.243038+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-johan",
@@ -681,6 +681,22 @@
       "issue": 16,
       "navn": "Ladestasjoner",
       "startet": "2026-09-23T13:02:49.4778489+00:00",
+      "minutter": 1
+    },
+    {
+      "agent": "mini-leif",
+      "github": "leif-larsen",
+      "issue": 118,
+      "navn": "Nyhetslinje nederst på skjermen",
+      "startet": "2026-09-23T13:03:29.1360578+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-wilma",
+      "github": "larsajakobsen",
+      "issue": 204,
+      "navn": "Lagraden sprenger panelet når navnet er langt",
+      "startet": "2026-09-23T13:03:40.229746+00:00",
       "minutter": 0
     }
   ],
@@ -921,7 +937,7 @@
       "issue": 118,
       "navn": "Nyhetslinje nederst på skjermen",
       "github": "leif-larsen",
-      "oppdatert": "2026-09-23T13:02:56Z"
+      "oppdatert": "2026-09-23T13:03:30Z"
     },
     {
       "issue": 119,
@@ -1023,7 +1039,7 @@
       "issue": 149,
       "navn": "Hvilken versjon kjører nå?",
       "github": "randsu",
-      "oppdatert": "2026-09-23T12:38:13Z"
+      "oppdatert": "2026-09-23T13:03:22Z"
     },
     {
       "issue": 150,
@@ -1089,7 +1105,7 @@
       "issue": 195,
       "navn": "Nytt lag: avvik i kollektivtrafikken",
       "github": "Buggz",
-      "oppdatert": "2026-09-23T12:57:50Z"
+      "oppdatert": "2026-09-23T13:03:53Z"
     },
     {
       "issue": 196,
@@ -1114,6 +1130,12 @@
       "navn": "Popupen havner bak lagpanelet på PC",
       "github": "monet820",
       "oppdatert": "2026-09-23T12:57:18Z"
+    },
+    {
+      "issue": 204,
+      "navn": "Lagraden sprenger panelet når navnet er langt",
+      "github": "larsajakobsen",
+      "oppdatert": "2026-09-23T13:03:41Z"
     },
     {
       "issue": 206,
@@ -1166,6 +1188,18 @@
   ],
   "aapne": [
     {
+      "pr": 228,
+      "tittel": "Nyhetslinje nederst på skjermen (#118)",
+      "github": "leif-larsen",
+      "agent": "mini-leif",
+      "opprettet": "2026-09-23T12:41:18Z",
+      "oppdatert": "2026-09-23T13:03:28Z",
+      "utkast": false,
+      "issues": [
+        118
+      ]
+    },
+    {
       "pr": 83,
       "tittel": "Nytt lag: museer og samlinger",
       "github": "jthagesk",
@@ -1211,18 +1245,6 @@
       "utkast": false,
       "issues": [
         133
-      ]
-    },
-    {
-      "pr": 228,
-      "tittel": "Nyhetslinje nederst på skjermen (#118)",
-      "github": "leif-larsen",
-      "agent": "mini-leif",
-      "opprettet": "2026-09-23T12:41:18Z",
-      "oppdatert": "2026-09-23T13:00:59Z",
-      "utkast": false,
-      "issues": [
-        118
       ]
     },
     {
