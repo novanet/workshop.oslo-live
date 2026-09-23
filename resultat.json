@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:30:52",
+  "oppdatert": "2026-09-23T10:31:18",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -59,31 +59,6 @@
       "plass": 2
     },
     {
-      "navn": "mini-wilma",
-      "github": "larsajakobsen",
-      "poeng": 2,
-      "feil": [
-        {
-          "issue": 1,
-          "navn": "Koordinatrekkefølge",
-          "poeng": 2
-        }
-      ],
-      "lag": [],
-      "levert": [],
-      "dollar": 2.1,
-      "tokens": 3726541,
-      "sekunder": 828,
-      "pr": 2,
-      "utkast": 0,
-      "merget": 1,
-      "kjoeringer": 5,
-      "utenPr": 3,
-      "bygg": [],
-      "estimert": false,
-      "plass": 3
-    },
-    {
       "navn": "mini-ingve",
       "github": "ingvevs",
       "poeng": 2,
@@ -106,7 +81,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 4
+      "plass": 3
     },
     {
       "navn": "mini-leif",
@@ -129,6 +104,31 @@
       "merget": 1,
       "kjoeringer": 3,
       "utenPr": 0,
+      "bygg": [],
+      "estimert": false,
+      "plass": 4
+    },
+    {
+      "navn": "mini-wilma",
+      "github": "larsajakobsen",
+      "poeng": 2,
+      "feil": [
+        {
+          "issue": 1,
+          "navn": "Koordinatrekkefølge",
+          "poeng": 2
+        }
+      ],
+      "lag": [],
+      "levert": [],
+      "dollar": 3.656,
+      "tokens": 7579266,
+      "sekunder": 1289,
+      "pr": 3,
+      "utkast": 0,
+      "merget": 1,
+      "kjoeringer": 6,
+      "utenPr": 3,
       "bygg": [],
       "estimert": false,
       "plass": 5
@@ -282,7 +282,7 @@
       "issue": 20,
       "navn": "Luftvarsel",
       "startet": "2026-09-23T08:22:06.0655338+00:00",
-      "minutter": 8
+      "minutter": 9
     },
     {
       "agent": "mini-kirsten",
@@ -293,20 +293,12 @@
       "minutter": 8
     },
     {
-      "agent": "mini-wilma",
-      "github": "larsajakobsen",
-      "issue": 8,
-      "navn": "Hendelser",
-      "startet": "2026-09-23T08:22:51.9896553+00:00",
-      "minutter": 7
-    },
-    {
       "agent": "mini-kirsten",
       "github": "jthagesk",
       "issue": 29,
       "navn": "Museer",
       "startet": "2026-09-23T08:23:16.9053574+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "mini-astrid",
@@ -338,7 +330,7 @@
       "issue": 19,
       "navn": "Artsobservasjoner",
       "startet": "2026-09-23T08:28:01.690939+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "helstein",
@@ -346,7 +338,7 @@
       "issue": 41,
       "navn": "Fargeblindhet",
       "startet": "2026-09-23T08:28:15.5659433+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-richard",
@@ -363,13 +355,21 @@
       "navn": "Badetemperatur",
       "startet": "2026-09-23T08:30:34.0929688+00:00",
       "minutter": 0
+    },
+    {
+      "agent": "helstein",
+      "github": "nilsgs",
+      "issue": 46,
+      "navn": "Bydelsgrenser",
+      "startet": "2026-09-23T08:31:07.3634724+00:00",
+      "minutter": 0
     }
   ],
   "main": {
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
     "pr": null,
-    "kjoeringer": 18
+    "kjoeringer": 19
   },
   "produkt": {
     "testerBestatt": 11,
@@ -473,7 +473,7 @@
       "issue": 8,
       "navn": "Nytt lag: politilogg og nyhetshendelser",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T08:22:52Z"
+      "oppdatert": "2026-09-23T08:30:52Z"
     },
     {
       "issue": 9,
@@ -551,7 +551,7 @@
       "issue": 46,
       "navn": "Tegn bydelsgrensene",
       "github": "nilsgs",
-      "oppdatert": "2026-09-23T08:30:39Z"
+      "oppdatert": "2026-09-23T08:31:08Z"
     },
     {
       "issue": 48,
@@ -609,6 +609,18 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 80,
+      "tittel": "Nytt lag: politilogg og nyhetshendelser",
+      "github": "larsajakobsen",
+      "agent": "mini-wilma",
+      "opprettet": "2026-09-23T08:30:50Z",
+      "oppdatert": "2026-09-23T08:30:51Z",
+      "utkast": false,
+      "issues": [
+        8
+      ]
+    },
     {
       "pr": 78,
       "tittel": "Nytt lag: smilefjes fra Mattilsynet",
