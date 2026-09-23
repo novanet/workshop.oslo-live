@@ -289,15 +289,16 @@ async function hent(id) {
       const c = f.geometry?.coordinates;
       if (!Array.isArray(c) || c.length < 2) continue;
 
+      const p = f.properties ?? {};
       const el = document.createElement('div');
       el.className = 'merke';
-      el.style.background = oppf.farge;
-      el.textContent = oppf.ikon;
+      el.style.background = p.advarsel ? '#b91c1c' : oppf.farge;
+      el.textContent = p.advarsel ? '⚠️' : oppf.ikon;
 
       const m = new maplibregl.Marker({ element: el })
         .setLngLat([c[0], c[1]])
         .setPopup(new maplibregl.Popup({ offset: 18, closeButton: true })
-          .setHTML(popup(f.properties ?? {})));
+          .setHTML(popup(p)));
 
       if (oppf.på) m.addTo(kart);
       oppf.markorer.push(m);
