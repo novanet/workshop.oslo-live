@@ -1,4 +1,8 @@
+using System.Collections.Concurrent;
+using System.Net;
+using System.Text;
 using System.Text.Json;
+using Microsoft.Extensions.Logging.Abstractions;
 using OsloLive.Kart;
 
 namespace OsloLive.Tester;
@@ -113,5 +117,68 @@ public class BydelerTester
     {
         Assert.All(AlleBydelsnavn, navn =>
             Assert.Contains(Bydeler.Prefikser, p => navn.StartsWith(p, StringComparison.Ordinal)));
+    }
+
+    [Fact]
+    public async Task Hent_gjoer_ni_kall_ett_per_prefiks_aldri_ett_per_punkt()
+    {
+        // Samme bydel i alle svar, så vi også ser at treff fra flere prefikser slås sammen.
+        const string svar = """
+            {
+                "source": "geonorge",
+                "operation": "search_place_name",
+                "parameters": {},
+                "data": {
+                    "places": [
+                        {
+                            "place_id": 145670,
+                            "status": "aktiv",
+                            "lat": 59.91725,
+                            "lon": 10.70886,
+                            "names": [{ "name": "Frogner", "status": "hovednavn" }]
+                        }
+                    ]
+                }
+            }
+            """;
+
+        var håndterer = new TellendeHandler(svar);
+        var data = new Allemannsdata(new HttpClient(håndterer), NullLogger<Allemannsdata>.Instance);
+
+        Allemannsdata.TømMellomlager();
+        try
+        {
+            var sentre = await Bydeler.Hent(data);
+
+            Assert.Equal(9, Bydeler.Prefikser.Length);
+            Assert.Equal(Bydeler.Prefikser.Length, håndterer.Antall);
+            Assert.Equal(Bydeler.Prefikser.Length, håndterer.Adresser.Distinct().Count());
+            Assert.All(håndterer.Adresser, adresse => Assert.Contains("kommunenummer=0301", adresse));
+            Assert.Equal("Frogner", Assert.Single(sentre).Navn);
+        }
+        finally
+        {
+            Allemannsdata.TømMellomlager();
+        }
+    }
+
+    /// <summary>Falsk <see cref="HttpMessageHandler"/> som teller kallene og gir samme svar hver gang, uten nettverk.</summary>
+    private sealed class TellendeHandler(string svar) : HttpMessageHandler
+    {
+        private int antall;
+
+        public int Antall => antall;
+
+        public ConcurrentBag<string> Adresser { get; } = [];
+
+        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage forespørsel, CancellationToken stopp)
+        {
+            Interlocked.Increment(ref antall);
+            Adresser.Add(forespørsel.RequestUri!.ToString());
+            return Task.FromResult(new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(svar, Encoding.UTF8, "application/json"),
+            });
+        }
     }
 }

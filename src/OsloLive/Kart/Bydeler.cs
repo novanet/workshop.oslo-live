@@ -11,7 +11,9 @@ public sealed record Bydelstelling(string Bydel, int Antall);
 /// <summary>
 /// Teller punktene i et lag per bydel. Det finnes ingen bydelsgrenser i
 /// Allemannsdata, så vi bruker nærmeste bydelssenter (fra Kartverkets
-/// stedsnavn) som en tilnærming til bydelsgrensene.
+/// stedsnavn) som en tilnærming til bydelsgrensene. Én oppdatering gjør
+/// 9 kall (ett per prefiks i <see cref="Prefikser"/>), uavhengig av antall
+/// punkter; svarene mellomlagres 30 s i <see cref="Allemannsdata"/>.
 /// </summary>
 public static class Bydeler
 {
@@ -27,7 +29,10 @@ public static class Bydeler
     /// </summary>
     public const double MaksAvstandMeter = 5000;
 
-    /// <summary>Henter bydelssentrene for Oslo kommune, ett kall per prefiks.</summary>
+    /// <summary>
+    /// Henter bydelssentrene for Oslo kommune: nøyaktig ett kall per prefiks,
+    /// altså 9 kall per oppdatering, aldri ett kall per punkt.
+    /// </summary>
     public static async Task<IReadOnlyList<Bydelssenter>> Hent(Allemannsdata data, CancellationToken stopp = default)
     {
         var svar = await Task.WhenAll(Prefikser.Select(prefiks => data.HentListe(
