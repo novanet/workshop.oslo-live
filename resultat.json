@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T15:11:56",
+  "oppdatert": "2026-09-23T15:13:15",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -185,14 +185,14 @@
         }
       ],
       "levert": [],
-      "dollar": 18.757,
-      "tokens": 34202417,
-      "sekunder": 5942,
+      "dollar": 19.662,
+      "tokens": 35903593,
+      "sekunder": 6178,
       "pr": 4,
       "utkast": 0,
       "merget": 2,
-      "kjoeringer": 32,
-      "utenPr": 27,
+      "kjoeringer": 33,
+      "utenPr": 28,
       "bygg": [],
       "estimert": false,
       "plass": 4
@@ -310,6 +310,63 @@
       "plass": 7
     },
     {
+      "navn": "mini-wilma",
+      "github": "larsajakobsen",
+      "poeng": 6,
+      "feil": [
+        {
+          "issue": 1,
+          "navn": "Koordinatrekkefølge",
+          "poeng": 2
+        }
+      ],
+      "lag": [
+        {
+          "issue": 8,
+          "navn": "Hendelser",
+          "poeng": 2
+        }
+      ],
+      "levert": [
+        {
+          "issue": 26,
+          "navn": "Skoler",
+          "poeng": 3
+        },
+        {
+          "issue": 32,
+          "navn": "Strømpris",
+          "poeng": 2
+        },
+        {
+          "issue": 112,
+          "navn": "Nytt lag: målestasjoner i elvene",
+          "poeng": 2
+        },
+        {
+          "issue": 198,
+          "navn": "Et lite pling når noe nytt dukker opp",
+          "poeng": 1
+        },
+        {
+          "issue": 207,
+          "navn": "Delt mobilitet viser «drivstoff: ELECTRIC» og «COMBUSTION»",
+          "poeng": 1
+        }
+      ],
+      "dollar": 41.296,
+      "tokens": 67779944,
+      "sekunder": 12677,
+      "pr": 13,
+      "utkast": 3,
+      "merget": 7,
+      "kjoeringer": 30,
+      "utenPr": 14,
+      "bygg": [],
+      "estimert": false,
+      "plass": 8
+    },
+    {
       "navn": "mini-ingve",
       "github": "ingvevs",
       "poeng": 5,
@@ -338,7 +395,7 @@
       "utenPr": 7,
       "bygg": [],
       "estimert": false,
-      "plass": 8
+      "plass": 9
     },
     {
       "navn": "mini-knive",
@@ -368,7 +425,7 @@
       "utenPr": 7,
       "bygg": [],
       "estimert": false,
-      "plass": 9
+      "plass": 10
     },
     {
       "navn": "mini-kirsten",
@@ -391,58 +448,6 @@
       "merget": 1,
       "kjoeringer": 18,
       "utenPr": 9,
-      "bygg": [],
-      "estimert": false,
-      "plass": 10
-    },
-    {
-      "navn": "mini-wilma",
-      "github": "larsajakobsen",
-      "poeng": 3,
-      "feil": [
-        {
-          "issue": 1,
-          "navn": "Koordinatrekkefølge",
-          "poeng": 2
-        }
-      ],
-      "lag": [
-        {
-          "issue": 8,
-          "navn": "Hendelser",
-          "poeng": 2
-        }
-      ],
-      "levert": [
-        {
-          "issue": 32,
-          "navn": "Strømpris",
-          "poeng": 2
-        },
-        {
-          "issue": 112,
-          "navn": "Nytt lag: målestasjoner i elvene",
-          "poeng": 2
-        },
-        {
-          "issue": 198,
-          "navn": "Et lite pling når noe nytt dukker opp",
-          "poeng": 1
-        },
-        {
-          "issue": 207,
-          "navn": "Delt mobilitet viser «drivstoff: ELECTRIC» og «COMBUSTION»",
-          "poeng": 1
-        }
-      ],
-      "dollar": 42.698,
-      "tokens": 69503228,
-      "sekunder": 12980,
-      "pr": 13,
-      "utkast": 3,
-      "merget": 6,
-      "kjoeringer": 31,
-      "utenPr": 15,
       "bygg": [],
       "estimert": false,
       "plass": 11
@@ -597,6 +602,25 @@
       "plass": 17
     },
     {
+      "navn": "mini-bug",
+      "github": "SasaRad",
+      "poeng": 0,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 3.443,
+      "tokens": 6292460,
+      "sekunder": 1133,
+      "pr": 2,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 5,
+      "utenPr": 3,
+      "bygg": [],
+      "estimert": false,
+      "plass": 18
+    },
+    {
       "navn": "mini-sindre",
       "github": "sin-rha",
       "poeng": 0,
@@ -611,25 +635,6 @@
       "merget": 0,
       "kjoeringer": 12,
       "utenPr": 8,
-      "bygg": [],
-      "estimert": false,
-      "plass": 18
-    },
-    {
-      "navn": "mini-bug",
-      "github": "SasaRad",
-      "poeng": 0,
-      "feil": [],
-      "lag": [],
-      "levert": [],
-      "dollar": 4.245,
-      "tokens": 7667429,
-      "sekunder": 1390,
-      "pr": 2,
-      "utkast": 0,
-      "merget": 0,
-      "kjoeringer": 6,
-      "utenPr": 4,
       "bygg": [],
       "estimert": false,
       "plass": 19
@@ -680,7 +685,7 @@
       "issue": 13,
       "navn": "Veiarbeid",
       "startet": "2026-09-23T13:02:49.243038+00:00",
-      "minutter": 8
+      "minutter": 9
     },
     {
       "agent": "mini-knive",
@@ -688,7 +693,7 @@
       "issue": 195,
       "navn": "Nytt lag: avvik i kollektivtrafikken",
       "startet": "2026-09-23T13:04:43.4543256+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-ingve",
@@ -696,7 +701,7 @@
       "issue": 11,
       "navn": "Kollektiv",
       "startet": "2026-09-23T13:05:41.9082982+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-frode",
@@ -704,7 +709,7 @@
       "issue": 50,
       "navn": "Metrikker",
       "startet": "2026-09-23T13:07:05.7797026+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-gir",
@@ -712,15 +717,7 @@
       "issue": 18,
       "navn": "Kulturminner",
       "startet": "2026-09-23T13:08:06.7329467+00:00",
-      "minutter": 3
-    },
-    {
-      "agent": "mini-gir",
-      "github": "GIR75",
-      "issue": 13,
-      "navn": "Veiarbeid",
-      "startet": "2026-09-23T13:08:14.600688+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-jon",
@@ -728,7 +725,7 @@
       "issue": 189,
       "navn": "Travlere enn vanlig på veiene",
       "startet": "2026-09-23T13:08:36.0345655+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-frode",
@@ -736,7 +733,7 @@
       "issue": 186,
       "navn": "Nytt lag: bysykkelstasjoner som fyllingsringer",
       "startet": "2026-09-23T13:09:04.334225+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-leif",
@@ -744,7 +741,7 @@
       "issue": 21,
       "navn": "Adressesøk",
       "startet": "2026-09-23T13:09:40.703571+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-frode",
@@ -752,7 +749,15 @@
       "issue": 192,
       "navn": "Nytt lag: Wikipedia-artikler rundt deg",
       "startet": "2026-09-23T13:11:25.786562+00:00",
-      "minutter": 0
+      "minutter": 1
+    },
+    {
+      "agent": "mini-aud",
+      "github": "audmaha",
+      "issue": 211,
+      "navn": "Statistikken viser ikke «Nyeste» for vannmålere og smilefjes",
+      "startet": "2026-09-23T13:11:37.8328465+00:00",
+      "minutter": 1
     }
   ],
   "main": {
@@ -806,13 +811,13 @@
       "issue": 13,
       "navn": "Nytt lag: veiarbeid og stengte veier",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T13:08:15Z"
+      "oppdatert": "2026-09-23T13:12:17Z"
     },
     {
       "issue": 13,
       "navn": "Nytt lag: veiarbeid og stengte veier",
       "github": "pr0nin",
-      "oppdatert": "2026-09-23T13:08:15Z"
+      "oppdatert": "2026-09-23T13:12:17Z"
     },
     {
       "issue": 16,
@@ -831,12 +836,6 @@
       "navn": "Nytt lag: kulturminner",
       "github": "GIR75",
       "oppdatert": "2026-09-23T13:08:07Z"
-    },
-    {
-      "issue": 21,
-      "navn": "Søk etter adresse og hopp dit på kartet",
-      "github": "leif-larsen",
-      "oppdatert": "2026-09-23T13:09:41Z"
     },
     {
       "issue": 26,
@@ -1220,7 +1219,7 @@
       "issue": 206,
       "navn": "Popupene viser rådata: ISO-tider, «ikon: 😊» og tall uten enhet",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T12:39:40Z"
+      "oppdatert": "2026-09-23T13:12:06Z"
     },
     {
       "issue": 208,
@@ -1232,7 +1231,7 @@
       "issue": 211,
       "navn": "Statistikken viser ikke «Nyeste» for vannmålere og smilefjes",
       "github": "audmaha",
-      "oppdatert": "2026-09-23T13:10:54Z"
+      "oppdatert": "2026-09-23T13:11:38Z"
     },
     {
       "issue": 213,
@@ -1255,6 +1254,30 @@
   ],
   "aapne": [
     {
+      "pr": 67,
+      "tittel": "Hent lagene parallelt",
+      "github": "FrodeBl",
+      "agent": "mini-frode",
+      "opprettet": "2026-09-23T07:59:18Z",
+      "oppdatert": "2026-09-23T13:11:42Z",
+      "utkast": false,
+      "issues": [
+        48
+      ]
+    },
+    {
+      "pr": 71,
+      "tittel": "Mål hva som skjer",
+      "github": "FrodeBl",
+      "agent": "mini-frode",
+      "opprettet": "2026-09-23T08:12:09Z",
+      "oppdatert": "2026-09-23T13:11:34Z",
+      "utkast": false,
+      "issues": [
+        50
+      ]
+    },
+    {
       "pr": 83,
       "tittel": "Nytt lag: museer og samlinger",
       "github": "jthagesk",
@@ -1276,18 +1299,6 @@
       "utkast": true,
       "issues": [
         204
-      ]
-    },
-    {
-      "pr": 109,
-      "tittel": "Nytt lag: skoler og barnehager",
-      "github": "larsajakobsen",
-      "agent": "mini-wilma",
-      "opprettet": "2026-09-23T09:21:55Z",
-      "oppdatert": "2026-09-23T13:10:09Z",
-      "utkast": false,
-      "issues": [
-        26
       ]
     },
     {
@@ -1360,18 +1371,6 @@
       "utkast": false,
       "issues": [
         47
-      ]
-    },
-    {
-      "pr": 67,
-      "tittel": "Hent lagene parallelt",
-      "github": "FrodeBl",
-      "agent": "mini-frode",
-      "opprettet": "2026-09-23T07:59:18Z",
-      "oppdatert": "2026-09-23T13:00:57Z",
-      "utkast": false,
-      "issues": [
-        48
       ]
     },
     {
@@ -1528,18 +1527,6 @@
       "utkast": false,
       "issues": [
         124
-      ]
-    },
-    {
-      "pr": 71,
-      "tittel": "Mål hva som skjer",
-      "github": "FrodeBl",
-      "agent": "mini-frode",
-      "opprettet": "2026-09-23T08:12:09Z",
-      "oppdatert": "2026-09-23T12:51:18Z",
-      "utkast": false,
-      "issues": [
-        50
       ]
     },
     {
