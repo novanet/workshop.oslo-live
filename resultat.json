@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T15:13:57",
+  "oppdatert": "2026-09-23T15:14:39",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -693,7 +693,7 @@
       "issue": 50,
       "navn": "Metrikker",
       "startet": "2026-09-23T13:07:05.7797026+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-gir",
@@ -701,7 +701,7 @@
       "issue": 18,
       "navn": "Kulturminner",
       "startet": "2026-09-23T13:08:06.7329467+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-jon",
@@ -709,7 +709,7 @@
       "issue": 189,
       "navn": "Travlere enn vanlig på veiene",
       "startet": "2026-09-23T13:08:36.0345655+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-frode",
@@ -717,7 +717,7 @@
       "issue": 186,
       "navn": "Nytt lag: bysykkelstasjoner som fyllingsringer",
       "startet": "2026-09-23T13:09:04.334225+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-frode",
@@ -725,7 +725,7 @@
       "issue": 192,
       "navn": "Nytt lag: Wikipedia-artikler rundt deg",
       "startet": "2026-09-23T13:11:25.786562+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-aud",
@@ -733,7 +733,7 @@
       "issue": 211,
       "navn": "Statistikken viser ikke «Nyeste» for vannmålere og smilefjes",
       "startet": "2026-09-23T13:11:37.8328465+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-wilma",
@@ -741,6 +741,30 @@
       "issue": 206,
       "navn": "Popupene viser rådata: ISO-tider, «ikon: 😊» og tall uten enhet",
       "startet": "2026-09-23T13:13:02.1051821+00:00",
+      "minutter": 1
+    },
+    {
+      "agent": "mini-johan",
+      "github": "pr0nin",
+      "issue": 115,
+      "navn": "Nytt lag: parker og torg",
+      "startet": "2026-09-23T13:13:50.233699+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-johan",
+      "github": "pr0nin",
+      "issue": 27,
+      "navn": "Verneområder",
+      "startet": "2026-09-23T13:13:51.5701165+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-leif",
+      "github": "leif-larsen",
+      "issue": 187,
+      "navn": "Skipets spor det siste døgnet",
+      "startet": "2026-09-23T13:13:58.9663843+00:00",
       "minutter": 0
     }
   ],
@@ -1132,6 +1156,12 @@
       "navn": "Nytt lag: bysykkelstasjoner som fyllingsringer",
       "github": "FrodeBl",
       "oppdatert": "2026-09-23T13:09:05Z"
+    },
+    {
+      "issue": 187,
+      "navn": "Skipets spor det siste døgnet",
+      "github": "leif-larsen",
+      "oppdatert": "2026-09-23T13:14:00Z"
     },
     {
       "issue": 188,
