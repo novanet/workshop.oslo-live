@@ -27,4 +27,41 @@ public class StatiskeFilerTester : IClassFixture<VertUtenBakgrunnssjekk>
 
         Assert.Contains("window.lagSymbol", innhold);
     }
+
+    [Fact]
+    public async Task Lagraden_har_grafen_mellom_navn_og_antall()
+    {
+        var innhold = await vert.CreateClient().GetStringAsync("/");
+
+        var navn = innhold.IndexOf("<span class=\"navn\">${l.navn}</span>", StringComparison.Ordinal);
+        var graf = innhold.IndexOf("class=\"graf\" id=\"graf-${l.id}\"", StringComparison.Ordinal);
+        var antall = innhold.IndexOf("class=\"antall\" id=\"antall-${l.id}\"", StringComparison.Ordinal);
+
+        Assert.True(navn >= 0 && graf > navn && antall > graf);
+    }
+
+    [Fact]
+    public async Task Lagraden_har_ingen_egen_grafrad()
+    {
+        var innhold = await vert.CreateClient().GetStringAsync("/");
+
+        Assert.DoesNotContain("liste.appendChild(graf)", innhold);
+    }
+
+    [Fact]
+    public async Task Indeksen_viser_ikke_historikktekst_i_raden()
+    {
+        var innhold = await vert.CreateClient().GetStringAsync("/");
+
+        Assert.DoesNotContain("graf-tom", innhold);
+    }
+
+    [Fact]
+    public async Task Indeksen_setter_verktoytips_uten_historikk()
+    {
+        var innhold = await vert.CreateClient().GetStringAsync("/");
+
+        Assert.Contains("Ingen historikk ennå", innhold);
+        Assert.Contains("bilder.length < 2", innhold);
+    }
 }
