@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:42:50",
+  "oppdatert": "2026-09-23T11:43:28",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -548,7 +548,7 @@
       "issue": 52,
       "navn": "Konfigurerbar bbox",
       "startet": "2026-09-23T09:36:06.5656066+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "Dmitry-agent",
@@ -580,7 +580,7 @@
       "issue": 28,
       "navn": "Tog",
       "startet": "2026-09-23T09:39:07.9583013+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-wilma",
@@ -604,7 +604,7 @@
       "issue": 113,
       "navn": "Nytt lag: store arbeidsplasser i sentrum",
       "startet": "2026-09-23T09:39:52.4461984+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-leif",
@@ -620,6 +620,14 @@
       "issue": 27,
       "navn": "Verneområder",
       "startet": "2026-09-23T09:42:25.9308327+00:00",
+      "minutter": 1
+    },
+    {
+      "agent": "mini-bug",
+      "github": "SasaRad",
+      "issue": 117,
+      "navn": "Nye punkter pulserer når de dukker opp",
+      "startet": "2026-09-23T09:43:08.8955657+00:00",
       "minutter": 0
     }
   ],
@@ -627,7 +635,7 @@
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
     "pr": null,
-    "kjoeringer": 35
+    "kjoeringer": 36
   },
   "produkt": {
     "testerBestatt": 15,
@@ -891,7 +899,7 @@
       "issue": 111,
       "navn": "Nytt lag: kaier og ferjekaier",
       "github": "martinrholth",
-      "oppdatert": "2026-09-23T09:40:57Z"
+      "oppdatert": "2026-09-23T09:43:20Z"
     },
     {
       "issue": 112,
@@ -918,6 +926,12 @@
       "oppdatert": "2026-09-23T09:38:45Z"
     },
     {
+      "issue": 117,
+      "navn": "Nye punkter pulserer når de dukker opp",
+      "github": "SasaRad",
+      "oppdatert": "2026-09-23T09:43:09Z"
+    },
+    {
       "issue": 118,
       "navn": "Nyhetslinje nederst på skjermen",
       "github": "leif-larsen",
@@ -932,6 +946,30 @@
   ],
   "aapne": [
     {
+      "pr": 96,
+      "tittel": "#22: Slå sammen punkter som ligger oppå hverandre",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:46:40Z",
+      "oppdatert": "2026-09-23T09:43:11Z",
+      "utkast": false,
+      "issues": [
+        22
+      ]
+    },
+    {
+      "pr": 125,
+      "tittel": "[WIP] Add layer for major employers in city center",
+      "github": "app/copilot-swe-agent",
+      "agent": "app/copilot-swe-agent",
+      "opprettet": "2026-09-23T09:38:58Z",
+      "oppdatert": "2026-09-23T09:43:07Z",
+      "utkast": true,
+      "issues": [
+        113
+      ]
+    },
+    {
       "pr": 87,
       "tittel": "Del kartutsnittet som en lenke",
       "github": "audmaha",
@@ -941,18 +979,6 @@
       "utkast": false,
       "issues": [
         23
-      ]
-    },
-    {
-      "pr": 125,
-      "tittel": "[WIP] Add layer for major employers in city center",
-      "github": "app/copilot-swe-agent",
-      "agent": "app/copilot-swe-agent",
-      "opprettet": "2026-09-23T09:38:58Z",
-      "oppdatert": "2026-09-23T09:41:13Z",
-      "utkast": true,
-      "issues": [
-        113
       ]
     },
     {
@@ -1061,18 +1087,6 @@
       "utkast": false,
       "issues": [
         8
-      ]
-    },
-    {
-      "pr": 96,
-      "tittel": "#22: Slå sammen punkter som ligger oppå hverandre",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:46:40Z",
-      "oppdatert": "2026-09-23T09:19:22Z",
-      "utkast": false,
-      "issues": [
-        22
       ]
     },
     {
