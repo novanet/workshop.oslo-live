@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:36:05",
+  "oppdatert": "2026-09-23T11:36:43",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -199,13 +199,13 @@
           "poeng": 5
         }
       ],
-      "dollar": 10.315,
-      "tokens": 22223515,
-      "sekunder": 3473,
+      "dollar": 10.971,
+      "tokens": 23469143,
+      "sekunder": 3729,
       "pr": 4,
       "utkast": 0,
       "merget": 1,
-      "kjoeringer": 7,
+      "kjoeringer": 8,
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
@@ -458,7 +458,7 @@
       "issue": 29,
       "navn": "Museer",
       "startet": "2026-09-23T09:33:36.7988647+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-taco",
@@ -466,7 +466,7 @@
       "issue": 122,
       "navn": "Vis hvor ferskt hvert lag er",
       "startet": "2026-09-23T09:34:35.9423034+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-bug",
@@ -474,6 +474,14 @@
       "issue": 3,
       "navn": "Mellomlageret",
       "startet": "2026-09-23T09:34:49.5919992+00:00",
+      "minutter": 1
+    },
+    {
+      "agent": "mini-kirsten",
+      "github": "jthagesk",
+      "issue": 52,
+      "navn": "Konfigurerbar bbox",
+      "startet": "2026-09-23T09:36:06.5656066+00:00",
       "minutter": 0
     }
   ],
@@ -481,7 +489,7 @@
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
     "pr": null,
-    "kjoeringer": 34
+    "kjoeringer": 35
   },
   "produkt": {
     "testerBestatt": 15,
@@ -571,13 +579,13 @@
       "issue": 5,
       "navn": "Tall i URL-ene får norsk desimalkomma",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T08:22:04Z"
+      "oppdatert": "2026-09-23T09:36:32Z"
     },
     {
       "issue": 5,
       "navn": "Tall i URL-ene får norsk desimalkomma",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T08:22:04Z"
+      "oppdatert": "2026-09-23T09:36:32Z"
     },
     {
       "issue": 6,
@@ -614,6 +622,12 @@
       "navn": "Nytt lag: kollektivtrafikk som beveger seg",
       "github": "coffeelyfe",
       "oppdatert": "2026-09-23T09:31:31Z"
+    },
+    {
+      "issue": 12,
+      "navn": "Nytt lag: holdeplasser og stasjoner",
+      "github": "FilonenkoDmitry",
+      "oppdatert": "2026-09-23T09:36:39Z"
     },
     {
       "issue": 13,
@@ -865,7 +879,7 @@
       "issue": 52,
       "navn": "Gjør kartutsnittet konfigurerbart",
       "github": "jthagesk",
-      "oppdatert": "2026-09-23T09:35:22Z"
+      "oppdatert": "2026-09-23T09:36:07Z"
     },
     {
       "issue": 53,
@@ -924,6 +938,18 @@
   ],
   "aapne": [
     {
+      "pr": 91,
+      "tittel": "Fargene må virke for alle",
+      "github": "audmaha",
+      "agent": "mini-aud",
+      "opprettet": "2026-09-23T08:42:14Z",
+      "oppdatert": "2026-09-23T09:36:10Z",
+      "utkast": false,
+      "issues": [
+        41
+      ]
+    },
+    {
       "pr": 79,
       "tittel": "Kartet blir tregt med mange punkter",
       "github": "sin-rha",
@@ -933,18 +959,6 @@
       "utkast": false,
       "issues": [
         55
-      ]
-    },
-    {
-      "pr": 91,
-      "tittel": "Fargene må virke for alle",
-      "github": "audmaha",
-      "agent": "mini-aud",
-      "opprettet": "2026-09-23T08:42:14Z",
-      "oppdatert": "2026-09-23T09:34:27Z",
-      "utkast": false,
-      "issues": [
-        41
       ]
     },
     {
