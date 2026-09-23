@@ -70,6 +70,7 @@ builder.Services.AddSingleton<ILag, VannmaalereLag>();
 builder.Services.AddSingleton<ILag, KaierLag>();
 builder.Services.AddSingleton<ILag, BomstasjonerLag>();
 builder.Services.AddSingleton<ILag, VaerstasjonerLag>();
+builder.Services.AddSingleton<ILag, FolketellingLag>();
 builder.Services.AddSingleton<ILag, IdrettsanleggLag>();
 
 // Bakgrunnssjekk av kildehelse, se Helse/HelseSjekker.cs.
