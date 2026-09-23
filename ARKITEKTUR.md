@@ -13,6 +13,7 @@ src/OsloLive/
     ILag.cs               kontrakten et lag oppfyller
   Lag/
     LuftkvalitetLag.cs    mal for nye lag
+    FlyLag.cs             unntak: egen kilde (airplanes.live), se «Unntak: flylaget»
   wwwroot/index.html      hele frontenden, én fil, ingen byggesteg
 tests/OsloLive.Tester/    xUnit. ApiTester.cs (WebApplicationFactory), KartTester.cs (Geo, Allemannsdata)
 issues/                   issuetekstene. Ikke rør.
@@ -81,6 +82,35 @@ Allemannsdata.ByggUrl(kilde, operasjon, parametre) // formaterer tall med Invari
 - Mellomlager 30 sekunder per adresse. Ikke omgå det. Trenger du ferskere data, skriv det i PR-en.
 - Tallparametre må ut som `59.91`, ikke `59,91`. Appen kjører med `nb-NO`; `ByggUrl` håndterer det, egen strengbygging må bruke `CultureInfo.InvariantCulture`.
 - Finn `kilde`, `operasjon`, parametre og feltnavn med MCP-serveren `allemannsdata` før du skriver kode.
+
+## Unntak: flylaget (airplanes.live)
+
+`FlyLag` bryter regelen om at lag skal bruke `Allemannsdata`. Issue #56 krever at
+bruddet begrunnes med svar på tre spørsmål. Svarene står her, ved siden av regelen.
+
+**Hvorfor akkurat denne kilden?** Allemannsdata har ingen kilde med flyposisjoner.
+Kilden `avinor` gir rutetider og status per flyplass, uten lat/lon, og ingen annen
+kilde i wikien gir posisjoner for fly. airplanes.live er et åpent ADS-B-nettverk
+drevet av entusiaster. Endepunktet `/v2/point/{lat}/{lon}/{nm}` gir fly innenfor en
+radius, med feltene laget trenger: `hex`, `flight`, `lat`, `lon`, `alt_baro` (tall,
+eller `"ground"` for fly på bakken) og `gs`. Ingen registrering, ingen nøkkel.
+
+**Hva koster den? Krever den nøkkel, og har den et tak på antall kall?** Gratis og
+nøkkelfri, så ingen hemmelighet ligger i repoet eller i miljøet. Kilden ber om maks
+ett kall i sekundet per IP. `FlyLag` mellomlagrer svaret i 30 sekunder i `IMemoryCache`,
+så kartet gjør maksimalt to kall i minuttet uansett hvor mange som ser på det.
+HttpClient-en `fly` har 10 sekunders tidsavbrudd.
+
+**Hva skjer den dagen kilden er nede eller avviser oss?** `FlyLag.Hent` kaster, og
+`/api/lag/{id}` i `Program.cs` gjør det om til 502 for `/api/lag/fly` alene. `/api/lag`
+og de andre lagene svarer 200, og lagvelgeren viser flylaget som rødt. Testen
+`Svikt_i_flykilden_gir_502_bare_for_flylaget` i `ApiTester.cs` bytter ut flylagets
+HttpClient med en som alltid feiler og bekrefter dette. Rader uten posisjon eller
+`hex` forkastes én og én i `TilPunkt`, så én dårlig rad feller ikke laget.
+
+Bruddet er isolert: `FlyLag` har egen navngitt `HttpClient` («fly») og eget mellomlager,
+og rører verken `Allemannsdata` eller de andre lagene. Kartutsnittet i `Geo` er ikke
+utvidet til Gardermoen; det er en egen beslutning om hva «Oslo Live» skal dekke.
 
 ## Frontend
 

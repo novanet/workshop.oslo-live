@@ -21,9 +21,28 @@ public static class Geo
     public const double OsloLat = 59.9139;
     public const double OsloLon = 10.7522;
 
-    /// <summary>Punktet slik GeoJSON skal ha det.</summary>
+    /// <summary>Jordens middelradius i meter. Brukes av <see cref="Avstand"/>.</summary>
+    public const double JordradiusMeter = 6_371_000;
+
+    /// <summary>Punktet slik GeoJSON skal ha det: lengdegrad først, [lon, lat].</summary>
     public static Geometri Punkt(double lat, double lon) =>
-        new("Point", [lat, lon]);
+        new("Point", [lon, lat]);
+
+    /// <summary>
+    /// Avstanden i meter mellom to punkter, langs jordoverflaten (haversine).
+    /// Ikke Pythagoras: en grad lengdegrad er bare halvparten så lang som en grad breddegrad i Oslo.
+    /// </summary>
+    public static double Avstand(double lat1, double lon1, double lat2, double lon2)
+    {
+        static double Radianer(double grader) => grader * Math.PI / 180;
+
+        var dLat = Radianer(lat2 - lat1);
+        var dLon = Radianer(lon2 - lon1);
+        var a = Math.Sin(dLat / 2) * Math.Sin(dLat / 2)
+              + Math.Cos(Radianer(lat1)) * Math.Cos(Radianer(lat2)) * Math.Sin(dLon / 2) * Math.Sin(dLon / 2);
+
+        return 2 * JordradiusMeter * Math.Asin(Math.Min(1, Math.Sqrt(a)));
+    }
 
     /// <summary>Ligger punktet innenfor kartutsnittet vårt?</summary>
     public static bool IOslo(double lat, double lon) =>
@@ -67,14 +86,15 @@ public static class Geo
 
     /// <summary>
     /// Samler punktene til et ferdig lag. Punkter utenfor Oslo er allerede
-    /// silt bort av <see cref="Lag"/>; her fjerner vi duplikater.
+    /// silt bort av <see cref="Lag"/>; her fjerner vi duplikater, altså
+    /// punkter med samme id.
     /// </summary>
     public static Kartlag Samle(IEnumerable<Kartpunkt?> punkter)
     {
         var rene = punkter
             .Where(p => p is not null)
             .Select(p => p!)
-            .DistinctBy(p => p.Properties["kilde"])
+            .DistinctBy(p => p.Properties["id"])
             .ToList();
 
         return new Kartlag("FeatureCollection", rene);

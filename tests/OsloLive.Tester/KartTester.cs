@@ -1,3 +1,4 @@
+using System.Globalization;
 using OsloLive.Kart;
 
 namespace OsloLive.Tester;
@@ -51,6 +52,25 @@ public class GeoTester
     }
 
     [Fact]
+    public void Samle_beholder_flere_punkter_med_samme_kilde()
+    {
+        var lag = Geo.Samle([
+            Geo.Lag("a", 59.91, 10.75, "A", "Felles kilde"),
+            Geo.Lag("b", 59.92, 10.76, "B", "Felles kilde"),
+        ]);
+
+        Assert.Equal(2, lag.Features.Count);
+    }
+
+    [Fact]
+    public void Punkt_har_lengdegrad_foer_breddegrad()
+    {
+        var punkt = Geo.Punkt(59.9139, 10.7522);
+
+        Assert.Equal([10.7522, 59.9139], punkt.Coordinates);
+    }
+
+    [Fact]
     public void Rådhuset_ligger_i_oslo()
     {
         Assert.True(Geo.IOslo(59.9139, 10.7522));
@@ -101,6 +121,39 @@ public class GeoTester
     }
 
     [Fact]
+    public void Samle_beholder_ulike_punkter_fra_samme_kilde()
+    {
+        var lag = Geo.Samle([
+            Geo.Lag("a", 59.91, 10.75, "A", "Kilde"),
+            Geo.Lag("b", 59.92, 10.76, "B", "Kilde"),
+            Geo.Lag("c", 59.93, 10.77, "C", "Kilde"),
+        ]);
+
+        Assert.Equal("FeatureCollection", lag.Type);
+        Assert.Equal(3, lag.Features.Count);
+        Assert.Equal(["a", "b", "c"], lag.Features.Select(f => f.Properties["id"]));
+
+        foreach (var punkt in lag.Features)
+        {
+            Assert.Contains("id", punkt.Properties.Keys);
+            Assert.Contains("navn", punkt.Properties.Keys);
+            Assert.Contains("kilde", punkt.Properties.Keys);
+        }
+    }
+
+    [Fact]
+    public void Samle_fjerner_punkter_med_samme_id()
+    {
+        var lag = Geo.Samle([
+            Geo.Lag("a", 59.91, 10.75, "A", "Kilde"),
+            Geo.Lag("a", 59.91, 10.75, "A", "Kilde"),
+        ]);
+
+        Assert.Single(lag.Features);
+        Assert.Equal("a", lag.Features[0].Properties["id"]);
+    }
+
+    [Fact]
     public void Samle_tar_ikke_med_punkter_utenfor_utsnittet()
     {
         var lag = Geo.Samle([
@@ -110,6 +163,58 @@ public class GeoTester
 
         Assert.Single(lag.Features);
         Assert.Equal("a", lag.Features[0].Properties["id"]);
+    }
+
+    [Fact]
+    public void Punkt_har_lengdegrad_foerst_og_breddegrad_sist()
+    {
+        var geometri = Geo.Punkt(59.9139, 10.7522);
+
+        Assert.Equal("Point", geometri.Type);
+        Assert.Equal([10.7522, 59.9139], geometri.Coordinates);
+    }
+
+    [Fact]
+    public void Lag_gir_koordinater_i_geojson_rekkefoelge()
+    {
+        var punkt = Geo.Lag("id-1", 59.9139, 10.7522, "Rådhuset", "Test");
+
+        Assert.Equal([10.7522, 59.9139], punkt!.Geometry.Coordinates);
+    }
+
+    [Fact]
+    public void Koordinatene_fra_lag_ligger_innenfor_utsnittet_i_lon_lat_rekkefoelge()
+    {
+        var punkt = Geo.Lag("id-1", 59.9139, 10.7522, "Rådhuset", "Test");
+        var c = punkt!.Geometry.Coordinates;
+
+        Assert.InRange(c[0], Geo.MinLon, Geo.MaksLon);
+        Assert.InRange(c[1], Geo.MinLat, Geo.MaksLat);
+    }
+
+    [Fact]
+    public void Avstand_fra_raadhuset_til_sofienbergparken_er_mellom_1200_og_1300_meter()
+    {
+        var meter = Geo.Avstand(Geo.OsloLat, Geo.OsloLon, 59.9228, 10.7660);
+
+        Assert.InRange(meter, 1200, 1300);
+    }
+
+    [Fact]
+    public void Avstand_til_samme_punkt_er_null()
+    {
+        var meter = Geo.Avstand(59.9139, 10.7522, 59.9139, 10.7522);
+
+        Assert.Equal(0, meter);
+    }
+
+    [Fact]
+    public void Avstand_er_lik_begge_veier()
+    {
+        var frem = Geo.Avstand(59.9139, 10.7522, 59.9228, 10.7660);
+        var tilbake = Geo.Avstand(59.9228, 10.7660, 59.9139, 10.7522);
+
+        Assert.Equal(frem, tilbake, precision: 6);
     }
 }
 
@@ -145,5 +250,75 @@ public class AllemannsdataTester
     public void Levetid_bruker_konstanten_i_sekunder()
     {
         Assert.Equal(TimeSpan.FromSeconds(Allemannsdata.LevetidSekunder), Allemannsdata.Levetid);
+    }
+
+    private static void MedNorskKultur(Action handling)
+    {
+        var forrigeKultur = CultureInfo.CurrentCulture;
+        CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("nb-NO");
+        try
+        {
+            handling();
+        }
+        finally
+        {
+            CultureInfo.CurrentCulture = forrigeKultur;
+        }
+    }
+
+    [Fact]
+    public void Url_bruker_punktum_for_double_med_norsk_kultur()
+    {
+        MedNorskKultur(() =>
+        {
+            Assert.Equal(",", CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
+
+            var url = Allemannsdata.ByggUrl("luftkvalitet", "get_air_quality_nearby",
+                new Dictionary<string, object> { ["lat"] = 59.9139, ["lon"] = 10.7522 });
+
+            Assert.Contains("lat=59.9139", url);
+            Assert.Contains("lon=10.7522", url);
+            Assert.DoesNotContain("59,9139", url);
+            Assert.DoesNotContain("59%2C9139", url);
+        });
+    }
+
+    [Fact]
+    public void Url_bruker_punktum_for_float_med_norsk_kultur()
+    {
+        MedNorskKultur(() =>
+        {
+            var url = Allemannsdata.ByggUrl("luftkvalitet", "get_air_quality_nearby",
+                new Dictionary<string, object> { ["lat"] = 59.5f });
+
+            Assert.Contains("lat=59.5", url);
+            Assert.DoesNotContain("%2C", url);
+        });
+    }
+
+    [Fact]
+    public void Url_bruker_punktum_for_decimal_med_norsk_kultur()
+    {
+        MedNorskKultur(() =>
+        {
+            var url = Allemannsdata.ByggUrl("luftkvalitet", "get_air_quality_nearby",
+                new Dictionary<string, object> { ["lat"] = 59.9139m });
+
+            Assert.Contains("lat=59.9139", url);
+            Assert.DoesNotContain("%2C", url);
+        });
+    }
+
+    [Fact]
+    public void Heltall_formateres_som_foer_med_norsk_kultur()
+    {
+        MedNorskKultur(() =>
+        {
+            var url = Allemannsdata.ByggUrl("luftkvalitet", "get_air_quality_nearby",
+                new Dictionary<string, object> { ["limit"] = 50, ["navn"] = "Oslo" });
+
+            Assert.Contains("limit=50", url);
+            Assert.Contains("navn=Oslo", url);
+        });
     }
 }

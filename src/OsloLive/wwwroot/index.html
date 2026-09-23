@@ -78,6 +78,17 @@
   .maplibregl-popup-content .rad { color: var(--dempet); }
   .maplibregl-popup-content .rad span { color: var(--tekst); }
   .maplibregl-ctrl-group { border: 1.5px solid var(--kant) !important; box-shadow: none !important; }
+
+  .panel.naermest { left: auto; right: 16px; width: 280px; }
+  .naermest .topp { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .naermest h2 { margin: 0; font-size: 16px; }
+  .naermest .lukk { border: 0; background: none; font-size: 18px; cursor: pointer; color: var(--dempet); }
+  .innslag { display: flex; gap: 9px; align-items: center; padding: 7px 8px; border-radius: 7px; cursor: pointer; }
+  .innslag:hover { background: #f3f4f6; }
+  .innslag .ikon { width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid #111; display: grid; place-items: center; font-size: 12px; flex: none; }
+  .innslag .tekst { flex: 1; font-size: 13px; line-height: 1.35; min-width: 0; }
+  .innslag .tekst small { display: block; color: var(--dempet); }
+  .innslag .meter { font-size: 12px; font-variant-numeric: tabular-nums; }
 </style>
 </head>
 <body>
@@ -97,6 +108,11 @@
   <button id="snurr" type="button" aria-pressed="false">Snurr</button>
   <button id="flatt" type="button">2D</button>
   <button id="hjem" type="button">Sentrum</button>
+</div>
+
+<div class="panel naermest" id="naermest" hidden>
+  <div class="topp"><h2>Nærmest her</h2><button class="lukk" id="lukk-naermest" type="button" aria-label="Lukk">×</button></div>
+  <div id="naermest-liste"></div>
 </div>
 
 <script>
@@ -265,13 +281,20 @@ function fargeFor(id, nr) {
 // ---------------------------------------------------------------------------
 const lagene = new Map();
 
+// Verdiene kommer fra eksterne kilder og går inn i innerHTML, så de må escapes.
+function esc(v) {
+  return String(v)
+    .replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;').replaceAll("'", '&#39;');
+}
+
 function popup(e) {
   const skjul = new Set(['id', 'navn', 'kilde']);
   const rader = Object.entries(e)
     .filter(([k, v]) => !skjul.has(k) && v !== null && v !== undefined && v !== '')
-    .map(([k, v]) => `<div class="rad">${k}: <span>${v}</span></div>`)
+    .map(([k, v]) => `<div class="rad">${esc(k)}: <span>${esc(v)}</span></div>`)
     .join('');
-  return `<b>${e.navn ?? 'Uten navn'}</b>${rader}<div class="rad" style="margin-top:6px;opacity:.7">${e.kilde ?? ''}</div>`;
+  return `<b>${esc(e.navn ?? 'Uten navn')}</b>${rader}<div class="rad" style="margin-top:6px;opacity:.7">${esc(e.kilde ?? '')}</div>`;
 }
 
 async function hent(id) {
@@ -284,23 +307,26 @@ async function hent(id) {
 
     for (const m of oppf.markorer) m.remove();
     oppf.markorer = [];
+    oppf.punkter = [];
 
     for (const f of (geo.features ?? [])) {
       const c = f.geometry?.coordinates;
       if (!Array.isArray(c) || c.length < 2) continue;
 
+      const p = f.properties ?? {};
       const el = document.createElement('div');
       el.className = 'merke';
-      el.style.background = oppf.farge;
-      el.textContent = f.properties?.ikon ?? oppf.ikon;
+      el.style.background = p.advarsel ? '#b91c1c' : oppf.farge;
+      el.textContent = p.advarsel ? '⚠️' : (p.ikon ?? oppf.ikon);
 
       const m = new maplibregl.Marker({ element: el })
         .setLngLat([c[0], c[1]])
         .setPopup(new maplibregl.Popup({ offset: 18, closeButton: true })
-          .setHTML(popup(f.properties ?? {})));
+          .setHTML(popup(p)));
 
       if (oppf.på) m.addTo(kart);
       oppf.markorer.push(m);
+      oppf.punkter.push({ markor: m, navn: f.properties?.navn ?? 'Uten navn', lon: c[0], lat: c[1] });
     }
 
     oppf.antall = oppf.markorer.length;
@@ -312,6 +338,7 @@ async function hent(id) {
     teller.className = 'antall feil';
   }
   oppdaterBunn();
+  if (valgtSted) visNaermest();
 }
 
 function oppdaterBunn() {
@@ -337,7 +364,7 @@ async function start() {
   liste.innerHTML = '';
   lag.forEach((l, nr) => {
     const farge = fargeFor(l.id, nr);
-    lagene.set(l.id, { ikon: l.ikon || '📍', farge, markorer: [], antall: 0, på: true });
+    lagene.set(l.id, { ikon: l.ikon || '📍', navn: l.navn, farge, markorer: [], punkter: [], antall: 0, på: true });
 
     const rad = document.createElement('label');
     rad.className = 'lag';
@@ -355,6 +382,7 @@ async function start() {
         if (oppf.på) { m.addTo(kart); } else { m.remove(); }
       }
       oppdaterBunn();
+      if (valgtSted) visNaermest();
     });
     liste.appendChild(rad);
 
@@ -363,6 +391,85 @@ async function start() {
 
   setInterval(() => lagene.forEach((_, id) => hent(id)), 15000);
 }
+
+// ---------------------------------------------------------------------------
+// Nærmest her: høyreklikk eller langt trykk
+// ---------------------------------------------------------------------------
+let valgtSted = null;   // { lng, lat }
+let stedMarkor = null;
+
+/** Samme haversine som Geo.Avstand i Kart/Geo.cs. Meter. */
+function avstand(lat1, lon1, lat2, lon2) {
+  const rad = (g) => g * Math.PI / 180;
+  const dLat = rad(lat2 - lat1), dLon = rad(lon2 - lon1);
+  const a = Math.sin(dLat / 2) ** 2 + Math.cos(rad(lat1)) * Math.cos(rad(lat2)) * Math.sin(dLon / 2) ** 2;
+  return 2 * 6371000 * Math.asin(Math.min(1, Math.sqrt(a)));
+}
+
+function velgSted(lngLat) {
+  valgtSted = { lng: lngLat.lng, lat: lngLat.lat };
+  if (!stedMarkor) stedMarkor = new maplibregl.Marker({ color: '#111' });
+  stedMarkor.setLngLat(lngLat).addTo(kart);
+  visNaermest();
+}
+
+function visNaermest() {
+  const innslag = [];
+  for (const oppf of lagene.values()) {
+    if (!oppf.på || !oppf.punkter.length) continue;          // lag uten punkter vises ikke
+    let best = null;
+    for (const p of oppf.punkter) {
+      const d = avstand(valgtSted.lat, valgtSted.lng, p.lat, p.lon);
+      if (!best || d < best.d) best = { ...p, d };
+    }
+    innslag.push({ oppf, best });
+  }
+  innslag.sort((a, b) => a.best.d - b.best.d);               // korteste øverst
+
+  const liste = document.getElementById('naermest-liste');
+  liste.innerHTML = '';
+  if (!innslag.length) liste.innerHTML = '<p class="tom">Ingen punkter i lagene som er på.</p>';
+  for (const { oppf, best } of innslag) {
+    const rad = document.createElement('div');
+    rad.className = 'innslag';
+    rad.innerHTML = '<span class="ikon"></span><span class="tekst"><span class="punkt"></span><small class="lagnavn"></small></span><span class="meter"></span>';
+    rad.querySelector('.ikon').textContent = oppf.ikon;
+    rad.querySelector('.ikon').style.background = oppf.farge;
+    rad.querySelector('.punkt').textContent = best.navn;      // textContent: navn kommer fra eksterne kilder
+    rad.querySelector('.lagnavn').textContent = oppf.navn;
+    rad.querySelector('.meter').textContent = Math.round(best.d) + ' m';
+    rad.addEventListener('click', () => {
+      kart.flyTo({ center: [best.lon, best.lat], zoom: Math.max(kart.getZoom(), 16), duration: 1200 });
+      const popup = best.markor.getPopup();
+      if (popup && !popup.isOpen()) best.markor.togglePopup();
+    });
+    liste.appendChild(rad);
+  }
+  document.getElementById('naermest').hidden = false;
+}
+
+function lukkNaermest() {
+  valgtSted = null;
+  if (stedMarkor) stedMarkor.remove();
+  document.getElementById('naermest').hidden = true;
+}
+
+document.getElementById('lukk-naermest').addEventListener('click', lukkNaermest);
+
+kart.on('contextmenu', (e) => { e.preventDefault(); velgSted(e.lngLat); });
+
+// Langt trykk: MapLibre har ingen egen hendelse for dette, og iOS sender ikke contextmenu.
+let trykkTimer = null, trykkStart = null;
+kart.on('touchstart', (e) => {
+  clearTimeout(trykkTimer);
+  if (e.originalEvent.touches.length !== 1) return;          // ikke ved knip/zoom
+  trykkStart = e.point;
+  trykkTimer = setTimeout(() => velgSted(e.lngLat), 600);
+});
+kart.on('touchmove', (e) => {
+  if (trykkStart && (Math.abs(e.point.x - trykkStart.x) > 10 || Math.abs(e.point.y - trykkStart.y) > 10)) clearTimeout(trykkTimer);
+});
+['touchend', 'touchcancel', 'dragstart', 'zoomstart'].forEach((h) => kart.on(h, () => clearTimeout(trykkTimer)));
 
 // ---------------------------------------------------------------------------
 // Kamera
