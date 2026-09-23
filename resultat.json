@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:02:41",
+  "oppdatert": "2026-09-23T14:03:46",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -57,13 +57,13 @@
           "poeng": 8
         }
       ],
-      "dollar": 16.757,
-      "tokens": 32622114,
-      "sekunder": 5772,
-      "pr": 10,
+      "dollar": 17.498,
+      "tokens": 34580100,
+      "sekunder": 6062,
+      "pr": 11,
       "utkast": 0,
       "merget": 10,
-      "kjoeringer": 15,
+      "kjoeringer": 16,
       "utenPr": 5,
       "bygg": [],
       "estimert": false,
@@ -123,14 +123,14 @@
         }
       ],
       "levert": [],
-      "dollar": 7.155,
-      "tokens": 12044475,
-      "sekunder": 2494,
+      "dollar": 8.791,
+      "tokens": 14498175,
+      "sekunder": 2978,
       "pr": 2,
       "utkast": 0,
       "merget": 2,
-      "kjoeringer": 17,
-      "utenPr": 15,
+      "kjoeringer": 19,
+      "utenPr": 17,
       "bygg": [],
       "estimert": false,
       "plass": 3
@@ -554,31 +554,7 @@
       "issue": 44,
       "navn": "Sammenlign tid",
       "startet": "2026-09-23T11:57:22.3942011+00:00",
-      "minutter": 5
-    },
-    {
-      "agent": "mini-richard",
-      "github": "randsu",
-      "issue": 142,
-      "navn": "Kurs på skipene",
-      "startet": "2026-09-23T11:58:03.6775072+00:00",
-      "minutter": 4
-    },
-    {
-      "agent": "mini-gir",
-      "github": "GIR75",
-      "issue": 13,
-      "navn": "Veiarbeid",
-      "startet": "2026-09-23T11:59:00.4345493+00:00",
-      "minutter": 3
-    },
-    {
-      "agent": "mini-gir",
-      "github": "GIR75",
-      "issue": 51,
-      "navn": "Logging",
-      "startet": "2026-09-23T11:59:02.268638+00:00",
-      "minutter": 3
+      "minutter": 6
     },
     {
       "agent": "mini-wilma",
@@ -586,7 +562,7 @@
       "issue": 26,
       "navn": "Skoler",
       "startet": "2026-09-23T12:00:11.8740211+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-leif",
@@ -594,7 +570,7 @@
       "issue": 21,
       "navn": "Adressesøk",
       "startet": "2026-09-23T12:00:22.8365202+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-gir",
@@ -602,7 +578,7 @@
       "issue": 33,
       "navn": "Sykkelparkering",
       "startet": "2026-09-23T12:00:56.0494312+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-wilma",
@@ -610,7 +586,7 @@
       "issue": 8,
       "navn": "Hendelser",
       "startet": "2026-09-23T12:01:11.9782453+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-taco",
@@ -618,7 +594,7 @@
       "issue": 54,
       "navn": "Rate limit",
       "startet": "2026-09-23T12:01:39.5119902+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-ingve",
@@ -626,7 +602,7 @@
       "issue": 11,
       "navn": "Kollektiv",
       "startet": "2026-09-23T12:01:44.272017+00:00",
-      "minutter": 0
+      "minutter": 2
     },
     {
       "agent": "mini-kirsten",
@@ -634,7 +610,7 @@
       "issue": 29,
       "navn": "Museer",
       "startet": "2026-09-23T12:01:56.5636433+00:00",
-      "minutter": 0
+      "minutter": 1
     }
   ],
   "main": {
@@ -690,7 +666,7 @@
       "issue": 13,
       "navn": "Nytt lag: veiarbeid og stengte veier",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T11:59:01Z"
+      "oppdatert": "2026-09-23T12:03:22Z"
     },
     {
       "issue": 14,
@@ -816,7 +792,7 @@
       "issue": 51,
       "navn": "Strukturert logging",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T11:59:03Z"
+      "oppdatert": "2026-09-23T12:02:58Z"
     },
     {
       "issue": 52,
@@ -1026,10 +1002,22 @@
       "issue": 142,
       "navn": "Kurs på skipene",
       "github": "randsu",
-      "oppdatert": "2026-09-23T11:58:04Z"
+      "oppdatert": "2026-09-23T12:03:16Z"
     }
   ],
   "aapne": [
+    {
+      "pr": 145,
+      "tittel": "#142: Kurs på skipene",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T12:03:14Z",
+      "oppdatert": "2026-09-23T12:03:15Z",
+      "utkast": false,
+      "issues": [
+        142
+      ]
+    },
     {
       "pr": 144,
       "tittel": "Tydelige kartsymboler: båter som ser ut som båter (#141)",
