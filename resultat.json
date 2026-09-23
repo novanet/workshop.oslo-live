@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:59:00",
+  "oppdatert": "2026-09-23T14:59:41",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -78,8 +78,8 @@
       "pr": 21,
       "utkast": 0,
       "merget": 12,
-      "kjoeringer": 38,
-      "utenPr": 20,
+      "kjoeringer": 41,
+      "utenPr": 23,
       "bygg": [],
       "estimert": false,
       "plass": 1
@@ -609,12 +609,12 @@
       "levert": [],
       "dollar": 4.091,
       "tokens": 7123031,
-      "sekunder": 1000,
+      "sekunder": 1002,
       "pr": 1,
       "utkast": 0,
       "merget": 0,
-      "kjoeringer": 8,
-      "utenPr": 7,
+      "kjoeringer": 10,
+      "utenPr": 9,
       "bygg": [],
       "estimert": false,
       "plass": 19
@@ -658,16 +658,7 @@
       "plass": 21
     }
   ],
-  "kjoerer": [
-    {
-      "agent": "mini-johan",
-      "github": "pr0nin",
-      "issue": 16,
-      "navn": "Ladestasjoner",
-      "startet": "2026-09-23T12:58:49.3581962+00:00",
-      "minutter": 0
-    }
-  ],
+  "kjoerer": [],
   "main": {
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
@@ -701,13 +692,13 @@
       "issue": 13,
       "navn": "Nytt lag: veiarbeid og stengte veier",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T12:58:25Z"
+      "oppdatert": "2026-09-23T12:59:04Z"
     },
     {
       "issue": 13,
       "navn": "Nytt lag: veiarbeid og stengte veier",
       "github": "pr0nin",
-      "oppdatert": "2026-09-23T12:58:25Z"
+      "oppdatert": "2026-09-23T12:59:04Z"
     },
     {
       "issue": 16,
@@ -1019,7 +1010,7 @@
       "issue": 155,
       "navn": "Vis siste gode svar når kilden svikter",
       "github": "randsu",
-      "oppdatert": "2026-09-23T12:57:13Z"
+      "oppdatert": "2026-09-23T12:59:04Z"
     },
     {
       "issue": 157,
@@ -1037,7 +1028,7 @@
       "issue": 180,
       "navn": "Simulering: strømstans i en bydel",
       "github": "randsu",
-      "oppdatert": "2026-09-23T12:57:09Z"
+      "oppdatert": "2026-09-23T12:59:04Z"
     },
     {
       "issue": 188,
@@ -1079,7 +1070,7 @@
       "issue": 196,
       "navn": "Nytt lag: forsinkelser på knutepunktene",
       "github": "randsu",
-      "oppdatert": "2026-09-23T12:58:57Z"
+      "oppdatert": "2026-09-23T12:59:01Z"
     },
     {
       "issue": 197,
@@ -1143,6 +1134,18 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 233,
+      "tittel": "Lagvelgeren er for høy: historikkgrafen tar en egen rad per lag",
+      "github": "larsajakobsen",
+      "agent": "mini-wilma",
+      "opprettet": "2026-09-23T12:45:56Z",
+      "oppdatert": "2026-09-23T12:59:09Z",
+      "utkast": true,
+      "issues": [
+        214
+      ]
+    },
     {
       "pr": 225,
       "tittel": "#114: Nytt lag: Kristiania i 1910",
@@ -1369,18 +1372,6 @@
       "utkast": false,
       "issues": [
         50
-      ]
-    },
-    {
-      "pr": 233,
-      "tittel": "Lagvelgeren er for høy: historikkgrafen tar en egen rad per lag",
-      "github": "larsajakobsen",
-      "agent": "mini-wilma",
-      "opprettet": "2026-09-23T12:45:56Z",
-      "oppdatert": "2026-09-23T12:48:43Z",
-      "utkast": true,
-      "issues": [
-        214
       ]
     },
     {
