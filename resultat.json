@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:47:17",
+  "oppdatert": "2026-09-23T14:47:58",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -642,7 +642,7 @@
       "issue": 189,
       "navn": "Travlere enn vanlig på veiene",
       "startet": "2026-09-23T12:34:43.2826697+00:00",
-      "minutter": 12
+      "minutter": 13
     },
     {
       "agent": "mini-gir",
@@ -650,7 +650,7 @@
       "issue": 51,
       "navn": "Logging",
       "startet": "2026-09-23T12:35:46.639797+00:00",
-      "minutter": 11
+      "minutter": 12
     },
     {
       "agent": "mini-richard",
@@ -658,7 +658,7 @@
       "issue": 119,
       "navn": "Mørkt kart når sola går ned i Oslo",
       "startet": "2026-09-23T12:39:26.8247317+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "mini-johan",
@@ -666,7 +666,7 @@
       "issue": 10,
       "navn": "Trafikk",
       "startet": "2026-09-23T12:42:27.1051764+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-astrid",
@@ -674,7 +674,7 @@
       "issue": 188,
       "navn": "Vinden som strømmer over byen",
       "startet": "2026-09-23T12:42:40.4886016+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-richard",
@@ -682,7 +682,7 @@
       "issue": 124,
       "navn": "Punkter som flytter seg, glir til ny posisjon",
       "startet": "2026-09-23T12:42:56.8988058+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "helstein",
@@ -690,7 +690,7 @@
       "issue": 212,
       "navn": "Feilmeldingene fra API-et er engelske unntakstekster",
       "startet": "2026-09-23T12:43:30.6513419+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "henrik",
@@ -698,7 +698,7 @@
       "issue": 114,
       "navn": "Nytt lag: Kristiania i 1910",
       "startet": "2026-09-23T12:43:33.13049+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-sindre",
@@ -706,7 +706,7 @@
       "issue": 55,
       "navn": "Ytelse",
       "startet": "2026-09-23T12:44:17.4643227+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-frode",
@@ -714,7 +714,7 @@
       "issue": 19,
       "navn": "Artsobservasjoner",
       "startet": "2026-09-23T12:45:18.4146535+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-richard",
@@ -722,7 +722,7 @@
       "issue": 130,
       "navn": "Fyrverkeri over Rådhuset når en PR blir merget",
       "startet": "2026-09-23T12:45:27.5284846+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-leif",
@@ -737,7 +737,7 @@
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
     "pr": null,
-    "kjoeringer": 52
+    "kjoeringer": 53
   },
   "produkt": {
     "testerBestatt": 18,
@@ -1189,15 +1189,39 @@
   ],
   "aapne": [
     {
+      "pr": 230,
+      "tittel": "#118: Nyhetslinje nederst på skjermen",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T12:42:40Z",
+      "oppdatert": "2026-09-23T12:47:30Z",
+      "utkast": false,
+      "issues": [
+        118
+      ]
+    },
+    {
       "pr": 67,
       "tittel": "Hent lagene parallelt",
       "github": "FrodeBl",
       "agent": "mini-frode",
       "opprettet": "2026-09-23T07:59:18Z",
-      "oppdatert": "2026-09-23T12:47:09Z",
+      "oppdatert": "2026-09-23T12:47:13Z",
       "utkast": false,
       "issues": [
         48
+      ]
+    },
+    {
+      "pr": 232,
+      "tittel": "#207: Delt mobilitet viser «drivstoff: ELECTRIC» og «COMBUSTION»",
+      "github": "randsu",
+      "agent": "randsu",
+      "opprettet": "2026-09-23T12:45:02Z",
+      "oppdatert": "2026-09-23T12:47:10Z",
+      "utkast": false,
+      "issues": [
+        207
       ]
     },
     {
@@ -1306,30 +1330,6 @@
       "utkast": true,
       "issues": [
         214
-      ]
-    },
-    {
-      "pr": 230,
-      "tittel": "#118: Nyhetslinje nederst på skjermen",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T12:42:40Z",
-      "oppdatert": "2026-09-23T12:45:25Z",
-      "utkast": false,
-      "issues": [
-        118
-      ]
-    },
-    {
-      "pr": 232,
-      "tittel": "#207: Delt mobilitet viser «drivstoff: ELECTRIC» og «COMBUSTION»",
-      "github": "randsu",
-      "agent": "randsu",
-      "opprettet": "2026-09-23T12:45:02Z",
-      "oppdatert": "2026-09-23T12:45:06Z",
-      "utkast": false,
-      "issues": [
-        207
       ]
     },
     {
