@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T13:16:58",
+  "oppdatert": "2026-09-23T13:17:36",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -252,12 +252,12 @@
       ],
       "dollar": 15.08,
       "tokens": 27825920,
-      "sekunder": 4777,
+      "sekunder": 4778,
       "pr": 5,
       "utkast": 0,
       "merget": 2,
-      "kjoeringer": 15,
-      "utenPr": 10,
+      "kjoeringer": 16,
+      "utenPr": 11,
       "bygg": [],
       "estimert": false,
       "plass": 8
@@ -814,8 +814,14 @@
     {
       "issue": 115,
       "navn": "Nytt lag: parker og torg",
+      "github": "larsajakobsen",
+      "oppdatert": "2026-09-23T11:17:22Z"
+    },
+    {
+      "issue": 115,
+      "navn": "Nytt lag: parker og torg",
       "github": "novanettor",
-      "oppdatert": "2026-09-23T11:16:31Z"
+      "oppdatert": "2026-09-23T11:17:22Z"
     },
     {
       "issue": 116,
