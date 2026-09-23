@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:23:15",
+  "oppdatert": "2026-09-23T11:23:43",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -465,7 +465,7 @@
       "issue": 45,
       "navn": "Varsler",
       "startet": "2026-09-23T09:22:36.7039942+00:00",
-      "minutter": 0
+      "minutter": 1
     }
   ],
   "main": {
@@ -907,10 +907,34 @@
       "github": "randsu",
       "agent": "mini-richard",
       "opprettet": "2026-09-23T08:58:22Z",
-      "oppdatert": "2026-09-23T09:22:20Z",
+      "oppdatert": "2026-09-23T09:23:26Z",
       "utkast": false,
       "issues": [
         25
+      ]
+    },
+    {
+      "pr": 92,
+      "tittel": "Et statistikkpanel",
+      "github": "audmaha",
+      "agent": "mini-aud",
+      "opprettet": "2026-09-23T08:42:17Z",
+      "oppdatert": "2026-09-23T09:23:20Z",
+      "utkast": false,
+      "issues": [
+        43
+      ]
+    },
+    {
+      "pr": 91,
+      "tittel": "Fargene må virke for alle",
+      "github": "audmaha",
+      "agent": "mini-aud",
+      "opprettet": "2026-09-23T08:42:14Z",
+      "oppdatert": "2026-09-23T09:23:12Z",
+      "utkast": false,
+      "issues": [
+        41
       ]
     },
     {
@@ -947,18 +971,6 @@
       "utkast": false,
       "issues": [
         8
-      ]
-    },
-    {
-      "pr": 91,
-      "tittel": "Fargene må virke for alle",
-      "github": "audmaha",
-      "agent": "mini-aud",
-      "opprettet": "2026-09-23T08:42:14Z",
-      "oppdatert": "2026-09-23T09:21:06Z",
-      "utkast": false,
-      "issues": [
-        41
       ]
     },
     {
@@ -1187,18 +1199,6 @@
       "utkast": false,
       "issues": [
         29
-      ]
-    },
-    {
-      "pr": 92,
-      "tittel": "Et statistikkpanel",
-      "github": "audmaha",
-      "agent": "mini-aud",
-      "opprettet": "2026-09-23T08:42:17Z",
-      "oppdatert": "2026-09-23T08:50:50Z",
-      "utkast": false,
-      "issues": [
-        43
       ]
     },
     {
