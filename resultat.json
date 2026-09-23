@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:36:46",
+  "oppdatert": "2026-09-23T10:37:13",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -336,28 +336,20 @@
       "feil": [],
       "lag": [],
       "levert": [],
-      "dollar": 5.724,
-      "tokens": 12151952,
-      "sekunder": 2078,
+      "dollar": 7.55,
+      "tokens": 16880120,
+      "sekunder": 2597,
       "pr": 3,
       "utkast": 0,
       "merget": 0,
-      "kjoeringer": 7,
-      "utenPr": 4,
+      "kjoeringer": 8,
+      "utenPr": 5,
       "bygg": [],
       "estimert": false,
       "plass": 16
     }
   ],
   "kjoerer": [
-    {
-      "agent": "mini-frode",
-      "github": "FrodeBl",
-      "issue": 19,
-      "navn": "Artsobservasjoner",
-      "startet": "2026-09-23T08:28:01.690939+00:00",
-      "minutter": 8
-    },
     {
       "agent": "helstein",
       "github": "nilsgs",
@@ -380,7 +372,7 @@
       "issue": 23,
       "navn": "Delbart utsnitt",
       "startet": "2026-09-23T08:31:51.7313963+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-aud",
@@ -388,7 +380,7 @@
       "issue": 23,
       "navn": "Delbart utsnitt",
       "startet": "2026-09-23T08:32:03.1180412+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-aud",
@@ -420,7 +412,7 @@
       "issue": 6,
       "navn": "Delt mobilitet",
       "startet": "2026-09-23T08:36:06.1007878+00:00",
-      "minutter": 0
+      "minutter": 1
     }
   ],
   "main": {
@@ -555,7 +547,7 @@
       "issue": 19,
       "navn": "Nytt lag: artsobservasjoner",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T08:28:02Z"
+      "oppdatert": "2026-09-23T08:36:49Z"
     },
     {
       "issue": 20,
