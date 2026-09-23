@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:55:28",
+  "oppdatert": "2026-09-23T14:56:11",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -287,13 +287,13 @@
           "poeng": 3
         }
       ],
-      "dollar": 11.933,
-      "tokens": 26231817,
-      "sekunder": 4317,
+      "dollar": 12.842,
+      "tokens": 27735291,
+      "sekunder": 4543,
       "pr": 5,
       "utkast": 0,
       "merget": 3,
-      "kjoeringer": 20,
+      "kjoeringer": 21,
       "utenPr": 8,
       "bygg": [],
       "estimert": false,
@@ -665,7 +665,7 @@
       "issue": 203,
       "navn": "Popupen havner bak lagpanelet på PC",
       "startet": "2026-09-23T12:49:33.0669163+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-richard",
@@ -673,7 +673,7 @@
       "issue": 180,
       "navn": "Simulering: strømstans i en bydel",
       "startet": "2026-09-23T12:49:58.0271137+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-richard",
@@ -681,15 +681,7 @@
       "issue": 196,
       "navn": "Nytt lag: forsinkelser på knutepunktene",
       "startet": "2026-09-23T12:50:57.3337676+00:00",
-      "minutter": 4
-    },
-    {
-      "agent": "mini-leif",
-      "github": "leif-larsen",
-      "issue": 21,
-      "navn": "Adressesøk",
-      "startet": "2026-09-23T12:50:58.0553123+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-frode",
@@ -697,7 +689,7 @@
       "issue": 48,
       "navn": "Parallell henting",
       "startet": "2026-09-23T12:51:10.1948683+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-richard",
@@ -713,7 +705,7 @@
       "issue": 50,
       "navn": "Metrikker",
       "startet": "2026-09-23T12:52:40.434133+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-kirsten",
@@ -721,7 +713,7 @@
       "issue": 29,
       "navn": "Museer",
       "startet": "2026-09-23T12:53:54.4756747+00:00",
-      "minutter": 1
+      "minutter": 2
     }
   ],
   "main": {
@@ -949,7 +941,7 @@
       "issue": 118,
       "navn": "Nyhetslinje nederst på skjermen",
       "github": "leif-larsen",
-      "oppdatert": "2026-09-23T12:49:34Z"
+      "oppdatert": "2026-09-23T12:55:51Z"
     },
     {
       "issue": 119,
@@ -1176,15 +1168,51 @@
   ],
   "aapne": [
     {
+      "pr": 244,
+      "tittel": "Statistikken viser ikke «Nyeste» for vannmålere og smilefjes",
+      "github": "audmaha",
+      "agent": "mini-aud",
+      "opprettet": "2026-09-23T12:52:34Z",
+      "oppdatert": "2026-09-23T12:55:21Z",
+      "utkast": false,
+      "issues": [
+        211
+      ]
+    },
+    {
+      "pr": 243,
+      "tittel": "#130: Fyrverkeri over Rådhuset når en PR blir merget",
+      "github": "randsu",
+      "agent": "randsu",
+      "opprettet": "2026-09-23T12:51:21Z",
+      "oppdatert": "2026-09-23T12:55:20Z",
+      "utkast": false,
+      "issues": [
+        130
+      ]
+    },
+    {
       "pr": 72,
       "tittel": "Søk etter adresse og hopp dit på kartet (#21)",
       "github": "leif-larsen",
       "agent": "mini-leif",
       "opprettet": "2026-09-23T08:12:16Z",
-      "oppdatert": "2026-09-23T12:55:17Z",
+      "oppdatert": "2026-09-23T12:55:20Z",
       "utkast": false,
       "issues": [
         21
+      ]
+    },
+    {
+      "pr": 245,
+      "tittel": "Strukturert logging",
+      "github": "GIR75",
+      "agent": "mini-gir",
+      "opprettet": "2026-09-23T12:52:59Z",
+      "oppdatert": "2026-09-23T12:55:18Z",
+      "utkast": false,
+      "issues": [
+        51
       ]
     },
     {
@@ -1209,18 +1237,6 @@
       "utkast": false,
       "issues": [
         188
-      ]
-    },
-    {
-      "pr": 243,
-      "tittel": "#130: Fyrverkeri over Rådhuset når en PR blir merget",
-      "github": "randsu",
-      "agent": "randsu",
-      "opprettet": "2026-09-23T12:51:21Z",
-      "oppdatert": "2026-09-23T12:54:06Z",
-      "utkast": false,
-      "issues": [
-        130
       ]
     },
     {
@@ -1281,30 +1297,6 @@
       "utkast": false,
       "issues": [
         55
-      ]
-    },
-    {
-      "pr": 245,
-      "tittel": "Strukturert logging",
-      "github": "GIR75",
-      "agent": "mini-gir",
-      "opprettet": "2026-09-23T12:52:59Z",
-      "oppdatert": "2026-09-23T12:53:00Z",
-      "utkast": false,
-      "issues": [
-        51
-      ]
-    },
-    {
-      "pr": 244,
-      "tittel": "Statistikken viser ikke «Nyeste» for vannmålere og smilefjes",
-      "github": "audmaha",
-      "agent": "mini-aud",
-      "opprettet": "2026-09-23T12:52:34Z",
-      "oppdatert": "2026-09-23T12:52:35Z",
-      "utkast": false,
-      "issues": [
-        211
       ]
     },
     {
