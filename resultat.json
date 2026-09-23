@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:44:05",
+  "oppdatert": "2026-09-23T11:44:43",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -516,15 +516,15 @@
     {
       "navn": "app/copilot-swe-agent",
       "github": "app/copilot-swe-agent",
-      "poeng": -2,
+      "poeng": -4,
       "feil": [],
       "lag": [],
       "levert": [],
       "dollar": 0.0,
       "tokens": 0,
       "sekunder": 0,
-      "pr": 2,
-      "utkast": 2,
+      "pr": 4,
+      "utkast": 4,
       "merget": 0,
       "kjoeringer": 0,
       "utenPr": 0,
@@ -540,7 +540,7 @@
       "issue": 52,
       "navn": "Konfigurerbar bbox",
       "startet": "2026-09-23T09:36:06.5656066+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "Dmitry-agent",
@@ -548,7 +548,7 @@
       "issue": 12,
       "navn": "Holdeplasser",
       "startet": "2026-09-23T09:36:39.1423524+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "henrik",
@@ -556,7 +556,7 @@
       "issue": 7,
       "navn": "Skipstrafikk",
       "startet": "2026-09-23T09:37:38.7912096+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-jon",
@@ -564,7 +564,7 @@
       "issue": 44,
       "navn": "Sammenlign tid",
       "startet": "2026-09-23T09:38:36.2749004+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-knive",
@@ -572,7 +572,7 @@
       "issue": 28,
       "navn": "Tog",
       "startet": "2026-09-23T09:39:07.9583013+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-wilma",
@@ -580,7 +580,7 @@
       "issue": 112,
       "navn": "Nytt lag: målestasjoner i elvene",
       "startet": "2026-09-23T09:39:34.3255853+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-wilma",
@@ -588,7 +588,7 @@
       "issue": 119,
       "navn": "Mørkt kart når sola går ned i Oslo",
       "startet": "2026-09-23T09:39:34.4905216+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-bug",
@@ -612,7 +612,7 @@
       "issue": 27,
       "navn": "Verneområder",
       "startet": "2026-09-23T09:42:25.9308327+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-bug",
@@ -620,7 +620,7 @@
       "issue": 117,
       "navn": "Nye punkter pulserer når de dukker opp",
       "startet": "2026-09-23T09:43:08.8955657+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-bug",
@@ -628,6 +628,22 @@
       "issue": 121,
       "navn": "Følg et punkt som beveger seg",
       "startet": "2026-09-23T09:43:37.9722137+00:00",
+      "minutter": 1
+    },
+    {
+      "agent": "mini-taco",
+      "github": "Puiu",
+      "issue": 54,
+      "navn": "Rate limit",
+      "startet": "2026-09-23T09:44:05.6033424+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "martin-holth",
+      "github": "martinrholth",
+      "issue": 111,
+      "navn": "Nytt lag: kaier og ferjekaier",
+      "startet": "2026-09-23T09:44:13.0798166+00:00",
       "minutter": 0
     }
   ],
@@ -863,7 +879,7 @@
       "issue": 54,
       "navn": "Vær grei mot kildene",
       "github": "Puiu",
-      "oppdatert": "2026-09-23T09:43:32Z"
+      "oppdatert": "2026-09-23T09:44:06Z"
     },
     {
       "issue": 55,
@@ -899,7 +915,7 @@
       "issue": 111,
       "navn": "Nytt lag: kaier og ferjekaier",
       "github": "martinrholth",
-      "oppdatert": "2026-09-23T09:43:20Z"
+      "oppdatert": "2026-09-23T09:44:13Z"
     },
     {
       "issue": 112,
@@ -924,6 +940,12 @@
       "navn": "Nytt lag: parker og torg",
       "github": "novanettor",
       "oppdatert": "2026-09-23T09:38:45Z"
+    },
+    {
+      "issue": 117,
+      "navn": "Nye punkter pulserer når de dukker opp",
+      "github": "Copilot",
+      "oppdatert": "2026-09-23T09:43:09Z"
     },
     {
       "issue": 117,
@@ -970,6 +992,54 @@
   ],
   "aapne": [
     {
+      "pr": 92,
+      "tittel": "Et statistikkpanel",
+      "github": "audmaha",
+      "agent": "mini-aud",
+      "opprettet": "2026-09-23T08:42:17Z",
+      "oppdatert": "2026-09-23T09:44:21Z",
+      "utkast": false,
+      "issues": [
+        43
+      ]
+    },
+    {
+      "pr": 136,
+      "tittel": "[WIP] Add pulsing effect for new points on map",
+      "github": "app/copilot-swe-agent",
+      "agent": "app/copilot-swe-agent",
+      "opprettet": "2026-09-23T09:44:20Z",
+      "oppdatert": "2026-09-23T09:44:20Z",
+      "utkast": true,
+      "issues": [
+        117
+      ]
+    },
+    {
+      "pr": 134,
+      "tittel": "[WIP] Fix icons for bike, e-scooter, and car in mobility section",
+      "github": "app/copilot-swe-agent",
+      "agent": "app/copilot-swe-agent",
+      "opprettet": "2026-09-23T09:43:34Z",
+      "oppdatert": "2026-09-23T09:44:10Z",
+      "utkast": true,
+      "issues": [
+        123
+      ]
+    },
+    {
+      "pr": 135,
+      "tittel": "[WIP] Add follow feature for moving points on map",
+      "github": "app/copilot-swe-agent",
+      "agent": "app/copilot-swe-agent",
+      "opprettet": "2026-09-23T09:44:03Z",
+      "oppdatert": "2026-09-23T09:44:03Z",
+      "utkast": true,
+      "issues": [
+        121
+      ]
+    },
+    {
       "pr": 87,
       "tittel": "Del kartutsnittet som en lenke",
       "github": "audmaha",
@@ -1006,18 +1076,6 @@
       ]
     },
     {
-      "pr": 134,
-      "tittel": "[WIP] Fix icons for bike, e-scooter, and car in mobility section",
-      "github": "app/copilot-swe-agent",
-      "agent": "app/copilot-swe-agent",
-      "opprettet": "2026-09-23T09:43:34Z",
-      "oppdatert": "2026-09-23T09:43:34Z",
-      "utkast": true,
-      "issues": [
-        123
-      ]
-    },
-    {
       "pr": 96,
       "tittel": "#22: Slå sammen punkter som ligger oppå hverandre",
       "github": "randsu",
@@ -1039,18 +1097,6 @@
       "utkast": false,
       "issues": [
         3
-      ]
-    },
-    {
-      "pr": 92,
-      "tittel": "Et statistikkpanel",
-      "github": "audmaha",
-      "agent": "mini-aud",
-      "opprettet": "2026-09-23T08:42:17Z",
-      "oppdatert": "2026-09-23T09:39:14Z",
-      "utkast": false,
-      "issues": [
-        43
       ]
     },
     {
