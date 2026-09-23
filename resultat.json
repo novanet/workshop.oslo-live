@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:46:58",
+  "oppdatert": "2026-09-23T11:47:53",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -47,13 +47,13 @@
           "poeng": 8
         }
       ],
-      "dollar": 16.757,
-      "tokens": 32622114,
-      "sekunder": 5772,
+      "dollar": 17.618,
+      "tokens": 34433191,
+      "sekunder": 6022,
       "pr": 10,
       "utkast": 0,
       "merget": 7,
-      "kjoeringer": 14,
+      "kjoeringer": 15,
       "utenPr": 4,
       "bygg": [],
       "estimert": false,
@@ -268,6 +268,31 @@
       "plass": 8
     },
     {
+      "navn": "henrik",
+      "github": "monet820",
+      "poeng": 2,
+      "feil": [],
+      "lag": [
+        {
+          "issue": 7,
+          "navn": "Skipstrafikk",
+          "poeng": 2
+        }
+      ],
+      "levert": [],
+      "dollar": 1.804,
+      "tokens": 3455543,
+      "sekunder": 577,
+      "pr": 1,
+      "utkast": 0,
+      "merget": 1,
+      "kjoeringer": 2,
+      "utenPr": 1,
+      "bygg": [],
+      "estimert": false,
+      "plass": 9
+    },
+    {
       "navn": "helstein",
       "github": "nilsgs",
       "poeng": 2,
@@ -290,7 +315,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 9
+      "plass": 10
     },
     {
       "navn": "mini-aud",
@@ -315,7 +340,7 @@
       "utenPr": 3,
       "bygg": [],
       "estimert": false,
-      "plass": 10
+      "plass": 11
     },
     {
       "navn": "mini-leif",
@@ -340,7 +365,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 11
+      "plass": 12
     },
     {
       "navn": "mini-taco",
@@ -365,25 +390,6 @@
       "utenPr": 0,
       "bygg": [],
       "estimert": false,
-      "plass": 12
-    },
-    {
-      "navn": "martin-holth",
-      "github": "martinrholth",
-      "poeng": 0,
-      "feil": [],
-      "lag": [],
-      "levert": [],
-      "dollar": 0.381,
-      "tokens": 482528,
-      "sekunder": 127,
-      "pr": 0,
-      "utkast": 0,
-      "merget": 0,
-      "kjoeringer": 2,
-      "utenPr": 2,
-      "bygg": [],
-      "estimert": false,
       "plass": 13
     },
     {
@@ -406,20 +412,20 @@
       "plass": 14
     },
     {
-      "navn": "henrik",
-      "github": "monet820",
+      "navn": "martin-holth",
+      "github": "martinrholth",
       "poeng": 0,
       "feil": [],
       "lag": [],
       "levert": [],
-      "dollar": 1.804,
-      "tokens": 3455543,
-      "sekunder": 577,
-      "pr": 1,
+      "dollar": 0.921,
+      "tokens": 1496171,
+      "sekunder": 290,
+      "pr": 0,
       "utkast": 0,
       "merget": 0,
-      "kjoeringer": 2,
-      "utenPr": 1,
+      "kjoeringer": 3,
+      "utenPr": 3,
       "bygg": [],
       "estimert": false,
       "plass": 15
@@ -472,7 +478,7 @@
       "dollar": 4.375,
       "tokens": 10107992,
       "sekunder": 1362,
-      "pr": 0,
+      "pr": 1,
       "utkast": 0,
       "merget": 0,
       "kjoeringer": 2,
@@ -507,14 +513,14 @@
       "feil": [],
       "lag": [],
       "levert": [],
-      "dollar": 10.883,
-      "tokens": 23741011,
-      "sekunder": 3762,
+      "dollar": 12.171,
+      "tokens": 26510556,
+      "sekunder": 4230,
       "pr": 3,
       "utkast": 0,
       "merget": 0,
-      "kjoeringer": 11,
-      "utenPr": 7,
+      "kjoeringer": 12,
+      "utenPr": 8,
       "bygg": [],
       "estimert": false,
       "plass": 20
@@ -522,7 +528,7 @@
     {
       "navn": "app/copilot-swe-agent",
       "github": "app/copilot-swe-agent",
-      "poeng": -4,
+      "poeng": -3,
       "feil": [],
       "lag": [],
       "levert": [],
@@ -530,7 +536,7 @@
       "tokens": 0,
       "sekunder": 0,
       "pr": 4,
-      "utkast": 4,
+      "utkast": 3,
       "merget": 0,
       "kjoeringer": 0,
       "utenPr": 0,
@@ -546,7 +552,7 @@
       "issue": 52,
       "navn": "Konfigurerbar bbox",
       "startet": "2026-09-23T09:36:06.5656066+00:00",
-      "minutter": 10
+      "minutter": 11
     },
     {
       "agent": "mini-jon",
@@ -562,7 +568,7 @@
       "issue": 28,
       "navn": "Tog",
       "startet": "2026-09-23T09:39:07.9583013+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "mini-wilma",
@@ -570,7 +576,7 @@
       "issue": 119,
       "navn": "Mørkt kart når sola går ned i Oslo",
       "startet": "2026-09-23T09:39:34.4905216+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "mini-leif",
@@ -586,7 +592,7 @@
       "issue": 27,
       "navn": "Verneområder",
       "startet": "2026-09-23T09:42:25.9308327+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-bug",
@@ -594,7 +600,7 @@
       "issue": 117,
       "navn": "Nye punkter pulserer når de dukker opp",
       "startet": "2026-09-23T09:43:08.8955657+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-bug",
@@ -610,15 +616,7 @@
       "issue": 54,
       "navn": "Rate limit",
       "startet": "2026-09-23T09:44:05.6033424+00:00",
-      "minutter": 2
-    },
-    {
-      "agent": "martin-holth",
-      "github": "martinrholth",
-      "issue": 111,
-      "navn": "Nytt lag: kaier og ferjekaier",
-      "startet": "2026-09-23T09:44:13.0798166+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-taco",
@@ -626,18 +624,26 @@
       "issue": 133,
       "navn": "",
       "startet": "2026-09-23T09:45:07.3901613+00:00",
-      "minutter": 1
+      "minutter": 2
+    },
+    {
+      "agent": "mini-johan",
+      "github": "pr0nin",
+      "issue": 10,
+      "navn": "Trafikk",
+      "startet": "2026-09-23T09:47:17.4922452+00:00",
+      "minutter": 0
     }
   ],
   "main": {
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
     "pr": null,
-    "kjoeringer": 36
+    "kjoeringer": 37
   },
   "produkt": {
-    "testerBestatt": 15,
-    "testerFeilet": 11,
+    "testerBestatt": 16,
+    "testerFeilet": 10,
     "issuerLost": [
       1,
       2,
@@ -645,6 +651,7 @@
       4,
       5,
       6,
+      7,
       9,
       15,
       17
@@ -675,7 +682,7 @@
       "issue": 10,
       "navn": "Nytt lag: trafikkregistreringspunkt",
       "github": "pr0nin",
-      "oppdatert": "2026-09-23T09:46:36Z"
+      "oppdatert": "2026-09-23T09:47:18Z"
     },
     {
       "issue": 11,
@@ -813,7 +820,7 @@
       "issue": 44,
       "navn": "Sammenlign to tidspunkt",
       "github": "yonzo",
-      "oppdatert": "2026-09-23T09:38:36Z"
+      "oppdatert": "2026-09-23T09:47:33Z"
     },
     {
       "issue": 46,
@@ -849,13 +856,13 @@
       "issue": 52,
       "navn": "Gjør kartutsnittet konfigurerbart",
       "github": "jthagesk",
-      "oppdatert": "2026-09-23T09:36:07Z"
+      "oppdatert": "2026-09-23T09:47:34Z"
     },
     {
       "issue": 54,
       "navn": "Vær grei mot kildene",
       "github": "Puiu",
-      "oppdatert": "2026-09-23T09:44:06Z"
+      "oppdatert": "2026-09-23T09:47:33Z"
     },
     {
       "issue": 55,
@@ -891,7 +898,7 @@
       "issue": 111,
       "navn": "Nytt lag: kaier og ferjekaier",
       "github": "martinrholth",
-      "oppdatert": "2026-09-23T09:44:13Z"
+      "oppdatert": "2026-09-23T09:47:02Z"
     },
     {
       "issue": 112,
@@ -966,20 +973,50 @@
       "oppdatert": "2026-09-23T09:43:29Z"
     },
     {
+      "issue": 132,
+      "navn": "Ekte sollys på 3D-byggene",
+      "github": "nilsgs",
+      "oppdatert": "2026-09-23T09:47:32Z"
+    },
+    {
       "issue": 133,
       "navn": "Havet stiger: hva havner under vann?",
       "github": "Puiu",
-      "oppdatert": "2026-09-23T09:45:08Z"
+      "oppdatert": "2026-09-23T09:47:33Z"
     }
   ],
   "aapne": [
+    {
+      "pr": 136,
+      "tittel": "[WIP] Add pulsing effect for new points on map",
+      "github": "app/copilot-swe-agent",
+      "agent": "app/copilot-swe-agent",
+      "opprettet": "2026-09-23T09:44:20Z",
+      "oppdatert": "2026-09-23T09:47:30Z",
+      "utkast": false,
+      "issues": [
+        117
+      ]
+    },
+    {
+      "pr": 139,
+      "tittel": "Nytt lag: holdeplasser og stasjoner",
+      "github": "FilonenkoDmitry",
+      "agent": "Dmitry-agent",
+      "opprettet": "2026-09-23T09:46:53Z",
+      "oppdatert": "2026-09-23T09:46:54Z",
+      "utkast": false,
+      "issues": [
+        12
+      ]
+    },
     {
       "pr": 138,
       "tittel": "Nytt lag: store arbeidsplasser i sentrum",
       "github": "SasaRad",
       "agent": "mini-bug",
       "opprettet": "2026-09-23T09:46:52Z",
-      "oppdatert": "2026-09-23T09:46:52Z",
+      "oppdatert": "2026-09-23T09:46:53Z",
       "utkast": false,
       "issues": [
         113
@@ -1010,18 +1047,6 @@
       ]
     },
     {
-      "pr": 137,
-      "tittel": "Nytt lag: skip i Oslofjorden",
-      "github": "monet820",
-      "agent": "henrik",
-      "opprettet": "2026-09-23T09:45:41Z",
-      "oppdatert": "2026-09-23T09:45:42Z",
-      "utkast": false,
-      "issues": [
-        7
-      ]
-    },
-    {
       "pr": 134,
       "tittel": "[WIP] Fix icons for bike, e-scooter, and car in mobility section",
       "github": "app/copilot-swe-agent",
@@ -1043,18 +1068,6 @@
       "utkast": true,
       "issues": [
         121
-      ]
-    },
-    {
-      "pr": 136,
-      "tittel": "[WIP] Add pulsing effect for new points on map",
-      "github": "app/copilot-swe-agent",
-      "agent": "app/copilot-swe-agent",
-      "opprettet": "2026-09-23T09:44:20Z",
-      "oppdatert": "2026-09-23T09:44:58Z",
-      "utkast": true,
-      "issues": [
-        117
       ]
     },
     {
