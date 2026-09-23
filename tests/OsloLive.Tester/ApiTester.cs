@@ -861,6 +861,183 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
                 Content = new StringContent(svar, System.Text.Encoding.UTF8, "application/json"),
             });
     }
+    // ---------------------------------------------------------------------------
+    // Vinden over Oslo (#188): /api/vind henter fra MET, ikke Allemannsdata.
+    // ---------------------------------------------------------------------------
+    private const string MetSvar = """
+        {
+            "properties": {
+                "timeseries": [
+                    {
+                        "time": "2026-09-23T12:00:00Z",
+                        "data": { "instant": { "details": { "wind_speed": 10.0, "wind_from_direction": 270.0 } } }
+                    }
+                ]
+            }
+        }
+        """;
+
+    [Fact]
+    public async Task Vindeffekten_finnes_som_statisk_fil()
+    {
+        var svar = await Klient.GetAsync("/effekter/vind.js");
+
+        Assert.Equal(HttpStatusCode.OK, svar.StatusCode);
+    }
+
+    [Fact]
+    public async Task Vinden_gir_16_punkter_med_u_og_v()
+    {
+        using var vertMedStub = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient(Vind.KlientNavn).ConfigurePrimaryHttpMessageHandler(() => new FastSvarHandler(MetSvar))));
+        var klient = vertMedStub.CreateClient();
+
+        var svar = await klient.GetAsync("/api/vind");
+        var punkter = await svar.Content.ReadFromJsonAsync<List<JsonElement>>();
+
+        Assert.Equal(HttpStatusCode.OK, svar.StatusCode);
+        Assert.Equal(16, punkter!.Count);
+        Assert.All(punkter, p =>
+        {
+            Assert.True(p.TryGetProperty("lat", out _));
+            Assert.True(p.TryGetProperty("lon", out _));
+            Assert.True(p.TryGetProperty("u", out _));
+            Assert.True(p.TryGetProperty("v", out _));
+        });
+        Assert.Equal(10, punkter[0].GetProperty("u").GetDouble(), 1);
+        Assert.Equal(0, punkter[0].GetProperty("v").GetDouble(), 1);
+    }
+
+    [Fact]
+    public async Task Vinden_gaar_til_met_med_riktig_user_agent()
+    {
+        var handler = new MetOpptaker(MetSvar);
+        using var vertMedTelling = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient(Vind.KlientNavn).ConfigurePrimaryHttpMessageHandler(() => handler)));
+        var klient = vertMedTelling.CreateClient();
+
+        var svar = await klient.GetAsync("/api/vind");
+
+        Assert.Equal(HttpStatusCode.OK, svar.StatusCode);
+        Assert.All(handler.Adresser, a => Assert.StartsWith("https://api.met.no/weatherapi/locationforecast/2.0/compact?", a.ToString()));
+        Assert.All(handler.Adresser, a => Assert.DoesNotContain(",", a.ToString()));
+        Assert.All(handler.BrukerAgenter, ua => Assert.Contains("OsloLive/1.0 (kurs)", ua));
+    }
+
+    [Fact]
+    public async Task Vinden_gjoer_hoeyst_4_kall_samtidig()
+    {
+        var handler = new MetOpptaker(MetSvar);
+        using var vertMedTelling = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient(Vind.KlientNavn).ConfigurePrimaryHttpMessageHandler(() => handler)));
+        var klient = vertMedTelling.CreateClient();
+
+        var svar = await klient.GetAsync("/api/vind");
+
+        Assert.Equal(HttpStatusCode.OK, svar.StatusCode);
+        Assert.Equal(16, handler.Antall);
+        Assert.True(handler.MaksSamtidige > 1 && handler.MaksSamtidige <= Vind.MaksSamtidige);
+    }
+
+    [Fact]
+    public async Task Vinden_mellomlagres()
+    {
+        var handler = new MetOpptaker(MetSvar);
+        using var vertMedTelling = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient(Vind.KlientNavn).ConfigurePrimaryHttpMessageHandler(() => handler)));
+        var klient = vertMedTelling.CreateClient();
+
+        var første = await klient.GetAsync("/api/vind");
+        var andre = await klient.GetAsync("/api/vind");
+
+        Assert.Equal(HttpStatusCode.OK, første.StatusCode);
+        Assert.Equal(HttpStatusCode.OK, andre.StatusCode);
+        Assert.Equal(16, handler.Antall);
+    }
+
+    [Fact]
+    public async Task Svikt_i_ett_vindpunkt_gir_502_med_feil()
+    {
+        var latSomFeiler = Vind.Rutenett()[0].Lat.ToString(CultureInfo.InvariantCulture);
+        using var vertMedSvikt = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient(Vind.KlientNavn).ConfigurePrimaryHttpMessageHandler(() => new SviktForVindpunktHandler(latSomFeiler, MetSvar))));
+        var klient = vertMedSvikt.CreateClient();
+
+        var vind = await klient.GetAsync("/api/vind");
+        var lag = await klient.GetAsync("/api/lag");
+        var helse = await klient.GetAsync("/api/helse");
+
+        Assert.Equal(HttpStatusCode.BadGateway, vind.StatusCode);
+        var feilSvar = await vind.Content.ReadFromJsonAsync<JsonElement>();
+        Assert.False(string.IsNullOrWhiteSpace(feilSvar.GetProperty("feil").GetString()));
+        Assert.Equal(HttpStatusCode.OK, lag.StatusCode);
+        Assert.Equal(HttpStatusCode.OK, helse.StatusCode);
+    }
+
+    private sealed class SviktForVindpunktHandler(string latSomFeiler, string svar) : HttpMessageHandler
+    {
+        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage forespørsel, CancellationToken stopp)
+        {
+            if (forespørsel.RequestUri!.Query.Contains($"lat={latSomFeiler}"))
+            {
+                throw new HttpRequestException("Kilden er nede.");
+            }
+
+            return Task.FromResult(new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(svar, Encoding.UTF8, "application/json"),
+            });
+        }
+    }
+
+    /// <summary>Teller kall, husker adresser og User-Agent-verdier, og finner det høyeste antallet samtidige kall.</summary>
+    private sealed class MetOpptaker(string svar) : HttpMessageHandler
+    {
+        private int _antall;
+        private int _inneværende;
+        private int _maksSamtidige;
+
+        public System.Collections.Concurrent.ConcurrentBag<Uri> Adresser { get; } = [];
+        public System.Collections.Concurrent.ConcurrentBag<string> BrukerAgenter { get; } = [];
+        public int Antall => _antall;
+        public int MaksSamtidige => _maksSamtidige;
+
+        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage forespørsel, CancellationToken stopp)
+        {
+            Interlocked.Increment(ref _antall);
+            Adresser.Add(forespørsel.RequestUri!);
+            BrukerAgenter.Add(forespørsel.Headers.UserAgent.ToString());
+
+            var samtidig = Interlocked.Increment(ref _inneværende);
+            HevMaks(samtidig);
+            try
+            {
+                await Task.Delay(20, stopp);
+                return new HttpResponseMessage(HttpStatusCode.OK)
+                {
+                    Content = new StringContent(svar, Encoding.UTF8, "application/json"),
+                };
+            }
+            finally
+            {
+                Interlocked.Decrement(ref _inneværende);
+            }
+        }
+
+        private void HevMaks(int verdi)
+        {
+            int gjeldende;
+            do
+            {
+                gjeldende = _maksSamtidige;
+                if (verdi <= gjeldende)
+                {
+                    return;
+                }
+            } while (Interlocked.CompareExchange(ref _maksSamtidige, verdi, gjeldende) != gjeldende);
+        }
+    }
+
     private sealed record Lagoppforing(string Id, string Navn, string Beskrivelse, string Ikon);
 
     private sealed record Statistikkoppforing(string Id, string Navn, int? Antall, DateTimeOffset? Eldste, DateTimeOffset? Nyeste, DateTimeOffset? Hentet, bool Feiler);

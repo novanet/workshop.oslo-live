@@ -1,5 +1,6 @@
 using System.Globalization;
 using System.Text.Json;
+using Microsoft.Extensions.Caching.Memory;
 using OsloLive;
 using OsloLive.Helse;
 using OsloLive.Historikk;
@@ -24,6 +25,12 @@ builder.Services.AddHttpClient<Allemannsdata>(klient =>
 // Flylaget bruker ikke Allemannsdata (ingen kilde der har flyposisjoner),
 // og trenger derfor sin egen navngitte HttpClient og eget mellomlager. Se FlyLag.cs.
 builder.Services.AddHttpClient("fly", klient =>
+{
+    klient.Timeout = TimeSpan.FromSeconds(10);
+    klient.DefaultRequestHeaders.UserAgent.ParseAdd("OsloLive/1.0 (kurs)");
+});
+// Vindeffekten (#188) henter fra MET locationforecast, ikke Allemannsdata. Egen navngitt HttpClient. Se Vind.cs.
+builder.Services.AddHttpClient(Vind.KlientNavn, klient =>
 {
     klient.Timeout = TimeSpan.FromSeconds(10);
     klient.DefaultRequestHeaders.UserAgent.ParseAdd("OsloLive/1.0 (kurs)");
@@ -222,6 +229,20 @@ app.MapGet("/api/vannstand", async (Allemannsdata data, CancellationToken stopp)
     catch (Exception ex)
     {
         app.Logger.LogError(ex, "Vannstand feilet");
+        return Results.Json(new { feil = ex.Message }, statusCode: 502);
+    }
+});
+
+// Vinden over Oslo som 4 x 4 rutenett med u/v (m/s). Ikke et kartlag, ingen tilstand; mellomlagret 30 min.
+app.MapGet("/api/vind", async (IHttpClientFactory http, IMemoryCache mellomlager, CancellationToken stopp) =>
+{
+    try
+    {
+        return Results.Ok(await Vind.Hent(http, mellomlager, stopp));
+    }
+    catch (Exception ex)
+    {
+        app.Logger.LogError(ex, "Vinden feilet");
         return Results.Json(new { feil = ex.Message }, statusCode: 502);
     }
 });
