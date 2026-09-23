@@ -408,6 +408,10 @@ function oppdaterTema() {
   if (skalVaereNatt === nattemodusPaa) return;
   nattemodusPaa = skalVaereNatt;
   (nattemodusPaa ? nattTema : varmTema)(kart);
+  // Ved oppstart kjører dette før leggTilPunktlag(), og da finnes verken punktkilden eller
+  // merkene ennå: temaet settes bare på kartstilen, og leggTilPunktlag() tegner punktene med
+  // riktig tema etterpå. Ved bytte hvert minutt finnes kilden, og punktene tegnes om uten omlasting.
+  if (!kart.getSource('punkter')) return;
   temaPaaEgneLag();
   tegnOmMerker();   // merkene tegnes på nytt med ring som passer temaet
   oppdaterKilde();  // punktene får SVG-symboler med kontur som passer temaet
