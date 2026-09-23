@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:20:57",
+  "oppdatert": "2026-09-23T11:21:25",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -875,23 +875,35 @@
       "issue": 59,
       "navn": "Overlapping boxes",
       "github": "jthagesk",
-      "oppdatert": "2026-09-23T08:48:44Z"
+      "oppdatert": "2026-09-23T09:20:55Z"
     },
     {
       "issue": 59,
       "navn": "Overlapping boxes",
       "github": "sin-rha",
-      "oppdatert": "2026-09-23T08:48:44Z"
+      "oppdatert": "2026-09-23T09:20:55Z"
     }
   ],
   "aapne": [
+    {
+      "pr": 91,
+      "tittel": "Fargene må virke for alle",
+      "github": "audmaha",
+      "agent": "mini-aud",
+      "opprettet": "2026-09-23T08:42:14Z",
+      "oppdatert": "2026-09-23T09:21:06Z",
+      "utkast": false,
+      "issues": [
+        41
+      ]
+    },
     {
       "pr": 101,
       "tittel": "#34: Skru tiden tilbake med en tidslinje",
       "github": "randsu",
       "agent": "mini-richard",
       "opprettet": "2026-09-23T08:51:10Z",
-      "oppdatert": "2026-09-23T09:20:42Z",
+      "oppdatert": "2026-09-23T09:21:00Z",
       "utkast": false,
       "issues": [
         34
@@ -1003,18 +1015,6 @@
       "utkast": false,
       "issues": [
         39
-      ]
-    },
-    {
-      "pr": 91,
-      "tittel": "Fargene må virke for alle",
-      "github": "audmaha",
-      "agent": "mini-aud",
-      "opprettet": "2026-09-23T08:42:14Z",
-      "oppdatert": "2026-09-23T09:08:30Z",
-      "utkast": false,
-      "issues": [
-        41
       ]
     },
     {
