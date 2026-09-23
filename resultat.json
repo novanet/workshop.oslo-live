@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:42:20",
+  "oppdatert": "2026-09-23T10:42:47",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -260,44 +260,6 @@
       "plass": 11
     },
     {
-      "navn": "mini-knive",
-      "github": "Buggz",
-      "poeng": 0,
-      "feil": [],
-      "lag": [],
-      "levert": [],
-      "dollar": 2.567,
-      "tokens": 6062931,
-      "sekunder": 879,
-      "pr": 1,
-      "utkast": 0,
-      "merget": 0,
-      "kjoeringer": 1,
-      "utenPr": 0,
-      "bygg": [],
-      "estimert": false,
-      "plass": 12
-    },
-    {
-      "navn": "mini-aud",
-      "github": "audmaha",
-      "poeng": 0,
-      "feil": [],
-      "lag": [],
-      "levert": [],
-      "dollar": 2.576,
-      "tokens": 4995747,
-      "sekunder": 1037,
-      "pr": 2,
-      "utkast": 0,
-      "merget": 0,
-      "kjoeringer": 3,
-      "utenPr": 1,
-      "bygg": [],
-      "estimert": false,
-      "plass": 13
-    },
-    {
       "navn": "mini-kirsten",
       "github": "jthagesk",
       "poeng": 0,
@@ -314,7 +276,26 @@
       "utenPr": 0,
       "bygg": [],
       "estimert": false,
-      "plass": 14
+      "plass": 12
+    },
+    {
+      "navn": "mini-knive",
+      "github": "Buggz",
+      "poeng": 0,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 3.947,
+      "tokens": 8497427,
+      "sekunder": 1398,
+      "pr": 2,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 2,
+      "utenPr": 0,
+      "bygg": [],
+      "estimert": false,
+      "plass": 13
     },
     {
       "navn": "Andy3000",
@@ -330,6 +311,25 @@
       "utkast": 0,
       "merget": 0,
       "kjoeringer": 3,
+      "utenPr": 1,
+      "bygg": [],
+      "estimert": false,
+      "plass": 14
+    },
+    {
+      "navn": "mini-aud",
+      "github": "audmaha",
+      "poeng": 0,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 4.043,
+      "tokens": 8068940,
+      "sekunder": 1536,
+      "pr": 3,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 4,
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
@@ -357,22 +357,6 @@
   ],
   "kjoerer": [
     {
-      "agent": "mini-knive",
-      "github": "Buggz",
-      "issue": 53,
-      "navn": "Dyp helsesjekk",
-      "startet": "2026-09-23T08:33:27.9645236+00:00",
-      "minutter": 8
-    },
-    {
-      "agent": "mini-aud",
-      "github": "audmaha",
-      "issue": 43,
-      "navn": "Statistikk",
-      "startet": "2026-09-23T08:33:40.253268+00:00",
-      "minutter": 8
-    },
-    {
       "agent": "mini-richard",
       "github": "randsu",
       "issue": 6,
@@ -394,7 +378,7 @@
       "issue": 44,
       "navn": "Sammenlign tid",
       "startet": "2026-09-23T08:38:34.7845421+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-kirsten",
@@ -402,7 +386,7 @@
       "issue": 29,
       "navn": "Museer",
       "startet": "2026-09-23T08:38:36.2729853+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-richard",
@@ -410,7 +394,7 @@
       "issue": 22,
       "navn": "Klynging",
       "startet": "2026-09-23T08:38:37.6037617+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-richard",
@@ -418,7 +402,7 @@
       "issue": 34,
       "navn": "Tidslinje",
       "startet": "2026-09-23T08:39:29.3560815+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "helstein",
@@ -426,7 +410,7 @@
       "issue": 30,
       "navn": "Vannstand",
       "startet": "2026-09-23T08:39:37.818134+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-astrid",
@@ -675,7 +659,7 @@
       "issue": 43,
       "navn": "Et statistikkpanel",
       "github": "audmaha",
-      "oppdatert": "2026-09-23T08:33:41Z"
+      "oppdatert": "2026-09-23T08:42:19Z"
     },
     {
       "issue": 44,
@@ -729,7 +713,7 @@
       "issue": 53,
       "navn": "En helsesjekk som betyr noe",
       "github": "Buggz",
-      "oppdatert": "2026-09-23T08:33:29Z"
+      "oppdatert": "2026-09-23T08:42:26Z"
     },
     {
       "issue": 54,
@@ -769,6 +753,30 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 93,
+      "tittel": "En helsesjekk som betyr noe (#53)",
+      "github": "Buggz",
+      "agent": "mini-knive",
+      "opprettet": "2026-09-23T08:42:24Z",
+      "oppdatert": "2026-09-23T08:42:25Z",
+      "utkast": false,
+      "issues": [
+        53
+      ]
+    },
+    {
+      "pr": 92,
+      "tittel": "Et statistikkpanel",
+      "github": "audmaha",
+      "agent": "mini-aud",
+      "opprettet": "2026-09-23T08:42:17Z",
+      "oppdatert": "2026-09-23T08:42:18Z",
+      "utkast": false,
+      "issues": [
+        43
+      ]
+    },
     {
       "pr": 91,
       "tittel": "Fargene må virke for alle",
