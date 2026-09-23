@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:50:33",
+  "oppdatert": "2026-09-23T14:51:39",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -143,7 +143,7 @@
     {
       "navn": "mini-frode",
       "github": "FrodeBl",
-      "poeng": 7,
+      "poeng": 9,
       "feil": [],
       "lag": [
         {
@@ -157,6 +157,11 @@
           "issue": 128,
           "navn": "Simulering: tsunami i Oslofjorden",
           "poeng": 3
+        },
+        {
+          "issue": 209,
+          "navn": "Bysykkelstasjoner blir 33 punkter oppå hverandre",
+          "poeng": 2
         }
       ],
       "dollar": 15.408,
@@ -164,7 +169,7 @@
       "sekunder": 5315,
       "pr": 5,
       "utkast": 0,
-      "merget": 2,
+      "merget": 3,
       "kjoeringer": 23,
       "utenPr": 17,
       "bygg": [],
@@ -640,7 +645,7 @@
       "issue": 189,
       "navn": "Travlere enn vanlig på veiene",
       "startet": "2026-09-23T12:34:43.2826697+00:00",
-      "minutter": 15
+      "minutter": 16
     },
     {
       "agent": "mini-gir",
@@ -648,7 +653,7 @@
       "issue": 51,
       "navn": "Logging",
       "startet": "2026-09-23T12:35:46.639797+00:00",
-      "minutter": 14
+      "minutter": 15
     },
     {
       "agent": "mini-astrid",
@@ -656,7 +661,7 @@
       "issue": 188,
       "navn": "Vinden som strømmer over byen",
       "startet": "2026-09-23T12:42:40.4886016+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "henrik",
@@ -664,7 +669,7 @@
       "issue": 114,
       "navn": "Nytt lag: Kristiania i 1910",
       "startet": "2026-09-23T12:43:33.13049+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-sindre",
@@ -696,7 +701,7 @@
       "issue": 211,
       "navn": "Statistikken viser ikke «Nyeste» for vannmålere og smilefjes",
       "startet": "2026-09-23T12:48:04.2901179+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "henrik",
@@ -704,7 +709,7 @@
       "issue": 203,
       "navn": "Popupen havner bak lagpanelet på PC",
       "startet": "2026-09-23T12:49:33.0669163+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-richard",
@@ -712,6 +717,22 @@
       "issue": 180,
       "navn": "Simulering: strømstans i en bydel",
       "startet": "2026-09-23T12:49:58.0271137+00:00",
+      "minutter": 1
+    },
+    {
+      "agent": "mini-richard",
+      "github": "randsu",
+      "issue": 196,
+      "navn": "Nytt lag: forsinkelser på knutepunktene",
+      "startet": "2026-09-23T12:50:57.3337676+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-leif",
+      "github": "leif-larsen",
+      "issue": 21,
+      "navn": "Adressesøk",
+      "startet": "2026-09-23T12:50:58.0553123+00:00",
       "minutter": 0
     }
   ],
@@ -813,7 +834,7 @@
       "issue": 48,
       "navn": "Hent lagene parallelt",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T12:50:29Z"
+      "oppdatert": "2026-09-23T12:51:11Z"
     },
     {
       "issue": 50,
@@ -1092,6 +1113,12 @@
       "oppdatert": "2026-09-23T12:46:06Z"
     },
     {
+      "issue": 196,
+      "navn": "Nytt lag: forsinkelser på knutepunktene",
+      "github": "randsu",
+      "oppdatert": "2026-09-23T12:50:58Z"
+    },
+    {
       "issue": 197,
       "navn": "Beskytt storskjermen mot innbrenning",
       "github": "yonzo",
@@ -1160,6 +1187,66 @@
   ],
   "aapne": [
     {
+      "pr": 72,
+      "tittel": "Søk etter adresse og hopp dit på kartet (#21)",
+      "github": "leif-larsen",
+      "agent": "mini-leif",
+      "opprettet": "2026-09-23T08:12:16Z",
+      "oppdatert": "2026-09-23T12:50:57Z",
+      "utkast": false,
+      "issues": [
+        21
+      ]
+    },
+    {
+      "pr": 145,
+      "tittel": "#142: Kurs på skipene",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T12:03:14Z",
+      "oppdatert": "2026-09-23T12:50:35Z",
+      "utkast": false,
+      "issues": [
+        142
+      ]
+    },
+    {
+      "pr": 239,
+      "tittel": "#211: Statistikken viser ikke «Nyeste» for vannmålere og smilefjes",
+      "github": "randsu",
+      "agent": "randsu",
+      "opprettet": "2026-09-23T12:48:17Z",
+      "oppdatert": "2026-09-23T12:50:17Z",
+      "utkast": false,
+      "issues": [
+        211
+      ]
+    },
+    {
+      "pr": 237,
+      "tittel": "#124: Punkter som flytter seg, glir til ny posisjon",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T12:48:04Z",
+      "oppdatert": "2026-09-23T12:50:15Z",
+      "utkast": false,
+      "issues": [
+        124
+      ]
+    },
+    {
+      "pr": 230,
+      "tittel": "#118: Nyhetslinje nederst på skjermen",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T12:42:40Z",
+      "oppdatert": "2026-09-23T12:50:15Z",
+      "utkast": false,
+      "issues": [
+        118
+      ]
+    },
+    {
       "pr": 242,
       "tittel": "Svarte klynger dekker sentrum og skjuler hvilke lag som er der (#215)",
       "github": "Buggz",
@@ -1208,18 +1295,6 @@
       ]
     },
     {
-      "pr": 239,
-      "tittel": "#211: Statistikken viser ikke «Nyeste» for vannmålere og smilefjes",
-      "github": "randsu",
-      "agent": "randsu",
-      "opprettet": "2026-09-23T12:48:17Z",
-      "oppdatert": "2026-09-23T12:49:49Z",
-      "utkast": false,
-      "issues": [
-        211
-      ]
-    },
-    {
       "pr": 67,
       "tittel": "Hent lagene parallelt",
       "github": "FrodeBl",
@@ -1229,18 +1304,6 @@
       "utkast": false,
       "issues": [
         48
-      ]
-    },
-    {
-      "pr": 230,
-      "tittel": "#118: Nyhetslinje nederst på skjermen",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T12:42:40Z",
-      "oppdatert": "2026-09-23T12:49:22Z",
-      "utkast": false,
-      "issues": [
-        118
       ]
     },
     {
@@ -1328,30 +1391,6 @@
       ]
     },
     {
-      "pr": 237,
-      "tittel": "#124: Punkter som flytter seg, glir til ny posisjon",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T12:48:04Z",
-      "oppdatert": "2026-09-23T12:48:05Z",
-      "utkast": false,
-      "issues": [
-        124
-      ]
-    },
-    {
-      "pr": 236,
-      "tittel": "Bysykkelstasjoner blir 33 punkter oppå hverandre",
-      "github": "FrodeBl",
-      "agent": "mini-frode",
-      "opprettet": "2026-09-23T12:46:57Z",
-      "oppdatert": "2026-09-23T12:47:02Z",
-      "utkast": false,
-      "issues": [
-        209
-      ]
-    },
-    {
       "pr": 222,
       "tittel": "Havet stiger: hva havner under vann? (#133)",
       "github": "Puiu",
@@ -1436,18 +1475,6 @@
       ]
     },
     {
-      "pr": 145,
-      "tittel": "#142: Kurs på skipene",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T12:03:14Z",
-      "oppdatert": "2026-09-23T12:40:38Z",
-      "utkast": false,
-      "issues": [
-        142
-      ]
-    },
-    {
       "pr": 224,
       "tittel": "Vinden som strømmer over byen",
       "github": "theakbe",
@@ -1493,18 +1520,6 @@
       "utkast": false,
       "issues": [
         197
-      ]
-    },
-    {
-      "pr": 72,
-      "tittel": "Søk etter adresse og hopp dit på kartet (#21)",
-      "github": "leif-larsen",
-      "agent": "mini-leif",
-      "opprettet": "2026-09-23T08:12:16Z",
-      "oppdatert": "2026-09-23T12:04:34Z",
-      "utkast": false,
-      "issues": [
-        21
       ]
     },
     {
