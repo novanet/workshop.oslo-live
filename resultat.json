@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:38:36",
+  "oppdatert": "2026-09-23T11:39:14",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -356,6 +356,25 @@
       "plass": 12
     },
     {
+      "navn": "mini-johan",
+      "github": "pr0nin",
+      "poeng": 0,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 0.403,
+      "tokens": 302116,
+      "sekunder": 92,
+      "pr": 0,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 1,
+      "utenPr": 1,
+      "bygg": [],
+      "estimert": false,
+      "plass": 13
+    },
+    {
       "navn": "Dmitry-agent",
       "github": "FilonenkoDmitry",
       "poeng": 0,
@@ -372,7 +391,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 13
+      "plass": 14
     },
     {
       "navn": "mini-taco",
@@ -391,7 +410,7 @@
       "utenPr": 0,
       "bygg": [],
       "estimert": false,
-      "plass": 14
+      "plass": 15
     },
     {
       "navn": "mini-sindre",
@@ -410,7 +429,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 15
+      "plass": 16
     },
     {
       "navn": "mini-aud",
@@ -429,7 +448,7 @@
       "utenPr": 3,
       "bygg": [],
       "estimert": false,
-      "plass": 16
+      "plass": 17
     },
     {
       "navn": "Andy3000",
@@ -448,7 +467,26 @@
       "utenPr": 2,
       "bygg": [],
       "estimert": false,
-      "plass": 17
+      "plass": 18
+    },
+    {
+      "navn": "app/copilot-swe-agent",
+      "github": "app/copilot-swe-agent",
+      "poeng": -1,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 0.0,
+      "tokens": 0,
+      "sekunder": 0,
+      "pr": 1,
+      "utkast": 1,
+      "merget": 0,
+      "kjoeringer": 0,
+      "utenPr": 0,
+      "bygg": [],
+      "estimert": false,
+      "plass": 19
     },
     {
       "navn": "mini-frode",
@@ -467,7 +505,7 @@
       "utenPr": 7,
       "bygg": [],
       "estimert": false,
-      "plass": 18
+      "plass": 20
     }
   ],
   "kjoerer": [
@@ -477,7 +515,7 @@
       "issue": 29,
       "navn": "Museer",
       "startet": "2026-09-23T09:33:36.7988647+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-taco",
@@ -485,7 +523,7 @@
       "issue": 122,
       "navn": "Vis hvor ferskt hvert lag er",
       "startet": "2026-09-23T09:34:35.9423034+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-bug",
@@ -493,7 +531,7 @@
       "issue": 3,
       "navn": "Mellomlageret",
       "startet": "2026-09-23T09:34:49.5919992+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-kirsten",
@@ -501,7 +539,7 @@
       "issue": 52,
       "navn": "Konfigurerbar bbox",
       "startet": "2026-09-23T09:36:06.5656066+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "Dmitry-agent",
@@ -509,15 +547,7 @@
       "issue": 12,
       "navn": "Holdeplasser",
       "startet": "2026-09-23T09:36:39.1423524+00:00",
-      "minutter": 1
-    },
-    {
-      "agent": "mini-johan",
-      "github": "pr0nin",
-      "issue": 10,
-      "navn": "Trafikk",
-      "startet": "2026-09-23T09:37:20.4937471+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "henrik",
@@ -525,6 +555,30 @@
       "issue": 7,
       "navn": "Skipstrafikk",
       "startet": "2026-09-23T09:37:38.7912096+00:00",
+      "minutter": 1
+    },
+    {
+      "agent": "mini-jon",
+      "github": "yonzo",
+      "issue": 44,
+      "navn": "Sammenlign tid",
+      "startet": "2026-09-23T09:38:36.2749004+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "martin-holth",
+      "github": "martinrholth",
+      "issue": 111,
+      "navn": "Nytt lag: kaier og ferjekaier",
+      "startet": "2026-09-23T09:38:43.734765+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-knive",
+      "github": "Buggz",
+      "issue": 28,
+      "navn": "Tog",
+      "startet": "2026-09-23T09:39:07.9583013+00:00",
       "minutter": 0
     }
   ],
@@ -574,13 +628,13 @@
       "issue": 10,
       "navn": "Nytt lag: trafikkregistreringspunkt",
       "github": "pr0nin",
-      "oppdatert": "2026-09-23T09:37:21Z"
+      "oppdatert": "2026-09-23T09:38:59Z"
     },
     {
       "issue": 11,
       "navn": "Nytt lag: kollektivtrafikk som beveger seg",
       "github": "coffeelyfe",
-      "oppdatert": "2026-09-23T09:38:32Z"
+      "oppdatert": "2026-09-23T09:38:39Z"
     },
     {
       "issue": 12,
@@ -664,7 +718,7 @@
       "issue": 28,
       "navn": "Nytt lag: togtrafikk",
       "github": "Buggz",
-      "oppdatert": "2026-09-23T09:38:31Z"
+      "oppdatert": "2026-09-23T09:39:08Z"
     },
     {
       "issue": 29,
@@ -718,7 +772,7 @@
       "issue": 44,
       "navn": "Sammenlign to tidspunkt",
       "github": "yonzo",
-      "oppdatert": "2026-09-23T09:37:49Z"
+      "oppdatert": "2026-09-23T09:38:36Z"
     },
     {
       "issue": 46,
@@ -793,10 +847,28 @@
       "oppdatert": "2026-09-23T09:20:55Z"
     },
     {
+      "issue": 111,
+      "navn": "Nytt lag: kaier og ferjekaier",
+      "github": "martinrholth",
+      "oppdatert": "2026-09-23T09:38:44Z"
+    },
+    {
+      "issue": 113,
+      "navn": "Nytt lag: store arbeidsplasser i sentrum",
+      "github": "Copilot",
+      "oppdatert": "2026-09-23T09:39:10Z"
+    },
+    {
+      "issue": 113,
+      "navn": "Nytt lag: store arbeidsplasser i sentrum",
+      "github": "SasaRad",
+      "oppdatert": "2026-09-23T09:39:10Z"
+    },
+    {
       "issue": 115,
       "navn": "Nytt lag: parker og torg",
       "github": "novanettor",
-      "oppdatert": "2026-09-23T09:37:34Z"
+      "oppdatert": "2026-09-23T09:38:45Z"
     },
     {
       "issue": 122,
@@ -807,12 +879,24 @@
   ],
   "aapne": [
     {
+      "pr": 125,
+      "tittel": "[WIP] Add layer for major employers in city center",
+      "github": "app/copilot-swe-agent",
+      "agent": "app/copilot-swe-agent",
+      "opprettet": "2026-09-23T09:38:58Z",
+      "oppdatert": "2026-09-23T09:38:58Z",
+      "utkast": true,
+      "issues": [
+        113
+      ]
+    },
+    {
       "pr": 107,
       "tittel": "Tastatursnarveier",
       "github": "audmaha",
       "agent": "mini-aud",
       "opprettet": "2026-09-23T09:00:42Z",
-      "oppdatert": "2026-09-23T09:37:21Z",
+      "oppdatert": "2026-09-23T09:38:38Z",
       "utkast": false,
       "issues": [
         39
