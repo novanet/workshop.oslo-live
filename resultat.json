@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:27:11",
+  "oppdatert": "2026-09-23T10:27:37",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -28,31 +28,6 @@
       "plass": 1
     },
     {
-      "navn": "mini-ingve",
-      "github": "ingvevs",
-      "poeng": 2,
-      "feil": [
-        {
-          "issue": 4,
-          "navn": "Duplikatfjerning",
-          "poeng": 2
-        }
-      ],
-      "lag": [],
-      "levert": [],
-      "dollar": 1.014,
-      "tokens": 1725789,
-      "sekunder": 335,
-      "pr": 1,
-      "utkast": 0,
-      "merget": 1,
-      "kjoeringer": 2,
-      "utenPr": 1,
-      "bygg": [],
-      "estimert": false,
-      "plass": 2
-    },
-    {
       "navn": "mini-wilma",
       "github": "larsajakobsen",
       "poeng": 2,
@@ -73,6 +48,31 @@
       "merget": 1,
       "kjoeringer": 5,
       "utenPr": 3,
+      "bygg": [],
+      "estimert": false,
+      "plass": 2
+    },
+    {
+      "navn": "mini-ingve",
+      "github": "ingvevs",
+      "poeng": 2,
+      "feil": [
+        {
+          "issue": 4,
+          "navn": "Duplikatfjerning",
+          "poeng": 2
+        }
+      ],
+      "lag": [],
+      "levert": [],
+      "dollar": 2.463,
+      "tokens": 4229842,
+      "sekunder": 985,
+      "pr": 2,
+      "utkast": 0,
+      "merget": 1,
+      "kjoeringer": 3,
+      "utenPr": 1,
       "bygg": [],
       "estimert": false,
       "plass": 3
@@ -252,20 +252,12 @@
       "minutter": 17
     },
     {
-      "agent": "mini-ingve",
-      "github": "ingvevs",
-      "issue": 49,
-      "navn": "Nytt forsøk",
-      "startet": "2026-09-23T08:16:16.8577675+00:00",
-      "minutter": 10
-    },
-    {
       "agent": "mini-knive",
       "github": "Buggz",
       "issue": 57,
       "navn": "Avgangstavle",
       "startet": "2026-09-23T08:16:36.122853+00:00",
-      "minutter": 10
+      "minutter": 11
     },
     {
       "agent": "mini-jon",
@@ -281,7 +273,7 @@
       "issue": 45,
       "navn": "Varsler",
       "startet": "2026-09-23T08:22:20.0747631+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-wilma",
@@ -297,7 +289,7 @@
       "issue": 29,
       "navn": "Museer",
       "startet": "2026-09-23T08:23:16.9053574+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-sindre",
@@ -305,7 +297,7 @@
       "issue": 55,
       "navn": "Ytelse",
       "startet": "2026-09-23T08:24:11.6549987+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-astrid",
@@ -313,7 +305,7 @@
       "issue": 42,
       "navn": "Nærmeste punkt",
       "startet": "2026-09-23T08:25:30.8766176+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-frode",
@@ -321,7 +313,7 @@
       "issue": 48,
       "navn": "Parallell henting",
       "startet": "2026-09-23T08:26:31.7269134+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-richard",
@@ -336,7 +328,7 @@
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
     "pr": null,
-    "kjoeringer": 17
+    "kjoeringer": 18
   },
   "produkt": {
     "testerBestatt": 12,
@@ -452,7 +444,7 @@
       "issue": 19,
       "navn": "Nytt lag: artsobservasjoner",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T08:24:29Z"
+      "oppdatert": "2026-09-23T08:27:29Z"
     },
     {
       "issue": 20,
@@ -471,6 +463,12 @@
       "navn": "Nytt lag: museer og samlinger",
       "github": "jthagesk",
       "oppdatert": "2026-09-23T08:23:18Z"
+    },
+    {
+      "issue": 41,
+      "navn": "Fargene må virke for alle",
+      "github": "nilsgs",
+      "oppdatert": "2026-09-23T08:27:30Z"
     },
     {
       "issue": 42,
@@ -506,7 +504,7 @@
       "issue": 49,
       "navn": "Prøv én gang til når en kilde svarer dårlig",
       "github": "ingvevs",
-      "oppdatert": "2026-09-23T08:16:17Z"
+      "oppdatert": "2026-09-23T08:27:27Z"
     },
     {
       "issue": 50,
@@ -553,6 +551,30 @@
   ],
   "aapne": [
     {
+      "pr": 77,
+      "tittel": "Prøv én gang til når en kilde svarer dårlig",
+      "github": "ingvevs",
+      "agent": "mini-ingve",
+      "opprettet": "2026-09-23T08:27:25Z",
+      "oppdatert": "2026-09-23T08:27:25Z",
+      "utkast": false,
+      "issues": [
+        49
+      ]
+    },
+    {
+      "pr": 69,
+      "tittel": "#56: Nytt lag: fly i lufta over Oslo",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:10:46Z",
+      "oppdatert": "2026-09-23T08:27:05Z",
+      "utkast": false,
+      "issues": [
+        56
+      ]
+    },
+    {
       "pr": 72,
       "tittel": "Søk etter adresse og hopp dit på kartet (#21)",
       "github": "leif-larsen",
@@ -574,18 +596,6 @@
       "utkast": false,
       "issues": [
         19
-      ]
-    },
-    {
-      "pr": 69,
-      "tittel": "#56: Nytt lag: fly i lufta over Oslo",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:10:46Z",
-      "oppdatert": "2026-09-23T08:24:47Z",
-      "utkast": false,
-      "issues": [
-        56
       ]
     },
     {
