@@ -1,11 +1,11 @@
 {
-  "oppdatert": "2026-09-23T11:31:56",
+  "oppdatert": "2026-09-23T11:32:45",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
       "navn": "mini-richard",
       "github": "randsu",
-      "poeng": 17,
+      "poeng": 27,
       "feil": [
         {
           "issue": 3,
@@ -14,6 +14,11 @@
         }
       ],
       "lag": [
+        {
+          "issue": 6,
+          "navn": "Delt mobilitet",
+          "poeng": 2
+        },
         {
           "issue": 9,
           "navn": "Badetemperatur",
@@ -25,6 +30,11 @@
           "issue": 24,
           "navn": "Bydeler",
           "poeng": 5
+        },
+        {
+          "issue": 34,
+          "navn": "Tidslinje",
+          "poeng": 8
         },
         {
           "issue": 38,
@@ -42,7 +52,7 @@
       "sekunder": 5772,
       "pr": 10,
       "utkast": 0,
-      "merget": 6,
+      "merget": 7,
       "kjoeringer": 14,
       "utenPr": 4,
       "bygg": [],
@@ -442,7 +452,7 @@
       "issue": 55,
       "navn": "Ytelse",
       "startet": "2026-09-23T09:26:04.1878556+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-knive",
@@ -460,14 +470,15 @@
     "kjoeringer": 33
   },
   "produkt": {
-    "testerBestatt": 14,
-    "testerFeilet": 12,
+    "testerBestatt": 15,
+    "testerFeilet": 11,
     "issuerLost": [
       1,
       2,
       3,
       4,
       5,
+      6,
       9,
       15,
       17
@@ -887,6 +898,18 @@
   ],
   "aapne": [
     {
+      "pr": 65,
+      "tittel": "#11: Nytt lag: kollektivtrafikk som beveger seg",
+      "github": "coffeelyfe",
+      "agent": "Andy3000",
+      "opprettet": "2026-09-23T07:50:13Z",
+      "oppdatert": "2026-09-23T09:31:45Z",
+      "utkast": false,
+      "issues": [
+        11
+      ]
+    },
+    {
       "pr": 84,
       "tittel": "Varsle når noe skjer",
       "github": "jthagesk",
@@ -896,30 +919,6 @@
       "utkast": false,
       "issues": [
         45
-      ]
-    },
-    {
-      "pr": 65,
-      "tittel": "#11: Nytt lag: kollektivtrafikk som beveger seg",
-      "github": "coffeelyfe",
-      "agent": "Andy3000",
-      "opprettet": "2026-09-23T07:50:13Z",
-      "oppdatert": "2026-09-23T09:31:29Z",
-      "utkast": false,
-      "issues": [
-        11
-      ]
-    },
-    {
-      "pr": 101,
-      "tittel": "#34: Skru tiden tilbake med en tidslinje",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:51:10Z",
-      "oppdatert": "2026-09-23T09:31:09Z",
-      "utkast": false,
-      "issues": [
-        34
       ]
     },
     {
