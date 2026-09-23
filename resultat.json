@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:35:27",
+  "oppdatert": "2026-09-23T10:35:54",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -337,7 +337,7 @@
       "issue": 42,
       "navn": "Nærmeste punkt",
       "startet": "2026-09-23T08:25:30.8766176+00:00",
-      "minutter": 9
+      "minutter": 10
     },
     {
       "agent": "mini-frode",
@@ -345,7 +345,7 @@
       "issue": 50,
       "navn": "Metrikker",
       "startet": "2026-09-23T08:27:51.3617499+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "mini-frode",
@@ -377,7 +377,7 @@
       "issue": 23,
       "navn": "Delbart utsnitt",
       "startet": "2026-09-23T08:31:51.7313963+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-aud",
@@ -401,7 +401,7 @@
       "issue": 53,
       "navn": "Dyp helsesjekk",
       "startet": "2026-09-23T08:33:27.9645236+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-aud",
@@ -409,7 +409,7 @@
       "issue": 43,
       "navn": "Statistikk",
       "startet": "2026-09-23T08:33:40.253268+00:00",
-      "minutter": 1
+      "minutter": 2
     }
   ],
   "main": {
@@ -448,31 +448,31 @@
       "issue": 2,
       "navn": "Steder langt utenfor Oslo slipper inn i kartet",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T08:24:57Z"
+      "oppdatert": "2026-09-23T08:35:31Z"
     },
     {
       "issue": 2,
       "navn": "Steder langt utenfor Oslo slipper inn i kartet",
       "github": "leif-larsen",
-      "oppdatert": "2026-09-23T08:24:57Z"
+      "oppdatert": "2026-09-23T08:35:31Z"
     },
     {
       "issue": 2,
       "navn": "Steder langt utenfor Oslo slipper inn i kartet",
       "github": "randsu",
-      "oppdatert": "2026-09-23T08:24:57Z"
+      "oppdatert": "2026-09-23T08:35:31Z"
     },
     {
       "issue": 3,
       "navn": "Kartet oppdaterer seg ikke, dataene står stille",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T08:26:26Z"
+      "oppdatert": "2026-09-23T08:35:41Z"
     },
     {
       "issue": 3,
       "navn": "Kartet oppdaterer seg ikke, dataene står stille",
       "github": "randsu",
-      "oppdatert": "2026-09-23T08:26:26Z"
+      "oppdatert": "2026-09-23T08:35:41Z"
     },
     {
       "issue": 4,
@@ -508,7 +508,7 @@
       "issue": 6,
       "navn": "Nytt lag: elsparkesykler og bysykler",
       "github": "randsu",
-      "oppdatert": "2026-09-23T08:29:38Z"
+      "oppdatert": "2026-09-23T08:35:34Z"
     },
     {
       "issue": 7,
@@ -562,13 +562,13 @@
       "issue": 23,
       "navn": "Del kartutsnittet som en lenke",
       "github": "audmaha",
-      "oppdatert": "2026-09-23T08:32:03Z"
+      "oppdatert": "2026-09-23T08:35:39Z"
     },
     {
       "issue": 23,
       "navn": "Del kartutsnittet som en lenke",
       "github": "randsu",
-      "oppdatert": "2026-09-23T08:32:03Z"
+      "oppdatert": "2026-09-23T08:35:39Z"
     },
     {
       "issue": 29,
