@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T12:28:18",
+  "oppdatert": "2026-09-23T12:28:56",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -910,6 +910,18 @@
   ],
   "aapne": [
     {
+      "pr": 104,
+      "tittel": "#25: Ta vare på et øyeblikksbilde hver time",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:58:22Z",
+      "oppdatert": "2026-09-23T10:28:31Z",
+      "utkast": false,
+      "issues": [
+        25
+      ]
+    },
+    {
       "pr": 96,
       "tittel": "#22: Slå sammen punkter som ligger oppå hverandre",
       "github": "randsu",
@@ -1099,18 +1111,6 @@
       "utkast": false,
       "issues": [
         26
-      ]
-    },
-    {
-      "pr": 104,
-      "tittel": "#25: Ta vare på et øyeblikksbilde hver time",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:58:22Z",
-      "oppdatert": "2026-09-23T09:23:26Z",
-      "utkast": false,
-      "issues": [
-        25
       ]
     },
     {
