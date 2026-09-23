@@ -68,7 +68,7 @@ public class MuseumLagTester
     public void Museum_uten_navn_faar_standardnavn()
     {
         var punkt = MuseumLag.TilPunkt(Rad("""
-            { "heritage_site_id": 135892, "lon_lat": [10.743, 59.918] }
+            { "heritage_site_id": 1, "lon_lat": [10.743, 59.918] }
             """), eksempel: null);
 
         Assert.Equal("Ukjent museum", punkt!.Properties["navn"]);
@@ -118,9 +118,44 @@ public class MuseumLagTester
     }
 
     [Fact]
-    public void Eksempelkall_er_begrenset()
+    public void Kjent_museum_faar_museets_navn_og_ikke_bygningsnavnet()
     {
-        Assert.True(MuseumLag.MaksEksempelkall > 0);
-        Assert.True(MuseumLag.MaksEksempelkall <= 50);
+        var museer = MuseumLag.ÉnPerMuseum(Rader("""
+            [
+                { "heritage_site_id": 137517, "navn": "Tilbygg. Nf 325", "lon_lat": [10.6864, 59.9070] },
+                { "heritage_site_id": 137517, "navn": "Hovedbygg. Nf 316", "lon_lat": [10.6862, 59.9068] }
+            ]
+            """));
+
+        var punkt = MuseumLag.TilPunkt(museer.Single(), eksempel: null);
+
+        Assert.Equal("Norsk Folkemuseum", punkt!.Properties["navn"]);
+    }
+
+    [Fact]
+    public void Kjent_museum_har_samlingskoden_i_digitaltmuseum()
+    {
+        var museum = MuseumLag.Oppslag(Rad("""
+            { "heritage_site_id": 137517, "navn": "Tilbygg. Nf 325" }
+            """));
+
+        Assert.Equal(new MuseumLag.Museum("Norsk Folkemuseum", "NF"), museum);
+    }
+
+    [Fact]
+    public void Ukjent_museum_beholder_navnet_fra_askeladden_uten_samling()
+    {
+        var museum = MuseumLag.Oppslag(Rad("""
+            { "heritage_site_id": 1, "navn": "Et lite galleri" }
+            """));
+
+        Assert.Equal(new MuseumLag.Museum("Et lite galleri", null), museum);
+    }
+
+    [Fact]
+    public void Kall_per_oppdatering_er_begrenset()
+    {
+        Assert.Equal(1 + MuseumLag.KjenteMuseer.Values.Count(m => m.Samling is not null), MuseumLag.MaksKallPerOppdatering);
+        Assert.True(MuseumLag.MaksKallPerOppdatering <= 20);
     }
 }

@@ -6,89 +6,87 @@ namespace OsloLive.Lag;
 
 /// <summary>
 /// Museer i Oslo fra Askeladden (Riksantikvarens kulturminnedatabase), med et
-/// smakebit-objekt fra museets samling i DigitaltMuseum. Begge kildene
+/// smakebit-objekt fra museets egen samling i DigitaltMuseum. Begge kildene
 /// kommer fra Allemannsdata sin «kulturarv»-kilde.
 ///
-/// Museumslisten har egen mellomlagring i <see cref="IMemoryCache"/> utover
-/// <see cref="Allemannsdata"/> sitt 30-sekunders mellomlager, fordi
-/// smakebit-kallet er ett kall per museum: uten et lengre mellomlager ville
-/// hvert oppslag i lagvelgeren (hvert 15. sekund) gitt et helt nytt sett med
-/// museumskall.
+/// Askeladden registrerer museumsbygninger, ikke museer: radene heter ting
+/// som «Tilbygg. Nf 325» eller «Tø03 Botanisk museum». <see cref="KjenteMuseer"/>
+/// gir derfor museets navn og samlingskode i DigitaltMuseum, mens Askeladden
+/// gir koordinatene.
+///
+/// Hele laget, smakebitene inkludert, mellomlagres i <see cref="IMemoryCache"/>
+/// og hentes bare på nytt når museumslisten er utløpt. Senere kall rører ikke
+/// nettet og svarer derfor raskt.
 /// </summary>
 public sealed class MuseumLag(Allemannsdata data, IMemoryCache mellomlager) : ILag
 {
-    private const string MuseumsNøkkel = "museum-museer";
-    private const string EksempelNøkkelPrefiks = "museum-eksempel-";
+    private const string LagNøkkel = "museum-lag";
 
     /// <summary>Museer flytter seg ikke, så et langt mellomlager gir raske svar etter det første kallet.</summary>
-    private static readonly TimeSpan MuseumsLevetid = TimeSpan.FromHours(6);
+    private static readonly TimeSpan LagLevetid = TimeSpan.FromHours(6);
 
     /// <summary>Mellomlagring når museumslista er tom, slik at et forbigående tomt svar ikke blanker laget i 6 timer.</summary>
-    private static readonly TimeSpan TomMuseumslisteLevetid = TimeSpan.FromMinutes(1);
-
-    /// <summary>Smakebiten for et museum endrer seg sjelden; mellomlagres lenge når den lykkes.</summary>
-    private static readonly TimeSpan EksempelLevetid = TimeSpan.FromHours(24);
-
-    /// <summary>
-    /// Kortere mellomlagring når smakebitkallet feiler eller ikke gir treff, slik at
-    /// vi prøver på nytt en gang i blant i stedet for å gi opp for et helt døgn.
-    /// </summary>
-    private static readonly TimeSpan EksempelFeilLevetid = TimeSpan.FromMinutes(10);
+    private static readonly TimeSpan TomtLagLevetid = TimeSpan.FromMinutes(1);
 
     /// <summary>Tak per smakebitkall, slik at ett tregt museum ikke forsinker resten av laget.</summary>
     private static readonly TimeSpan EksempelFrist = TimeSpan.FromSeconds(8);
 
     /// <summary>
     /// Tak på museumslistekallet, slik at første kall svarer innen 30 sekunder selv om
-    /// kilden henger: <see cref="Allemannsdata"/> sin HttpClient har 30 sekunders tidsavbrudd
-    /// pluss inntil to nye forsøk.
+    /// kilden henger: 15 sekunder her pluss <see cref="EksempelFrist"/> for smakebitene,
+    /// som hentes samtidig.
     /// </summary>
     private static readonly TimeSpan MuseumsFrist = TimeSpan.FromSeconds(15);
 
+    /// <summary>Museets navn og samlingskoden i DigitaltMuseum (null når museet ikke har en samling der).</summary>
+    public sealed record Museum(string Navn, string? Samling);
+
     /// <summary>
-    /// Antall museer vi henter et smakebit-objekt for per oppdatering.
-    /// Smakebiten tar museumsnavnet som søketekst, ikke en museumsliste, så
-    /// ett kall per museum er nødvendig; vi setter et tak for ikke å belaste
-    /// kilden for mye selv om museumslisten i Oslo skulle vokse. Museer som
-    /// ikke rekker en tur denne runden, blir ikke mellomlagret uten smakebit,
-    /// så de får en ny sjanse neste oppdatering: over noen runder får alle
-    /// museene etter hvert en smakebit.
+    /// Kjente museer i Oslo, etter Askeladden sitt <c>heritage_site_id</c>.
+    /// Samlingskodene kommer fra <c>list_museums</c>; overordnede koder som
+    /// «NMK» og «KHMUIO» har nesten ingen objekter selv, så vi bruker
+    /// undersamlingene.
     /// </summary>
-    public const int MaksEksempelkall = 20;
+    public static readonly IReadOnlyDictionary<long, Museum> KjenteMuseer = new Dictionary<long, Museum>
+    {
+        [87641] = new("Nasjonalmuseet – Arkitektur", "NMK-A"),
+        [117755] = new("Naturhistorisk museum", null),
+        [132953] = new("Nasjonalgalleriet", "NMK-B"),
+        [135892] = new("Kunstindustrimuseet", "NMK-D"),
+        [137517] = new("Norsk Folkemuseum", "NF"),
+        [163416] = new("Kulturhistorisk museum", "KHMUIO-A"),
+        [164640] = new("Munchmuseet på Tøyen", null),
+        [168378] = new("Norsk Maritimt Museum", "NSM"),
+        [168511] = new("Kunstnernes Hus", null),
+        [168599] = new("Frammuseet", null),
+        [227994] = new("Emanuel Vigelands museum", null),
+    };
+
+    /// <summary>
+    /// Øvre grense for antall kall mot Allemannsdata per oppdatering av laget:
+    /// ett for museumslisten og ett smakebitkall per kjent museum med samling.
+    /// Oppdateringen skjer bare når mellomlageret er utløpt, altså hver 6. time.
+    /// </summary>
+    public static int MaksKallPerOppdatering => 1 + KjenteMuseer.Values.Count(m => m.Samling is not null);
 
     public string Id => "museum";
     public string Navn => "Museer";
-    public string Beskrivelse => "Museer i Oslo fra Askeladden, med et smakebit-objekt fra DigitaltMuseum.";
+    public string Beskrivelse => "Museer i Oslo fra Askeladden, med et smakebit-objekt fra samlingen i DigitaltMuseum.";
     public string Ikon => "🏛️";
 
     public async Task<Kartlag> Hent(CancellationToken stopp = default)
     {
+        if (mellomlager.TryGetValue(LagNøkkel, out Kartlag? lagret) && lagret is not null)
+        {
+            return lagret;
+        }
+
         var museer = await HentMuseer(stopp);
+        var eksempler = await Task.WhenAll(museer.Select(m => HentEksempel(Oppslag(m).Samling, stopp)));
 
-        var eksempler = new Dictionary<long, string?>();
-        var uhentede = new List<JsonElement>();
-        foreach (var museum in museer)
-        {
-            var id = museum.GetProperty("heritage_site_id").GetInt64();
-            if (mellomlager.TryGetValue(EksempelNøkkelPrefiks + id, out string? lagretEksempel))
-            {
-                eksempler[id] = lagretEksempel;
-            }
-            else
-            {
-                uhentede.Add(museum);
-            }
-        }
-
-        var denneRunden = uhentede.Take(MaksEksempelkall).ToList();
-        var resultater = await Task.WhenAll(denneRunden.Select(m => HentEksempel(m, stopp)));
-        for (var i = 0; i < denneRunden.Count; i++)
-        {
-            eksempler[denneRunden[i].GetProperty("heritage_site_id").GetInt64()] = resultater[i];
-        }
-
-        var punkter = museer.Select(m => TilPunkt(m, eksempler.GetValueOrDefault(m.GetProperty("heritage_site_id").GetInt64())));
-        return Geo.Samle(punkter);
+        var lag = Geo.Samle(museer.Select((m, i) => TilPunkt(m, eksempler[i])));
+        mellomlager.Set(LagNøkkel, lag, lag.Features.Count > 0 ? LagLevetid : TomtLagLevetid);
+        return lag;
     }
 
     /// <summary>
@@ -98,11 +96,6 @@ public sealed class MuseumLag(Allemannsdata data, IMemoryCache mellomlager) : IL
     /// </summary>
     private async Task<IReadOnlyList<JsonElement>> HentMuseer(CancellationToken stopp)
     {
-        if (mellomlager.TryGetValue(MuseumsNøkkel, out IReadOnlyList<JsonElement>? lagret) && lagret is not null)
-        {
-            return lagret;
-        }
-
         using var frist = CancellationTokenSource.CreateLinkedTokenSource(stopp);
         frist.CancelAfter(MuseumsFrist);
 
@@ -118,9 +111,7 @@ public sealed class MuseumLag(Allemannsdata data, IMemoryCache mellomlager) : IL
             liste: "sites",
             frist.Token);
 
-        var museer = ÉnPerMuseum(rader);
-        mellomlager.Set(MuseumsNøkkel, museer, museer.Count > 0 ? MuseumsLevetid : TomMuseumslisteLevetid);
-        return museer;
+        return ÉnPerMuseum(rader);
     }
 
     /// <summary>
@@ -136,36 +127,50 @@ public sealed class MuseumLag(Allemannsdata data, IMemoryCache mellomlager) : IL
             .ToList();
 
     /// <summary>
-    /// Henter smakebit-objektet for ett museum: tittelen på det første
-    /// treffet i DigitaltMuseum for museumsnavnet. Svikter kallet eller tar
-    /// det for lang tid, gir vi opp smakebiten for dette museet uten å felle
-    /// hele laget.
+    /// Museet en Askeladden-rad hører til: fra <see cref="KjenteMuseer"/> når
+    /// vi kjenner det, ellers radens eget navn og ingen samling.
     /// </summary>
-    private async Task<string?> HentEksempel(JsonElement museum, CancellationToken stopp)
+    public static Museum Oppslag(JsonElement rad)
     {
-        var id = museum.GetProperty("heritage_site_id").GetInt64();
-        var nøkkel = EksempelNøkkelPrefiks + id;
-
-        if (mellomlager.TryGetValue(nøkkel, out string? lagretEksempel))
+        if (rad.TryGetProperty("heritage_site_id", out var id)
+            && id.ValueKind == JsonValueKind.Number
+            && KjenteMuseer.TryGetValue(id.GetInt64(), out var kjent))
         {
-            return lagretEksempel;
+            return kjent;
+        }
+
+        var navn = rad.TryGetProperty("navn", out var n) && n.ValueKind == JsonValueKind.String
+            ? n.GetString() ?? "Ukjent museum"
+            : "Ukjent museum";
+        return new Museum(navn, null);
+    }
+
+    /// <summary>
+    /// Henter smakebit-objektet fra museets samling: tittelen på det første
+    /// objektet DigitaltMuseum har med samlingskoden som eier. Museer uten
+    /// samling gir ikke noe kall. Svikter kallet eller tar det for lang tid,
+    /// vises museet uten smakebit til laget hentes på nytt.
+    /// </summary>
+    private async Task<string?> HentEksempel(string? samling, CancellationToken stopp)
+    {
+        if (samling is null)
+        {
+            return null;
         }
 
         using var frist = CancellationTokenSource.CreateLinkedTokenSource(stopp);
         frist.CancelAfter(EksempelFrist);
 
-        string? eksempel;
         try
         {
-            var navn = museum.TryGetProperty("navn", out var n) ? n.GetString() ?? "" : "";
             var objekter = await data.HentListe(
                 "kulturarv",
                 "search_museum_objects",
-                new Dictionary<string, object> { ["query"] = navn, ["limit"] = 1 },
+                new Dictionary<string, object> { ["query"] = "*", ["owner"] = samling, ["limit"] = 1 },
                 liste: "objects",
                 frist.Token);
 
-            eksempel = objekter.Count > 0 && objekter[0].TryGetProperty("title", out var t) && t.ValueKind == JsonValueKind.String
+            return objekter.Count > 0 && objekter[0].TryGetProperty("title", out var t) && t.ValueKind == JsonValueKind.String
                 ? t.GetString()
                 : null;
         }
@@ -175,16 +180,14 @@ public sealed class MuseumLag(Allemannsdata data, IMemoryCache mellomlager) : IL
         }
         catch
         {
-            eksempel = null;
+            return null;
         }
-
-        mellomlager.Set(nøkkel, eksempel, eksempel is null ? EksempelFeilLevetid : EksempelLevetid);
-        return eksempel;
     }
 
     /// <summary>
     /// Oversetter én museumsrad fra <c>search_heritage_sites</c> til et
-    /// kartpunkt. Rader uten id eller koordinater gir null.
+    /// kartpunkt, med navnet fra <see cref="Oppslag"/>. Rader uten id eller
+    /// koordinater gir null.
     /// </summary>
     public static Kartpunkt? TilPunkt(JsonElement museum, string? eksempel)
     {
@@ -197,10 +200,6 @@ public sealed class MuseumLag(Allemannsdata data, IMemoryCache mellomlager) : IL
         {
             return null;
         }
-
-        var navn = museum.TryGetProperty("navn", out var n) && n.ValueKind == JsonValueKind.String
-            ? n.GetString() ?? "Ukjent museum"
-            : "Ukjent museum";
 
         var lon = lonLat[0].GetDouble();
         var lat = lonLat[1].GetDouble();
@@ -215,7 +214,7 @@ public sealed class MuseumLag(Allemannsdata data, IMemoryCache mellomlager) : IL
             id: idFelt.GetRawText(),
             lat: lat,
             lon: lon,
-            navn: navn,
+            navn: Oppslag(museum).Navn,
             kilde: "Askeladden og DigitaltMuseum (Riksantikvaren)",
             detaljer: detaljer);
     }

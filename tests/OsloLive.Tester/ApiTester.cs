@@ -562,8 +562,8 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
                 "parameters": {},
                 "data": {
                     "sites": [
-                        { "heritage_site_id": 1, "navn": "Kunstindustrimuseet", "lon_lat": [10.743, 59.918] },
-                        { "heritage_site_id": 1, "navn": "Tilbygg", "lon_lat": [10.744, 59.919] }
+                        { "heritage_site_id": 135892, "navn": "Kunstindustrimuseet", "lon_lat": [10.743, 59.918] },
+                        { "heritage_site_id": 135892, "navn": "Tilbygg", "lon_lat": [10.744, 59.919] }
                     ]
                 }
             }
@@ -577,10 +577,13 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
             }
             """;
 
-        var handler = new RutendeHandler(url => new HttpResponseMessage(HttpStatusCode.OK)
-        {
-            Content = new StringContent(url.Contains("search_heritage_sites") ? museumsSvar : objektSvar, Encoding.UTF8, "application/json"),
-        });
+        // Smakebiten skal komme fra museets egen samling: bare kall med
+        // Kunstindustrimuseets samlingskode i DigitaltMuseum får et objekt.
+        var handler = new RutendeHandler(url => url.Contains("search_heritage_sites")
+            ? new HttpResponseMessage(HttpStatusCode.OK) { Content = new StringContent(museumsSvar, Encoding.UTF8, "application/json") }
+            : url.Contains("owner=NMK-D")
+                ? new HttpResponseMessage(HttpStatusCode.OK) { Content = new StringContent(objektSvar, Encoding.UTF8, "application/json") }
+                : new HttpResponseMessage(HttpStatusCode.NotFound));
 
         using var vertUtenNett = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
             tjenester.AddHttpClient<Allemannsdata>().ConfigurePrimaryHttpMessageHandler(() => handler)));
@@ -616,7 +619,7 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
                 "parameters": {},
                 "data": {
                     "sites": [
-                        { "heritage_site_id": 1, "navn": "Kunstindustrimuseet", "lon_lat": [10.743, 59.918] }
+                        { "heritage_site_id": 135892, "navn": "Kunstindustrimuseet", "lon_lat": [10.743, 59.918] }
                     ]
                 }
             }
@@ -638,6 +641,7 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
 
             Assert.Equal(HttpStatusCode.OK, respons.StatusCode);
             Assert.Single(lag!.Features);
+            Assert.Equal(1, handler.ObjektKall);
             Assert.False(lag.Features[0].Properties.ContainsKey("eksempel"));
         }
         finally
@@ -649,11 +653,13 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
     [Fact]
     public async Task Museumslaget_begrenser_og_mellomlagrer_objektkallene()
     {
-        var museer = Enumerable.Range(1, 30)
-            .Select(i => new
+        // Alle kjente museer, pluss 20 ukjente museumsbygninger som ikke skal gi objektkall.
+        var museer = MuseumLag.KjenteMuseer.Keys
+            .Concat(Enumerable.Range(1, 20).Select(i => (long)i))
+            .Select((id, i) => new
             {
-                heritage_site_id = i,
-                navn = $"Museum {i}",
+                heritage_site_id = id,
+                navn = $"Bygning {id}",
                 lon_lat = new[] { 10.70 + (i * 0.001), 59.90 + (i * 0.001) },
             })
             .ToArray();
@@ -672,10 +678,13 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
             data = new { objects = new[] { new { title = "Et objekt" } } },
         });
 
-        var handler = new RutendeHandler(url => new HttpResponseMessage(HttpStatusCode.OK)
-        {
-            Content = new StringContent(url.Contains("search_heritage_sites") ? museumsSvar : objektSvar, Encoding.UTF8, "application/json"),
-        });
+        // Ett av objektkallene svikter; det skal ikke prøves på nytt før laget er utløpt.
+        var handler = new RutendeHandler(url => url.Contains("owner=NF")
+            ? new HttpResponseMessage(HttpStatusCode.NotFound)
+            : new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(url.Contains("search_heritage_sites") ? museumsSvar : objektSvar, Encoding.UTF8, "application/json"),
+            });
 
         using var vertUtenNett = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
             tjenester.AddHttpClient<Allemannsdata>().ConfigurePrimaryHttpMessageHandler(() => handler)));
@@ -687,21 +696,14 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
             var forsteRespons = await klient.GetAsync("/api/lag/museum");
             Assert.Equal(HttpStatusCode.OK, forsteRespons.StatusCode);
             Assert.Equal(1, handler.MuseumsKall);
-            Assert.Equal(MuseumLag.MaksEksempelkall, handler.ObjektKall);
+            Assert.Equal(MuseumLag.MaksKallPerOppdatering - 1, handler.ObjektKall);
 
             Allemannsdata.TømMellomlager();
 
             var andreRespons = await klient.GetAsync("/api/lag/museum");
             Assert.Equal(HttpStatusCode.OK, andreRespons.StatusCode);
             Assert.Equal(1, handler.MuseumsKall);
-            Assert.Equal(30, handler.ObjektKall);
-
-            Allemannsdata.TømMellomlager();
-
-            var tredjeRespons = await klient.GetAsync("/api/lag/museum");
-            Assert.Equal(HttpStatusCode.OK, tredjeRespons.StatusCode);
-            Assert.Equal(1, handler.MuseumsKall);
-            Assert.Equal(30, handler.ObjektKall);
+            Assert.Equal(MuseumLag.MaksKallPerOppdatering - 1, handler.ObjektKall);
         }
         finally
         {
