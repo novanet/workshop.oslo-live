@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:56:52",
+  "oppdatert": "2026-09-23T14:57:35",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -72,14 +72,14 @@
           "poeng": 1
         }
       ],
-      "dollar": 26.024,
-      "tokens": 50555118,
-      "sekunder": 9945,
+      "dollar": 27.94,
+      "tokens": 53830780,
+      "sekunder": 11017,
       "pr": 21,
       "utkast": 0,
       "merget": 12,
-      "kjoeringer": 32,
-      "utenPr": 14,
+      "kjoeringer": 35,
+      "utenPr": 17,
       "bygg": [],
       "estimert": false,
       "plass": 1
@@ -174,14 +174,14 @@
           "poeng": 2
         }
       ],
-      "dollar": 18.005,
-      "tokens": 31007756,
-      "sekunder": 6012,
+      "dollar": 19.096,
+      "tokens": 32025918,
+      "sekunder": 6272,
       "pr": 5,
       "utkast": 0,
       "merget": 3,
-      "kjoeringer": 25,
-      "utenPr": 18,
+      "kjoeringer": 26,
+      "utenPr": 19,
       "bygg": [],
       "estimert": false,
       "plass": 4
@@ -287,14 +287,14 @@
           "poeng": 3
         }
       ],
-      "dollar": 12.842,
-      "tokens": 27735291,
-      "sekunder": 4543,
+      "dollar": 12.99,
+      "tokens": 27892829,
+      "sekunder": 4572,
       "pr": 5,
       "utkast": 0,
       "merget": 3,
-      "kjoeringer": 21,
-      "utenPr": 8,
+      "kjoeringer": 22,
+      "utenPr": 9,
       "bygg": [],
       "estimert": false,
       "plass": 7
@@ -361,31 +361,6 @@
       "plass": 9
     },
     {
-      "navn": "mini-kirsten",
-      "github": "jthagesk",
-      "poeng": 4,
-      "feil": [],
-      "lag": [],
-      "levert": [
-        {
-          "issue": 45,
-          "navn": "Varsler",
-          "poeng": 5
-        }
-      ],
-      "dollar": 20.0,
-      "tokens": 45807315,
-      "sekunder": 6408,
-      "pr": 4,
-      "utkast": 0,
-      "merget": 1,
-      "kjoeringer": 17,
-      "utenPr": 8,
-      "bygg": [],
-      "estimert": false,
-      "plass": 10
-    },
-    {
       "navn": "mini-wilma",
       "github": "larsajakobsen",
       "poeng": 4,
@@ -428,6 +403,31 @@
       "merget": 5,
       "kjoeringer": 28,
       "utenPr": 14,
+      "bygg": [],
+      "estimert": false,
+      "plass": 10
+    },
+    {
+      "navn": "mini-kirsten",
+      "github": "jthagesk",
+      "poeng": 3,
+      "feil": [],
+      "lag": [],
+      "levert": [
+        {
+          "issue": 45,
+          "navn": "Varsler",
+          "poeng": 5
+        }
+      ],
+      "dollar": 20.648,
+      "tokens": 46597333,
+      "sekunder": 6594,
+      "pr": 4,
+      "utkast": 0,
+      "merget": 1,
+      "kjoeringer": 18,
+      "utenPr": 9,
       "bygg": [],
       "estimert": false,
       "plass": 11
@@ -500,13 +500,13 @@
         }
       ],
       "levert": [],
-      "dollar": 6.181,
-      "tokens": 12316026,
-      "sekunder": 1907,
-      "pr": 2,
+      "dollar": 7.097,
+      "tokens": 14068441,
+      "sekunder": 2340,
+      "pr": 3,
       "utkast": 0,
       "merget": 1,
-      "kjoeringer": 9,
+      "kjoeringer": 10,
       "utenPr": 6,
       "bygg": [],
       "estimert": false,
@@ -658,64 +658,7 @@
       "plass": 21
     }
   ],
-  "kjoerer": [
-    {
-      "agent": "henrik",
-      "github": "monet820",
-      "issue": 203,
-      "navn": "Popupen havner bak lagpanelet på PC",
-      "startet": "2026-09-23T12:49:33.0669163+00:00",
-      "minutter": 7
-    },
-    {
-      "agent": "mini-richard",
-      "github": "randsu",
-      "issue": 180,
-      "navn": "Simulering: strømstans i en bydel",
-      "startet": "2026-09-23T12:49:58.0271137+00:00",
-      "minutter": 6
-    },
-    {
-      "agent": "mini-richard",
-      "github": "randsu",
-      "issue": 196,
-      "navn": "Nytt lag: forsinkelser på knutepunktene",
-      "startet": "2026-09-23T12:50:57.3337676+00:00",
-      "minutter": 5
-    },
-    {
-      "agent": "mini-richard",
-      "github": "randsu",
-      "issue": 155,
-      "navn": "Vis siste gode svar når kilden svikter",
-      "startet": "2026-09-23T12:52:27.6280109+00:00",
-      "minutter": 4
-    },
-    {
-      "agent": "mini-frode",
-      "github": "FrodeBl",
-      "issue": 50,
-      "navn": "Metrikker",
-      "startet": "2026-09-23T12:52:40.434133+00:00",
-      "minutter": 4
-    },
-    {
-      "agent": "mini-kirsten",
-      "github": "jthagesk",
-      "issue": 29,
-      "navn": "Museer",
-      "startet": "2026-09-23T12:53:54.4756747+00:00",
-      "minutter": 2
-    },
-    {
-      "agent": "mini-leif",
-      "github": "leif-larsen",
-      "issue": 118,
-      "navn": "Nyhetslinje nederst på skjermen",
-      "startet": "2026-09-23T12:56:29.1961936+00:00",
-      "minutter": 0
-    }
-  ],
+  "kjoerer": [],
   "main": {
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
@@ -791,7 +734,7 @@
       "issue": 29,
       "navn": "Nytt lag: museer og samlinger",
       "github": "jthagesk",
-      "oppdatert": "2026-09-23T12:53:55Z"
+      "oppdatert": "2026-09-23T12:57:08Z"
     },
     {
       "issue": 31,
@@ -845,7 +788,7 @@
       "issue": 50,
       "navn": "Mål hva som skjer",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T12:52:41Z"
+      "oppdatert": "2026-09-23T12:57:07Z"
     },
     {
       "issue": 51,
@@ -863,7 +806,7 @@
       "issue": 55,
       "navn": "Kartet blir tregt med mange punkter",
       "github": "sin-rha",
-      "oppdatert": "2026-09-23T12:56:49Z"
+      "oppdatert": "2026-09-23T12:56:55Z"
     },
     {
       "issue": 57,
@@ -941,7 +884,7 @@
       "issue": 118,
       "navn": "Nyhetslinje nederst på skjermen",
       "github": "leif-larsen",
-      "oppdatert": "2026-09-23T12:56:30Z"
+      "oppdatert": "2026-09-23T12:57:09Z"
     },
     {
       "issue": 119,
@@ -1055,7 +998,7 @@
       "issue": 155,
       "navn": "Vis siste gode svar når kilden svikter",
       "github": "randsu",
-      "oppdatert": "2026-09-23T12:52:28Z"
+      "oppdatert": "2026-09-23T12:57:13Z"
     },
     {
       "issue": 157,
@@ -1073,7 +1016,7 @@
       "issue": 180,
       "navn": "Simulering: strømstans i en bydel",
       "github": "randsu",
-      "oppdatert": "2026-09-23T12:49:58Z"
+      "oppdatert": "2026-09-23T12:57:09Z"
     },
     {
       "issue": 188,
@@ -1109,7 +1052,7 @@
       "issue": 196,
       "navn": "Nytt lag: forsinkelser på knutepunktene",
       "github": "randsu",
-      "oppdatert": "2026-09-23T12:50:58Z"
+      "oppdatert": "2026-09-23T12:57:12Z"
     },
     {
       "issue": 197,
@@ -1127,7 +1070,7 @@
       "issue": 203,
       "navn": "Popupen havner bak lagpanelet på PC",
       "github": "monet820",
-      "oppdatert": "2026-09-23T12:49:34Z"
+      "oppdatert": "2026-09-23T12:57:18Z"
     },
     {
       "issue": 206,
@@ -1168,6 +1111,66 @@
   ],
   "aapne": [
     {
+      "pr": 243,
+      "tittel": "#130: Fyrverkeri over Rådhuset når en PR blir merget",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T12:51:21Z",
+      "oppdatert": "2026-09-23T12:57:20Z",
+      "utkast": false,
+      "issues": [
+        130
+      ]
+    },
+    {
+      "pr": 246,
+      "tittel": "Popupen havner bak lagpanelet på PC",
+      "github": "monet820",
+      "agent": "henrik",
+      "opprettet": "2026-09-23T12:57:16Z",
+      "oppdatert": "2026-09-23T12:57:18Z",
+      "utkast": false,
+      "issues": [
+        203
+      ]
+    },
+    {
+      "pr": 228,
+      "tittel": "Nyhetslinje nederst på skjermen (#118)",
+      "github": "leif-larsen",
+      "agent": "mini-leif",
+      "opprettet": "2026-09-23T12:41:18Z",
+      "oppdatert": "2026-09-23T12:57:05Z",
+      "utkast": false,
+      "issues": [
+        118
+      ]
+    },
+    {
+      "pr": 224,
+      "tittel": "Vinden som strømmer over byen",
+      "github": "theakbe",
+      "agent": "mini-astrid",
+      "opprettet": "2026-09-23T12:37:37Z",
+      "oppdatert": "2026-09-23T12:56:48Z",
+      "utkast": false,
+      "issues": [
+        188
+      ]
+    },
+    {
+      "pr": 222,
+      "tittel": "Havet stiger: hva havner under vann? (#133)",
+      "github": "Puiu",
+      "agent": "mini-taco",
+      "opprettet": "2026-09-23T12:30:27Z",
+      "oppdatert": "2026-09-23T12:56:43Z",
+      "utkast": false,
+      "issues": [
+        133
+      ]
+    },
+    {
       "pr": 221,
       "tittel": "#191: Et døgn med bysykkelturer på 90 sekunder",
       "github": "randsu",
@@ -1192,18 +1195,6 @@
       ]
     },
     {
-      "pr": 228,
-      "tittel": "Nyhetslinje nederst på skjermen (#118)",
-      "github": "leif-larsen",
-      "agent": "mini-leif",
-      "opprettet": "2026-09-23T12:41:18Z",
-      "oppdatert": "2026-09-23T12:56:28Z",
-      "utkast": false,
-      "issues": [
-        118
-      ]
-    },
-    {
       "pr": 225,
       "tittel": "#114: Nytt lag: Kristiania i 1910",
       "github": "randsu",
@@ -1225,18 +1216,6 @@
       "utkast": false,
       "issues": [
         211
-      ]
-    },
-    {
-      "pr": 243,
-      "tittel": "#130: Fyrverkeri over Rådhuset når en PR blir merget",
-      "github": "randsu",
-      "agent": "randsu",
-      "opprettet": "2026-09-23T12:51:21Z",
-      "oppdatert": "2026-09-23T12:55:20Z",
-      "utkast": false,
-      "issues": [
-        130
       ]
     },
     {
@@ -1273,30 +1252,6 @@
       "utkast": false,
       "issues": [
         114
-      ]
-    },
-    {
-      "pr": 224,
-      "tittel": "Vinden som strømmer over byen",
-      "github": "theakbe",
-      "agent": "mini-astrid",
-      "opprettet": "2026-09-23T12:37:37Z",
-      "oppdatert": "2026-09-23T12:55:02Z",
-      "utkast": false,
-      "issues": [
-        188
-      ]
-    },
-    {
-      "pr": 222,
-      "tittel": "Havet stiger: hva havner under vann? (#133)",
-      "github": "Puiu",
-      "agent": "mini-taco",
-      "opprettet": "2026-09-23T12:30:27Z",
-      "oppdatert": "2026-09-23T12:54:00Z",
-      "utkast": false,
-      "issues": [
-        133
       ]
     },
     {
