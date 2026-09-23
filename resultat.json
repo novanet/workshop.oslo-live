@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:06:23",
+  "oppdatert": "2026-09-23T14:07:02",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -63,8 +63,8 @@
       "pr": 11,
       "utkast": 0,
       "merget": 10,
-      "kjoeringer": 17,
-      "utenPr": 6,
+      "kjoeringer": 16,
+      "utenPr": 5,
       "bygg": [],
       "estimert": false,
       "plass": 1
@@ -433,6 +433,25 @@
       "plass": 14
     },
     {
+      "navn": "mini-tom",
+      "github": "renaa",
+      "poeng": 0,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 0.0,
+      "tokens": 0,
+      "sekunder": 0,
+      "pr": 0,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 1,
+      "utenPr": 1,
+      "bygg": [],
+      "estimert": false,
+      "plass": 15
+    },
+    {
       "navn": "martin-holth",
       "github": "martinrholth",
       "poeng": 0,
@@ -449,7 +468,7 @@
       "utenPr": 4,
       "bygg": [],
       "estimert": false,
-      "plass": 15
+      "plass": 16
     },
     {
       "navn": "mini-johan",
@@ -468,7 +487,7 @@
       "utenPr": 5,
       "bygg": [],
       "estimert": false,
-      "plass": 16
+      "plass": 17
     },
     {
       "navn": "mini-sindre",
@@ -487,7 +506,7 @@
       "utenPr": 6,
       "bygg": [],
       "estimert": false,
-      "plass": 17
+      "plass": 18
     },
     {
       "navn": "mini-bug",
@@ -506,7 +525,7 @@
       "utenPr": 3,
       "bygg": [],
       "estimert": false,
-      "plass": 18
+      "plass": 19
     },
     {
       "navn": "Andy3000",
@@ -525,7 +544,7 @@
       "utenPr": 4,
       "bygg": [],
       "estimert": false,
-      "plass": 19
+      "plass": 20
     },
     {
       "navn": "mini-frode",
@@ -544,7 +563,7 @@
       "utenPr": 13,
       "bygg": [],
       "estimert": false,
-      "plass": 20
+      "plass": 21
     }
   ],
   "kjoerer": [
@@ -570,7 +589,7 @@
       "issue": 33,
       "navn": "Sykkelparkering",
       "startet": "2026-09-23T12:00:56.0494312+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-wilma",
@@ -586,7 +605,7 @@
       "issue": 54,
       "navn": "Rate limit",
       "startet": "2026-09-23T12:01:39.5119902+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-ingve",
@@ -594,7 +613,7 @@
       "issue": 11,
       "navn": "Kollektiv",
       "startet": "2026-09-23T12:01:44.272017+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-kirsten",
@@ -602,7 +621,7 @@
       "issue": 29,
       "navn": "Museer",
       "startet": "2026-09-23T12:01:56.5636433+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-frode",
@@ -610,7 +629,7 @@
       "issue": 50,
       "navn": "Metrikker",
       "startet": "2026-09-23T12:04:40.5122615+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-frode",
@@ -619,14 +638,6 @@
       "navn": "Parallell henting",
       "startet": "2026-09-23T12:05:19.7031269+00:00",
       "minutter": 1
-    },
-    {
-      "agent": "mini-tom",
-      "github": "renaa",
-      "issue": 37,
-      "navn": "Eksport",
-      "startet": "2026-09-23T12:06:13.9571235+00:00",
-      "minutter": 0
     }
   ],
   "main": {
@@ -1006,19 +1017,19 @@
       "issue": 132,
       "navn": "Ekte sollys på 3D-byggene",
       "github": "audmaha",
-      "oppdatert": "2026-09-23T11:59:31Z"
+      "oppdatert": "2026-09-23T12:06:41Z"
     },
     {
       "issue": 132,
       "navn": "Ekte sollys på 3D-byggene",
       "github": "nilsgs",
-      "oppdatert": "2026-09-23T11:59:31Z"
+      "oppdatert": "2026-09-23T12:06:41Z"
     },
     {
       "issue": 141,
       "navn": "Tydelige kartsymboler: båter som ser ut som båter",
       "github": "leif-larsen",
-      "oppdatert": "2026-09-23T11:58:53Z"
+      "oppdatert": "2026-09-23T12:06:31Z"
     },
     {
       "issue": 142,
@@ -1034,7 +1045,7 @@
       "github": "randsu",
       "agent": "mini-richard",
       "opprettet": "2026-09-23T12:03:14Z",
-      "oppdatert": "2026-09-23T12:04:35Z",
+      "oppdatert": "2026-09-23T12:06:17Z",
       "utkast": false,
       "issues": [
         142
