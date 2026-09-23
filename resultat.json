@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:11:53",
+  "oppdatert": "2026-09-23T11:12:21",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -103,14 +103,14 @@
         }
       ],
       "levert": [],
-      "dollar": 5.528,
-      "tokens": 9891428,
-      "sekunder": 1985,
+      "dollar": 6.227,
+      "tokens": 10706439,
+      "sekunder": 2284,
       "pr": 2,
       "utkast": 0,
       "merget": 2,
-      "kjoeringer": 7,
-      "utenPr": 5,
+      "kjoeringer": 8,
+      "utenPr": 6,
       "bygg": [],
       "estimert": false,
       "plass": 3
@@ -436,7 +436,7 @@
       "issue": 26,
       "navn": "Skoler",
       "startet": "2026-09-23T09:03:43.3920206+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "Andy3000",
@@ -444,15 +444,7 @@
       "issue": 11,
       "navn": "Kollektiv",
       "startet": "2026-09-23T09:04:10.6494291+00:00",
-      "minutter": 7
-    },
-    {
-      "agent": "mini-gir",
-      "github": "GIR75",
-      "issue": 51,
-      "navn": "Logging",
-      "startet": "2026-09-23T09:06:55.8322066+00:00",
-      "minutter": 4
+      "minutter": 8
     }
   ],
   "main": {
@@ -596,7 +588,7 @@
       "issue": 14,
       "navn": "Nytt lag: idretts- og friluftsanlegg",
       "github": "leif-larsen",
-      "oppdatert": "2026-09-23T09:02:52Z"
+      "oppdatert": "2026-09-23T09:11:42Z"
     },
     {
       "issue": 15,
@@ -638,7 +630,7 @@
       "issue": 21,
       "navn": "Søk etter adresse og hopp dit på kartet",
       "github": "leif-larsen",
-      "oppdatert": "2026-09-23T08:24:29Z"
+      "oppdatert": "2026-09-23T09:11:55Z"
     },
     {
       "issue": 22,
@@ -824,7 +816,7 @@
       "issue": 51,
       "navn": "Strukturert logging",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T09:06:56Z"
+      "oppdatert": "2026-09-23T09:12:01Z"
     },
     {
       "issue": 52,
