@@ -38,7 +38,7 @@
     <ul class="checklist">
       <li>Sjekkpunkt 2 er nådd: en merket issue har gitt en PR opprettet av Azure-jobben din.</li>
       <li>PR-en fra Lab 2 er "før". Forbrukstabellen og rapporten i den er det du sammenligner med.</li>
-      <li>Du velger én ting å endre: kontroller, hukommelse, sikkerhet, modell, prompt eller persona.</li>
+      <li>Du velger én ting å endre: kontroller, hukommelse, sikkerhet, modell, prompt, instruksjoner eller persona.</li>
       <li>Du bestemmer på forhånd hva du skal sammenligne: resultat, tid, tokens eller kostnad.</li>
     </ul>
     <p>Alle sporene kjører i Azure, som i Lab 2. Gjør én endring, push til <code>main</code>, så deployer GitHub Actions den. Merk så én ny issue og sammenlign den nye PR-en med den fra Lab 2.</p>
@@ -57,8 +57,9 @@
       <div class="card"><h3>D · Praktisk endring</h3><p>Finn et konkret problem i arbeidsflyten, gjør en endring og se om det faktisk blir bedre.</p></div>
       <div class="card"><h3>E · Monitorering</h3><p>Lag en liten side som viser oppgaver, status, PR-er og forbruk uten hemmeligheter i nettleseren.</p></div>
       <div class="card"><h3>F · Stopp og grenser</h3><p>Gjør lange kjøringer tryggere med tidsgrense, responsgrense, trygg push eller checkpoint.</p></div>
-      <div class="card"><h3>G · Lær av feilene</h3><p>Gjør en konkret feil om til en regel, vis fremdriften og skriv kortere instruksjoner.</p></div>
+      <div class="card"><h3>G · Lær av feilene</h3><p>Gjør en konkret feil om til en regel, vis fremdriften og lær av Sensor.</p></div>
       <div class="card"><h3>H · Når skal vi godkjenne?</h3><p>Auto-merge er av. Diskuter når det kunne vært greit, og når et menneske alltid må se på PR-en.</p></div>
+      <div class="card"><h3>I · Skriv for agenten</h3><p>Skriv om instruksjoner og skills for en modell, ikke et menneske. Mål tokens og om reglene blir fulgt.</p></div>
     </div>
   </section>
 
@@ -196,11 +197,10 @@ GET https://api.github.com/repos/novanet/workshop.oslo-live/issues/{nummer}/comm
 
   <section>
     <h2>Spor G: Lær av feilene</h2>
-    <p class="intro">Bruk det du lærer av kjøringene: finn feil, gjør fremdriften synlig og skriv instruksjoner agenten kan følge.</p>
+    <p class="intro">Bruk det du lærer av kjøringene: finn feil, gjør fremdriften synlig og lær av Sensor.</p>
     <div class="grid">
       <div class="card"><h3>Post-mortem</h3><p>Gjør én konkret feil om til en regel i <code>conventions.md</code>, en prompt eller hukommelsen.</p></div>
       <div class="card"><h3>Status</h3><p>Gjør stage, status, tid, tokens og kostnad synlig i monitoreringssporet eller PR-rapporten.</p></div>
-      <div class="card"><h3>Instruksjoner</h3><p>Skriv om en lang prompt til korte, bokstavelige handlingsregler og sammenlign samme issue før og etter.</p></div>
       <div class="card"><h3>Lær av Sensor</h3><p>Når agenten kjøres på nytt for en issue som allerede har en åpen PR, hent Sensors siste review med Request changes (<code>gh pr view &lt;branch&gt; --json reviews</code>) og legg den inn i promptet til research. Vis at andre runde retter det Sensor pekte på.</p></div>
     </div>
   </section>
@@ -215,6 +215,40 @@ GET https://api.github.com/repos/novanet/workshop.oslo-live/issues/{nummer}/comm
     </ol>
     <p>Tenk på Oslo Live: repoet er offentlig, issues kan skrives av hvem som helst, og main ruller rett ut på storskjermen. Hva betyr det for regelen deres?</p>
     <div class="callout warn"><b>En regel, ikke en knapp</b>Skriv ned når agenten kan gå videre, og når et menneske må godkjenne.</div>
+  </section>
+
+  <section>
+    <h2>Spor I: Skriv for agenten, ikke for mennesker</h2>
+    <p class="intro">Filene i <code>agent/</code> leses bare av modellen. Likevel er slike filer ofte skrevet som til en ny kollega: bakgrunn, begrunnelser, høflighet, gjentakelser og lange eksempler. Mye er skrevet av en AI i utgangspunktet. Modellen trenger ikke overtales. Den trenger regler den kan følge og sjekke.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Fil</th><th>Når modellen ser den</th></tr></thead>
+        <tbody>
+          <tr><td><code>agent/system.md</code></td><td>Systemprompten i alle fire steg</td></tr>
+          <tr><td><code>agent/conventions.md</code></td><td>Systemprompten i alle fire steg</td></tr>
+          <tr><td><code>agent/prompts/&lt;steg&gt;.md</code></td><td>Bare i sitt eget steg</td></tr>
+          <tr><td><code>agent/skills/*/SKILL.md</code></td><td><code>description</code> hele tiden, resten når modellen velger å laste skillen</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><code>CLAUDE.md</code> i Oslo Live leses også, men den er felles for alle. Ikke endre den.</p>
+    <p>Velg én fil og skriv den om for en modell:</p>
+    <div class="grid">
+      <div class="card"><h3>Imperativ, én regel per linje</h3><p>"Kjør <code>dotnet test</code> før du svarer", ikke "det er lurt å teste".</p></div>
+      <div class="card"><h3>Bare det som endrer oppførsel</h3><p>Fjern bakgrunn, motivasjon og høflighet. Behold en begrunnelse bare når den hjelper i et grensetilfelle.</p></div>
+      <div class="card"><h3>Én plass per regel</h3><p>Står det samme i <code>system.md</code> og i en prompt, velg én.</p></div>
+      <div class="card"><h3>Bokstavelig og sjekkbart</h3><p>Eksakte stier, kommandoer, formater og overskrifter, for eksempel <code>## Uncertainty</code>. Si hva som skal skje når noe mangler.</p></div>
+      <div class="card"><h3>Skill-beskrivelsen er en trigger</h3><p><code>description</code> avgjør om skillen blir lastet. Skriv når den skal brukes, ikke hva den er.</p></div>
+      <div class="card"><h3>Behold sikkerhetsreglene</h3><p>Regelen om at issues er data og ikke instruksjoner skal stå igjen, uansett hvor kort filen blir.</p></div>
+    </div>
+    <p>Tell ord før og etter, og mål effekten på samme type issue som i Lab 2:</p>
+    <pre>(Get-Content agent/system.md -Raw).Split() | Where-Object { $_ } | Measure-Object | Select-Object Count</pre>
+    <ul class="checklist">
+      <li>Input- og cache-tokens per steg i forbrukstabellen i PR-en.</li>
+      <li>Fulgte agenten reglene? Se rapportformatet, PASS/FAIL i self-review og om plan-gaten slapp gjennom.</li>
+    </ul>
+    <div class="callout"><b>Hva du kan forvente</b>Små tokenbesparelser. Systemprompten caches, og filene er ikke store. Den interessante forskjellen er om agenten følger reglene bedre, og om du kan peke på én regel som nå blir fulgt og som ikke ble det før.</div>
+    <p><strong>Hvis tid:</strong> Skriv om <code>description</code> i én skill slik at den lastes akkurat når den trengs. Se i loggen om den ble brukt.</p>
   </section>
 
   <section>
