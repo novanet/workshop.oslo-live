@@ -1,11 +1,11 @@
 {
-  "oppdatert": "2026-09-23T21:40:26",
+  "oppdatert": "2026-09-23T21:41:42",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
       "navn": "mini-richard",
       "github": "randsu",
-      "poeng": 43,
+      "poeng": 47,
       "feil": [
         {
           "issue": 3,
@@ -14,6 +14,11 @@
         }
       ],
       "lag": [
+        {
+          "issue": 6,
+          "navn": "Delt mobilitet",
+          "poeng": 2
+        },
         {
           "issue": 9,
           "navn": "Badetemperatur",
@@ -72,6 +77,11 @@
           "poeng": 3
         },
         {
+          "issue": 130,
+          "navn": "Fyrverkeri over Rådhuset når en PR blir merget",
+          "poeng": 2
+        },
+        {
           "issue": 142,
           "navn": "Kurs på skipene",
           "poeng": 1
@@ -82,7 +92,7 @@
       "sekunder": 11017,
       "pr": 21,
       "utkast": 0,
-      "merget": 14,
+      "merget": 15,
       "kjoeringer": 45,
       "utenPr": 27,
       "bygg": [],
@@ -717,14 +727,15 @@
     "kjoeringer": 68
   },
   "produkt": {
-    "testerBestatt": 20,
-    "testerFeilet": 6,
+    "testerBestatt": 21,
+    "testerFeilet": 5,
     "issuerLost": [
       1,
       2,
       3,
       4,
       5,
+      6,
       7,
       8,
       9,
@@ -1186,6 +1197,18 @@
   ],
   "aapne": [
     {
+      "pr": 237,
+      "tittel": "#124: Punkter som flytter seg, glir til ny posisjon",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T12:48:04Z",
+      "oppdatert": "2026-09-23T19:40:11Z",
+      "utkast": false,
+      "issues": [
+        124
+      ]
+    },
+    {
       "pr": 221,
       "tittel": "#191: Et døgn med bysykkelturer på 90 sekunder",
       "github": "randsu",
@@ -1207,30 +1230,6 @@
       "utkast": false,
       "issues": [
         29
-      ]
-    },
-    {
-      "pr": 237,
-      "tittel": "#124: Punkter som flytter seg, glir til ny posisjon",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T12:48:04Z",
-      "oppdatert": "2026-09-23T16:18:24Z",
-      "utkast": false,
-      "issues": [
-        124
-      ]
-    },
-    {
-      "pr": 243,
-      "tittel": "#130: Fyrverkeri over Rådhuset når en PR blir merget",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T12:51:21Z",
-      "oppdatert": "2026-09-23T13:38:53Z",
-      "utkast": false,
-      "issues": [
-        130
       ]
     },
     {
