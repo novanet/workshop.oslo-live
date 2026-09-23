@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:47:55",
+  "oppdatert": "2026-09-23T10:48:22",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -399,7 +399,7 @@
       "issue": 52,
       "navn": "Konfigurerbar bbox",
       "startet": "2026-09-23T08:42:06.8631198+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-kirsten",
@@ -407,7 +407,7 @@
       "issue": 59,
       "navn": "",
       "startet": "2026-09-23T08:44:07.3435998+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-frode",
@@ -439,6 +439,22 @@
       "issue": 50,
       "navn": "Metrikker",
       "startet": "2026-09-23T08:47:21.1306878+00:00",
+      "minutter": 1
+    },
+    {
+      "agent": "mini-richard",
+      "github": "randsu",
+      "issue": 25,
+      "navn": "Historikk",
+      "startet": "2026-09-23T08:47:59.0992794+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "Dmitry-agent",
+      "github": "FilonenkoDmitry",
+      "issue": 12,
+      "navn": "Holdeplasser",
+      "startet": "2026-09-23T08:48:05.3217109+00:00",
       "minutter": 0
     }
   ],
@@ -562,7 +578,7 @@
       "issue": 11,
       "navn": "Nytt lag: kollektivtrafikk som beveger seg",
       "github": "coffeelyfe",
-      "oppdatert": "2026-09-23T08:42:13Z"
+      "oppdatert": "2026-09-23T08:48:05Z"
     },
     {
       "issue": 14,
@@ -617,6 +633,12 @@
       "navn": "Tell punkter per bydel",
       "github": "randsu",
       "oppdatert": "2026-09-23T08:45:29Z"
+    },
+    {
+      "issue": 25,
+      "navn": "Ta vare på et øyeblikksbilde hver time",
+      "github": "randsu",
+      "oppdatert": "2026-09-23T08:47:59Z"
     },
     {
       "issue": 29,
@@ -777,6 +799,18 @@
   ],
   "aapne": [
     {
+      "pr": 94,
+      "tittel": "#6: Nytt lag: elsparkesykler og bysykler",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:44:44Z",
+      "oppdatert": "2026-09-23T08:47:55Z",
+      "utkast": false,
+      "issues": [
+        6
+      ]
+    },
+    {
       "pr": 96,
       "tittel": "#22: Slå sammen punkter som ligger oppå hverandre",
       "github": "randsu",
@@ -798,18 +832,6 @@
       "utkast": false,
       "issues": [
         47
-      ]
-    },
-    {
-      "pr": 94,
-      "tittel": "#6: Nytt lag: elsparkesykler og bysykler",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:44:44Z",
-      "oppdatert": "2026-09-23T08:46:01Z",
-      "utkast": false,
-      "issues": [
-        6
       ]
     },
     {
