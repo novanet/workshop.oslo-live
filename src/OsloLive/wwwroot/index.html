@@ -37,6 +37,8 @@
   .lag .antall { font-size: 12px; color: var(--dempet); font-variant-numeric: tabular-nums; }
   .lag .antall.feil { color: var(--feil); }
   .lag .antall.ok { color: var(--ok); font-weight: 600; }
+  .lag .alder { flex: none; font-size: 11px; color: var(--dempet); font-variant-numeric: tabular-nums; cursor: default; }
+  .lag .alder.gammel { color: var(--feil); }
   .lag .visning { flex: none; font: inherit; font-size: 11px; padding: 2px 7px; border: 1.5px solid var(--kant); border-radius: 6px; background: #fff; cursor: pointer; }
   .lag .visning[aria-pressed="true"] { background: #111; color: #fff; }
   .tom { font-size: 13px; color: var(--dempet); line-height: 1.5; padding: 4px 2px; }
@@ -594,6 +596,7 @@ async function hent(id) {
   const oppf = lagene.get(id);
   const teller = document.getElementById('antall-' + id);
   const gen = tidGenerasjon;
+  const levende = !valgtTid;   // henting av historikk fra tidslinjen teller ikke som fersk levende data
   try {
     const url = '/api/lag/' + id + (valgtTid ? '?tid=' + encodeURIComponent(valgtTid.toISOString()) : '');
     const svar = await fetch(url);
@@ -636,6 +639,7 @@ async function hent(id) {
 
     oppf.antall = oppf.markorer.length;
     oppf.feil = false;
+    if (levende) oppf.sistOk = new Date();
     teller.textContent = oppf.antall;
     teller.className = 'antall ' + (oppf.antall ? 'ok' : '');
   } catch (e) {
@@ -695,6 +699,34 @@ function skrivAdresse() {
 }
 kart.on('moveend', skrivAdresse);
 
+/** «4 s», «2 min» eller «1 t» siden siste vellykkede henting, eller «aldri». */
+function alderTekst(sistOk, nå) {
+  if (!sistOk) return 'aldri';
+  const sekunder = Math.floor((nå - sistOk) / 1000);
+  if (sekunder < 60) return sekunder + ' s';
+  const minutter = Math.floor(sekunder / 60);
+  if (minutter < 60) return minutter + ' min';
+  return Math.floor(minutter / 60) + ' t';
+}
+
+function klokkeHMS(d) {
+  const to = (n) => String(n).padStart(2, '0');
+  return to(d.getHours()) + ':' + to(d.getMinutes()) + ':' + to(d.getSeconds());
+}
+
+/** Oppdaterer alderteksten for hvert lag hvert sekund, uten å kalle API-et. */
+function oppdaterAlder() {
+  const nå = new Date();
+  for (const [id, oppf] of lagene) {
+    const el = document.getElementById('alder-' + id);
+    if (!el) continue;
+    el.textContent = alderTekst(oppf.sistOk, nå);
+    el.title = oppf.sistOk ? 'Sist hentet uten feil kl. ' + klokkeHMS(oppf.sistOk) : 'Aldri hentet uten feil';
+    el.classList.toggle('gammel', !!oppf.sistOk && (nå - oppf.sistOk) > 60000);
+  }
+}
+setInterval(oppdaterAlder, 1000);
+
 document.getElementById('tid').addEventListener('input', (ev) => {
   const min = Number(ev.target.value);
   const d = min === 0 ? null : new Date(Date.now() + min * 60000);
@@ -729,7 +761,7 @@ async function start() {
   lag.forEach((l, nr) => {
     const farge = fargeFor(l.id, nr);
     const på = adresse.lag ? adresse.lag.has(l.id) : true;
-    lagene.set(l.id, { ikon: l.ikon || '📍', navn: l.navn, farge, markorer: [], punkter: [], antall: 0, på, feil: false, boks: null, varme: !!varmevalg[l.id] });
+    lagene.set(l.id, { ikon: l.ikon || '📍', navn: l.navn, farge, markorer: [], punkter: [], antall: 0, på, feil: false, boks: null, varme: !!varmevalg[l.id], sistOk: null });
 
     const rad = document.createElement('label');
     rad.className = 'lag';
@@ -739,6 +771,7 @@ async function start() {
       `<span class="prikk" style="background:${farge}"></span>` +
       `<span class="navn">${l.navn}</span>` +
       `<span class="antall" id="antall-${l.id}">…</span>` +
+      `<span class="alder" id="alder-${l.id}">aldri</span>` +
       `<button type="button" class="visning" aria-pressed="${!!varmevalg[l.id]}" title="Bytt mellom punkter og varmekart">${varmevalg[l.id] ? 'Varme' : 'Punkter'}</button>`;
 
     lagene.get(l.id).boks = rad.querySelector('input');
