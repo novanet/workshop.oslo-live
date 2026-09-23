@@ -37,11 +37,18 @@
   .lag .antall { font-size: 12px; color: var(--dempet); font-variant-numeric: tabular-nums; }
   .lag .antall.feil { color: var(--feil); }
   .lag .antall.ok { color: var(--ok); font-weight: 600; }
+  .lag .alder { flex: none; font-size: 11px; color: var(--dempet); font-variant-numeric: tabular-nums; cursor: default; }
+  .lag .alder.gammel { color: var(--feil); }
   .lag .visning { flex: none; font: inherit; font-size: 11px; padding: 2px 7px; border: 1.5px solid var(--kant); border-radius: 6px; background: #fff; cursor: pointer; }
   .lag .visning[aria-pressed="true"] { background: #111; color: #fff; }
   .tom { font-size: 13px; color: var(--dempet); line-height: 1.5; padding: 4px 2px; }
   .bunn { margin-top: 12px; padding-top: 12px; border-top: 1px solid #e5e7eb; font-size: 11px; color: var(--dempet); display: flex; justify-content: space-between; }
 
+  .statistikk { margin-top: 12px; padding-top: 12px; border-top: 1px solid #e5e7eb; font-size: 12px; }
+  .statistikk summary { cursor: pointer; font-weight: 600; font-size: 13px; }
+  .statistikk table { width: 100%; border-collapse: collapse; margin-top: 6px; font-variant-numeric: tabular-nums; }
+  .statistikk td { padding: 2px 4px; color: var(--dempet); }
+  .statistikk .feiler { color: var(--feil); font-weight: 600; }
   .stroem { margin-top: 12px; padding-top: 12px; border-top: 1px solid #e5e7eb; }
   .stroem h2 { margin: 0 0 6px; font-size: 13px; }
   .stroem .naa { font-size: 22px; font-weight: 700; }
@@ -213,6 +220,7 @@
     <span id="oppdatert">–</span>
     <span id="sum">–</span>
   </div>
+  <details class="statistikk" id="statistikk"><summary>Statistikk</summary><div id="statistikkinnhold"><p class="tom">Laster …</p></div></details>
   <div class="stroem" id="stroem">
     <h2>Strømpris i Oslo (NO1)</h2>
     <p class="tom">Henter strømpris …</p>
@@ -565,6 +573,7 @@ async function hent(id) {
   const oppf = lagene.get(id);
   const teller = document.getElementById('antall-' + id);
   const gen = tidGenerasjon;
+  const levende = !valgtTid;   // henting av historikk fra tidslinjen teller ikke som fersk levende data
   try {
     const url = '/api/lag/' + id + (valgtTid ? '?tid=' + encodeURIComponent(valgtTid.toISOString()) : '');
     const svar = await fetch(url);
@@ -607,6 +616,7 @@ async function hent(id) {
 
     oppf.antall = oppf.markorer.length;
     oppf.feil = false;
+    if (levende) oppf.sistOk = new Date();
     teller.textContent = oppf.antall;
     teller.className = 'antall ' + (oppf.antall ? 'ok' : '');
   } catch (e) {
@@ -644,6 +654,60 @@ function oppdaterBunn() {
   document.getElementById('oppdatert').textContent = valgtTid ? 'Viser ' + tidTekst(valgtTid) : new Date().toLocaleTimeString('no-NO');
 }
 
+const STATISTIKK_NØKKEL = 'oslolive.statistikk.åpen';
+const statistikkPanel = document.getElementById('statistikk');
+statistikkPanel.open = localStorage.getItem(STATISTIKK_NØKKEL) === '1';
+statistikkPanel.addEventListener('toggle', () => localStorage.setItem(STATISTIKK_NØKKEL, statistikkPanel.open ? '1' : '0'));
+
+function klokke(iso) {
+  return iso ? new Date(iso).toLocaleTimeString('no-NO') : '–';
+}
+
+async function hentStatistikk() {
+  const mål = document.getElementById('statistikkinnhold');
+  try {
+    const svar = await fetch('/api/statistikk');
+    if (!svar.ok) throw new Error('HTTP ' + svar.status);
+    const rader = await svar.json();
+
+    mål.innerHTML = '<table><tr><td>Lag</td><td>Punkter</td><td>Nyeste</td><td>Hentet</td></tr>' +
+      rader.map((r) => `<tr><td>${esc(r.navn)}</td>` +
+        `<td>${r.feiler ? '<span class="feiler">feiler</span>' : esc(r.antall ?? '–')}</td>` +
+        `<td title="Eldste: ${esc(klokke(r.eldste))}">${esc(klokke(r.nyeste))}</td>` +
+        `<td>${esc(klokke(r.hentet))}</td></tr>`).join('') + '</table>';
+  } catch (e) {
+    mål.innerHTML = '<p class="tom">Statistikken er utilgjengelig.</p>';
+  }
+}
+
+/** «4 s», «2 min» eller «1 t» siden siste vellykkede henting, eller «aldri». */
+function alderTekst(sistOk, nå) {
+  if (!sistOk) return 'aldri';
+  const sekunder = Math.floor((nå - sistOk) / 1000);
+  if (sekunder < 60) return sekunder + ' s';
+  const minutter = Math.floor(sekunder / 60);
+  if (minutter < 60) return minutter + ' min';
+  return Math.floor(minutter / 60) + ' t';
+}
+
+function klokkeHMS(d) {
+  const to = (n) => String(n).padStart(2, '0');
+  return to(d.getHours()) + ':' + to(d.getMinutes()) + ':' + to(d.getSeconds());
+}
+
+/** Oppdaterer alderteksten for hvert lag hvert sekund, uten å kalle API-et. */
+function oppdaterAlder() {
+  const nå = new Date();
+  for (const [id, oppf] of lagene) {
+    const el = document.getElementById('alder-' + id);
+    if (!el) continue;
+    el.textContent = alderTekst(oppf.sistOk, nå);
+    el.title = oppf.sistOk ? 'Sist hentet uten feil kl. ' + klokkeHMS(oppf.sistOk) : 'Aldri hentet uten feil';
+    el.classList.toggle('gammel', !!oppf.sistOk && (nå - oppf.sistOk) > 60000);
+  }
+}
+setInterval(oppdaterAlder, 1000);
+
 document.getElementById('tid').addEventListener('input', (ev) => {
   const min = Number(ev.target.value);
   const d = min === 0 ? null : new Date(Date.now() + min * 60000);
@@ -677,7 +741,7 @@ async function start() {
   const varmevalg = lesVarmevalg();
   lag.forEach((l, nr) => {
     const farge = fargeFor(l.id, nr);
-    lagene.set(l.id, { ikon: l.ikon || '📍', navn: l.navn, farge, markorer: [], punkter: [], antall: 0, på: true, feil: false, boks: null, varme: !!varmevalg[l.id] });
+    lagene.set(l.id, { ikon: l.ikon || '📍', navn: l.navn, farge, markorer: [], punkter: [], antall: 0, på: true, feil: false, boks: null, varme: !!varmevalg[l.id], sistOk: null });
 
     const rad = document.createElement('label');
     rad.className = 'lag';
@@ -687,6 +751,7 @@ async function start() {
       `<span class="prikk" style="background:${farge}"></span>` +
       `<span class="navn">${l.navn}</span>` +
       `<span class="antall" id="antall-${l.id}">…</span>` +
+      `<span class="alder" id="alder-${l.id}">aldri</span>` +
       `<button type="button" class="visning" aria-pressed="${!!varmevalg[l.id]}" title="Bytt mellom punkter og varmekart">${varmevalg[l.id] ? 'Varme' : 'Punkter'}</button>`;
 
     lagene.get(l.id).boks = rad.querySelector('input');
@@ -707,14 +772,15 @@ async function start() {
     valg.textContent = l.navn;
     bydelSelect.appendChild(valg);
 
-    hent(l.id);
   });
 
   bydelSelect.addEventListener('change', hentBydeler);
   hentBydeler();
 
+  const oppdaterAlt = () => Promise.allSettled([...lagene.keys()].map(hent)).then(hentStatistikk);
+  oppdaterAlt();
   // Står tidslinjen på et annet tidspunkt enn nå, hentes ingen levende data før den settes tilbake.
-  setInterval(() => { if (valgtTid) return; lagene.forEach((_, id) => hent(id)); hentBydeler(); }, 15000);
+  setInterval(() => { if (valgtTid) return; oppdaterAlt(); hentBydeler(); }, 15000);
 
   // Først nå finnes lagene, så demoen har noe å vise og noe å sette tilbake etterpå.
   document.getElementById('demo').disabled = false;

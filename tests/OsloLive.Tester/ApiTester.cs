@@ -139,6 +139,16 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
         Assert.Equal("Holdeplasser", holdeplasser.Navn);
         Assert.False(string.IsNullOrWhiteSpace(holdeplasser.Beskrivelse));
         Assert.False(string.IsNullOrWhiteSpace(holdeplasser.Ikon));
+    
+    [Fact]
+    public async Task Lagoversikten_har_skip()
+    {
+        var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
+
+        var skip = lag!.Single(l => l.Id == "skip");
+        Assert.Equal("Skipstrafikk", skip.Navn);
+        Assert.False(string.IsNullOrWhiteSpace(skip.Beskrivelse));
+        Assert.False(string.IsNullOrWhiteSpace(skip.Ikon));
     }
 
     [Fact]
@@ -241,6 +251,57 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
     }
 
     [Fact]
+    public async Task Skiplaget_gir_featurecollection_uten_nett()
+    {
+        const string svar = """
+            {
+                "source": "ais",
+                "operation": "find_vessels_nearby",
+                "parameters": {},
+                "data": {
+                    "fartoy": [
+                        {
+                            "vessel_id": 258219000,
+                            "navn": "Tåkeheimen",
+                            "kallesignal": "LCDK",
+                            "imo": 9481207,
+                            "skipstype": 60,
+                            "lat": 59.905,
+                            "lon": 10.72,
+                            "fart_knop": 12.3,
+                            "kurs": 112.3,
+                            "destinasjon": "NESODDTANGEN",
+                            "sist_oppdatert": "2026-09-23T09:38:37+00:00",
+                            "avstand_km": 1.01
+                        }
+                    ],
+                    "radius_km": 20
+                }
+            }
+            """;
+
+        using var vertUtenNett = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient<Allemannsdata>().ConfigurePrimaryHttpMessageHandler(() => new FastSvarHandler(svar))));
+        var klient = vertUtenNett.CreateClient();
+
+        Allemannsdata.TømMellomlager();
+        try
+        {
+            var respons = await klient.GetAsync("/api/lag/skip");
+            var lag = await respons.Content.ReadFromJsonAsync<Kartlag>();
+
+            Assert.Equal(HttpStatusCode.OK, respons.StatusCode);
+            Assert.Equal("FeatureCollection", lag!.Type);
+            Assert.NotEmpty(lag.Features);
+            Assert.Equal([10.72, 59.905], lag.Features[0].Geometry.Coordinates);
+        }
+        finally
+        {
+            Allemannsdata.TømMellomlager();
+        }
+    }
+    
+    [Fact]
     public async Task Holdeplasslaget_gir_featurecollection_uten_nett()
     {
         const string svar = """
@@ -311,6 +372,54 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
         Assert.Equal(HttpStatusCode.BadGateway, fly.StatusCode);
         Assert.Equal(HttpStatusCode.OK, lag.StatusCode);
         Assert.Equal(HttpStatusCode.OK, helse.StatusCode);
+    }
+
+    [Fact]
+    public async Task Statistikken_svarer_200()
+    {
+        var svar = await Klient.GetAsync("/api/statistikk");
+
+        Assert.Equal(HttpStatusCode.OK, svar.StatusCode);
+    }
+
+    [Fact]
+    public async Task Statistikken_har_ett_element_per_lag()
+    {
+        var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
+        var statistikk = await Klient.GetFromJsonAsync<List<Statistikkoppforing>>("/api/statistikk");
+
+        Assert.Equal(
+            lag!.Select(l => l.Id).OrderBy(id => id),
+            statistikk!.Select(s => s.Id).OrderBy(id => id));
+    }
+
+    [Fact]
+    public async Task Lag_som_feiler_gir_feiler_true_og_antall_null_i_statistikken()
+    {
+        using var vertMedSvikt = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient("fly").ConfigurePrimaryHttpMessageHandler(() => new SviktHandler())));
+        var klient = vertMedSvikt.CreateClient();
+
+        await klient.GetAsync("/api/lag/fly");
+        var statistikk = await klient.GetFromJsonAsync<List<Statistikkoppforing>>("/api/statistikk");
+
+        var fly = statistikk!.Single(s => s.Id == "fly");
+        Assert.True(fly.Feiler);
+        Assert.Null(fly.Antall);
+    }
+
+    [Fact]
+    public async Task Statistikken_henter_ikke_lagene()
+    {
+        using var vertMedSvikt = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient("fly").ConfigurePrimaryHttpMessageHandler(() => new SviktHandler())));
+        var klient = vertMedSvikt.CreateClient();
+
+        var statistikk = await klient.GetFromJsonAsync<List<Statistikkoppforing>>("/api/statistikk");
+
+        var fly = statistikk!.Single(s => s.Id == "fly");
+        Assert.False(fly.Feiler);
+        Assert.Null(fly.Hentet);
     }
 
     [Fact]
@@ -460,4 +569,6 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
     }
 
     private sealed record Lagoppforing(string Id, string Navn, string Beskrivelse, string Ikon);
+
+    private sealed record Statistikkoppforing(string Id, string Navn, int? Antall, DateTimeOffset? Eldste, DateTimeOffset? Nyeste, DateTimeOffset? Hentet, bool Feiler);
 }
