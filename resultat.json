@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:49:10",
+  "oppdatert": "2026-09-23T11:49:48",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -550,7 +550,7 @@
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
     "pr": null,
-    "kjoeringer": 37
+    "kjoeringer": 38
   },
   "produkt": {
     "testerBestatt": 16,
@@ -869,13 +869,13 @@
       "issue": 130,
       "navn": "Fyrverkeri over Rådhuset når en PR blir merget",
       "github": "Copilot",
-      "oppdatert": "2026-09-23T09:48:52Z"
+      "oppdatert": "2026-09-23T09:49:39Z"
     },
     {
       "issue": 130,
       "navn": "Fyrverkeri over Rådhuset når en PR blir merget",
       "github": "SasaRad",
-      "oppdatert": "2026-09-23T09:48:52Z"
+      "oppdatert": "2026-09-23T09:49:39Z"
     },
     {
       "issue": 132,
