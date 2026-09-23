@@ -994,7 +994,22 @@ document.getElementById('nyhetslinje-rull').addEventListener('animationiteration
 });
 redusertBevegelse.addEventListener('change', tegnNyhetslinje);
 
-async function hent(id) {
+// Høyst ett kall per lag om gangen: er forrige kall for samme tid fortsatt i gang,
+// gjenbrukes det, så kallene ikke stabler seg opp mot et tregt lag.
+function hent(id) {
+  const oppf = lagene.get(id);
+  if (oppf.pågår && oppf.pågår.gen === tidGenerasjon) return oppf.pågår.løfte;
+  const løfte = hentLag(id).finally(() => { if (oppf.pågår?.løfte === løfte) oppf.pågår = null; });
+  oppf.pågår = { gen: tidGenerasjon, løfte };
+  return løfte;
+}
+
+/** Starter alle lagene samtidig; hvert lag tegnes når svaret kommer, klokkeslettet når siste svar er inne. */
+function oppdaterAlle() {
+  return Promise.allSettled([...lagene.keys()].map(hent)).then(oppdaterTidspunkt);
+}
+
+async function hentLag(id) {
   const oppf = lagene.get(id);
   const teller = document.getElementById('antall-' + id);
   const gen = tidGenerasjon;
@@ -1087,6 +1102,9 @@ function oppdaterBunn() {
   let sum = 0;
   for (const l of lagene.values()) if (l.på) sum += l.antall;
   document.getElementById('sum').textContent = sum + ' punkter';
+}
+
+function oppdaterTidspunkt() {
   document.getElementById('oppdatert').textContent = valgtTid ? 'Viser ' + tidTekst(valgtTid) : new Date().toLocaleTimeString('no-NO');
 }
 
@@ -1168,7 +1186,7 @@ document.getElementById('tid').addEventListener('input', (ev) => {
   tidTimer = setTimeout(() => {
     valgtTid = d;
     tidGenerasjon++;
-    lagene.forEach((_, id) => hent(id));
+    oppdaterAlle();
     hentBydeler();
   }, 250);
 });
@@ -1250,7 +1268,7 @@ async function start() {
   bydelSelect.addEventListener('change', hentBydeler);
   hentBydeler();
 
-  const oppdaterAlt = () => Promise.allSettled([...lagene.keys()].map(hent)).then(hentStatistikk);
+  const oppdaterAlt = () => oppdaterAlle().then(hentStatistikk);
   oppdaterAlt();
   // Står tidslinjen på et annet tidspunkt enn nå, hentes ingen levende data før den settes tilbake.
   setInterval(() => { if (valgtTid) return; oppdaterAlt(); hentBydeler(); }, 15000);
