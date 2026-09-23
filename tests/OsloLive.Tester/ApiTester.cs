@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Net;
 using System.Net.Http.Json;
 using System.Text;
@@ -42,6 +43,17 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
             Assert.False(string.IsNullOrWhiteSpace(l.Id));
             Assert.False(string.IsNullOrWhiteSpace(l.Navn));
         });
+    }
+
+    [Fact]
+    public async Task Lagoversikten_har_hendelser_med_navn_beskrivelse_og_ikon()
+    {
+        var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
+
+        var hendelser = lag!.Single(l => l.Id == "hendelser");
+        Assert.Equal("Hendelser", hendelser.Navn);
+        Assert.False(string.IsNullOrWhiteSpace(hendelser.Beskrivelse));
+        Assert.False(string.IsNullOrWhiteSpace(hendelser.Ikon));
     }
 
     [Fact]
@@ -162,6 +174,17 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
         Assert.Equal("Vannmålere", vannmaalere.Navn);
         Assert.False(string.IsNullOrWhiteSpace(vannmaalere.Beskrivelse));
         Assert.False(string.IsNullOrWhiteSpace(vannmaalere.Ikon));
+    }
+
+    [Fact]
+    public async Task Lagoversikten_har_kaier()
+    {
+        var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
+
+        var kaier = lag!.Single(l => l.Id == "kaier");
+        Assert.Equal("Kaier", kaier.Navn);
+        Assert.False(string.IsNullOrWhiteSpace(kaier.Beskrivelse));
+        Assert.False(string.IsNullOrWhiteSpace(kaier.Ikon));
     }
 
     [Fact]
@@ -430,6 +453,57 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
         }
     }
 
+    [Fact]
+    public async Task Kaierlaget_gir_featurecollection_uten_nett()
+    {
+        const string svar = """
+            {
+                "source": "kystdatahuset",
+                "operation": "find_ports_nearby",
+                "parameters": {},
+                "data": {
+                    "havner": [
+                        {
+                            "port_id": 2467069,
+                            "navn": "Salt brygge FK",
+                            "kode": "NOOSL",
+                            "type": "Ferjekai",
+                            "kommune": "Oslo",
+                            "fylke": "Oslo",
+                            "lat": 59.906647,
+                            "lon": 10.747188,
+                            "avstand_km": 0.4
+                        }
+                    ],
+                    "radius_km": 20
+                }
+            }
+            """;
+
+        var handler = new OpptakendeSvarHandler(svar);
+        using var vertUtenNett = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient<Allemannsdata>().ConfigurePrimaryHttpMessageHandler(() => handler)));
+        var klient = vertUtenNett.CreateClient();
+
+        Allemannsdata.TømMellomlager();
+        try
+        {
+            var respons = await klient.GetAsync("/api/lag/kaier");
+            var lag = await respons.Content.ReadFromJsonAsync<Kartlag>();
+
+            Assert.Equal(HttpStatusCode.OK, respons.StatusCode);
+            Assert.Equal("FeatureCollection", lag!.Type);
+            Assert.NotEmpty(lag.Features);
+            Assert.Equal([10.747188, 59.906647], lag.Features[0].Geometry.Coordinates);
+            Assert.Contains("kystdatahuset/find_ports_nearby", handler.SisteAdresse!.ToString());
+            Assert.Contains("radius_km=", handler.SisteAdresse!.ToString());
+        }
+        finally
+        {
+            Allemannsdata.TømMellomlager();
+        }
+    }
+
     private sealed class OpptakendeSvarHandler(string svar) : HttpMessageHandler
     {
         public Uri? SisteAdresse { get; private set; }
@@ -457,6 +531,62 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
         var helse = await klient.GetAsync("/api/helse");
 
         Assert.Equal(HttpStatusCode.BadGateway, fly.StatusCode);
+        Assert.Equal(HttpStatusCode.OK, lag.StatusCode);
+        Assert.Equal(HttpStatusCode.OK, helse.StatusCode);
+    }
+
+    [Fact]
+    public async Task Vannstand_svarer_200_med_naa_neste_og_maalt()
+    {
+        // Mellomlageret er statisk og delt mellom tester, så det må tømmes før hvert kall.
+        Allemannsdata.TømMellomlager();
+        var nå = DateTimeOffset.UtcNow;
+        var naaJson = $$"""[{"time":"{{nå.AddMinutes(-20).ToString("o", CultureInfo.InvariantCulture)}}","tide_cm":10.0,"sea_level_cm":12.5,"surge_cm":2.5}]""";
+        var tabellJson = $$"""[{"time":"{{nå.AddHours(3).ToString("o", CultureInfo.InvariantCulture)}}","height_cm":24.0,"kind":"high"},{"time":"{{nå.AddHours(9).ToString("o", CultureInfo.InvariantCulture)}}","height_cm":-12.0,"kind":"low"}]""";
+
+        using var vertMedData = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient<Allemannsdata>().ConfigurePrimaryHttpMessageHandler(() => new VannstandHandler(naaJson, tabellJson))));
+        var klient = vertMedData.CreateClient();
+
+        var svar = await klient.GetAsync("/api/vannstand");
+        var kropp = await svar.Content.ReadFromJsonAsync<JsonElement>();
+
+        Assert.Equal(HttpStatusCode.OK, svar.StatusCode);
+        Assert.Equal(12.5, kropp.GetProperty("naa").GetDouble());
+        Assert.True(DateTimeOffset.TryParse(kropp.GetProperty("maalt").GetString(), out _));
+        Assert.Equal("høyvann", kropp.GetProperty("neste").GetProperty("type").GetString());
+        Assert.True(DateTimeOffset.TryParse(kropp.GetProperty("neste").GetProperty("tidspunkt").GetString(), out _));
+        Assert.Equal(24.0, kropp.GetProperty("neste").GetProperty("verdi").GetDouble());
+    }
+
+    [Fact]
+    public async Task Svikt_i_vannstandskilden_gir_502_med_feil()
+    {
+        Allemannsdata.TømMellomlager();
+        using var vertMedSvikt = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient<Allemannsdata>().ConfigurePrimaryHttpMessageHandler(() => new SviktHandler())));
+        var klient = vertMedSvikt.CreateClient();
+
+        var svar = await klient.GetAsync("/api/vannstand");
+        var kropp = await svar.Content.ReadFromJsonAsync<JsonElement>();
+
+        Assert.Equal(HttpStatusCode.BadGateway, svar.StatusCode);
+        Assert.False(string.IsNullOrWhiteSpace(kropp.GetProperty("feil").GetString()));
+    }
+
+    [Fact]
+    public async Task Svikt_i_vannstandskilden_rammer_ikke_lagoversikten()
+    {
+        Allemannsdata.TømMellomlager();
+        using var vertMedSvikt = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient<Allemannsdata>().ConfigurePrimaryHttpMessageHandler(() => new SviktHandler())));
+        var klient = vertMedSvikt.CreateClient();
+
+        var vannstand = await klient.GetAsync("/api/vannstand");
+        var lag = await klient.GetAsync("/api/lag");
+        var helse = await klient.GetAsync("/api/helse");
+
+        Assert.Equal(HttpStatusCode.BadGateway, vannstand.StatusCode);
         Assert.Equal(HttpStatusCode.OK, lag.StatusCode);
         Assert.Equal(HttpStatusCode.OK, helse.StatusCode);
     }
@@ -694,6 +824,24 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
             throw new HttpRequestException("Kilden er nede.");
     }
 
+    /// <summary>Svarer med tidsserien til «naa» eller tabellen til «neste», avhengig av hvilken operasjon adressen ber om.</summary>
+    private sealed class VannstandHandler(string naaJson, string tabellJson) : HttpMessageHandler
+    {
+        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage forespørsel, CancellationToken stopp)
+        {
+            var erTabell = forespørsel.RequestUri!.ToString().Contains("get_tide_table");
+            var kropp = Innpakket(erTabell ? "get_tide_table" : "get_tide_forecast", erTabell ? tabellJson : naaJson);
+
+            return Task.FromResult(new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(kropp, Encoding.UTF8, "application/json"),
+            });
+        }
+    }
+
+    private static string Innpakket(string operasjon, string data) =>
+        $$"""{"source":"weather","operation":"{{operasjon}}","parameters":{},"data":{{data}}}""";
+
     private sealed class StubHandler(string svar) : HttpMessageHandler
     {
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage forespørsel, CancellationToken stopp) =>
@@ -702,7 +850,6 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
                 Content = new StringContent(svar, System.Text.Encoding.UTF8, "application/json"),
             });
     }
-
     private sealed record Lagoppforing(string Id, string Navn, string Beskrivelse, string Ikon);
 
     private sealed record Statistikkoppforing(string Id, string Navn, int? Antall, DateTimeOffset? Eldste, DateTimeOffset? Nyeste, DateTimeOffset? Hentet, bool Feiler);
