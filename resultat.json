@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:32:06",
+  "oppdatert": "2026-09-23T14:32:46",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -196,8 +196,8 @@
       "pr": 4,
       "utkast": 0,
       "merget": 2,
-      "kjoeringer": 16,
-      "utenPr": 7,
+      "kjoeringer": 17,
+      "utenPr": 8,
       "bygg": [],
       "estimert": false,
       "plass": 5
@@ -325,12 +325,12 @@
       ],
       "dollar": 18.04,
       "tokens": 40390256,
-      "sekunder": 5728,
+      "sekunder": 5729,
       "pr": 4,
       "utkast": 0,
       "merget": 1,
-      "kjoeringer": 15,
-      "utenPr": 7,
+      "kjoeringer": 16,
+      "utenPr": 8,
       "bygg": [],
       "estimert": false,
       "plass": 9
@@ -450,12 +450,12 @@
       ],
       "dollar": 2.254,
       "tokens": 4113023,
-      "sekunder": 662,
+      "sekunder": 663,
       "pr": 1,
       "utkast": 0,
       "merget": 1,
-      "kjoeringer": 6,
-      "utenPr": 5,
+      "kjoeringer": 7,
+      "utenPr": 6,
       "bygg": [],
       "estimert": false,
       "plass": 14
@@ -607,7 +607,7 @@
       "issue": 188,
       "navn": "Vinden som strømmer over byen",
       "startet": "2026-09-23T12:23:41.4076789+00:00",
-      "minutter": 8
+      "minutter": 9
     },
     {
       "agent": "mini-wilma",
@@ -615,7 +615,7 @@
       "issue": 26,
       "navn": "Skoler",
       "startet": "2026-09-23T12:28:26.4775068+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-wilma",
@@ -623,6 +623,22 @@
       "issue": 214,
       "navn": "Lagvelgeren er for høy: historikkgrafen tar en egen rad per lag",
       "startet": "2026-09-23T12:31:25.313151+00:00",
+      "minutter": 1
+    },
+    {
+      "agent": "henrik",
+      "github": "monet820",
+      "issue": 114,
+      "navn": "Nytt lag: Kristiania i 1910",
+      "startet": "2026-09-23T12:32:02.4130394+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-wilma",
+      "github": "larsajakobsen",
+      "issue": 206,
+      "navn": "Popupene viser rådata: ISO-tider, «ikon: 😊» og tall uten enhet",
+      "startet": "2026-09-23T12:32:25.3380267+00:00",
       "minutter": 0
     }
   ],
@@ -630,7 +646,7 @@
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
     "pr": null,
-    "kjoeringer": 47
+    "kjoeringer": 48
   },
   "produkt": {
     "testerBestatt": 18,
@@ -735,25 +751,25 @@
       "issue": 57,
       "navn": "Avgangstavle for Gardermoen",
       "github": "Buggz",
-      "oppdatert": "2026-09-23T12:30:53Z"
+      "oppdatert": "2026-09-23T12:32:29Z"
     },
     {
       "issue": 57,
       "navn": "Avgangstavle for Gardermoen",
       "github": "ingvevs",
-      "oppdatert": "2026-09-23T12:30:53Z"
+      "oppdatert": "2026-09-23T12:32:29Z"
     },
     {
       "issue": 59,
       "navn": "Overlapping boxes",
       "github": "jthagesk",
-      "oppdatert": "2026-09-23T12:30:54Z"
+      "oppdatert": "2026-09-23T12:32:29Z"
     },
     {
       "issue": 59,
       "navn": "Overlapping boxes",
       "github": "sin-rha",
-      "oppdatert": "2026-09-23T12:30:54Z"
+      "oppdatert": "2026-09-23T12:32:29Z"
     },
     {
       "issue": 113,
@@ -813,7 +829,7 @@
       "issue": 118,
       "navn": "Nyhetslinje nederst på skjermen",
       "github": "leif-larsen",
-      "oppdatert": "2026-09-23T12:31:40Z"
+      "oppdatert": "2026-09-23T12:32:31Z"
     },
     {
       "issue": 119,
@@ -1002,10 +1018,28 @@
       "oppdatert": "2026-09-23T12:31:34Z"
     },
     {
+      "issue": 205,
+      "navn": "Strømprisen vises med desimalpunktum",
+      "github": "martinrholth",
+      "oppdatert": "2026-09-23T12:32:26Z"
+    },
+    {
+      "issue": 206,
+      "navn": "Popupene viser rådata: ISO-tider, «ikon: 😊» og tall uten enhet",
+      "github": "larsajakobsen",
+      "oppdatert": "2026-09-23T12:32:26Z"
+    },
+    {
       "issue": 214,
       "navn": "Lagvelgeren er for høy: historikkgrafen tar en egen rad per lag",
       "github": "larsajakobsen",
       "oppdatert": "2026-09-23T12:31:43Z"
+    },
+    {
+      "issue": 215,
+      "navn": "Svarte klynger dekker sentrum og skjuler hvilke lag som er der",
+      "github": "Buggz",
+      "oppdatert": "2026-09-23T12:32:41Z"
     }
   ],
   "aapne": [
