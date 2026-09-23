@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:58:36",
+  "oppdatert": "2026-09-23T11:59:14",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -904,6 +904,18 @@
   ],
   "aapne": [
     {
+      "pr": 107,
+      "tittel": "Tastatursnarveier",
+      "github": "audmaha",
+      "agent": "mini-aud",
+      "opprettet": "2026-09-23T09:00:42Z",
+      "oppdatert": "2026-09-23T09:58:22Z",
+      "utkast": false,
+      "issues": [
+        39
+      ]
+    },
+    {
       "pr": 91,
       "tittel": "Fargene må virke for alle",
       "github": "audmaha",
@@ -1033,18 +1045,6 @@
       "utkast": false,
       "issues": [
         3
-      ]
-    },
-    {
-      "pr": 107,
-      "tittel": "Tastatursnarveier",
-      "github": "audmaha",
-      "agent": "mini-aud",
-      "opprettet": "2026-09-23T09:00:42Z",
-      "oppdatert": "2026-09-23T09:38:38Z",
-      "utkast": false,
-      "issues": [
-        39
       ]
     },
     {
