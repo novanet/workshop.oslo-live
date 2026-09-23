@@ -40,6 +40,28 @@ public class ApiTester(WebApplicationFactory<Program> vert) : IClassFixture<WebA
     }
 
     [Fact]
+    public async Task Kartutsnittet_svarer()
+    {
+        var svar = await Klient.GetAsync("/api/kart");
+
+        Assert.Equal(HttpStatusCode.OK, svar.StatusCode);
+    }
+
+    [Fact]
+    public async Task Kartutsnittet_har_grenser_og_sentrum_for_Oslo_naar_ingen_annet_er_satt()
+    {
+        var utsnitt = await Klient.GetFromJsonAsync<Utsnittsoppforing>("/api/kart");
+
+        Assert.NotNull(utsnitt);
+        Assert.Equal(59.80, utsnitt!.MinLat);
+        Assert.Equal(60.14, utsnitt.MaksLat);
+        Assert.Equal(10.45, utsnitt.MinLon);
+        Assert.Equal(10.98, utsnitt.MaksLon);
+        Assert.Equal(59.9139, utsnitt.SentrumLat);
+        Assert.Equal(10.7522, utsnitt.SentrumLon);
+    }
+
+    [Fact]
     public async Task Ukjent_lag_gir_404()
     {
         var svar = await Klient.GetAsync("/api/lag/finnes-ikke");
@@ -82,4 +104,6 @@ public class ApiTester(WebApplicationFactory<Program> vert) : IClassFixture<WebA
     }
 
     private sealed record Lagoppforing(string Id, string Navn, string Beskrivelse, string Ikon);
+
+    private sealed record Utsnittsoppforing(double MinLat, double MaksLat, double MinLon, double MaksLon, double SentrumLat, double SentrumLon);
 }

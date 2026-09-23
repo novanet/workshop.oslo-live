@@ -1,4 +1,5 @@
 using System.Globalization;
+using Microsoft.Extensions.Configuration;
 using OsloLive.Kart;
 
 namespace OsloLive.Tester;
@@ -118,6 +119,36 @@ public class GeoTester
         var punkt = Geo.Lag("id", 61.115, 10.466, "Lillehammer", "Test");
 
         Assert.Null(punkt);
+    }
+
+    private static readonly Kartutsnitt Bergen = new(60.30, 60.45, 5.20, 5.40, 60.39, 5.32);
+
+    [Fact]
+    public void Raadhuset_faller_utenfor_naar_utsnittet_er_satt_til_Bergen()
+    {
+        var (iOslo, punkt) = Geo.MedUtsnitt(Bergen, () =>
+            (Geo.IOslo(59.9139, 10.7522), Geo.Lag("id-1", 59.9139, 10.7522, "Rådhuset", "Test")));
+
+        Assert.False(iOslo);
+        Assert.Null(punkt);
+    }
+
+    [Fact]
+    public void Utsnittet_er_tilbake_til_Oslo_etter_MedUtsnitt()
+    {
+        Geo.MedUtsnitt(Bergen, () => Geo.IOslo(59.9139, 10.7522));
+
+        Assert.True(Geo.IOslo(59.9139, 10.7522));
+    }
+
+    [Fact]
+    public void Manglende_Kart_seksjon_gir_ingen_verdi_slik_at_appen_faller_tilbake_til_Oslo()
+    {
+        var konfigurasjon = new ConfigurationBuilder().AddInMemoryCollection([]).Build();
+
+        var utsnitt = konfigurasjon.GetSection("Kart").Get<Kartutsnitt>();
+
+        Assert.Null(utsnitt);
     }
 
     [Fact]

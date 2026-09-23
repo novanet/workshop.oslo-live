@@ -115,8 +115,9 @@
   <div id="naermest-liste"></div>
 </div>
 
-<script>
-const SENTRUM = [10.7522, 59.9139];
+<script type="module">
+const utsnitt = await fetch('/api/kart').then((r) => r.json());
+const SENTRUM = [utsnitt.sentrumLon, utsnitt.sentrumLat];
 
 const kart = new maplibregl.Map({
   container: 'kart',

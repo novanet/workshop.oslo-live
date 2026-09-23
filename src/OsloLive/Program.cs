@@ -11,6 +11,9 @@ CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("nb-NO");
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Kartutsnittet: hentes fra «Kart»-seksjonen i oppsettet, eller Oslo som standard.
+Geo.Bruk(builder.Configuration.GetSection("Kart").Get<Kartutsnitt>() ?? Kartutsnitt.Oslo);
+
 builder.Services.AddHttpClient<Allemannsdata>(klient =>
 {
     klient.Timeout = TimeSpan.FromSeconds(30);
@@ -61,6 +64,9 @@ app.MapGet("/api/lag/{id}", async (string id, IEnumerable<ILag> lag, Cancellatio
         return Results.Json(new { feil = ex.Message }, statusCode: 502);
     }
 });
+
+// Kartutsnittet frontenden skal vise: grensene og sentrum.
+app.MapGet("/api/kart", () => Geo.Utsnitt);
 
 app.MapGet("/api/helse", () => new { status = "ok", tid = DateTimeOffset.Now });
 
