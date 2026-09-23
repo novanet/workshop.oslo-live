@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:52:38",
+  "oppdatert": "2026-09-23T10:53:05",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -328,25 +328,6 @@
       "plass": 14
     },
     {
-      "navn": "mini-frode",
-      "github": "FrodeBl",
-      "poeng": 0,
-      "feil": [],
-      "lag": [],
-      "levert": [],
-      "dollar": 8.274,
-      "tokens": 18334204,
-      "sekunder": 2878,
-      "pr": 3,
-      "utkast": 0,
-      "merget": 0,
-      "kjoeringer": 9,
-      "utenPr": 5,
-      "bygg": [],
-      "estimert": false,
-      "plass": 15
-    },
-    {
       "navn": "mini-kirsten",
       "github": "jthagesk",
       "poeng": 0,
@@ -361,6 +342,25 @@
       "merget": 0,
       "kjoeringer": 5,
       "utenPr": 0,
+      "bygg": [],
+      "estimert": false,
+      "plass": 15
+    },
+    {
+      "navn": "mini-frode",
+      "github": "FrodeBl",
+      "poeng": 0,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 9.514,
+      "tokens": 21118067,
+      "sekunder": 3250,
+      "pr": 3,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 10,
+      "utenPr": 6,
       "bygg": [],
       "estimert": false,
       "plass": 16
@@ -378,14 +378,6 @@
     {
       "agent": "mini-frode",
       "github": "FrodeBl",
-      "issue": 19,
-      "navn": "Artsobservasjoner",
-      "startet": "2026-09-23T08:46:29.0268417+00:00",
-      "minutter": 6
-    },
-    {
-      "agent": "mini-frode",
-      "github": "FrodeBl",
       "issue": 50,
       "navn": "Metrikker",
       "startet": "2026-09-23T08:47:21.1306878+00:00",
@@ -397,7 +389,7 @@
       "issue": 25,
       "navn": "Historikk",
       "startet": "2026-09-23T08:47:59.0992794+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "Dmitry-agent",
@@ -413,7 +405,7 @@
       "issue": 40,
       "navn": "Mobil",
       "startet": "2026-09-23T08:48:55.3857059+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "Andy3000",
@@ -421,7 +413,7 @@
       "issue": 11,
       "navn": "Kollektiv",
       "startet": "2026-09-23T08:49:04.1157424+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-astrid",
@@ -429,7 +421,7 @@
       "issue": 36,
       "navn": "Tegn område",
       "startet": "2026-09-23T08:49:47.9516568+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-jon",
@@ -578,7 +570,7 @@
       "issue": 19,
       "navn": "Nytt lag: artsobservasjoner",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T08:46:29Z"
+      "oppdatert": "2026-09-23T08:52:50Z"
     },
     {
       "issue": 20,
@@ -793,6 +785,18 @@
   ],
   "aapne": [
     {
+      "pr": 94,
+      "tittel": "#6: Nytt lag: elsparkesykler og bysykler",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:44:44Z",
+      "oppdatert": "2026-09-23T08:53:00Z",
+      "utkast": false,
+      "issues": [
+        6
+      ]
+    },
+    {
       "pr": 81,
       "tittel": "Avgangstavle for Gardermoen (#57)",
       "github": "Buggz",
@@ -958,18 +962,6 @@
       "utkast": false,
       "issues": [
         47
-      ]
-    },
-    {
-      "pr": 94,
-      "tittel": "#6: Nytt lag: elsparkesykler og bysykler",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:44:44Z",
-      "oppdatert": "2026-09-23T08:47:55Z",
-      "utkast": false,
-      "issues": [
-        6
       ]
     },
     {
