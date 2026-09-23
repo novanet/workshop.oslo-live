@@ -1,11 +1,11 @@
 {
-  "oppdatert": "2026-09-23T22:25:06",
+  "oppdatert": "2026-09-23T22:26:38",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
       "navn": "mini-richard",
       "github": "randsu",
-      "poeng": 45,
+      "poeng": 47,
       "feil": [
         {
           "issue": 3,
@@ -14,6 +14,11 @@
         }
       ],
       "lag": [
+        {
+          "issue": 6,
+          "navn": "Delt mobilitet",
+          "poeng": 2
+        },
         {
           "issue": 9,
           "navn": "Badetemperatur",
@@ -722,14 +727,15 @@
     "kjoeringer": 70
   },
   "produkt": {
-    "testerBestatt": 20,
-    "testerFeilet": 6,
+    "testerBestatt": 21,
+    "testerFeilet": 5,
     "issuerLost": [
       1,
       2,
       3,
       4,
       5,
+      6,
       7,
       8,
       9,
