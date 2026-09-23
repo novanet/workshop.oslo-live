@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:18:45",
+  "oppdatert": "2026-09-23T10:19:11",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -243,7 +243,7 @@
       "issue": 17,
       "navn": "Smilefjes",
       "startet": "2026-09-23T08:10:01.588657+00:00",
-      "minutter": 8
+      "minutter": 9
     },
     {
       "agent": "mini-frode",
@@ -251,7 +251,7 @@
       "issue": 19,
       "navn": "Artsobservasjoner",
       "startet": "2026-09-23T08:14:02.4941234+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-ingve",
@@ -317,7 +317,7 @@
       "issue": 1,
       "navn": "Alle punkter havner i havet, langt utenfor Norge",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T07:37:01Z"
+      "oppdatert": "2026-09-23T08:19:03Z"
     },
     {
       "issue": 2,
@@ -353,7 +353,7 @@
       "issue": 5,
       "navn": "Tall i URL-ene får norsk desimalkomma",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T07:57:13Z"
+      "oppdatert": "2026-09-23T08:18:55Z"
     },
     {
       "issue": 7,
