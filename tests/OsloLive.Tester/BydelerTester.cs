@@ -143,7 +143,7 @@ public class BydelerTester
             """;
 
         var håndterer = new TellendeHandler(svar);
-        var data = new Allemannsdata(new HttpClient(håndterer), NullLogger<Allemannsdata>.Instance);
+        var data = new Allemannsdata(new HttpClient(håndterer), NullLogger<Allemannsdata>.Instance, new Metrikker());
 
         Allemannsdata.TømMellomlager();
         try
