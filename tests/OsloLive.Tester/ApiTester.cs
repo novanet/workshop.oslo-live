@@ -68,6 +68,17 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
     }
 
     [Fact]
+    public async Task Lagoversikten_har_idrettsanlegg()
+    {
+        var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
+
+        var anlegg = lag!.Single(l => l.Id == "idrettsanlegg");
+        Assert.Equal("Idrettsanlegg", anlegg.Navn);
+        Assert.False(string.IsNullOrWhiteSpace(anlegg.Beskrivelse));
+        Assert.False(string.IsNullOrWhiteSpace(anlegg.Ikon));
+    }
+
+    [Fact]
     public async Task Ukjent_lag_gir_404()
     {
         var svar = await Klient.GetAsync("/api/lag/finnes-ikke");
