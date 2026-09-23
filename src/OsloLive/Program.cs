@@ -67,6 +67,7 @@ builder.Services.AddSingleton<ILag, SpisestederLag>();
 builder.Services.AddSingleton<ILag, HoldeplasserLag>();
 builder.Services.AddSingleton<ILag, SkipLag>();
 builder.Services.AddSingleton<ILag, VannmaalereLag>();
+builder.Services.AddSingleton<ILag, SkolerLag>();
 builder.Services.AddSingleton<ILag, KaierLag>();
 builder.Services.AddSingleton<ILag, BomstasjonerLag>();
 builder.Services.AddSingleton<ILag, VaerstasjonerLag>();
