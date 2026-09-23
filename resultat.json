@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:34:06",
+  "oppdatert": "2026-09-23T14:34:46",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -536,8 +536,8 @@
       "pr": 2,
       "utkast": 0,
       "merget": 0,
-      "kjoeringer": 9,
-      "utenPr": 6,
+      "kjoeringer": 10,
+      "utenPr": 7,
       "bygg": [],
       "estimert": false,
       "plass": 18
@@ -607,7 +607,7 @@
       "issue": 188,
       "navn": "Vinden som strømmer over byen",
       "startet": "2026-09-23T12:23:41.4076789+00:00",
-      "minutter": 10
+      "minutter": 11
     },
     {
       "agent": "mini-wilma",
@@ -615,7 +615,7 @@
       "issue": 26,
       "navn": "Skoler",
       "startet": "2026-09-23T12:28:26.4775068+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-wilma",
@@ -623,7 +623,7 @@
       "issue": 214,
       "navn": "Lagvelgeren er for høy: historikkgrafen tar en egen rad per lag",
       "startet": "2026-09-23T12:31:25.313151+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "henrik",
@@ -639,7 +639,7 @@
       "issue": 206,
       "navn": "Popupene viser rådata: ISO-tider, «ikon: 😊» og tall uten enhet",
       "startet": "2026-09-23T12:32:25.3380267+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-richard",
@@ -647,7 +647,7 @@
       "issue": 115,
       "navn": "Nytt lag: parker og torg",
       "startet": "2026-09-23T12:33:36.8322183+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-richard",
@@ -655,6 +655,38 @@
       "issue": 114,
       "navn": "Nytt lag: Kristiania i 1910",
       "startet": "2026-09-23T12:33:37.8320639+00:00",
+      "minutter": 1
+    },
+    {
+      "agent": "mini-knive",
+      "github": "Buggz",
+      "issue": 215,
+      "navn": "Svarte klynger dekker sentrum og skjuler hvilke lag som er der",
+      "startet": "2026-09-23T12:34:13.5766398+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-kirsten",
+      "github": "jthagesk",
+      "issue": 29,
+      "navn": "Museer",
+      "startet": "2026-09-23T12:34:23.8175869+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-leif",
+      "github": "leif-larsen",
+      "issue": 118,
+      "navn": "Nyhetslinje nederst på skjermen",
+      "startet": "2026-09-23T12:34:25.9928919+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-richard",
+      "github": "randsu",
+      "issue": 116,
+      "navn": "Nytt lag: værstasjoner",
+      "startet": "2026-09-23T12:34:27.1286355+00:00",
       "minutter": 0
     }
   ],
@@ -761,7 +793,7 @@
       "issue": 55,
       "navn": "Kartet blir tregt med mange punkter",
       "github": "sin-rha",
-      "oppdatert": "2026-09-23T12:33:51Z"
+      "oppdatert": "2026-09-23T12:34:25Z"
     },
     {
       "issue": 57,
@@ -833,13 +865,19 @@
       "issue": 116,
       "navn": "Nytt lag: værstasjoner",
       "github": "monet820",
-      "oppdatert": "2026-09-23T12:30:12Z"
+      "oppdatert": "2026-09-23T12:34:28Z"
     },
     {
       "issue": 116,
       "navn": "Nytt lag: værstasjoner",
       "github": "nilsgs",
-      "oppdatert": "2026-09-23T12:30:12Z"
+      "oppdatert": "2026-09-23T12:34:28Z"
+    },
+    {
+      "issue": 116,
+      "navn": "Nytt lag: værstasjoner",
+      "github": "randsu",
+      "oppdatert": "2026-09-23T12:34:28Z"
     },
     {
       "issue": 117,
@@ -857,7 +895,7 @@
       "issue": 118,
       "navn": "Nyhetslinje nederst på skjermen",
       "github": "leif-larsen",
-      "oppdatert": "2026-09-23T12:33:33Z"
+      "oppdatert": "2026-09-23T12:34:27Z"
     },
     {
       "issue": 119,
@@ -1001,7 +1039,7 @@
       "issue": 189,
       "navn": "Travlere enn vanlig på veiene",
       "github": "yonzo",
-      "oppdatert": "2026-09-23T12:33:54Z"
+      "oppdatert": "2026-09-23T12:34:44Z"
     },
     {
       "issue": 190,
@@ -1067,7 +1105,7 @@
       "issue": 215,
       "navn": "Svarte klynger dekker sentrum og skjuler hvilke lag som er der",
       "github": "Buggz",
-      "oppdatert": "2026-09-23T12:33:35Z"
+      "oppdatert": "2026-09-23T12:34:14Z"
     }
   ],
   "aapne": [
