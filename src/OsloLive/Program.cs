@@ -38,6 +38,14 @@ builder.Services.AddHttpClient("bomstasjoner", klient =>
     klient.DefaultRequestHeaders.Add("X-Client", "OsloLive");
     klient.DefaultRequestHeaders.Accept.ParseAdd("application/json");
 });
+// Avvik i kollektivtrafikken hentes fra Entur Journey Planner (GraphQL), som heller
+// ikke er en Allemannsdata-kilde, og krever headeren ET-Client-Name. Se KollektivavvikLag.cs.
+builder.Services.AddHttpClient("entur", klient =>
+{
+    klient.Timeout = TimeSpan.FromSeconds(15);
+    klient.DefaultRequestHeaders.UserAgent.ParseAdd("OsloLive/1.0 (kurs)");
+    klient.DefaultRequestHeaders.Add("ET-Client-Name", "novanet-oslolive");
+});
 builder.Services.AddMemoryCache();
 builder.Services.AddSingleton<Lagstatistikk>();
 
@@ -71,6 +79,7 @@ builder.Services.AddSingleton<ILag, KaierLag>();
 builder.Services.AddSingleton<ILag, BomstasjonerLag>();
 builder.Services.AddSingleton<ILag, VaerstasjonerLag>();
 builder.Services.AddSingleton<ILag, IdrettsanleggLag>();
+builder.Services.AddSingleton<ILag, KollektivavvikLag>();
 
 // Bakgrunnssjekk av kildehelse, se Helse/HelseSjekker.cs.
 builder.Services.Configure<HelseValg>(builder.Configuration.GetSection("Helse"));
