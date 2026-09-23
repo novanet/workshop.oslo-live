@@ -131,6 +131,17 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
     }
 
     [Fact]
+    public async Task Lagoversikten_har_skip()
+    {
+        var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
+
+        var skip = lag!.Single(l => l.Id == "skip");
+        Assert.Equal("Skipstrafikk", skip.Navn);
+        Assert.False(string.IsNullOrWhiteSpace(skip.Beskrivelse));
+        Assert.False(string.IsNullOrWhiteSpace(skip.Ikon));
+    }
+
+    [Fact]
     public async Task Spisestederlaget_gir_featurecollection_uten_nett()
     {
         const string svar = """
@@ -222,6 +233,57 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
             Assert.Equal("FeatureCollection", lag!.Type);
             Assert.NotEmpty(lag.Features);
             Assert.Equal([10.749284, 59.909607], lag.Features[0].Geometry.Coordinates);
+        }
+        finally
+        {
+            Allemannsdata.TømMellomlager();
+        }
+    }
+
+    [Fact]
+    public async Task Skiplaget_gir_featurecollection_uten_nett()
+    {
+        const string svar = """
+            {
+                "source": "ais",
+                "operation": "find_vessels_nearby",
+                "parameters": {},
+                "data": {
+                    "fartoy": [
+                        {
+                            "vessel_id": 258219000,
+                            "navn": "Tåkeheimen",
+                            "kallesignal": "LCDK",
+                            "imo": 9481207,
+                            "skipstype": 60,
+                            "lat": 59.905,
+                            "lon": 10.72,
+                            "fart_knop": 12.3,
+                            "kurs": 112.3,
+                            "destinasjon": "NESODDTANGEN",
+                            "sist_oppdatert": "2026-09-23T09:38:37+00:00",
+                            "avstand_km": 1.01
+                        }
+                    ],
+                    "radius_km": 20
+                }
+            }
+            """;
+
+        using var vertUtenNett = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient<Allemannsdata>().ConfigurePrimaryHttpMessageHandler(() => new FastSvarHandler(svar))));
+        var klient = vertUtenNett.CreateClient();
+
+        Allemannsdata.TømMellomlager();
+        try
+        {
+            var respons = await klient.GetAsync("/api/lag/skip");
+            var lag = await respons.Content.ReadFromJsonAsync<Kartlag>();
+
+            Assert.Equal(HttpStatusCode.OK, respons.StatusCode);
+            Assert.Equal("FeatureCollection", lag!.Type);
+            Assert.NotEmpty(lag.Features);
+            Assert.Equal([10.72, 59.905], lag.Features[0].Geometry.Coordinates);
         }
         finally
         {
