@@ -39,6 +39,19 @@ public sealed class MobilitetLag(Allemannsdata data) : ILag
     };
 
     /// <summary>
+    /// Oversetter kildens drivstoffkode (GBFS «propulsion_type») til teksten popupen
+    /// skal vise. Ukjente koder gir null, og da får ikke punktet feltet «drivstoff».
+    /// </summary>
+    public static string? Drivstoff(string? propulsion) => propulsion switch
+    {
+        "ELECTRIC" or "ELECTRIC_ASSIST" => "elektrisk",
+        "COMBUSTION" or "COMBUSTION_DIESEL" => "fossil",
+        "HYBRID" or "PLUG_IN_HYBRID" => "hybrid",
+        "HUMAN" => "tråkk",
+        _ => null,
+    };
+
+    /// <summary>
     /// Oversetter operatørens system-id til navnet akseptansekriteriene ber om
     /// («Ryde», «Voi», «Oslo Bysykkel»), siden kilden ellers gir selskapsnavn
     /// («VOI Technology Norway AS», «UIP Bauer Media Outdoor Norge AS»).
@@ -87,9 +100,10 @@ public sealed class MobilitetLag(Allemannsdata data) : ILag
             ["type"] = type,
         };
 
-        if (rad.TryGetProperty("propulsion", out var drivstoff) && drivstoff.ValueKind == JsonValueKind.String)
+        var propulsion = rad.TryGetProperty("propulsion", out var p) && p.ValueKind == JsonValueKind.String ? p.GetString() : null;
+        if (Drivstoff(propulsion) is { } drivstoff)
         {
-            detaljer["drivstoff"] = drivstoff.GetString();
+            detaljer["drivstoff"] = drivstoff;
         }
 
         if (rad.TryGetProperty("range_m", out var rekkevidde) && rekkevidde.ValueKind == JsonValueKind.Number)

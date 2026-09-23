@@ -36,6 +36,42 @@ public class MobilitetLagTester
         Assert.Equal(forventet, MobilitetLag.Operatør(systemId, operatør));
     }
 
+    [Theory]
+    [InlineData("ELECTRIC", "elektrisk")]
+    [InlineData("ELECTRIC_ASSIST", "elektrisk")]
+    [InlineData("COMBUSTION", "fossil")]
+    [InlineData("COMBUSTION_DIESEL", "fossil")]
+    [InlineData("HYBRID", "hybrid")]
+    [InlineData("PLUG_IN_HYBRID", "hybrid")]
+    [InlineData("HUMAN", "tråkk")]
+    [InlineData("HYDROGEN_FUEL_CELL", null)]
+    [InlineData(null, null)]
+    public void Drivstoff_oversettes_fra_propulsion(string? propulsion, string? forventet)
+    {
+        Assert.Equal(forventet, MobilitetLag.Drivstoff(propulsion));
+    }
+
+    [Fact]
+    public void Kjøretøy_får_drivstoff_på_norsk_og_ukjent_drivstoff_gir_ikke_feltet()
+    {
+        var elsparkesykkel = MobilitetLag.FraKjøretøy(Rad("""
+            { "id": "VOI:1", "form_factor": "SCOOTER_STANDING", "propulsion": "ELECTRIC", "lat": 59.91, "lon": 10.75, "reserved": false, "disabled": false, "operator": "VOI Technology Norway AS", "system_id": "voioslo" }
+            """));
+        var delebil = MobilitetLag.FraKjøretøy(Rad("""
+            { "id": "HYRE:1", "form_factor": "CAR", "propulsion": "COMBUSTION", "lat": 59.91, "lon": 10.75, "reserved": false, "disabled": false, "operator": "Hyre", "system_id": "hyrenorge" }
+            """));
+        var ukjent = MobilitetLag.FraKjøretøy(Rad("""
+            { "id": "HYRE:2", "form_factor": "CAR", "propulsion": "HYDROGEN_FUEL_CELL", "lat": 59.91, "lon": 10.75, "reserved": false, "disabled": false, "operator": "Hyre", "system_id": "hyrenorge" }
+            """));
+
+        Assert.NotNull(elsparkesykkel);
+        Assert.Equal("elektrisk", elsparkesykkel!.Properties["drivstoff"]);
+        Assert.NotNull(delebil);
+        Assert.Equal("fossil", delebil!.Properties["drivstoff"]);
+        Assert.NotNull(ukjent);
+        Assert.False(ukjent!.Properties.ContainsKey("drivstoff"));
+    }
+
     [Fact]
     public void Ledig_kjøretøy_gir_punkt_med_lon_lat()
     {
