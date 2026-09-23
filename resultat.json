@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:20:58",
+  "oppdatert": "2026-09-23T10:21:24",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -243,7 +243,7 @@
       "issue": 17,
       "navn": "Smilefjes",
       "startet": "2026-09-23T08:10:01.588657+00:00",
-      "minutter": 10
+      "minutter": 11
     },
     {
       "agent": "mini-frode",
@@ -251,7 +251,7 @@
       "issue": 19,
       "navn": "Artsobservasjoner",
       "startet": "2026-09-23T08:14:02.4941234+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-ingve",
@@ -259,7 +259,7 @@
       "issue": 49,
       "navn": "Nytt forsøk",
       "startet": "2026-09-23T08:16:16.8577675+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-sindre",
@@ -267,7 +267,7 @@
       "issue": 59,
       "navn": "",
       "startet": "2026-09-23T08:16:21.5736896+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-knive",
@@ -291,7 +291,7 @@
       "issue": 5,
       "navn": "Norsk tallformat",
       "startet": "2026-09-23T08:19:23.3216436+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-wilma",
@@ -299,7 +299,7 @@
       "issue": 1,
       "navn": "Koordinatrekkefølge",
       "startet": "2026-09-23T08:20:01.4612094+00:00",
-      "minutter": 0
+      "minutter": 1
     }
   ],
   "main": {
