@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T15:28:49",
+  "oppdatert": "2026-09-23T15:29:31",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -148,13 +148,13 @@
           "poeng": 2
         }
       ],
-      "dollar": 22.839,
-      "tokens": 35600006,
-      "sekunder": 7310,
+      "dollar": 23.643,
+      "tokens": 36603757,
+      "sekunder": 7571,
       "pr": 7,
       "utkast": 0,
       "merget": 5,
-      "kjoeringer": 29,
+      "kjoeringer": 30,
       "utenPr": 19,
       "bygg": [],
       "estimert": false,
@@ -456,8 +456,8 @@
       "pr": 4,
       "utkast": 0,
       "merget": 1,
-      "kjoeringer": 19,
-      "utenPr": 10,
+      "kjoeringer": 18,
+      "utenPr": 9,
       "bygg": [],
       "estimert": false,
       "plass": 11
@@ -701,7 +701,7 @@
       "issue": 186,
       "navn": "Nytt lag: bysykkelstasjoner som fyllingsringer",
       "startet": "2026-09-23T13:22:58.2011074+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-wilma",
@@ -709,7 +709,7 @@
       "issue": 184,
       "navn": "Neste avganger når du klikker på en holdeplass",
       "startet": "2026-09-23T13:24:18.5982608+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-wilma",
@@ -717,15 +717,15 @@
       "issue": 183,
       "navn": "Regner det i Oslo sentrum de neste to timene?",
       "startet": "2026-09-23T13:24:20.6110309+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
-      "agent": "mini-frode",
-      "github": "FrodeBl",
-      "issue": 48,
-      "navn": "Parallell henting",
-      "startet": "2026-09-23T13:24:27.3250644+00:00",
-      "minutter": 4
+      "agent": "mini-sindre",
+      "github": "sin-rha",
+      "issue": 55,
+      "navn": "Ytelse",
+      "startet": "2026-09-23T13:28:44.0134563+00:00",
+      "minutter": 0
     }
   ],
   "main": {
@@ -863,7 +863,7 @@
       "issue": 48,
       "navn": "Hent lagene parallelt",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T13:24:28Z"
+      "oppdatert": "2026-09-23T13:29:20Z"
     },
     {
       "issue": 51,
@@ -1234,6 +1234,18 @@
   ],
   "aapne": [
     {
+      "pr": 67,
+      "tittel": "Hent lagene parallelt",
+      "github": "FrodeBl",
+      "agent": "mini-frode",
+      "opprettet": "2026-09-23T07:59:18Z",
+      "oppdatert": "2026-09-23T13:29:18Z",
+      "utkast": false,
+      "issues": [
+        48
+      ]
+    },
+    {
       "pr": 255,
       "tittel": "Nytt lag: hjertestartere",
       "github": "larsajakobsen",
@@ -1279,18 +1291,6 @@
       "utkast": false,
       "issues": [
         210
-      ]
-    },
-    {
-      "pr": 67,
-      "tittel": "Hent lagene parallelt",
-      "github": "FrodeBl",
-      "agent": "mini-frode",
-      "opprettet": "2026-09-23T07:59:18Z",
-      "oppdatert": "2026-09-23T13:22:35Z",
-      "utkast": false,
-      "issues": [
-        48
       ]
     },
     {
