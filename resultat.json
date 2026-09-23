@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:50:27",
+  "oppdatert": "2026-09-23T11:51:05",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -286,8 +286,8 @@
       "pr": 1,
       "utkast": 0,
       "merget": 1,
-      "kjoeringer": 2,
-      "utenPr": 1,
+      "kjoeringer": 4,
+      "utenPr": 3,
       "bygg": [],
       "estimert": false,
       "plass": 9
@@ -318,31 +318,6 @@
       "plass": 10
     },
     {
-      "navn": "mini-aud",
-      "github": "audmaha",
-      "poeng": 2,
-      "feil": [],
-      "lag": [],
-      "levert": [
-        {
-          "issue": 43,
-          "navn": "Statistikk",
-          "poeng": 2
-        }
-      ],
-      "dollar": 6.139,
-      "tokens": 10875517,
-      "sekunder": 2265,
-      "pr": 4,
-      "utkast": 0,
-      "merget": 1,
-      "kjoeringer": 7,
-      "utenPr": 3,
-      "bygg": [],
-      "estimert": false,
-      "plass": 11
-    },
-    {
       "navn": "mini-leif",
       "github": "leif-larsen",
       "poeng": 2,
@@ -363,6 +338,31 @@
       "merget": 1,
       "kjoeringer": 8,
       "utenPr": 2,
+      "bygg": [],
+      "estimert": false,
+      "plass": 11
+    },
+    {
+      "navn": "mini-aud",
+      "github": "audmaha",
+      "poeng": 2,
+      "feil": [],
+      "lag": [],
+      "levert": [
+        {
+          "issue": 43,
+          "navn": "Statistikk",
+          "poeng": 2
+        }
+      ],
+      "dollar": 7.54,
+      "tokens": 13809864,
+      "sekunder": 2846,
+      "pr": 4,
+      "utkast": 0,
+      "merget": 1,
+      "kjoeringer": 8,
+      "utenPr": 3,
       "bygg": [],
       "estimert": false,
       "plass": 12
@@ -547,11 +547,19 @@
   ],
   "kjoerer": [
     {
+      "agent": "mini-sindre",
+      "github": "sin-rha",
+      "issue": 55,
+      "navn": "Ytelse",
+      "startet": "2026-09-23T09:50:47.5507221+00:00",
+      "minutter": 0
+    },
+    {
       "agent": "henrik",
       "github": "monet820",
-      "issue": 130,
-      "navn": "",
-      "startet": "2026-09-23T09:50:01.9813722+00:00",
+      "issue": 116,
+      "navn": "Nytt lag: værstasjoner",
+      "startet": "2026-09-23T09:50:54.8729874+00:00",
       "minutter": 0
     }
   ],
@@ -608,7 +616,7 @@
       "issue": 13,
       "navn": "Nytt lag: veiarbeid og stengte veier",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T09:07:59Z"
+      "oppdatert": "2026-09-23T09:50:51Z"
     },
     {
       "issue": 14,
@@ -626,13 +634,13 @@
       "issue": 18,
       "navn": "Nytt lag: kulturminner",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T09:07:20Z"
+      "oppdatert": "2026-09-23T09:50:45Z"
     },
     {
       "issue": 19,
       "navn": "Nytt lag: artsobservasjoner",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T09:50:24Z"
+      "oppdatert": "2026-09-23T09:50:27Z"
     },
     {
       "issue": 21,
@@ -704,7 +712,7 @@
       "issue": 33,
       "navn": "Nytt lag: sykkelparkering",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T09:09:45Z"
+      "oppdatert": "2026-09-23T09:51:00Z"
     },
     {
       "issue": 39,
@@ -746,19 +754,19 @@
       "issue": 48,
       "navn": "Hent lagene parallelt",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T09:50:14Z"
+      "oppdatert": "2026-09-23T09:51:02Z"
     },
     {
       "issue": 50,
       "navn": "Mål hva som skjer",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T09:50:01Z"
+      "oppdatert": "2026-09-23T09:51:01Z"
     },
     {
       "issue": 51,
       "navn": "Strukturert logging",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T09:12:01Z"
+      "oppdatert": "2026-09-23T09:50:57Z"
     },
     {
       "issue": 52,
@@ -770,7 +778,7 @@
       "issue": 55,
       "navn": "Kartet blir tregt med mange punkter",
       "github": "sin-rha",
-      "oppdatert": "2026-09-23T09:50:03Z"
+      "oppdatert": "2026-09-23T09:50:48Z"
     },
     {
       "issue": 57,
@@ -821,10 +829,22 @@
       "oppdatert": "2026-09-23T09:46:54Z"
     },
     {
+      "issue": 114,
+      "navn": "Nytt lag: Kristiania i 1910",
+      "github": "monet820",
+      "oppdatert": "2026-09-23T09:50:55Z"
+    },
+    {
       "issue": 115,
       "navn": "Nytt lag: parker og torg",
       "github": "novanettor",
       "oppdatert": "2026-09-23T09:38:45Z"
+    },
+    {
+      "issue": 116,
+      "navn": "Nytt lag: værstasjoner",
+      "github": "monet820",
+      "oppdatert": "2026-09-23T09:50:55Z"
     },
     {
       "issue": 117,
@@ -900,6 +920,18 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 91,
+      "tittel": "Fargene må virke for alle",
+      "github": "audmaha",
+      "agent": "mini-aud",
+      "opprettet": "2026-09-23T08:42:14Z",
+      "oppdatert": "2026-09-23T09:50:27Z",
+      "utkast": false,
+      "issues": [
+        41
+      ]
+    },
     {
       "pr": 136,
       "tittel": "[WIP] Add pulsing effect for new points on map",
@@ -1018,18 +1050,6 @@
       "utkast": false,
       "issues": [
         3
-      ]
-    },
-    {
-      "pr": 91,
-      "tittel": "Fargene må virke for alle",
-      "github": "audmaha",
-      "agent": "mini-aud",
-      "opprettet": "2026-09-23T08:42:14Z",
-      "oppdatert": "2026-09-23T09:39:11Z",
-      "utkast": false,
-      "issues": [
-        41
       ]
     },
     {
