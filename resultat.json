@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:54:55",
+  "oppdatert": "2026-09-23T11:55:34",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -257,12 +257,12 @@
       ],
       "dollar": 15.08,
       "tokens": 27825920,
-      "sekunder": 4775,
+      "sekunder": 4776,
       "pr": 5,
       "utkast": 0,
       "merget": 2,
-      "kjoeringer": 13,
-      "utenPr": 8,
+      "kjoeringer": 14,
+      "utenPr": 9,
       "bygg": [],
       "estimert": false,
       "plass": 8
@@ -545,16 +545,7 @@
       "plass": 21
     }
   ],
-  "kjoerer": [
-    {
-      "agent": "mini-wilma",
-      "github": "larsajakobsen",
-      "issue": 120,
-      "navn": "Vis endringen per lag i lagvelgeren",
-      "startet": "2026-09-23T09:54:30.8861702+00:00",
-      "minutter": 0
-    }
-  ],
+  "kjoerer": [],
   "main": {
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
@@ -866,7 +857,7 @@
       "issue": 120,
       "navn": "Vis endringen per lag i lagvelgeren",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T09:54:31Z"
+      "oppdatert": "2026-09-23T09:55:17Z"
     },
     {
       "issue": 121,
