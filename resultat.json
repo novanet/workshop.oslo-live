@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:24:01",
+  "oppdatert": "2026-09-23T10:24:27",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -243,7 +243,7 @@
       "issue": 17,
       "navn": "Smilefjes",
       "startet": "2026-09-23T08:10:01.588657+00:00",
-      "minutter": 13
+      "minutter": 14
     },
     {
       "agent": "mini-frode",
@@ -251,7 +251,7 @@
       "issue": 19,
       "navn": "Artsobservasjoner",
       "startet": "2026-09-23T08:14:02.4941234+00:00",
-      "minutter": 9
+      "minutter": 10
     },
     {
       "agent": "mini-ingve",
@@ -259,7 +259,7 @@
       "issue": 49,
       "navn": "Nytt forsøk",
       "startet": "2026-09-23T08:16:16.8577675+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "mini-knive",
@@ -283,7 +283,7 @@
       "issue": 2,
       "navn": "Utsnittet",
       "startet": "2026-09-23T08:21:26.6777013+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-jon",
@@ -291,7 +291,7 @@
       "issue": 20,
       "navn": "Luftvarsel",
       "startet": "2026-09-23T08:22:06.0655338+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-kirsten",
@@ -299,7 +299,7 @@
       "issue": 45,
       "navn": "Varsler",
       "startet": "2026-09-23T08:22:20.0747631+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-wilma",
@@ -315,6 +315,22 @@
       "issue": 29,
       "navn": "Museer",
       "startet": "2026-09-23T08:23:16.9053574+00:00",
+      "minutter": 1
+    },
+    {
+      "agent": "mini-sindre",
+      "github": "sin-rha",
+      "issue": 55,
+      "navn": "Ytelse",
+      "startet": "2026-09-23T08:24:11.6549987+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-wilma",
+      "github": "larsajakobsen",
+      "issue": 3,
+      "navn": "Mellomlageret",
+      "startet": "2026-09-23T08:24:21.5164398+00:00",
       "minutter": 0
     }
   ],
@@ -370,8 +386,14 @@
     {
       "issue": 3,
       "navn": "Kartet oppdaterer seg ikke, dataene står stille",
+      "github": "larsajakobsen",
+      "oppdatert": "2026-09-23T08:24:22Z"
+    },
+    {
+      "issue": 3,
+      "navn": "Kartet oppdaterer seg ikke, dataene står stille",
       "github": "randsu",
-      "oppdatert": "2026-09-23T08:20:05Z"
+      "oppdatert": "2026-09-23T08:24:22Z"
     },
     {
       "issue": 4,
@@ -488,6 +510,12 @@
       "oppdatert": "2026-09-23T08:15:25Z"
     },
     {
+      "issue": 55,
+      "navn": "Kartet blir tregt med mange punkter",
+      "github": "sin-rha",
+      "oppdatert": "2026-09-23T08:24:12Z"
+    },
+    {
       "issue": 56,
       "navn": "Nytt lag: fly i lufta over Oslo",
       "github": "randsu",
@@ -514,6 +542,18 @@
   ],
   "aapne": [
     {
+      "pr": 69,
+      "tittel": "#56: Nytt lag: fly i lufta over Oslo",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:10:46Z",
+      "oppdatert": "2026-09-23T08:24:07Z",
+      "utkast": false,
+      "issues": [
+        56
+      ]
+    },
+    {
       "pr": 75,
       "tittel": "Alle punkter havner i havet, langt utenfor Norge",
       "github": "larsajakobsen",
@@ -523,18 +563,6 @@
       "utkast": false,
       "issues": [
         1
-      ]
-    },
-    {
-      "pr": 69,
-      "tittel": "#56: Nytt lag: fly i lufta over Oslo",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:10:46Z",
-      "oppdatert": "2026-09-23T08:23:02Z",
-      "utkast": false,
-      "issues": [
-        56
       ]
     },
     {
