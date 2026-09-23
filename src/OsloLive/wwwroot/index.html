@@ -696,7 +696,7 @@ function visPopup(lag, p) {
     .setLngLat([p.lon, p.lat]).setHTML(popup(p.egenskaper)).addTo(kart);
   boble.on('close', () => { if (aapenPopup?.boble === boble) aapenPopup = null; });
   aapenPopup = { boble, lag, id: p.id };
-  sikreSynligPopup(boble);
+  window.sikreSynligPopup?.(boble);
 }
 
 /** Lukker popupen. Med lag oppgitt: bare hvis den hører til det laget. */
@@ -1440,24 +1440,6 @@ panelHeader.addEventListener('click', () => {
   settPanelApen(!hovedpanel.classList.contains('apen'));
 });
 
-/** Lukker panelet og flytter kartet slik at en nyåpnet popup ikke havner bak det, på mobil. */
-function sikreSynligPopup(boble) {
-  if (!erMobil()) return;
-  settPanelApen(false);
-  const flytt = () => {
-    requestAnimationFrame(() => {
-      if (!boble.isOpen()) return;
-      const el = boble.getElement();
-      if (!el) return;
-      const boks = el.getBoundingClientRect();
-      const grense = window.innerHeight - hovedpanel.offsetHeight - 12;
-      const overheng = boks.bottom - grense;
-      if (overheng > 0) kart.panBy([0, overheng], { duration: 300 });
-    });
-  };
-  if (kart.isMoving()) kart.once('moveend', flytt); else flytt();
-}
-
 // ---------------------------------------------------------------------------
 // Kamera
 // ---------------------------------------------------------------------------
@@ -1764,5 +1746,6 @@ demoKnapp.addEventListener('click', () => { demo.på ? stoppDemo() : startDemo()
 </script>
 <script src="effekter/lyd.js" defer></script>
 <script src="effekter/sollys.js" defer></script>
+<script src="effekter/popup-synlig.js" defer></script>
 </body>
 </html>
