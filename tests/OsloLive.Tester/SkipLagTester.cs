@@ -212,6 +212,32 @@ public class SkipLagTester
         Assert.Equal(0, SkipLag.UtledKurs(rad));
     }
 
+    // Rader fanget fra ais/find_vessels_nearby (lat=59.9139, lon=10.7522, radius_km=20)
+    // 23. september 2026, uendret bortsett fra utelatte felt. Feltene i svaret er:
+    // avstand_km, destinasjon, fart_knop, imo, kallesignal, kurs, lat, lon, navn,
+    // sist_oppdatert, skipstype, vessel_id. Ingen heading; retningen heter «kurs».
+    [Fact]
+    public void Ekte_rad_fra_kilden_i_fart_gir_kurs_fra_feltet_kurs()
+    {
+        var punkt = SkipLag.TilPunkt(Rad("""
+            { "vessel_id": 259004190, "navn": "OSLOFJORD V", "lat": 59.9045, "lon": 10.729802, "fart_knop": 7.8, "kurs": 177.5, "destinasjon": "NOOSL", "kallesignal": "LGWD", "skipstype": "Passenger" }
+            """));
+
+        Assert.NotNull(punkt);
+        Assert.Equal(178, punkt!.Properties["kurs"]);
+    }
+
+    [Fact]
+    public void Ekte_rad_fra_kilden_som_ligger_stille_bruker_kurs_fordi_kilden_ikke_har_heading()
+    {
+        var punkt = SkipLag.TilPunkt(Rad("""
+            { "vessel_id": 257395400, "navn": "FJORD HARMONY", "lat": 59.905833, "lon": 10.753165, "fart_knop": 0, "kurs": 10, "destinasjon": null, "kallesignal": "LG5556", "skipstype": "Passenger" }
+            """));
+
+        Assert.NotNull(punkt);
+        Assert.Equal(10, punkt!.Properties["kurs"]);
+    }
+
     [Fact]
     public void Radiusen_dekker_Nesodden()
     {
