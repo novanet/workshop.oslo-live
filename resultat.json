@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:21:50",
+  "oppdatert": "2026-09-23T10:22:16",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -103,25 +103,6 @@
       "plass": 4
     },
     {
-      "navn": "mini-sindre",
-      "github": "sin-rha",
-      "poeng": 0,
-      "feil": [],
-      "lag": [],
-      "levert": [],
-      "dollar": 0.235,
-      "tokens": 226801,
-      "sekunder": 79,
-      "pr": 0,
-      "utkast": 0,
-      "merget": 0,
-      "kjoeringer": 1,
-      "utenPr": 1,
-      "bygg": [],
-      "estimert": false,
-      "plass": 5
-    },
-    {
       "navn": "henrik",
       "github": "monet820",
       "poeng": 0,
@@ -138,26 +119,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 6
-    },
-    {
-      "navn": "mini-wilma",
-      "github": "larsajakobsen",
-      "poeng": 0,
-      "feil": [],
-      "lag": [],
-      "levert": [],
-      "dollar": 0.48,
-      "tokens": 812565,
-      "sekunder": 164,
-      "pr": 1,
-      "utkast": 0,
-      "merget": 0,
-      "kjoeringer": 1,
-      "utenPr": 0,
-      "bygg": [],
-      "estimert": false,
-      "plass": 7
+      "plass": 5
     },
     {
       "navn": "mini-jon",
@@ -173,6 +135,44 @@
       "utkast": 0,
       "merget": 0,
       "kjoeringer": 1,
+      "utenPr": 1,
+      "bygg": [],
+      "estimert": false,
+      "plass": 6
+    },
+    {
+      "navn": "mini-wilma",
+      "github": "larsajakobsen",
+      "poeng": 0,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 0.883,
+      "tokens": 1545863,
+      "sekunder": 316,
+      "pr": 1,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 2,
+      "utenPr": 1,
+      "bygg": [],
+      "estimert": false,
+      "plass": 7
+    },
+    {
+      "navn": "mini-sindre",
+      "github": "sin-rha",
+      "poeng": 0,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 1.061,
+      "tokens": 1938133,
+      "sekunder": 387,
+      "pr": 1,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 2,
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
@@ -243,7 +243,7 @@
       "issue": 17,
       "navn": "Smilefjes",
       "startet": "2026-09-23T08:10:01.588657+00:00",
-      "minutter": 11
+      "minutter": 12
     },
     {
       "agent": "mini-frode",
@@ -251,7 +251,7 @@
       "issue": 19,
       "navn": "Artsobservasjoner",
       "startet": "2026-09-23T08:14:02.4941234+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "mini-ingve",
@@ -259,14 +259,6 @@
       "issue": 49,
       "navn": "Nytt forsøk",
       "startet": "2026-09-23T08:16:16.8577675+00:00",
-      "minutter": 5
-    },
-    {
-      "agent": "mini-sindre",
-      "github": "sin-rha",
-      "issue": 59,
-      "navn": "",
-      "startet": "2026-09-23T08:16:21.5736896+00:00",
       "minutter": 5
     },
     {
@@ -288,18 +280,10 @@
     {
       "agent": "mini-wilma",
       "github": "larsajakobsen",
-      "issue": 5,
-      "navn": "Norsk tallformat",
-      "startet": "2026-09-23T08:19:23.3216436+00:00",
-      "minutter": 2
-    },
-    {
-      "agent": "mini-wilma",
-      "github": "larsajakobsen",
       "issue": 1,
       "navn": "Koordinatrekkefølge",
       "startet": "2026-09-23T08:20:01.4612094+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-wilma",
@@ -307,6 +291,14 @@
       "issue": 2,
       "navn": "Utsnittet",
       "startet": "2026-09-23T08:21:26.6777013+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-jon",
+      "github": "yonzo",
+      "issue": 20,
+      "navn": "Luftvarsel",
+      "startet": "2026-09-23T08:22:06.0655338+00:00",
       "minutter": 0
     }
   ],
@@ -381,13 +373,13 @@
       "issue": 5,
       "navn": "Tall i URL-ene får norsk desimalkomma",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T08:19:24Z"
+      "oppdatert": "2026-09-23T08:22:04Z"
     },
     {
       "issue": 5,
       "navn": "Tall i URL-ene får norsk desimalkomma",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T08:19:24Z"
+      "oppdatert": "2026-09-23T08:22:04Z"
     },
     {
       "issue": 7,
@@ -412,6 +404,12 @@
       "navn": "Nytt lag: artsobservasjoner",
       "github": "FrodeBl",
       "oppdatert": "2026-09-23T08:14:03Z"
+    },
+    {
+      "issue": 20,
+      "navn": "Vis varselet for luftkvalitet, ikke bare målingen",
+      "github": "yonzo",
+      "oppdatert": "2026-09-23T08:22:06Z"
     },
     {
       "issue": 21,
@@ -477,10 +475,22 @@
       "issue": 59,
       "navn": "Overlapping boxes",
       "github": "sin-rha",
-      "oppdatert": "2026-09-23T08:16:22Z"
+      "oppdatert": "2026-09-23T08:21:50Z"
     }
   ],
   "aapne": [
+    {
+      "pr": 74,
+      "tittel": "Overlapping boxes",
+      "github": "sin-rha",
+      "agent": "mini-sindre",
+      "opprettet": "2026-09-23T08:21:48Z",
+      "oppdatert": "2026-09-23T08:21:49Z",
+      "utkast": false,
+      "issues": [
+        59
+      ]
+    },
     {
       "pr": 65,
       "tittel": "#11: Nytt lag: kollektivtrafikk som beveger seg",
