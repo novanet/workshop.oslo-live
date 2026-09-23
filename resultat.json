@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T15:08:21",
+  "oppdatert": "2026-09-23T15:09:34",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -670,7 +670,7 @@
       "issue": 13,
       "navn": "Veiarbeid",
       "startet": "2026-09-23T13:02:49.243038+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-johan",
@@ -678,7 +678,7 @@
       "issue": 16,
       "navn": "Ladestasjoner",
       "startet": "2026-09-23T13:02:49.4778489+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-wilma",
@@ -686,7 +686,7 @@
       "issue": 204,
       "navn": "Lagraden sprenger panelet når navnet er langt",
       "startet": "2026-09-23T13:03:40.229746+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-knive",
@@ -694,7 +694,7 @@
       "issue": 195,
       "navn": "Nytt lag: avvik i kollektivtrafikken",
       "startet": "2026-09-23T13:04:43.4543256+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-ingve",
@@ -702,7 +702,7 @@
       "issue": 11,
       "navn": "Kollektiv",
       "startet": "2026-09-23T13:05:41.9082982+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-frode",
@@ -718,6 +718,22 @@
       "issue": 18,
       "navn": "Kulturminner",
       "startet": "2026-09-23T13:08:06.7329467+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-gir",
+      "github": "GIR75",
+      "issue": 13,
+      "navn": "Veiarbeid",
+      "startet": "2026-09-23T13:08:14.600688+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-jon",
+      "github": "yonzo",
+      "issue": 189,
+      "navn": "Travlere enn vanlig på veiene",
+      "startet": "2026-09-23T13:08:36.0345655+00:00",
       "minutter": 0
     }
   ],
@@ -796,7 +812,7 @@
       "issue": 21,
       "navn": "Søk etter adresse og hopp dit på kartet",
       "github": "leif-larsen",
-      "oppdatert": "2026-09-23T12:55:22Z"
+      "oppdatert": "2026-09-23T13:08:41Z"
     },
     {
       "issue": 26,
@@ -1114,7 +1130,7 @@
       "issue": 189,
       "navn": "Travlere enn vanlig på veiene",
       "github": "yonzo",
-      "oppdatert": "2026-09-23T13:07:59Z"
+      "oppdatert": "2026-09-23T13:08:36Z"
     },
     {
       "issue": 190,
@@ -1208,6 +1224,18 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 226,
+      "tittel": "Popupene viser rådata: ISO-tider, «ikon: 😊» og tall uten enhet",
+      "github": "larsajakobsen",
+      "agent": "mini-wilma",
+      "opprettet": "2026-09-23T12:38:36Z",
+      "oppdatert": "2026-09-23T13:08:27Z",
+      "utkast": false,
+      "issues": [
+        206
+      ]
+    },
     {
       "pr": 222,
       "tittel": "Havet stiger: hva havner under vann? (#133)",
@@ -1482,18 +1510,6 @@
       "utkast": false,
       "issues": [
         33
-      ]
-    },
-    {
-      "pr": 226,
-      "tittel": "Popupene viser rådata: ISO-tider, «ikon: 😊» og tall uten enhet",
-      "github": "larsajakobsen",
-      "agent": "mini-wilma",
-      "opprettet": "2026-09-23T12:38:36Z",
-      "oppdatert": "2026-09-23T12:43:35Z",
-      "utkast": false,
-      "issues": [
-        206
       ]
     },
     {
