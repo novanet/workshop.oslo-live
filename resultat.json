@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T12:00:31",
+  "oppdatert": "2026-09-23T12:01:10",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -514,8 +514,8 @@
       "pr": 3,
       "utkast": 0,
       "merget": 0,
-      "kjoeringer": 14,
-      "utenPr": 10,
+      "kjoeringer": 15,
+      "utenPr": 11,
       "bygg": [],
       "estimert": false,
       "plass": 20
@@ -540,16 +540,7 @@
       "plass": 21
     }
   ],
-  "kjoerer": [
-    {
-      "agent": "mini-frode",
-      "github": "FrodeBl",
-      "issue": 19,
-      "navn": "Artsobservasjoner",
-      "startet": "2026-09-23T10:00:22.3571057+00:00",
-      "minutter": 0
-    }
-  ],
+  "kjoerer": [],
   "main": {
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
@@ -626,7 +617,7 @@
       "issue": 19,
       "navn": "Nytt lag: artsobservasjoner",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T10:00:23Z"
+      "oppdatert": "2026-09-23T10:00:46Z"
     },
     {
       "issue": 21,
@@ -824,7 +815,7 @@
       "issue": 115,
       "navn": "Nytt lag: parker og torg",
       "github": "novanettor",
-      "oppdatert": "2026-09-23T09:56:25Z"
+      "oppdatert": "2026-09-23T10:01:00Z"
     },
     {
       "issue": 116,
@@ -913,6 +904,18 @@
   ],
   "aapne": [
     {
+      "pr": 136,
+      "tittel": "[WIP] Add pulsing effect for new points on map",
+      "github": "app/copilot-swe-agent",
+      "agent": "app/copilot-swe-agent",
+      "opprettet": "2026-09-23T09:44:20Z",
+      "oppdatert": "2026-09-23T10:00:49Z",
+      "utkast": false,
+      "issues": [
+        117
+      ]
+    },
+    {
       "pr": 73,
       "tittel": "Vær grei mot kildene (#54)",
       "github": "Puiu",
@@ -958,18 +961,6 @@
       "utkast": false,
       "issues": [
         41
-      ]
-    },
-    {
-      "pr": 136,
-      "tittel": "[WIP] Add pulsing effect for new points on map",
-      "github": "app/copilot-swe-agent",
-      "agent": "app/copilot-swe-agent",
-      "opprettet": "2026-09-23T09:44:20Z",
-      "oppdatert": "2026-09-23T09:47:30Z",
-      "utkast": false,
-      "issues": [
-        117
       ]
     },
     {
