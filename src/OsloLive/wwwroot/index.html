@@ -292,7 +292,7 @@ async function hent(id) {
       const el = document.createElement('div');
       el.className = 'merke';
       el.style.background = oppf.farge;
-      el.textContent = oppf.ikon;
+      el.textContent = f.properties?.ikon ?? oppf.ikon;
 
       const m = new maplibregl.Marker({ element: el })
         .setLngLat([c[0], c[1]])
