@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:16:48",
+  "oppdatert": "2026-09-23T11:17:16",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -250,13 +250,13 @@
       ],
       "lag": [],
       "levert": [],
-      "dollar": 5.132,
-      "tokens": 11742562,
-      "sekunder": 1554,
+      "dollar": 5.628,
+      "tokens": 13210180,
+      "sekunder": 1774,
       "pr": 3,
       "utkast": 0,
       "merget": 1,
-      "kjoeringer": 5,
+      "kjoeringer": 6,
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
@@ -452,27 +452,27 @@
       "minutter": 4
     },
     {
-      "agent": "mini-leif",
-      "github": "leif-larsen",
-      "issue": 72,
-      "navn": "",
-      "startet": "2026-09-23T09:12:59.4083914+00:00",
-      "minutter": 3
-    },
-    {
       "agent": "mini-wilma",
       "github": "larsajakobsen",
       "issue": 27,
       "navn": "Verneområder",
       "startet": "2026-09-23T09:15:32.8062504+00:00",
       "minutter": 1
+    },
+    {
+      "agent": "helstein",
+      "github": "nilsgs",
+      "issue": 15,
+      "navn": "Spisesteder",
+      "startet": "2026-09-23T09:16:56.867472+00:00",
+      "minutter": 0
     }
   ],
   "main": {
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
     "pr": null,
-    "kjoeringer": 31
+    "kjoeringer": 32
   },
   "produkt": {
     "testerBestatt": 14,
@@ -615,13 +615,13 @@
       "issue": 15,
       "navn": "Nytt lag: spisesteder",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T09:16:17Z"
+      "oppdatert": "2026-09-23T09:16:57Z"
     },
     {
       "issue": 15,
       "navn": "Nytt lag: spisesteder",
       "github": "nilsgs",
-      "oppdatert": "2026-09-23T09:16:17Z"
+      "oppdatert": "2026-09-23T09:16:57Z"
     },
     {
       "issue": 16,
@@ -902,6 +902,18 @@
   ],
   "aapne": [
     {
+      "pr": 72,
+      "tittel": "Søk etter adresse og hopp dit på kartet (#21)",
+      "github": "leif-larsen",
+      "agent": "mini-leif",
+      "opprettet": "2026-09-23T08:12:16Z",
+      "oppdatert": "2026-09-23T09:16:57Z",
+      "utkast": false,
+      "issues": [
+        21
+      ]
+    },
+    {
       "pr": 65,
       "tittel": "#11: Nytt lag: kollektivtrafikk som beveger seg",
       "github": "coffeelyfe",
@@ -923,18 +935,6 @@
       "utkast": false,
       "issues": [
         34
-      ]
-    },
-    {
-      "pr": 72,
-      "tittel": "Søk etter adresse og hopp dit på kartet (#21)",
-      "github": "leif-larsen",
-      "agent": "mini-leif",
-      "opprettet": "2026-09-23T08:12:16Z",
-      "oppdatert": "2026-09-23T09:13:00Z",
-      "utkast": false,
-      "issues": [
-        21
       ]
     },
     {
