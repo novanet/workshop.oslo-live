@@ -93,6 +93,13 @@
   }
   .merke:hover { transform: scale(1.32); }
 
+  /* Varsel: blinker minst 3 ganger når en regel slår til første gang for et punkt. */
+  @keyframes varsel-blink {
+    0%, 100% { opacity: 1; box-shadow: 0 2px 5px rgba(0,0,0,.3); }
+    50% { opacity: .2; box-shadow: 0 0 14px 4px rgba(185,28,28,.9); }
+  }
+  .merke.blink { animation: varsel-blink .5s ease-in-out 3; }
+
   .maplibregl-popup-content {
     background: #fff; color: var(--tekst);
     border: 1.5px solid var(--kant); border-radius: 10px;
@@ -126,9 +133,11 @@
     #hovedpanel .handtak { width: 36px; height: 5px; border-radius: 3px; background: #d1d5db; flex: none; }
     #hovedpanel h1 { font-size: 16px; margin: 0; }
     #hovedpanel .under { display: none; }
+    #hovedpanel .varsler { display: none; }
     #hovedpanel #lagliste { display: none; overflow-y: auto; flex: 1; min-height: 0; }
     #hovedpanel .bunn { display: none; flex: none; }
     #hovedpanel.apen .under { display: block; }
+    #hovedpanel.apen .varsler { display: block; }
     #hovedpanel.apen .bunn { display: flex; }
     #hovedpanel.apen #lagliste { display: block; }
 
@@ -157,6 +166,15 @@
   .bydeler li { display: flex; justify-content: space-between; padding: 4px 2px; font-size: 13px; }
   .bydeler li .antall { font-variant-numeric: tabular-nums; color: var(--dempet); }
 
+  .varsler { margin-bottom: 12px; }
+  .varsler h2 { margin: 0 0 6px; font-size: 13px; }
+  .varsler ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+  .varsel { display: flex; gap: 8px; align-items: center; padding: 6px 8px; border: 1px solid #e5e7eb; border-radius: 7px; background: #fff7ed; }
+  .varsel .ikon { width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid #111; display: grid; place-items: center; font-size: 12px; flex: none; }
+  .varsel .tekst { flex: 1; font-size: 12px; line-height: 1.35; min-width: 0; }
+  .varsel .tekst small { display: block; color: var(--dempet); }
+  .varsel .lukk { border: 0; background: none; font-size: 16px; cursor: pointer; color: var(--dempet); flex: none; }
+
   .panel.omrade { top: auto; left: 16px; bottom: 24px; width: 240px; }
   .omrade h2 { margin: 0 0 8px; font-size: 16px; }
   .omrade .rad { display: flex; justify-content: space-between; font-size: 13px; padding: 3px 2px; }
@@ -172,6 +190,10 @@
     <h1>Oslo Live</h1>
   </div>
   <p class="under">Levende data fra Allemannsdata</p>
+  <div class="varsler" id="varsler" hidden>
+    <h2>Varsler</h2>
+    <ol id="varsel-liste" aria-live="polite"></ol>
+  </div>
   <div id="lagliste"><p class="tom">Laster lag …</p></div>
   <div class="bydeler">
     <div class="topp"><h2>Flest punkter per bydel</h2><select id="bydel-lag" aria-label="Velg lag"></select></div>
@@ -443,6 +465,78 @@ function varmekart(id, features) {
   });
 }
 
+// ---------------------------------------------------------------------------
+// Varsler: regler som kjører på dataene fra vanlig henting, uten egne kall.
+// Hver regel er én funksjon som tar et punkts egenskaper og gir true/false.
+// ---------------------------------------------------------------------------
+function luftErDaarlig(p) {
+  const rangering = ['Lite', 'Moderat', 'Mye', 'Svært mye'];
+  return rangering.indexOf(p['nivå']) >= rangering.indexOf('Mye');
+}
+
+function hendelseErAlvorlig(p) {
+  const alvorlighet = String(p['alvorlighet'] ?? '').toLowerCase();
+  return alvorlighet.includes('høy') || alvorlighet.includes('alvorlig');
+}
+
+function veiErStengt(p) {
+  const tekst = `${p['type'] ?? ''} ${p['beskrivelse'] ?? ''}`.toLowerCase();
+  return /steng/.test(tekst);
+}
+
+/** Én regel per lag: hvilket lag den gjelder for, sjekken selv og teksten som forklarer varselet. */
+const VARSELREGLER = [
+  { lag: 'luftkvalitet', id: 'luft-daarlig', regel: luftErDaarlig, tekst: (p) => `luftkvaliteten er ${p['nivå']}` },
+  { lag: 'hendelser', id: 'hendelse-alvorlig', regel: hendelseErAlvorlig, tekst: () => 'en alvorlig hendelse' },
+  { lag: 'veiarbeid', id: 'vei-stengt', regel: veiErStengt, tekst: () => 'veien er stengt' },
+];
+
+const MAKS_VARSLER = 10;
+
+const varselOppfylt = new Set();   // nøkler (lag|punkt-id|regel-id) som er oppfylt akkurat nå, for å ikke varsle på nytt
+const varselLukket = new Set();    // nøkler brukeren har lukket; kommer ikke tilbake så lenge siden er åpen
+
+/** Kjører reglene for laget mot ett punkt, og varsler ved nye brudd. */
+function sjekkVarsler(lagId, oppf, p, el) {
+  for (const r of VARSELREGLER) {
+    if (r.lag !== lagId) continue;
+
+    const nøkkel = `${lagId}|${p.id}|${r.id}`;
+    if (!r.regel(p)) { varselOppfylt.delete(nøkkel); continue; }
+    if (varselOppfylt.has(nøkkel)) continue;   // fortsatt oppfylt siden forrige henting: ingen ny melding
+
+    varselOppfylt.add(nøkkel);
+    if (varselLukket.has(nøkkel)) continue;    // lukket av brukeren denne økten
+
+    el.classList.add('blink');
+    leggTilVarsel(nøkkel, oppf.ikon, p.navn ?? 'Uten navn', r.tekst(p));
+  }
+}
+
+function leggTilVarsel(nøkkel, ikon, navn, hva) {
+  const seksjon = document.getElementById('varsler');
+  const liste = document.getElementById('varsel-liste');
+
+  const rad = document.createElement('li');
+  rad.className = 'varsel';
+  rad.innerHTML =
+    `<span class="ikon">${ikon}</span>` +
+    `<span class="tekst"><b></b><small></small></span>` +
+    `<button type="button" class="lukk" aria-label="Lukk varsel">×</button>`;
+  rad.querySelector('b').textContent = navn;         // navn kommer fra eksterne kilder
+  rad.querySelector('small').textContent = hva;      // hva kan inneholde verdier fra eksterne kilder
+
+  rad.querySelector('.lukk').addEventListener('click', () => {
+    varselLukket.add(nøkkel);
+    rad.remove();
+    seksjon.hidden = !liste.childElementCount;
+  });
+
+  liste.insertBefore(rad, liste.firstChild);
+  while (liste.childElementCount > MAKS_VARSLER) liste.removeChild(liste.lastChild);
+  seksjon.hidden = false;
+}
+
 async function hent(id) {
   const oppf = lagene.get(id);
   const teller = document.getElementById('antall-' + id);
@@ -465,6 +559,8 @@ async function hent(id) {
       el.className = 'merke';
       el.style.background = p.advarsel ? '#b91c1c' : oppf.farge;
       el.textContent = p.advarsel ? '⚠️' : (p.ikon ?? oppf.ikon);
+
+      sjekkVarsler(id, oppf, p, el);
 
       const boble = new maplibregl.Popup({ offset: 18, closeButton: true }).setHTML(popup(p));
       boble.on('open', () => sikreSynligPopup(boble));
