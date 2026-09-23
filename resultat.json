@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:08:52",
+  "oppdatert": "2026-09-23T11:09:19",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -439,7 +439,7 @@
       "issue": 11,
       "navn": "Kollektiv",
       "startet": "2026-09-23T09:04:10.6494291+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-gir",
@@ -447,7 +447,7 @@
       "issue": 51,
       "navn": "Logging",
       "startet": "2026-09-23T09:06:55.8322066+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-gir",
@@ -455,7 +455,7 @@
       "issue": 33,
       "navn": "Sykkelparkering",
       "startet": "2026-09-23T09:06:56.2114677+00:00",
-      "minutter": 1
+      "minutter": 2
     }
   ],
   "main": {
@@ -886,6 +886,54 @@
   ],
   "aapne": [
     {
+      "pr": 104,
+      "tittel": "#25: Ta vare på et øyeblikksbilde hver time",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:58:22Z",
+      "oppdatert": "2026-09-23T09:09:10Z",
+      "utkast": false,
+      "issues": [
+        25
+      ]
+    },
+    {
+      "pr": 107,
+      "tittel": "Tastatursnarveier",
+      "github": "audmaha",
+      "agent": "mini-aud",
+      "opprettet": "2026-09-23T09:00:42Z",
+      "oppdatert": "2026-09-23T09:09:02Z",
+      "utkast": false,
+      "issues": [
+        39
+      ]
+    },
+    {
+      "pr": 103,
+      "tittel": "#24: Tell punkter per bydel",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:56:50Z",
+      "oppdatert": "2026-09-23T09:09:00Z",
+      "utkast": false,
+      "issues": [
+        24
+      ]
+    },
+    {
+      "pr": 96,
+      "tittel": "#22: Slå sammen punkter som ligger oppå hverandre",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:46:40Z",
+      "oppdatert": "2026-09-23T09:08:47Z",
+      "utkast": false,
+      "issues": [
+        22
+      ]
+    },
+    {
       "pr": 101,
       "tittel": "#34: Skru tiden tilbake med en tidslinje",
       "github": "randsu",
@@ -982,18 +1030,6 @@
       ]
     },
     {
-      "pr": 104,
-      "tittel": "#25: Ta vare på et øyeblikksbilde hver time",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:58:22Z",
-      "oppdatert": "2026-09-23T09:08:03Z",
-      "utkast": false,
-      "issues": [
-        25
-      ]
-    },
-    {
       "pr": 102,
       "tittel": "Gjør kartutsnittet konfigurerbart",
       "github": "jthagesk",
@@ -1030,18 +1066,6 @@
       ]
     },
     {
-      "pr": 103,
-      "tittel": "#24: Tell punkter per bydel",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:56:50Z",
-      "oppdatert": "2026-09-23T09:07:07Z",
-      "utkast": false,
-      "issues": [
-        24
-      ]
-    },
-    {
       "pr": 79,
       "tittel": "Kartet blir tregt med mange punkter",
       "github": "sin-rha",
@@ -1063,18 +1087,6 @@
       "utkast": false,
       "issues": [
         47
-      ]
-    },
-    {
-      "pr": 107,
-      "tittel": "Tastatursnarveier",
-      "github": "audmaha",
-      "agent": "mini-aud",
-      "opprettet": "2026-09-23T09:00:42Z",
-      "oppdatert": "2026-09-23T09:00:43Z",
-      "utkast": false,
-      "issues": [
-        39
       ]
     },
     {
@@ -1123,18 +1135,6 @@
       "utkast": false,
       "issues": [
         57
-      ]
-    },
-    {
-      "pr": 96,
-      "tittel": "#22: Slå sammen punkter som ligger oppå hverandre",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:46:40Z",
-      "oppdatert": "2026-09-23T08:52:01Z",
-      "utkast": false,
-      "issues": [
-        22
       ]
     },
     {
