@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:26:45",
+  "oppdatert": "2026-09-23T10:27:11",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -249,7 +249,7 @@
       "issue": 17,
       "navn": "Smilefjes",
       "startet": "2026-09-23T08:10:01.588657+00:00",
-      "minutter": 16
+      "minutter": 17
     },
     {
       "agent": "mini-ingve",
@@ -273,7 +273,7 @@
       "issue": 20,
       "navn": "Luftvarsel",
       "startet": "2026-09-23T08:22:06.0655338+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-kirsten",
@@ -289,7 +289,7 @@
       "issue": 8,
       "navn": "Hendelser",
       "startet": "2026-09-23T08:22:51.9896553+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-kirsten",
@@ -321,6 +321,14 @@
       "issue": 48,
       "navn": "Parallell henting",
       "startet": "2026-09-23T08:26:31.7269134+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-richard",
+      "github": "randsu",
+      "issue": 6,
+      "navn": "Delt mobilitet",
+      "startet": "2026-09-23T08:26:52.0303298+00:00",
       "minutter": 0
     }
   ],
@@ -409,6 +417,12 @@
       "navn": "Tall i URL-ene får norsk desimalkomma",
       "github": "larsajakobsen",
       "oppdatert": "2026-09-23T08:22:04Z"
+    },
+    {
+      "issue": 6,
+      "navn": "Nytt lag: elsparkesykler og bysykler",
+      "github": "randsu",
+      "oppdatert": "2026-09-23T08:26:52Z"
     },
     {
       "issue": 7,
