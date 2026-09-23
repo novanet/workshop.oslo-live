@@ -27,6 +27,7 @@ Prinsipp: kartet er en liste med lag. `ILag → Kartlag (GeoJSON) → MapLibre`.
 |---|---|
 | `GET /api/lag` | `[{ id, navn, beskrivelse, ikon }]` |
 | `GET /api/lag/{id}` | `Kartlag` som GeoJSON `FeatureCollection`. 404 ved ukjent id. 502 `{ feil }` hvis laget kaster; de andre lagene påvirkes ikke. |
+| `GET /api/stroempris` | Strømprisen i Oslo (NO1) i dag: `{ naa, billigst: { time, pris }, dyrest: { time, pris }, timer: [{ time, pris }, …] }`, øre/kWh inkl. mva. 502 `{ feil }` hvis kilden svikter. |
 | `GET /api/helse` | `{ status: "ok", tid }` |
 
 Frontenden henter `/api/lag` ved oppstart og hvert lag hvert 15. sekund. Et lag som svarer 502 markeres rødt i lagvelgeren.
