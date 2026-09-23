@@ -139,6 +139,84 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
     }
 
     [Fact]
+    public async Task Lagoversikten_har_bysykkelstasjonslaget()
+    {
+        var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
+
+        var stasjoner = lag!.Single(l => l.Id == "bysykkelstasjoner");
+        Assert.Equal("Bysykkelstasjoner", stasjoner.Navn);
+        Assert.False(string.IsNullOrWhiteSpace(stasjoner.Beskrivelse));
+        Assert.False(string.IsNullOrWhiteSpace(stasjoner.Ikon));
+    }
+
+    [Fact]
+    public async Task Bysykkelstasjonslaget_gir_ett_punkt_per_installert_stasjon_med_fylling()
+    {
+        var handler = new GbfsHandler();
+        using var vertMedGbfs = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient("bysykkelstasjoner").ConfigurePrimaryHttpMessageHandler(() => handler)));
+
+        var kropp = await vertMedGbfs.CreateClient().GetFromJsonAsync<JsonElement>("/api/lag/bysykkelstasjoner");
+
+        var punkt = Assert.Single(kropp.GetProperty("features").EnumerateArray());
+        var egenskaper = punkt.GetProperty("properties");
+        Assert.Equal("Skøyen Stasjon", egenskaper.GetProperty("navn").GetString());
+        Assert.Equal(6, egenskaper.GetProperty("ledige sykler").GetInt32());
+        Assert.Equal(2, egenskaper.GetProperty("ledige låser").GetInt32());
+        Assert.Equal(75, egenskaper.GetProperty("fylling").GetInt32());
+    }
+
+    [Fact]
+    public async Task Bysykkelstasjonslaget_henter_begge_gbfs_filene_med_client_identifier()
+    {
+        var handler = new GbfsHandler();
+        using var vertMedGbfs = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient("bysykkelstasjoner").ConfigurePrimaryHttpMessageHandler(() => handler)));
+
+        await vertMedGbfs.CreateClient().GetAsync("/api/lag/bysykkelstasjoner");
+
+        Assert.Equal(
+            ["https://gbfs.urbansharing.com/oslobysykkel.no/station_information.json", "https://gbfs.urbansharing.com/oslobysykkel.no/station_status.json"],
+            handler.Forespørsler.Keys.Order());
+        Assert.All(handler.Forespørsler.Values, id => Assert.Equal("novanet-oslolive", id));
+    }
+
+    /// <summary>
+    /// Svarer som Oslo Bysykkels GBFS: én installert stasjon i begge filene, én som ikke er
+    /// installert, og én som bare finnes i statusfilen. Husker Client-Identifier per adresse.
+    /// </summary>
+    private sealed class GbfsHandler : HttpMessageHandler
+    {
+        public ConcurrentDictionary<string, string?> Forespørsler { get; } = new();
+
+        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage forespørsel, CancellationToken stopp)
+        {
+            var adresse = forespørsel.RequestUri!.ToString();
+            Forespørsler[adresse] = forespørsel.Headers.TryGetValues("Client-Identifier", out var verdier) ? verdier.Single() : null;
+
+            var kropp = adresse.EndsWith("station_information.json", StringComparison.Ordinal)
+                ? """
+                  {"data":{"stations":[
+                    {"station_id":"627","name":"Skøyen Stasjon","lat":59.9226729,"lon":10.6788129,"capacity":20},
+                    {"station_id":"381","name":"Aker Brygge","lat":59.9109,"lon":10.7298,"capacity":12}
+                  ]}}
+                  """
+                : """
+                  {"data":{"stations":[
+                    {"station_id":"627","is_installed":true,"num_bikes_available":6,"num_docks_available":2},
+                    {"station_id":"381","is_installed":false,"num_bikes_available":0,"num_docks_available":0},
+                    {"station_id":"999","is_installed":true,"num_bikes_available":3,"num_docks_available":3}
+                  ]}}
+                  """;
+
+            return Task.FromResult(new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(kropp, Encoding.UTF8, "application/json"),
+            });
+        }
+    }
+
+    [Fact]
     public async Task Ukjent_lag_gir_404_ogsaa_for_bydeler()
     {
         var svar = await Klient.GetAsync("/api/lag/finnes-ikke/bydeler");

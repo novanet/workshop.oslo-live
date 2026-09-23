@@ -29,6 +29,39 @@ public class StatiskeFilerTester : IClassFixture<VertUtenBakgrunnssjekk>
     }
 
     [Fact]
+    public async Task Fyllingsringskriptet_svarer_200()
+    {
+        var svar = await vert.CreateClient().GetAsync("/effekter/fyllingsring.js");
+
+        Assert.Equal(HttpStatusCode.OK, svar.StatusCode);
+    }
+
+    [Fact]
+    public async Task Forsiden_laster_fyllingsringskriptet_med_en_defer_linje_etter_symbolskriptet()
+    {
+        var innhold = await vert.CreateClient().GetStringAsync("/index.html");
+
+        const string linje = "<script defer src=\"effekter/fyllingsring.js\"></script>";
+        var symboler = innhold.IndexOf("effekter/symboler.js", StringComparison.Ordinal);
+        var fyllingsring = innhold.IndexOf(linje, StringComparison.Ordinal);
+        Assert.True(symboler >= 0, "Fant ikke symboler.js i index.html");
+        Assert.True(fyllingsring > symboler, "fyllingsring.js må lastes etter symboler.js");
+        Assert.Single(innhold.Split("fyllingsring.js")[1..]);
+    }
+
+    [Fact]
+    public async Task Fyllingsringskriptet_roerer_ikke_kart_popup_klikk_eller_klynger()
+    {
+        var innhold = await vert.CreateClient().GetStringAsync("/effekter/fyllingsring.js");
+
+        Assert.DoesNotContain("kart.", innhold);
+        Assert.DoesNotContain("maplibregl", innhold);
+        Assert.DoesNotContain("popup", innhold, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("cluster", innhold);
+        Assert.DoesNotContain("addEventListener", innhold);
+    }
+
+    [Fact]
     public async Task Forsiden_formaterer_stroempris_med_norsk_tallformat()
     {
         var innhold = await vert.CreateClient().GetStringAsync("/index.html");
