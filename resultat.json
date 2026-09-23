@@ -1,11 +1,11 @@
 {
-  "oppdatert": "2026-09-23T14:28:52",
+  "oppdatert": "2026-09-23T14:30:06",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
       "navn": "mini-richard",
       "github": "randsu",
-      "poeng": 37,
+      "poeng": 39,
       "feil": [
         {
           "issue": 3,
@@ -14,6 +14,11 @@
         }
       ],
       "lag": [
+        {
+          "issue": 6,
+          "navn": "Delt mobilitet",
+          "poeng": 2
+        },
         {
           "issue": 9,
           "navn": "Badetemperatur",
@@ -183,36 +188,6 @@
       "plass": 4
     },
     {
-      "navn": "mini-knive",
-      "github": "Buggz",
-      "poeng": 6,
-      "feil": [],
-      "lag": [],
-      "levert": [
-        {
-          "issue": 40,
-          "navn": "Mobil",
-          "poeng": 3
-        },
-        {
-          "issue": 53,
-          "navn": "Dyp helsesjekk",
-          "poeng": 3
-        }
-      ],
-      "dollar": 9.373,
-      "tokens": 16634056,
-      "sekunder": 3150,
-      "pr": 3,
-      "utkast": 0,
-      "merget": 2,
-      "kjoeringer": 8,
-      "utenPr": 5,
-      "bygg": [],
-      "estimert": false,
-      "plass": 5
-    },
-    {
       "navn": "mini-ingve",
       "github": "ingvevs",
       "poeng": 5,
@@ -241,7 +216,7 @@
       "utenPr": 5,
       "bygg": [],
       "estimert": false,
-      "plass": 6
+      "plass": 5
     },
     {
       "navn": "mini-leif",
@@ -270,6 +245,36 @@
       "merget": 2,
       "kjoeringer": 15,
       "utenPr": 6,
+      "bygg": [],
+      "estimert": false,
+      "plass": 6
+    },
+    {
+      "navn": "mini-knive",
+      "github": "Buggz",
+      "poeng": 5,
+      "feil": [],
+      "lag": [],
+      "levert": [
+        {
+          "issue": 40,
+          "navn": "Mobil",
+          "poeng": 3
+        },
+        {
+          "issue": 53,
+          "navn": "Dyp helsesjekk",
+          "poeng": 3
+        }
+      ],
+      "dollar": 10.674,
+      "tokens": 19002132,
+      "sekunder": 3581,
+      "pr": 4,
+      "utkast": 0,
+      "merget": 2,
+      "kjoeringer": 9,
+      "utenPr": 5,
       "bygg": [],
       "estimert": false,
       "plass": 7
@@ -576,13 +581,13 @@
       "feil": [],
       "lag": [],
       "levert": [],
-      "dollar": 13.115,
-      "tokens": 25524857,
-      "sekunder": 4549,
-      "pr": 3,
+      "dollar": 14.438,
+      "tokens": 26578620,
+      "sekunder": 5075,
+      "pr": 4,
       "utkast": 0,
       "merget": 0,
-      "kjoeringer": 20,
+      "kjoeringer": 21,
       "utenPr": 16,
       "bygg": [],
       "estimert": false,
@@ -596,7 +601,7 @@
       "issue": 191,
       "navn": "Et døgn med bysykkelturer på 90 sekunder",
       "startet": "2026-09-23T12:19:02.7888497+00:00",
-      "minutter": 9
+      "minutter": 10
     },
     {
       "agent": "mini-wilma",
@@ -604,14 +609,6 @@
       "issue": 190,
       "navn": "Hvor langt når jeg på 15 minutter?",
       "startet": "2026-09-23T12:19:34.8533908+00:00",
-      "minutter": 9
-    },
-    {
-      "agent": "mini-frode",
-      "github": "FrodeBl",
-      "issue": 128,
-      "navn": "Simulering: tsunami i Oslofjorden",
-      "startet": "2026-09-23T12:19:38.2554331+00:00",
       "minutter": 9
     },
     {
@@ -628,7 +625,7 @@
       "issue": 129,
       "navn": "Simulering: meteornedslag",
       "startet": "2026-09-23T12:20:25.1910717+00:00",
-      "minutter": 8
+      "minutter": 9
     },
     {
       "agent": "mini-taco",
@@ -637,14 +634,6 @@
       "navn": "Havet stiger: hva havner under vann?",
       "startet": "2026-09-23T12:20:40.4209313+00:00",
       "minutter": 8
-    },
-    {
-      "agent": "mini-knive",
-      "github": "Buggz",
-      "issue": 28,
-      "navn": "Tog",
-      "startet": "2026-09-23T12:21:43.7886322+00:00",
-      "minutter": 7
     },
     {
       "agent": "mini-astrid",
@@ -660,7 +649,7 @@
       "issue": 158,
       "navn": "Strøm av endringer i stedet for å spørre hvert 15. sekund",
       "startet": "2026-09-23T12:24:01.7531547+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-richard",
@@ -668,7 +657,7 @@
       "issue": 170,
       "navn": "Fortell en historie med kartet, styrt med presentasjonsklikker",
       "startet": "2026-09-23T12:24:03.3026673+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "helstein",
@@ -676,7 +665,7 @@
       "issue": 194,
       "navn": "Nytt lag: bomstasjoner",
       "startet": "2026-09-23T12:24:21.6258713+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-johan",
@@ -684,7 +673,7 @@
       "issue": 10,
       "navn": "Trafikk",
       "startet": "2026-09-23T12:24:28.6299515+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "henrik",
@@ -692,7 +681,7 @@
       "issue": 114,
       "navn": "Nytt lag: Kristiania i 1910",
       "startet": "2026-09-23T12:26:11.5734946+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-leif",
@@ -700,7 +689,7 @@
       "issue": 118,
       "navn": "Nyhetslinje nederst på skjermen",
       "startet": "2026-09-23T12:26:25.0299132+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-gir",
@@ -708,7 +697,7 @@
       "issue": 18,
       "navn": "Kulturminner",
       "startet": "2026-09-23T12:27:56.5414222+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-gir",
@@ -716,7 +705,7 @@
       "issue": 13,
       "navn": "Veiarbeid",
       "startet": "2026-09-23T12:27:56.7393798+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-gir",
@@ -724,7 +713,7 @@
       "issue": 51,
       "navn": "Logging",
       "startet": "2026-09-23T12:28:07.2626034+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "henrik",
@@ -732,7 +721,7 @@
       "issue": 116,
       "navn": "Nytt lag: værstasjoner",
       "startet": "2026-09-23T12:28:11.5051731+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-gir",
@@ -740,7 +729,7 @@
       "issue": 33,
       "navn": "Sykkelparkering",
       "startet": "2026-09-23T12:28:16.1616527+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-wilma",
@@ -748,7 +737,7 @@
       "issue": 26,
       "navn": "Skoler",
       "startet": "2026-09-23T12:28:26.4775068+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-jon",
@@ -766,14 +755,15 @@
     "kjoeringer": 45
   },
   "produkt": {
-    "testerBestatt": 17,
-    "testerFeilet": 9,
+    "testerBestatt": 18,
+    "testerFeilet": 8,
     "issuerLost": [
       1,
       2,
       3,
       4,
       5,
+      6,
       7,
       8,
       9,
@@ -837,7 +827,7 @@
       "issue": 50,
       "navn": "Mål hva som skjer",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T12:08:47Z"
+      "oppdatert": "2026-09-23T12:29:13Z"
     },
     {
       "issue": 51,
@@ -945,7 +935,7 @@
       "issue": 118,
       "navn": "Nyhetslinje nederst på skjermen",
       "github": "leif-larsen",
-      "oppdatert": "2026-09-23T12:28:34Z"
+      "oppdatert": "2026-09-23T12:29:08Z"
     },
     {
       "issue": 119,
@@ -993,7 +983,7 @@
       "issue": 128,
       "navn": "Simulering: tsunami i Oslofjorden",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T12:28:37Z"
+      "oppdatert": "2026-09-23T12:28:50Z"
     },
     {
       "issue": 129,
@@ -1124,6 +1114,54 @@
   ],
   "aapne": [
     {
+      "pr": 220,
+      "tittel": "Nytt lag: togtrafikk (#28)",
+      "github": "Buggz",
+      "agent": "mini-knive",
+      "opprettet": "2026-09-23T12:29:19Z",
+      "oppdatert": "2026-09-23T12:29:20Z",
+      "utkast": false,
+      "issues": [
+        28
+      ]
+    },
+    {
+      "pr": 219,
+      "tittel": "Simulering: tsunami i Oslofjorden",
+      "github": "FrodeBl",
+      "agent": "mini-frode",
+      "opprettet": "2026-09-23T12:28:49Z",
+      "oppdatert": "2026-09-23T12:29:00Z",
+      "utkast": false,
+      "issues": [
+        128
+      ]
+    },
+    {
+      "pr": 91,
+      "tittel": "Fargene må virke for alle",
+      "github": "audmaha",
+      "agent": "mini-aud",
+      "opprettet": "2026-09-23T08:42:14Z",
+      "oppdatert": "2026-09-23T12:28:47Z",
+      "utkast": false,
+      "issues": [
+        41
+      ]
+    },
+    {
+      "pr": 218,
+      "tittel": "Nytt lag: kaier og ferjekaier",
+      "github": "martinrholth",
+      "agent": "martin-holth",
+      "opprettet": "2026-09-23T12:27:26Z",
+      "oppdatert": "2026-09-23T12:28:39Z",
+      "utkast": false,
+      "issues": [
+        111
+      ]
+    },
+    {
       "pr": 217,
       "tittel": "Beskytt storskjermen mot innbrenning",
       "github": "yonzo",
@@ -1133,18 +1171,6 @@
       "utkast": false,
       "issues": [
         197
-      ]
-    },
-    {
-      "pr": 218,
-      "tittel": "Nytt lag: kaier og ferjekaier",
-      "github": "martinrholth",
-      "agent": "martin-holth",
-      "opprettet": "2026-09-23T12:27:26Z",
-      "oppdatert": "2026-09-23T12:27:28Z",
-      "utkast": false,
-      "issues": [
-        111
       ]
     },
     {
@@ -1217,18 +1243,6 @@
       "utkast": false,
       "issues": [
         21
-      ]
-    },
-    {
-      "pr": 91,
-      "tittel": "Fargene må virke for alle",
-      "github": "audmaha",
-      "agent": "mini-aud",
-      "opprettet": "2026-09-23T08:42:14Z",
-      "oppdatert": "2026-09-23T11:51:23Z",
-      "utkast": false,
-      "issues": [
-        41
       ]
     },
     {
