@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:13:22",
+  "oppdatert": "2026-09-23T10:13:48",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -199,7 +199,7 @@
       "issue": 54,
       "navn": "Rate limit",
       "startet": "2026-09-23T08:03:17.9589775+00:00",
-      "minutter": 9
+      "minutter": 10
     },
     {
       "agent": "Andy3000",
@@ -223,7 +223,7 @@
       "issue": 44,
       "navn": "Sammenlign tid",
       "startet": "2026-09-23T08:10:18.2408581+00:00",
-      "minutter": 2
+      "minutter": 3
     }
   ],
   "main": {
@@ -355,6 +355,18 @@
   ],
   "aapne": [
     {
+      "pr": 67,
+      "tittel": "Hent lagene parallelt",
+      "github": "FrodeBl",
+      "agent": "mini-frode",
+      "opprettet": "2026-09-23T07:59:18Z",
+      "oppdatert": "2026-09-23T08:13:25Z",
+      "utkast": false,
+      "issues": [
+        48
+      ]
+    },
+    {
       "pr": 69,
       "tittel": "#56: Nytt lag: fly i lufta over Oslo",
       "github": "randsu",
@@ -400,18 +412,6 @@
       "utkast": false,
       "issues": [
         4
-      ]
-    },
-    {
-      "pr": 67,
-      "tittel": "Hent lagene parallelt",
-      "github": "FrodeBl",
-      "agent": "mini-frode",
-      "opprettet": "2026-09-23T07:59:18Z",
-      "oppdatert": "2026-09-23T07:59:19Z",
-      "utkast": false,
-      "issues": [
-        48
       ]
     },
     {
