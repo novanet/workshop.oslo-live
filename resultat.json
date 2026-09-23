@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:05:41",
+  "oppdatert": "2026-09-23T10:06:08",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -72,25 +72,6 @@
       "plass": 3
     },
     {
-      "navn": "mini-ingve",
-      "github": "ingvevs",
-      "poeng": 0,
-      "feil": [],
-      "lag": [],
-      "levert": [],
-      "dollar": 0.558,
-      "tokens": 894924,
-      "sekunder": 157,
-      "pr": 0,
-      "utkast": 0,
-      "merget": 0,
-      "kjoeringer": 1,
-      "utenPr": 1,
-      "bygg": [],
-      "estimert": false,
-      "plass": 4
-    },
-    {
       "navn": "mini-frode",
       "github": "FrodeBl",
       "poeng": 0,
@@ -105,6 +86,25 @@
       "merget": 0,
       "kjoeringer": 3,
       "utenPr": 2,
+      "bygg": [],
+      "estimert": false,
+      "plass": 4
+    },
+    {
+      "navn": "mini-ingve",
+      "github": "ingvevs",
+      "poeng": 0,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 1.014,
+      "tokens": 1725789,
+      "sekunder": 335,
+      "pr": 1,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 2,
+      "utenPr": 1,
       "bygg": [],
       "estimert": false,
       "plass": 5
@@ -158,14 +158,6 @@
       "minutter": 12
     },
     {
-      "agent": "mini-ingve",
-      "github": "ingvevs",
-      "issue": 4,
-      "navn": "Duplikatfjerning",
-      "startet": "2026-09-23T08:02:25.1355944+00:00",
-      "minutter": 3
-    },
-    {
       "agent": "mini-taco",
       "github": "Puiu",
       "issue": 54,
@@ -195,7 +187,7 @@
       "issue": 21,
       "navn": "Adressesøk",
       "startet": "2026-09-23T08:04:57.5527152+00:00",
-      "minutter": 0
+      "minutter": 1
     }
   ],
   "main": {
@@ -237,7 +229,7 @@
       "issue": 4,
       "navn": "Hvert lag viser bare ett eneste punkt",
       "github": "ingvevs",
-      "oppdatert": "2026-09-23T08:02:26Z"
+      "oppdatert": "2026-09-23T08:05:43Z"
     },
     {
       "issue": 5,
@@ -295,6 +287,18 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 68,
+      "tittel": "Hvert lag viser bare ett eneste punkt",
+      "github": "ingvevs",
+      "agent": "mini-ingve",
+      "opprettet": "2026-09-23T08:05:41Z",
+      "oppdatert": "2026-09-23T08:05:41Z",
+      "utkast": false,
+      "issues": [
+        4
+      ]
+    },
     {
       "pr": 67,
       "tittel": "Hent lagene parallelt",
