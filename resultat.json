@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T13:46:25",
+  "oppdatert": "2026-09-23T13:47:04",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -205,8 +205,8 @@
       "pr": 4,
       "utkast": 0,
       "merget": 1,
-      "kjoeringer": 10,
-      "utenPr": 3,
+      "kjoeringer": 11,
+      "utenPr": 4,
       "bygg": [],
       "estimert": false,
       "plass": 6
@@ -553,14 +553,6 @@
       "navn": "Nytt lag: målestasjoner i elvene",
       "startet": "2026-09-23T11:41:09.4028616+00:00",
       "minutter": 5
-    },
-    {
-      "agent": "mini-kirsten",
-      "github": "jthagesk",
-      "issue": 29,
-      "navn": "Museer",
-      "startet": "2026-09-23T11:46:14.9957618+00:00",
-      "minutter": 0
     }
   ],
   "main": {
@@ -694,7 +686,7 @@
       "issue": 29,
       "navn": "Nytt lag: museer og samlinger",
       "github": "jthagesk",
-      "oppdatert": "2026-09-23T11:46:15Z"
+      "oppdatert": "2026-09-23T11:46:39Z"
     },
     {
       "issue": 30,
