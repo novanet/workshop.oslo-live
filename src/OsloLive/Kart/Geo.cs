@@ -21,9 +21,9 @@ public static class Geo
     public const double OsloLat = 59.9139;
     public const double OsloLon = 10.7522;
 
-    /// <summary>Punktet slik GeoJSON skal ha det.</summary>
+    /// <summary>Punktet slik GeoJSON skal ha det: lengdegrad først, [lon, lat].</summary>
     public static Geometri Punkt(double lat, double lon) =>
-        new("Point", [lat, lon]);
+        new("Point", [lon, lat]);
 
     /// <summary>Ligger punktet innenfor kartutsnittet vårt?</summary>
     public static bool IOslo(double lat, double lon) =>

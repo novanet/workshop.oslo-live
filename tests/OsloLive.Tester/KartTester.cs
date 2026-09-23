@@ -145,6 +145,33 @@ public class GeoTester
         Assert.Single(lag.Features);
         Assert.Equal("a", lag.Features[0].Properties["id"]);
     }
+
+    [Fact]
+    public void Punkt_har_lengdegrad_foerst_og_breddegrad_sist()
+    {
+        var geometri = Geo.Punkt(59.9139, 10.7522);
+
+        Assert.Equal("Point", geometri.Type);
+        Assert.Equal([10.7522, 59.9139], geometri.Coordinates);
+    }
+
+    [Fact]
+    public void Lag_gir_koordinater_i_geojson_rekkefoelge()
+    {
+        var punkt = Geo.Lag("id-1", 59.9139, 10.7522, "Rådhuset", "Test");
+
+        Assert.Equal([10.7522, 59.9139], punkt!.Geometry.Coordinates);
+    }
+
+    [Fact]
+    public void Koordinatene_fra_lag_ligger_innenfor_utsnittet_i_lon_lat_rekkefoelge()
+    {
+        var punkt = Geo.Lag("id-1", 59.9139, 10.7522, "Rådhuset", "Test");
+        var c = punkt!.Geometry.Coordinates;
+
+        Assert.InRange(c[0], Geo.MinLon, Geo.MaksLon);
+        Assert.InRange(c[1], Geo.MinLat, Geo.MaksLat);
+    }
 }
 
 public class AllemannsdataTester
