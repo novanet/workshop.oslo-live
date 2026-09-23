@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:55:14",
+  "oppdatert": "2026-09-23T10:55:41",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -126,31 +126,6 @@
       "plass": 4
     },
     {
-      "navn": "mini-jon",
-      "github": "yonzo",
-      "poeng": 3,
-      "feil": [],
-      "lag": [],
-      "levert": [
-        {
-          "issue": 20,
-          "navn": "Luftvarsel",
-          "poeng": 3
-        }
-      ],
-      "dollar": 3.447,
-      "tokens": 6330492,
-      "sekunder": 1212,
-      "pr": 1,
-      "utkast": 0,
-      "merget": 1,
-      "kjoeringer": 3,
-      "utenPr": 2,
-      "bygg": [],
-      "estimert": false,
-      "plass": 5
-    },
-    {
       "navn": "mini-knive",
       "github": "Buggz",
       "poeng": 3,
@@ -171,6 +146,31 @@
       "merget": 1,
       "kjoeringer": 2,
       "utenPr": 0,
+      "bygg": [],
+      "estimert": false,
+      "plass": 5
+    },
+    {
+      "navn": "mini-jon",
+      "github": "yonzo",
+      "poeng": 3,
+      "feil": [],
+      "lag": [],
+      "levert": [
+        {
+          "issue": 20,
+          "navn": "Luftvarsel",
+          "poeng": 3
+        }
+      ],
+      "dollar": 4.127,
+      "tokens": 7424293,
+      "sekunder": 1436,
+      "pr": 1,
+      "utkast": 0,
+      "merget": 1,
+      "kjoeringer": 4,
+      "utenPr": 3,
       "bygg": [],
       "estimert": false,
       "plass": 6
@@ -385,7 +385,7 @@
       "issue": 24,
       "navn": "Bydeler",
       "startet": "2026-09-23T08:45:28.8651408+00:00",
-      "minutter": 9
+      "minutter": 10
     },
     {
       "agent": "mini-frode",
@@ -393,7 +393,7 @@
       "issue": 50,
       "navn": "Metrikker",
       "startet": "2026-09-23T08:47:21.1306878+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "mini-richard",
@@ -426,14 +426,6 @@
       "navn": "Tegn område",
       "startet": "2026-09-23T08:49:47.9516568+00:00",
       "minutter": 5
-    },
-    {
-      "agent": "mini-jon",
-      "github": "yonzo",
-      "issue": 44,
-      "navn": "Sammenlign tid",
-      "startet": "2026-09-23T08:51:36.6212576+00:00",
-      "minutter": 3
     },
     {
       "agent": "mini-leif",
@@ -759,7 +751,7 @@
       "issue": 44,
       "navn": "Sammenlign to tidspunkt",
       "github": "yonzo",
-      "oppdatert": "2026-09-23T08:51:37Z"
+      "oppdatert": "2026-09-23T08:55:29Z"
     },
     {
       "issue": 45,
@@ -853,6 +845,18 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 84,
+      "tittel": "Varsle når noe skjer",
+      "github": "jthagesk",
+      "agent": "mini-kirsten",
+      "opprettet": "2026-09-23T08:34:32Z",
+      "oppdatert": "2026-09-23T08:55:09Z",
+      "utkast": false,
+      "issues": [
+        45
+      ]
+    },
     {
       "pr": 73,
       "tittel": "Vær grei mot kildene (#54)",
@@ -1043,18 +1047,6 @@
       "utkast": false,
       "issues": [
         59
-      ]
-    },
-    {
-      "pr": 84,
-      "tittel": "Varsle når noe skjer",
-      "github": "jthagesk",
-      "agent": "mini-kirsten",
-      "opprettet": "2026-09-23T08:34:32Z",
-      "oppdatert": "2026-09-23T08:49:20Z",
-      "utkast": false,
-      "issues": [
-        45
       ]
     },
     {
