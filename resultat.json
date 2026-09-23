@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T15:18:00",
+  "oppdatert": "2026-09-23T15:18:42",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -349,13 +349,13 @@
           "poeng": 1
         }
       ],
-      "dollar": 41.296,
-      "tokens": 67779944,
-      "sekunder": 12677,
+      "dollar": 42.299,
+      "tokens": 68672835,
+      "sekunder": 12955,
       "pr": 13,
       "utkast": 3,
       "merget": 7,
-      "kjoeringer": 30,
+      "kjoeringer": 31,
       "utenPr": 14,
       "bygg": [],
       "estimert": false,
@@ -686,22 +686,14 @@
       "issue": 211,
       "navn": "Statistikken viser ikke «Nyeste» for vannmålere og smilefjes",
       "startet": "2026-09-23T13:11:37.8328465+00:00",
-      "minutter": 6
-    },
-    {
-      "agent": "mini-wilma",
-      "github": "larsajakobsen",
-      "issue": 206,
-      "navn": "Popupene viser rådata: ISO-tider, «ikon: 😊» og tall uten enhet",
-      "startet": "2026-09-23T13:13:02.1051821+00:00",
-      "minutter": 4
+      "minutter": 7
     }
   ],
   "main": {
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
     "pr": null,
-    "kjoeringer": 62
+    "kjoeringer": 63
   },
   "produkt": {
     "testerBestatt": 20,
@@ -1162,7 +1154,7 @@
       "issue": 206,
       "navn": "Popupene viser rådata: ISO-tider, «ikon: 😊» og tall uten enhet",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T13:13:02Z"
+      "oppdatert": "2026-09-23T13:18:12Z"
     },
     {
       "issue": 208,
@@ -1197,6 +1189,30 @@
   ],
   "aapne": [
     {
+      "pr": 253,
+      "tittel": "Nytt lag: Wikipedia-artikler rundt deg",
+      "github": "FrodeBl",
+      "agent": "mini-frode",
+      "opprettet": "2026-09-23T13:16:03Z",
+      "oppdatert": "2026-09-23T13:18:27Z",
+      "utkast": false,
+      "issues": [
+        192
+      ]
+    },
+    {
+      "pr": 252,
+      "tittel": "Nytt lag: bysykkelstasjoner som fyllingsringer",
+      "github": "FrodeBl",
+      "agent": "mini-frode",
+      "opprettet": "2026-09-23T13:15:46Z",
+      "oppdatert": "2026-09-23T13:18:24Z",
+      "utkast": false,
+      "issues": [
+        186
+      ]
+    },
+    {
       "pr": 226,
       "tittel": "Popupene viser rådata: ISO-tider, «ikon: 😊» og tall uten enhet",
       "github": "larsajakobsen",
@@ -1209,18 +1225,6 @@
       ]
     },
     {
-      "pr": 253,
-      "tittel": "Nytt lag: Wikipedia-artikler rundt deg",
-      "github": "FrodeBl",
-      "agent": "mini-frode",
-      "opprettet": "2026-09-23T13:16:03Z",
-      "oppdatert": "2026-09-23T13:17:26Z",
-      "utkast": false,
-      "issues": [
-        192
-      ]
-    },
-    {
       "pr": 71,
       "tittel": "Mål hva som skjer",
       "github": "FrodeBl",
@@ -1230,18 +1234,6 @@
       "utkast": false,
       "issues": [
         50
-      ]
-    },
-    {
-      "pr": 252,
-      "tittel": "Nytt lag: bysykkelstasjoner som fyllingsringer",
-      "github": "FrodeBl",
-      "agent": "mini-frode",
-      "opprettet": "2026-09-23T13:15:46Z",
-      "oppdatert": "2026-09-23T13:16:41Z",
-      "utkast": false,
-      "issues": [
-        186
       ]
     },
     {
