@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:15:53",
+  "oppdatert": "2026-09-23T11:16:21",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -457,7 +457,7 @@
       "issue": 72,
       "navn": "",
       "startet": "2026-09-23T09:12:59.4083914+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-wilma",
@@ -615,7 +615,13 @@
       "issue": 15,
       "navn": "Nytt lag: spisesteder",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T09:07:40Z"
+      "oppdatert": "2026-09-23T09:16:17Z"
+    },
+    {
+      "issue": 15,
+      "navn": "Nytt lag: spisesteder",
+      "github": "nilsgs",
+      "oppdatert": "2026-09-23T09:16:17Z"
     },
     {
       "issue": 16,
