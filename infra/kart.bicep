@@ -127,15 +127,13 @@ resource kart 'Microsoft.App/containerApps@2024-03-01' = {
           ]
         }
       ]
+      // Én replika, ikke flere. Appen har tilstand i minnet (Lagstatistikk,
+      // HelseSjekker, mellomlageret) og på disk (øyeblikksbildene i
+      // App_Data/historikk). Med flere replikaer svarer hver sin versjon, og
+      // lastbalansereren gjør historikkgrafen, statistikken og helsa ustabile (#210).
       scale: {
         minReplicas: 1
-        maxReplicas: 3
-        rules: [
-          {
-            name: 'http'
-            http: { metadata: { concurrentRequests: '50' } }
-          }
-        ]
+        maxReplicas: 1
       }
     }
   }

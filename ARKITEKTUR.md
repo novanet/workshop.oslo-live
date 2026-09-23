@@ -145,6 +145,8 @@ Konfigurasjon i `appsettings.json`:
 
 Standardmappa ligger i containerens eget filsystem. Den overlever en omstart av prosessen, men i Container Apps hører filsystemet til replikaen, så etter en ny revisjon starter tidslinjen tom til jobben har tatt nye bilder. Skal historikken overleve en utrulling, monter et volum (for eksempel Azure Files) på `/app/App_Data/historikk`, eller pek `Historikk:Mappe` (miljøvariabelen `Historikk__Mappe`) på volumet. `infra/kart.bicep` monterer ikke noe volum i dag. Dockerfile lager mappa med rettigheter for brukeren `app`, som kjørebildet kjører som.
 
+**Én replika.** Historikk, tidslinje, statistikk og helse forutsetter at appen kjører på én replika. Øyeblikksbildene ligger i replikaens eget filsystem, og `Lagstatistikk` (`/api/statistikk`), `HelseSjekker` (`/api/helse/kilder`) og mellomlageret ligger i minnet per prosess. Med flere replikaer sender lastbalansereren kallene til en tilfeldig replika, og samme spørsmål gir ulike svar (#210). Derfor har `infra/kart.bicep` `maxReplicas: 1`. Skal appen skalere ut, må bildene ligge på et delt volum og tilstanden i minnet flyttes til et delt lager først.
+
 ## Frontend
 
 `wwwroot/index.html`: HTML, CSS og JavaScript i én fil. MapLibre GL JS 4.7.1 fra cdnjs (pinnet), vektorfliser fra OpenFreeMap (stil `liberty`), terreng fra Mapterhorn. Kartet står i 3D med `pitch: 55`. Farger og terreng settes i `varmTema(kart)`; utseendeendringer gjøres der. Punkter tegnes som HTML-markører per lag; popup viser `navn` og alle `detaljer` unntatt `id`, `navn`, `kilde`. Nye script lastes fra cdnjs med pinnet versjon.
