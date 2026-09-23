@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:28:13",
+  "oppdatert": "2026-09-23T11:28:40",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -442,7 +442,7 @@
       "issue": 11,
       "navn": "Kollektiv",
       "startet": "2026-09-23T09:22:13.4670027+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-kirsten",
@@ -450,7 +450,7 @@
       "issue": 45,
       "navn": "Varsler",
       "startet": "2026-09-23T09:22:36.7039942+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-sindre",
