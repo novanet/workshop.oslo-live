@@ -40,6 +40,14 @@ builder.Services.AddHttpClient("bomstasjoner", klient =>
     klient.DefaultRequestHeaders.Add("X-Client", "OsloLive");
     klient.DefaultRequestHeaders.Accept.ParseAdd("application/json");
 });
+
+// Wikipedia-artiklene hentes rett fra MediaWiki-API-et, og Wikimedia krever en beskrivende
+// User-Agent med hva appen er og hvor den finnes. Se WikipediaLag.cs.
+builder.Services.AddHttpClient("wikipedia", klient =>
+{
+    klient.Timeout = TimeSpan.FromSeconds(15);
+    klient.DefaultRequestHeaders.UserAgent.ParseAdd("OsloLive/1.0 (kart over Oslo med levende data; https://github.com/novanet/workshop.oslo-live)");
+});
 builder.Services.AddMemoryCache();
 builder.Services.AddSingleton<Lagstatistikk>();
 
@@ -74,6 +82,7 @@ builder.Services.AddSingleton<ILag, KaierLag>();
 builder.Services.AddSingleton<ILag, BomstasjonerLag>();
 builder.Services.AddSingleton<ILag, VaerstasjonerLag>();
 builder.Services.AddSingleton<ILag, IdrettsanleggLag>();
+builder.Services.AddSingleton<ILag, WikipediaLag>();
 builder.Services.AddSingleton<ILag, VeiarbeidLag>();
 
 // Bakgrunnssjekk av kildehelse, se Helse/HelseSjekker.cs.
