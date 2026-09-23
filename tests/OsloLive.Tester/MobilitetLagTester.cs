@@ -119,8 +119,10 @@ public class MobilitetLagTester
     }
 
     [Fact]
-    public void Bysykkelstasjon_gir_ett_punkt_per_ledig_sykkel()
+    public void Bysykkelstasjon_gir_ett_punkt_med_antall_ledige_sykler()
     {
+        // Tidligere ble det ett punkt per ledig sykkel, alle på samme koordinat,
+        // og de kunne aldri skilles på kartet (#209). Nå er én stasjon ett punkt.
         var punkter = MobilitetLag.FraBysykkelstasjon(Rad("""
             {
                 "id": "YOS:Station:599",
@@ -133,22 +135,38 @@ public class MobilitetLagTester
             }
             """)).ToList();
 
-        Assert.Equal(3, punkter.Count);
-        Assert.All(punkter, p => Assert.NotNull(p));
-        Assert.Equal(3, punkter.Select(p => p!.Properties["id"]).Distinct().Count());
-        Assert.All(punkter, p =>
-        {
-            Assert.Equal([10.7499929, 59.9103199], p!.Geometry.Coordinates);
-            Assert.StartsWith("Paléhaven", (string)p.Properties["navn"]!);
-            Assert.Equal("Entur delt mobilitet", p.Properties["kilde"]);
-            Assert.Equal("Oslo Bysykkel", p.Properties["operatør"]);
-            Assert.Equal("sykkel", p.Properties["type"]);
-            Assert.Equal("Paléhaven", p.Properties["stasjon"]);
-        });
+        var p = Assert.Single(punkter);
+        Assert.NotNull(p);
+        Assert.Equal("YOS:Station:599", p!.Properties["id"]);
+        Assert.Equal([10.7499929, 59.9103199], p.Geometry.Coordinates);
+        Assert.Equal("Paléhaven", p.Properties["navn"]);
+        Assert.Equal("Entur delt mobilitet", p.Properties["kilde"]);
+        Assert.Equal("Oslo Bysykkel", p.Properties["operatør"]);
+        Assert.Equal("sykkel", p.Properties["type"]);
+        Assert.Equal("Paléhaven", p.Properties["stasjon"]);
+        Assert.IsType<int>(p.Properties["ledige sykler"]);
+        Assert.Equal(3, p.Properties["ledige sykler"]);
     }
 
     [Fact]
-    public void Samle_gir_ett_punkt_per_kjøretøy_og_per_ledig_bysykkel()
+    public void Samme_bysykkelstasjon_fra_flere_formfaktorer_gir_ett_punkt()
+    {
+        // Laget spør både BICYCLE og CARGO_BICYCLE, så samme stasjon kan komme to ganger.
+        var stasjoner = Liste("""
+            [
+                { "id": "YOS:Station:599", "name": "Paléhaven", "lat": 59.91, "lon": 10.75, "vehicles_available": 33, "operator": "UIP Bauer Media Outdoor Norge AS", "system_id": "oslobysykkel" },
+                { "id": "YOS:Station:599", "name": "Paléhaven", "lat": 59.91, "lon": 10.75, "vehicles_available": 33, "operator": "UIP Bauer Media Outdoor Norge AS", "system_id": "oslobysykkel" }
+            ]
+            """);
+
+        var lag = MobilitetLag.Samle([], stasjoner);
+
+        var p = Assert.Single(lag.Features);
+        Assert.Equal(33, p.Properties["ledige sykler"]);
+    }
+
+    [Fact]
+    public void Samle_gir_ett_punkt_per_kjøretøy_og_per_bysykkelstasjon()
     {
         var kjøretøy = Liste("""
             [
@@ -164,7 +182,8 @@ public class MobilitetLagTester
 
         var lag = MobilitetLag.Samle(kjøretøy, stasjoner);
 
-        Assert.Equal(3, lag.Features.Count);
+        // Én sparkesykkel og én stasjon med ledige sykler; den tomme stasjonen gir ingenting.
+        Assert.Equal(2, lag.Features.Count);
     }
 
     [Fact]
