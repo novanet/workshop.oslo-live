@@ -119,26 +119,75 @@ public class MobilitetLagTester
     }
 
     [Fact]
-    public void Bysykkelstasjon_med_ledige_gir_punkt()
+    public void Bysykkelstasjon_gir_ett_punkt_per_ledig_sykkel()
     {
-        var punkt = MobilitetLag.FraBysykkelstasjon(Rad("""
+        var punkter = MobilitetLag.FraBysykkelstasjon(Rad("""
             {
                 "id": "YOS:Station:599",
                 "name": "Paléhaven",
                 "lat": 59.9103199,
                 "lon": 10.7499929,
-                "vehicles_available": 27,
+                "vehicles_available": 3,
                 "operator": "UIP Bauer Media Outdoor Norge AS",
                 "system_id": "oslobysykkel"
             }
-            """));
+            """)).ToList();
 
-        Assert.NotNull(punkt);
-        Assert.Equal("Paléhaven", punkt!.Properties["navn"]);
-        Assert.Equal("Oslo Bysykkel", punkt.Properties["operatør"]);
-        Assert.Equal("sykkel", punkt.Properties["type"]);
-        Assert.Equal(27, punkt.Properties["ledige"]);
-        Assert.Equal([10.7499929, 59.9103199], punkt.Geometry.Coordinates);
+        Assert.Equal(3, punkter.Count);
+        Assert.All(punkter, p => Assert.NotNull(p));
+        Assert.Equal(3, punkter.Select(p => p!.Properties["id"]).Distinct().Count());
+        Assert.All(punkter, p =>
+        {
+            Assert.Equal([10.7499929, 59.9103199], p!.Geometry.Coordinates);
+            Assert.StartsWith("Paléhaven", (string)p.Properties["navn"]!);
+            Assert.Equal("Entur delt mobilitet", p.Properties["kilde"]);
+            Assert.Equal("Oslo Bysykkel", p.Properties["operatør"]);
+            Assert.Equal("sykkel", p.Properties["type"]);
+            Assert.Equal("Paléhaven", p.Properties["stasjon"]);
+        });
+    }
+
+    [Fact]
+    public void Samle_gir_ett_punkt_per_kjøretøy_og_per_ledig_bysykkel()
+    {
+        var kjøretøy = Liste("""
+            [
+                { "id": "BOLT:1", "form_factor": "SCOOTER_STANDING", "lat": 59.91, "lon": 10.75, "reserved": false, "disabled": false, "operator": "Bolt", "system_id": "boltoslo" }
+            ]
+            """);
+        var stasjoner = Liste("""
+            [
+                { "id": "YOS:Station:599", "name": "Paléhaven", "lat": 59.91, "lon": 10.75, "vehicles_available": 2, "operator": "UIP Bauer Media Outdoor Norge AS", "system_id": "oslobysykkel" },
+                { "id": "YOS:Station:600", "name": "Tom stasjon", "lat": 59.92, "lon": 10.74, "vehicles_available": 0, "operator": "UIP Bauer Media Outdoor Norge AS", "system_id": "oslobysykkel" }
+            ]
+            """);
+
+        var lag = MobilitetLag.Samle(kjøretøy, stasjoner);
+
+        Assert.Equal(3, lag.Features.Count);
+    }
+
+    [Fact]
+    public void Punktene_har_feltene_operatør_og_type_til_popupen()
+    {
+        var sparkesykkel = MobilitetLag.FraKjøretøy(Rad("""
+            { "id": "VOI:1", "form_factor": "SCOOTER_STANDING", "lat": 59.91, "lon": 10.75, "reserved": false, "disabled": false, "operator": "VOI Technology Norway AS", "system_id": "voioslo" }
+            """));
+        var bysykkel = MobilitetLag.FraBysykkelstasjon(Rad("""
+            { "id": "YOS:Station:599", "name": "Paléhaven", "lat": 59.91, "lon": 10.75, "vehicles_available": 1, "operator": "UIP Bauer Media Outdoor Norge AS", "system_id": "oslobysykkel" }
+            """)).Single();
+
+        Assert.NotNull(sparkesykkel);
+        Assert.True(sparkesykkel!.Properties.ContainsKey("operatør"));
+        Assert.True(sparkesykkel.Properties.ContainsKey("type"));
+        Assert.Equal("Voi", sparkesykkel.Properties["operatør"]);
+        Assert.Equal("elsparkesykkel", sparkesykkel.Properties["type"]);
+
+        Assert.NotNull(bysykkel);
+        Assert.True(bysykkel!.Properties.ContainsKey("operatør"));
+        Assert.True(bysykkel.Properties.ContainsKey("type"));
+        Assert.Equal("Oslo Bysykkel", bysykkel.Properties["operatør"]);
+        Assert.Equal("sykkel", bysykkel.Properties["type"]);
     }
 
     [Fact]
@@ -154,8 +203,8 @@ public class MobilitetLagTester
             { "id": "HYRE:Station:1", "name": "Hyre-stasjon", "lat": 59.91, "lon": 10.75, "vehicles_available": 4, "operator": "Hyre", "system_id": "hyrenorge" }
             """));
 
-        Assert.Null(paléhaven);
-        Assert.Null(voi);
-        Assert.Null(hyre);
+        Assert.Empty(paléhaven);
+        Assert.Empty(voi);
+        Assert.Empty(hyre);
     }
 }

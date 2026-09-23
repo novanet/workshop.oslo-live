@@ -6,6 +6,8 @@ namespace OsloLive.Lag;
 /// <summary>
 /// Delt mobilitet i Oslo: ledige elsparkesykler, bysykler og delebiler akkurat nå.
 /// Kilde: Entur, som samler alle operatørene (Ryde, Voi, Bolt, Hyre, Oslo Bysykkel m.fl.).
+/// Popupen i frontenden viser alle egenskapene på et punkt (unntatt id, navn og kilde),
+/// så «operatør» og «type» dukker opp der automatisk.
 /// </summary>
 public sealed class MobilitetLag(Allemannsdata data) : ILag
 {
@@ -23,7 +25,8 @@ public sealed class MobilitetLag(Allemannsdata data) : ILag
     /// </summary>
     public const int MaksPerType = 60;
 
-    private static readonly string[] Formfaktorer = ["SCOOTER_STANDING", "BICYCLE", "CAR"];
+    private static readonly string[] Formfaktorer =
+        ["SCOOTER_STANDING", "SCOOTER_SEATED", "BICYCLE", "CARGO_BICYCLE", "CAR"];
 
     /// <summary>Oversetter kildens formfaktor til teksten popupen skal vise.</summary>
     public static string Type(string? formFactor) => formFactor switch
@@ -105,39 +108,45 @@ public sealed class MobilitetLag(Allemannsdata data) : ILag
 
     /// <summary>
     /// Oslo Bysykkel listes ikke som enkeltkjøretøy hos kilden, bare som
-    /// stasjoner med antall ledige sykler. Vi viser derfor ett punkt per
-    /// stasjon med ledige sykler, ikke ett punkt per sykkel.
+    /// stasjoner med antall ledige sykler. Vi lager derfor ett punkt per ledig
+    /// sykkel på stasjonens koordinat, med unik id «stasjonsid:løpenummer».
+    /// En stasjon uten ledige sykler gir ingen punkter.
     /// </summary>
-    public static Kartpunkt? FraBysykkelstasjon(JsonElement stasjon)
+    public static IEnumerable<Kartpunkt?> FraBysykkelstasjon(JsonElement stasjon)
     {
         var systemId = stasjon.TryGetProperty("system_id", out var s) ? s.GetString() : null;
         if (!string.Equals(systemId, "oslobysykkel", StringComparison.OrdinalIgnoreCase))
         {
-            return null;
+            return [];
         }
 
         var ledige = stasjon.TryGetProperty("vehicles_available", out var v) ? v.GetInt32() : 0;
         if (ledige <= 0)
         {
-            return null;
+            return [];
         }
 
-        return Geo.Lag(
-            id: stasjon.GetProperty("id").GetString() ?? "",
-            lat: stasjon.GetProperty("lat").GetDouble(),
-            lon: stasjon.GetProperty("lon").GetDouble(),
-            navn: stasjon.GetProperty("name").GetString() ?? "Ukjent stasjon",
+        var stasjonId = stasjon.GetProperty("id").GetString() ?? "";
+        var lat = stasjon.GetProperty("lat").GetDouble();
+        var lon = stasjon.GetProperty("lon").GetDouble();
+        var stasjonNavn = stasjon.GetProperty("name").GetString() ?? "Ukjent stasjon";
+
+        return Enumerable.Range(1, ledige).Select(i => Geo.Lag(
+            id: $"{stasjonId}:{i}",
+            lat: lat,
+            lon: lon,
+            navn: $"{stasjonNavn} ({i} av {ledige})",
             kilde: "Entur delt mobilitet",
             detaljer: new Dictionary<string, object?>
             {
                 ["operatør"] = "Oslo Bysykkel",
                 ["type"] = "sykkel",
-                ["ledige"] = ledige,
-            });
+                ["stasjon"] = stasjonNavn,
+            }));
     }
 
     public static Kartlag Samle(IEnumerable<JsonElement> kjøretøy, IEnumerable<JsonElement> stasjoner) =>
-        Geo.Samle(kjøretøy.Select(FraKjøretøy).Concat(stasjoner.Select(FraBysykkelstasjon)));
+        Geo.Samle(kjøretøy.Select(FraKjøretøy).Concat(stasjoner.SelectMany(FraBysykkelstasjon)));
 
     public async Task<Kartlag> Hent(CancellationToken stopp = default)
     {
