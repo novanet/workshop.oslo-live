@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:58:19",
+  "oppdatert": "2026-09-23T10:58:47",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -82,13 +82,13 @@
           "poeng": 8
         }
       ],
-      "dollar": 14.881,
-      "tokens": 28643289,
-      "sekunder": 5169,
-      "pr": 9,
+      "dollar": 16.757,
+      "tokens": 32622114,
+      "sekunder": 5772,
+      "pr": 10,
       "utkast": 0,
       "merget": 3,
-      "kjoeringer": 13,
+      "kjoeringer": 14,
       "utenPr": 4,
       "bygg": [],
       "estimert": false,
@@ -380,14 +380,6 @@
   ],
   "kjoerer": [
     {
-      "agent": "mini-richard",
-      "github": "randsu",
-      "issue": 25,
-      "navn": "Historikk",
-      "startet": "2026-09-23T08:47:59.0992794+00:00",
-      "minutter": 10
-    },
-    {
       "agent": "Dmitry-agent",
       "github": "FilonenkoDmitry",
       "issue": 12,
@@ -621,7 +613,7 @@
       "issue": 25,
       "navn": "Ta vare på et øyeblikksbilde hver time",
       "github": "randsu",
-      "oppdatert": "2026-09-23T08:47:59Z"
+      "oppdatert": "2026-09-23T08:58:24Z"
     },
     {
       "issue": 29,
@@ -717,7 +709,7 @@
       "issue": 45,
       "navn": "Varsle når noe skjer",
       "github": "jthagesk",
-      "oppdatert": "2026-09-23T08:34:34Z"
+      "oppdatert": "2026-09-23T08:58:43Z"
     },
     {
       "issue": 46,
@@ -805,6 +797,18 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 104,
+      "tittel": "#25: Ta vare på et øyeblikksbilde hver time",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:58:22Z",
+      "oppdatert": "2026-09-23T08:58:23Z",
+      "utkast": false,
+      "issues": [
+        25
+      ]
+    },
     {
       "pr": 85,
       "tittel": "#9: Nytt lag: badetemperaturer",
