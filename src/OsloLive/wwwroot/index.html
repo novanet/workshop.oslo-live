@@ -37,6 +37,8 @@
   .lag .antall { font-size: 12px; color: var(--dempet); font-variant-numeric: tabular-nums; }
   .lag .antall.feil { color: var(--feil); }
   .lag .antall.ok { color: var(--ok); font-weight: 600; }
+  .lag .visning { flex: none; font: inherit; font-size: 11px; padding: 2px 7px; border: 1.5px solid var(--kant); border-radius: 6px; background: #fff; cursor: pointer; }
+  .lag .visning[aria-pressed="true"] { background: #111; color: #fff; }
   .tom { font-size: 13px; color: var(--dempet); line-height: 1.5; padding: 4px 2px; }
   .bunn { margin-top: 12px; padding-top: 12px; border-top: 1px solid #e5e7eb; font-size: 11px; color: var(--dempet); display: flex; justify-content: space-between; }
 
@@ -286,6 +288,22 @@ function fargeFor(id, nr) {
   return FARGER[id] || RESERVE[nr % RESERVE.length];
 }
 
+// Punkter eller varmekart per lag, husket i localStorage.
+const VARME_NOKKEL = 'oslolive.varmekart';
+function lesVarmevalg() {
+  try { return JSON.parse(localStorage.getItem(VARME_NOKKEL)) ?? {}; } catch (e) { return {}; }
+}
+function lagreVarmevalg() {
+  const valg = {};
+  for (const [id, l] of lagene) if (l.varme) valg[id] = true;
+  try { localStorage.setItem(VARME_NOKKEL, JSON.stringify(valg)); } catch (e) { /* privat modus e.l. */ }
+}
+
+function rgba(hex, a) {
+  const n = parseInt(hex.slice(1), 16);
+  return `rgba(${n >> 16 & 255},${n >> 8 & 255},${n & 255},${a})`;
+}
+
 // ---------------------------------------------------------------------------
 // Lagene
 // ---------------------------------------------------------------------------
@@ -315,6 +333,36 @@ function tidTekst(d) {
   return d ? d.toLocaleString('no-NO', { weekday: 'short', hour: '2-digit', minute: '2-digit' }) : 'Nå';
 }
 
+/** Viser markører eller varmekart for laget, ut fra på/av og valgt visning. */
+function visLag(id) {
+  const oppf = lagene.get(id);
+  const markorerSynlige = oppf.på && !oppf.varme;
+  for (const m of oppf.markorer) { if (markorerSynlige) { m.addTo(kart); } else { m.remove(); } }
+  if (kart.getLayer('varme-' + id)) {
+    kart.setLayoutProperty('varme-' + id, 'visibility', oppf.på && oppf.varme ? 'visible' : 'none');
+  }
+}
+
+function varmekart(id, features) {
+  const oppf = lagene.get(id);
+  const data = { type: 'FeatureCollection', features };
+  const kilde = kart.getSource('varme-' + id);
+  if (kilde) { kilde.setData(data); return; }
+  kart.addSource('varme-' + id, { type: 'geojson', data });
+  kart.addLayer({
+    id: 'varme-' + id, type: 'heatmap', source: 'varme-' + id,
+    layout: { visibility: 'none' },
+    paint: {
+      'heatmap-weight': 1,
+      'heatmap-intensity': ['interpolate', ['linear'], ['zoom'], 10, 1, 16, 3],
+      'heatmap-radius': ['interpolate', ['linear'], ['zoom'], 10, 15, 16, 35],
+      'heatmap-opacity': 0.8,
+      'heatmap-color': ['interpolate', ['linear'], ['heatmap-density'],
+        0, rgba(oppf.farge, 0), 0.2, rgba(oppf.farge, 0.25), 0.6, rgba(oppf.farge, 0.6), 1, rgba(oppf.farge, 0.95)]
+    }
+  });
+}
+
 async function hent(id) {
   const oppf = lagene.get(id);
   const teller = document.getElementById('antall-' + id);
@@ -330,6 +378,7 @@ async function hent(id) {
     oppf.markorer = [];
     oppf.punkter = [];
 
+    const gyldige = [];
     for (const f of (geo.features ?? [])) {
       const c = f.geometry?.coordinates;
       if (!Array.isArray(c) || c.length < 2) continue;
@@ -338,17 +387,21 @@ async function hent(id) {
       const el = document.createElement('div');
       el.className = 'merke';
       el.style.background = p.advarsel ? '#b91c1c' : oppf.farge;
-      el.textContent = p.advarsel ? '⚠️' : oppf.ikon;
+      el.textContent = p.advarsel ? '⚠️' : (p.ikon ?? oppf.ikon);
 
       const m = new maplibregl.Marker({ element: el })
         .setLngLat([c[0], c[1]])
         .setPopup(new maplibregl.Popup({ offset: 18, closeButton: true })
           .setHTML(popup(p)));
 
-      if (oppf.på) m.addTo(kart);
+      if (oppf.på && !oppf.varme) m.addTo(kart);
       oppf.markorer.push(m);
       oppf.punkter.push({ markor: m, navn: f.properties?.navn ?? 'Uten navn', lon: c[0], lat: c[1] });
+      gyldige.push({ type: 'Feature', geometry: { type: 'Point', coordinates: [c[0], c[1]] }, properties: {} });
     }
+
+    varmekart(id, gyldige);
+    visLag(id);
 
     oppf.antall = oppf.markorer.length;
     teller.textContent = oppf.antall;
@@ -397,9 +450,10 @@ async function start() {
   }
 
   liste.innerHTML = '';
+  const varmevalg = lesVarmevalg();
   lag.forEach((l, nr) => {
     const farge = fargeFor(l.id, nr);
-    lagene.set(l.id, { ikon: l.ikon || '📍', navn: l.navn, farge, markorer: [], punkter: [], antall: 0, på: true });
+    lagene.set(l.id, { ikon: l.ikon || '📍', navn: l.navn, farge, markorer: [], punkter: [], antall: 0, på: true, varme: !!varmevalg[l.id] });
 
     const rad = document.createElement('label');
     rad.className = 'lag';
@@ -408,16 +462,24 @@ async function start() {
       `<input type="checkbox" checked>` +
       `<span class="prikk" style="background:${farge}"></span>` +
       `<span class="navn">${l.navn}</span>` +
-      `<span class="antall" id="antall-${l.id}">…</span>`;
+      `<span class="antall" id="antall-${l.id}">…</span>` +
+      `<button type="button" class="visning" aria-pressed="${!!varmevalg[l.id]}" title="Bytt mellom punkter og varmekart">${varmevalg[l.id] ? 'Varme' : 'Punkter'}</button>`;
 
     rad.querySelector('input').addEventListener('change', (ev) => {
       const oppf = lagene.get(l.id);
       oppf.på = ev.target.checked;
-      for (const m of oppf.markorer) {
-        if (oppf.på) { m.addTo(kart); } else { m.remove(); }
-      }
+      visLag(l.id);
       oppdaterBunn();
       if (valgtSted) visNaermest();
+    });
+    rad.querySelector('.visning').addEventListener('click', (ev) => {
+      ev.preventDefault(); ev.stopPropagation();
+      const oppf = lagene.get(l.id);
+      oppf.varme = !oppf.varme;
+      ev.currentTarget.setAttribute('aria-pressed', String(oppf.varme));
+      ev.currentTarget.textContent = oppf.varme ? 'Varme' : 'Punkter';
+      lagreVarmevalg();
+      visLag(l.id);
     });
     liste.appendChild(rad);
 
@@ -476,7 +538,9 @@ function visNaermest() {
     rad.addEventListener('click', () => {
       kart.flyTo({ center: [best.lon, best.lat], zoom: Math.max(kart.getZoom(), 16), duration: 1200 });
       const popup = best.markor.getPopup();
-      if (popup && !popup.isOpen()) best.markor.togglePopup();
+      if (popup && !popup.isOpen()) {
+        if (oppf.på && !oppf.varme) { best.markor.togglePopup(); } else { popup.setLngLat([best.lon, best.lat]).addTo(kart); }
+      }
     });
     liste.appendChild(rad);
   }

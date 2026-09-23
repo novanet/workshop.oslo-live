@@ -42,6 +42,17 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
     }
 
     [Fact]
+    public async Task Lagoversikten_har_smilefjes()
+    {
+        var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
+
+        var smilefjes = lag!.Single(l => l.Id == "smilefjes");
+        Assert.Equal("Smilefjes", smilefjes.Navn);
+        Assert.False(string.IsNullOrWhiteSpace(smilefjes.Beskrivelse));
+        Assert.False(string.IsNullOrWhiteSpace(smilefjes.Ikon));
+    }
+
+    [Fact]
     public async Task Ukjent_lag_gir_404()
     {
         var svar = await Klient.GetAsync("/api/lag/finnes-ikke");
