@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T13:53:08",
+  "oppdatert": "2026-09-23T13:54:04",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -192,6 +192,42 @@
       "plass": 5
     },
     {
+      "navn": "mini-wilma",
+      "github": "larsajakobsen",
+      "poeng": 5,
+      "feil": [
+        {
+          "issue": 1,
+          "navn": "Koordinatrekkefølge",
+          "poeng": 2
+        }
+      ],
+      "lag": [],
+      "levert": [
+        {
+          "issue": 32,
+          "navn": "Strømpris",
+          "poeng": 2
+        },
+        {
+          "issue": 112,
+          "navn": "Nytt lag: målestasjoner i elvene",
+          "poeng": 2
+        }
+      ],
+      "dollar": 19.451,
+      "tokens": 33569390,
+      "sekunder": 6072,
+      "pr": 7,
+      "utkast": 0,
+      "merget": 3,
+      "kjoeringer": 19,
+      "utenPr": 12,
+      "bygg": [],
+      "estimert": false,
+      "plass": 6
+    },
+    {
       "navn": "mini-kirsten",
       "github": "jthagesk",
       "poeng": 4,
@@ -214,7 +250,7 @@
       "utenPr": 5,
       "bygg": [],
       "estimert": false,
-      "plass": 6
+      "plass": 7
     },
     {
       "navn": "mini-jon",
@@ -237,37 +273,6 @@
       "merget": 1,
       "kjoeringer": 5,
       "utenPr": 4,
-      "bygg": [],
-      "estimert": false,
-      "plass": 7
-    },
-    {
-      "navn": "mini-wilma",
-      "github": "larsajakobsen",
-      "poeng": 3,
-      "feil": [
-        {
-          "issue": 1,
-          "navn": "Koordinatrekkefølge",
-          "poeng": 2
-        }
-      ],
-      "lag": [],
-      "levert": [
-        {
-          "issue": 32,
-          "navn": "Strømpris",
-          "poeng": 2
-        }
-      ],
-      "dollar": 19.451,
-      "tokens": 33569390,
-      "sekunder": 6072,
-      "pr": 7,
-      "utkast": 0,
-      "merget": 2,
-      "kjoeringer": 19,
-      "utenPr": 12,
       "bygg": [],
       "estimert": false,
       "plass": 8
@@ -544,7 +549,7 @@
       "issue": 132,
       "navn": "Ekte sollys på 3D-byggene",
       "startet": "2026-09-23T11:50:10.530436+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-leif",
@@ -552,14 +557,14 @@
       "issue": 141,
       "navn": "Tydelige kartsymboler: båter som ser ut som båter",
       "startet": "2026-09-23T11:52:28.401471+00:00",
-      "minutter": 0
+      "minutter": 1
     }
   ],
   "main": {
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
     "pr": null,
-    "kjoeringer": 38
+    "kjoeringer": 40
   },
   "produkt": {
     "testerBestatt": 17,
@@ -675,7 +680,7 @@
       "issue": 28,
       "navn": "Nytt lag: togtrafikk",
       "github": "Buggz",
-      "oppdatert": "2026-09-23T09:47:37Z"
+      "oppdatert": "2026-09-23T11:53:44Z"
     },
     {
       "issue": 29,
@@ -796,12 +801,6 @@
       "navn": "Nytt lag: kaier og ferjekaier",
       "github": "martinrholth",
       "oppdatert": "2026-09-23T11:52:03Z"
-    },
-    {
-      "issue": 112,
-      "navn": "Nytt lag: målestasjoner i elvene",
-      "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T11:50:03Z"
     },
     {
       "issue": 113,
@@ -1013,18 +1012,6 @@
       "utkast": false,
       "issues": [
         25
-      ]
-    },
-    {
-      "pr": 143,
-      "tittel": "Nytt lag: målestasjoner i elvene",
-      "github": "larsajakobsen",
-      "agent": "mini-wilma",
-      "opprettet": "2026-09-23T11:49:35Z",
-      "oppdatert": "2026-09-23T11:49:36Z",
-      "utkast": false,
-      "issues": [
-        112
       ]
     },
     {
