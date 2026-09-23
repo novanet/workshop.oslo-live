@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:43:13",
+  "oppdatert": "2026-09-23T10:43:40",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -71,14 +71,14 @@
           "poeng": 3
         }
       ],
-      "dollar": 2.696,
-      "tokens": 5300148,
-      "sekunder": 928,
+      "dollar": 3.447,
+      "tokens": 6330492,
+      "sekunder": 1212,
       "pr": 1,
       "utkast": 0,
       "merget": 1,
-      "kjoeringer": 2,
-      "utenPr": 1,
+      "kjoeringer": 3,
+      "utenPr": 2,
       "bygg": [],
       "estimert": false,
       "plass": 3
@@ -373,20 +373,12 @@
       "minutter": 5
     },
     {
-      "agent": "mini-jon",
-      "github": "yonzo",
-      "issue": 44,
-      "navn": "Sammenlign tid",
-      "startet": "2026-09-23T08:38:34.7845421+00:00",
-      "minutter": 4
-    },
-    {
       "agent": "mini-kirsten",
       "github": "jthagesk",
       "issue": 29,
       "navn": "Museer",
       "startet": "2026-09-23T08:38:36.2729853+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-richard",
@@ -394,7 +386,7 @@
       "issue": 22,
       "navn": "Klynging",
       "startet": "2026-09-23T08:38:37.6037617+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-richard",
@@ -402,7 +394,7 @@
       "issue": 34,
       "navn": "Tidslinje",
       "startet": "2026-09-23T08:39:29.3560815+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "helstein",
@@ -410,7 +402,7 @@
       "issue": 30,
       "navn": "Vannstand",
       "startet": "2026-09-23T08:39:37.818134+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-astrid",
@@ -665,7 +657,7 @@
       "issue": 44,
       "navn": "Sammenlign to tidspunkt",
       "github": "yonzo",
-      "oppdatert": "2026-09-23T08:38:35Z"
+      "oppdatert": "2026-09-23T08:43:27Z"
     },
     {
       "issue": 45,
@@ -749,10 +741,34 @@
       "issue": 59,
       "navn": "Overlapping boxes",
       "github": "sin-rha",
-      "oppdatert": "2026-09-23T08:21:50Z"
+      "oppdatert": "2026-09-23T08:43:26Z"
     }
   ],
   "aapne": [
+    {
+      "pr": 78,
+      "tittel": "Nytt lag: smilefjes fra Mattilsynet",
+      "github": "GIR75",
+      "agent": "mini-gir",
+      "opprettet": "2026-09-23T08:28:36Z",
+      "oppdatert": "2026-09-23T08:43:25Z",
+      "utkast": false,
+      "issues": [
+        17
+      ]
+    },
+    {
+      "pr": 92,
+      "tittel": "Et statistikkpanel",
+      "github": "audmaha",
+      "agent": "mini-aud",
+      "opprettet": "2026-09-23T08:42:17Z",
+      "oppdatert": "2026-09-23T08:43:19Z",
+      "utkast": false,
+      "issues": [
+        43
+      ]
+    },
     {
       "pr": 93,
       "tittel": "En helsesjekk som betyr noe (#53)",
@@ -763,18 +779,6 @@
       "utkast": false,
       "issues": [
         53
-      ]
-    },
-    {
-      "pr": 92,
-      "tittel": "Et statistikkpanel",
-      "github": "audmaha",
-      "agent": "mini-aud",
-      "opprettet": "2026-09-23T08:42:17Z",
-      "oppdatert": "2026-09-23T08:42:18Z",
-      "utkast": false,
-      "issues": [
-        43
       ]
     },
     {
@@ -919,18 +923,6 @@
       "utkast": false,
       "issues": [
         55
-      ]
-    },
-    {
-      "pr": 78,
-      "tittel": "Nytt lag: smilefjes fra Mattilsynet",
-      "github": "GIR75",
-      "agent": "mini-gir",
-      "opprettet": "2026-09-23T08:28:36Z",
-      "oppdatert": "2026-09-23T08:30:07Z",
-      "utkast": false,
-      "issues": [
-        17
       ]
     },
     {
