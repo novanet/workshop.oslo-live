@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:04:20",
+  "oppdatert": "2026-09-23T11:04:48",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -431,7 +431,7 @@
       "issue": 27,
       "navn": "Verneområder",
       "startet": "2026-09-23T09:03:41.4652664+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-wilma",
@@ -439,7 +439,7 @@
       "issue": 26,
       "navn": "Skoler",
       "startet": "2026-09-23T09:03:43.3920206+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "Andy3000",
