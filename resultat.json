@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:07:41",
+  "oppdatert": "2026-09-23T14:08:19",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -222,12 +222,12 @@
       ],
       "dollar": 19.451,
       "tokens": 33569390,
-      "sekunder": 6073,
+      "sekunder": 6072,
       "pr": 7,
       "utkast": 0,
       "merget": 3,
-      "kjoeringer": 20,
-      "utenPr": 13,
+      "kjoeringer": 19,
+      "utenPr": 12,
       "bygg": [],
       "estimert": false,
       "plass": 6
@@ -581,7 +581,7 @@
       "issue": 26,
       "navn": "Skoler",
       "startet": "2026-09-23T12:00:11.8740211+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "mini-wilma",
@@ -589,7 +589,7 @@
       "issue": 8,
       "navn": "Hendelser",
       "startet": "2026-09-23T12:01:11.9782453+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-taco",
@@ -605,7 +605,7 @@
       "issue": 11,
       "navn": "Kollektiv",
       "startet": "2026-09-23T12:01:44.272017+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-kirsten",
@@ -613,7 +613,7 @@
       "issue": 29,
       "navn": "Museer",
       "startet": "2026-09-23T12:01:56.5636433+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-frode",
@@ -637,6 +637,14 @@
       "issue": 141,
       "navn": "Tydelige kartsymboler: båter som ser ut som båter",
       "startet": "2026-09-23T12:07:21.8184109+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-aud",
+      "github": "audmaha",
+      "issue": 132,
+      "navn": "Ekte sollys på 3D-byggene",
+      "startet": "2026-09-23T12:07:36.4342939+00:00",
       "minutter": 0
     }
   ],
