@@ -55,6 +55,9 @@
   .lag .antall { font-size: 12px; color: var(--dempet); font-variant-numeric: tabular-nums; }
   .lag .antall.feil { color: var(--feil); }
   .lag .antall.ok { color: var(--ok); font-weight: 600; }
+  .lag .endring { flex: none; font-size: 11px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .lag .endring.opp { color: var(--ok); }
+  .lag .endring.ned { color: var(--feil); }
   .lag .alder { flex: none; font-size: 11px; color: var(--dempet); font-variant-numeric: tabular-nums; cursor: default; }
   .lag .alder.gammel { color: var(--feil); }
   .lag .visning { flex: none; font: inherit; font-size: 11px; padding: 2px 7px; border: 1.5px solid var(--kant); border-radius: 6px; background: #fff; cursor: pointer; }
@@ -1043,6 +1046,12 @@ async function hent(id) {
     if (levende) oppf.sistOk = new Date();
     teller.textContent = oppf.antall;
     teller.className = 'antall ' + (oppf.antall ? 'ok' : '');
+
+    const endring = endringTekst(oppf.sistOkAntall, oppf.antall);
+    oppf.sistOkAntall = oppf.antall;
+    const endringEl = document.getElementById('endring-' + id);
+    endringEl.textContent = endring;
+    endringEl.className = endringKlasse(endring);
     teller.title = '';
   } catch (e) {
     if (gen !== tidGenerasjon) return;
@@ -1056,6 +1065,10 @@ async function hent(id) {
     oppf.feil = true;
     teller.textContent = 'feil';
     teller.className = 'antall feil';
+
+    const endringEl = document.getElementById('endring-' + id);
+    endringEl.textContent = '';
+    endringEl.className = 'endring';
     teller.title = e.message;
 
     if (levende) {
@@ -1137,6 +1150,19 @@ function alderTekst(sistOk, nå) {
   return Math.floor(minutter / 60) + ' t';
 }
 
+/** «+3» eller «-2» siden forrige vellykkede henting, eller tomt første gang og når endringen er 0. */
+function endringTekst(forrige, nå) {
+  if (forrige == null) return '';
+  const endring = nå - forrige;
+  if (endring > 0) return '+' + endring;
+  if (endring < 0) return String(endring);
+  return '';
+}
+
+function endringKlasse(tekst) {
+  return 'endring' + (tekst.startsWith('+') ? ' opp' : tekst ? ' ned' : '');
+}
+
 function klokkeHMS(d) {
   const to = (n) => String(n).padStart(2, '0');
   return to(d.getHours()) + ':' + to(d.getMinutes()) + ':' + to(d.getSeconds());
@@ -1188,6 +1214,8 @@ async function start() {
   const varmevalg = lesVarmevalg();
   let forrige = null;
   lag.forEach((l, nr) => {
+    const farge = fargeFor(l.id, nr);
+    lagene.set(l.id, { ikon: l.ikon || '📍', navn: l.navn, farge, markorer: [], punkter: [], antall: 0, på: true, feil: false, boks: null, varme: !!varmevalg[l.id], sistOk: null, sistOkAntall: null });
     let farge = fargeFor(l.id, nr);
     const på = onsket ? onsket.has(l.id) : true;
     // To lag ved siden av hverandre skal aldri faa samme farge, selv om
@@ -1213,6 +1241,7 @@ async function start() {
       `<span class="prikk" aria-hidden="true"><img src="${prikkBilde(l.id, oppf)}" alt=""></span>` +
       `<span class="navn">${l.navn}</span>` +
       `<span class="antall" id="antall-${l.id}">…</span>` +
+      `<span class="endring" id="endring-${l.id}"></span>` +
       `<span class="alder" id="alder-${l.id}">aldri</span>` +
       `<button type="button" class="visning" aria-pressed="${!!varmevalg[l.id]}" title="Bytt mellom punkter og varmekart">${varmevalg[l.id] ? 'Varme' : 'Punkter'}</button>`;
 
