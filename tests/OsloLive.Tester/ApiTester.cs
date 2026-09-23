@@ -131,6 +131,63 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
     }
 
     [Fact]
+    public async Task Lagoversikten_har_arbeidsplasser()
+    {
+        var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
+
+        var arbeidsplasser = lag!.Single(l => l.Id == "arbeidsplasser");
+        Assert.Equal("Store arbeidsplasser", arbeidsplasser.Navn);
+        Assert.False(string.IsNullOrWhiteSpace(arbeidsplasser.Beskrivelse));
+        Assert.False(string.IsNullOrWhiteSpace(arbeidsplasser.Ikon));
+    }
+
+    [Fact]
+    public async Task Arbeidsplasserlaget_gir_featurecollection_uten_nett()
+    {
+        const string svar = """
+            {
+                "source": "firmafakta",
+                "operation": "finn_selskaper_i_omrade",
+                "parameters": {},
+                "data": {
+                    "summary": {},
+                    "pagination": {},
+                    "companies": [
+                        {
+                            "organization_id": "944384448",
+                            "navn": "STIFTELSEN KIRKENS BYMISJON",
+                            "antallAnsatte": 2567,
+                            "naeringskode1": { "kode": "94.910", "beskrivelse": "Aktiviteter i religiøse organisasjoner" },
+                            "distance_km": 0.2,
+                            "coordinates": { "latitude": 59.9099, "longitude": 10.7464 }
+                        }
+                    ]
+                }
+            }
+            """;
+
+        using var vertUtenNett = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient<Allemannsdata>().ConfigurePrimaryHttpMessageHandler(() => new FastSvarHandler(svar))));
+        var klient = vertUtenNett.CreateClient();
+
+        Allemannsdata.TømMellomlager();
+        try
+        {
+            var respons = await klient.GetAsync("/api/lag/arbeidsplasser");
+            var lag = await respons.Content.ReadFromJsonAsync<Kartlag>();
+
+            Assert.Equal(HttpStatusCode.OK, respons.StatusCode);
+            Assert.Equal("FeatureCollection", lag!.Type);
+            Assert.NotEmpty(lag.Features);
+            Assert.Equal([10.7464, 59.9099], lag.Features[0].Geometry.Coordinates);
+        }
+        finally
+        {
+            Allemannsdata.TømMellomlager();
+        }
+    }
+
+    [Fact]
     public async Task Spisestederlaget_gir_featurecollection_uten_nett()
     {
         const string svar = """
