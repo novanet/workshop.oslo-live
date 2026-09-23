@@ -15,6 +15,8 @@ CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("nb-NO");
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Tellingen av oppslag i Allemannsdata. Én for hele prosessen, se /api/metrikker.
+builder.Services.AddSingleton<Metrikker>();
 builder.Services.AddHttpClient<Allemannsdata>(klient =>
 {
     klient.Timeout = TimeSpan.FromSeconds(30);
@@ -216,6 +218,9 @@ app.MapGet("/api/statistikk", (IEnumerable<ILag> lag, Lagstatistikk statistikk) 
         var s = statistikk.Hent(l.Id);
         return new { id = l.Id, navn = l.Navn, antall = s.Antall, eldste = s.Eldste, nyeste = s.Nyeste, hentet = s.Hentet, feiler = s.Feiler };
     }));
+
+// Kall, treff i mellomlageret, bom, snittid og feil per kilde siden oppstart. Nullstilles ikke ved oppslag.
+app.MapGet("/api/metrikker", (Metrikker metrikker) => metrikker.Les());
 
 // Virker tjenesten? Leser siste kjente resultat fra bakgrunnssjekken.
 app.MapGet("/api/helse/kilder", (HelseSjekker sjekker) =>
