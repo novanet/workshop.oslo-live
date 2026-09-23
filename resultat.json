@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:37:39",
+  "oppdatert": "2026-09-23T10:38:16",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -21,17 +21,42 @@
           "poeng": 8
         }
       ],
-      "dollar": 5.225,
-      "tokens": 9468148,
-      "sekunder": 1881,
-      "pr": 3,
+      "dollar": 6.188,
+      "tokens": 11352200,
+      "sekunder": 2306,
+      "pr": 4,
       "utkast": 0,
       "merget": 2,
-      "kjoeringer": 6,
+      "kjoeringer": 7,
       "utenPr": 3,
       "bygg": [],
       "estimert": false,
       "plass": 1
+    },
+    {
+      "navn": "mini-astrid",
+      "github": "theakbe",
+      "poeng": 3,
+      "feil": [],
+      "lag": [],
+      "levert": [
+        {
+          "issue": 42,
+          "navn": "Nærmeste punkt",
+          "poeng": 3
+        }
+      ],
+      "dollar": 1.818,
+      "tokens": 4407241,
+      "sekunder": 648,
+      "pr": 1,
+      "utkast": 0,
+      "merget": 1,
+      "kjoeringer": 1,
+      "utenPr": 0,
+      "bygg": [],
+      "estimert": false,
+      "plass": 2
     },
     {
       "navn": "mini-jon",
@@ -56,7 +81,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 2
+      "plass": 3
     },
     {
       "navn": "mini-gir",
@@ -81,7 +106,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 3
+      "plass": 4
     },
     {
       "navn": "mini-ingve",
@@ -106,7 +131,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 4
+      "plass": 5
     },
     {
       "navn": "mini-leif",
@@ -131,7 +156,7 @@
       "utenPr": 0,
       "bygg": [],
       "estimert": false,
-      "plass": 5
+      "plass": 6
     },
     {
       "navn": "mini-wilma",
@@ -156,7 +181,7 @@
       "utenPr": 3,
       "bygg": [],
       "estimert": false,
-      "plass": 6
+      "plass": 7
     },
     {
       "navn": "henrik",
@@ -168,25 +193,6 @@
       "dollar": 0.304,
       "tokens": 221022,
       "sekunder": 119,
-      "pr": 0,
-      "utkast": 0,
-      "merget": 0,
-      "kjoeringer": 1,
-      "utenPr": 1,
-      "bygg": [],
-      "estimert": false,
-      "plass": 7
-    },
-    {
-      "navn": "mini-aud",
-      "github": "audmaha",
-      "poeng": 0,
-      "feil": [],
-      "lag": [],
-      "levert": [],
-      "dollar": 0.36,
-      "tokens": 645238,
-      "sekunder": 132,
       "pr": 0,
       "utkast": 0,
       "merget": 0,
@@ -216,6 +222,25 @@
       "plass": 9
     },
     {
+      "navn": "mini-aud",
+      "github": "audmaha",
+      "poeng": 0,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 1.176,
+      "tokens": 2061400,
+      "sekunder": 456,
+      "pr": 1,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 2,
+      "utenPr": 1,
+      "bygg": [],
+      "estimert": false,
+      "plass": 10
+    },
+    {
       "navn": "mini-taco",
       "github": "Puiu",
       "poeng": 0,
@@ -225,25 +250,6 @@
       "dollar": 1.654,
       "tokens": 3189417,
       "sekunder": 707,
-      "pr": 1,
-      "utkast": 0,
-      "merget": 0,
-      "kjoeringer": 1,
-      "utenPr": 0,
-      "bygg": [],
-      "estimert": false,
-      "plass": 10
-    },
-    {
-      "navn": "mini-astrid",
-      "github": "theakbe",
-      "poeng": 0,
-      "feil": [],
-      "lag": [],
-      "levert": [],
-      "dollar": 1.818,
-      "tokens": 4407241,
-      "sekunder": 648,
       "pr": 1,
       "utkast": 0,
       "merget": 0,
@@ -361,26 +367,10 @@
     {
       "agent": "mini-richard",
       "github": "randsu",
-      "issue": 38,
-      "navn": "Demomodus",
-      "startet": "2026-09-23T08:30:23.0330294+00:00",
-      "minutter": 7
-    },
-    {
-      "agent": "mini-richard",
-      "github": "randsu",
       "issue": 23,
       "navn": "Delbart utsnitt",
       "startet": "2026-09-23T08:31:51.7313963+00:00",
-      "minutter": 5
-    },
-    {
-      "agent": "mini-aud",
-      "github": "audmaha",
-      "issue": 23,
-      "navn": "Delbart utsnitt",
-      "startet": "2026-09-23T08:32:03.1180412+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-aud",
@@ -404,7 +394,7 @@
       "issue": 43,
       "navn": "Statistikk",
       "startet": "2026-09-23T08:33:40.253268+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-richard",
@@ -413,6 +403,14 @@
       "navn": "Delt mobilitet",
       "startet": "2026-09-23T08:36:06.1007878+00:00",
       "minutter": 1
+    },
+    {
+      "agent": "mini-wilma",
+      "github": "larsajakobsen",
+      "issue": 32,
+      "navn": "Strømpris",
+      "startet": "2026-09-23T08:37:51.7658572+00:00",
+      "minutter": 0
     }
   ],
   "main": {
@@ -565,25 +563,31 @@
       "issue": 23,
       "navn": "Del kartutsnittet som en lenke",
       "github": "audmaha",
-      "oppdatert": "2026-09-23T08:35:39Z"
+      "oppdatert": "2026-09-23T08:37:46Z"
     },
     {
       "issue": 23,
       "navn": "Del kartutsnittet som en lenke",
       "github": "randsu",
-      "oppdatert": "2026-09-23T08:35:39Z"
+      "oppdatert": "2026-09-23T08:37:46Z"
     },
     {
       "issue": 29,
       "navn": "Nytt lag: museer og samlinger",
       "github": "jthagesk",
-      "oppdatert": "2026-09-23T08:34:14Z"
+      "oppdatert": "2026-09-23T08:37:58Z"
+    },
+    {
+      "issue": 32,
+      "navn": "Vis strømprisen for Oslo",
+      "github": "larsajakobsen",
+      "oppdatert": "2026-09-23T08:37:52Z"
     },
     {
       "issue": 38,
       "navn": "Demomodus for storskjerm",
       "github": "randsu",
-      "oppdatert": "2026-09-23T08:30:24Z"
+      "oppdatert": "2026-09-23T08:37:48Z"
     },
     {
       "issue": 41,
@@ -613,7 +617,7 @@
       "issue": 44,
       "navn": "Sammenlign to tidspunkt",
       "github": "yonzo",
-      "oppdatert": "2026-09-23T08:15:47Z"
+      "oppdatert": "2026-09-23T08:37:59Z"
     },
     {
       "issue": 45,
@@ -690,15 +694,39 @@
   ],
   "aapne": [
     {
-      "pr": 86,
-      "tittel": "Hva er nærmest her?",
-      "github": "theakbe",
-      "agent": "mini-astrid",
-      "opprettet": "2026-09-23T08:36:36Z",
-      "oppdatert": "2026-09-23T08:36:37Z",
+      "pr": 88,
+      "tittel": "#38: Demomodus for storskjerm",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:37:47Z",
+      "oppdatert": "2026-09-23T08:37:48Z",
       "utkast": false,
       "issues": [
-        42
+        38
+      ]
+    },
+    {
+      "pr": 87,
+      "tittel": "Del kartutsnittet som en lenke",
+      "github": "audmaha",
+      "agent": "mini-aud",
+      "opprettet": "2026-09-23T08:37:45Z",
+      "oppdatert": "2026-09-23T08:37:45Z",
+      "utkast": false,
+      "issues": [
+        23
+      ]
+    },
+    {
+      "pr": 85,
+      "tittel": "#9: Nytt lag: badetemperaturer",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:35:02Z",
+      "oppdatert": "2026-09-23T08:37:27Z",
+      "utkast": false,
+      "issues": [
+        9
       ]
     },
     {
@@ -711,18 +739,6 @@
       "utkast": false,
       "issues": [
         50
-      ]
-    },
-    {
-      "pr": 85,
-      "tittel": "#9: Nytt lag: badetemperaturer",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:35:02Z",
-      "oppdatert": "2026-09-23T08:35:03Z",
-      "utkast": false,
-      "issues": [
-        9
       ]
     },
     {
