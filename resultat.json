@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:40:29",
+  "oppdatert": "2026-09-23T11:41:07",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -318,25 +318,6 @@
       "plass": 10
     },
     {
-      "navn": "martin-holth",
-      "github": "martinrholth",
-      "poeng": 0,
-      "feil": [],
-      "lag": [],
-      "levert": [],
-      "dollar": 0.0,
-      "tokens": 0,
-      "sekunder": 0,
-      "pr": 0,
-      "utkast": 0,
-      "merget": 0,
-      "kjoeringer": 1,
-      "utenPr": 1,
-      "bygg": [],
-      "estimert": false,
-      "plass": 11
-    },
-    {
       "navn": "henrik",
       "github": "monet820",
       "poeng": 0,
@@ -351,6 +332,25 @@
       "merget": 0,
       "kjoeringer": 1,
       "utenPr": 1,
+      "bygg": [],
+      "estimert": false,
+      "plass": 11
+    },
+    {
+      "navn": "martin-holth",
+      "github": "martinrholth",
+      "poeng": 0,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 0.381,
+      "tokens": 482528,
+      "sekunder": 127,
+      "pr": 0,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 2,
+      "utenPr": 2,
       "bygg": [],
       "estimert": false,
       "plass": 12
@@ -534,7 +534,7 @@
       "issue": 29,
       "navn": "Museer",
       "startet": "2026-09-23T09:33:36.7988647+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-kirsten",
@@ -542,7 +542,7 @@
       "issue": 52,
       "navn": "Konfigurerbar bbox",
       "startet": "2026-09-23T09:36:06.5656066+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "Dmitry-agent",
@@ -550,7 +550,7 @@
       "issue": 12,
       "navn": "Holdeplasser",
       "startet": "2026-09-23T09:36:39.1423524+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "henrik",
@@ -558,7 +558,7 @@
       "issue": 7,
       "navn": "Skipstrafikk",
       "startet": "2026-09-23T09:37:38.7912096+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-jon",
@@ -566,15 +566,7 @@
       "issue": 44,
       "navn": "Sammenlign tid",
       "startet": "2026-09-23T09:38:36.2749004+00:00",
-      "minutter": 1
-    },
-    {
-      "agent": "martin-holth",
-      "github": "martinrholth",
-      "issue": 111,
-      "navn": "Nytt lag: kaier og ferjekaier",
-      "startet": "2026-09-23T09:38:43.734765+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-knive",
@@ -598,7 +590,7 @@
       "issue": 112,
       "navn": "Nytt lag: målestasjoner i elvene",
       "startet": "2026-09-23T09:39:34.3255853+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-wilma",
@@ -606,7 +598,7 @@
       "issue": 119,
       "navn": "Mørkt kart når sola går ned i Oslo",
       "startet": "2026-09-23T09:39:34.4905216+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-bug",
@@ -614,7 +606,7 @@
       "issue": 113,
       "navn": "Nytt lag: store arbeidsplasser i sentrum",
       "startet": "2026-09-23T09:39:52.4461984+00:00",
-      "minutter": 0
+      "minutter": 1
     }
   ],
   "main": {
@@ -669,7 +661,7 @@
       "issue": 11,
       "navn": "Nytt lag: kollektivtrafikk som beveger seg",
       "github": "coffeelyfe",
-      "oppdatert": "2026-09-23T09:39:15Z"
+      "oppdatert": "2026-09-23T09:40:50Z"
     },
     {
       "issue": 12,
@@ -885,7 +877,7 @@
       "issue": 111,
       "navn": "Nytt lag: kaier og ferjekaier",
       "github": "martinrholth",
-      "oppdatert": "2026-09-23T09:38:44Z"
+      "oppdatert": "2026-09-23T09:40:57Z"
     },
     {
       "issue": 112,
@@ -925,6 +917,18 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 87,
+      "tittel": "Del kartutsnittet som en lenke",
+      "github": "audmaha",
+      "agent": "mini-aud",
+      "opprettet": "2026-09-23T08:37:45Z",
+      "oppdatert": "2026-09-23T09:40:43Z",
+      "utkast": false,
+      "issues": [
+        23
+      ]
+    },
     {
       "pr": 127,
       "tittel": "Vis hvor ferskt hvert lag er (#122)",
@@ -983,18 +987,6 @@
       "utkast": false,
       "issues": [
         41
-      ]
-    },
-    {
-      "pr": 87,
-      "tittel": "Del kartutsnittet som en lenke",
-      "github": "audmaha",
-      "agent": "mini-aud",
-      "opprettet": "2026-09-23T08:37:45Z",
-      "oppdatert": "2026-09-23T09:39:08Z",
-      "utkast": false,
-      "issues": [
-        23
       ]
     },
     {
