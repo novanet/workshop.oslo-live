@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T09:51:00",
+  "oppdatert": "2026-09-23T09:53:48",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -123,7 +123,16 @@
       "plass": 6
     }
   ],
-  "kjoerer": [],
+  "kjoerer": [
+    {
+      "agent": "mini-richard",
+      "github": "randsu",
+      "issue": 56,
+      "navn": "Flytrafikk",
+      "startet": "2026-09-23T07:53:20.1148991+00:00",
+      "minutter": 0
+    }
+  ],
   "main": {
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
@@ -162,7 +171,7 @@
       "issue": 5,
       "navn": "Tall i URL-ene får norsk desimalkomma",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T07:47:45Z"
+      "oppdatert": "2026-09-23T07:53:26Z"
     },
     {
       "issue": 11,
@@ -180,7 +189,7 @@
       "issue": 56,
       "navn": "Nytt lag: fly i lufta over Oslo",
       "github": "randsu",
-      "oppdatert": "2026-09-23T07:44:23Z"
+      "oppdatert": "2026-09-23T07:53:21Z"
     },
     {
       "issue": 57,
@@ -191,6 +200,18 @@
   ],
   "aapne": [
     {
+      "pr": 65,
+      "tittel": "#11: Nytt lag: kollektivtrafikk som beveger seg",
+      "github": "coffeelyfe",
+      "agent": "Andy3000",
+      "opprettet": "2026-09-23T07:50:13Z",
+      "oppdatert": "2026-09-23T07:51:30Z",
+      "utkast": false,
+      "issues": [
+        11
+      ]
+    },
+    {
       "pr": 66,
       "tittel": "Steder langt utenfor Oslo slipper inn i kartet (#2)",
       "github": "leif-larsen",
@@ -200,18 +221,6 @@
       "utkast": false,
       "issues": [
         2
-      ]
-    },
-    {
-      "pr": 65,
-      "tittel": "#11: Nytt lag: kollektivtrafikk som beveger seg",
-      "github": "coffeelyfe",
-      "agent": "Andy3000",
-      "opprettet": "2026-09-23T07:50:13Z",
-      "oppdatert": "2026-09-23T07:50:14Z",
-      "utkast": false,
-      "issues": [
-        11
       ]
     },
     {
