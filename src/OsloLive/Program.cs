@@ -67,6 +67,7 @@ builder.Services.AddSingleton<ILag, SpisestederLag>();
 builder.Services.AddSingleton<ILag, HoldeplasserLag>();
 builder.Services.AddSingleton<ILag, SkipLag>();
 builder.Services.AddSingleton<ILag, VannmaalereLag>();
+builder.Services.AddSingleton<ILag, SkolerLag>();
 builder.Services.AddSingleton<ILag, KaierLag>();
 builder.Services.AddSingleton<ILag, MuseumLag>();
 builder.Services.AddSingleton<ILag, BomstasjonerLag>();
@@ -239,10 +240,68 @@ app.MapGet("/api/vannstand", async (Allemannsdata data, CancellationToken stopp)
     }
 });
 
+// Adressesøk hos Kartverket (Geonorge). Ikke et lag, derfor eget endepunkt uten tilstand.
+app.MapGet("/api/sok", async (string? q, Allemannsdata data, CancellationToken stopp) =>
+{
+    if (string.IsNullOrWhiteSpace(q))
+    {
+        return Results.BadRequest(new { feil = "Skriv noe å søke etter i «q»." });
+    }
+
+    try
+    {
+        var rader = await data.HentListe(
+            "geonorge",
+            "search_address",
+            new Dictionary<string, object>
+            {
+                ["text"] = q.Trim(),
+                ["kommunenummer"] = "0301",
+                ["limit"] = 20,
+            },
+            liste: "addresses",
+            stopp);
+
+        var treff = rader
+            .Select(TilSøketreff)
+            .Where(t => t is not null && Geo.IOslo(t.Lat, t.Lon))
+            .Take(10)
+            .ToList();
+
+        return Results.Ok(treff);
+    }
+    catch (Exception ex)
+    {
+        app.Logger.LogError(ex, "Adressesøket feilet");
+        return Results.Json(new { feil = ex.Message }, statusCode: 502);
+    }
+});
+
 app.Run();
 
 /// <summary>Gjør Program synlig for testprosjektet.</summary>
-public partial class Program;
+public partial class Program
+{
+    /// <summary>Ett treff i adressesøket.</summary>
+    public sealed record Søketreff(string Navn, double Lat, double Lon);
+
+    /// <summary>Leser en rad fra Geonorges adressesøk. Null hvis navn eller koordinater mangler.</summary>
+    public static Søketreff? TilSøketreff(JsonElement rad)
+    {
+        var navn = rad.TryGetProperty("address", out var a) ? a.GetString() : null;
+        if (string.IsNullOrWhiteSpace(navn))
+        {
+            return null;
+        }
+
+        if (!rad.TryGetProperty("lat", out var lat) || !rad.TryGetProperty("lon", out var lon))
+        {
+            return null;
+        }
+
+        return new Søketreff(navn, lat.GetDouble(), lon.GetDouble());
+    }
+}
 
 /// <summary>
 /// Tolker tidevannssvaret fra Kartverket (via Allemannsdata, kilde «weather»).
