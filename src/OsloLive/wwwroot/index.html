@@ -482,7 +482,7 @@ function popup(e) {
   const skjul = new Set(['id', 'navn', 'kilde']);
   const rader = Object.entries(e)
     .filter(([k, v]) => !skjul.has(k) && v !== null && v !== undefined && v !== '')
-    .map(([k, v]) => `<div class="rad">${esc(k)}: <span>${esc(v)}</span></div>`)
+    .map(([k, v]) => `<div class="rad">${esc(k)}: <span>${esc(k === 'kurs' ? v + '°' : v)}</span></div>`)
     .join('');
   return `<b>${esc(e.navn ?? 'Uten navn')}</b>${rader}<div class="rad" style="margin-top:6px;opacity:.7">${esc(e.kilde ?? '')}</div>`;
 }

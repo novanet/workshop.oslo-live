@@ -20,6 +20,29 @@ public sealed class SkipLag(Allemannsdata data) : ILag
     /// <summary>Tak på antall fartøy, romslig nok til å ikke kutte Nesoddbåtene.</summary>
     public const int MaksFartøy = 200;
 
+    /// <summary>
+    /// Kurs over grunn i grader, 0-359, der 0 er nord. Feltet «kurs» fra
+    /// AIS-kilden (describe_operation for ais/find_vessels_nearby) er det
+    /// eneste retningsfeltet operasjonen oppgir; den har ingen egen
+    /// heading-verdi å falle tilbake på. AIS bruker 360 som «ukjent kurs»,
+    /// så verdier utenfor [0, 360) forkastes, i tillegg til manglende felt.
+    /// </summary>
+    public static int? UtledKurs(JsonElement rad)
+    {
+        if (!rad.TryGetProperty("kurs", out var k) || k.ValueKind != JsonValueKind.Number)
+        {
+            return null;
+        }
+
+        var verdi = k.GetDouble();
+        if (verdi < 0 || verdi >= 360)
+        {
+            return null;
+        }
+
+        return (int)Math.Round(verdi) % 360;
+    }
+
     /// <summary>Ett fartøy med kjent posisjon blir ett punkt. Ukjent posisjon gir ikke punkt.</summary>
     public static Kartpunkt? TilPunkt(JsonElement rad)
     {
@@ -55,6 +78,12 @@ public sealed class SkipLag(Allemannsdata data) : ILag
             {
                 detaljer["destinasjon"] = destinasjon;
             }
+        }
+
+        var kurs = UtledKurs(rad);
+        if (kurs is not null)
+        {
+            detaljer["kurs"] = kurs;
         }
 
         return Geo.Lag(

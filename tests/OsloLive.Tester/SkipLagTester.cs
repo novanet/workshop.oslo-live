@@ -110,6 +110,58 @@ public class SkipLagTester
     }
 
     [Fact]
+    public void Fartoey_med_vanlig_kurs_faar_kurs_som_heltall()
+    {
+        var punkt = SkipLag.TilPunkt(Rad("""
+            { "vessel_id": 257852500, "navn": "Vision of the Fjords", "lat": 59.9073, "lon": 10.7481, "fart_knop": 0, "kurs": 236.7 }
+            """));
+
+        Assert.NotNull(punkt);
+        Assert.Equal(237, punkt!.Properties["kurs"]);
+    }
+
+    [Fact]
+    public void Fartoey_med_ukjent_kurs_mangler_kursfeltet()
+    {
+        var punkt = SkipLag.TilPunkt(Rad("""
+            { "vessel_id": 257852500, "navn": "Ukjent kurs", "lat": 59.9073, "lon": 10.7481, "fart_knop": 5, "kurs": 360 }
+            """));
+
+        Assert.NotNull(punkt);
+        Assert.False(punkt!.Properties.ContainsKey("kurs"));
+    }
+
+    [Fact]
+    public void Fartoey_uten_kurs_mangler_kursfeltet()
+    {
+        var punkt = SkipLag.TilPunkt(Rad("""
+            { "vessel_id": 257852500, "navn": "Bjorvika", "lat": 59.9073, "lon": 10.7481, "fart_knop": 0, "kurs": null }
+            """));
+
+        Assert.NotNull(punkt);
+        Assert.False(punkt!.Properties.ContainsKey("kurs"));
+    }
+
+    [Theory]
+    [InlineData(-1)]
+    [InlineData(360)]
+    [InlineData(511)]
+    public void UtledKurs_forkaster_verdier_utenfor_gyldig_omraade(double kurs)
+    {
+        var rad = Rad($$"""{ "kurs": {{kurs.ToString(System.Globalization.CultureInfo.InvariantCulture)}} }""");
+
+        Assert.Null(SkipLag.UtledKurs(rad));
+    }
+
+    [Fact]
+    public void UtledKurs_rund_av_til_naermeste_heltall_og_haandterer_wrap_til_null()
+    {
+        var rad = Rad("""{ "kurs": 359.6 }""");
+
+        Assert.Equal(0, SkipLag.UtledKurs(rad));
+    }
+
+    [Fact]
     public void Radiusen_dekker_Nesodden()
     {
         // Nesoddtangen ferjekai.
