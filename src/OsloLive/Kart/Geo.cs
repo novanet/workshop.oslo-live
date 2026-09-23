@@ -67,14 +67,15 @@ public static class Geo
 
     /// <summary>
     /// Samler punktene til et ferdig lag. Punkter utenfor Oslo er allerede
-    /// silt bort av <see cref="Lag"/>; her fjerner vi duplikater.
+    /// silt bort av <see cref="Lag"/>; her fjerner vi duplikater, altså
+    /// punkter med samme id.
     /// </summary>
     public static Kartlag Samle(IEnumerable<Kartpunkt?> punkter)
     {
         var rene = punkter
             .Where(p => p is not null)
             .Select(p => p!)
-            .DistinctBy(p => p.Properties["kilde"])
+            .DistinctBy(p => p.Properties["id"])
             .ToList();
 
         return new Kartlag("FeatureCollection", rene);

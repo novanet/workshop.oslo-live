@@ -101,6 +101,39 @@ public class GeoTester
     }
 
     [Fact]
+    public void Samle_beholder_ulike_punkter_fra_samme_kilde()
+    {
+        var lag = Geo.Samle([
+            Geo.Lag("a", 59.91, 10.75, "A", "Kilde"),
+            Geo.Lag("b", 59.92, 10.76, "B", "Kilde"),
+            Geo.Lag("c", 59.93, 10.77, "C", "Kilde"),
+        ]);
+
+        Assert.Equal("FeatureCollection", lag.Type);
+        Assert.Equal(3, lag.Features.Count);
+        Assert.Equal(["a", "b", "c"], lag.Features.Select(f => f.Properties["id"]));
+
+        foreach (var punkt in lag.Features)
+        {
+            Assert.Contains("id", punkt.Properties.Keys);
+            Assert.Contains("navn", punkt.Properties.Keys);
+            Assert.Contains("kilde", punkt.Properties.Keys);
+        }
+    }
+
+    [Fact]
+    public void Samle_fjerner_punkter_med_samme_id()
+    {
+        var lag = Geo.Samle([
+            Geo.Lag("a", 59.91, 10.75, "A", "Kilde"),
+            Geo.Lag("a", 59.91, 10.75, "A", "Kilde"),
+        ]);
+
+        Assert.Single(lag.Features);
+        Assert.Equal("a", lag.Features[0].Properties["id"]);
+    }
+
+    [Fact]
     public void Samle_tar_ikke_med_punkter_utenfor_utsnittet()
     {
         var lag = Geo.Samle([
