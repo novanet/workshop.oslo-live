@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:11:57",
+  "oppdatert": "2026-09-23T10:12:23",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -15,13 +15,13 @@
       ],
       "lag": [],
       "levert": [],
-      "dollar": 0.459,
-      "tokens": 830036,
-      "sekunder": 183,
-      "pr": 1,
+      "dollar": 1.904,
+      "tokens": 4503476,
+      "sekunder": 603,
+      "pr": 2,
       "utkast": 0,
       "merget": 1,
-      "kjoeringer": 1,
+      "kjoeringer": 2,
       "utenPr": 0,
       "bygg": [],
       "estimert": false,
@@ -91,20 +91,20 @@
       "plass": 4
     },
     {
-      "navn": "mini-frode",
-      "github": "FrodeBl",
+      "navn": "mini-wilma",
+      "github": "larsajakobsen",
       "poeng": 0,
       "feil": [],
       "lag": [],
       "levert": [],
-      "dollar": 0.591,
-      "tokens": 953832,
-      "sekunder": 198,
+      "dollar": 0.48,
+      "tokens": 812565,
+      "sekunder": 164,
       "pr": 1,
       "utkast": 0,
       "merget": 0,
-      "kjoeringer": 3,
-      "utenPr": 2,
+      "kjoeringer": 1,
+      "utenPr": 0,
       "bygg": [],
       "estimert": false,
       "plass": 5
@@ -165,6 +165,25 @@
       "bygg": [],
       "estimert": false,
       "plass": 8
+    },
+    {
+      "navn": "mini-frode",
+      "github": "FrodeBl",
+      "poeng": 0,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 1.821,
+      "tokens": 3226617,
+      "sekunder": 697,
+      "pr": 2,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 4,
+      "utenPr": 2,
+      "bygg": [],
+      "estimert": false,
+      "plass": 9
     }
   ],
   "kjoerer": [
@@ -174,15 +193,7 @@
       "issue": 54,
       "navn": "Rate limit",
       "startet": "2026-09-23T08:03:17.9589775+00:00",
-      "minutter": 8
-    },
-    {
-      "agent": "mini-frode",
-      "github": "FrodeBl",
-      "issue": 50,
-      "navn": "Metrikker",
-      "startet": "2026-09-23T08:03:32.4223783+00:00",
-      "minutter": 8
+      "minutter": 9
     },
     {
       "agent": "Andy3000",
@@ -190,23 +201,7 @@
       "issue": 11,
       "navn": "Kollektiv",
       "startet": "2026-09-23T08:04:09.8675976+00:00",
-      "minutter": 7
-    },
-    {
-      "agent": "mini-leif",
-      "github": "leif-larsen",
-      "issue": 21,
-      "navn": "Adressesøk",
-      "startet": "2026-09-23T08:04:57.5527152+00:00",
-      "minutter": 6
-    },
-    {
-      "agent": "mini-wilma",
-      "github": "larsajakobsen",
-      "issue": 4,
-      "navn": "Duplikatfjerning",
-      "startet": "2026-09-23T08:09:04.172255+00:00",
-      "minutter": 2
+      "minutter": 8
     },
     {
       "agent": "mini-gir",
@@ -214,7 +209,7 @@
       "issue": 17,
       "navn": "Smilefjes",
       "startet": "2026-09-23T08:10:01.588657+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-jon",
@@ -222,7 +217,7 @@
       "issue": 44,
       "navn": "Sammenlign tid",
       "startet": "2026-09-23T08:10:18.2408581+00:00",
-      "minutter": 1
+      "minutter": 2
     }
   ],
   "main": {
@@ -264,13 +259,13 @@
       "issue": 4,
       "navn": "Hvert lag viser bare ett eneste punkt",
       "github": "ingvevs",
-      "oppdatert": "2026-09-23T08:09:05Z"
+      "oppdatert": "2026-09-23T08:12:08Z"
     },
     {
       "issue": 4,
       "navn": "Hvert lag viser bare ett eneste punkt",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T08:09:05Z"
+      "oppdatert": "2026-09-23T08:12:08Z"
     },
     {
       "issue": 5,
@@ -300,7 +295,7 @@
       "issue": 21,
       "navn": "Søk etter adresse og hopp dit på kartet",
       "github": "leif-larsen",
-      "oppdatert": "2026-09-23T08:04:58Z"
+      "oppdatert": "2026-09-23T08:12:18Z"
     },
     {
       "issue": 44,
@@ -324,7 +319,7 @@
       "issue": 50,
       "navn": "Mål hva som skjer",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T08:03:33Z"
+      "oppdatert": "2026-09-23T08:12:11Z"
     },
     {
       "issue": 54,
@@ -352,6 +347,42 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 72,
+      "tittel": "Søk etter adresse og hopp dit på kartet (#21)",
+      "github": "leif-larsen",
+      "agent": "mini-leif",
+      "opprettet": "2026-09-23T08:12:16Z",
+      "oppdatert": "2026-09-23T08:12:17Z",
+      "utkast": false,
+      "issues": [
+        21
+      ]
+    },
+    {
+      "pr": 71,
+      "tittel": "Mål hva som skjer",
+      "github": "FrodeBl",
+      "agent": "mini-frode",
+      "opprettet": "2026-09-23T08:12:09Z",
+      "oppdatert": "2026-09-23T08:12:10Z",
+      "utkast": false,
+      "issues": [
+        50
+      ]
+    },
+    {
+      "pr": 70,
+      "tittel": "Hvert lag viser bare ett eneste punkt",
+      "github": "larsajakobsen",
+      "agent": "mini-wilma",
+      "opprettet": "2026-09-23T08:12:06Z",
+      "oppdatert": "2026-09-23T08:12:07Z",
+      "utkast": false,
+      "issues": [
+        4
+      ]
+    },
     {
       "pr": 69,
       "tittel": "#56: Nytt lag: fly i lufta over Oslo",
