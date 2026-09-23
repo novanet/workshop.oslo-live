@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:19:11",
+  "oppdatert": "2026-09-23T10:19:38",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -259,7 +259,7 @@
       "issue": 49,
       "navn": "Nytt forsøk",
       "startet": "2026-09-23T08:16:16.8577675+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-sindre",
@@ -267,7 +267,7 @@
       "issue": 59,
       "navn": "",
       "startet": "2026-09-23T08:16:21.5736896+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-knive",
@@ -275,7 +275,7 @@
       "issue": 57,
       "navn": "Avgangstavle",
       "startet": "2026-09-23T08:16:36.122853+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-richard",
@@ -283,7 +283,7 @@
       "issue": 2,
       "navn": "Utsnittet",
       "startet": "2026-09-23T08:17:30.8091834+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-leif",
@@ -291,6 +291,14 @@
       "issue": 21,
       "navn": "Adressesøk",
       "startet": "2026-09-23T08:18:27.0600008+00:00",
+      "minutter": 1
+    },
+    {
+      "agent": "mini-wilma",
+      "github": "larsajakobsen",
+      "issue": 5,
+      "navn": "Norsk tallformat",
+      "startet": "2026-09-23T08:19:23.3216436+00:00",
       "minutter": 0
     }
   ],
@@ -323,13 +331,13 @@
       "issue": 2,
       "navn": "Steder langt utenfor Oslo slipper inn i kartet",
       "github": "leif-larsen",
-      "oppdatert": "2026-09-23T08:17:31Z"
+      "oppdatert": "2026-09-23T08:19:12Z"
     },
     {
       "issue": 2,
       "navn": "Steder langt utenfor Oslo slipper inn i kartet",
       "github": "randsu",
-      "oppdatert": "2026-09-23T08:17:31Z"
+      "oppdatert": "2026-09-23T08:19:12Z"
     },
     {
       "issue": 3,
@@ -341,19 +349,25 @@
       "issue": 4,
       "navn": "Hvert lag viser bare ett eneste punkt",
       "github": "ingvevs",
-      "oppdatert": "2026-09-23T08:12:08Z"
+      "oppdatert": "2026-09-23T08:19:18Z"
     },
     {
       "issue": 4,
       "navn": "Hvert lag viser bare ett eneste punkt",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T08:12:08Z"
+      "oppdatert": "2026-09-23T08:19:18Z"
     },
     {
       "issue": 5,
       "navn": "Tall i URL-ene får norsk desimalkomma",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T08:18:55Z"
+      "oppdatert": "2026-09-23T08:19:24Z"
+    },
+    {
+      "issue": 5,
+      "navn": "Tall i URL-ene får norsk desimalkomma",
+      "github": "larsajakobsen",
+      "oppdatert": "2026-09-23T08:19:24Z"
     },
     {
       "issue": 7,
