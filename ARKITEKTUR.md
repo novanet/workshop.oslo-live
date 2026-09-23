@@ -141,7 +141,7 @@ Standardmappa ligger i containerens eget filsystem. Den overlever en omstart av 
 
 ## Frontend
 
-`wwwroot/index.html`: HTML, CSS og JavaScript i én fil. MapLibre GL JS 4.7.1 fra cdnjs (pinnet), vektorfliser fra OpenFreeMap (stil `liberty`), terreng fra Mapterhorn. Kartet står i 3D med `pitch: 55`. Farger og terreng settes i `varmTema(kart)`; utseendeendringer gjøres der. Punkter tegnes som HTML-markører per lag; popup viser `navn` og alle `detaljer` unntatt `id`, `navn`, `kilde`. Nye script lastes fra cdnjs med pinnet versjon.
+`wwwroot/index.html`: HTML, CSS og JavaScript i én fil. MapLibre GL JS 4.7.1 fra cdnjs (pinnet), vektorfliser fra OpenFreeMap (stil `liberty`), terreng fra Mapterhorn. Kartet står i 3D med `pitch: 55`. Farger og terreng settes i `varmTema(kart)`; utseendeendringer gjøres der. Punktene fra alle lag ligger i én GeoJSON-kilde (`punkter`) med MapLibre-klynging (`clusterRadius` 50, enkeltpunkter fra zoom 16); ikonene er canvas-bilder per lag, og varsler blinker med en rød glorie i laget `punkter-blink`. Popup viser `navn` og alle `detaljer` unntatt `id`, `navn`, `kilde`. Nye script lastes fra cdnjs med pinnet versjon.
 
 ## Samtidige agenter
 
