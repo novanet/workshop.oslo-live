@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:42:47",
+  "oppdatert": "2026-09-23T10:43:13",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -362,7 +362,7 @@
       "issue": 6,
       "navn": "Delt mobilitet",
       "startet": "2026-09-23T08:36:06.1007878+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-wilma",
@@ -370,7 +370,7 @@
       "issue": 32,
       "navn": "Strømpris",
       "startet": "2026-09-23T08:37:51.7658572+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-jon",
@@ -418,7 +418,7 @@
       "issue": 35,
       "navn": "Varmekart",
       "startet": "2026-09-23T08:39:47.6963928+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-taco",
@@ -426,7 +426,7 @@
       "issue": 47,
       "navn": "Søk på tvers",
       "startet": "2026-09-23T08:39:51.4798178+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-kirsten",
@@ -434,7 +434,7 @@
       "issue": 52,
       "navn": "Konfigurerbar bbox",
       "startet": "2026-09-23T08:42:06.8631198+00:00",
-      "minutter": 0
+      "minutter": 1
     }
   ],
   "main": {
