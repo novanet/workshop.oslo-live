@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:15:15",
+  "oppdatert": "2026-09-23T10:15:41",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -160,6 +160,25 @@
       "plass": 7
     },
     {
+      "navn": "mini-taco",
+      "github": "Puiu",
+      "poeng": 0,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 1.654,
+      "tokens": 3189417,
+      "sekunder": 707,
+      "pr": 1,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 1,
+      "utenPr": 0,
+      "bygg": [],
+      "estimert": false,
+      "plass": 8
+    },
+    {
       "navn": "mini-frode",
       "github": "FrodeBl",
       "poeng": 0,
@@ -176,7 +195,7 @@
       "utenPr": 2,
       "bygg": [],
       "estimert": false,
-      "plass": 8
+      "plass": 9
     },
     {
       "navn": "Andy3000",
@@ -195,18 +214,10 @@
       "utenPr": 0,
       "bygg": [],
       "estimert": false,
-      "plass": 9
+      "plass": 10
     }
   ],
   "kjoerer": [
-    {
-      "agent": "mini-taco",
-      "github": "Puiu",
-      "issue": 54,
-      "navn": "Rate limit",
-      "startet": "2026-09-23T08:03:17.9589775+00:00",
-      "minutter": 11
-    },
     {
       "agent": "mini-gir",
       "github": "GIR75",
@@ -221,7 +232,7 @@
       "issue": 44,
       "navn": "Sammenlign tid",
       "startet": "2026-09-23T08:10:18.2408581+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-frode",
@@ -345,7 +356,7 @@
       "issue": 54,
       "navn": "Vær grei mot kildene",
       "github": "Puiu",
-      "oppdatert": "2026-09-23T08:03:19Z"
+      "oppdatert": "2026-09-23T08:15:25Z"
     },
     {
       "issue": 56,
@@ -367,6 +378,42 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 73,
+      "tittel": "Vær grei mot kildene (#54)",
+      "github": "Puiu",
+      "agent": "mini-taco",
+      "opprettet": "2026-09-23T08:15:23Z",
+      "oppdatert": "2026-09-23T08:15:24Z",
+      "utkast": false,
+      "issues": [
+        54
+      ]
+    },
+    {
+      "pr": 70,
+      "tittel": "Hvert lag viser bare ett eneste punkt",
+      "github": "larsajakobsen",
+      "agent": "mini-wilma",
+      "opprettet": "2026-09-23T08:12:06Z",
+      "oppdatert": "2026-09-23T08:14:57Z",
+      "utkast": false,
+      "issues": [
+        4
+      ]
+    },
+    {
+      "pr": 71,
+      "tittel": "Mål hva som skjer",
+      "github": "FrodeBl",
+      "agent": "mini-frode",
+      "opprettet": "2026-09-23T08:12:09Z",
+      "oppdatert": "2026-09-23T08:14:56Z",
+      "utkast": false,
+      "issues": [
+        50
+      ]
+    },
     {
       "pr": 65,
       "tittel": "#11: Nytt lag: kollektivtrafikk som beveger seg",
@@ -413,30 +460,6 @@
       "utkast": false,
       "issues": [
         56
-      ]
-    },
-    {
-      "pr": 71,
-      "tittel": "Mål hva som skjer",
-      "github": "FrodeBl",
-      "agent": "mini-frode",
-      "opprettet": "2026-09-23T08:12:09Z",
-      "oppdatert": "2026-09-23T08:12:10Z",
-      "utkast": false,
-      "issues": [
-        50
-      ]
-    },
-    {
-      "pr": 70,
-      "tittel": "Hvert lag viser bare ett eneste punkt",
-      "github": "larsajakobsen",
-      "agent": "mini-wilma",
-      "opprettet": "2026-09-23T08:12:06Z",
-      "oppdatert": "2026-09-23T08:12:07Z",
-      "utkast": false,
-      "issues": [
-        4
       ]
     }
   ],
