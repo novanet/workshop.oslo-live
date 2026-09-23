@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:15:48",
+  "oppdatert": "2026-09-23T14:16:28",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -64,12 +64,12 @@
       ],
       "dollar": 17.498,
       "tokens": 34580100,
-      "sekunder": 6062,
+      "sekunder": 6063,
       "pr": 11,
       "utkast": 0,
       "merget": 10,
-      "kjoeringer": 16,
-      "utenPr": 5,
+      "kjoeringer": 17,
+      "utenPr": 6,
       "bygg": [],
       "estimert": false,
       "plass": 1
@@ -130,12 +130,12 @@
       "levert": [],
       "dollar": 10.005,
       "tokens": 17101880,
-      "sekunder": 3331,
+      "sekunder": 3333,
       "pr": 3,
       "utkast": 0,
       "merget": 2,
-      "kjoeringer": 20,
-      "utenPr": 17,
+      "kjoeringer": 22,
+      "utenPr": 19,
       "bygg": [],
       "estimert": false,
       "plass": 3
@@ -160,12 +160,12 @@
       ],
       "dollar": 9.373,
       "tokens": 16634056,
-      "sekunder": 3149,
+      "sekunder": 3150,
       "pr": 3,
       "utkast": 0,
       "merget": 2,
-      "kjoeringer": 7,
-      "utenPr": 4,
+      "kjoeringer": 8,
+      "utenPr": 5,
       "bygg": [],
       "estimert": false,
       "plass": 4
@@ -578,7 +578,7 @@
       "issue": 26,
       "navn": "Skoler",
       "startet": "2026-09-23T12:00:11.8740211+00:00",
-      "minutter": 15
+      "minutter": 16
     },
     {
       "agent": "mini-aud",
@@ -595,6 +595,14 @@
       "navn": "Hendelser",
       "startet": "2026-09-23T12:10:34.6234355+00:00",
       "minutter": 5
+    },
+    {
+      "agent": "mini-gir",
+      "github": "GIR75",
+      "issue": 51,
+      "navn": "Logging",
+      "startet": "2026-09-23T12:16:17.8388957+00:00",
+      "minutter": 0
     }
   ],
   "main": {
@@ -627,7 +635,7 @@
       "issue": 13,
       "navn": "Nytt lag: veiarbeid og stengte veier",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T12:15:40Z"
+      "oppdatert": "2026-09-23T12:16:22Z"
     },
     {
       "issue": 14,
@@ -645,7 +653,7 @@
       "issue": 18,
       "navn": "Nytt lag: kulturminner",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T12:15:34Z"
+      "oppdatert": "2026-09-23T12:16:21Z"
     },
     {
       "issue": 19,
@@ -675,7 +683,7 @@
       "issue": 28,
       "navn": "Nytt lag: togtrafikk",
       "github": "Buggz",
-      "oppdatert": "2026-09-23T12:14:59Z"
+      "oppdatert": "2026-09-23T12:15:58Z"
     },
     {
       "issue": 29,
@@ -699,7 +707,7 @@
       "issue": 33,
       "navn": "Nytt lag: sykkelparkering",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T12:07:12Z"
+      "oppdatert": "2026-09-23T12:15:52Z"
     },
     {
       "issue": 37,
@@ -759,7 +767,7 @@
       "issue": 51,
       "navn": "Strukturert logging",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T12:15:46Z"
+      "oppdatert": "2026-09-23T12:16:24Z"
     },
     {
       "issue": 52,
@@ -957,13 +965,25 @@
       "issue": 141,
       "navn": "Tydelige kartsymboler: båter som ser ut som båter",
       "github": "leif-larsen",
-      "oppdatert": "2026-09-23T12:15:15Z"
+      "oppdatert": "2026-09-23T12:16:12Z"
     },
     {
       "issue": 142,
       "navn": "Kurs på skipene",
       "github": "randsu",
       "oppdatert": "2026-09-23T12:03:16Z"
+    },
+    {
+      "issue": 158,
+      "navn": "Strøm av endringer i stedet for å spørre hvert 15. sekund",
+      "github": "randsu",
+      "oppdatert": "2026-09-23T12:16:17Z"
+    },
+    {
+      "issue": 198,
+      "navn": "Et lite pling når noe nytt dukker opp",
+      "github": "larsajakobsen",
+      "oppdatert": "2026-09-23T12:16:25Z"
     }
   ],
   "aapne": [
