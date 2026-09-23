@@ -41,7 +41,6 @@
   .bunn { margin-top: 12px; padding-top: 12px; border-top: 1px solid #e5e7eb; font-size: 11px; color: var(--dempet); display: flex; justify-content: space-between; }
 
   .kamera {
-    position: absolute; bottom: 24px; right: 16px; z-index: 10;
     display: flex; flex-direction: column; gap: 6px;
   }
   .kamera button {
@@ -115,6 +114,17 @@ const kart = new maplibregl.Map({
 });
 
 kart.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), 'bottom-right');
+
+// Kameraknappene legges i kartets eget kontrollhjørne, så MapLibre
+// stabler dem sammen med zoom og kildehenvisning uten overlapp.
+kart.addControl({
+  onAdd() {
+    const el = document.querySelector('.kamera');
+    el.classList.add('maplibregl-ctrl');
+    return el;
+  },
+  onRemove() {}
+}, 'bottom-right');
 
 kart.on('style.load', () => {
   varmTema(kart);
