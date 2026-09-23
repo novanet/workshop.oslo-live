@@ -1,11 +1,11 @@
 {
-  "oppdatert": "2026-09-23T13:51:24",
+  "oppdatert": "2026-09-23T13:52:03",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
       "navn": "mini-richard",
       "github": "randsu",
-      "poeng": 30,
+      "poeng": 32,
       "feil": [
         {
           "issue": 3,
@@ -14,6 +14,11 @@
         }
       ],
       "lag": [
+        {
+          "issue": 6,
+          "navn": "Delt mobilitet",
+          "poeng": 2
+        },
         {
           "issue": 9,
           "navn": "Badetemperatur",
@@ -205,8 +210,8 @@
       "pr": 4,
       "utkast": 0,
       "merget": 1,
-      "kjoeringer": 11,
-      "utenPr": 4,
+      "kjoeringer": 12,
+      "utenPr": 5,
       "bygg": [],
       "estimert": false,
       "plass": 6
@@ -386,8 +391,8 @@
       "pr": 3,
       "utkast": 0,
       "merget": 1,
-      "kjoeringer": 6,
-      "utenPr": 3,
+      "kjoeringer": 7,
+      "utenPr": 4,
       "bygg": [],
       "estimert": false,
       "plass": 13
@@ -524,25 +529,6 @@
       "bygg": [],
       "estimert": false,
       "plass": 20
-    },
-    {
-      "navn": "app/copilot-swe-agent",
-      "github": "app/copilot-swe-agent",
-      "poeng": -3,
-      "feil": [],
-      "lag": [],
-      "levert": [],
-      "dollar": 0.0,
-      "tokens": 0,
-      "sekunder": 0,
-      "pr": 4,
-      "utkast": 3,
-      "merget": 0,
-      "kjoeringer": 0,
-      "utenPr": 0,
-      "bygg": [],
-      "estimert": false,
-      "plass": 21
     }
   ],
   "kjoerer": [
@@ -553,6 +539,14 @@
       "navn": "Ekte sollys på 3D-byggene",
       "startet": "2026-09-23T11:50:10.530436+00:00",
       "minutter": 1
+    },
+    {
+      "agent": "martin-holth",
+      "github": "martinrholth",
+      "issue": 111,
+      "navn": "Nytt lag: kaier og ferjekaier",
+      "startet": "2026-09-23T11:51:39.5025981+00:00",
+      "minutter": 0
     }
   ],
   "main": {
@@ -562,14 +556,15 @@
     "kjoeringer": 38
   },
   "produkt": {
-    "testerBestatt": 15,
-    "testerFeilet": 11,
+    "testerBestatt": 16,
+    "testerFeilet": 10,
     "issuerLost": [
       1,
       2,
       3,
       4,
       5,
+      6,
       7,
       9,
       15,
@@ -691,7 +686,7 @@
       "issue": 29,
       "navn": "Nytt lag: museer og samlinger",
       "github": "jthagesk",
-      "oppdatert": "2026-09-23T11:50:32Z"
+      "oppdatert": "2026-09-23T11:51:32Z"
     },
     {
       "issue": 30,
@@ -805,7 +800,7 @@
       "issue": 111,
       "navn": "Nytt lag: kaier og ferjekaier",
       "github": "martinrholth",
-      "oppdatert": "2026-09-23T11:50:55Z"
+      "oppdatert": "2026-09-23T11:51:40Z"
     },
     {
       "issue": 112,
@@ -958,19 +953,37 @@
       "oppdatert": "2026-09-23T11:50:11Z"
     },
     {
-      "issue": 133,
-      "navn": "Havet stiger: hva havner under vann?",
-      "github": "Puiu",
-      "oppdatert": "2026-09-23T11:51:19Z"
-    },
-    {
       "issue": 141,
       "navn": "Tydelige kartsymboler: båter som ser ut som båter",
       "github": "leif-larsen",
-      "oppdatert": "2026-09-23T11:51:20Z"
+      "oppdatert": "2026-09-23T11:51:24Z"
     }
   ],
   "aapne": [
+    {
+      "pr": 91,
+      "tittel": "Fargene må virke for alle",
+      "github": "audmaha",
+      "agent": "mini-aud",
+      "opprettet": "2026-09-23T08:42:14Z",
+      "oppdatert": "2026-09-23T11:51:23Z",
+      "utkast": false,
+      "issues": [
+        41
+      ]
+    },
+    {
+      "pr": 140,
+      "tittel": "Vis endringen per lag i lagvelgeren",
+      "github": "larsajakobsen",
+      "agent": "mini-wilma",
+      "opprettet": "2026-09-23T11:40:24Z",
+      "oppdatert": "2026-09-23T11:51:15Z",
+      "utkast": false,
+      "issues": [
+        120
+      ]
+    },
     {
       "pr": 89,
       "tittel": "#23: Del kartutsnittet som en lenke",
@@ -1020,18 +1033,6 @@
       ]
     },
     {
-      "pr": 140,
-      "tittel": "Vis endringen per lag i lagvelgeren",
-      "github": "larsajakobsen",
-      "agent": "mini-wilma",
-      "opprettet": "2026-09-23T11:40:24Z",
-      "oppdatert": "2026-09-23T11:40:25Z",
-      "utkast": false,
-      "issues": [
-        120
-      ]
-    },
-    {
       "pr": 97,
       "tittel": "Søk på tvers av alle lag (#47)",
       "github": "Puiu",
@@ -1053,18 +1054,6 @@
       "utkast": false,
       "issues": [
         12
-      ]
-    },
-    {
-      "pr": 136,
-      "tittel": "[WIP] Add pulsing effect for new points on map",
-      "github": "app/copilot-swe-agent",
-      "agent": "app/copilot-swe-agent",
-      "opprettet": "2026-09-23T09:44:20Z",
-      "oppdatert": "2026-09-23T10:00:49Z",
-      "utkast": false,
-      "issues": [
-        117
       ]
     },
     {
@@ -1092,18 +1081,6 @@
       ]
     },
     {
-      "pr": 91,
-      "tittel": "Fargene må virke for alle",
-      "github": "audmaha",
-      "agent": "mini-aud",
-      "opprettet": "2026-09-23T08:42:14Z",
-      "oppdatert": "2026-09-23T09:50:27Z",
-      "utkast": false,
-      "issues": [
-        41
-      ]
-    },
-    {
       "pr": 87,
       "tittel": "Del kartutsnittet som en lenke",
       "github": "audmaha",
@@ -1116,30 +1093,6 @@
       ]
     },
     {
-      "pr": 134,
-      "tittel": "[WIP] Fix icons for bike, e-scooter, and car in mobility section",
-      "github": "app/copilot-swe-agent",
-      "agent": "app/copilot-swe-agent",
-      "opprettet": "2026-09-23T09:43:34Z",
-      "oppdatert": "2026-09-23T09:45:27Z",
-      "utkast": true,
-      "issues": [
-        123
-      ]
-    },
-    {
-      "pr": 135,
-      "tittel": "[WIP] Add follow feature for moving points on map",
-      "github": "app/copilot-swe-agent",
-      "agent": "app/copilot-swe-agent",
-      "opprettet": "2026-09-23T09:44:03Z",
-      "oppdatert": "2026-09-23T09:45:04Z",
-      "utkast": true,
-      "issues": [
-        121
-      ]
-    },
-    {
       "pr": 83,
       "tittel": "Nytt lag: museer og samlinger",
       "github": "jthagesk",
@@ -1149,18 +1102,6 @@
       "utkast": false,
       "issues": [
         29
-      ]
-    },
-    {
-      "pr": 125,
-      "tittel": "Nytt lag: Store arbeidsplasser (firmafakta)",
-      "github": "app/copilot-swe-agent",
-      "agent": "app/copilot-swe-agent",
-      "opprettet": "2026-09-23T09:38:58Z",
-      "oppdatert": "2026-09-23T09:43:37Z",
-      "utkast": true,
-      "issues": [
-        113
       ]
     },
     {
