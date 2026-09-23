@@ -660,6 +660,11 @@ function symbolbilde(id, oppf, p) {
   return null;
 }
 
+// Lag med eget symbol fra effekter/symboler.js skilles på silhuetten, ikke på
+// farge: skip er et skrog sett ovenfra (BAAT), fly er et fly med vinger (FLY),
+// og mobilitet er sykkel, elsparkesykkel eller bil. Ingen av dem ligner hverandre
+// eller de fire formene (sirkel, firkant, ruter, dråpe) de andre lagene bruker.
+// Mobilitetspunkter uten type får formen og kantstilen til laget som alle andre.
 // Bildet et punkt tegnes med: eget symbol (skip, fly, mobilitet), ellers
 // lagets farge og ikon, eller punktets eget ikon (smilefjes) eller advarsel.
 // Formen og kantstilen er alltid lagets, så lag kan skilles uten farge.
