@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:42:13",
+  "oppdatert": "2026-09-23T11:42:50",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -482,14 +482,14 @@
       "feil": [],
       "lag": [],
       "levert": [],
-      "dollar": 9.086,
-      "tokens": 18645314,
-      "sekunder": 2589,
+      "dollar": 9.778,
+      "tokens": 19289126,
+      "sekunder": 2778,
       "pr": 1,
       "utkast": 0,
       "merget": 0,
-      "kjoeringer": 6,
-      "utenPr": 2,
+      "kjoeringer": 7,
+      "utenPr": 3,
       "bygg": [],
       "estimert": false,
       "plass": 19
@@ -540,7 +540,7 @@
       "issue": 29,
       "navn": "Museer",
       "startet": "2026-09-23T09:33:36.7988647+00:00",
-      "minutter": 8
+      "minutter": 9
     },
     {
       "agent": "mini-kirsten",
@@ -548,7 +548,7 @@
       "issue": 52,
       "navn": "Konfigurerbar bbox",
       "startet": "2026-09-23T09:36:06.5656066+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "Dmitry-agent",
@@ -556,7 +556,7 @@
       "issue": 12,
       "navn": "Holdeplasser",
       "startet": "2026-09-23T09:36:39.1423524+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "henrik",
@@ -564,7 +564,7 @@
       "issue": 7,
       "navn": "Skipstrafikk",
       "startet": "2026-09-23T09:37:38.7912096+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-jon",
@@ -572,7 +572,7 @@
       "issue": 44,
       "navn": "Sammenlign tid",
       "startet": "2026-09-23T09:38:36.2749004+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-knive",
@@ -580,15 +580,7 @@
       "issue": 28,
       "navn": "Tog",
       "startet": "2026-09-23T09:39:07.9583013+00:00",
-      "minutter": 2
-    },
-    {
-      "agent": "Andy3000",
-      "github": "coffeelyfe",
-      "issue": 11,
-      "navn": "Kollektiv",
-      "startet": "2026-09-23T09:39:14.3480284+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-wilma",
@@ -596,7 +588,7 @@
       "issue": 112,
       "navn": "Nytt lag: målestasjoner i elvene",
       "startet": "2026-09-23T09:39:34.3255853+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-wilma",
@@ -604,7 +596,7 @@
       "issue": 119,
       "navn": "Mørkt kart når sola går ned i Oslo",
       "startet": "2026-09-23T09:39:34.4905216+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-bug",
@@ -612,7 +604,23 @@
       "issue": 113,
       "navn": "Nytt lag: store arbeidsplasser i sentrum",
       "startet": "2026-09-23T09:39:52.4461984+00:00",
+      "minutter": 2
+    },
+    {
+      "agent": "mini-leif",
+      "github": "leif-larsen",
+      "issue": 118,
+      "navn": "Nyhetslinje nederst på skjermen",
+      "startet": "2026-09-23T09:41:48.0096457+00:00",
       "minutter": 1
+    },
+    {
+      "agent": "mini-wilma",
+      "github": "larsajakobsen",
+      "issue": 27,
+      "navn": "Verneområder",
+      "startet": "2026-09-23T09:42:25.9308327+00:00",
+      "minutter": 0
     }
   ],
   "main": {
@@ -667,7 +675,7 @@
       "issue": 11,
       "navn": "Nytt lag: kollektivtrafikk som beveger seg",
       "github": "coffeelyfe",
-      "oppdatert": "2026-09-23T09:40:50Z"
+      "oppdatert": "2026-09-23T09:42:33Z"
     },
     {
       "issue": 12,
@@ -745,7 +753,7 @@
       "issue": 27,
       "navn": "Nytt lag: verneområder og naturtyper",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T09:41:39Z"
+      "oppdatert": "2026-09-23T09:42:26Z"
     },
     {
       "issue": 28,
@@ -910,6 +918,12 @@
       "oppdatert": "2026-09-23T09:38:45Z"
     },
     {
+      "issue": 118,
+      "navn": "Nyhetslinje nederst på skjermen",
+      "github": "leif-larsen",
+      "oppdatert": "2026-09-23T09:41:48Z"
+    },
+    {
       "issue": 119,
       "navn": "Mørkt kart når sola går ned i Oslo",
       "github": "larsajakobsen",
@@ -917,6 +931,18 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 87,
+      "tittel": "Del kartutsnittet som en lenke",
+      "github": "audmaha",
+      "agent": "mini-aud",
+      "opprettet": "2026-09-23T08:37:45Z",
+      "oppdatert": "2026-09-23T09:42:13Z",
+      "utkast": false,
+      "issues": [
+        23
+      ]
+    },
     {
       "pr": 125,
       "tittel": "[WIP] Add layer for major employers in city center",
@@ -927,18 +953,6 @@
       "utkast": true,
       "issues": [
         113
-      ]
-    },
-    {
-      "pr": 87,
-      "tittel": "Del kartutsnittet som en lenke",
-      "github": "audmaha",
-      "agent": "mini-aud",
-      "opprettet": "2026-09-23T08:37:45Z",
-      "oppdatert": "2026-09-23T09:40:43Z",
-      "utkast": false,
-      "issues": [
-        23
       ]
     },
     {
