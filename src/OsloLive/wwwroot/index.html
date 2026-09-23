@@ -82,6 +82,21 @@
   .stroem .graf span { flex: 1; background: #d6cbb0; border-radius: 1px 1px 0 0; }
   .stroem .graf span.naa-time { background: #111; }
 
+  .sok-felt {
+    width: 100%; box-sizing: border-box; margin-bottom: 8px;
+    border: 1.5px solid var(--kant); border-radius: 7px;
+    padding: 7px 9px; font-size: 13px; font-family: inherit;
+  }
+  .sok-felt:focus { outline: 2px solid #111; outline-offset: 1px; }
+  #lagsok-resultat:not(:empty) { margin-bottom: 8px; border-bottom: 1px solid #e5e7eb; padding-bottom: 8px; }
+  .sok-gruppe .topp { display: flex; align-items: center; gap: 7px; padding: 4px 2px; }
+  .sok-gruppe .topp .ikon { width: 20px; height: 20px; border-radius: 50%; border: 1.5px solid #111; display: grid; place-items: center; font-size: 11px; flex: none; }
+  .sok-gruppe .topp .navn { flex: 1; font-size: 12px; font-weight: 600; }
+  .sok-gruppe .topp .antall { font-size: 11px; color: var(--dempet); }
+  .sok-treff { padding: 6px 8px 6px 29px; font-size: 13px; border-radius: 7px; cursor: pointer; }
+  .sok-treff:hover { background: #f3f4f6; }
+  .sok-skjult { padding: 2px 8px 6px 29px; font-size: 11px; color: var(--dempet); }
+
   .kamera {
     position: absolute; bottom: calc(var(--tikkerhoyde) + 24px); right: 16px; z-index: 10;
     display: flex; flex-direction: column; gap: 6px;
@@ -227,6 +242,8 @@
     <h1>Oslo Live</h1>
   </div>
   <p class="under">Levende data fra Allemannsdata</p>
+  <input type="text" id="lagsok" class="sok-felt" placeholder="Søk i kartet" autocomplete="off">
+  <div id="lagsok-resultat"></div>
   <form id="sok" class="sok" role="search">
     <input id="sokefelt" type="search" placeholder="Søk etter adresse" autocomplete="off" aria-label="Søk etter adresse">
     <button type="submit">Søk</button>
@@ -1305,6 +1322,7 @@ async function hent(id) {
   oppdaterBunn();
   if (valgtSted) visNaermest();
   if (omradeLukket) visOmrade();
+  visSok();
 }
 
 function settPå(id, på) {
@@ -1317,6 +1335,7 @@ function settPå(id, på) {
   if (valgtSted) visNaermest();
   if (omradeLukket) visOmrade();
   skrivUtsnitt();
+  visSok();
 }
 
 function oppdaterBunn() {
@@ -1726,6 +1745,87 @@ kart.on('touchmove', (e) => {
   if (trykkStart && (Math.abs(e.point.x - trykkStart.x) > 10 || Math.abs(e.point.y - trykkStart.y) > 10)) clearTimeout(trykkTimer);
 });
 ['touchend', 'touchcancel', 'dragstart', 'zoomstart'].forEach((h) => kart.on(h, () => clearTimeout(trykkTimer)));
+
+// ---------------------------------------------------------------------------
+// Søk i kartet: leter i navn og detaljfelt for punktene i lagene som er på,
+// uten nye kall — bare i dataene hent() allerede har lagret på hvert lag.
+// ---------------------------------------------------------------------------
+const lagSokFelt = document.getElementById('lagsok');
+const lagSokResultat = document.getElementById('lagsok-resultat');
+
+function normaliser(s) {
+  return String(s).toLocaleLowerCase('nb');
+}
+
+function treffILag(oppf, ord) {
+  return oppf.punkter.filter((p) => {
+    const felter = [p.navn, ...Object.entries(p.egenskaper ?? {})
+      .filter(([k]) => k !== 'id' && k !== 'kilde')
+      .map(([, v]) => v)];
+    const samlet = normaliser(felter.filter((v) => v !== null && v !== undefined).join(' '));
+    return samlet.includes(ord);
+  });
+}
+
+function visSok() {
+  const tekst = lagSokFelt.value.trim();
+  if (tekst.length < 2) { lagSokResultat.innerHTML = ''; return; }
+
+  const ord = normaliser(tekst);
+  const grupper = [];
+  for (const [id, oppf] of lagene) {
+    if (!oppf.på) continue;
+    const treff = treffILag(oppf, ord);
+    if (treff.length) grupper.push({ id, oppf, treff });
+  }
+
+  lagSokResultat.innerHTML = '';
+  if (!grupper.length) {
+    lagSokResultat.innerHTML = '<p class="tom">Ingen treff</p>';
+    return;
+  }
+
+  for (const { id, oppf, treff } of grupper) {
+    const gruppe = document.createElement('div');
+    gruppe.className = 'sok-gruppe';
+
+    const topp = document.createElement('div');
+    topp.className = 'topp';
+    topp.innerHTML = '<span class="ikon"></span><span class="navn"></span><span class="antall"></span>';
+    topp.querySelector('.ikon').textContent = oppf.ikon;
+    topp.querySelector('.ikon').style.background = oppf.farge;
+    topp.querySelector('.navn').textContent = oppf.navn;      // textContent: navn kommer fra eksterne kilder
+    topp.querySelector('.antall').textContent = treff.length;
+    gruppe.appendChild(topp);
+
+    for (const p of treff.slice(0, 20)) {
+      const rad = document.createElement('div');
+      rad.className = 'sok-treff';
+      rad.textContent = p.navn;
+      rad.addEventListener('click', () => {
+        kart.flyTo({ center: [p.lon, p.lat], zoom: Math.max(kart.getZoom(), 16), duration: 1200 });
+        visPopup(id, p);
+      });
+      gruppe.appendChild(rad);
+    }
+
+    if (treff.length > 20) {
+      const skjult = document.createElement('div');
+      skjult.className = 'sok-skjult';
+      skjult.textContent = (treff.length - 20) + ' flere skjult';
+      gruppe.appendChild(skjult);
+    }
+
+    lagSokResultat.appendChild(gruppe);
+  }
+}
+
+lagSokFelt.addEventListener('input', visSok);
+lagSokFelt.addEventListener('keydown', (ev) => {
+  if (ev.key !== 'Escape') return;
+  lagSokFelt.value = '';
+  visSok();
+});
 
 // ---------------------------------------------------------------------------
 // Mobilpanel: under 700px ligger panelet nederst, sammenslått til én linje
