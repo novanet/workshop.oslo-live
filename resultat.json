@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:13:46",
+  "oppdatert": "2026-09-23T14:14:30",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -578,7 +578,7 @@
       "issue": 26,
       "navn": "Skoler",
       "startet": "2026-09-23T12:00:11.8740211+00:00",
-      "minutter": 13
+      "minutter": 14
     },
     {
       "agent": "mini-aud",
@@ -825,7 +825,7 @@
       "issue": 111,
       "navn": "Nytt lag: kaier og ferjekaier",
       "github": "martinrholth",
-      "oppdatert": "2026-09-23T11:52:03Z"
+      "oppdatert": "2026-09-23T12:14:25Z"
     },
     {
       "issue": 113,
@@ -933,7 +933,7 @@
       "issue": 128,
       "navn": "Simulering: tsunami i Oslofjorden",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T12:01:37Z"
+      "oppdatert": "2026-09-23T12:13:52Z"
     },
     {
       "issue": 129,
@@ -969,13 +969,13 @@
       "issue": 132,
       "navn": "Ekte sollys på 3D-byggene",
       "github": "audmaha",
-      "oppdatert": "2026-09-23T12:07:37Z"
+      "oppdatert": "2026-09-23T12:13:54Z"
     },
     {
       "issue": 132,
       "navn": "Ekte sollys på 3D-byggene",
       "github": "nilsgs",
-      "oppdatert": "2026-09-23T12:07:37Z"
+      "oppdatert": "2026-09-23T12:13:54Z"
     },
     {
       "issue": 141,
@@ -1109,18 +1109,6 @@
       "utkast": false,
       "issues": [
         39
-      ]
-    },
-    {
-      "pr": 87,
-      "tittel": "Del kartutsnittet som en lenke",
-      "github": "audmaha",
-      "agent": "mini-aud",
-      "opprettet": "2026-09-23T08:37:45Z",
-      "oppdatert": "2026-09-23T09:45:55Z",
-      "utkast": false,
-      "issues": [
-        23
       ]
     },
     {
