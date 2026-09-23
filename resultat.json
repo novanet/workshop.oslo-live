@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:24:27",
+  "oppdatert": "2026-09-23T10:24:53",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -65,13 +65,13 @@
       ],
       "lag": [],
       "levert": [],
-      "dollar": 1.904,
-      "tokens": 4503476,
-      "sekunder": 603,
+      "dollar": 3.124,
+      "tokens": 7570986,
+      "sekunder": 944,
       "pr": 2,
       "utkast": 0,
       "merget": 1,
-      "kjoeringer": 2,
+      "kjoeringer": 3,
       "utenPr": 0,
       "bygg": [],
       "estimert": false,
@@ -198,25 +198,6 @@
       "plass": 9
     },
     {
-      "navn": "mini-frode",
-      "github": "FrodeBl",
-      "poeng": 0,
-      "feil": [],
-      "lag": [],
-      "levert": [],
-      "dollar": 1.821,
-      "tokens": 3226617,
-      "sekunder": 697,
-      "pr": 2,
-      "utkast": 0,
-      "merget": 0,
-      "kjoeringer": 4,
-      "utenPr": 2,
-      "bygg": [],
-      "estimert": false,
-      "plass": 10
-    },
-    {
       "navn": "Andy3000",
       "github": "coffeelyfe",
       "poeng": 0,
@@ -233,6 +214,25 @@
       "utenPr": 0,
       "bygg": [],
       "estimert": false,
+      "plass": 10
+    },
+    {
+      "navn": "mini-frode",
+      "github": "FrodeBl",
+      "poeng": 0,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 3.667,
+      "tokens": 7815989,
+      "sekunder": 1304,
+      "pr": 3,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 5,
+      "utenPr": 2,
+      "bygg": [],
+      "estimert": false,
       "plass": 11
     }
   ],
@@ -244,14 +244,6 @@
       "navn": "Smilefjes",
       "startet": "2026-09-23T08:10:01.588657+00:00",
       "minutter": 14
-    },
-    {
-      "agent": "mini-frode",
-      "github": "FrodeBl",
-      "issue": 19,
-      "navn": "Artsobservasjoner",
-      "startet": "2026-09-23T08:14:02.4941234+00:00",
-      "minutter": 10
     },
     {
       "agent": "mini-ingve",
@@ -267,15 +259,7 @@
       "issue": 57,
       "navn": "Avgangstavle",
       "startet": "2026-09-23T08:16:36.122853+00:00",
-      "minutter": 7
-    },
-    {
-      "agent": "mini-leif",
-      "github": "leif-larsen",
-      "issue": 21,
-      "navn": "Adressesøk",
-      "startet": "2026-09-23T08:18:27.0600008+00:00",
-      "minutter": 5
+      "minutter": 8
     },
     {
       "agent": "mini-wilma",
@@ -307,7 +291,7 @@
       "issue": 8,
       "navn": "Hendelser",
       "startet": "2026-09-23T08:22:51.9896553+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-kirsten",
@@ -447,7 +431,7 @@
       "issue": 19,
       "navn": "Nytt lag: artsobservasjoner",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T08:14:03Z"
+      "oppdatert": "2026-09-23T08:24:29Z"
     },
     {
       "issue": 20,
@@ -459,7 +443,7 @@
       "issue": 21,
       "navn": "Søk etter adresse og hopp dit på kartet",
       "github": "leif-larsen",
-      "oppdatert": "2026-09-23T08:18:28Z"
+      "oppdatert": "2026-09-23T08:24:29Z"
     },
     {
       "issue": 29,
@@ -547,10 +531,34 @@
       "github": "randsu",
       "agent": "mini-richard",
       "opprettet": "2026-09-23T08:10:46Z",
-      "oppdatert": "2026-09-23T08:24:07Z",
+      "oppdatert": "2026-09-23T08:24:47Z",
       "utkast": false,
       "issues": [
         56
+      ]
+    },
+    {
+      "pr": 76,
+      "tittel": "Nytt lag: artsobservasjoner",
+      "github": "FrodeBl",
+      "agent": "mini-frode",
+      "opprettet": "2026-09-23T08:24:27Z",
+      "oppdatert": "2026-09-23T08:24:28Z",
+      "utkast": false,
+      "issues": [
+        19
+      ]
+    },
+    {
+      "pr": 72,
+      "tittel": "Søk etter adresse og hopp dit på kartet (#21)",
+      "github": "leif-larsen",
+      "agent": "mini-leif",
+      "opprettet": "2026-09-23T08:12:16Z",
+      "oppdatert": "2026-09-23T08:24:28Z",
+      "utkast": false,
+      "issues": [
+        21
       ]
     },
     {
@@ -623,18 +631,6 @@
       "utkast": false,
       "issues": [
         50
-      ]
-    },
-    {
-      "pr": 72,
-      "tittel": "Søk etter adresse og hopp dit på kartet (#21)",
-      "github": "leif-larsen",
-      "agent": "mini-leif",
-      "opprettet": "2026-09-23T08:12:16Z",
-      "oppdatert": "2026-09-23T08:14:30Z",
-      "utkast": false,
-      "issues": [
-        21
       ]
     },
     {
