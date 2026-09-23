@@ -6,6 +6,7 @@
 <title>Oslo Live</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.js"></script>
+<script defer src="effekter/symboler.js"></script>
 <style>
   :root {
     --kant: #111111;
@@ -512,10 +513,49 @@ function lagMerkebilde(navn, farge, ikon) {
   kart.addImage(navn, g.getImageData(0, 0, s, s), { pixelRatio: 2 });
 }
 
-// Bildet et punkt tegnes med: lagets farge og ikon, eller punktets eget ikon
-// (smilefjes) eller advarsel. Bildene lages første gang de trengs.
+// SVG-symboler fra effekter/symboler.js blir MapLibre-bilder. SVG-en må
+// lastes asynkront via en <img>, så punktet vises med vanlig merke inntil
+// bildet er klart.
+const symbolLaster = new Set();
+let symbolOppdatering = 0;
+
+function kortHash(str) {
+  let h = 5381;
+  for (let i = 0; i < str.length; i++) h = ((h << 5) + h) ^ str.charCodeAt(i);
+  return Math.abs(h).toString(36);
+}
+
+// Bilde for lagets eget symbol (skip, fly, mobilitet), eller null når laget
+// ikke har et, eller symbolet ennå ikke er lastet.
+function symbolbilde(id, oppf, p) {
+  if (typeof window.lagSymbol !== 'function') return null;
+  const el = window.lagSymbol(id, p.egenskaper, oppf.farge);
+  if (!el) return null;
+  const svgTekst = new XMLSerializer().serializeToString(el);
+  const navn = 'symbol-' + id + '-' + kortHash(svgTekst);
+  if (kart.hasImage(navn)) return navn;
+  if (!symbolLaster.has(navn)) {
+    symbolLaster.add(navn);
+    const bilde = new Image();
+    bilde.onload = () => {
+      if (!kart.hasImage(navn)) kart.addImage(navn, bilde, { pixelRatio: 2 });
+      if (!symbolOppdatering) symbolOppdatering = requestAnimationFrame(() => {
+        symbolOppdatering = 0;
+        oppdaterKilde();
+      });
+    };
+    bilde.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgTekst);
+  }
+  return null;
+}
+
+// Bildet et punkt tegnes med: eget symbol (skip, fly, mobilitet), ellers
+// lagets farge og ikon, eller punktets eget ikon (smilefjes) eller advarsel.
+// Bildene lages første gang de trengs.
 function bildeFor(id, oppf, p) {
   if (p.egenskaper.advarsel) return 'merke-advarsel';
+  const symbol = symbolbilde(id, oppf, p);
+  if (symbol) return symbol;
   const eget = p.egenskaper.ikon;
   const navn = eget ? 'merke-' + id + '-' + eget : 'merke-' + id;
   lagMerkebilde(navn, oppf.farge, eget || oppf.ikon);
@@ -590,6 +630,9 @@ function leggTilPunktlag() {
     filter: ['!', ['has', 'point_count']],
     layout: {
       'icon-image': ['get', 'bilde'],
+      // Bildene har pixelRatio 2 på et 64 px lerret, så icon-size 1 gir et
+      // 32 px symbol – over kravet om minst 28 px.
+      'icon-size': 1,
       'icon-allow-overlap': true, 'icon-ignore-placement': true
     } });
 
