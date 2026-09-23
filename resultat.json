@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:44:43",
+  "oppdatert": "2026-09-23T11:45:21",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -540,7 +540,7 @@
       "issue": 52,
       "navn": "Konfigurerbar bbox",
       "startet": "2026-09-23T09:36:06.5656066+00:00",
-      "minutter": 8
+      "minutter": 9
     },
     {
       "agent": "Dmitry-agent",
@@ -572,7 +572,7 @@
       "issue": 28,
       "navn": "Tog",
       "startet": "2026-09-23T09:39:07.9583013+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-wilma",
@@ -596,7 +596,7 @@
       "issue": 113,
       "navn": "Nytt lag: store arbeidsplasser i sentrum",
       "startet": "2026-09-23T09:39:52.4461984+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-leif",
@@ -604,7 +604,7 @@
       "issue": 118,
       "navn": "Nyhetslinje nederst på skjermen",
       "startet": "2026-09-23T09:41:48.0096457+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-wilma",
@@ -620,7 +620,7 @@
       "issue": 117,
       "navn": "Nye punkter pulserer når de dukker opp",
       "startet": "2026-09-23T09:43:08.8955657+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-bug",
@@ -636,7 +636,7 @@
       "issue": 54,
       "navn": "Rate limit",
       "startet": "2026-09-23T09:44:05.6033424+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "martin-holth",
@@ -644,6 +644,14 @@
       "issue": 111,
       "navn": "Nytt lag: kaier og ferjekaier",
       "startet": "2026-09-23T09:44:13.0798166+00:00",
+      "minutter": 1
+    },
+    {
+      "agent": "mini-taco",
+      "github": "Puiu",
+      "issue": 133,
+      "navn": "",
+      "startet": "2026-09-23T09:45:07.3901613+00:00",
       "minutter": 0
     }
   ],
@@ -988,9 +996,63 @@
       "navn": "Riktig ikon for sykkel, elsparkesykkel og bil",
       "github": "SasaRad",
       "oppdatert": "2026-09-23T09:43:29Z"
+    },
+    {
+      "issue": 133,
+      "navn": "Havet stiger: hva havner under vann?",
+      "github": "Puiu",
+      "oppdatert": "2026-09-23T09:45:08Z"
     }
   ],
   "aapne": [
+    {
+      "pr": 135,
+      "tittel": "[WIP] Add follow feature for moving points on map",
+      "github": "app/copilot-swe-agent",
+      "agent": "app/copilot-swe-agent",
+      "opprettet": "2026-09-23T09:44:03Z",
+      "oppdatert": "2026-09-23T09:45:04Z",
+      "utkast": true,
+      "issues": [
+        121
+      ]
+    },
+    {
+      "pr": 136,
+      "tittel": "[WIP] Add pulsing effect for new points on map",
+      "github": "app/copilot-swe-agent",
+      "agent": "app/copilot-swe-agent",
+      "opprettet": "2026-09-23T09:44:20Z",
+      "oppdatert": "2026-09-23T09:44:58Z",
+      "utkast": true,
+      "issues": [
+        117
+      ]
+    },
+    {
+      "pr": 83,
+      "tittel": "Nytt lag: museer og samlinger",
+      "github": "jthagesk",
+      "agent": "mini-kirsten",
+      "opprettet": "2026-09-23T08:34:12Z",
+      "oppdatert": "2026-09-23T09:44:58Z",
+      "utkast": false,
+      "issues": [
+        29
+      ]
+    },
+    {
+      "pr": 96,
+      "tittel": "#22: Slå sammen punkter som ligger oppå hverandre",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:46:40Z",
+      "oppdatert": "2026-09-23T09:44:51Z",
+      "utkast": false,
+      "issues": [
+        22
+      ]
+    },
     {
       "pr": 92,
       "tittel": "Et statistikkpanel",
@@ -1001,18 +1063,6 @@
       "utkast": false,
       "issues": [
         43
-      ]
-    },
-    {
-      "pr": 136,
-      "tittel": "[WIP] Add pulsing effect for new points on map",
-      "github": "app/copilot-swe-agent",
-      "agent": "app/copilot-swe-agent",
-      "opprettet": "2026-09-23T09:44:20Z",
-      "oppdatert": "2026-09-23T09:44:20Z",
-      "utkast": true,
-      "issues": [
-        117
       ]
     },
     {
@@ -1028,18 +1078,6 @@
       ]
     },
     {
-      "pr": 135,
-      "tittel": "[WIP] Add follow feature for moving points on map",
-      "github": "app/copilot-swe-agent",
-      "agent": "app/copilot-swe-agent",
-      "opprettet": "2026-09-23T09:44:03Z",
-      "oppdatert": "2026-09-23T09:44:03Z",
-      "utkast": true,
-      "issues": [
-        121
-      ]
-    },
-    {
       "pr": 87,
       "tittel": "Del kartutsnittet som en lenke",
       "github": "audmaha",
@@ -1052,18 +1090,6 @@
       ]
     },
     {
-      "pr": 83,
-      "tittel": "Nytt lag: museer og samlinger",
-      "github": "jthagesk",
-      "agent": "mini-kirsten",
-      "opprettet": "2026-09-23T08:34:12Z",
-      "oppdatert": "2026-09-23T09:43:39Z",
-      "utkast": false,
-      "issues": [
-        29
-      ]
-    },
-    {
       "pr": 125,
       "tittel": "Nytt lag: Store arbeidsplasser (firmafakta)",
       "github": "app/copilot-swe-agent",
@@ -1073,18 +1099,6 @@
       "utkast": true,
       "issues": [
         113
-      ]
-    },
-    {
-      "pr": 96,
-      "tittel": "#22: Slå sammen punkter som ligger oppå hverandre",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:46:40Z",
-      "oppdatert": "2026-09-23T09:43:17Z",
-      "utkast": false,
-      "issues": [
-        22
       ]
     },
     {
