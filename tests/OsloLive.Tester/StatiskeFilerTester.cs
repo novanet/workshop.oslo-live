@@ -63,5 +63,24 @@ public class StatiskeFilerTester : IClassFixture<VertUtenBakgrunnssjekk>
 
         Assert.Contains("Ingen historikk ennå", innhold);
         Assert.Contains("bilder.length < 2", innhold);
+    public async Task Forsiden_formaterer_stroempris_med_norsk_tallformat()
+    {
+        var innhold = await vert.CreateClient().GetStringAsync("/index.html");
+
+        Assert.Contains("Intl.NumberFormat('nb-NO'", innhold);
+    }
+
+    [Fact]
+    public async Task Stroempanelet_bruker_ikke_toFixed_eller_punktumerstatning()
+    {
+        var innhold = await vert.CreateClient().GetStringAsync("/index.html");
+
+        var start = innhold.IndexOf("async function hentStroem()", StringComparison.Ordinal);
+        Assert.True(start >= 0, "Fant ikke hentStroem() i index.html");
+        var slutt = innhold.IndexOf("\n}", start, StringComparison.Ordinal);
+        var funksjon = innhold[start..slutt];
+
+        Assert.DoesNotContain("toFixed(", funksjon);
+        Assert.DoesNotContain("replace('", funksjon);
     }
 }
