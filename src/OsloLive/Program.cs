@@ -17,6 +17,8 @@ CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("nb-NO");
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Tellingen av oppslag i Allemannsdata. Én for hele prosessen, se /api/metrikker.
+builder.Services.AddSingleton<Metrikker>();
 builder.Services.AddHttpClient<Allemannsdata>(klient =>
 {
     klient.Timeout = TimeSpan.FromSeconds(30);
@@ -47,6 +49,14 @@ builder.Services.AddHttpClient("bomstasjoner", klient =>
     klient.DefaultRequestHeaders.UserAgent.ParseAdd("OsloLive/1.0 (kurs)");
     klient.DefaultRequestHeaders.Add("X-Client", "OsloLive");
     klient.DefaultRequestHeaders.Accept.ParseAdd("application/json");
+});
+
+// Wikipedia-artiklene hentes rett fra MediaWiki-API-et, og Wikimedia krever en beskrivende
+// User-Agent med hva appen er og hvor den finnes. Se WikipediaLag.cs.
+builder.Services.AddHttpClient("wikipedia", klient =>
+{
+    klient.Timeout = TimeSpan.FromSeconds(15);
+    klient.DefaultRequestHeaders.UserAgent.ParseAdd("OsloLive/1.0 (kart over Oslo med levende data; https://github.com/novanet/workshop.oslo-live)");
 });
 builder.Services.AddMemoryCache();
 builder.Services.AddSingleton<Lagstatistikk>();
@@ -91,10 +101,14 @@ builder.Services.AddSingleton<ILag, SpisestederLag>();
 builder.Services.AddSingleton<ILag, HoldeplasserLag>();
 builder.Services.AddSingleton<ILag, SkipLag>();
 builder.Services.AddSingleton<ILag, VannmaalereLag>();
+builder.Services.AddSingleton<ILag, SkolerLag>();
 builder.Services.AddSingleton<ILag, KaierLag>();
+builder.Services.AddSingleton<ILag, FolketellingLag>();
 builder.Services.AddSingleton<ILag, BomstasjonerLag>();
 builder.Services.AddSingleton<ILag, VaerstasjonerLag>();
 builder.Services.AddSingleton<ILag, IdrettsanleggLag>();
+builder.Services.AddSingleton<ILag, WikipediaLag>();
+builder.Services.AddSingleton<ILag, VeiarbeidLag>();
 
 // Bakgrunnssjekk av kildehelse, se Helse/HelseSjekker.cs.
 builder.Services.Configure<HelseValg>(builder.Configuration.GetSection("Helse"));
@@ -256,6 +270,9 @@ app.MapGet("/api/statistikk", (IEnumerable<ILag> lag, Lagstatistikk statistikk) 
         return new { id = l.Id, navn = l.Navn, antall = s.Antall, eldste = s.Eldste, nyeste = s.Nyeste, hentet = s.Hentet, feiler = s.Feiler };
     }));
 
+// Kall, treff i mellomlageret, bom, snittid og feil per kilde siden oppstart. Nullstilles ikke ved oppslag.
+app.MapGet("/api/metrikker", (Metrikker metrikker) => metrikker.Les());
+
 // Virker tjenesten? Leser siste kjente resultat fra bakgrunnssjekken.
 app.MapGet("/api/helse/kilder", (HelseSjekker sjekker) =>
 {
@@ -279,10 +296,68 @@ app.MapGet("/api/vannstand", async (Allemannsdata data, CancellationToken stopp)
     }
 });
 
+// Adressesøk hos Kartverket (Geonorge). Ikke et lag, derfor eget endepunkt uten tilstand.
+app.MapGet("/api/sok", async (string? q, Allemannsdata data, CancellationToken stopp) =>
+{
+    if (string.IsNullOrWhiteSpace(q))
+    {
+        return Results.BadRequest(new { feil = "Skriv noe å søke etter i «q»." });
+    }
+
+    try
+    {
+        var rader = await data.HentListe(
+            "geonorge",
+            "search_address",
+            new Dictionary<string, object>
+            {
+                ["text"] = q.Trim(),
+                ["kommunenummer"] = "0301",
+                ["limit"] = 20,
+            },
+            liste: "addresses",
+            stopp);
+
+        var treff = rader
+            .Select(TilSøketreff)
+            .Where(t => t is not null && Geo.IOslo(t.Lat, t.Lon))
+            .Take(10)
+            .ToList();
+
+        return Results.Ok(treff);
+    }
+    catch (Exception ex)
+    {
+        app.Logger.LogError(ex, "Adressesøket feilet");
+        return Results.Json(new { feil = ex.Message }, statusCode: 502);
+    }
+});
+
 app.Run();
 
 /// <summary>Gjør Program synlig for testprosjektet.</summary>
-public partial class Program;
+public partial class Program
+{
+    /// <summary>Ett treff i adressesøket.</summary>
+    public sealed record Søketreff(string Navn, double Lat, double Lon);
+
+    /// <summary>Leser en rad fra Geonorges adressesøk. Null hvis navn eller koordinater mangler.</summary>
+    public static Søketreff? TilSøketreff(JsonElement rad)
+    {
+        var navn = rad.TryGetProperty("address", out var a) ? a.GetString() : null;
+        if (string.IsNullOrWhiteSpace(navn))
+        {
+            return null;
+        }
+
+        if (!rad.TryGetProperty("lat", out var lat) || !rad.TryGetProperty("lon", out var lon))
+        {
+            return null;
+        }
+
+        return new Søketreff(navn, lat.GetDouble(), lon.GetDouble());
+    }
+}
 
 /// <summary>
 /// Tolker tidevannssvaret fra Kartverket (via Allemannsdata, kilde «weather»).

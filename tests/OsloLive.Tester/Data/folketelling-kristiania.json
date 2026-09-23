@@ -1,0 +1,1200 @@
+{
+ "source": "arkivverket",
+ "operation": "search_census_properties",
+ "parameters": {
+  "query": "Kristiania",
+  "limit": 50,
+  "offset": 0
+ },
+ "data": {
+  "count": 7424,
+  "returned": 50,
+  "properties": [
+   {
+    "property_id": "bf01036372028453",
+    "gaardsnavn_gateadr": "Kristiania metalvæveri og staalnetfabrik",
+    "bruksnavn": "Kristiania metalvæveri og staalnetfabrik",
+    "gaardsnr": "132",
+    "bruksnr": "16",
+    "fylke": "Akershus",
+    "kommune_sokn": "Aker",
+    "coordinates": {
+     "lat": 59.916162038291,
+     "lon": 10.808059023187
+    },
+    "source": "Folketelling 1910 for 0218 Aker herred"
+   },
+   {
+    "property_id": "gf01036392173180",
+    "gaardsnavn_gateadr": "Karlstadgate 11",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "coordinates": {
+     "lat": 59.924763789872,
+     "lon": 10.764700216189
+    },
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392173195",
+    "gaardsnavn_gateadr": "Karlstadgate 13",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "coordinates": {
+     "lat": 59.924771369495,
+     "lon": 10.764376830409
+    },
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392173349",
+    "gaardsnavn_gateadr": "Kirkegaardsgate 1",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "coordinates": {
+     "lat": 59.921798829546,
+     "lon": 10.763932419236
+    },
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392173442",
+    "gaardsnavn_gateadr": "Kirkegaardsgate 2",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "coordinates": {
+     "lat": 59.9219092734,
+     "lon": 10.763452643576
+    },
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392173487",
+    "gaardsnavn_gateadr": "Kirkegaardsgate 3",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "coordinates": {
+     "lat": 59.921646023494,
+     "lon": 10.763934017576
+    },
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392173529",
+    "gaardsnavn_gateadr": "Kirkegaardsgate 4",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "coordinates": {
+     "lat": 59.921764848181,
+     "lon": 10.763435263541
+    },
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392173589",
+    "gaardsnavn_gateadr": "Kirkegaardsgate 5",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "coordinates": {
+     "lat": 59.954477019569,
+     "lon": 10.775496467329
+    },
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392173652",
+    "gaardsnavn_gateadr": "Kirkegaardsgate 6",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "coordinates": {
+     "lat": 59.921600217195,
+     "lon": 10.763348821937
+    },
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392173700",
+    "gaardsnavn_gateadr": "Kirkegaardsgate 7",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "coordinates": {
+     "lat": 59.921315040134,
+     "lon": 10.76370761985
+    },
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392173772",
+    "gaardsnavn_gateadr": "Kirkegaardsgate 8",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "coordinates": {
+     "lat": 59.920773503301,
+     "lon": 10.763364830035
+    },
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392173909",
+    "gaardsnavn_gateadr": "Kirkegaardsgate 9",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "coordinates": {
+     "lat": 59.92091230134,
+     "lon": 10.764045599529
+    },
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392174029",
+    "gaardsnavn_gateadr": "Kirkegaardsgate 10",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "coordinates": {
+     "lat": 59.920690843187,
+     "lon": 10.763590303392
+    },
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392174037",
+    "gaardsnavn_gateadr": "Kirkegaardsgate 11",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "coordinates": {
+     "lat": 59.92081379819,
+     "lon": 10.764058174682
+    },
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392174169",
+    "gaardsnavn_gateadr": "Kirkegaardsgate 12",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "coordinates": {
+     "lat": 59.920565704366,
+     "lon": 10.763892838177
+    },
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392174241",
+    "gaardsnavn_gateadr": "Kirkegaardsgate 13",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "coordinates": {
+     "lat": 59.920632059791,
+     "lon": 10.764278384373
+    },
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392174376",
+    "gaardsnavn_gateadr": "Kirkegaardsgate 14",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "coordinates": {
+     "lat": 59.920027148134,
+     "lon": 10.76448096926
+    },
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392174377",
+    "gaardsnavn_gateadr": "Kirkegaardsgate 16",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "coordinates": {
+     "lat": 59.919871125764,
+     "lon": 10.764662069888
+    },
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392174417",
+    "gaardsnavn_gateadr": "Kirkegaardsgate 20",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "coordinates": {
+     "lat": 59.954477019569,
+     "lon": 10.775496467329
+    },
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392174625",
+    "gaardsnavn_gateadr": "Kirkegaardsgate 21a, b",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "coordinates": {
+     "lat": 59.954477019569,
+     "lon": 10.775496467329
+    },
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392175032",
+    "gaardsnavn_gateadr": "Kirkegaardsgate 22a, b",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "coordinates": {
+     "lat": 59.954477019569,
+     "lon": 10.775496467329
+    },
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392175427",
+    "gaardsnavn_gateadr": "Kirkegaardsgate 23",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "coordinates": {
+     "lat": 59.954477019569,
+     "lon": 10.775496467329
+    },
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392175632",
+    "gaardsnavn_gateadr": "Kjøbenhavnsgate 1",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392175896",
+    "gaardsnavn_gateadr": "Kjøbenhavnsgate 11",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392176038",
+    "gaardsnavn_gateadr": "Kjøbenhavnsgate 13",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392176118",
+    "gaardsnavn_gateadr": "Kjøbenhavnsgate 15",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392176208",
+    "gaardsnavn_gateadr": "Kjøbenhavnsgate 17",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392176277",
+    "gaardsnavn_gateadr": "Kjøbenhavnsgate 19",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392176426",
+    "gaardsnavn_gateadr": "Konghellegaten 1",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "coordinates": {
+     "lat": 59.930223724392,
+     "lon": 10.777080998248
+    },
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392176440",
+    "gaardsnavn_gateadr": "Lakkegaten 64",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "coordinates": {
+     "lat": 59.918480376014,
+     "lon": 10.764194860985
+    },
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392176532",
+    "gaardsnavn_gateadr": "Lakkegaten 66",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "coordinates": {
+     "lat": 59.919077813677,
+     "lon": 10.765157323353
+    },
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392176566",
+    "gaardsnavn_gateadr": "Lakkegaten 68",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "coordinates": {
+     "lat": 59.919229348638,
+     "lon": 10.765675257823
+    },
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392176600",
+    "gaardsnavn_gateadr": "Lakkegaten 71",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "coordinates": {
+     "lat": 59.918609292746,
+     "lon": 10.765127571007
+    },
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392176781",
+    "gaardsnavn_gateadr": "Lakkegaten 73",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "coordinates": {
+     "lat": 59.918900663092,
+     "lon": 10.765520200952
+    },
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392176967",
+    "gaardsnavn_gateadr": "Lakkegaten 75a, b",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "coordinates": {
+     "lat": 59.919187316465,
+     "lon": 10.766325348388
+    },
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392177377",
+    "gaardsnavn_gateadr": "Lakkegaten 79",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "coordinates": {
+     "lat": 59.919948441347,
+     "lon": 10.76762517749
+    },
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392177408",
+    "gaardsnavn_gateadr": "Langgate 1",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "coordinates": {
+     "lat": 59.922369710983,
+     "lon": 10.713511370618
+    },
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392177436",
+    "gaardsnavn_gateadr": "Langgate 2",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "coordinates": {
+     "lat": 59.873910581643,
+     "lon": 10.830091432374
+    },
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392177461",
+    "gaardsnavn_gateadr": "Langgate 3",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "coordinates": {
+     "lat": 59.922447637296,
+     "lon": 10.713143073393
+    },
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392177492",
+    "gaardsnavn_gateadr": "Langgate 4",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "coordinates": {
+     "lat": 59.872386759802,
+     "lon": 10.813257737535
+    },
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392177547",
+    "gaardsnavn_gateadr": "Langgate 5",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "coordinates": {
+     "lat": 59.922559636838,
+     "lon": 10.712716636736
+    },
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392177577",
+    "gaardsnavn_gateadr": "Langgate 6",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "coordinates": {
+     "lat": 59.87225356183,
+     "lon": 10.813310277241
+    },
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392177595",
+    "gaardsnavn_gateadr": "Langgate 7",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "coordinates": {
+     "lat": 59.873390963032,
+     "lon": 10.810627535537
+    },
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392177602",
+    "gaardsnavn_gateadr": "Langgate 8",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "coordinates": {
+     "lat": 59.872094064421,
+     "lon": 10.813384011354
+    },
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392177620",
+    "gaardsnavn_gateadr": "Langgate 9",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "coordinates": {
+     "lat": 59.872969854457,
+     "lon": 10.811521130789
+    },
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392177652",
+    "gaardsnavn_gateadr": "Langgate 10",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "coordinates": {
+     "lat": 59.871952477894,
+     "lon": 10.813455489393
+    },
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392177657",
+    "gaardsnavn_gateadr": "Langgate 12",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "coordinates": {
+     "lat": 59.871776203372,
+     "lon": 10.81356710053
+    },
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392177667",
+    "gaardsnavn_gateadr": "Langgate 13",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "coordinates": {
+     "lat": 59.872732595291,
+     "lon": 10.811694089263
+    },
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392177684",
+    "gaardsnavn_gateadr": "Langgate 14",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "coordinates": {
+     "lat": 59.871653094615,
+     "lon": 10.813654133361
+    },
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   },
+   {
+    "property_id": "gf01036392177696",
+    "gaardsnavn_gateadr": "Langgate 15",
+    "fylke": "Oslo",
+    "kommune_sokn": "Kristiania",
+    "coordinates": {
+     "lat": 59.872669011707,
+     "lon": 10.812238603418
+    },
+    "source": "Folketelling 1910 for 0301 Kristiania kjøpstad"
+   }
+  ],
+  "limit": 50,
+  "offset": 0,
+  "has_more_results": true,
+  "truncated": true,
+  "next_offset": 50
+ },
+ "entities": [
+  {
+   "type": "archive_record",
+   "id": "bf01036372028453",
+   "name": "Kristiania metalvæveri og staalnetfabrik",
+   "description": "Folketelling 1910 for 0218 Aker herred",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392173180",
+   "name": "Karlstadgate 11",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392173195",
+   "name": "Karlstadgate 13",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392173349",
+   "name": "Kirkegaardsgate 1",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392173442",
+   "name": "Kirkegaardsgate 2",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392173487",
+   "name": "Kirkegaardsgate 3",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392173529",
+   "name": "Kirkegaardsgate 4",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392173589",
+   "name": "Kirkegaardsgate 5",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392173652",
+   "name": "Kirkegaardsgate 6",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392173700",
+   "name": "Kirkegaardsgate 7",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392173772",
+   "name": "Kirkegaardsgate 8",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392173909",
+   "name": "Kirkegaardsgate 9",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392174029",
+   "name": "Kirkegaardsgate 10",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392174037",
+   "name": "Kirkegaardsgate 11",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392174169",
+   "name": "Kirkegaardsgate 12",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392174241",
+   "name": "Kirkegaardsgate 13",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392174376",
+   "name": "Kirkegaardsgate 14",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392174377",
+   "name": "Kirkegaardsgate 16",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392174417",
+   "name": "Kirkegaardsgate 20",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392174625",
+   "name": "Kirkegaardsgate 21a, b",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392175032",
+   "name": "Kirkegaardsgate 22a, b",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392175427",
+   "name": "Kirkegaardsgate 23",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392175632",
+   "name": "Kjøbenhavnsgate 1",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392175896",
+   "name": "Kjøbenhavnsgate 11",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392176038",
+   "name": "Kjøbenhavnsgate 13",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392176118",
+   "name": "Kjøbenhavnsgate 15",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392176208",
+   "name": "Kjøbenhavnsgate 17",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392176277",
+   "name": "Kjøbenhavnsgate 19",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392176426",
+   "name": "Konghellegaten 1",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392176440",
+   "name": "Lakkegaten 64",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392176532",
+   "name": "Lakkegaten 66",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392176566",
+   "name": "Lakkegaten 68",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392176600",
+   "name": "Lakkegaten 71",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392176781",
+   "name": "Lakkegaten 73",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392176967",
+   "name": "Lakkegaten 75a, b",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392177377",
+   "name": "Lakkegaten 79",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392177408",
+   "name": "Langgate 1",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392177436",
+   "name": "Langgate 2",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392177461",
+   "name": "Langgate 3",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392177492",
+   "name": "Langgate 4",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392177547",
+   "name": "Langgate 5",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392177577",
+   "name": "Langgate 6",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392177595",
+   "name": "Langgate 7",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392177602",
+   "name": "Langgate 8",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392177620",
+   "name": "Langgate 9",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392177652",
+   "name": "Langgate 10",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392177657",
+   "name": "Langgate 12",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392177667",
+   "name": "Langgate 13",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392177684",
+   "name": "Langgate 14",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  },
+  {
+   "type": "archive_record",
+   "id": "gf01036392177696",
+   "name": "Langgate 15",
+   "description": "Folketelling 1910 for 0301 Kristiania kjøpstad",
+   "source": "arkivverket",
+   "attributes": {
+    "institution": null,
+    "occupation": null
+   }
+  }
+ ],
+ "_meta": {
+  "retrieved_at": "2026-09-23T12:51:04Z",
+  "language": "en",
+  "content_languages": [
+   "en"
+  ],
+  "sources": [
+   {
+    "id": "arkivverket",
+    "name": "National Archives of Norway",
+    "description": "Search the 1910 census, historical properties and the National Archives catalogue.",
+    "documentation": "https://api.digitalarkivet.no/",
+    "cache_ttl_seconds": 300
+   }
+  ],
+  "cache": {
+   "hit": false,
+   "stored_at": "2026-09-23T12:51:04Z",
+   "expires_at": "2026-09-23T12:56:04Z",
+   "ttl_seconds": 300,
+   "remaining_ttl_seconds": 300,
+   "age_seconds": 0,
+   "scope": "process"
+  },
+  "result_count": 50,
+  "total_available": 7424,
+  "requested_limit": 50,
+  "possibly_truncated": true,
+  "pagination": {
+   "limit": 50,
+   "offset": 0,
+   "returned": 50,
+   "has_more_results": true,
+   "next_offset": 50,
+   "total_available": 7424
+  },
+  "response_size_ceiling_bytes": 65536,
+  "response_size_ceiling_enforced": true
+ },
+ "_provenance": {
+  "data": {
+   "source": "arkivverket",
+   "source_api": "https://allemannsdata.com/wiki/api/v1/kilder/arkivverket"
+  },
+  "entities": {
+   "source": "arkivverket",
+   "source_api": "https://allemannsdata.com/wiki/api/v1/kilder/arkivverket",
+   "derived_from": "#/data",
+   "description": "Normalized projection of data."
+  }
+ },
+ "_links": {
+  "self": "https://allemannsdata.com/wiki/api/v1/kilder/arkivverket/search_census_properties?query=Kristiania&limit=50",
+  "source": "https://allemannsdata.com/wiki/api/v1/kilder/arkivverket",
+  "wiki": "https://allemannsdata.com/wiki/kilder/arkivverket/search_census_properties/?query=Kristiania&limit=50&offset=0",
+  "feedback": "https://allemannsdata.com/wiki/api/v1/feedback"
+ },
+ "output_fields": [
+  "count",
+  "returned",
+  "properties",
+  "properties[].property_id",
+  "properties[].gaardsnavn_gateadr",
+  "properties[].bruksnavn",
+  "properties[].gaardsnr",
+  "properties[].bruksnr",
+  "properties[].fylke",
+  "properties[].kommune_sokn",
+  "properties[].coordinates",
+  "properties[].coordinates.lat",
+  "properties[].coordinates.lon",
+  "properties[].source",
+  "properties[].residents",
+  "properties[].residents[].person_id",
+  "properties[].residents[].name",
+  "properties[].residents[].kjonn",
+  "properties[].residents[].familiestilling",
+  "properties[].residents[].sivilstand",
+  "properties[].residents[].yrke",
+  "properties[].residents[].fodselsaar",
+  "properties[].residents[].fodested",
+  "limit",
+  "offset",
+  "has_more_results",
+  "truncated",
+  "next_offset"
+ ],
+ "output_fields_truncated": false,
+ "canonical_field_aliases": {
+  "latitude": [
+   "properties[].coordinates.lat"
+  ],
+  "longitude": [
+   "properties[].coordinates.lon"
+  ],
+  "name": [
+   "properties[].residents[].name"
+  ]
+ }
+}

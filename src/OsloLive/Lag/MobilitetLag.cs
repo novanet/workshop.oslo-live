@@ -61,6 +61,16 @@ public sealed class MobilitetLag(Allemannsdata data) : ILag
         return operatør ?? "Ukjent operatør";
     }
 
+    /// <summary>Oversetter kildens drivstoff (propulsion) til teksten popupen skal vise. Ukjente verdier gir null.</summary>
+    public static string? Drivstoff(string? propulsion) => propulsion switch
+    {
+        "ELECTRIC" or "ELECTRIC_ASSIST" => "elektrisk",
+        "COMBUSTION" or "COMBUSTION_DIESEL" => "fossil",
+        "HYBRID" or "PLUG_IN_HYBRID" => "hybrid",
+        "HUMAN" => "tråkk",
+        _ => null,
+    };
+
     /// <summary>Ett ledig kjøretøy blir ett punkt. Reserverte eller avskrudde kjøretøy vises ikke.</summary>
     public static Kartpunkt? FraKjøretøy(JsonElement rad)
     {
@@ -87,9 +97,12 @@ public sealed class MobilitetLag(Allemannsdata data) : ILag
             ["type"] = type,
         };
 
-        if (rad.TryGetProperty("propulsion", out var drivstoff) && drivstoff.ValueKind == JsonValueKind.String)
+        var drivstoff = rad.TryGetProperty("propulsion", out var p) && p.ValueKind == JsonValueKind.String
+            ? Drivstoff(p.GetString())
+            : null;
+        if (drivstoff is not null)
         {
-            detaljer["drivstoff"] = drivstoff.GetString();
+            detaljer["drivstoff"] = drivstoff;
         }
 
         if (rad.TryGetProperty("range_m", out var rekkevidde) && rekkevidde.ValueKind == JsonValueKind.Number)
