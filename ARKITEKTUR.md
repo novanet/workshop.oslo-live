@@ -28,6 +28,7 @@ Prinsipp: kartet er en liste med lag. `ILag → Kartlag (GeoJSON) → MapLibre`.
 | `GET /api/lag` | `[{ id, navn, beskrivelse, ikon }]` |
 | `GET /api/lag/{id}` | `Kartlag` som GeoJSON `FeatureCollection`. 404 ved ukjent id. 502 `{ feil }` hvis laget kaster; de andre lagene påvirkes ikke. |
 | `GET /api/lag/{id}/historikk` | `[{ tidspunkt, antall }]`, siste 24 timer, eldste først. 404 ved ukjent id, tom liste hvis laget ikke har bilder ennå. `Bildejobb` (bakgrunnstjeneste) tar ett bilde av hvert lag i timen og lagrer det som fil under `Historikk:Mappe` i `appsettings.json` (relativ sti havner under temp-mappa); bilder eldre enn 7 dager slettes. |
+| `GET /api/lag/{id}/bydeler` | `[{ bydel, antall }]`, antall punkter i laget per bydel, sortert synkende. Bydel = nærmeste bydelssenter fra Kartverket; punkter lenger enn 5 km fra alle sentre utelates. 404 ved ukjent id, 502 `{ feil }` hvis laget eller oppslaget svikter. Én oppdatering gjør 9 kall mot Allemannsdata (ett per forbokstav i `Bydeler.Prefikser`), uavhengig av antall punkter, aldri ett kall per punkt. Svarene mellomlagres 30 s som alt annet. |
 | `GET /api/stroempris` | Strømprisen i Oslo (NO1) i dag: `{ naa, billigst: { time, pris }, dyrest: { time, pris }, timer: [{ time, pris }, …] }`, øre/kWh inkl. mva. 502 `{ feil }` hvis kilden svikter. |
 | `GET /api/helse` | `{ status: "ok", tid }` |
 | `GET /api/helse` | `{ status: "ok", tid }`. Lever prosessen? Ingen kall til kildene, svarer alltid umiddelbart. |
