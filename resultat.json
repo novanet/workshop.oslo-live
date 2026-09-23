@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:36:43",
+  "oppdatert": "2026-09-23T11:37:21",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -199,13 +199,13 @@
           "poeng": 5
         }
       ],
-      "dollar": 10.971,
-      "tokens": 23469143,
-      "sekunder": 3729,
+      "dollar": 10.315,
+      "tokens": 22223515,
+      "sekunder": 3473,
       "pr": 4,
       "utkast": 0,
       "merget": 1,
-      "kjoeringer": 8,
+      "kjoeringer": 7,
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
@@ -474,7 +474,7 @@
       "issue": 3,
       "navn": "Mellomlageret",
       "startet": "2026-09-23T09:34:49.5919992+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-kirsten",
@@ -482,6 +482,14 @@
       "issue": 52,
       "navn": "Konfigurerbar bbox",
       "startet": "2026-09-23T09:36:06.5656066+00:00",
+      "minutter": 1
+    },
+    {
+      "agent": "Dmitry-agent",
+      "github": "FilonenkoDmitry",
+      "issue": 12,
+      "navn": "Holdeplasser",
+      "startet": "2026-09-23T09:36:39.1423524+00:00",
       "minutter": 0
     }
   ],
@@ -510,100 +518,16 @@
   },
   "tildelt": [
     {
-      "issue": 1,
-      "navn": "Alle punkter havner i havet, langt utenfor Norge",
-      "github": "FrodeBl",
-      "oppdatert": "2026-09-23T08:23:39Z"
-    },
-    {
-      "issue": 1,
-      "navn": "Alle punkter havner i havet, langt utenfor Norge",
-      "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T08:23:39Z"
-    },
-    {
-      "issue": 2,
-      "navn": "Steder langt utenfor Oslo slipper inn i kartet",
-      "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T08:35:31Z"
-    },
-    {
-      "issue": 2,
-      "navn": "Steder langt utenfor Oslo slipper inn i kartet",
-      "github": "leif-larsen",
-      "oppdatert": "2026-09-23T08:35:31Z"
-    },
-    {
-      "issue": 2,
-      "navn": "Steder langt utenfor Oslo slipper inn i kartet",
-      "github": "randsu",
-      "oppdatert": "2026-09-23T08:35:31Z"
-    },
-    {
-      "issue": 3,
-      "navn": "Kartet oppdaterer seg ikke, dataene står stille",
-      "github": "SasaRad",
-      "oppdatert": "2026-09-23T09:34:50Z"
-    },
-    {
-      "issue": 3,
-      "navn": "Kartet oppdaterer seg ikke, dataene står stille",
-      "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T09:34:50Z"
-    },
-    {
-      "issue": 3,
-      "navn": "Kartet oppdaterer seg ikke, dataene står stille",
-      "github": "randsu",
-      "oppdatert": "2026-09-23T09:34:50Z"
-    },
-    {
-      "issue": 4,
-      "navn": "Hvert lag viser bare ett eneste punkt",
-      "github": "audmaha",
-      "oppdatert": "2026-09-23T08:30:07Z"
-    },
-    {
-      "issue": 4,
-      "navn": "Hvert lag viser bare ett eneste punkt",
-      "github": "ingvevs",
-      "oppdatert": "2026-09-23T08:30:07Z"
-    },
-    {
-      "issue": 4,
-      "navn": "Hvert lag viser bare ett eneste punkt",
-      "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T08:30:07Z"
-    },
-    {
-      "issue": 5,
-      "navn": "Tall i URL-ene får norsk desimalkomma",
-      "github": "GIR75",
-      "oppdatert": "2026-09-23T09:36:32Z"
-    },
-    {
-      "issue": 5,
-      "navn": "Tall i URL-ene får norsk desimalkomma",
-      "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T09:36:32Z"
-    },
-    {
-      "issue": 6,
-      "navn": "Nytt lag: elsparkesykler og bysykler",
-      "github": "randsu",
-      "oppdatert": "2026-09-23T08:44:46Z"
-    },
-    {
       "issue": 7,
       "navn": "Nytt lag: skip i Oslofjorden",
       "github": "audmaha",
-      "oppdatert": "2026-09-23T08:56:21Z"
+      "oppdatert": "2026-09-23T09:36:54Z"
     },
     {
       "issue": 7,
       "navn": "Nytt lag: skip i Oslofjorden",
       "github": "monet820",
-      "oppdatert": "2026-09-23T08:56:21Z"
+      "oppdatert": "2026-09-23T09:36:54Z"
     },
     {
       "issue": 8,
@@ -612,10 +536,10 @@
       "oppdatert": "2026-09-23T08:30:52Z"
     },
     {
-      "issue": 9,
-      "navn": "Nytt lag: badetemperaturer",
-      "github": "randsu",
-      "oppdatert": "2026-09-23T08:35:04Z"
+      "issue": 10,
+      "navn": "Nytt lag: trafikkregistreringspunkt",
+      "github": "pr0nin",
+      "oppdatert": "2026-09-23T09:37:18Z"
     },
     {
       "issue": 11,
@@ -642,28 +566,10 @@
       "oppdatert": "2026-09-23T09:11:42Z"
     },
     {
-      "issue": 15,
-      "navn": "Nytt lag: spisesteder",
-      "github": "GIR75",
-      "oppdatert": "2026-09-23T09:24:46Z"
-    },
-    {
-      "issue": 15,
-      "navn": "Nytt lag: spisesteder",
-      "github": "nilsgs",
-      "oppdatert": "2026-09-23T09:24:46Z"
-    },
-    {
       "issue": 16,
       "navn": "Nytt lag: ladestasjoner for elbil",
       "github": "randsu",
       "oppdatert": "2026-09-23T08:57:05Z"
-    },
-    {
-      "issue": 17,
-      "navn": "Nytt lag: smilefjes fra Mattilsynet",
-      "github": "GIR75",
-      "oppdatert": "2026-09-23T08:28:37Z"
     },
     {
       "issue": 18,
@@ -676,12 +582,6 @@
       "navn": "Nytt lag: artsobservasjoner",
       "github": "FrodeBl",
       "oppdatert": "2026-09-23T08:52:50Z"
-    },
-    {
-      "issue": 20,
-      "navn": "Vis varselet for luftkvalitet, ikke bare målingen",
-      "github": "yonzo",
-      "oppdatert": "2026-09-23T08:32:33Z"
     },
     {
       "issue": 21,
@@ -706,12 +606,6 @@
       "navn": "Del kartutsnittet som en lenke",
       "github": "randsu",
       "oppdatert": "2026-09-23T08:38:27Z"
-    },
-    {
-      "issue": 24,
-      "navn": "Tell punkter per bydel",
-      "github": "randsu",
-      "oppdatert": "2026-09-23T08:56:52Z"
     },
     {
       "issue": 25,
@@ -756,40 +650,16 @@
       "oppdatert": "2026-09-23T08:57:49Z"
     },
     {
-      "issue": 32,
-      "navn": "Vis strømprisen for Oslo",
-      "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T08:49:20Z"
-    },
-    {
       "issue": 33,
       "navn": "Nytt lag: sykkelparkering",
       "github": "GIR75",
       "oppdatert": "2026-09-23T09:09:45Z"
     },
     {
-      "issue": 34,
-      "navn": "Skru tiden tilbake med en tidslinje",
-      "github": "randsu",
-      "oppdatert": "2026-09-23T08:51:12Z"
-    },
-    {
-      "issue": 35,
-      "navn": "Varmekart i stedet for punkter",
-      "github": "theakbe",
-      "oppdatert": "2026-09-23T08:45:58Z"
-    },
-    {
-      "issue": 36,
-      "navn": "Tegn et område og tell hva som er inni",
-      "github": "theakbe",
-      "oppdatert": "2026-09-23T08:59:02Z"
-    },
-    {
       "issue": 38,
       "navn": "Demomodus for storskjerm",
       "github": "randsu",
-      "oppdatert": "2026-09-23T08:37:48Z"
+      "oppdatert": "2026-09-23T09:37:19Z"
     },
     {
       "issue": 39,
