@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:21:52",
+  "oppdatert": "2026-09-23T11:22:20",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -182,37 +182,6 @@
       "plass": 5
     },
     {
-      "navn": "mini-wilma",
-      "github": "larsajakobsen",
-      "poeng": 4,
-      "feil": [
-        {
-          "issue": 1,
-          "navn": "Koordinatrekkefølge",
-          "poeng": 2
-        }
-      ],
-      "lag": [],
-      "levert": [
-        {
-          "issue": 32,
-          "navn": "Strømpris",
-          "poeng": 2
-        }
-      ],
-      "dollar": 7.542,
-      "tokens": 15039091,
-      "sekunder": 2415,
-      "pr": 4,
-      "utkast": 0,
-      "merget": 2,
-      "kjoeringer": 9,
-      "utenPr": 5,
-      "bygg": [],
-      "estimert": false,
-      "plass": 6
-    },
-    {
       "navn": "mini-jon",
       "github": "yonzo",
       "poeng": 3,
@@ -233,6 +202,37 @@
       "merget": 1,
       "kjoeringer": 4,
       "utenPr": 3,
+      "bygg": [],
+      "estimert": false,
+      "plass": 6
+    },
+    {
+      "navn": "mini-wilma",
+      "github": "larsajakobsen",
+      "poeng": 3,
+      "feil": [
+        {
+          "issue": 1,
+          "navn": "Koordinatrekkefølge",
+          "poeng": 2
+        }
+      ],
+      "lag": [],
+      "levert": [
+        {
+          "issue": 32,
+          "navn": "Strømpris",
+          "poeng": 2
+        }
+      ],
+      "dollar": 10.609,
+      "tokens": 21247682,
+      "sekunder": 3485,
+      "pr": 5,
+      "utkast": 0,
+      "merget": 2,
+      "kjoeringer": 9,
+      "utenPr": 5,
       "bygg": [],
       "estimert": false,
       "plass": 7
@@ -449,7 +449,15 @@
       "issue": 15,
       "navn": "Spisesteder",
       "startet": "2026-09-23T09:16:56.867472+00:00",
-      "minutter": 4
+      "minutter": 5
+    },
+    {
+      "agent": "Andy3000",
+      "github": "coffeelyfe",
+      "issue": 11,
+      "navn": "Kollektiv",
+      "startet": "2026-09-23T09:22:13.4670027+00:00",
+      "minutter": 0
     }
   ],
   "main": {
@@ -581,7 +589,7 @@
       "issue": 11,
       "navn": "Nytt lag: kollektivtrafikk som beveger seg",
       "github": "coffeelyfe",
-      "oppdatert": "2026-09-23T09:21:34Z"
+      "oppdatert": "2026-09-23T09:22:14Z"
     },
     {
       "issue": 13,
@@ -791,7 +799,7 @@
       "issue": 45,
       "navn": "Varsle når noe skjer",
       "github": "jthagesk",
-      "oppdatert": "2026-09-23T09:02:33Z"
+      "oppdatert": "2026-09-23T09:21:55Z"
     },
     {
       "issue": 46,
@@ -886,6 +894,42 @@
   ],
   "aapne": [
     {
+      "pr": 109,
+      "tittel": "Nytt lag: skoler og barnehager",
+      "github": "larsajakobsen",
+      "agent": "mini-wilma",
+      "opprettet": "2026-09-23T09:21:55Z",
+      "oppdatert": "2026-09-23T09:21:56Z",
+      "utkast": false,
+      "issues": [
+        26
+      ]
+    },
+    {
+      "pr": 104,
+      "tittel": "#25: Ta vare på et øyeblikksbilde hver time",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:58:22Z",
+      "oppdatert": "2026-09-23T09:21:51Z",
+      "utkast": false,
+      "issues": [
+        25
+      ]
+    },
+    {
+      "pr": 80,
+      "tittel": "Nytt lag: politilogg og nyhetshendelser",
+      "github": "larsajakobsen",
+      "agent": "mini-wilma",
+      "opprettet": "2026-09-23T08:30:50Z",
+      "oppdatert": "2026-09-23T09:21:49Z",
+      "utkast": false,
+      "issues": [
+        8
+      ]
+    },
+    {
       "pr": 91,
       "tittel": "Fargene må virke for alle",
       "github": "audmaha",
@@ -910,18 +954,6 @@
       ]
     },
     {
-      "pr": 80,
-      "tittel": "Nytt lag: politilogg og nyhetshendelser",
-      "github": "larsajakobsen",
-      "agent": "mini-wilma",
-      "opprettet": "2026-09-23T08:30:50Z",
-      "oppdatert": "2026-09-23T09:20:10Z",
-      "utkast": false,
-      "issues": [
-        8
-      ]
-    },
-    {
       "pr": 87,
       "tittel": "Del kartutsnittet som en lenke",
       "github": "audmaha",
@@ -931,18 +963,6 @@
       "utkast": false,
       "issues": [
         23
-      ]
-    },
-    {
-      "pr": 104,
-      "tittel": "#25: Ta vare på et øyeblikksbilde hver time",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:58:22Z",
-      "oppdatert": "2026-09-23T09:19:24Z",
-      "utkast": false,
-      "issues": [
-        25
       ]
     },
     {
