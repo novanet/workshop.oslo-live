@@ -784,11 +784,63 @@ function oppdaterKilde() {
     if (!oppf.på || oppf.varme) continue;
     for (const p of oppf.punkter) features.push({
       type: 'Feature',
-      geometry: { type: 'Point', coordinates: [p.lon, p.lat] },
+      geometry: { type: 'Point', coordinates: [p.visLon ?? p.lon, p.visLat ?? p.lat] },
       properties: { lag: id, id: p.id, bilde: bildeFor(id, oppf, p), blink: p.blink ? 1 : 0 }
     });
   }
   kart.getSource('punkter')?.setData({ type: 'FeatureCollection', features });
+}
+
+// ---------------------------------------------------------------------------
+// Glidende posisjon: et punkt som har samme properties.id som ved forrige
+// henting og har flyttet seg mindre enn GLIDNING_MAKS_AVSTAND, glir fra gammel
+// til ny posisjon over GLIDNING_VARIGHET i stedet for å hoppe. Punkter uten id
+// (syntetisk id inkluderer lon/lat, så et flyttet punkt får alltid ny id) og
+// punkter uten forrige treff hopper rett til posisjonen, som før.
+// ---------------------------------------------------------------------------
+const GLIDNING_VARIGHET = 2000;      // ms
+const GLIDNING_MAKS_AVSTAND = 5000;  // meter
+
+function redusertBevegelseOnsket() {
+  return window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+}
+
+const glidendePunkter = new Set();
+let glidningRammeId = 0;
+
+function glidningSteg() {
+  glidningRammeId = 0;
+  const nå = performance.now();
+  for (const p of glidendePunkter) {
+    const a = p.glidning;
+    const t = Math.min(1, (nå - a.start) / GLIDNING_VARIGHET);
+    p.visLon = a.fraLon + (p.lon - a.fraLon) * t;
+    p.visLat = a.fraLat + (p.lat - a.fraLat) * t;
+    if (t >= 1) { delete p.glidning; glidendePunkter.delete(p); }
+    if (aapenPopup && aapenPopup.lag === a.lag && aapenPopup.id === p.id) {
+      aapenPopup.boble.setLngLat([p.visLon, p.visLat]);
+    }
+  }
+  oppdaterKilde();
+  if (glidendePunkter.size) glidningRammeId = requestAnimationFrame(glidningSteg);
+}
+
+/** Setter opp glidende posisjon for punktene i `liste` som har flyttet seg fra `forrige`. */
+function forberedGlidning(lagId, forrige, liste) {
+  const redusertBevegelse = redusertBevegelseOnsket();
+  for (const p of liste) {
+    const gammel = forrige.get(p.id);
+    const flyttet = gammel && (gammel.lon !== p.lon || gammel.lat !== p.lat);
+    if (!flyttet || redusertBevegelse || avstand(gammel.lat, gammel.lon, p.lat, p.lon) > GLIDNING_MAKS_AVSTAND) {
+      p.visLon = p.lon; p.visLat = p.lat;
+      continue;
+    }
+    p.visLon = gammel.visLon ?? gammel.lon;
+    p.visLat = gammel.visLat ?? gammel.lat;
+    p.glidning = { fraLon: p.visLon, fraLat: p.visLat, start: performance.now(), lag: lagId };
+    glidendePunkter.add(p);
+  }
+  if (glidendePunkter.size && !glidningRammeId) glidningRammeId = requestAnimationFrame(glidningSteg);
 }
 
 /** Blinker glorien på punktene med blink=1 tre ganger, og nullstiller så flagget. */
@@ -932,10 +984,15 @@ async function hent(id) {
       liste.push(punkt);
     }
 
+    const forrige = new Map(oppf.punkter.map((p) => [p.id, p]));
+    forberedGlidning(id, forrige, liste);
+
     // Popupen følger punktet sitt om det fortsatt finnes, ellers forsvinner den med det.
+    // Posisjonen er punktets glidende (viste) posisjon, så popupen følger markøren
+    // i stedet for å hoppe rett til den nye posisjonen mens markøren fortsatt glir.
     if (aapenPopup?.lag === id) {
       const igjen = liste.find((p) => p.id === aapenPopup.id);
-      if (igjen) aapenPopup.boble.setLngLat([igjen.lon, igjen.lat]).setHTML(popup(igjen.egenskaper));
+      if (igjen) aapenPopup.boble.setLngLat([igjen.visLon, igjen.visLat]).setHTML(popup(igjen.egenskaper));
       else lukkPopup(id);
     }
     oppf.punkter = liste;
