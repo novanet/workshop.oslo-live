@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:35:54",
+  "oppdatert": "2026-09-23T10:36:20",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -317,14 +317,14 @@
       "feil": [],
       "lag": [],
       "levert": [],
-      "dollar": 4.435,
-      "tokens": 9382407,
-      "sekunder": 1610,
+      "dollar": 5.724,
+      "tokens": 12151952,
+      "sekunder": 2078,
       "pr": 3,
       "utkast": 0,
       "merget": 0,
-      "kjoeringer": 6,
-      "utenPr": 3,
+      "kjoeringer": 7,
+      "utenPr": 4,
       "bygg": [],
       "estimert": false,
       "plass": 15
@@ -342,18 +342,10 @@
     {
       "agent": "mini-frode",
       "github": "FrodeBl",
-      "issue": 50,
-      "navn": "Metrikker",
-      "startet": "2026-09-23T08:27:51.3617499+00:00",
-      "minutter": 8
-    },
-    {
-      "agent": "mini-frode",
-      "github": "FrodeBl",
       "issue": 19,
       "navn": "Artsobservasjoner",
       "startet": "2026-09-23T08:28:01.690939+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "helstein",
@@ -361,7 +353,7 @@
       "issue": 41,
       "navn": "Fargeblindhet",
       "startet": "2026-09-23T08:28:15.5659433+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "mini-richard",
@@ -385,7 +377,7 @@
       "issue": 23,
       "navn": "Delbart utsnitt",
       "startet": "2026-09-23T08:32:03.1180412+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-aud",
@@ -393,7 +385,7 @@
       "issue": 41,
       "navn": "Fargeblindhet",
       "startet": "2026-09-23T08:32:12.9324331+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-knive",
@@ -410,13 +402,21 @@
       "navn": "Statistikk",
       "startet": "2026-09-23T08:33:40.253268+00:00",
       "minutter": 2
+    },
+    {
+      "agent": "mini-richard",
+      "github": "randsu",
+      "issue": 6,
+      "navn": "Delt mobilitet",
+      "startet": "2026-09-23T08:36:06.1007878+00:00",
+      "minutter": 0
     }
   ],
   "main": {
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
     "pr": null,
-    "kjoeringer": 19
+    "kjoeringer": 20
   },
   "produkt": {
     "testerBestatt": 11,
@@ -508,7 +508,7 @@
       "issue": 6,
       "navn": "Nytt lag: elsparkesykler og bysykler",
       "github": "randsu",
-      "oppdatert": "2026-09-23T08:35:34Z"
+      "oppdatert": "2026-09-23T08:36:06Z"
     },
     {
       "issue": 7,
@@ -640,7 +640,7 @@
       "issue": 50,
       "navn": "Mål hva som skjer",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T08:27:52Z"
+      "oppdatert": "2026-09-23T08:35:59Z"
     },
     {
       "issue": 53,
@@ -686,6 +686,18 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 71,
+      "tittel": "Mål hva som skjer",
+      "github": "FrodeBl",
+      "agent": "mini-frode",
+      "opprettet": "2026-09-23T08:12:09Z",
+      "oppdatert": "2026-09-23T08:35:58Z",
+      "utkast": false,
+      "issues": [
+        50
+      ]
+    },
     {
       "pr": 85,
       "tittel": "#9: Nytt lag: badetemperaturer",
@@ -852,18 +864,6 @@
       "utkast": false,
       "issues": [
         4
-      ]
-    },
-    {
-      "pr": 71,
-      "tittel": "Mål hva som skjer",
-      "github": "FrodeBl",
-      "agent": "mini-frode",
-      "opprettet": "2026-09-23T08:12:09Z",
-      "oppdatert": "2026-09-23T08:14:56Z",
-      "utkast": false,
-      "issues": [
-        50
       ]
     },
     {
