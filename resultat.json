@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:32:11",
+  "oppdatert": "2026-09-23T10:32:37",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -172,25 +172,6 @@
       "plass": 7
     },
     {
-      "navn": "mini-jon",
-      "github": "yonzo",
-      "poeng": 0,
-      "feil": [],
-      "lag": [],
-      "levert": [],
-      "dollar": 0.775,
-      "tokens": 1089909,
-      "sekunder": 320,
-      "pr": 0,
-      "utkast": 0,
-      "merget": 0,
-      "kjoeringer": 1,
-      "utenPr": 1,
-      "bygg": [],
-      "estimert": false,
-      "plass": 8
-    },
-    {
       "navn": "mini-taco",
       "github": "Puiu",
       "poeng": 0,
@@ -207,7 +188,7 @@
       "utenPr": 0,
       "bygg": [],
       "estimert": false,
-      "plass": 9
+      "plass": 8
     },
     {
       "navn": "mini-sindre",
@@ -226,7 +207,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 10
+      "plass": 9
     },
     {
       "navn": "mini-knive",
@@ -243,6 +224,25 @@
       "merget": 0,
       "kjoeringer": 1,
       "utenPr": 0,
+      "bygg": [],
+      "estimert": false,
+      "plass": 10
+    },
+    {
+      "navn": "mini-jon",
+      "github": "yonzo",
+      "poeng": 0,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 2.696,
+      "tokens": 5300148,
+      "sekunder": 928,
+      "pr": 1,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 2,
+      "utenPr": 1,
       "bygg": [],
       "estimert": false,
       "plass": 11
@@ -288,20 +288,12 @@
   ],
   "kjoerer": [
     {
-      "agent": "mini-jon",
-      "github": "yonzo",
-      "issue": 20,
-      "navn": "Luftvarsel",
-      "startet": "2026-09-23T08:22:06.0655338+00:00",
-      "minutter": 10
-    },
-    {
       "agent": "mini-kirsten",
       "github": "jthagesk",
       "issue": 45,
       "navn": "Varsler",
       "startet": "2026-09-23T08:22:20.0747631+00:00",
-      "minutter": 9
+      "minutter": 10
     },
     {
       "agent": "mini-kirsten",
@@ -309,7 +301,7 @@
       "issue": 29,
       "navn": "Museer",
       "startet": "2026-09-23T08:23:16.9053574+00:00",
-      "minutter": 8
+      "minutter": 9
     },
     {
       "agent": "mini-astrid",
@@ -317,7 +309,7 @@
       "issue": 42,
       "navn": "Nærmeste punkt",
       "startet": "2026-09-23T08:25:30.8766176+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-frode",
@@ -341,7 +333,7 @@
       "issue": 41,
       "navn": "Fargeblindhet",
       "startet": "2026-09-23T08:28:15.5659433+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-richard",
@@ -349,7 +341,7 @@
       "issue": 38,
       "navn": "Demomodus",
       "startet": "2026-09-23T08:30:23.0330294+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-richard",
@@ -357,7 +349,7 @@
       "issue": 9,
       "navn": "Badetemperatur",
       "startet": "2026-09-23T08:30:34.0929688+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "helstein",
@@ -381,6 +373,14 @@
       "issue": 23,
       "navn": "Delbart utsnitt",
       "startet": "2026-09-23T08:32:03.1180412+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-aud",
+      "github": "audmaha",
+      "issue": 41,
+      "navn": "Fargeblindhet",
+      "startet": "2026-09-23T08:32:12.9324331+00:00",
       "minutter": 0
     }
   ],
@@ -522,7 +522,7 @@
       "issue": 20,
       "navn": "Vis varselet for luftkvalitet, ikke bare målingen",
       "github": "yonzo",
-      "oppdatert": "2026-09-23T08:22:06Z"
+      "oppdatert": "2026-09-23T08:32:33Z"
     },
     {
       "issue": 21,
@@ -557,8 +557,14 @@
     {
       "issue": 41,
       "navn": "Fargene må virke for alle",
+      "github": "audmaha",
+      "oppdatert": "2026-09-23T08:32:13Z"
+    },
+    {
+      "issue": 41,
+      "navn": "Fargene må virke for alle",
       "github": "nilsgs",
-      "oppdatert": "2026-09-23T08:31:18Z"
+      "oppdatert": "2026-09-23T08:32:13Z"
     },
     {
       "issue": 42,
@@ -640,6 +646,18 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 82,
+      "tittel": "Vis varselet for luftkvalitet, ikke bare målingen",
+      "github": "yonzo",
+      "agent": "mini-jon",
+      "opprettet": "2026-09-23T08:32:31Z",
+      "oppdatert": "2026-09-23T08:32:32Z",
+      "utkast": false,
+      "issues": [
+        20
+      ]
+    },
     {
       "pr": 81,
       "tittel": "Avgangstavle for Gardermoen (#57)",
