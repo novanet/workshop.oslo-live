@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:08:44",
+  "oppdatert": "2026-09-23T10:09:10",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -187,7 +187,15 @@
       "issue": 21,
       "navn": "Adressesøk",
       "startet": "2026-09-23T08:04:57.5527152+00:00",
-      "minutter": 3
+      "minutter": 4
+    },
+    {
+      "agent": "mini-wilma",
+      "github": "larsajakobsen",
+      "issue": 4,
+      "navn": "Duplikatfjerning",
+      "startet": "2026-09-23T08:09:04.172255+00:00",
+      "minutter": 0
     }
   ],
   "main": {
@@ -229,13 +237,25 @@
       "issue": 4,
       "navn": "Hvert lag viser bare ett eneste punkt",
       "github": "ingvevs",
-      "oppdatert": "2026-09-23T08:07:57Z"
+      "oppdatert": "2026-09-23T08:09:05Z"
+    },
+    {
+      "issue": 4,
+      "navn": "Hvert lag viser bare ett eneste punkt",
+      "github": "larsajakobsen",
+      "oppdatert": "2026-09-23T08:09:05Z"
     },
     {
       "issue": 5,
       "navn": "Tall i URL-ene får norsk desimalkomma",
       "github": "GIR75",
       "oppdatert": "2026-09-23T07:57:13Z"
+    },
+    {
+      "issue": 7,
+      "navn": "Nytt lag: skip i Oslofjorden",
+      "github": "monet820",
+      "oppdatert": "2026-09-23T08:09:07Z"
     },
     {
       "issue": 11,
