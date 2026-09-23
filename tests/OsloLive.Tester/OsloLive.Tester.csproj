@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Data\bysykkelturer.json" CopyToOutputDirectory="PreserveNewest" />
     <None Include="Data\**" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 

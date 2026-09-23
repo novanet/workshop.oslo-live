@@ -1,6 +1,8 @@
 using System.Globalization;
+using Microsoft.Extensions.Caching.Memory;
 using System.Text.Json;
 using OsloLive;
+using OsloLive.Bysykkel;
 using OsloLive.Helse;
 using OsloLive.Historikk;
 using OsloLive.Kart;
@@ -28,6 +30,14 @@ builder.Services.AddHttpClient<Allemannsdata>(klient =>
 builder.Services.AddHttpClient("fly", klient =>
 {
     klient.Timeout = TimeSpan.FromSeconds(10);
+    klient.DefaultRequestHeaders.UserAgent.ParseAdd("OsloLive/1.0 (kurs)");
+});
+
+// Bysykkeldøgnet (#191) laster ned en hel månedsfil (rundt 90 MB) fra Oslo Bysykkels
+// åpne data, ikke Allemannsdata. Derfor egen navngitt HttpClient med lang tidsgrense.
+builder.Services.AddHttpClient("bysykkel", klient =>
+{
+    klient.Timeout = TimeSpan.FromMinutes(10);
     klient.DefaultRequestHeaders.UserAgent.ParseAdd("OsloLive/1.0 (kurs)");
 });
 
@@ -62,6 +72,20 @@ builder.Services.AddSingleton(tjenester =>
         : mappe);
 });
 builder.Services.AddHostedService<Øyeblikksjobb>();
+
+// Bysykkeldøgnet (#191): jobben starter først når noen spør, se Bysykkel/Bysykkeltjeneste.cs.
+// Standardmappa ligger under appens rotmappe (App_Data/bysykkel, ikke i git). Overstyres med Bysykkel:Mappe.
+builder.Services.AddSingleton(tjenester =>
+{
+    var mappe = tjenester.GetRequiredService<IConfiguration>()["Bysykkel:Mappe"];
+    return new Bysykkeltjeneste(
+        tjenester.GetRequiredService<IHttpClientFactory>(),
+        tjenester.GetRequiredService<IMemoryCache>(),
+        string.IsNullOrWhiteSpace(mappe)
+            ? Path.Combine(tjenester.GetRequiredService<IHostEnvironment>().ContentRootPath, "App_Data", "bysykkel")
+            : mappe,
+        tjenester.GetRequiredService<ILogger<Bysykkeltjeneste>>());
+});
 
 // ---------------------------------------------------------------------------
 // Lagene på kartet. Nytt lag? Legg til én linje her.
@@ -217,6 +241,23 @@ app.MapGet("/api/stroempris", async (Allemannsdata data, CancellationToken stopp
         return Results.Json(new { feil = Feiltekst.Fra(ex) }, statusCode: 502);
     }
 });
+
+// Et helt døgn med bysykkelturer, den travleste hverdagen i siste hele måned (#191).
+// Kilden er Oslo Bysykkels egne åpne data, ikke Allemannsdata; se Bysykkel/.
+// Første kall etter at måneden skifter kan ta tid, siden månedsfila (rundt 90 MB)
+// må lastes ned og strømmes gjennom; da svarer endepunktet 202 mens jobben går i bakgrunnen.
+app.MapGet("/api/bysykkeldogn", (Bysykkeltjeneste tjeneste) => tjeneste.Hent(DateTimeOffset.UtcNow) switch
+{
+    Tilstand.Klar k => Results.Ok(k.Døgn),
+    Tilstand.Feilet f => LoggFeilOgSvar(f.Feil),
+    _ => Results.Json(new { status = "forbereder" }, statusCode: 202),
+});
+
+IResult LoggFeilOgSvar(string feil)
+{
+    app.Logger.LogError("Bysykkeldøgnet feilet: {Feil}", feil);
+    return Results.Json(new { feil }, statusCode: 502);
+}
 
 // Lever prosessen? Svarer alltid umiddelbart, uten å spørre kildene.
 app.MapGet("/api/helse", () => new { status = "ok", tid = DateTimeOffset.Now });

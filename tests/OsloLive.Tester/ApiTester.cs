@@ -1175,6 +1175,182 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
                 Content = new StringContent(svar, System.Text.Encoding.UTF8, "application/json"),
             });
     }
+
+    // #191: bysykkeldøgnet. Hver test bruker sin egen midlertidige Bysykkel:Mappe, slik at
+    // ingen av dem skriver i den ekte App_Data/bysykkel eller påvirker hverandre.
+    private static async Task<HttpResponseMessage> VentTilFerdig(HttpClient klient)
+    {
+        HttpResponseMessage svar;
+        var forsøk = 0;
+        do
+        {
+            svar = await klient.GetAsync("/api/bysykkeldogn");
+            if (svar.StatusCode != HttpStatusCode.Accepted)
+            {
+                return svar;
+            }
+
+            await Task.Delay(100);
+        } while (++forsøk < 50);
+
+        return svar;
+    }
+
+    [Fact]
+    public async Task Bysykkeldogn_gir_202_og_saa_200_med_dato_og_turer()
+    {
+        var mappe = Path.Combine(Path.GetTempPath(), "oslolive-bysykkel-" + Guid.NewGuid().ToString("N"));
+        try
+        {
+            var fixture = await File.ReadAllTextAsync("Data/bysykkelturer.json");
+            using var vertMedStub = vert.WithWebHostBuilder(b =>
+            {
+                b.UseSetting("Bysykkel:Mappe", mappe);
+                b.ConfigureServices(tjenester => tjenester.AddHttpClient("bysykkel").ConfigurePrimaryHttpMessageHandler(() => new StubHandler(fixture)));
+            });
+            var klient = vertMedStub.CreateClient();
+
+            var førsteSvar = await klient.GetAsync("/api/bysykkeldogn");
+            Assert.Equal(HttpStatusCode.Accepted, førsteSvar.StatusCode);
+            var forbereder = await førsteSvar.Content.ReadFromJsonAsync<JsonElement>();
+            Assert.Equal("forbereder", forbereder.GetProperty("status").GetString());
+
+            var svar = await VentTilFerdig(klient);
+            Assert.Equal(HttpStatusCode.OK, svar.StatusCode);
+
+            var kropp = await svar.Content.ReadFromJsonAsync<JsonElement>();
+            Assert.Equal("2026-08-11", kropp.GetProperty("dato").GetString());
+            var turer = kropp.GetProperty("turer");
+            Assert.Equal(3, turer.GetArrayLength());
+            foreach (var tur in turer.EnumerateArray())
+            {
+                Assert.Equal(2, tur.GetProperty("fra").GetArrayLength());
+                Assert.Equal(2, tur.GetProperty("til").GetArrayLength());
+                Assert.True(tur.TryGetProperty("start", out _));
+                Assert.True(tur.TryGetProperty("slutt", out _));
+            }
+
+            Assert.NotEmpty(Directory.GetFiles(mappe, "*.json.gz"));
+        }
+        finally
+        {
+            if (Directory.Exists(mappe)) Directory.Delete(mappe, recursive: true);
+        }
+    }
+
+    [Fact]
+    public async Task To_samtidige_kall_starter_bare_en_nedlasting()
+    {
+        var mappe = Path.Combine(Path.GetTempPath(), "oslolive-bysykkel-" + Guid.NewGuid().ToString("N"));
+        try
+        {
+            var fixture = await File.ReadAllTextAsync("Data/bysykkelturer.json");
+            var handler = new TellendeHandler(fixture);
+            using var vertMedTeller = vert.WithWebHostBuilder(b =>
+            {
+                b.UseSetting("Bysykkel:Mappe", mappe);
+                b.ConfigureServices(tjenester => tjenester.AddHttpClient("bysykkel").ConfigurePrimaryHttpMessageHandler(() => handler));
+            });
+            var klient = vertMedTeller.CreateClient();
+
+            await Task.WhenAll(Enumerable.Range(0, 5).Select(_ => klient.GetAsync("/api/bysykkeldogn")));
+            var svar = await VentTilFerdig(klient);
+
+            Assert.Equal(HttpStatusCode.OK, svar.StatusCode);
+            Assert.Equal(1, handler.Antall);
+        }
+        finally
+        {
+            if (Directory.Exists(mappe)) Directory.Delete(mappe, recursive: true);
+        }
+    }
+
+    [Fact]
+    public async Task Bysykkeldogn_leses_fra_disk_uten_ny_nedlasting()
+    {
+        var mappe = Path.Combine(Path.GetTempPath(), "oslolive-bysykkel-" + Guid.NewGuid().ToString("N"));
+        try
+        {
+            var fixture = await File.ReadAllTextAsync("Data/bysykkelturer.json");
+
+            using (var forberedendeVert = vert.WithWebHostBuilder(b =>
+            {
+                b.UseSetting("Bysykkel:Mappe", mappe);
+                b.ConfigureServices(tjenester => tjenester.AddHttpClient("bysykkel").ConfigurePrimaryHttpMessageHandler(() => new StubHandler(fixture)));
+            }))
+            {
+                var svar = await VentTilFerdig(forberedendeVert.CreateClient());
+                Assert.Equal(HttpStatusCode.OK, svar.StatusCode);
+            }
+
+            using var vertUtenNett = vert.WithWebHostBuilder(b =>
+            {
+                b.UseSetting("Bysykkel:Mappe", mappe);
+                b.ConfigureServices(tjenester => tjenester.AddHttpClient("bysykkel").ConfigurePrimaryHttpMessageHandler(() => new SviktHandler()));
+            });
+
+            var svarFraDisk = await VentTilFerdig(vertUtenNett.CreateClient());
+            Assert.Equal(HttpStatusCode.OK, svarFraDisk.StatusCode);
+        }
+        finally
+        {
+            if (Directory.Exists(mappe)) Directory.Delete(mappe, recursive: true);
+        }
+    }
+
+    [Fact]
+    public async Task Svikt_i_bysykkelkilden_gir_502_resten_svarer_200()
+    {
+        var mappe = Path.Combine(Path.GetTempPath(), "oslolive-bysykkel-" + Guid.NewGuid().ToString("N"));
+        try
+        {
+            using var vertMedSvikt = vert.WithWebHostBuilder(b =>
+            {
+                b.UseSetting("Bysykkel:Mappe", mappe);
+                b.ConfigureServices(tjenester => tjenester.AddHttpClient("bysykkel").ConfigurePrimaryHttpMessageHandler(() => new SviktHandler()));
+            });
+            var klient = vertMedSvikt.CreateClient();
+
+            var svar = await VentTilFerdig(klient);
+            Assert.Equal(HttpStatusCode.BadGateway, svar.StatusCode);
+            var feilSvar = await svar.Content.ReadFromJsonAsync<JsonElement>();
+            Assert.False(string.IsNullOrWhiteSpace(feilSvar.GetProperty("feil").GetString()));
+
+            var lag = await klient.GetAsync("/api/lag");
+            var helse = await klient.GetAsync("/api/helse");
+            Assert.Equal(HttpStatusCode.OK, lag.StatusCode);
+            Assert.Equal(HttpStatusCode.OK, helse.StatusCode);
+        }
+        finally
+        {
+            if (Directory.Exists(mappe)) Directory.Delete(mappe, recursive: true);
+        }
+    }
+
+    [Fact]
+    public async Task Bysykkeleffekten_serveres()
+    {
+        var svar = await vert.CreateClient().GetAsync("/effekter/bysykkeldogn.js");
+
+        Assert.Equal(HttpStatusCode.OK, svar.StatusCode);
+    }
+
+    private sealed class TellendeHandler(string svar) : HttpMessageHandler
+    {
+        private int antall;
+
+        public int Antall => antall;
+
+        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage forespørsel, CancellationToken stopp)
+        {
+            Interlocked.Increment(ref antall);
+            return Task.FromResult(new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(svar, System.Text.Encoding.UTF8, "application/json"),
+            });
+        }
+    }
+
     private sealed record Lagoppforing(string Id, string Navn, string Beskrivelse, string Ikon);
 
     private sealed record Statistikkoppforing(string Id, string Navn, int? Antall, DateTimeOffset? Eldste, DateTimeOffset? Nyeste, DateTimeOffset? Hentet, bool Feiler);

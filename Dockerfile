@@ -18,7 +18,7 @@ RUN dotnet publish src/OsloLive/OsloLive.csproj \
       -c Release -o /out --no-restore
 
 # Tom mappe som blir historikkmappa i kjørebildet, se under.
-RUN mkdir -p /historikk
+RUN mkdir -p /historikk /bysykkel
 
 # Chiseled: ingen shell, ingen pakkebehandler, kjører som ikke-root.
 # Mye mindre enn det vanlige aspnet-bildet, som betyr raskere nedlasting
@@ -36,6 +36,8 @@ COPY --from=build /out .
 # skrives av ikke-root-brukeren «app» (uid 1654) som chiseled-bildet kjører som.
 # Monter gjerne et volum her; uten volum forsvinner bildene sammen med containeren.
 COPY --from=build --chown=1654:1654 /historikk /app/App_Data/historikk
+# Bysykkeldøgnet (#191) lagrer månedsfila komprimert under App_Data/bysykkel; samme bruker må kunne skrive der.
+COPY --from=build --chown=1654:1654 /bysykkel /app/App_Data/bysykkel
 
 ENV ASPNETCORE_HTTP_PORTS=8080 \
     DOTNET_CLI_TELEMETRY_OPTOUT=1 \
