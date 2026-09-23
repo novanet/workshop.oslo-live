@@ -195,6 +195,38 @@ gh issue edit 3 --repo novanet/workshop.oslo-live --add-label kari</pre>
   </section>
 
   <section>
+    <h2>Når PR-en ikke blir merget</h2>
+    <p class="intro">Sensor vurderer hver ny commit på PR-en. Går alt gjennom, godkjenner den og slår på auto-merge. Blir PR-en stående, er det en av disse grunnene.</p>
+    <div class="grid">
+      <div class="card">
+        <h3>Sensor ba om endringer</h3>
+        <p>Sensor sjekker bygg og test, den skjulte testen for issuen og akseptansekriteriene. Reviewen viser PASS, FAIL eller USIKKER per kriterium. Det er lista du jobber etter.</p>
+        <p><strong>Rett det selv.</strong> Du har skrivetilgang til agentens branch:</p>
+        <pre>gh repo clone novanet/workshop.oslo-live
+Set-Location workshop.oslo-live
+gh pr checkout &lt;pr-nummer&gt;</pre>
+        <p>Gjør endringen, kjør <code>dotnet build</code> og <code>dotnet test</code>, og push:</p>
+        <pre>git commit -am "Rett etter Sensor"
+git push</pre>
+        <p>Sensor vurderer den nye commiten i neste runde.</p>
+        <p><strong>Eller gjør agenten bedre og kjør på nytt.</strong> Endre prompt, konvensjoner eller modell i ditt eget repo og push, så deployen går. Fjern og sett etiketten igjen. Agenten starter fra <code>main</code> og ser ikke Sensors review av seg selv. Lab 3, spor G, viser hvordan du kan gi den reviewen. Den nye kostnaden legges til på samme PR.</p>
+        <p><strong>Står det at issuen allerede er løst av en annen PR,</strong> har noen andre vunnet den. Lukk PR-en og velg en ny issue.</p>
+      </div>
+      <div class="card">
+        <h3>PR-en har konflikt</h3>
+        <p>GitHub viser <em>This branch has conflicts</em> når noen andre har endret de samme linjene og blitt merget først. Auto-merge venter da for alltid.</p>
+        <p><strong>Enklest: kjør agenten på nytt.</strong> Den kloner siste <code>main</code>, lager branchen på nytt og oppdaterer den samme PR-en:</p>
+        <pre>gh issue edit &lt;issue-nummer&gt; --repo novanet/workshop.oslo-live --remove-label kari
+gh issue edit &lt;issue-nummer&gt; --repo novanet/workshop.oslo-live --add-label kari</pre>
+        <p><strong>Eller løs den selv</strong> i branchen:</p>
+        <pre>gh pr checkout &lt;pr-nummer&gt;
+git merge origin/main</pre>
+        <p>Rett konfliktene, kjør <code>dotnet build</code> og <code>dotnet test</code>, og så <code>git commit</code> og <code>git push</code>. Sensor vurderer den nye commiten.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
     <h2>Behold miljøet til Lab 3</h2>
     <p>Lab 3 bygger videre på denne deployen og bruker samme Container Apps Job, Storage Queue, webhook og Azure-logger. Gjør endringer i agenten lokalt, push dem, og deployen kjører fra Actions.</p>
     <div class="callout warn"><b>Ikke slett noe</b>Ressursgruppen er delt av hele kurset. Ikke slett noe. Kurslederen rydder etter kurset.</div>
