@@ -1,6 +1,14 @@
 // Et døgn med bysykkelturer, avspilt på 90 sekunder (#191). Lastes med <script defer>
 // etter hovedskriptet i index.html, og bruker derfor de globale bindingene kart,
 // lagene, settPå, hent, hentBydeler, demo og stoppDemo direkte ved navn.
+//
+// Målt 23. september 2026 i headless Chromium 1280x800 med 8 153 turer i døgnet: 58 bilder/s
+// over 3 s under avspilling (i ettermiddagsrushet kl. 16:43 i døgnet med 188 sykler ute;
+// 118 bilder/s kl. 06:05 med 6 ute, på en skjerm som oppdaterer 120 ganger i sekundet);
+// 0 kall til /api/lag/* på 20 s under avspilling; lagvelgeren deaktivert under avspilling
+// og aktiv igjen etter stopp; se docs/bilder/bysykkeldogn-avspilling.png og
+// bysykkeldogn-stoppet.png. Målingen telte requestAnimationFrame-kall i siden mens
+// avspillingen gikk, og kall til /api/lag/ fra klikk på knappen og 20 s framover.
 (function () {
   'use strict';
 
