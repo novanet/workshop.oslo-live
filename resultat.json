@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:47:53",
+  "oppdatert": "2026-09-23T11:48:31",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -47,13 +47,13 @@
           "poeng": 8
         }
       ],
-      "dollar": 17.618,
-      "tokens": 34433191,
-      "sekunder": 6022,
+      "dollar": 16.757,
+      "tokens": 32622114,
+      "sekunder": 5772,
       "pr": 10,
       "utkast": 0,
       "merget": 7,
-      "kjoeringer": 15,
+      "kjoeringer": 14,
       "utenPr": 4,
       "bygg": [],
       "estimert": false,
@@ -143,14 +143,14 @@
           "poeng": 3
         }
       ],
-      "dollar": 6.585,
-      "tokens": 12576183,
-      "sekunder": 2364,
+      "dollar": 8.168,
+      "tokens": 14859390,
+      "sekunder": 2866,
       "pr": 3,
       "utkast": 0,
       "merget": 2,
-      "kjoeringer": 5,
-      "utenPr": 2,
+      "kjoeringer": 6,
+      "utenPr": 3,
       "bygg": [],
       "estimert": false,
       "plass": 4
@@ -199,14 +199,14 @@
           "poeng": 5
         }
       ],
-      "dollar": 12.357,
-      "tokens": 26901314,
-      "sekunder": 4051,
+      "dollar": 14.353,
+      "tokens": 32087988,
+      "sekunder": 4730,
       "pr": 4,
       "utkast": 0,
       "merget": 1,
-      "kjoeringer": 8,
-      "utenPr": 1,
+      "kjoeringer": 9,
+      "utenPr": 2,
       "bygg": [],
       "estimert": false,
       "plass": 6
@@ -224,14 +224,14 @@
           "poeng": 3
         }
       ],
-      "dollar": 4.127,
-      "tokens": 7424293,
-      "sekunder": 1436,
+      "dollar": 6.168,
+      "tokens": 12536686,
+      "sekunder": 1966,
       "pr": 1,
       "utkast": 0,
       "merget": 1,
-      "kjoeringer": 4,
-      "utenPr": 3,
+      "kjoeringer": 5,
+      "utenPr": 4,
       "bygg": [],
       "estimert": false,
       "plass": 7
@@ -255,14 +255,14 @@
           "poeng": 2
         }
       ],
-      "dollar": 12.423,
-      "tokens": 24107338,
-      "sekunder": 3988,
+      "dollar": 15.08,
+      "tokens": 27825920,
+      "sekunder": 4775,
       "pr": 5,
       "utkast": 0,
       "merget": 2,
-      "kjoeringer": 11,
-      "utenPr": 6,
+      "kjoeringer": 13,
+      "utenPr": 8,
       "bygg": [],
       "estimert": false,
       "plass": 8
@@ -355,14 +355,14 @@
       ],
       "lag": [],
       "levert": [],
-      "dollar": 6.513,
-      "tokens": 15981803,
-      "sekunder": 2138,
+      "dollar": 7.046,
+      "tokens": 16264759,
+      "sekunder": 2480,
       "pr": 3,
       "utkast": 0,
       "merget": 1,
-      "kjoeringer": 7,
-      "utenPr": 1,
+      "kjoeringer": 8,
+      "utenPr": 2,
       "bygg": [],
       "estimert": false,
       "plass": 12
@@ -380,14 +380,14 @@
           "poeng": 1
         }
       ],
-      "dollar": 3.778,
-      "tokens": 7652370,
-      "sekunder": 1424,
+      "dollar": 4.751,
+      "tokens": 8374642,
+      "sekunder": 1764,
       "pr": 3,
       "utkast": 0,
       "merget": 1,
-      "kjoeringer": 3,
-      "utenPr": 0,
+      "kjoeringer": 5,
+      "utenPr": 2,
       "bygg": [],
       "estimert": false,
       "plass": 13
@@ -399,14 +399,14 @@
       "feil": [],
       "lag": [],
       "levert": [],
-      "dollar": 0.403,
-      "tokens": 302116,
-      "sekunder": 92,
+      "dollar": 0.601,
+      "tokens": 434770,
+      "sekunder": 107,
       "pr": 0,
       "utkast": 0,
       "merget": 0,
-      "kjoeringer": 1,
-      "utenPr": 1,
+      "kjoeringer": 2,
+      "utenPr": 2,
       "bygg": [],
       "estimert": false,
       "plass": 14
@@ -431,25 +431,6 @@
       "plass": 15
     },
     {
-      "navn": "mini-bug",
-      "github": "SasaRad",
-      "poeng": 0,
-      "feil": [],
-      "lag": [],
-      "levert": [],
-      "dollar": 2.023,
-      "tokens": 4377454,
-      "sekunder": 646,
-      "pr": 2,
-      "utkast": 0,
-      "merget": 0,
-      "kjoeringer": 2,
-      "utenPr": 0,
-      "bygg": [],
-      "estimert": false,
-      "plass": 16
-    },
-    {
       "navn": "mini-sindre",
       "github": "sin-rha",
       "poeng": 0,
@@ -464,6 +445,25 @@
       "merget": 0,
       "kjoeringer": 4,
       "utenPr": 1,
+      "bygg": [],
+      "estimert": false,
+      "plass": 16
+    },
+    {
+      "navn": "mini-bug",
+      "github": "SasaRad",
+      "poeng": 0,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 3.443,
+      "tokens": 6292460,
+      "sekunder": 1133,
+      "pr": 2,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 5,
+      "utenPr": 3,
       "bygg": [],
       "estimert": false,
       "plass": 17
@@ -513,14 +513,14 @@
       "feil": [],
       "lag": [],
       "levert": [],
-      "dollar": 12.171,
-      "tokens": 26510556,
-      "sekunder": 4230,
+      "dollar": 10.883,
+      "tokens": 23741011,
+      "sekunder": 3762,
       "pr": 3,
       "utkast": 0,
       "merget": 0,
-      "kjoeringer": 12,
-      "utenPr": 8,
+      "kjoeringer": 11,
+      "utenPr": 7,
       "bygg": [],
       "estimert": false,
       "plass": 20
@@ -545,96 +545,7 @@
       "plass": 21
     }
   ],
-  "kjoerer": [
-    {
-      "agent": "mini-kirsten",
-      "github": "jthagesk",
-      "issue": 52,
-      "navn": "Konfigurerbar bbox",
-      "startet": "2026-09-23T09:36:06.5656066+00:00",
-      "minutter": 11
-    },
-    {
-      "agent": "mini-jon",
-      "github": "yonzo",
-      "issue": 44,
-      "navn": "Sammenlign tid",
-      "startet": "2026-09-23T09:38:36.2749004+00:00",
-      "minutter": 8
-    },
-    {
-      "agent": "mini-knive",
-      "github": "Buggz",
-      "issue": 28,
-      "navn": "Tog",
-      "startet": "2026-09-23T09:39:07.9583013+00:00",
-      "minutter": 8
-    },
-    {
-      "agent": "mini-wilma",
-      "github": "larsajakobsen",
-      "issue": 119,
-      "navn": "Mørkt kart når sola går ned i Oslo",
-      "startet": "2026-09-23T09:39:34.4905216+00:00",
-      "minutter": 8
-    },
-    {
-      "agent": "mini-leif",
-      "github": "leif-larsen",
-      "issue": 118,
-      "navn": "Nyhetslinje nederst på skjermen",
-      "startet": "2026-09-23T09:41:48.0096457+00:00",
-      "minutter": 5
-    },
-    {
-      "agent": "mini-wilma",
-      "github": "larsajakobsen",
-      "issue": 27,
-      "navn": "Verneområder",
-      "startet": "2026-09-23T09:42:25.9308327+00:00",
-      "minutter": 5
-    },
-    {
-      "agent": "mini-bug",
-      "github": "SasaRad",
-      "issue": 117,
-      "navn": "Nye punkter pulserer når de dukker opp",
-      "startet": "2026-09-23T09:43:08.8955657+00:00",
-      "minutter": 4
-    },
-    {
-      "agent": "mini-bug",
-      "github": "SasaRad",
-      "issue": 121,
-      "navn": "Følg et punkt som beveger seg",
-      "startet": "2026-09-23T09:43:37.9722137+00:00",
-      "minutter": 3
-    },
-    {
-      "agent": "mini-taco",
-      "github": "Puiu",
-      "issue": 54,
-      "navn": "Rate limit",
-      "startet": "2026-09-23T09:44:05.6033424+00:00",
-      "minutter": 3
-    },
-    {
-      "agent": "mini-taco",
-      "github": "Puiu",
-      "issue": 133,
-      "navn": "",
-      "startet": "2026-09-23T09:45:07.3901613+00:00",
-      "minutter": 2
-    },
-    {
-      "agent": "mini-johan",
-      "github": "pr0nin",
-      "issue": 10,
-      "navn": "Trafikk",
-      "startet": "2026-09-23T09:47:17.4922452+00:00",
-      "minutter": 0
-    }
-  ],
+  "kjoerer": [],
   "main": {
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
@@ -661,18 +572,6 @@
   },
   "tildelt": [
     {
-      "issue": 7,
-      "navn": "Nytt lag: skip i Oslofjorden",
-      "github": "audmaha",
-      "oppdatert": "2026-09-23T09:45:43Z"
-    },
-    {
-      "issue": 7,
-      "navn": "Nytt lag: skip i Oslofjorden",
-      "github": "monet820",
-      "oppdatert": "2026-09-23T09:45:43Z"
-    },
-    {
       "issue": 8,
       "navn": "Nytt lag: politilogg og nyhetshendelser",
       "github": "larsajakobsen",
@@ -682,7 +581,7 @@
       "issue": 10,
       "navn": "Nytt lag: trafikkregistreringspunkt",
       "github": "pr0nin",
-      "oppdatert": "2026-09-23T09:47:18Z"
+      "oppdatert": "2026-09-23T09:47:37Z"
     },
     {
       "issue": 11,
@@ -766,13 +665,13 @@
       "issue": 27,
       "navn": "Nytt lag: verneområder og naturtyper",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T09:42:26Z"
+      "oppdatert": "2026-09-23T09:47:36Z"
     },
     {
       "issue": 28,
       "navn": "Nytt lag: togtrafikk",
       "github": "Buggz",
-      "oppdatert": "2026-09-23T09:39:08Z"
+      "oppdatert": "2026-09-23T09:47:37Z"
     },
     {
       "issue": 29,
@@ -859,12 +758,6 @@
       "oppdatert": "2026-09-23T09:47:34Z"
     },
     {
-      "issue": 54,
-      "navn": "Vær grei mot kildene",
-      "github": "Puiu",
-      "oppdatert": "2026-09-23T09:47:33Z"
-    },
-    {
       "issue": 55,
       "navn": "Kartet blir tregt med mange punkter",
       "github": "sin-rha",
@@ -928,61 +821,55 @@
       "issue": 117,
       "navn": "Nye punkter pulserer når de dukker opp",
       "github": "Copilot",
-      "oppdatert": "2026-09-23T09:43:09Z"
+      "oppdatert": "2026-09-23T09:47:35Z"
     },
     {
       "issue": 117,
       "navn": "Nye punkter pulserer når de dukker opp",
       "github": "SasaRad",
-      "oppdatert": "2026-09-23T09:43:09Z"
+      "oppdatert": "2026-09-23T09:47:35Z"
     },
     {
       "issue": 118,
       "navn": "Nyhetslinje nederst på skjermen",
       "github": "leif-larsen",
-      "oppdatert": "2026-09-23T09:41:48Z"
+      "oppdatert": "2026-09-23T09:47:37Z"
     },
     {
       "issue": 119,
       "navn": "Mørkt kart når sola går ned i Oslo",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T09:39:35Z"
+      "oppdatert": "2026-09-23T09:47:47Z"
     },
     {
       "issue": 121,
       "navn": "Følg et punkt som beveger seg",
       "github": "Copilot",
-      "oppdatert": "2026-09-23T09:43:39Z"
+      "oppdatert": "2026-09-23T09:47:37Z"
     },
     {
       "issue": 121,
       "navn": "Følg et punkt som beveger seg",
       "github": "SasaRad",
-      "oppdatert": "2026-09-23T09:43:39Z"
+      "oppdatert": "2026-09-23T09:47:37Z"
     },
     {
       "issue": 123,
       "navn": "Riktig ikon for sykkel, elsparkesykkel og bil",
       "github": "Copilot",
-      "oppdatert": "2026-09-23T09:43:29Z"
+      "oppdatert": "2026-09-23T09:48:04Z"
     },
     {
       "issue": 123,
       "navn": "Riktig ikon for sykkel, elsparkesykkel og bil",
       "github": "SasaRad",
-      "oppdatert": "2026-09-23T09:43:29Z"
+      "oppdatert": "2026-09-23T09:48:04Z"
     },
     {
       "issue": 132,
       "navn": "Ekte sollys på 3D-byggene",
       "github": "nilsgs",
-      "oppdatert": "2026-09-23T09:47:32Z"
-    },
-    {
-      "issue": 133,
-      "navn": "Havet stiger: hva havner under vann?",
-      "github": "Puiu",
-      "oppdatert": "2026-09-23T09:47:33Z"
+      "oppdatert": "2026-09-23T09:47:40Z"
     }
   ],
   "aapne": [
