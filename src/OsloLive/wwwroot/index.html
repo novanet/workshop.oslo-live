@@ -835,29 +835,58 @@ function oppdaterKilde() {
 // ---------------------------------------------------------------------------
 // Glidende posisjon: et punkt som har samme properties.id som ved forrige
 // henting og har flyttet seg mindre enn GLIDNING_MAKS_AVSTAND, glir fra gammel
-// til ny posisjon over GLIDNING_VARIGHET i stedet for å hoppe. Punkter uten id
-// (syntetisk id inkluderer lon/lat, så et flyttet punkt får alltid ny id) og
-// punkter uten forrige treff hopper rett til posisjonen, som før.
+// til ny posisjon over GLIDNING_VARIGHET i stedet for å hoppe. Punkter uten
+// properties.id oppfører seg som før: id-en deres er syntetisk og laget av
+// lon/lat (se punktId under), så et slikt punkt som flytter seg får ny id og
+// hopper rett dit. Nye punkter, punkter over avstandsgrensen og alle punkter
+// når prefers-reduced-motion er på, hopper også rett til posisjonen.
 // ---------------------------------------------------------------------------
 const GLIDNING_VARIGHET = 2000;      // ms
-const GLIDNING_MAKS_AVSTAND = 5000;  // meter
+const GLIDNING_MAKS_AVSTAND = 5000;  // meter, målt med avstand() (haversine i meter)
+
+/**
+ * Id-en et punkt kjennes igjen på fra henting til henting. Har punktet
+ * `properties.id`, brukes den. Uten id lages en syntetisk id av navn og
+ * koordinater; den inneholder lon/lat, så et punkt uten id som flytter seg
+ * får en ny id, finner ikke igjen sitt gamle punkt i forberedGlidning og
+ * hopper rett til den nye posisjonen, som før.
+ */
+function punktId(egenskaper, lon, lat) {
+  if (egenskaper.id != null) return String(egenskaper.id);
+  return (egenskaper.navn ?? '') + '|' + lon + '|' + lat;
+}
 
 function redusertBevegelseOnsket() {
   return window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
 }
 
-const glidendePunkter = new Set();
+// Punktene som glir akkurat nå, med nøkkel `lag|id`. Nøkkelen gjør at en ny
+// henting av laget kan avbryte glidningen til det gamle punktobjektet før det
+// nye tar over (avbrytGlidning), så ingen gammel animasjon lever videre og
+// flytter markør eller popup langs en utdatert bane.
+const glidendePunkter = new Map();
 let glidningRammeId = 0;
+
+/** Avbryter alle glidninger for laget; punktene blir stående der de vises nå. */
+function avbrytGlidning(lagId) {
+  for (const [nøkkel, p] of glidendePunkter) {
+    if (p.glidning.lag !== lagId) continue;
+    delete p.glidning;
+    glidendePunkter.delete(nøkkel);
+  }
+}
 
 function glidningSteg() {
   glidningRammeId = 0;
   const nå = performance.now();
-  for (const p of glidendePunkter) {
+  // Slås redusert bevegelse på midt i en glidning, fullføres alle med ett hopp.
+  const hopp = redusertBevegelseOnsket();
+  for (const [nøkkel, p] of glidendePunkter) {
     const a = p.glidning;
-    const t = Math.min(1, (nå - a.start) / GLIDNING_VARIGHET);
+    const t = hopp ? 1 : Math.min(1, (nå - a.start) / GLIDNING_VARIGHET);
     p.visLon = a.fraLon + (p.lon - a.fraLon) * t;
     p.visLat = a.fraLat + (p.lat - a.fraLat) * t;
-    if (t >= 1) { delete p.glidning; glidendePunkter.delete(p); }
+    if (t >= 1) { delete p.glidning; glidendePunkter.delete(nøkkel); }
     if (aapenPopup && aapenPopup.lag === a.lag && aapenPopup.id === p.id) {
       aapenPopup.boble.setLngLat([p.visLon, p.visLat]);
     }
@@ -866,20 +895,32 @@ function glidningSteg() {
   if (glidendePunkter.size) glidningRammeId = requestAnimationFrame(glidningSteg);
 }
 
-/** Setter opp glidende posisjon for punktene i `liste` som har flyttet seg fra `forrige`. */
+/**
+ * Setter opp glidende posisjon for punktene i `liste` (den nye hentingen av
+ * laget) som har flyttet seg siden `forrige` (forrige hentings punkter, på id).
+ * Glidningene laget hadde fra før avbrytes først: de gamle punktobjektene
+ * byttes ut nå, og en animasjon som levde videre på dem ville flyttet popupen
+ * langs en utdatert bane etter at hent() har satt den nye posisjonen.
+ */
 function forberedGlidning(lagId, forrige, liste) {
+  avbrytGlidning(lagId);
   const redusertBevegelse = redusertBevegelseOnsket();
   for (const p of liste) {
-    const gammel = forrige.get(p.id);
-    const flyttet = gammel && (gammel.lon !== p.lon || gammel.lat !== p.lat);
-    if (!flyttet || redusertBevegelse || avstand(gammel.lat, gammel.lon, p.lat, p.lon) > GLIDNING_MAKS_AVSTAND) {
+    // Bare punkter med ekte properties.id kan kjennes igjen; uten id er id-en
+    // syntetisk og laget av lon/lat (punktId), så punktet oppfører seg som før.
+    const gammel = p.egenskaper.id != null ? forrige.get(p.id) : undefined;
+    // Vi går ut fra der markøren vises nå, så en glidning som ble avbrutt
+    // fortsetter jevnt derfra i stedet for å hoppe tilbake til startpunktet.
+    const fraLon = gammel?.visLon ?? gammel?.lon;
+    const fraLat = gammel?.visLat ?? gammel?.lat;
+    const flyttet = gammel && (fraLon !== p.lon || fraLat !== p.lat);
+    if (!flyttet || redusertBevegelse || avstand(fraLat, fraLon, p.lat, p.lon) > GLIDNING_MAKS_AVSTAND) {
       p.visLon = p.lon; p.visLat = p.lat;
       continue;
     }
-    p.visLon = gammel.visLon ?? gammel.lon;
-    p.visLat = gammel.visLat ?? gammel.lat;
-    p.glidning = { fraLon: p.visLon, fraLat: p.visLat, start: performance.now(), lag: lagId };
-    glidendePunkter.add(p);
+    p.visLon = fraLon; p.visLat = fraLat;
+    p.glidning = { fraLon, fraLat, start: performance.now(), lag: lagId };
+    glidendePunkter.set(lagId + '|' + p.id, p);
   }
   if (glidendePunkter.size && !glidningRammeId) glidningRammeId = requestAnimationFrame(glidningSteg);
 }
@@ -1067,7 +1108,7 @@ async function hent(id) {
       if (!Array.isArray(c) || c.length < 2) continue;
 
       const p = f.properties ?? {};
-      const punkt = { id: String(p.id ?? (p.navn ?? '') + '|' + c[0] + '|' + c[1]), navn: p.navn ?? 'Uten navn', lon: c[0], lat: c[1], egenskaper: p };
+      const punkt = { id: punktId(p, c[0], c[1]), navn: p.navn ?? 'Uten navn', lon: c[0], lat: c[1], egenskaper: p };
       sjekkVarsler(id, oppf, p, punkt);
       liste.push(punkt);
     }
@@ -1109,6 +1150,7 @@ async function hent(id) {
     // Ta bort punktene fra forrige henting, ellers blir de stående i kartet
     // selv om laget er markert som feilende og demoen hopper over det.
     lukkPopup(id);
+    avbrytGlidning(id);
     oppf.punkter = [];
     varmekart(id, []);
     visLag(id);
