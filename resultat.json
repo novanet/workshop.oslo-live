@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:37:21",
+  "oppdatert": "2026-09-23T11:37:58",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -318,6 +318,25 @@
       "plass": 10
     },
     {
+      "navn": "martin-holth",
+      "github": "martinrholth",
+      "poeng": 0,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 0.0,
+      "tokens": 0,
+      "sekunder": 0,
+      "pr": 0,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 1,
+      "utenPr": 1,
+      "bygg": [],
+      "estimert": false,
+      "plass": 11
+    },
+    {
       "navn": "henrik",
       "github": "monet820",
       "poeng": 0,
@@ -334,7 +353,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 11
+      "plass": 12
     },
     {
       "navn": "Dmitry-agent",
@@ -353,7 +372,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 12
+      "plass": 13
     },
     {
       "navn": "mini-taco",
@@ -372,7 +391,7 @@
       "utenPr": 0,
       "bygg": [],
       "estimert": false,
-      "plass": 13
+      "plass": 14
     },
     {
       "navn": "mini-sindre",
@@ -391,7 +410,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 14
+      "plass": 15
     },
     {
       "navn": "mini-aud",
@@ -410,7 +429,7 @@
       "utenPr": 3,
       "bygg": [],
       "estimert": false,
-      "plass": 15
+      "plass": 16
     },
     {
       "navn": "Andy3000",
@@ -429,7 +448,7 @@
       "utenPr": 2,
       "bygg": [],
       "estimert": false,
-      "plass": 16
+      "plass": 17
     },
     {
       "navn": "mini-frode",
@@ -448,7 +467,7 @@
       "utenPr": 7,
       "bygg": [],
       "estimert": false,
-      "plass": 17
+      "plass": 18
     }
   ],
   "kjoerer": [
@@ -458,7 +477,7 @@
       "issue": 29,
       "navn": "Museer",
       "startet": "2026-09-23T09:33:36.7988647+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-taco",
@@ -466,7 +485,7 @@
       "issue": 122,
       "navn": "Vis hvor ferskt hvert lag er",
       "startet": "2026-09-23T09:34:35.9423034+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-bug",
@@ -474,7 +493,7 @@
       "issue": 3,
       "navn": "Mellomlageret",
       "startet": "2026-09-23T09:34:49.5919992+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-kirsten",
@@ -490,6 +509,22 @@
       "issue": 12,
       "navn": "Holdeplasser",
       "startet": "2026-09-23T09:36:39.1423524+00:00",
+      "minutter": 1
+    },
+    {
+      "agent": "mini-johan",
+      "github": "pr0nin",
+      "issue": 10,
+      "navn": "Trafikk",
+      "startet": "2026-09-23T09:37:20.4937471+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "henrik",
+      "github": "monet820",
+      "issue": 7,
+      "navn": "Skipstrafikk",
+      "startet": "2026-09-23T09:37:38.7912096+00:00",
       "minutter": 0
     }
   ],
@@ -521,13 +556,13 @@
       "issue": 7,
       "navn": "Nytt lag: skip i Oslofjorden",
       "github": "audmaha",
-      "oppdatert": "2026-09-23T09:36:54Z"
+      "oppdatert": "2026-09-23T09:37:39Z"
     },
     {
       "issue": 7,
       "navn": "Nytt lag: skip i Oslofjorden",
       "github": "monet820",
-      "oppdatert": "2026-09-23T09:36:54Z"
+      "oppdatert": "2026-09-23T09:37:39Z"
     },
     {
       "issue": 8,
@@ -539,7 +574,7 @@
       "issue": 10,
       "navn": "Nytt lag: trafikkregistreringspunkt",
       "github": "pr0nin",
-      "oppdatert": "2026-09-23T09:37:18Z"
+      "oppdatert": "2026-09-23T09:37:21Z"
     },
     {
       "issue": 11,
@@ -656,22 +691,10 @@
       "oppdatert": "2026-09-23T09:09:45Z"
     },
     {
-      "issue": 38,
-      "navn": "Demomodus for storskjerm",
-      "github": "randsu",
-      "oppdatert": "2026-09-23T09:37:19Z"
-    },
-    {
       "issue": 39,
       "navn": "Tastatursnarveier",
       "github": "audmaha",
       "oppdatert": "2026-09-23T09:00:43Z"
-    },
-    {
-      "issue": 40,
-      "navn": "Kartet må virke på mobil",
-      "github": "Buggz",
-      "oppdatert": "2026-09-23T08:59:45Z"
     },
     {
       "issue": 41,
@@ -686,12 +709,6 @@
       "oppdatert": "2026-09-23T08:42:15Z"
     },
     {
-      "issue": 42,
-      "navn": "Hva er nærmest her?",
-      "github": "theakbe",
-      "oppdatert": "2026-09-23T08:36:38Z"
-    },
-    {
       "issue": 43,
       "navn": "Et statistikkpanel",
       "github": "audmaha",
@@ -701,13 +718,7 @@
       "issue": 44,
       "navn": "Sammenlign to tidspunkt",
       "github": "yonzo",
-      "oppdatert": "2026-09-23T08:55:29Z"
-    },
-    {
-      "issue": 45,
-      "navn": "Varsle når noe skjer",
-      "github": "jthagesk",
-      "oppdatert": "2026-09-23T09:31:39Z"
+      "oppdatert": "2026-09-23T09:37:49Z"
     },
     {
       "issue": 46,
@@ -728,12 +739,6 @@
       "oppdatert": "2026-09-23T08:50:29Z"
     },
     {
-      "issue": 49,
-      "navn": "Prøv én gang til når en kilde svarer dårlig",
-      "github": "ingvevs",
-      "oppdatert": "2026-09-23T08:27:27Z"
-    },
-    {
       "issue": 50,
       "navn": "Mål hva som skjer",
       "github": "FrodeBl",
@@ -752,12 +757,6 @@
       "oppdatert": "2026-09-23T09:36:07Z"
     },
     {
-      "issue": 53,
-      "navn": "En helsesjekk som betyr noe",
-      "github": "Buggz",
-      "oppdatert": "2026-09-23T08:42:26Z"
-    },
-    {
       "issue": 54,
       "navn": "Vær grei mot kildene",
       "github": "Puiu",
@@ -768,12 +767,6 @@
       "navn": "Kartet blir tregt med mange punkter",
       "github": "sin-rha",
       "oppdatert": "2026-09-23T09:34:38Z"
-    },
-    {
-      "issue": 56,
-      "navn": "Nytt lag: fly i lufta over Oslo",
-      "github": "randsu",
-      "oppdatert": "2026-09-23T08:10:48Z"
     },
     {
       "issue": 57,
@@ -800,6 +793,12 @@
       "oppdatert": "2026-09-23T09:20:55Z"
     },
     {
+      "issue": 115,
+      "navn": "Nytt lag: parker og torg",
+      "github": "novanettor",
+      "oppdatert": "2026-09-23T09:37:34Z"
+    },
+    {
       "issue": 122,
       "navn": "Vis hvor ferskt hvert lag er",
       "github": "Puiu",
@@ -807,6 +806,18 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 107,
+      "tittel": "Tastatursnarveier",
+      "github": "audmaha",
+      "agent": "mini-aud",
+      "opprettet": "2026-09-23T09:00:42Z",
+      "oppdatert": "2026-09-23T09:37:21Z",
+      "utkast": false,
+      "issues": [
+        39
+      ]
+    },
     {
       "pr": 91,
       "tittel": "Fargene må virke for alle",
@@ -841,18 +852,6 @@
       "utkast": false,
       "issues": [
         11
-      ]
-    },
-    {
-      "pr": 107,
-      "tittel": "Tastatursnarveier",
-      "github": "audmaha",
-      "agent": "mini-aud",
-      "opprettet": "2026-09-23T09:00:42Z",
-      "oppdatert": "2026-09-23T09:26:11Z",
-      "utkast": false,
-      "issues": [
-        39
       ]
     },
     {
