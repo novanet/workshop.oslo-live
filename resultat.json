@@ -1,11 +1,11 @@
 {
-  "oppdatert": "2026-09-23T14:41:47",
+  "oppdatert": "2026-09-23T14:42:27",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
       "navn": "mini-richard",
       "github": "randsu",
-      "poeng": 38,
+      "poeng": 39,
       "feil": [
         {
           "issue": 3,
@@ -60,6 +60,11 @@
           "issue": 56,
           "navn": "Flytrafikk",
           "poeng": 8
+        },
+        {
+          "issue": 116,
+          "navn": "Nytt lag: værstasjoner",
+          "poeng": 1
         }
       ],
       "dollar": 23.539,
@@ -67,7 +72,7 @@
       "sekunder": 8558,
       "pr": 14,
       "utkast": 0,
-      "merget": 10,
+      "merget": 11,
       "kjoeringer": 28,
       "utenPr": 14,
       "bygg": [],
@@ -271,13 +276,13 @@
           "poeng": 1
         }
       ],
-      "dollar": 33.348,
-      "tokens": 54937007,
-      "sekunder": 10340,
+      "dollar": 36.677,
+      "tokens": 61441048,
+      "sekunder": 11138,
       "pr": 10,
       "utkast": 1,
       "merget": 5,
-      "kjoeringer": 26,
+      "kjoeringer": 27,
       "utenPr": 14,
       "bygg": [],
       "estimert": false,
@@ -396,31 +401,6 @@
       "plass": 11
     },
     {
-      "navn": "henrik",
-      "github": "monet820",
-      "poeng": 2,
-      "feil": [],
-      "lag": [
-        {
-          "issue": 7,
-          "navn": "Skipstrafikk",
-          "poeng": 2
-        }
-      ],
-      "levert": [],
-      "dollar": 3.191,
-      "tokens": 5084880,
-      "sekunder": 940,
-      "pr": 1,
-      "utkast": 0,
-      "merget": 1,
-      "kjoeringer": 7,
-      "utenPr": 6,
-      "bygg": [],
-      "estimert": false,
-      "plass": 12
-    },
-    {
       "navn": "Dmitry-agent",
       "github": "FilonenkoDmitry",
       "poeng": 2,
@@ -441,6 +421,31 @@
       "merget": 1,
       "kjoeringer": 2,
       "utenPr": 1,
+      "bygg": [],
+      "estimert": false,
+      "plass": 12
+    },
+    {
+      "navn": "henrik",
+      "github": "monet820",
+      "poeng": 2,
+      "feil": [],
+      "lag": [
+        {
+          "issue": 7,
+          "navn": "Skipstrafikk",
+          "poeng": 2
+        }
+      ],
+      "levert": [],
+      "dollar": 5.082,
+      "tokens": 9969983,
+      "sekunder": 1479,
+      "pr": 2,
+      "utkast": 0,
+      "merget": 1,
+      "kjoeringer": 8,
+      "utenPr": 6,
       "bygg": [],
       "estimert": false,
       "plass": 13
@@ -620,26 +625,10 @@
     {
       "agent": "mini-wilma",
       "github": "larsajakobsen",
-      "issue": 26,
-      "navn": "Skoler",
-      "startet": "2026-09-23T12:28:26.4775068+00:00",
-      "minutter": 13
-    },
-    {
-      "agent": "mini-wilma",
-      "github": "larsajakobsen",
       "issue": 214,
       "navn": "Lagvelgeren er for høy: historikkgrafen tar en egen rad per lag",
       "startet": "2026-09-23T12:31:25.313151+00:00",
-      "minutter": 10
-    },
-    {
-      "agent": "henrik",
-      "github": "monet820",
-      "issue": 114,
-      "navn": "Nytt lag: Kristiania i 1910",
-      "startet": "2026-09-23T12:32:02.4130394+00:00",
-      "minutter": 9
+      "minutter": 11
     },
     {
       "agent": "mini-knive",
@@ -647,7 +636,7 @@
       "issue": 215,
       "navn": "Svarte klynger dekker sentrum og skjuler hvilke lag som er der",
       "startet": "2026-09-23T12:34:13.5766398+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "mini-kirsten",
@@ -655,7 +644,7 @@
       "issue": 29,
       "navn": "Museer",
       "startet": "2026-09-23T12:34:23.8175869+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "mini-jon",
@@ -663,7 +652,7 @@
       "issue": 189,
       "navn": "Travlere enn vanlig på veiene",
       "startet": "2026-09-23T12:34:43.2826697+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-gir",
@@ -671,7 +660,7 @@
       "issue": 51,
       "navn": "Logging",
       "startet": "2026-09-23T12:35:46.639797+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-gir",
@@ -679,7 +668,7 @@
       "issue": 33,
       "navn": "Sykkelparkering",
       "startet": "2026-09-23T12:35:47.0074899+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "helstein",
@@ -687,7 +676,7 @@
       "issue": 194,
       "navn": "Nytt lag: bomstasjoner",
       "startet": "2026-09-23T12:36:39.65381+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-richard",
@@ -703,7 +692,7 @@
       "issue": 205,
       "navn": "Strømprisen vises med desimalpunktum",
       "startet": "2026-09-23T12:38:19.4975108+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-richard",
@@ -711,7 +700,15 @@
       "issue": 119,
       "navn": "Mørkt kart når sola går ned i Oslo",
       "startet": "2026-09-23T12:39:26.8247317+00:00",
-      "minutter": 2
+      "minutter": 3
+    },
+    {
+      "agent": "mini-ingve",
+      "github": "ingvevs",
+      "issue": 11,
+      "navn": "Kollektiv",
+      "startet": "2026-09-23T12:42:10.8697351+00:00",
+      "minutter": 0
     }
   ],
   "main": {
@@ -741,6 +738,18 @@
     "feilmelding": null
   },
   "tildelt": [
+    {
+      "issue": 27,
+      "navn": "Nytt lag: verneområder og naturtyper",
+      "github": "larsajakobsen",
+      "oppdatert": "2026-09-23T09:47:36Z"
+    },
+    {
+      "issue": 28,
+      "navn": "Nytt lag: togtrafikk",
+      "github": "Buggz",
+      "oppdatert": "2026-09-23T12:29:21Z"
+    },
     {
       "issue": 29,
       "navn": "Nytt lag: museer og samlinger",
@@ -859,13 +868,13 @@
       "issue": 114,
       "navn": "Nytt lag: Kristiania i 1910",
       "github": "monet820",
-      "oppdatert": "2026-09-23T12:38:29Z"
+      "oppdatert": "2026-09-23T12:41:32Z"
     },
     {
       "issue": 114,
       "navn": "Nytt lag: Kristiania i 1910",
       "github": "randsu",
-      "oppdatert": "2026-09-23T12:38:29Z"
+      "oppdatert": "2026-09-23T12:41:32Z"
     },
     {
       "issue": 115,
@@ -884,24 +893,6 @@
       "navn": "Nytt lag: parker og torg",
       "github": "randsu",
       "oppdatert": "2026-09-23T12:35:38Z"
-    },
-    {
-      "issue": 116,
-      "navn": "Nytt lag: værstasjoner",
-      "github": "monet820",
-      "oppdatert": "2026-09-23T12:39:04Z"
-    },
-    {
-      "issue": 116,
-      "navn": "Nytt lag: værstasjoner",
-      "github": "nilsgs",
-      "oppdatert": "2026-09-23T12:39:04Z"
-    },
-    {
-      "issue": 116,
-      "navn": "Nytt lag: værstasjoner",
-      "github": "randsu",
-      "oppdatert": "2026-09-23T12:39:04Z"
     },
     {
       "issue": 117,
@@ -961,13 +952,13 @@
       "issue": 123,
       "navn": "Riktig ikon for sykkel, elsparkesykkel og bil",
       "github": "Copilot",
-      "oppdatert": "2026-09-23T12:29:57Z"
+      "oppdatert": "2026-09-23T12:41:54Z"
     },
     {
       "issue": 123,
       "navn": "Riktig ikon for sykkel, elsparkesykkel og bil",
       "github": "SasaRad",
-      "oppdatert": "2026-09-23T12:29:57Z"
+      "oppdatert": "2026-09-23T12:41:54Z"
     },
     {
       "issue": 124,
@@ -1004,18 +995,6 @@
       "navn": "Kameratur over Oslo når ingen rører skjermen",
       "github": "randsu",
       "oppdatert": "2026-09-23T12:30:00Z"
-    },
-    {
-      "issue": 132,
-      "navn": "Ekte sollys på 3D-byggene",
-      "github": "audmaha",
-      "oppdatert": "2026-09-23T12:30:01Z"
-    },
-    {
-      "issue": 132,
-      "navn": "Ekte sollys på 3D-byggene",
-      "github": "nilsgs",
-      "oppdatert": "2026-09-23T12:30:01Z"
     },
     {
       "issue": 133,
@@ -1075,7 +1054,7 @@
       "issue": 188,
       "navn": "Vinden som strømmer over byen",
       "github": "theakbe",
-      "oppdatert": "2026-09-23T12:37:39Z"
+      "oppdatert": "2026-09-23T12:42:15Z"
     },
     {
       "issue": 189,
@@ -1164,6 +1143,54 @@
   ],
   "aapne": [
     {
+      "pr": 225,
+      "tittel": "#114: Nytt lag: Kristiania i 1910",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T12:38:28Z",
+      "oppdatert": "2026-09-23T12:41:43Z",
+      "utkast": false,
+      "issues": [
+        114
+      ]
+    },
+    {
+      "pr": 229,
+      "tittel": "Nytt lag: Kristiania i 1910",
+      "github": "monet820",
+      "agent": "henrik",
+      "opprettet": "2026-09-23T12:41:30Z",
+      "oppdatert": "2026-09-23T12:41:31Z",
+      "utkast": false,
+      "issues": [
+        114
+      ]
+    },
+    {
+      "pr": 109,
+      "tittel": "Nytt lag: skoler og barnehager",
+      "github": "larsajakobsen",
+      "agent": "mini-wilma",
+      "opprettet": "2026-09-23T09:21:55Z",
+      "oppdatert": "2026-09-23T12:41:30Z",
+      "utkast": false,
+      "issues": [
+        26
+      ]
+    },
+    {
+      "pr": 226,
+      "tittel": "Popupene viser rådata: ISO-tider, «ikon: 😊» og tall uten enhet",
+      "github": "larsajakobsen",
+      "agent": "mini-wilma",
+      "opprettet": "2026-09-23T12:38:36Z",
+      "oppdatert": "2026-09-23T12:41:26Z",
+      "utkast": false,
+      "issues": [
+        206
+      ]
+    },
+    {
       "pr": 228,
       "tittel": "Nyhetslinje nederst på skjermen (#118)",
       "github": "leif-larsen",
@@ -1176,18 +1203,6 @@
       ]
     },
     {
-      "pr": 226,
-      "tittel": "Popupene viser rådata: ISO-tider, «ikon: 😊» og tall uten enhet",
-      "github": "larsajakobsen",
-      "agent": "mini-wilma",
-      "opprettet": "2026-09-23T12:38:36Z",
-      "oppdatert": "2026-09-23T12:41:17Z",
-      "utkast": false,
-      "issues": [
-        206
-      ]
-    },
-    {
       "pr": 222,
       "tittel": "Havet stiger: hva havner under vann? (#133)",
       "github": "Puiu",
@@ -1197,18 +1212,6 @@
       "utkast": false,
       "issues": [
         133
-      ]
-    },
-    {
-      "pr": 225,
-      "tittel": "#114: Nytt lag: Kristiania i 1910",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T12:38:28Z",
-      "oppdatert": "2026-09-23T12:41:01Z",
-      "utkast": false,
-      "issues": [
-        114
       ]
     },
     {
@@ -1269,18 +1272,6 @@
       "utkast": false,
       "issues": [
         50
-      ]
-    },
-    {
-      "pr": 227,
-      "tittel": "#116: Nytt lag: værstasjoner",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T12:39:02Z",
-      "oppdatert": "2026-09-23T12:39:03Z",
-      "utkast": false,
-      "issues": [
-        116
       ]
     },
     {
@@ -1353,18 +1344,6 @@
       "utkast": false,
       "issues": [
         197
-      ]
-    },
-    {
-      "pr": 109,
-      "tittel": "Nytt lag: skoler og barnehager",
-      "github": "larsajakobsen",
-      "agent": "mini-wilma",
-      "opprettet": "2026-09-23T09:21:55Z",
-      "oppdatert": "2026-09-23T12:15:38Z",
-      "utkast": false,
-      "issues": [
-        26
       ]
     },
     {
