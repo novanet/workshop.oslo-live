@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T15:26:44",
+  "oppdatert": "2026-09-23T15:27:25",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -701,7 +701,7 @@
       "issue": 193,
       "navn": "Nytt lag: hjertestartere",
       "startet": "2026-09-23T13:20:02.3717642+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-frode",
@@ -709,7 +709,7 @@
       "issue": 186,
       "navn": "Nytt lag: bysykkelstasjoner som fyllingsringer",
       "startet": "2026-09-23T13:22:58.2011074+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-wilma",
@@ -717,7 +717,7 @@
       "issue": 184,
       "navn": "Neste avganger når du klikker på en holdeplass",
       "startet": "2026-09-23T13:24:18.5982608+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-wilma",
@@ -725,7 +725,7 @@
       "issue": 183,
       "navn": "Regner det i Oslo sentrum de neste to timene?",
       "startet": "2026-09-23T13:24:20.6110309+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-frode",
