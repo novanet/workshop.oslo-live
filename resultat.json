@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:17:52",
+  "oppdatert": "2026-09-23T10:18:19",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -243,7 +243,7 @@
       "issue": 17,
       "navn": "Smilefjes",
       "startet": "2026-09-23T08:10:01.588657+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "mini-frode",
@@ -251,7 +251,7 @@
       "issue": 19,
       "navn": "Artsobservasjoner",
       "startet": "2026-09-23T08:14:02.4941234+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-ingve",
@@ -259,7 +259,7 @@
       "issue": 49,
       "navn": "Nytt forsøk",
       "startet": "2026-09-23T08:16:16.8577675+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-sindre",
