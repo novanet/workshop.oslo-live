@@ -142,4 +142,18 @@ public class FolketellingLagTester
 
         Assert.Null(punkt);
     }
+
+    // Rad fanget fra arkivverket/search_census_properties?query=Kristiania&limit=50 den
+    // 23. september 2026: 50 rader, 44 av dem med koordinater innenfor kartutsnittet.
+    // Feltnavnene er kildens egne: property_id, gaardsnavn_gateadr, gaardsnr, bruksnr, source, coordinates.lat/lon.
+    [Fact]
+    public void Ekte_rad_fra_kilden_gir_punkt_innenfor_utsnittet()
+    {
+        var punkt = FolketellingLag.TilPunkt(Rad("""
+            {"property_id": "bf01036372028453", "gaardsnavn_gateadr": "Kristiania metalvæveri og staalnetfabrik", "gaardsnr": "132", "bruksnr": "16", "source": "Folketelling 1910 for 0218 Aker herred", "coordinates": {"lat": 59.916162038291, "lon": 10.808059023187}}
+            """));
+
+        Assert.NotNull(punkt);
+        Assert.Equal("Point", punkt!.Geometry.Type);
+    }
 }
