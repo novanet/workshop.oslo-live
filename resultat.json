@@ -1,7 +1,27 @@
 {
-  "oppdatert": "2026-09-23T09:35:33",
+  "oppdatert": "2026-09-23T09:37:45",
   "repo": "novanet/workshop.oslo-live",
-  "deltakere": [],
+  "deltakere": [
+    {
+      "navn": "mini-frode",
+      "github": "FrodeBl",
+      "poeng": 0,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 0.0,
+      "tokens": 0,
+      "sekunder": 0,
+      "pr": 0,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 1,
+      "utenPr": 1,
+      "bygg": [],
+      "estimert": false,
+      "plass": 1
+    }
+  ],
   "kjoerer": [
     {
       "agent": "mini-richard",
@@ -9,7 +29,7 @@
       "issue": 3,
       "navn": "Mellomlageret",
       "startet": "2026-09-23T07:35:16.7565669+00:00",
-      "minutter": 0
+      "minutter": 2
     }
   ],
   "main": {
@@ -26,6 +46,12 @@
     "feilmelding": null
   },
   "tildelt": [
+    {
+      "issue": 1,
+      "navn": "Alle punkter havner i havet, langt utenfor Norge",
+      "github": "FrodeBl",
+      "oppdatert": "2026-09-23T07:37:01Z"
+    },
     {
       "issue": 3,
       "navn": "Kartet oppdaterer seg ikke, dataene står stille",
