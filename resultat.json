@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T15:22:29",
+  "oppdatert": "2026-09-23T15:23:12",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -701,7 +701,7 @@
       "issue": 210,
       "navn": "Historikkgrafen blinker fordi appen kjører på tre replikaer",
       "startet": "2026-09-23T13:19:01.0373888+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-wilma",
@@ -709,7 +709,15 @@
       "issue": 193,
       "navn": "Nytt lag: hjertestartere",
       "startet": "2026-09-23T13:20:02.3717642+00:00",
-      "minutter": 2
+      "minutter": 3
+    },
+    {
+      "agent": "mini-frode",
+      "github": "FrodeBl",
+      "issue": 186,
+      "navn": "Nytt lag: bysykkelstasjoner som fyllingsringer",
+      "startet": "2026-09-23T13:22:58.2011074+00:00",
+      "minutter": 0
     }
   ],
   "main": {
@@ -1081,7 +1089,7 @@
       "issue": 186,
       "navn": "Nytt lag: bysykkelstasjoner som fyllingsringer",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T13:22:18Z"
+      "oppdatert": "2026-09-23T13:22:59Z"
     },
     {
       "issue": 187,
@@ -1206,6 +1214,18 @@
   ],
   "aapne": [
     {
+      "pr": 67,
+      "tittel": "Hent lagene parallelt",
+      "github": "FrodeBl",
+      "agent": "mini-frode",
+      "opprettet": "2026-09-23T07:59:18Z",
+      "oppdatert": "2026-09-23T13:22:35Z",
+      "utkast": false,
+      "issues": [
+        48
+      ]
+    },
+    {
       "pr": 254,
       "tittel": "Historikkgrafen blinker fordi appen kjører på tre replikaer",
       "github": "larsajakobsen",
@@ -1239,18 +1259,6 @@
       "utkast": false,
       "issues": [
         186
-      ]
-    },
-    {
-      "pr": 67,
-      "tittel": "Hent lagene parallelt",
-      "github": "FrodeBl",
-      "agent": "mini-frode",
-      "opprettet": "2026-09-23T07:59:18Z",
-      "oppdatert": "2026-09-23T13:19:12Z",
-      "utkast": false,
-      "issues": [
-        48
       ]
     },
     {
