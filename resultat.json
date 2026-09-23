@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:19:38",
+  "oppdatert": "2026-09-23T10:20:05",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -90,14 +90,14 @@
       ],
       "lag": [],
       "levert": [],
-      "dollar": 3.585,
-      "tokens": 6661789,
-      "sekunder": 1344,
+      "dollar": 3.954,
+      "tokens": 7238547,
+      "sekunder": 1471,
       "pr": 2,
       "utkast": 0,
       "merget": 1,
-      "kjoeringer": 3,
-      "utenPr": 1,
+      "kjoeringer": 4,
+      "utenPr": 2,
       "bygg": [],
       "estimert": false,
       "plass": 4
@@ -243,7 +243,7 @@
       "issue": 17,
       "navn": "Smilefjes",
       "startet": "2026-09-23T08:10:01.588657+00:00",
-      "minutter": 9
+      "minutter": 10
     },
     {
       "agent": "mini-frode",
@@ -251,7 +251,7 @@
       "issue": 19,
       "navn": "Artsobservasjoner",
       "startet": "2026-09-23T08:14:02.4941234+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-ingve",
@@ -278,14 +278,6 @@
       "minutter": 3
     },
     {
-      "agent": "mini-richard",
-      "github": "randsu",
-      "issue": 2,
-      "navn": "Utsnittet",
-      "startet": "2026-09-23T08:17:30.8091834+00:00",
-      "minutter": 2
-    },
-    {
       "agent": "mini-leif",
       "github": "leif-larsen",
       "issue": 21,
@@ -299,6 +291,14 @@
       "issue": 5,
       "navn": "Norsk tallformat",
       "startet": "2026-09-23T08:19:23.3216436+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-wilma",
+      "github": "larsajakobsen",
+      "issue": 1,
+      "navn": "Koordinatrekkefølge",
+      "startet": "2026-09-23T08:20:01.4612094+00:00",
       "minutter": 0
     }
   ],
@@ -325,19 +325,25 @@
       "issue": 1,
       "navn": "Alle punkter havner i havet, langt utenfor Norge",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T08:19:03Z"
+      "oppdatert": "2026-09-23T08:20:02Z"
+    },
+    {
+      "issue": 1,
+      "navn": "Alle punkter havner i havet, langt utenfor Norge",
+      "github": "larsajakobsen",
+      "oppdatert": "2026-09-23T08:20:02Z"
     },
     {
       "issue": 2,
       "navn": "Steder langt utenfor Oslo slipper inn i kartet",
       "github": "leif-larsen",
-      "oppdatert": "2026-09-23T08:19:12Z"
+      "oppdatert": "2026-09-23T08:19:47Z"
     },
     {
       "issue": 2,
       "navn": "Steder langt utenfor Oslo slipper inn i kartet",
       "github": "randsu",
-      "oppdatert": "2026-09-23T08:19:12Z"
+      "oppdatert": "2026-09-23T08:19:47Z"
     },
     {
       "issue": 3,
