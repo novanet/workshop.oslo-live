@@ -17,6 +17,9 @@ COPY src/OsloLive/ src/OsloLive/
 RUN dotnet publish src/OsloLive/OsloLive.csproj \
       -c Release -o /out --no-restore
 
+# Tom mappe som blir historikkmappa i kjørebildet, se under.
+RUN mkdir -p /historikk
+
 # Chiseled: ingen shell, ingen pakkebehandler, kjører som ikke-root.
 # Mye mindre enn det vanlige aspnet-bildet, som betyr raskere nedlasting
 # og raskere oppstart av en ny revisjon.
@@ -28,6 +31,11 @@ FROM mcr.microsoft.com/dotnet/aspnet:10.0-noble-chiseled-extra
 
 WORKDIR /app
 COPY --from=build /out .
+
+# Historikkmappa (Historikk:Mappe, standard App_Data/historikk under /app) må kunne
+# skrives av ikke-root-brukeren «app» (uid 1654) som chiseled-bildet kjører som.
+# Monter gjerne et volum her; uten volum forsvinner bildene sammen med containeren.
+COPY --from=build --chown=1654:1654 /historikk /app/App_Data/historikk
 
 ENV ASPNETCORE_HTTP_PORTS=8080 \
     DOTNET_CLI_TELEMETRY_OPTOUT=1 \
