@@ -1,6 +1,7 @@
 using System.Globalization;
 using OsloLive;
 using OsloLive.Helse;
+using OsloLive.Historikk;
 using OsloLive.Kart;
 using OsloLive.Lag;
 
@@ -28,6 +29,18 @@ builder.Services.AddHttpClient("fly", klient =>
 });
 builder.Services.AddMemoryCache();
 
+// Øyeblikksbilder av hvert lag hver time, slik at tidslinjen kan vise hvordan kartet så ut. Se Historikk/.
+// Standardmappa ligger under appens rotmappe (App_Data/historikk, ikke i git), ikke i temp, slik at
+// den er forutsigbar og kan monteres som volum i containeren. Overstyres med Historikk:Mappe.
+builder.Services.AddSingleton(tjenester =>
+{
+    var mappe = tjenester.GetRequiredService<IConfiguration>()["Historikk:Mappe"];
+    return new Bildelager(string.IsNullOrWhiteSpace(mappe)
+        ? Path.Combine(tjenester.GetRequiredService<IHostEnvironment>().ContentRootPath, "App_Data", "historikk")
+        : mappe);
+});
+builder.Services.AddHostedService<Øyeblikksjobb>();
+
 // ---------------------------------------------------------------------------
 // Lagene på kartet. Nytt lag? Legg til én linje her.
 // ---------------------------------------------------------------------------
@@ -52,13 +65,23 @@ app.UseStaticFiles();
 app.MapGet("/api/lag", (IEnumerable<ILag> lag) =>
     lag.Select(l => new { id = l.Id, navn = l.Navn, beskrivelse = l.Beskrivelse, ikon = l.Ikon }));
 
-// Punktene i ett lag, som GeoJSON.
-app.MapGet("/api/lag/{id}", async (string id, IEnumerable<ILag> lag, CancellationToken stopp) =>
+// Punktene i ett lag, som GeoJSON. Med ?tid= hentes bildet lagret nærmest det tidspunktet, se Historikk/.
+app.MapGet("/api/lag/{id}", async (string id, string? tid, IEnumerable<ILag> lag, Bildelager bilder, CancellationToken stopp) =>
 {
     var valgt = lag.FirstOrDefault(l => string.Equals(l.Id, id, StringComparison.OrdinalIgnoreCase));
     if (valgt is null)
     {
         return Results.NotFound(new { feil = $"Fant ingen lag med id «{id}»." });
+    }
+
+    if (tid is not null)
+    {
+        if (!Bildelager.TolkTid(tid, out var tidspunkt))
+        {
+            return Results.BadRequest(new { feil = $"«{tid}» er ikke et gyldig tidspunkt. Bruk ISO 8601, for eksempel 2026-09-18T08:00:00Z." });
+        }
+
+        return Results.Ok(await bilder.HentNærmest(valgt.Id, tidspunkt, stopp) ?? new Kartlag("FeatureCollection", []));
     }
 
     try
@@ -75,7 +98,8 @@ app.MapGet("/api/lag/{id}", async (string id, IEnumerable<ILag> lag, Cancellatio
 
 // Antall punkter per bydel for ett lag. Tilstandsløs; bydelssentrene hentes
 // via Allemannsdata (mellomlagret 30 s der, som resten av kallene).
-app.MapGet("/api/lag/{id}/bydeler", async (string id, IEnumerable<ILag> lag, Allemannsdata data, CancellationToken stopp) =>
+// Med ?tid= telles bildet lagret nærmest det tidspunktet, som for /api/lag/{id}, slik at tellingen følger tidslinjen.
+app.MapGet("/api/lag/{id}/bydeler", async (string id, string? tid, IEnumerable<ILag> lag, Allemannsdata data, Bildelager bilder, CancellationToken stopp) =>
 {
     var valgt = lag.FirstOrDefault(l => string.Equals(l.Id, id, StringComparison.OrdinalIgnoreCase));
     if (valgt is null)
@@ -83,9 +107,22 @@ app.MapGet("/api/lag/{id}/bydeler", async (string id, IEnumerable<ILag> lag, All
         return Results.NotFound(new { feil = $"Fant ingen lag med id «{id}»." });
     }
 
+    DateTimeOffset? tidspunkt = null;
+    if (tid is not null)
+    {
+        if (!Bildelager.TolkTid(tid, out var t))
+        {
+            return Results.BadRequest(new { feil = $"«{tid}» er ikke et gyldig tidspunkt. Bruk ISO 8601, for eksempel 2026-09-18T08:00:00Z." });
+        }
+
+        tidspunkt = t;
+    }
+
     try
     {
-        var punkter = await valgt.Hent(stopp);
+        var punkter = tidspunkt is null
+            ? await valgt.Hent(stopp)
+            : await bilder.HentNærmest(valgt.Id, tidspunkt.Value, stopp) ?? new Kartlag("FeatureCollection", []);
         var sentre = await Bydeler.Hent(data, stopp);
         return Results.Ok(Bydeler.Tell(punkter, sentre));
     }

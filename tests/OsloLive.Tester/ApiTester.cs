@@ -4,12 +4,13 @@ using System.Text;
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
+using OsloLive.Historikk;
 using OsloLive.Kart;
 
 namespace OsloLive.Tester;
 
 /// <summary>Tester at kart-API-et svarer slik frontenden forventer.</summary>
-public class ApiTester(VertUtenBakgrunnssjekk vert) : IClassFixture<VertUtenBakgrunnssjekk>
+public class ApiTester(TestVert vert) : IClassFixture<TestVert>
 {
     private HttpClient Klient => vert.CreateClient();
 
@@ -252,6 +253,93 @@ public class ApiTester(VertUtenBakgrunnssjekk vert) : IClassFixture<VertUtenBakg
         Assert.Equal(HttpStatusCode.BadGateway, fly.StatusCode);
         Assert.Equal(HttpStatusCode.OK, lag.StatusCode);
         Assert.Equal(HttpStatusCode.OK, helse.StatusCode);
+    }
+
+    [Fact]
+    public async Task Ugyldig_tid_gir_400()
+    {
+        var svar = await Klient.GetAsync("/api/lag/luftkvalitet?tid=ikke-en-tid");
+
+        Assert.Equal(HttpStatusCode.BadRequest, svar.StatusCode);
+    }
+
+    [Fact]
+    public async Task Tid_uten_lagrede_bilder_gir_tom_featurecollection()
+    {
+        var svar = await Klient.GetAsync("/api/lag/fly?tid=2026-09-18T08:00:00Z");
+        var lag = JsonDocument.Parse(await svar.Content.ReadAsStringAsync()).RootElement;
+
+        Assert.Equal(HttpStatusCode.OK, svar.StatusCode);
+        Assert.Equal("FeatureCollection", lag.GetProperty("type").GetString());
+        Assert.Empty(lag.GetProperty("features").EnumerateArray());
+    }
+
+    [Fact]
+    public async Task Tid_gir_bildet_som_er_lagret_naermest()
+    {
+        var tid = DateTimeOffset.Parse("2026-09-18T08:00:00Z");
+        var punkt = Geo.Lag("stasjon-a", 59.9139, 10.7522, "Stasjon A", "Test");
+        var bilder = vert.Services.GetRequiredService<Bildelager>();
+        await bilder.Lagre("luftkvalitet", Geo.Samle([punkt]), tid.AddMinutes(-30));
+
+        var svar = await Klient.GetAsync("/api/lag/luftkvalitet?tid=" + Uri.EscapeDataString(tid.ToString("O")));
+        var lag = JsonDocument.Parse(await svar.Content.ReadAsStringAsync()).RootElement;
+
+        Assert.Equal(HttpStatusCode.OK, svar.StatusCode);
+        Assert.Single(lag.GetProperty("features").EnumerateArray());
+    }
+
+    [Fact]
+    public async Task Ukjent_lag_med_tid_gir_404()
+    {
+        var svar = await Klient.GetAsync("/api/lag/finnes-ikke?tid=2026-09-18T08:00:00Z");
+
+        Assert.Equal(HttpStatusCode.NotFound, svar.StatusCode);
+    }
+
+    [Fact]
+    public async Task Ugyldig_tid_gir_400_ogsaa_for_bydeler()
+    {
+        var svar = await Klient.GetAsync("/api/lag/luftkvalitet/bydeler?tid=ikke-en-tid");
+
+        Assert.Equal(HttpStatusCode.BadRequest, svar.StatusCode);
+    }
+
+    [Fact]
+    public async Task Bydeler_med_tid_teller_bildet_som_er_lagret_naermest()
+    {
+        Allemannsdata.TømMellomlager();
+        var tid = DateTimeOffset.Parse("2026-09-18T08:00:00Z");
+        var punkt = Geo.Lag("strand-a", 59.9139, 10.7522, "Strand A", "Test");
+        var bilder = vert.Services.GetRequiredService<Bildelager>();
+        await bilder.Lagre("badetemperatur", Geo.Samle([punkt]), tid.AddMinutes(-30));
+
+        // Bydelssentrene kommer fra Allemannsdata; her ett senter nær punktet, uten nettverk.
+        var sentre = JsonSerializer.Serialize(new
+        {
+            source = "geonorge",
+            operation = "search_place_name",
+            parameters = new { },
+            data = new
+            {
+                places = new[]
+                {
+                    new { place_id = 1L, status = "aktiv", lat = 59.91725, lon = 10.70, names = new[] { new { name = "Frogner", status = "hovednavn" } } },
+                },
+            },
+        });
+        using var vertMedStub = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient<Allemannsdata>().ConfigurePrimaryHttpMessageHandler(() => new StubHandler(sentre))));
+        var klient = vertMedStub.CreateClient();
+
+        var svar = await klient.GetAsync("/api/lag/badetemperatur/bydeler?tid=" + Uri.EscapeDataString(tid.ToString("O")));
+        var tellinger = await svar.Content.ReadFromJsonAsync<JsonElement>();
+
+        Assert.Equal(HttpStatusCode.OK, svar.StatusCode);
+        var eneste = Assert.Single(tellinger.EnumerateArray());
+        Assert.Equal("Frogner", eneste.GetProperty("bydel").GetString());
+        Assert.Equal(1, eneste.GetProperty("antall").GetInt32());
+        Allemannsdata.TømMellomlager();
     }
 
     [Fact]

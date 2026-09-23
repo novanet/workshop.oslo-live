@@ -79,6 +79,7 @@
     padding: 12px 36px; box-shadow: 0 10px 40px rgba(0,0,0,.2);
   }
   body.demo .panel { opacity: 0; pointer-events: none; transition: opacity 1s ease; }
+  body.demo .tidslinje { opacity: 0; pointer-events: none; transition: opacity 1s ease; }
 
   /* Markører: farget skive med mørk ring, så punktene står fram
      mot det beige kartet. */
@@ -136,6 +137,12 @@
       left: 12px; right: auto; bottom: calc(var(--panelhoyde, 20vh) + 12px);
       flex-direction: row;
     }
+
+    /* Tidslinjen ligger over kameraknappene, som igjen ligger over panelet nederst. */
+    .tidslinje {
+      left: 12px; right: 12px; width: auto; transform: none;
+      bottom: calc(var(--panelhoyde, 20vh) + 54px);
+    }
   }
 
   .panel.naermest { left: auto; right: 16px; width: 280px; }
@@ -149,6 +156,9 @@
   .innslag .tekst small { display: block; color: var(--dempet); }
   .innslag .meter { font-size: 12px; font-variant-numeric: tabular-nums; }
 
+  .tidslinje { position:absolute; bottom:24px; left:50%; transform:translateX(-50%); z-index:10; width:min(520px, calc(100% - 220px)); display:flex; align-items:center; gap:10px; background:rgba(255,255,255,.95); border:1.5px solid var(--kant); border-radius:10px; padding:8px 12px; box-shadow:0 6px 20px rgba(0,0,0,.14); font-size:12px; }
+  .tidslinje input { flex:1; accent-color:#111; }
+  .tidslinje #tid-tekst { min-width:110px; text-align:right; font-variant-numeric:tabular-nums; font-weight:600; }
   .bydeler { margin-top: 12px; padding-top: 12px; border-top: 1px solid #e5e7eb; }
   .bydeler .topp { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 8px; }
   .bydeler h2 { margin: 0; font-size: 16px; }
@@ -194,6 +204,12 @@
   <button id="snurr" type="button" aria-pressed="false">Snurr</button>
   <button id="flatt" type="button">2D</button>
   <button id="hjem" type="button">Sentrum</button>
+</div>
+
+<div class="tidslinje">
+  <span>−24 t</span>
+  <input id="tid" type="range" min="-1440" max="0" step="15" value="0" aria-label="Tidslinje, siste døgn" aria-valuetext="Nå">
+  <span id="tid-tekst">Nå</span>
 </div>
 
 <div id="demotekst" aria-live="polite" hidden>
@@ -413,6 +429,14 @@ function popup(e) {
   return `<b>${esc(e.navn ?? 'Uten navn')}</b>${rader}<div class="rad" style="margin-top:6px;opacity:.7">${esc(e.kilde ?? '')}</div>`;
 }
 
+let valgtTid = null;   // null = nå, ellers Date
+let tidGenerasjon = 0;
+let tidTimer = null;
+
+function tidTekst(d) {
+  return d ? d.toLocaleString('no-NO', { weekday: 'short', hour: '2-digit', minute: '2-digit' }) : 'Nå';
+}
+
 /** Viser markører eller varmekart for laget, ut fra på/av og valgt visning. */
 function visLag(id) {
   const oppf = lagene.get(id);
@@ -446,10 +470,13 @@ function varmekart(id, features) {
 async function hent(id) {
   const oppf = lagene.get(id);
   const teller = document.getElementById('antall-' + id);
+  const gen = tidGenerasjon;
   try {
-    const svar = await fetch('/api/lag/' + id);
+    const url = '/api/lag/' + id + (valgtTid ? '?tid=' + encodeURIComponent(valgtTid.toISOString()) : '');
+    const svar = await fetch(url);
     if (!svar.ok) throw new Error('HTTP ' + svar.status);
     const geo = await svar.json();
+    if (gen !== tidGenerasjon) return;   // et tregt svar fra en annen tid enn den valgte nå
 
     for (const m of oppf.markorer) m.remove();
     oppf.markorer = [];
@@ -487,6 +514,7 @@ async function hent(id) {
     teller.textContent = oppf.antall;
     teller.className = 'antall ' + (oppf.antall ? 'ok' : '');
   } catch (e) {
+    if (gen !== tidGenerasjon) return;
     // Ta bort punktene fra forrige henting, ellers blir de stående i kartet
     // selv om laget er markert som feilende og demoen hopper over det.
     for (const m of oppf.markorer) m.remove();
@@ -517,8 +545,23 @@ function oppdaterBunn() {
   let sum = 0;
   for (const l of lagene.values()) if (l.på) sum += l.antall;
   document.getElementById('sum').textContent = sum + ' punkter';
-  document.getElementById('oppdatert').textContent = new Date().toLocaleTimeString('no-NO');
+  document.getElementById('oppdatert').textContent = valgtTid ? 'Viser ' + tidTekst(valgtTid) : new Date().toLocaleTimeString('no-NO');
 }
+
+document.getElementById('tid').addEventListener('input', (ev) => {
+  const min = Number(ev.target.value);
+  const d = min === 0 ? null : new Date(Date.now() + min * 60000);
+  document.getElementById('tid-tekst').textContent = tidTekst(d);
+  ev.target.setAttribute('aria-valuetext', tidTekst(d));
+
+  clearTimeout(tidTimer);
+  tidTimer = setTimeout(() => {
+    valgtTid = d;
+    tidGenerasjon++;
+    lagene.forEach((_, id) => hent(id));
+    hentBydeler();
+  }, 250);
+});
 
 async function start() {
   let lag = [];
@@ -574,7 +617,8 @@ async function start() {
   bydelSelect.addEventListener('change', hentBydeler);
   hentBydeler();
 
-  setInterval(() => { lagene.forEach((_, id) => hent(id)); hentBydeler(); }, 15000);
+  // Står tidslinjen på et annet tidspunkt enn nå, hentes ingen levende data før den settes tilbake.
+  setInterval(() => { if (valgtTid) return; lagene.forEach((_, id) => hent(id)); hentBydeler(); }, 15000);
 
   // Først nå finnes lagene, så demoen har noe å vise og noe å sette tilbake etterpå.
   document.getElementById('demo').disabled = false;
@@ -592,7 +636,8 @@ async function hentBydeler() {
   const kall = ++sisteBydelkall;
 
   try {
-    const svar = await fetch('/api/lag/' + encodeURIComponent(id) + '/bydeler');
+    // Samme ?tid= som lagene, slik at tellingen følger tidslinjen.
+    const svar = await fetch('/api/lag/' + encodeURIComponent(id) + '/bydeler' + (valgtTid ? '?tid=' + encodeURIComponent(valgtTid.toISOString()) : ''));
     if (kall !== sisteBydelkall) return;   // et nyere kall er sendt (byttet lag eller neste oppdatering)
     if (!svar.ok) throw new Error('HTTP ' + svar.status);
     const tellinger = await svar.json();
