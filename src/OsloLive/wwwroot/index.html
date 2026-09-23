@@ -7,6 +7,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.js"></script>
 <script defer src="effekter/symboler.js"></script>
+<script defer src="effekter/popupformat.js"></script>
+<script src="effekter/tsunami.js" defer></script>
 <style>
   :root {
     --kant: #111111;
@@ -14,6 +16,7 @@
     --dempet: #6b7280;
     --ok: #15803d;
     --feil: #b91c1c;
+    --tikkerhoyde: 44px;
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; height: 100%; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; background: #ede7d8; color: var(--tekst); }
@@ -25,10 +28,21 @@
     border: 1.5px solid var(--kant); border-radius: 10px;
     padding: 16px; box-shadow: 0 6px 20px rgba(0,0,0,.14);
     backdrop-filter: blur(8px);
-    max-height: calc(100% - 32px); overflow-y: auto;
+    max-height: calc(100% - 32px - var(--tikkerhoyde)); overflow-y: auto;
   }
   .panel h1 { margin: 0 0 2px; font-size: 20px; letter-spacing: -.02em; }
   .panel .under { margin: 0 0 14px; font-size: 12px; color: var(--dempet); }
+
+  .sok { display: flex; gap: 6px; margin: 0 0 8px; }
+  .sok input { flex: 1; min-width: 0; border: 1.5px solid var(--kant); border-radius: 7px; padding: 6px 8px; font: inherit; font-size: 13px; }
+  .sok button { border: 1.5px solid var(--kant); background: #fff; color: var(--tekst); border-radius: 7px; padding: 6px 10px; font-size: 12px; font-weight: 500; cursor: pointer; font-family: inherit; }
+  .sok button:hover { background: #111; color: #fff; }
+
+  .soketreff { list-style: none; margin: 0 0 12px; padding: 0; }
+  .soketreff li { padding: 7px 8px; border-radius: 7px; font-size: 13px; cursor: pointer; }
+  .soketreff li:hover { background: #f3f4f6; }
+  .soketreff .tom { cursor: default; color: var(--dempet); }
+  .soketreff .tom:hover { background: none; }
 
   .lag { display: flex; align-items: center; gap: 9px; padding: 7px 8px; border-radius: 7px; cursor: pointer; }
   .lag:hover { background: #f3f4f6; }
@@ -69,7 +83,7 @@
   .stroem .graf span.naa-time { background: #111; }
 
   .kamera {
-    position: absolute; bottom: 24px; right: 16px; z-index: 10;
+    position: absolute; bottom: calc(var(--tikkerhoyde) + 24px); right: 16px; z-index: 10;
     display: flex; flex-direction: column; gap: 6px;
   }
   .kamera button {
@@ -109,11 +123,28 @@
   .maplibregl-popup-content .rad { color: var(--dempet); }
   .maplibregl-popup-content .rad span { color: var(--tekst); }
   .maplibregl-ctrl-group { border: 1.5px solid var(--kant) !important; box-shadow: none !important; }
+  /* Løfter zoomkontrollene opp over nyhetslinja, som ellers ville dekket dem. */
+  .maplibregl-ctrl-bottom-right { bottom: var(--tikkerhoyde) !important; }
+
+  .nyhetslinje {
+    position: fixed; inset: auto 0 0 0; z-index: 15; height: var(--tikkerhoyde);
+    background: #111; color: #fff; overflow: hidden;
+    display: flex; align-items: center;
+    font-size: 24px; font-weight: 600; white-space: nowrap;
+  }
+  .nyhetslinje-rull { display: inline-block; padding-left: 100%; animation: rull 20s linear infinite; }
+  @keyframes rull {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .nyhetslinje-rull { animation: none; padding-left: 20px; }
+  }
 
   /* Mobilvisning: panelet ligger nederst, sammenslått til én linje som kan dras eller trykkes opp. */
   @media (max-width: 699.98px) {
     #hovedpanel {
-      position: fixed; top: auto; left: 0; right: 0; bottom: 0; width: 100%;
+      position: fixed; top: auto; left: 0; right: 0; bottom: var(--tikkerhoyde); width: 100%;
       border-radius: 14px 14px 0 0;
       max-height: 20vh; max-height: 20dvh;
       padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
@@ -139,14 +170,14 @@
     #hovedpanel.apen #lagliste { display: block; }
 
     .kamera {
-      left: 12px; right: auto; bottom: calc(var(--panelhoyde, 20vh) + 12px);
+      left: 12px; right: auto; bottom: calc(var(--panelhoyde, 20vh) + var(--tikkerhoyde) + 12px);
       flex-direction: row;
     }
 
     /* Tidslinjen ligger over kameraknappene, som igjen ligger over panelet nederst. */
     .tidslinje {
       left: 12px; right: 12px; width: auto; transform: none;
-      bottom: calc(var(--panelhoyde, 20vh) + 54px);
+      bottom: calc(var(--panelhoyde, 20vh) + var(--tikkerhoyde) + 54px);
     }
   }
 
@@ -181,7 +212,7 @@
   .varsel .tekst small { display: block; color: var(--dempet); }
   .varsel .lukk { border: 0; background: none; font-size: 16px; cursor: pointer; color: var(--dempet); flex: none; }
 
-  .panel.omrade { top: auto; left: 16px; bottom: 24px; width: 240px; }
+  .panel.omrade { top: auto; left: 16px; bottom: calc(var(--tikkerhoyde) + 24px); width: 240px; }
   .omrade h2 { margin: 0 0 8px; font-size: 16px; }
   .omrade .rad { display: flex; justify-content: space-between; font-size: 13px; padding: 3px 2px; }
   .omrade .sum { display: flex; justify-content: space-between; margin-top: 8px; padding-top: 8px; border-top: 1px solid #e5e7eb; font-weight: 600; font-size: 13px; }
@@ -196,6 +227,11 @@
     <h1>Oslo Live</h1>
   </div>
   <p class="under">Levende data fra Allemannsdata</p>
+  <form id="sok" class="sok" role="search">
+    <input id="sokefelt" type="search" placeholder="Søk etter adresse" autocomplete="off" aria-label="Søk etter adresse">
+    <button type="submit">Søk</button>
+  </form>
+  <ul id="soketreff" class="soketreff"></ul>
   <div class="varsler" id="varsler" hidden>
     <h2>Varsler</h2>
     <ol id="varsel-liste" aria-live="polite"></ol>
@@ -230,6 +266,10 @@
   <span>−24 t</span>
   <input id="tid" type="range" min="-1440" max="0" step="15" value="0" aria-label="Tidslinje, siste døgn" aria-valuetext="Nå">
   <span id="tid-tekst">Nå</span>
+</div>
+
+<div class="nyhetslinje" id="nyhetslinje">
+  <div class="nyhetslinje-rull" id="nyhetslinje-rull"><span id="nyhetslinje-innhold">Ingen nye hendelser ennå</span></div>
 </div>
 
 <div id="demotekst" aria-live="polite" hidden>
@@ -748,7 +788,9 @@ function popup(e) {
   const skjul = new Set(['id', 'navn', 'kilde']);
   const rader = Object.entries(e)
     .filter(([k, v]) => !skjul.has(k) && v !== null && v !== undefined && v !== '')
-    .map(([k, v]) => `<div class="rad">${esc(k)}: <span>${esc(v)}</span></div>`)
+    .map(([k, v]) => (typeof window.formaterEgenskap === 'function' ? window.formaterEgenskap(k, v) : { nøkkel: k, verdi: v }))
+    .filter(Boolean)
+    .map((f) => `<div class="rad">${esc(f.nøkkel)}: <span>${esc(f.verdi)}</span></div>`)
     .join('');
   return `<b>${esc(e.navn ?? 'Uten navn')}</b>${rader}<div class="rad" style="margin-top:6px;opacity:.7">${esc(e.kilde ?? '')}</div>`;
 }
@@ -1064,6 +1106,50 @@ function leggTilVarsel(nøkkel, ikon, navn, hva) {
   seksjon.hidden = false;
 }
 
+// ---------------------------------------------------------------------------
+// Nyhetslinje: ruller de siste hendelsene nederst på skjermen, som en
+// nyhetskanal. Bygger på dataene fra vanlig henting, uten egne kall.
+// ---------------------------------------------------------------------------
+const MAKS_NYHETER = 20;
+const nyheter = [];   // { tid, tekst }, nyeste først
+const redusertBevegelse = window.matchMedia('(prefers-reduced-motion: reduce)');
+let nyheterVenter = false;   // ny hendelse kom mens linja ruller; vises først når runden er ferdig
+
+function klokkeHM(d) {
+  const to = (n) => String(n).padStart(2, '0');
+  return to(d.getHours()) + ':' + to(d.getMinutes());
+}
+
+function tegnNyhetslinje() {
+  nyheterVenter = false;
+  const felt = document.getElementById('nyhetslinje-innhold');
+  const rull = document.getElementById('nyhetslinje-rull');
+  if (!nyheter.length) {
+    felt.textContent = 'Ingen nye hendelser ennå';
+    return;
+  }
+  if (redusertBevegelse.matches) {
+    felt.textContent = `${klokkeHM(nyheter[0].tid)} ${nyheter[0].tekst}`;
+    return;
+  }
+  felt.textContent = nyheter.map((n) => `${klokkeHM(n.tid)} ${n.tekst}`).join('   •   ');
+  // Rolig, jevn fart uansett hvor mye linja har å vise: ca. 60 piksler i sekundet.
+  rull.style.animationDuration = Math.max(14, felt.textContent.length / 6) + 's';
+}
+
+function leggTilNyhet(tekst) {
+  nyheter.unshift({ tid: new Date(), tekst });
+  if (nyheter.length > MAKS_NYHETER) nyheter.length = MAKS_NYHETER;
+  // Bytter ikke teksten midt i en runde: linja skal rulle jevnt, ikke hoppe.
+  if (redusertBevegelse.matches || nyheter.length === 1) tegnNyhetslinje();
+  else nyheterVenter = true;
+}
+
+document.getElementById('nyhetslinje-rull').addEventListener('animationiteration', () => {
+  if (nyheterVenter) tegnNyhetslinje();
+});
+redusertBevegelse.addEventListener('change', tegnNyhetslinje);
+
 async function hent(id) {
   const oppf = lagene.get(id);
   const teller = document.getElementById('antall-' + id);
@@ -1072,7 +1158,10 @@ async function hent(id) {
   try {
     const url = '/api/lag/' + id + (valgtTid ? '?tid=' + encodeURIComponent(valgtTid.toISOString()) : '');
     const svar = await fetch(url);
-    if (!svar.ok) throw new Error('HTTP ' + svar.status);
+    if (!svar.ok) {
+      const kropp = await svar.json().catch(() => null);
+      throw new Error(kropp?.feil ?? 'HTTP ' + svar.status);
+    }
     const geo = await svar.json();
     if (gen !== tidGenerasjon) return;   // et tregt svar fra en annen tid enn den valgte nå
 
@@ -1095,6 +1184,16 @@ async function hent(id) {
     }
     oppf.punkter = liste;
 
+    if (levende) {
+      if (oppf.svarte === false) leggTilNyhet(`${oppf.navn} er tilbake`);
+      oppf.svarte = true;
+
+      if (oppf.forrigeIder) {
+        for (const p of liste) if (!oppf.forrigeIder.has(p.id)) leggTilNyhet(`${oppf.ikon} ${oppf.navn}: ${p.navn}`);
+      }
+      oppf.forrigeIder = new Set(liste.map((p) => p.id));
+    }
+
     varmekart(id, liste.map((p) => ({ type: 'Feature', geometry: { type: 'Point', coordinates: [p.lon, p.lat] }, properties: {} })));
     visLag(id);
 
@@ -1103,6 +1202,7 @@ async function hent(id) {
     if (levende) oppf.sistOk = new Date();
     teller.textContent = oppf.antall;
     teller.className = 'antall ' + (oppf.antall ? 'ok' : '');
+    teller.title = '';
   } catch (e) {
     if (gen !== tidGenerasjon) return;
     // Ta bort punktene fra forrige henting, ellers blir de stående i kartet
@@ -1115,6 +1215,12 @@ async function hent(id) {
     oppf.feil = true;
     teller.textContent = 'feil';
     teller.className = 'antall feil';
+    teller.title = e.message;
+
+    if (levende) {
+      if (oppf.svarte) leggTilNyhet(`${oppf.navn} svarer ikke`);
+      oppf.svarte = false;
+    }
   }
   oppdaterBunn();
   if (valgtSted) visNaermest();
@@ -1255,7 +1361,7 @@ async function start() {
 
     const { form, kant } = stilFor(nr);
     const kontrast = kontrastFor(farge);
-    const oppf = { ikon: l.ikon || '📍', navn: l.navn, farge, form, kant, kontrast, punkter: [], antall: 0, på, feil: false, boks: null, varme: !!varmevalg[l.id], sistOk: null };
+    const oppf = { ikon: l.ikon || '📍', navn: l.navn, farge, form, kant, kontrast, punkter: [], antall: 0, på, feil: false, boks: null, varme: !!varmevalg[l.id], sistOk: null, forrigeIder: null, svarte: null };
     lagene.set(l.id, oppf);
 
     const rad = document.createElement('label');
@@ -1430,6 +1536,12 @@ function osloTime() {
   return Number(new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Oslo', hour: 'numeric', hour12: false }).format(new Date()));
 }
 
+// Norsk desimalkomma og ekte minustegn (−), én desimal.
+const STROEM_TALL = new Intl.NumberFormat('nb-NO', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+function ore(pris) {
+  return STROEM_TALL.format(pris);
+}
+
 async function hentStroem() {
   const boks = document.getElementById('stroem');
   try {
@@ -1443,14 +1555,14 @@ async function hentStroem() {
     const spenn = Math.max(...priser) - min || 1;
     const naaTime = osloTime();
     const graf = p.timer
-      .map((t) => `<span class="${t.time === naaTime ? 'naa-time' : ''}" style="height:${4 + ((t.pris - min) / spenn) * 96}%" title="kl. ${klokkeslett(t.time)}: ${esc(t.pris.toFixed(1))} øre"></span>`)
+      .map((t) => `<span class="${t.time === naaTime ? 'naa-time' : ''}" style="height:${4 + ((t.pris - min) / spenn) * 96}%" title="kl. ${klokkeslett(t.time)}: ${esc(ore(t.pris))} øre"></span>`)
       .join('');
 
     boks.innerHTML =
       `<h2>Strømpris i Oslo (NO1)</h2>` +
-      `<p class="naa">${esc(p.naa.toFixed(1))} <span class="enhet">øre/kWh inkl. mva</span></p>` +
-      `<p class="rad">Billigst kl. ${klokkeslett(p.billigst.time)}: <b>${esc(p.billigst.pris.toFixed(1))}</b> øre</p>` +
-      `<p class="rad">Dyrest kl. ${klokkeslett(p.dyrest.time)}: <b>${esc(p.dyrest.pris.toFixed(1))}</b> øre</p>` +
+      `<p class="naa">${esc(ore(p.naa))} <span class="enhet">øre/kWh inkl. mva</span></p>` +
+      `<p class="rad">Billigst kl. ${klokkeslett(p.billigst.time)}: <b>${esc(ore(p.billigst.pris))}</b> øre</p>` +
+      `<p class="rad">Dyrest kl. ${klokkeslett(p.dyrest.time)}: <b>${esc(ore(p.dyrest.pris))}</b> øre</p>` +
       `<div class="graf">${graf}</div>`;
   } catch (e) {
     boks.innerHTML = `<h2>Strømpris i Oslo (NO1)</h2><p class="tom">Strømprisen er ikke tilgjengelig akkurat nå.</p>`;
@@ -1601,6 +1713,61 @@ function sikreSynligPopup(boble) {
   };
   if (kart.isMoving()) kart.once('moveend', flytt); else flytt();
 }
+
+// ---------------------------------------------------------------------------
+// Søk
+// ---------------------------------------------------------------------------
+let søkemarkør = null;
+
+function fjernSøkemarkør() {
+  if (søkemarkør) {
+    søkemarkør.remove();
+    søkemarkør = null;
+  }
+}
+
+function visSøketreff(treff) {
+  const liste = document.getElementById('soketreff');
+  liste.innerHTML = '';
+
+  if (!treff.length) {
+    liste.innerHTML = '<li class="tom">Ingen treff</li>';
+    return;
+  }
+
+  treff.forEach((t) => {
+    const li = document.createElement('li');
+    li.textContent = t.navn;
+    li.addEventListener('click', () => {
+      fjernSøkemarkør();
+      kart.flyTo({ center: [t.lon, t.lat], zoom: 17, duration: 1600 });
+
+      const p = new maplibregl.Popup({ offset: 25, closeButton: true }).setText(t.navn);
+      søkemarkør = new maplibregl.Marker({ color: '#111' }).setLngLat([t.lon, t.lat]).setPopup(p).addTo(kart);
+      søkemarkør.togglePopup();
+      p.on('close', fjernSøkemarkør);
+    });
+    liste.appendChild(li);
+  });
+}
+
+document.getElementById('sok').addEventListener('submit', async (ev) => {
+  ev.preventDefault();
+  const q = document.getElementById('sokefelt').value.trim();
+  const liste = document.getElementById('soketreff');
+  if (!q) return;
+
+  fjernSøkemarkør();
+  liste.innerHTML = '<li class="tom">Søker …</li>';
+
+  try {
+    const svar = await fetch('/api/sok?q=' + encodeURIComponent(q));
+    if (!svar.ok) throw new Error('HTTP ' + svar.status);
+    visSøketreff(await svar.json());
+  } catch (e) {
+    liste.innerHTML = '<li class="tom">Søket feilet</li>';
+  }
+});
 
 // ---------------------------------------------------------------------------
 // Kamera
@@ -1907,5 +2074,6 @@ function stoppDemo() {
 demoKnapp.addEventListener('click', () => { demo.på ? stoppDemo() : startDemo(); });
 </script>
 <script src="effekter/lyd.js" defer></script>
+<script src="effekter/sollys.js" defer></script>
 </body>
 </html>

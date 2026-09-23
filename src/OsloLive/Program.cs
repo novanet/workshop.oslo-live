@@ -15,6 +15,8 @@ CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("nb-NO");
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Tellingen av oppslag i Allemannsdata. Én for hele prosessen, se /api/metrikker.
+builder.Services.AddSingleton<Metrikker>();
 builder.Services.AddHttpClient<Allemannsdata>(klient =>
 {
     klient.Timeout = TimeSpan.FromSeconds(30);
@@ -27,6 +29,16 @@ builder.Services.AddHttpClient("fly", klient =>
 {
     klient.Timeout = TimeSpan.FromSeconds(10);
     klient.DefaultRequestHeaders.UserAgent.ParseAdd("OsloLive/1.0 (kurs)");
+});
+
+// Bomstasjonene hentes fra NVDB (Statens vegvesen), som heller ikke er en Allemannsdata-kilde,
+// og krever headeren X-Client. Se BomstasjonerLag.cs.
+builder.Services.AddHttpClient("bomstasjoner", klient =>
+{
+    klient.Timeout = TimeSpan.FromSeconds(15);
+    klient.DefaultRequestHeaders.UserAgent.ParseAdd("OsloLive/1.0 (kurs)");
+    klient.DefaultRequestHeaders.Add("X-Client", "OsloLive");
+    klient.DefaultRequestHeaders.Accept.ParseAdd("application/json");
 });
 builder.Services.AddMemoryCache();
 builder.Services.AddSingleton<Lagstatistikk>();
@@ -47,6 +59,7 @@ builder.Services.AddHostedService<Øyeblikksjobb>();
 // Lagene på kartet. Nytt lag? Legg til én linje her.
 // ---------------------------------------------------------------------------
 builder.Services.AddSingleton<ILag, LuftkvalitetLag>();
+builder.Services.AddSingleton<ILag, ArterLag>();
 builder.Services.AddSingleton<ILag, HendelserLag>();
 builder.Services.AddSingleton<ILag, SmilefjesLag>();
 builder.Services.AddSingleton<ILag, FlyLag>();
@@ -56,13 +69,17 @@ builder.Services.AddSingleton<ILag, SpisestederLag>();
 builder.Services.AddSingleton<ILag, HoldeplasserLag>();
 builder.Services.AddSingleton<ILag, SkipLag>();
 builder.Services.AddSingleton<ILag, VannmaalereLag>();
+builder.Services.AddSingleton<ILag, SkolerLag>();
 builder.Services.AddSingleton<ILag, KaierLag>();
+builder.Services.AddSingleton<ILag, BomstasjonerLag>();
+builder.Services.AddSingleton<ILag, VaerstasjonerLag>();
+builder.Services.AddSingleton<ILag, IdrettsanleggLag>();
+builder.Services.AddSingleton<ILag, VeiarbeidLag>();
 
 // Bakgrunnssjekk av kildehelse, se Helse/HelseSjekker.cs.
 builder.Services.Configure<HelseValg>(builder.Configuration.GetSection("Helse"));
 builder.Services.AddSingleton<HelseSjekker>();
 builder.Services.AddHostedService(sp => sp.GetRequiredService<HelseSjekker>());
-
 
 var app = builder.Build();
 
@@ -108,7 +125,7 @@ app.MapGet("/api/lag/{id}", async (string id, string? tid, IEnumerable<ILag> lag
         }
 
         app.Logger.LogError(ex, "Laget {Id} feilet", id);
-        return Results.Json(new { feil = ex.Message }, statusCode: 502);
+        return Results.Json(new { feil = Feiltekst.Fra(ex) }, statusCode: 502);
     }
 });
 
@@ -160,7 +177,7 @@ app.MapGet("/api/lag/{id}/bydeler", async (string id, string? tid, IEnumerable<I
     catch (Exception ex)
     {
         app.Logger.LogError(ex, "Bydelstelling for laget {Id} feilet", id);
-        return Results.Json(new { feil = ex.Message }, statusCode: 502);
+        return Results.Json(new { feil = Feiltekst.Fra(ex) }, statusCode: 502);
     }
 });
 
@@ -187,7 +204,7 @@ app.MapGet("/api/stroempris", async (Allemannsdata data, CancellationToken stopp
     catch (Exception ex)
     {
         app.Logger.LogError(ex, "Strømprisen feilet");
-        return Results.Json(new { feil = ex.Message }, statusCode: 502);
+        return Results.Json(new { feil = Feiltekst.Fra(ex) }, statusCode: 502);
     }
 });
 
@@ -201,6 +218,9 @@ app.MapGet("/api/statistikk", (IEnumerable<ILag> lag, Lagstatistikk statistikk) 
         var s = statistikk.Hent(l.Id);
         return new { id = l.Id, navn = l.Navn, antall = s.Antall, eldste = s.Eldste, nyeste = s.Nyeste, hentet = s.Hentet, feiler = s.Feiler };
     }));
+
+// Kall, treff i mellomlageret, bom, snittid og feil per kilde siden oppstart. Nullstilles ikke ved oppslag.
+app.MapGet("/api/metrikker", (Metrikker metrikker) => metrikker.Les());
 
 // Virker tjenesten? Leser siste kjente resultat fra bakgrunnssjekken.
 app.MapGet("/api/helse/kilder", (HelseSjekker sjekker) =>
@@ -221,6 +241,43 @@ app.MapGet("/api/vannstand", async (Allemannsdata data, CancellationToken stopp)
     catch (Exception ex)
     {
         app.Logger.LogError(ex, "Vannstand feilet");
+        return Results.Json(new { feil = Feiltekst.Fra(ex) }, statusCode: 502);
+    }
+});
+
+// Adressesøk hos Kartverket (Geonorge). Ikke et lag, derfor eget endepunkt uten tilstand.
+app.MapGet("/api/sok", async (string? q, Allemannsdata data, CancellationToken stopp) =>
+{
+    if (string.IsNullOrWhiteSpace(q))
+    {
+        return Results.BadRequest(new { feil = "Skriv noe å søke etter i «q»." });
+    }
+
+    try
+    {
+        var rader = await data.HentListe(
+            "geonorge",
+            "search_address",
+            new Dictionary<string, object>
+            {
+                ["text"] = q.Trim(),
+                ["kommunenummer"] = "0301",
+                ["limit"] = 20,
+            },
+            liste: "addresses",
+            stopp);
+
+        var treff = rader
+            .Select(TilSøketreff)
+            .Where(t => t is not null && Geo.IOslo(t.Lat, t.Lon))
+            .Take(10)
+            .ToList();
+
+        return Results.Ok(treff);
+    }
+    catch (Exception ex)
+    {
+        app.Logger.LogError(ex, "Adressesøket feilet");
         return Results.Json(new { feil = ex.Message }, statusCode: 502);
     }
 });
@@ -228,7 +285,28 @@ app.MapGet("/api/vannstand", async (Allemannsdata data, CancellationToken stopp)
 app.Run();
 
 /// <summary>Gjør Program synlig for testprosjektet.</summary>
-public partial class Program;
+public partial class Program
+{
+    /// <summary>Ett treff i adressesøket.</summary>
+    public sealed record Søketreff(string Navn, double Lat, double Lon);
+
+    /// <summary>Leser en rad fra Geonorges adressesøk. Null hvis navn eller koordinater mangler.</summary>
+    public static Søketreff? TilSøketreff(JsonElement rad)
+    {
+        var navn = rad.TryGetProperty("address", out var a) ? a.GetString() : null;
+        if (string.IsNullOrWhiteSpace(navn))
+        {
+            return null;
+        }
+
+        if (!rad.TryGetProperty("lat", out var lat) || !rad.TryGetProperty("lon", out var lon))
+        {
+            return null;
+        }
+
+        return new Søketreff(navn, lat.GetDouble(), lon.GetDouble());
+    }
+}
 
 /// <summary>
 /// Tolker tidevannssvaret fra Kartverket (via Allemannsdata, kilde «weather»).
