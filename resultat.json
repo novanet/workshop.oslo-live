@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:39:52",
+  "oppdatert": "2026-09-23T11:40:29",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -413,25 +413,6 @@
       "plass": 15
     },
     {
-      "navn": "mini-taco",
-      "github": "Puiu",
-      "poeng": 0,
-      "feil": [],
-      "lag": [],
-      "levert": [],
-      "dollar": 2.719,
-      "tokens": 5585224,
-      "sekunder": 1114,
-      "pr": 2,
-      "utkast": 0,
-      "merget": 0,
-      "kjoeringer": 2,
-      "utenPr": 0,
-      "bygg": [],
-      "estimert": false,
-      "plass": 16
-    },
-    {
       "navn": "mini-sindre",
       "github": "sin-rha",
       "poeng": 0,
@@ -446,6 +427,25 @@
       "merget": 0,
       "kjoeringer": 4,
       "utenPr": 1,
+      "bygg": [],
+      "estimert": false,
+      "plass": 16
+    },
+    {
+      "navn": "mini-taco",
+      "github": "Puiu",
+      "poeng": 0,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 3.778,
+      "tokens": 7652370,
+      "sekunder": 1424,
+      "pr": 3,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 3,
+      "utenPr": 0,
       "bygg": [],
       "estimert": false,
       "plass": 17
@@ -537,20 +537,12 @@
       "minutter": 6
     },
     {
-      "agent": "mini-taco",
-      "github": "Puiu",
-      "issue": 122,
-      "navn": "Vis hvor ferskt hvert lag er",
-      "startet": "2026-09-23T09:34:35.9423034+00:00",
-      "minutter": 5
-    },
-    {
       "agent": "mini-kirsten",
       "github": "jthagesk",
       "issue": 52,
       "navn": "Konfigurerbar bbox",
       "startet": "2026-09-23T09:36:06.5656066+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "Dmitry-agent",
@@ -590,7 +582,7 @@
       "issue": 28,
       "navn": "Tog",
       "startet": "2026-09-23T09:39:07.9583013+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "Andy3000",
@@ -598,7 +590,7 @@
       "issue": 11,
       "navn": "Kollektiv",
       "startet": "2026-09-23T09:39:14.3480284+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-wilma",
@@ -614,6 +606,14 @@
       "issue": 119,
       "navn": "Mørkt kart når sola går ned i Oslo",
       "startet": "2026-09-23T09:39:34.4905216+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-bug",
+      "github": "SasaRad",
+      "issue": 113,
+      "navn": "Nytt lag: store arbeidsplasser i sentrum",
+      "startet": "2026-09-23T09:39:52.4461984+00:00",
       "minutter": 0
     }
   ],
@@ -897,13 +897,13 @@
       "issue": 113,
       "navn": "Nytt lag: store arbeidsplasser i sentrum",
       "github": "Copilot",
-      "oppdatert": "2026-09-23T09:39:10Z"
+      "oppdatert": "2026-09-23T09:39:53Z"
     },
     {
       "issue": 113,
       "navn": "Nytt lag: store arbeidsplasser i sentrum",
       "github": "SasaRad",
-      "oppdatert": "2026-09-23T09:39:10Z"
+      "oppdatert": "2026-09-23T09:39:53Z"
     },
     {
       "issue": 115,
@@ -921,17 +921,41 @@
       "issue": 122,
       "navn": "Vis hvor ferskt hvert lag er",
       "github": "Puiu",
-      "oppdatert": "2026-09-23T09:34:36Z"
+      "oppdatert": "2026-09-23T09:40:11Z"
     }
   ],
   "aapne": [
+    {
+      "pr": 127,
+      "tittel": "Vis hvor ferskt hvert lag er (#122)",
+      "github": "Puiu",
+      "agent": "mini-taco",
+      "opprettet": "2026-09-23T09:40:09Z",
+      "oppdatert": "2026-09-23T09:40:10Z",
+      "utkast": false,
+      "issues": [
+        122
+      ]
+    },
+    {
+      "pr": 125,
+      "tittel": "[WIP] Add layer for major employers in city center",
+      "github": "app/copilot-swe-agent",
+      "agent": "app/copilot-swe-agent",
+      "opprettet": "2026-09-23T09:38:58Z",
+      "oppdatert": "2026-09-23T09:39:51Z",
+      "utkast": true,
+      "issues": [
+        113
+      ]
+    },
     {
       "pr": 126,
       "tittel": "Kartet oppdaterer seg ikke, dataene står stille",
       "github": "SasaRad",
       "agent": "mini-bug",
       "opprettet": "2026-09-23T09:39:23Z",
-      "oppdatert": "2026-09-23T09:39:23Z",
+      "oppdatert": "2026-09-23T09:39:47Z",
       "utkast": false,
       "issues": [
         3
@@ -971,18 +995,6 @@
       "utkast": false,
       "issues": [
         23
-      ]
-    },
-    {
-      "pr": 125,
-      "tittel": "[WIP] Add layer for major employers in city center",
-      "github": "app/copilot-swe-agent",
-      "agent": "app/copilot-swe-agent",
-      "opprettet": "2026-09-23T09:38:58Z",
-      "oppdatert": "2026-09-23T09:38:58Z",
-      "utkast": true,
-      "issues": [
-        113
       ]
     },
     {
