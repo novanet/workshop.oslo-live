@@ -137,14 +137,14 @@ public class SkipLagTester
     }
 
     [Fact]
-    public void Stilleliggende_fartoey_uten_heading_faar_ikke_kurs()
+    public void Stilleliggende_fartoey_uten_heading_bruker_kurs_over_grunn()
     {
         var punkt = SkipLag.TilPunkt(Rad("""
             { "vessel_id": 257852500, "navn": "Vision of the Fjords", "lat": 59.9073, "lon": 10.7481, "fart_knop": 0, "kurs": 236.7 }
             """));
 
         Assert.NotNull(punkt);
-        Assert.False(punkt!.Properties.ContainsKey("kurs"));
+        Assert.Equal(237, punkt!.Properties["kurs"]);
     }
 
     [Fact]
@@ -156,9 +156,17 @@ public class SkipLagTester
     }
 
     [Fact]
-    public void Ukjent_heading_511_gir_ikke_kurs()
+    public void Ukjent_heading_511_faller_tilbake_til_kurs_over_grunn()
     {
         var rad = Rad("""{ "fart_knop": 0, "kurs": 100, "heading": 511 }""");
+
+        Assert.Equal(100, SkipLag.UtledKurs(rad));
+    }
+
+    [Fact]
+    public void Stilleliggende_uten_kurs_og_heading_gir_ikke_kurs()
+    {
+        var rad = Rad("""{ "fart_knop": 0, "kurs": 360, "heading": 511 }""");
 
         Assert.Null(SkipLag.UtledKurs(rad));
     }

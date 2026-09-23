@@ -32,8 +32,8 @@ public sealed class SkipLag(Allemannsdata data) : ILag
     /// operasjoner per fartøy, som ville gitt ett kall per punkt, så den leses her
     /// bare hvis raden har feltet. Regel: er fartøyet i fart (fart ukjent eller
     /// minst <see cref="FartIBevegelseKnop"/> knop) og kurs over grunn er gyldig, brukes
-    /// den; ellers brukes heading når den er gyldig. Ligger fartøyet stille uten
-    /// heading, utelates feltet, for da sier kurs over grunn ingenting om retningen.
+    /// den; ellers brukes heading når den er gyldig, og mangler heading brukes kurs
+    /// over grunn likevel, så feltet finnes så lenge kilden oppgir kurs eller heading.
     /// AIS bruker 360 som «ukjent kurs» og 511 som «ukjent heading»; de og alle
     /// verdier utenfor [0, 360) forkastes.
     /// </summary>
@@ -49,7 +49,8 @@ public sealed class SkipLag(Allemannsdata data) : ILag
             return kurs;
         }
 
-        return heading;
+        // Stilleliggende: heading er riktig retning; mangler den, er kurs over grunn det kilden har.
+        return heading ?? kurs;
     }
 
     /// <summary>Et gradfelt som heltall 0-359, eller null når feltet mangler, ikke er et tall eller er utenfor [0, 360).</summary>
