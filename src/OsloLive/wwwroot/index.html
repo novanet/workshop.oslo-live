@@ -475,18 +475,23 @@ async function start() {
   setInterval(() => { lagene.forEach((_, id) => hent(id)); hentBydeler(); }, 15000);
 }
 
+/** Løpenummer for siste bydelskall. Et tregt svar fra et eldre kall skal ikke overskrive et nyere. */
+let sisteBydelkall = 0;
+
 /** Henter og viser de fem bydelene med flest punkter for laget som er valgt i bydel-panelet. */
 async function hentBydeler() {
   const select = document.getElementById('bydel-lag');
   const liste = document.getElementById('bydel-liste');
   const id = select.value;
   if (!id) return;
+  const kall = ++sisteBydelkall;
 
   try {
     const svar = await fetch('/api/lag/' + encodeURIComponent(id) + '/bydeler');
-    if (select.value !== id) return;   // laget ble byttet mens kallet var underveis
+    if (kall !== sisteBydelkall) return;   // et nyere kall er sendt (byttet lag eller neste oppdatering)
     if (!svar.ok) throw new Error('HTTP ' + svar.status);
     const tellinger = await svar.json();
+    if (kall !== sisteBydelkall) return;
 
     tellinger.sort((a, b) => b.antall - a.antall);
     liste.innerHTML = '';
@@ -505,7 +510,7 @@ async function hentBydeler() {
       liste.appendChild(rad);
     }
   } catch (e) {
-    if (select.value !== id) return;
+    if (kall !== sisteBydelkall) return;
     liste.innerHTML = '<li class="tom">Kunne ikke telle bydeler</li>';
   }
 }
