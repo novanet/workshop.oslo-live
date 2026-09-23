@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T09:39:57",
+  "oppdatert": "2026-09-23T09:42:09",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -15,8 +15,8 @@
       "pr": 0,
       "utkast": 0,
       "merget": 0,
-      "kjoeringer": 1,
-      "utenPr": 1,
+      "kjoeringer": 2,
+      "utenPr": 2,
       "bygg": [],
       "estimert": false,
       "plass": 1
@@ -39,23 +39,34 @@
       "bygg": [],
       "estimert": false,
       "plass": 2
+    },
+    {
+      "navn": "mini-ingve",
+      "github": "ingvevs",
+      "poeng": -1,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 0.558,
+      "tokens": 894924,
+      "sekunder": 157,
+      "pr": 0,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 1,
+      "utenPr": 1,
+      "bygg": [],
+      "estimert": false,
+      "plass": 3
     }
   ],
   "kjoerer": [
     {
-      "agent": "mini-ingve",
-      "github": "ingvevs",
-      "issue": 57,
-      "navn": "Avgangstavle",
-      "startet": "2026-09-23T07:39:12.0647718+00:00",
-      "minutter": 0
-    },
-    {
-      "agent": "mini-frode",
-      "github": "FrodeBl",
-      "issue": 48,
-      "navn": "Parallell henting",
-      "startet": "2026-09-23T07:39:46.4061414+00:00",
+      "agent": "mini-richard",
+      "github": "randsu",
+      "issue": 56,
+      "navn": "Flytrafikk",
+      "startet": "2026-09-23T07:41:34.103511+00:00",
       "minutter": 0
     }
   ],
@@ -89,13 +100,19 @@
       "issue": 48,
       "navn": "Hent lagene parallelt",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T07:39:47Z"
+      "oppdatert": "2026-09-23T07:39:50Z"
+    },
+    {
+      "issue": 56,
+      "navn": "Nytt lag: fly i lufta over Oslo",
+      "github": "randsu",
+      "oppdatert": "2026-09-23T07:41:35Z"
     },
     {
       "issue": 57,
       "navn": "Avgangstavle for Gardermoen",
       "github": "ingvevs",
-      "oppdatert": "2026-09-23T07:39:13Z"
+      "oppdatert": "2026-09-23T07:41:56Z"
     }
   ],
   "aapne": [
