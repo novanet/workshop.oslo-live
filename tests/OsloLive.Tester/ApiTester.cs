@@ -98,6 +98,24 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
     }
 
     [Fact]
+    public async Task Sok_uten_q_gir_400()
+    {
+        var svar = await Klient.GetAsync("/api/sok");
+
+        Assert.Equal(HttpStatusCode.BadRequest, svar.StatusCode);
+    }
+
+    [Theory]
+    [InlineData("/api/sok?q=")]
+    [InlineData("/api/sok?q=%20%20")]
+    public async Task Sok_med_tom_q_gir_400(string url)
+    {
+        var svar = await Klient.GetAsync(url);
+
+        Assert.Equal(HttpStatusCode.BadRequest, svar.StatusCode);
+    }
+
+    [Fact]
     public async Task Lagoversikten_har_flylaget()
     {
         var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
@@ -908,4 +926,98 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
     private sealed record Lagoppforing(string Id, string Navn, string Beskrivelse, string Ikon);
 
     private sealed record Statistikkoppforing(string Id, string Navn, int? Antall, DateTimeOffset? Eldste, DateTimeOffset? Nyeste, DateTimeOffset? Hentet, bool Feiler);
+}
+
+/// <summary>
+/// Tester hele /api/sok-kjeden mot et ekte svar fra Geonorge, hentet via
+/// Allemannsdata-MCP-serveren 2026-09-23 (kilde geonorge, operasjon
+/// search_address, text=Karl+Johans+gate+1, kommunenummer=0301). Dette
+/// bekrefter at feltene address/lat/lon faktisk kommer i dette formatet, og
+/// at treffet ligger i Oslo sentrum - uten at testen selv går mot nettet.
+/// </summary>
+public class SokEndepunktTester(WebApplicationFactory<Program> vert) : IClassFixture<WebApplicationFactory<Program>>
+{
+    private const string EktSvarFraGeonorge = """
+        {
+          "source": "geonorge",
+          "operation": "search_address",
+          "data": {
+            "total_count": 1,
+            "addresses": [
+              {
+                "address": "Karl Johans gate 1",
+                "postnummer": "0154",
+                "poststed": "OSLO",
+                "kommunenummer": "0301",
+                "kommunenavn": "OSLO",
+                "lat": 59.9113775,
+                "lon": 10.749404,
+                "epsg": "EPSG:4326"
+              }
+            ]
+          }
+        }
+        """;
+
+    [Fact]
+    public async Task Sok_etter_karl_johans_gate_1_gir_treff_i_oslo_sentrum()
+    {
+        Allemannsdata.TømMellomlager();
+
+        var vertMedFalsktSvar = vert.WithWebHostBuilder(bygg => bygg.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient<Allemannsdata>()
+                .ConfigurePrimaryHttpMessageHandler(() => new FastSvarHandler(EktSvarFraGeonorge))));
+
+        var treff = await vertMedFalsktSvar.CreateClient()
+            .GetFromJsonAsync<List<Program.Søketreff>>("/api/sok?q=Karl+Johans+gate+1");
+
+        Assert.NotNull(treff);
+        var forste = Assert.Single(treff!);
+        Assert.Equal("Karl Johans gate 1", forste.Navn);
+        Assert.True(Geo.IOslo(forste.Lat, forste.Lon));
+    }
+
+    private sealed class FastSvarHandler(string json) : HttpMessageHandler
+    {
+        protected override Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage forespørsel, CancellationToken stopp)
+        {
+            var svar = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(json, Encoding.UTF8, "application/json"),
+            };
+            return Task.FromResult(svar);
+        }
+    }
+}
+
+/// <summary>Tester som leser adressesøkrader uten nettverk.</summary>
+public class SøketreffTester
+{
+    [Fact]
+    public void Soketreff_leses_fra_en_rad()
+    {
+        var rad = JsonDocument.Parse("""
+            { "address": "Karl Johans gate 1", "postnummer": "0154", "poststed": "OSLO",
+              "kommunenummer": "0301", "kommunenavn": "OSLO", "lat": 59.9113775, "lon": 10.749404,
+              "epsg": "EPSG:4326" }
+            """).RootElement;
+
+        var treff = Program.TilSøketreff(rad);
+
+        Assert.NotNull(treff);
+        Assert.Equal("Karl Johans gate 1", treff.Navn);
+        Assert.Equal(59.9113775, treff.Lat);
+        Assert.Equal(10.749404, treff.Lon);
+    }
+
+    [Fact]
+    public void Soketreff_uten_adresse_blir_null()
+    {
+        var rad = JsonDocument.Parse("""{ "lat": 59.91, "lon": 10.75 }""").RootElement;
+
+        var treff = Program.TilSøketreff(rad);
+
+        Assert.Null(treff);
+    }
 }

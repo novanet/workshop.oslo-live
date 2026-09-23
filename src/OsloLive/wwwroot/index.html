@@ -32,6 +32,17 @@
   .panel h1 { margin: 0 0 2px; font-size: 20px; letter-spacing: -.02em; }
   .panel .under { margin: 0 0 14px; font-size: 12px; color: var(--dempet); }
 
+  .sok { display: flex; gap: 6px; margin: 0 0 8px; }
+  .sok input { flex: 1; min-width: 0; border: 1.5px solid var(--kant); border-radius: 7px; padding: 6px 8px; font: inherit; font-size: 13px; }
+  .sok button { border: 1.5px solid var(--kant); background: #fff; color: var(--tekst); border-radius: 7px; padding: 6px 10px; font-size: 12px; font-weight: 500; cursor: pointer; font-family: inherit; }
+  .sok button:hover { background: #111; color: #fff; }
+
+  .soketreff { list-style: none; margin: 0 0 12px; padding: 0; }
+  .soketreff li { padding: 7px 8px; border-radius: 7px; font-size: 13px; cursor: pointer; }
+  .soketreff li:hover { background: #f3f4f6; }
+  .soketreff .tom { cursor: default; color: var(--dempet); }
+  .soketreff .tom:hover { background: none; }
+
   .lag { display: flex; align-items: center; gap: 9px; padding: 7px 8px; border-radius: 7px; cursor: pointer; }
   .lag:hover { background: #f3f4f6; }
   .lag input { accent-color: #111; width: 15px; height: 15px; cursor: pointer; flex: none; }
@@ -215,6 +226,11 @@
     <h1>Oslo Live</h1>
   </div>
   <p class="under">Levende data fra Allemannsdata</p>
+  <form id="sok" class="sok" role="search">
+    <input id="sokefelt" type="search" placeholder="Søk etter adresse" autocomplete="off" aria-label="Søk etter adresse">
+    <button type="submit">Søk</button>
+  </form>
+  <ul id="soketreff" class="soketreff"></ul>
   <div class="varsler" id="varsler" hidden>
     <h2>Varsler</h2>
     <ol id="varsel-liste" aria-live="polite"></ol>
@@ -1538,6 +1554,61 @@ function sikreSynligPopup(boble) {
   };
   if (kart.isMoving()) kart.once('moveend', flytt); else flytt();
 }
+
+// ---------------------------------------------------------------------------
+// Søk
+// ---------------------------------------------------------------------------
+let søkemarkør = null;
+
+function fjernSøkemarkør() {
+  if (søkemarkør) {
+    søkemarkør.remove();
+    søkemarkør = null;
+  }
+}
+
+function visSøketreff(treff) {
+  const liste = document.getElementById('soketreff');
+  liste.innerHTML = '';
+
+  if (!treff.length) {
+    liste.innerHTML = '<li class="tom">Ingen treff</li>';
+    return;
+  }
+
+  treff.forEach((t) => {
+    const li = document.createElement('li');
+    li.textContent = t.navn;
+    li.addEventListener('click', () => {
+      fjernSøkemarkør();
+      kart.flyTo({ center: [t.lon, t.lat], zoom: 17, duration: 1600 });
+
+      const p = new maplibregl.Popup({ offset: 25, closeButton: true }).setText(t.navn);
+      søkemarkør = new maplibregl.Marker({ color: '#111' }).setLngLat([t.lon, t.lat]).setPopup(p).addTo(kart);
+      søkemarkør.togglePopup();
+      p.on('close', fjernSøkemarkør);
+    });
+    liste.appendChild(li);
+  });
+}
+
+document.getElementById('sok').addEventListener('submit', async (ev) => {
+  ev.preventDefault();
+  const q = document.getElementById('sokefelt').value.trim();
+  const liste = document.getElementById('soketreff');
+  if (!q) return;
+
+  fjernSøkemarkør();
+  liste.innerHTML = '<li class="tom">Søker …</li>';
+
+  try {
+    const svar = await fetch('/api/sok?q=' + encodeURIComponent(q));
+    if (!svar.ok) throw new Error('HTTP ' + svar.status);
+    visSøketreff(await svar.json());
+  } catch (e) {
+    liste.innerHTML = '<li class="tom">Søket feilet</li>';
+  }
+});
 
 // ---------------------------------------------------------------------------
 // Kamera
