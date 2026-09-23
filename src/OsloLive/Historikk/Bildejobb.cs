@@ -57,8 +57,15 @@ public sealed class Bildejobb(IEnumerable<ILag> lagene, Bildelager lager, IConfi
             {
                 lager.Lagre(lag.Id, await lag.Hent(stopp), nå);
             }
-            catch (Exception ex) when (ex is not OperationCanceledException)
+            catch (OperationCanceledException) when (stopp.IsCancellationRequested)
             {
+                // Tjenesten stoppes: la det gå videre til ExecuteAsync.
+                throw;
+            }
+            catch (Exception ex)
+            {
+                // Også tidsavbrudd fra en kilde (TaskCanceledException fra HttpClient
+                // sin egen timeout) havner her, slik at ett tregt lag ikke stopper jobben.
                 logg.LogWarning(ex, "Klarte ikke å ta bilde av laget {Id}", lag.Id);
             }
         }

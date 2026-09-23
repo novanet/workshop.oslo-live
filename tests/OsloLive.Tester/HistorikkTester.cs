@@ -1,5 +1,7 @@
 using System.Globalization;
 using System.Text.Json;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging.Abstractions;
 using OsloLive.Historikk;
 using OsloLive.Kart;
 
@@ -105,6 +107,58 @@ public sealed class BildelagerTester : IDisposable
 
         var bilde = Assert.Single(bilder);
         Assert.Equal(Nå, bilde.Tidspunkt);
+    }
+
+    [Fact]
+    public void Siste_hopper_over_oedelagt_fil()
+    {
+        var lager = new Bildelager(mappe);
+        lager.Lagre("luftkvalitet", EttPunkt(), Nå.AddHours(-2));
+        File.WriteAllText(Path.Combine(mappe, "luftkvalitet", "20260923T070000Z.json"), "{");
+
+        var siste = lager.Siste("luftkvalitet");
+
+        Assert.Equal(Nå.AddHours(-2), siste);
+    }
+
+    [Fact]
+    public async Task Jobben_fortsetter_med_neste_lag_naar_en_kilde_avbrytes()
+    {
+        var lager = new Bildelager(mappe);
+        var oppsett = new ConfigurationBuilder()
+            .AddInMemoryCollection(new Dictionary<string, string?> { ["Historikk:Aktiv"] = "true" })
+            .Build();
+        ILag[] lagene = [new TregtLag(), new RasktLag()];
+        using var jobb = new Bildejobb(lagene, lager, oppsett, NullLogger<Bildejobb>.Instance);
+
+        // Første runde med bilder tas rett etter StartAsync. Vent (med tak) til det raske
+        // laget er lagret; stopper jobben etter det trege laget, blir det aldri noe bilde.
+        await jobb.StartAsync(CancellationToken.None);
+        SpinWait.SpinUntil(() => lager.Siste("rask") is not null, TimeSpan.FromSeconds(5));
+        await jobb.StopAsync(CancellationToken.None);
+
+        Assert.Empty(lager.Les("treg", DateTimeOffset.UtcNow));
+        Assert.Single(lager.Les("rask", DateTimeOffset.UtcNow));
+    }
+
+    /// <summary>Etterligner et lag der HttpClient sin egen timeout slår inn, uten at tjenesten er stoppet.</summary>
+    private sealed class TregtLag : ILag
+    {
+        public string Id => "treg";
+        public string Navn => "Treg kilde";
+        public string Beskrivelse => "Svarer aldri i tide.";
+        public string Ikon => "🐢";
+        public Task<Kartlag> Hent(CancellationToken stopp = default) =>
+            Task.FromException<Kartlag>(new TaskCanceledException("Tidsavbrudd", new TimeoutException()));
+    }
+
+    private sealed class RasktLag : ILag
+    {
+        public string Id => "rask";
+        public string Navn => "Rask kilde";
+        public string Beskrivelse => "Svarer med ett punkt.";
+        public string Ikon => "🐇";
+        public Task<Kartlag> Hent(CancellationToken stopp = default) => Task.FromResult(EttPunkt());
     }
 
     [Theory]

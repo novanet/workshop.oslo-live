@@ -556,9 +556,17 @@ async function hentHistorikk(id) {
     return;
   }
 
-  const BREDDE = 260, HOYDE = 26;
-  const n = Math.max(24, bilder.length);
-  const barBredde = BREDDE / n;
+  // 24 faste timeluker med inneværende klokketime lengst til høyre. Hvert bilde
+  // havner i luka for sin egen time, slik at nedetid vises som hull og ikke som
+  // sammenpressede stolper.
+  const BREDDE = 260, HOYDE = 26, LUKER = 24, TIME = 60 * 60 * 1000;
+  const start = Math.floor(Date.now() / TIME) * TIME - (LUKER - 1) * TIME;
+  const luker = new Array(LUKER).fill(null);
+  bilder.forEach((b) => {
+    const i = Math.floor((new Date(b.tidspunkt).getTime() - start) / TIME);
+    if (i >= 0 && i < LUKER) luker[i] = b; // eldste først, så det nyeste i timen vinner
+  });
+  const lukeBredde = BREDDE / LUKER;
   const maks = Math.max(1, ...bilder.map((b) => b.antall));
 
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -569,12 +577,13 @@ async function hentHistorikk(id) {
   const siste = new Date(bilder[bilder.length - 1].tidspunkt).toLocaleTimeString('no-NO', { hour: '2-digit', minute: '2-digit' });
   svg.setAttribute('aria-label', `Antall per time siste døgn, fra ${forste} til ${siste}`);
 
-  bilder.forEach((b, i) => {
+  luker.forEach((b, i) => {
+    if (!b) return;
     const h = Math.max(1, (b.antall / maks) * HOYDE);
     const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-    rect.setAttribute('x', String(i * barBredde));
+    rect.setAttribute('x', String(i * lukeBredde));
     rect.setAttribute('y', String(HOYDE - h));
-    rect.setAttribute('width', String(Math.max(0, barBredde - 1)));
+    rect.setAttribute('width', String(Math.max(0, lukeBredde - 1)));
     rect.setAttribute('height', String(h));
     rect.setAttribute('fill', oppf.farge);
 

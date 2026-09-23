@@ -78,7 +78,7 @@ public sealed class Bildelager(string mappe)
         return bilder.OrderBy(b => b.Tidspunkt).ToList();
     }
 
-    /// <summary>Tidspunktet til det nyeste bildet for laget, eller null hvis laget ikke har noen ennå.</summary>
+    /// <summary>Tidspunktet til det nyeste lesbare bildet for laget, eller null hvis laget ikke har noen ennå.</summary>
     public DateTimeOffset? Siste(string lagId)
     {
         var lagMappe = Path.Combine(mappe, lagId);
@@ -90,7 +90,9 @@ public sealed class Bildelager(string mappe)
         DateTimeOffset? siste = null;
         foreach (var fil in Directory.EnumerateFiles(lagMappe, "*.json"))
         {
-            if (TryLesTidspunkt(fil, out var tidspunkt) && (siste is null || tidspunkt > siste))
+            // Innholdet må være lesbart, ellers ville en ødelagt fil få jobben til å
+            // vente på neste time mens Les fortsatt gir tom historikk.
+            if (TryLesTidspunkt(fil, out var tidspunkt) && (siste is null || tidspunkt > siste) && TryTellPunkter(fil, out _))
             {
                 siste = tidspunkt;
             }
