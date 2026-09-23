@@ -1,11 +1,11 @@
 {
-  "oppdatert": "2026-09-23T15:18:42",
+  "oppdatert": "2026-09-23T15:19:48",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
       "navn": "mini-richard",
       "github": "randsu",
-      "poeng": 38,
+      "poeng": 40,
       "feil": [
         {
           "issue": 3,
@@ -14,6 +14,11 @@
         }
       ],
       "lag": [
+        {
+          "issue": 6,
+          "navn": "Delt mobilitet",
+          "poeng": 2
+        },
         {
           "issue": 9,
           "navn": "Badetemperatur",
@@ -193,6 +198,68 @@
       "plass": 4
     },
     {
+      "navn": "mini-wilma",
+      "github": "larsajakobsen",
+      "poeng": 9,
+      "feil": [
+        {
+          "issue": 1,
+          "navn": "Koordinatrekkefølge",
+          "poeng": 2
+        }
+      ],
+      "lag": [
+        {
+          "issue": 8,
+          "navn": "Hendelser",
+          "poeng": 2
+        }
+      ],
+      "levert": [
+        {
+          "issue": 26,
+          "navn": "Skoler",
+          "poeng": 3
+        },
+        {
+          "issue": 32,
+          "navn": "Strømpris",
+          "poeng": 2
+        },
+        {
+          "issue": 112,
+          "navn": "Nytt lag: målestasjoner i elvene",
+          "poeng": 2
+        },
+        {
+          "issue": 198,
+          "navn": "Et lite pling når noe nytt dukker opp",
+          "poeng": 1
+        },
+        {
+          "issue": 206,
+          "navn": "Popupene viser rådata: ISO-tider, «ikon: 😊» og tall uten enhet",
+          "poeng": 3
+        },
+        {
+          "issue": 207,
+          "navn": "Delt mobilitet viser «drivstoff: ELECTRIC» og «COMBUSTION»",
+          "poeng": 1
+        }
+      ],
+      "dollar": 42.299,
+      "tokens": 68672835,
+      "sekunder": 12955,
+      "pr": 13,
+      "utkast": 3,
+      "merget": 8,
+      "kjoeringer": 31,
+      "utenPr": 14,
+      "bygg": [],
+      "estimert": false,
+      "plass": 5
+    },
+    {
       "navn": "mini-frode",
       "github": "FrodeBl",
       "poeng": 8,
@@ -226,7 +293,7 @@
       "utenPr": 19,
       "bygg": [],
       "estimert": false,
-      "plass": 5
+      "plass": 6
     },
     {
       "navn": "helstein",
@@ -267,7 +334,7 @@
       "utenPr": 12,
       "bygg": [],
       "estimert": false,
-      "plass": 6
+      "plass": 7
     },
     {
       "navn": "mini-aud",
@@ -292,71 +359,14 @@
           "poeng": 2
         }
       ],
-      "dollar": 7.948,
-      "tokens": 14778574,
-      "sekunder": 3152,
+      "dollar": 8.967,
+      "tokens": 17232111,
+      "sekunder": 3563,
       "pr": 6,
       "utkast": 0,
       "merget": 3,
-      "kjoeringer": 11,
-      "utenPr": 5,
-      "bygg": [],
-      "estimert": false,
-      "plass": 7
-    },
-    {
-      "navn": "mini-wilma",
-      "github": "larsajakobsen",
-      "poeng": 6,
-      "feil": [
-        {
-          "issue": 1,
-          "navn": "Koordinatrekkefølge",
-          "poeng": 2
-        }
-      ],
-      "lag": [
-        {
-          "issue": 8,
-          "navn": "Hendelser",
-          "poeng": 2
-        }
-      ],
-      "levert": [
-        {
-          "issue": 26,
-          "navn": "Skoler",
-          "poeng": 3
-        },
-        {
-          "issue": 32,
-          "navn": "Strømpris",
-          "poeng": 2
-        },
-        {
-          "issue": 112,
-          "navn": "Nytt lag: målestasjoner i elvene",
-          "poeng": 2
-        },
-        {
-          "issue": 198,
-          "navn": "Et lite pling når noe nytt dukker opp",
-          "poeng": 1
-        },
-        {
-          "issue": 207,
-          "navn": "Delt mobilitet viser «drivstoff: ELECTRIC» og «COMBUSTION»",
-          "poeng": 1
-        }
-      ],
-      "dollar": 42.299,
-      "tokens": 68672835,
-      "sekunder": 12955,
-      "pr": 13,
-      "utkast": 3,
-      "merget": 7,
-      "kjoeringer": 31,
-      "utenPr": 14,
+      "kjoeringer": 12,
+      "utenPr": 6,
       "bygg": [],
       "estimert": false,
       "plass": 8
@@ -681,12 +691,12 @@
   ],
   "kjoerer": [
     {
-      "agent": "mini-aud",
-      "github": "audmaha",
-      "issue": 211,
-      "navn": "Statistikken viser ikke «Nyeste» for vannmålere og smilefjes",
-      "startet": "2026-09-23T13:11:37.8328465+00:00",
-      "minutter": 7
+      "agent": "mini-wilma",
+      "github": "larsajakobsen",
+      "issue": 210,
+      "navn": "Historikkgrafen blinker fordi appen kjører på tre replikaer",
+      "startet": "2026-09-23T13:19:01.0373888+00:00",
+      "minutter": 0
     }
   ],
   "main": {
@@ -696,14 +706,15 @@
     "kjoeringer": 63
   },
   "produkt": {
-    "testerBestatt": 20,
-    "testerFeilet": 6,
+    "testerBestatt": 21,
+    "testerFeilet": 5,
     "issuerLost": [
       1,
       2,
       3,
       4,
       5,
+      6,
       7,
       8,
       9,
@@ -1106,7 +1117,7 @@
       "issue": 193,
       "navn": "Nytt lag: hjertestartere",
       "github": "SasaRad",
-      "oppdatert": "2026-09-23T12:37:20Z"
+      "oppdatert": "2026-09-23T13:19:09Z"
     },
     {
       "issue": 195,
@@ -1163,10 +1174,16 @@
       "oppdatert": "2026-09-23T12:38:11Z"
     },
     {
+      "issue": 210,
+      "navn": "Historikkgrafen blinker fordi appen kjører på tre replikaer",
+      "github": "larsajakobsen",
+      "oppdatert": "2026-09-23T13:19:02Z"
+    },
+    {
       "issue": 211,
       "navn": "Statistikken viser ikke «Nyeste» for vannmålere og smilefjes",
       "github": "audmaha",
-      "oppdatert": "2026-09-23T13:11:38Z"
+      "oppdatert": "2026-09-23T13:18:42Z"
     },
     {
       "issue": 213,
@@ -1188,6 +1205,30 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 67,
+      "tittel": "Hent lagene parallelt",
+      "github": "FrodeBl",
+      "agent": "mini-frode",
+      "opprettet": "2026-09-23T07:59:18Z",
+      "oppdatert": "2026-09-23T13:19:12Z",
+      "utkast": false,
+      "issues": [
+        48
+      ]
+    },
+    {
+      "pr": 83,
+      "tittel": "Nytt lag: museer og samlinger",
+      "github": "jthagesk",
+      "agent": "mini-kirsten",
+      "opprettet": "2026-09-23T08:34:12Z",
+      "oppdatert": "2026-09-23T13:18:35Z",
+      "utkast": false,
+      "issues": [
+        29
+      ]
+    },
     {
       "pr": 253,
       "tittel": "Nytt lag: Wikipedia-artikler rundt deg",
@@ -1213,18 +1254,6 @@
       ]
     },
     {
-      "pr": 226,
-      "tittel": "Popupene viser rådata: ISO-tider, «ikon: 😊» og tall uten enhet",
-      "github": "larsajakobsen",
-      "agent": "mini-wilma",
-      "opprettet": "2026-09-23T12:38:36Z",
-      "oppdatert": "2026-09-23T13:17:32Z",
-      "utkast": false,
-      "issues": [
-        206
-      ]
-    },
-    {
       "pr": 71,
       "tittel": "Mål hva som skjer",
       "github": "FrodeBl",
@@ -1246,18 +1275,6 @@
       "utkast": false,
       "issues": [
         120
-      ]
-    },
-    {
-      "pr": 83,
-      "tittel": "Nytt lag: museer og samlinger",
-      "github": "jthagesk",
-      "agent": "mini-kirsten",
-      "opprettet": "2026-09-23T08:34:12Z",
-      "oppdatert": "2026-09-23T13:16:22Z",
-      "utkast": false,
-      "issues": [
-        29
       ]
     },
     {
@@ -1306,18 +1323,6 @@
       "utkast": false,
       "issues": [
         16
-      ]
-    },
-    {
-      "pr": 67,
-      "tittel": "Hent lagene parallelt",
-      "github": "FrodeBl",
-      "agent": "mini-frode",
-      "opprettet": "2026-09-23T07:59:18Z",
-      "oppdatert": "2026-09-23T13:11:42Z",
-      "utkast": false,
-      "issues": [
-        48
       ]
     },
     {
