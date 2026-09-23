@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:31:18",
+  "oppdatert": "2026-09-23T10:31:45",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -229,6 +229,25 @@
       "plass": 10
     },
     {
+      "navn": "mini-knive",
+      "github": "Buggz",
+      "poeng": 0,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 2.567,
+      "tokens": 6062931,
+      "sekunder": 879,
+      "pr": 1,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 1,
+      "utenPr": 0,
+      "bygg": [],
+      "estimert": false,
+      "plass": 11
+    },
+    {
       "navn": "Andy3000",
       "github": "coffeelyfe",
       "poeng": 0,
@@ -245,7 +264,7 @@
       "utenPr": 0,
       "bygg": [],
       "estimert": false,
-      "plass": 11
+      "plass": 12
     },
     {
       "navn": "mini-frode",
@@ -264,18 +283,10 @@
       "utenPr": 2,
       "bygg": [],
       "estimert": false,
-      "plass": 12
+      "plass": 13
     }
   ],
   "kjoerer": [
-    {
-      "agent": "mini-knive",
-      "github": "Buggz",
-      "issue": 57,
-      "navn": "Avgangstavle",
-      "startet": "2026-09-23T08:16:36.122853+00:00",
-      "minutter": 14
-    },
     {
       "agent": "mini-jon",
       "github": "yonzo",
@@ -290,7 +301,7 @@
       "issue": 45,
       "navn": "Varsler",
       "startet": "2026-09-23T08:22:20.0747631+00:00",
-      "minutter": 8
+      "minutter": 9
     },
     {
       "agent": "mini-kirsten",
@@ -306,7 +317,7 @@
       "issue": 42,
       "navn": "Nærmeste punkt",
       "startet": "2026-09-23T08:25:30.8766176+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-frode",
@@ -314,7 +325,7 @@
       "issue": 48,
       "navn": "Parallell henting",
       "startet": "2026-09-23T08:26:31.7269134+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-frode",
@@ -346,7 +357,7 @@
       "issue": 38,
       "navn": "Demomodus",
       "startet": "2026-09-23T08:30:23.0330294+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-richard",
@@ -354,7 +365,7 @@
       "issue": 9,
       "navn": "Badetemperatur",
       "startet": "2026-09-23T08:30:34.0929688+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "helstein",
@@ -527,7 +538,7 @@
       "issue": 41,
       "navn": "Fargene må virke for alle",
       "github": "nilsgs",
-      "oppdatert": "2026-09-23T08:28:16Z"
+      "oppdatert": "2026-09-23T08:31:18Z"
     },
     {
       "issue": 42,
@@ -593,13 +604,13 @@
       "issue": 57,
       "navn": "Avgangstavle for Gardermoen",
       "github": "Buggz",
-      "oppdatert": "2026-09-23T08:16:37Z"
+      "oppdatert": "2026-09-23T08:31:36Z"
     },
     {
       "issue": 57,
       "navn": "Avgangstavle for Gardermoen",
       "github": "ingvevs",
-      "oppdatert": "2026-09-23T08:16:37Z"
+      "oppdatert": "2026-09-23T08:31:36Z"
     },
     {
       "issue": 59,
@@ -609,6 +620,30 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 81,
+      "tittel": "Avgangstavle for Gardermoen (#57)",
+      "github": "Buggz",
+      "agent": "mini-knive",
+      "opprettet": "2026-09-23T08:31:34Z",
+      "oppdatert": "2026-09-23T08:31:35Z",
+      "utkast": false,
+      "issues": [
+        57
+      ]
+    },
+    {
+      "pr": 79,
+      "tittel": "Kartet blir tregt med mange punkter",
+      "github": "sin-rha",
+      "agent": "mini-sindre",
+      "opprettet": "2026-09-23T08:30:02Z",
+      "oppdatert": "2026-09-23T08:31:04Z",
+      "utkast": false,
+      "issues": [
+        55
+      ]
+    },
     {
       "pr": 80,
       "tittel": "Nytt lag: politilogg og nyhetshendelser",
@@ -631,18 +666,6 @@
       "utkast": false,
       "issues": [
         17
-      ]
-    },
-    {
-      "pr": 79,
-      "tittel": "Kartet blir tregt med mange punkter",
-      "github": "sin-rha",
-      "agent": "mini-sindre",
-      "opprettet": "2026-09-23T08:30:02Z",
-      "oppdatert": "2026-09-23T08:30:03Z",
-      "utkast": false,
-      "issues": [
-        55
       ]
     },
     {
