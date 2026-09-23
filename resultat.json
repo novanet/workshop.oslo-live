@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T09:37:45",
+  "oppdatert": "2026-09-23T09:39:57",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -20,16 +20,43 @@
       "bygg": [],
       "estimert": false,
       "plass": 1
+    },
+    {
+      "navn": "mini-richard",
+      "github": "randsu",
+      "poeng": -1,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 0.396,
+      "tokens": 617980,
+      "sekunder": 153,
+      "pr": 1,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 1,
+      "utenPr": 0,
+      "bygg": [],
+      "estimert": false,
+      "plass": 2
     }
   ],
   "kjoerer": [
     {
-      "agent": "mini-richard",
-      "github": "randsu",
-      "issue": 3,
-      "navn": "Mellomlageret",
-      "startet": "2026-09-23T07:35:16.7565669+00:00",
-      "minutter": 2
+      "agent": "mini-ingve",
+      "github": "ingvevs",
+      "issue": 57,
+      "navn": "Avgangstavle",
+      "startet": "2026-09-23T07:39:12.0647718+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-frode",
+      "github": "FrodeBl",
+      "issue": 48,
+      "navn": "Parallell henting",
+      "startet": "2026-09-23T07:39:46.4061414+00:00",
+      "minutter": 0
     }
   ],
   "main": {
@@ -56,10 +83,35 @@
       "issue": 3,
       "navn": "Kartet oppdaterer seg ikke, dataene står stille",
       "github": "randsu",
-      "oppdatert": "2026-09-23T07:35:17Z"
+      "oppdatert": "2026-09-23T07:38:09Z"
+    },
+    {
+      "issue": 48,
+      "navn": "Hent lagene parallelt",
+      "github": "FrodeBl",
+      "oppdatert": "2026-09-23T07:39:47Z"
+    },
+    {
+      "issue": 57,
+      "navn": "Avgangstavle for Gardermoen",
+      "github": "ingvevs",
+      "oppdatert": "2026-09-23T07:39:13Z"
     }
   ],
-  "aapne": [],
+  "aapne": [
+    {
+      "pr": 63,
+      "tittel": "#3: Kartet oppdaterer seg ikke, dataene står stille",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T07:38:07Z",
+      "oppdatert": "2026-09-23T07:39:36Z",
+      "utkast": false,
+      "issues": [
+        3
+      ]
+    }
+  ],
   "regler": {
     "vanskelighet": [
       1,
