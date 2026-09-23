@@ -27,4 +27,12 @@ public class StatiskeFilerTester : IClassFixture<VertUtenBakgrunnssjekk>
 
         Assert.Contains("window.lagSymbol", innhold);
     }
+
+    [Fact]
+    public async Task Klyngefargeskriptet_svarer_200()
+    {
+        var svar = await vert.CreateClient().GetAsync("/effekter/klyngefarger.js");
+
+        Assert.Equal(HttpStatusCode.OK, svar.StatusCode);
+    }
 }
