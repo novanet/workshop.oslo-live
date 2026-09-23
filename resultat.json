@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T12:23:50",
+  "oppdatert": "2026-09-23T12:24:28",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -910,6 +910,18 @@
   ],
   "aapne": [
     {
+      "pr": 96,
+      "tittel": "#22: Slå sammen punkter som ligger oppå hverandre",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:46:40Z",
+      "oppdatert": "2026-09-23T10:23:58Z",
+      "utkast": false,
+      "issues": [
+        22
+      ]
+    },
+    {
       "pr": 139,
       "tittel": "Nytt lag: holdeplasser og stasjoner",
       "github": "FilonenkoDmitry",
@@ -979,18 +991,6 @@
       "utkast": false,
       "issues": [
         113
-      ]
-    },
-    {
-      "pr": 96,
-      "tittel": "#22: Slå sammen punkter som ligger oppå hverandre",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:46:40Z",
-      "oppdatert": "2026-09-23T09:46:31Z",
-      "utkast": false,
-      "issues": [
-        22
       ]
     },
     {
