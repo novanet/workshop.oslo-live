@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:32:37",
+  "oppdatert": "2026-09-23T10:33:04",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -317,7 +317,7 @@
       "issue": 50,
       "navn": "Metrikker",
       "startet": "2026-09-23T08:27:51.3617499+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-frode",
@@ -325,7 +325,7 @@
       "issue": 19,
       "navn": "Artsobservasjoner",
       "startet": "2026-09-23T08:28:01.690939+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "helstein",
@@ -365,7 +365,7 @@
       "issue": 23,
       "navn": "Delbart utsnitt",
       "startet": "2026-09-23T08:31:51.7313963+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-aud",
@@ -373,7 +373,7 @@
       "issue": 23,
       "navn": "Delbart utsnitt",
       "startet": "2026-09-23T08:32:03.1180412+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-aud",
