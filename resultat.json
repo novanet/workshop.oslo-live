@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:04:23",
+  "oppdatert": "2026-09-23T10:04:49",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -163,7 +163,7 @@
       "issue": 4,
       "navn": "Duplikatfjerning",
       "startet": "2026-09-23T08:02:25.1355944+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-taco",
@@ -179,7 +179,7 @@
       "issue": 50,
       "navn": "Metrikker",
       "startet": "2026-09-23T08:03:32.4223783+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "Andy3000",
