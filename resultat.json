@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:15:41",
+  "oppdatert": "2026-09-23T10:16:07",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -160,6 +160,25 @@
       "plass": 7
     },
     {
+      "navn": "mini-jon",
+      "github": "yonzo",
+      "poeng": 0,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 0.775,
+      "tokens": 1089909,
+      "sekunder": 320,
+      "pr": 0,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 1,
+      "utenPr": 1,
+      "bygg": [],
+      "estimert": false,
+      "plass": 8
+    },
+    {
       "navn": "mini-taco",
       "github": "Puiu",
       "poeng": 0,
@@ -176,7 +195,7 @@
       "utenPr": 0,
       "bygg": [],
       "estimert": false,
-      "plass": 8
+      "plass": 9
     },
     {
       "navn": "mini-frode",
@@ -195,7 +214,7 @@
       "utenPr": 2,
       "bygg": [],
       "estimert": false,
-      "plass": 9
+      "plass": 10
     },
     {
       "navn": "Andy3000",
@@ -214,7 +233,7 @@
       "utenPr": 0,
       "bygg": [],
       "estimert": false,
-      "plass": 10
+      "plass": 11
     }
   ],
   "kjoerer": [
@@ -224,15 +243,7 @@
       "issue": 17,
       "navn": "Smilefjes",
       "startet": "2026-09-23T08:10:01.588657+00:00",
-      "minutter": 5
-    },
-    {
-      "agent": "mini-jon",
-      "github": "yonzo",
-      "issue": 44,
-      "navn": "Sammenlign tid",
-      "startet": "2026-09-23T08:10:18.2408581+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-frode",
@@ -240,7 +251,7 @@
       "issue": 19,
       "navn": "Artsobservasjoner",
       "startet": "2026-09-23T08:14:02.4941234+00:00",
-      "minutter": 1
+      "minutter": 2
     }
   ],
   "main": {
@@ -332,7 +343,7 @@
       "issue": 44,
       "navn": "Sammenlign to tidspunkt",
       "github": "yonzo",
-      "oppdatert": "2026-09-23T08:10:19Z"
+      "oppdatert": "2026-09-23T08:15:47Z"
     },
     {
       "issue": 46,
@@ -368,16 +379,40 @@
       "issue": 57,
       "navn": "Avgangstavle for Gardermoen",
       "github": "ingvevs",
-      "oppdatert": "2026-09-23T07:41:56Z"
+      "oppdatert": "2026-09-23T08:15:52Z"
     },
     {
       "issue": 59,
       "navn": "Overlapping boxes",
       "github": "sin-rha",
-      "oppdatert": "2026-09-23T07:59:05Z"
+      "oppdatert": "2026-09-23T08:15:46Z"
     }
   ],
   "aapne": [
+    {
+      "pr": 65,
+      "tittel": "#11: Nytt lag: kollektivtrafikk som beveger seg",
+      "github": "coffeelyfe",
+      "agent": "Andy3000",
+      "opprettet": "2026-09-23T07:50:13Z",
+      "oppdatert": "2026-09-23T08:15:51Z",
+      "utkast": false,
+      "issues": [
+        11
+      ]
+    },
+    {
+      "pr": 69,
+      "tittel": "#56: Nytt lag: fly i lufta over Oslo",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:10:46Z",
+      "oppdatert": "2026-09-23T08:15:29Z",
+      "utkast": false,
+      "issues": [
+        56
+      ]
+    },
     {
       "pr": 73,
       "tittel": "Vær grei mot kildene (#54)",
@@ -415,18 +450,6 @@
       ]
     },
     {
-      "pr": 65,
-      "tittel": "#11: Nytt lag: kollektivtrafikk som beveger seg",
-      "github": "coffeelyfe",
-      "agent": "Andy3000",
-      "opprettet": "2026-09-23T07:50:13Z",
-      "oppdatert": "2026-09-23T08:14:43Z",
-      "utkast": false,
-      "issues": [
-        11
-      ]
-    },
-    {
       "pr": 72,
       "tittel": "Søk etter adresse og hopp dit på kartet (#21)",
       "github": "leif-larsen",
@@ -448,18 +471,6 @@
       "utkast": false,
       "issues": [
         48
-      ]
-    },
-    {
-      "pr": 69,
-      "tittel": "#56: Nytt lag: fly i lufta over Oslo",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:10:46Z",
-      "oppdatert": "2026-09-23T08:12:37Z",
-      "utkast": false,
-      "issues": [
-        56
       ]
     }
   ],
