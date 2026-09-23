@@ -466,7 +466,8 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
     {
         // Øyeblikksjobb og helsesjekken er fjernet fra testverten, og Historikk:Mappe peker på
         // en midlertidig mappe som slettes etter testene. Ingen filer havner i App_Data/historikk.
-        Assert.Empty(vert.Services.GetServices<IHostedService>());
+        // Testserveren har sin egen vertstjeneste; ingen av appens bakgrunnsjobber skal være der.
+        Assert.DoesNotContain(vert.Services.GetServices<IHostedService>(), t => t.GetType().Namespace?.StartsWith("OsloLive") == true);
 
         var lager = vert.Services.GetRequiredService<Bildelager>();
         await lager.Lagre("testlag", Geo.Samle([Geo.Lag("a", 59.91, 10.75, "A", "Test")]), DateTimeOffset.UtcNow);
