@@ -42,6 +42,7 @@ builder.Services.AddHostedService<Øyeblikksjobb>();
 builder.Services.AddSingleton<ILag, LuftkvalitetLag>();
 builder.Services.AddSingleton<ILag, SmilefjesLag>();
 builder.Services.AddSingleton<ILag, FlyLag>();
+builder.Services.AddSingleton<ILag, MobilitetLag>();
 
 // Bakgrunnssjekk av kildehelse, se Helse/HelseSjekker.cs.
 builder.Services.Configure<HelseValg>(builder.Configuration.GetSection("Helse"));
