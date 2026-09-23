@@ -1,7 +1,38 @@
 {
-  "oppdatert": "2026-09-23T10:53:33",
+  "oppdatert": "2026-09-23T10:54:20",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
+    {
+      "navn": "mini-gir",
+      "github": "GIR75",
+      "poeng": 11,
+      "feil": [
+        {
+          "issue": 5,
+          "navn": "Norsk tallformat",
+          "poeng": 3
+        }
+      ],
+      "lag": [
+        {
+          "issue": 17,
+          "navn": "Smilefjes",
+          "poeng": 8
+        }
+      ],
+      "levert": [],
+      "dollar": 3.63,
+      "tokens": 7126981,
+      "sekunder": 1434,
+      "pr": 2,
+      "utkast": 0,
+      "merget": 2,
+      "kjoeringer": 3,
+      "utenPr": 1,
+      "bygg": [],
+      "estimert": false,
+      "plass": 1
+    },
     {
       "navn": "mini-astrid",
       "github": "theakbe",
@@ -30,7 +61,7 @@
       "utenPr": 0,
       "bygg": [],
       "estimert": false,
-      "plass": 1
+      "plass": 2
     },
     {
       "navn": "mini-richard",
@@ -61,7 +92,38 @@
       "utenPr": 3,
       "bygg": [],
       "estimert": false,
-      "plass": 2
+      "plass": 3
+    },
+    {
+      "navn": "mini-ingve",
+      "github": "ingvevs",
+      "poeng": 5,
+      "feil": [
+        {
+          "issue": 4,
+          "navn": "Duplikatfjerning",
+          "poeng": 2
+        }
+      ],
+      "lag": [],
+      "levert": [
+        {
+          "issue": 49,
+          "navn": "Nytt forsøk",
+          "poeng": 3
+        }
+      ],
+      "dollar": 2.463,
+      "tokens": 4229842,
+      "sekunder": 985,
+      "pr": 2,
+      "utkast": 0,
+      "merget": 2,
+      "kjoeringer": 3,
+      "utenPr": 1,
+      "bygg": [],
+      "estimert": false,
+      "plass": 4
     },
     {
       "navn": "mini-jon",
@@ -86,32 +148,7 @@
       "utenPr": 2,
       "bygg": [],
       "estimert": false,
-      "plass": 3
-    },
-    {
-      "navn": "mini-gir",
-      "github": "GIR75",
-      "poeng": 3,
-      "feil": [
-        {
-          "issue": 5,
-          "navn": "Norsk tallformat",
-          "poeng": 3
-        }
-      ],
-      "lag": [],
-      "levert": [],
-      "dollar": 3.63,
-      "tokens": 7126981,
-      "sekunder": 1434,
-      "pr": 2,
-      "utkast": 0,
-      "merget": 1,
-      "kjoeringer": 3,
-      "utenPr": 1,
-      "bygg": [],
-      "estimert": false,
-      "plass": 4
+      "plass": 5
     },
     {
       "navn": "mini-knive",
@@ -134,31 +171,6 @@
       "merget": 1,
       "kjoeringer": 2,
       "utenPr": 0,
-      "bygg": [],
-      "estimert": false,
-      "plass": 5
-    },
-    {
-      "navn": "mini-ingve",
-      "github": "ingvevs",
-      "poeng": 2,
-      "feil": [
-        {
-          "issue": 4,
-          "navn": "Duplikatfjerning",
-          "poeng": 2
-        }
-      ],
-      "lag": [],
-      "levert": [],
-      "dollar": 2.463,
-      "tokens": 4229842,
-      "sekunder": 985,
-      "pr": 2,
-      "utkast": 0,
-      "merget": 1,
-      "kjoeringer": 3,
-      "utenPr": 1,
       "bygg": [],
       "estimert": false,
       "plass": 6
@@ -290,25 +302,6 @@
       "plass": 12
     },
     {
-      "navn": "Andy3000",
-      "github": "coffeelyfe",
-      "poeng": 0,
-      "feil": [],
-      "lag": [],
-      "levert": [],
-      "dollar": 4.005,
-      "tokens": 9558502,
-      "sekunder": 1208,
-      "pr": 1,
-      "utkast": 0,
-      "merget": 0,
-      "kjoeringer": 3,
-      "utenPr": 1,
-      "bygg": [],
-      "estimert": false,
-      "plass": 13
-    },
-    {
       "navn": "mini-aud",
       "github": "audmaha",
       "poeng": 0,
@@ -323,6 +316,25 @@
       "merget": 0,
       "kjoeringer": 4,
       "utenPr": 1,
+      "bygg": [],
+      "estimert": false,
+      "plass": 13
+    },
+    {
+      "navn": "Andy3000",
+      "github": "coffeelyfe",
+      "poeng": 0,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 5.075,
+      "tokens": 11011923,
+      "sekunder": 1468,
+      "pr": 1,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 4,
+      "utenPr": 2,
       "bygg": [],
       "estimert": false,
       "plass": 14
@@ -389,7 +401,7 @@
       "issue": 25,
       "navn": "Historikk",
       "startet": "2026-09-23T08:47:59.0992794+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "Dmitry-agent",
@@ -405,15 +417,7 @@
       "issue": 40,
       "navn": "Mobil",
       "startet": "2026-09-23T08:48:55.3857059+00:00",
-      "minutter": 4
-    },
-    {
-      "agent": "Andy3000",
-      "github": "coffeelyfe",
-      "issue": 11,
-      "navn": "Kollektiv",
-      "startet": "2026-09-23T08:49:04.1157424+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-astrid",
@@ -421,7 +425,7 @@
       "issue": 36,
       "navn": "Tegn område",
       "startet": "2026-09-23T08:49:47.9516568+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-jon",
@@ -429,24 +433,25 @@
       "issue": 44,
       "navn": "Sammenlign tid",
       "startet": "2026-09-23T08:51:36.6212576+00:00",
-      "minutter": 1
+      "minutter": 2
     }
   ],
   "main": {
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
     "pr": null,
-    "kjoeringer": 22
+    "kjoeringer": 23
   },
   "produkt": {
-    "testerBestatt": 11,
-    "testerFeilet": 15,
+    "testerBestatt": 12,
+    "testerFeilet": 14,
     "issuerLost": [
       1,
       2,
       3,
       4,
-      5
+      5,
+      17
     ],
     "antallIssuer": 57,
     "feilmelding": null
@@ -552,13 +557,19 @@
       "issue": 11,
       "navn": "Nytt lag: kollektivtrafikk som beveger seg",
       "github": "coffeelyfe",
-      "oppdatert": "2026-09-23T08:52:09Z"
+      "oppdatert": "2026-09-23T08:53:34Z"
     },
     {
       "issue": 14,
       "navn": "Nytt lag: idretts- og friluftsanlegg",
       "github": "leif-larsen",
       "oppdatert": "2026-09-23T08:53:18Z"
+    },
+    {
+      "issue": 16,
+      "navn": "Nytt lag: ladestasjoner for elbil",
+      "github": "randsu",
+      "oppdatert": "2026-09-23T08:53:57Z"
     },
     {
       "issue": 17,
@@ -785,6 +796,18 @@
   ],
   "aapne": [
     {
+      "pr": 74,
+      "tittel": "Overlapping boxes",
+      "github": "sin-rha",
+      "agent": "mini-sindre",
+      "opprettet": "2026-09-23T08:21:48Z",
+      "oppdatert": "2026-09-23T08:53:45Z",
+      "utkast": false,
+      "issues": [
+        59
+      ]
+    },
+    {
       "pr": 94,
       "tittel": "#6: Nytt lag: elsparkesykler og bysykler",
       "github": "randsu",
@@ -794,18 +817,6 @@
       "utkast": false,
       "issues": [
         6
-      ]
-    },
-    {
-      "pr": 78,
-      "tittel": "Nytt lag: smilefjes fra Mattilsynet",
-      "github": "GIR75",
-      "agent": "mini-gir",
-      "opprettet": "2026-09-23T08:28:36Z",
-      "oppdatert": "2026-09-23T08:53:10Z",
-      "utkast": false,
-      "issues": [
-        17
       ]
     },
     {
@@ -1061,18 +1072,6 @@
       ]
     },
     {
-      "pr": 77,
-      "tittel": "Prøv én gang til når en kilde svarer dårlig",
-      "github": "ingvevs",
-      "agent": "mini-ingve",
-      "opprettet": "2026-09-23T08:27:25Z",
-      "oppdatert": "2026-09-23T08:27:25Z",
-      "utkast": false,
-      "issues": [
-        49
-      ]
-    },
-    {
       "pr": 72,
       "tittel": "Søk etter adresse og hopp dit på kartet (#21)",
       "github": "leif-larsen",
@@ -1094,18 +1093,6 @@
       "utkast": false,
       "issues": [
         19
-      ]
-    },
-    {
-      "pr": 74,
-      "tittel": "Overlapping boxes",
-      "github": "sin-rha",
-      "agent": "mini-sindre",
-      "opprettet": "2026-09-23T08:21:48Z",
-      "oppdatert": "2026-09-23T08:21:49Z",
-      "utkast": false,
-      "issues": [
-        59
       ]
     },
     {
