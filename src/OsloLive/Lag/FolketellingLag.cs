@@ -19,7 +19,7 @@ public sealed class FolketellingLag(Allemannsdata data) : ILag
     /// <summary>Søkeordet som gir treff i det gamle Kristiania, se klassekommentaren.</summary>
     public const string Søkeord = "Kristiania";
 
-    /// <summary>Antall eiendommer vi ber om per oppdatering.</summary>
+    /// <summary>Antall eiendommer vi ber om per oppdateringer.</summary>
     public const int AntallEiendommer = 50;
 
     public static IReadOnlyDictionary<string, object> Parametre { get; } = new Dictionary<string, object>
