@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T09:48:47",
+  "oppdatert": "2026-09-23T09:51:00",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -47,6 +47,25 @@
       "plass": 2
     },
     {
+      "navn": "mini-leif",
+      "github": "leif-larsen",
+      "poeng": -1,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 0.459,
+      "tokens": 830036,
+      "sekunder": 183,
+      "pr": 1,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 1,
+      "utenPr": 0,
+      "bygg": [],
+      "estimert": false,
+      "plass": 3
+    },
+    {
       "navn": "mini-gir",
       "github": "GIR75",
       "poeng": -1,
@@ -63,7 +82,7 @@
       "utenPr": 0,
       "bygg": [],
       "estimert": false,
-      "plass": 3
+      "plass": 4
     },
     {
       "navn": "mini-ingve",
@@ -82,32 +101,34 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 4
-    }
-  ],
-  "kjoerer": [
-    {
-      "agent": "Andy3000",
-      "github": "coffeelyfe",
-      "issue": 11,
-      "navn": "Kollektiv",
-      "startet": "2026-09-23T07:42:32.6774656+00:00",
-      "minutter": 6
+      "plass": 5
     },
     {
-      "agent": "mini-leif",
-      "github": "leif-larsen",
-      "issue": 2,
-      "navn": "Utsnittet",
-      "startet": "2026-09-23T07:47:08.0486481+00:00",
-      "minutter": 1
+      "navn": "Andy3000",
+      "github": "coffeelyfe",
+      "poeng": -1,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 1.529,
+      "tokens": 3450100,
+      "sekunder": 441,
+      "pr": 1,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 1,
+      "utenPr": 0,
+      "bygg": [],
+      "estimert": false,
+      "plass": 6
     }
   ],
+  "kjoerer": [],
   "main": {
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
     "pr": null,
-    "kjoeringer": 13
+    "kjoeringer": 14
   },
   "produkt": {
     "testerBestatt": 7,
@@ -129,7 +150,7 @@
       "issue": 2,
       "navn": "Steder langt utenfor Oslo slipper inn i kartet",
       "github": "leif-larsen",
-      "oppdatert": "2026-09-23T07:47:09Z"
+      "oppdatert": "2026-09-23T07:50:33Z"
     },
     {
       "issue": 3,
@@ -147,7 +168,7 @@
       "issue": 11,
       "navn": "Nytt lag: kollektivtrafikk som beveger seg",
       "github": "coffeelyfe",
-      "oppdatert": "2026-09-23T07:42:33Z"
+      "oppdatert": "2026-09-23T07:50:14Z"
     },
     {
       "issue": 48,
@@ -169,6 +190,30 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 66,
+      "tittel": "Steder langt utenfor Oslo slipper inn i kartet (#2)",
+      "github": "leif-larsen",
+      "agent": "mini-leif",
+      "opprettet": "2026-09-23T07:50:31Z",
+      "oppdatert": "2026-09-23T07:50:32Z",
+      "utkast": false,
+      "issues": [
+        2
+      ]
+    },
+    {
+      "pr": 65,
+      "tittel": "#11: Nytt lag: kollektivtrafikk som beveger seg",
+      "github": "coffeelyfe",
+      "agent": "Andy3000",
+      "opprettet": "2026-09-23T07:50:13Z",
+      "oppdatert": "2026-09-23T07:50:14Z",
+      "utkast": false,
+      "issues": [
+        11
+      ]
+    },
     {
       "pr": 64,
       "tittel": "Tall i URL-ene får norsk desimalkomma",
