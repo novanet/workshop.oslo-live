@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:29:09",
+  "oppdatert": "2026-09-23T11:29:37",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -442,7 +442,7 @@
       "issue": 11,
       "navn": "Kollektiv",
       "startet": "2026-09-23T09:22:13.4670027+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-kirsten",
@@ -459,6 +459,14 @@
       "navn": "Ytelse",
       "startet": "2026-09-23T09:26:04.1878556+00:00",
       "minutter": 3
+    },
+    {
+      "agent": "mini-knive",
+      "github": "Buggz",
+      "issue": 28,
+      "navn": "Tog",
+      "startet": "2026-09-23T09:29:24.4557136+00:00",
+      "minutter": 0
     }
   ],
   "main": {
@@ -698,7 +706,7 @@
       "issue": 28,
       "navn": "Nytt lag: togtrafikk",
       "github": "Buggz",
-      "oppdatert": "2026-09-23T09:28:50Z"
+      "oppdatert": "2026-09-23T09:29:25Z"
     },
     {
       "issue": 29,
