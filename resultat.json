@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T09:44:22",
+  "oppdatert": "2026-09-23T09:46:34",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -22,25 +22,6 @@
       "plass": 1
     },
     {
-      "navn": "mini-richard",
-      "github": "randsu",
-      "poeng": -1,
-      "feil": [],
-      "lag": [],
-      "levert": [],
-      "dollar": 0.396,
-      "tokens": 617980,
-      "sekunder": 153,
-      "pr": 1,
-      "utkast": 0,
-      "merget": 0,
-      "kjoeringer": 1,
-      "utenPr": 0,
-      "bygg": [],
-      "estimert": false,
-      "plass": 2
-    },
-    {
       "navn": "mini-ingve",
       "github": "ingvevs",
       "poeng": -1,
@@ -57,24 +38,43 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
+      "plass": 2
+    },
+    {
+      "navn": "mini-richard",
+      "github": "randsu",
+      "poeng": -1,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 0.965,
+      "tokens": 1224765,
+      "sekunder": 316,
+      "pr": 1,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 2,
+      "utenPr": 1,
+      "bygg": [],
+      "estimert": false,
       "plass": 3
     }
   ],
   "kjoerer": [
-    {
-      "agent": "mini-richard",
-      "github": "randsu",
-      "issue": 56,
-      "navn": "Flytrafikk",
-      "startet": "2026-09-23T07:41:34.103511+00:00",
-      "minutter": 2
-    },
     {
       "agent": "Andy3000",
       "github": "coffeelyfe",
       "issue": 11,
       "navn": "Kollektiv",
       "startet": "2026-09-23T07:42:32.6774656+00:00",
+      "minutter": 3
+    },
+    {
+      "agent": "mini-gir",
+      "github": "GIR75",
+      "issue": 5,
+      "navn": "Norsk tallformat",
+      "startet": "2026-09-23T07:44:43.6945998+00:00",
       "minutter": 1
     }
   ],
@@ -105,6 +105,12 @@
       "oppdatert": "2026-09-23T07:38:09Z"
     },
     {
+      "issue": 5,
+      "navn": "Tall i URL-ene får norsk desimalkomma",
+      "github": "GIR75",
+      "oppdatert": "2026-09-23T07:44:44Z"
+    },
+    {
       "issue": 11,
       "navn": "Nytt lag: kollektivtrafikk som beveger seg",
       "github": "coffeelyfe",
@@ -120,7 +126,7 @@
       "issue": 56,
       "navn": "Nytt lag: fly i lufta over Oslo",
       "github": "randsu",
-      "oppdatert": "2026-09-23T07:41:35Z"
+      "oppdatert": "2026-09-23T07:44:23Z"
     },
     {
       "issue": 57,
