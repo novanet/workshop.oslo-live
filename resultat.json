@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T15:32:04",
+  "oppdatert": "2026-09-23T15:32:46",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -153,13 +153,13 @@
           "poeng": 2
         }
       ],
-      "dollar": 23.643,
-      "tokens": 36603757,
-      "sekunder": 7571,
+      "dollar": 25.556,
+      "tokens": 39225565,
+      "sekunder": 8060,
       "pr": 7,
       "utkast": 0,
       "merget": 5,
-      "kjoeringer": 30,
+      "kjoeringer": 31,
       "utenPr": 19,
       "bygg": [],
       "estimert": false,
@@ -701,20 +701,12 @@
   ],
   "kjoerer": [
     {
-      "agent": "mini-frode",
-      "github": "FrodeBl",
-      "issue": 186,
-      "navn": "Nytt lag: bysykkelstasjoner som fyllingsringer",
-      "startet": "2026-09-23T13:22:58.2011074+00:00",
-      "minutter": 8
-    },
-    {
       "agent": "mini-wilma",
       "github": "larsajakobsen",
       "issue": 184,
       "navn": "Neste avganger når du klikker på en holdeplass",
       "startet": "2026-09-23T13:24:18.5982608+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "mini-wilma",
@@ -722,7 +714,7 @@
       "issue": 183,
       "navn": "Regner det i Oslo sentrum de neste to timene?",
       "startet": "2026-09-23T13:24:20.6110309+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "mini-sindre",
@@ -730,7 +722,7 @@
       "issue": 55,
       "navn": "Ytelse",
       "startet": "2026-09-23T13:28:44.0134563+00:00",
-      "minutter": 2
+      "minutter": 4
     }
   ],
   "main": {
@@ -1115,7 +1107,7 @@
       "issue": 186,
       "navn": "Nytt lag: bysykkelstasjoner som fyllingsringer",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T13:22:59Z"
+      "oppdatert": "2026-09-23T13:31:40Z"
     },
     {
       "issue": 187,
@@ -1240,6 +1232,54 @@
   ],
   "aapne": [
     {
+      "pr": 97,
+      "tittel": "Søk på tvers av alle lag (#47)",
+      "github": "Puiu",
+      "agent": "mini-taco",
+      "opprettet": "2026-09-23T08:46:56Z",
+      "oppdatert": "2026-09-23T13:32:35Z",
+      "utkast": false,
+      "issues": [
+        47
+      ]
+    },
+    {
+      "pr": 237,
+      "tittel": "#124: Punkter som flytter seg, glir til ny posisjon",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T12:48:04Z",
+      "oppdatert": "2026-09-23T13:32:00Z",
+      "utkast": false,
+      "issues": [
+        124
+      ]
+    },
+    {
+      "pr": 252,
+      "tittel": "Nytt lag: bysykkelstasjoner som fyllingsringer",
+      "github": "FrodeBl",
+      "agent": "mini-frode",
+      "opprettet": "2026-09-23T13:15:46Z",
+      "oppdatert": "2026-09-23T13:31:38Z",
+      "utkast": false,
+      "issues": [
+        186
+      ]
+    },
+    {
+      "pr": 238,
+      "tittel": "#119: Mørkt kart når sola går ned i Oslo",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T12:48:17Z",
+      "oppdatert": "2026-09-23T13:31:34Z",
+      "utkast": false,
+      "issues": [
+        119
+      ]
+    },
+    {
       "pr": 67,
       "tittel": "Hent lagene parallelt",
       "github": "FrodeBl",
@@ -1252,30 +1292,6 @@
       ]
     },
     {
-      "pr": 237,
-      "tittel": "#124: Punkter som flytter seg, glir til ny posisjon",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T12:48:04Z",
-      "oppdatert": "2026-09-23T13:30:32Z",
-      "utkast": false,
-      "issues": [
-        124
-      ]
-    },
-    {
-      "pr": 238,
-      "tittel": "#119: Mørkt kart når sola går ned i Oslo",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T12:48:17Z",
-      "oppdatert": "2026-09-23T13:29:52Z",
-      "utkast": false,
-      "issues": [
-        119
-      ]
-    },
-    {
       "pr": 255,
       "tittel": "Nytt lag: hjertestartere",
       "github": "larsajakobsen",
@@ -1285,18 +1301,6 @@
       "utkast": false,
       "issues": [
         193
-      ]
-    },
-    {
-      "pr": 97,
-      "tittel": "Søk på tvers av alle lag (#47)",
-      "github": "Puiu",
-      "agent": "mini-taco",
-      "opprettet": "2026-09-23T08:46:56Z",
-      "oppdatert": "2026-09-23T13:26:15Z",
-      "utkast": false,
-      "issues": [
-        47
       ]
     },
     {
@@ -1321,18 +1325,6 @@
       "utkast": false,
       "issues": [
         210
-      ]
-    },
-    {
-      "pr": 252,
-      "tittel": "Nytt lag: bysykkelstasjoner som fyllingsringer",
-      "github": "FrodeBl",
-      "agent": "mini-frode",
-      "opprettet": "2026-09-23T13:15:46Z",
-      "oppdatert": "2026-09-23T13:21:15Z",
-      "utkast": false,
-      "issues": [
-        186
       ]
     },
     {
