@@ -1,12 +1,13 @@
 using System.Net;
 using System.Net.Http.Json;
-using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
+using OsloLive.Historikk;
+using OsloLive.Kart;
 
 namespace OsloLive.Tester;
 
 /// <summary>Tester at kart-API-et svarer slik frontenden forventer.</summary>
-public class ApiTester(WebApplicationFactory<Program> vert) : IClassFixture<WebApplicationFactory<Program>>
+public class ApiTester(TestVert vert) : IClassFixture<TestVert>
 {
     private HttpClient Klient => vert.CreateClient();
 
@@ -73,6 +74,41 @@ public class ApiTester(WebApplicationFactory<Program> vert) : IClassFixture<WebA
         Assert.Equal(HttpStatusCode.BadGateway, fly.StatusCode);
         Assert.Equal(HttpStatusCode.OK, lag.StatusCode);
         Assert.Equal(HttpStatusCode.OK, helse.StatusCode);
+    }
+
+    [Fact]
+    public async Task Historikk_for_ukjent_lag_gir_404()
+    {
+        var svar = await Klient.GetAsync("/api/lag/finnes-ikke/historikk");
+
+        Assert.Equal(HttpStatusCode.NotFound, svar.StatusCode);
+    }
+
+    [Fact]
+    public async Task Historikk_for_lag_uten_bilder_gir_tom_liste()
+    {
+        var svar = await Klient.GetAsync("/api/lag/luftkvalitet/historikk");
+        var bilder = await svar.Content.ReadFromJsonAsync<List<Bilde>>();
+
+        Assert.Equal(HttpStatusCode.OK, svar.StatusCode);
+        Assert.NotNull(bilder);
+        Assert.Empty(bilder);
+    }
+
+    [Fact]
+    public async Task Historikk_viser_lagrede_bilder_med_tidspunkt_og_antall()
+    {
+        var lager = vert.Services.GetRequiredService<Bildelager>();
+        var punkt = Geo.Lag("a", 59.91, 10.75, "A", "Test");
+        lager.Lagre("fly", Geo.Samle([punkt]), DateTimeOffset.UtcNow.AddHours(-1));
+
+        var svar = await Klient.GetAsync("/api/lag/fly/historikk");
+        var bilder = await svar.Content.ReadFromJsonAsync<List<Bilde>>();
+
+        Assert.Equal(HttpStatusCode.OK, svar.StatusCode);
+        Assert.NotNull(bilder);
+        var bilde = Assert.Single(bilder);
+        Assert.Equal(1, bilde.Antall);
     }
 
     private sealed class SviktHandler : HttpMessageHandler

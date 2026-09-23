@@ -40,6 +40,8 @@
   .lag .visning { flex: none; font: inherit; font-size: 11px; padding: 2px 7px; border: 1.5px solid var(--kant); border-radius: 6px; background: #fff; cursor: pointer; }
   .lag .visning[aria-pressed="true"] { background: #111; color: #fff; }
   .tom { font-size: 13px; color: var(--dempet); line-height: 1.5; padding: 4px 2px; }
+  .graf { display: block; width: 100%; height: 26px; margin: 0 0 4px; padding: 0 8px; }
+  .graf-tom { font-size: 11px; color: var(--dempet); padding: 0 8px 4px; }
   .bunn { margin-top: 12px; padding-top: 12px; border-top: 1px solid #e5e7eb; font-size: 11px; color: var(--dempet); display: flex; justify-content: space-between; }
 
   .kamera {
@@ -448,10 +450,73 @@ async function start() {
     });
     liste.appendChild(rad);
 
+    const graf = document.createElement('div');
+    graf.id = 'graf-' + l.id;
+    liste.appendChild(graf);
+
     hent(l.id);
+    hentHistorikk(l.id);
   });
 
   setInterval(() => lagene.forEach((_, id) => hent(id)), 15000);
+  setInterval(() => lagene.forEach((_, id) => hentHistorikk(id)), 60000);
+}
+
+/** Henter og tegner den lille grafen med antall punkter per time siste døgn. */
+async function hentHistorikk(id) {
+  const oppf = lagene.get(id);
+  const mal = document.getElementById('graf-' + id);
+  if (!mal) return;
+
+  let bilder = [];
+  try {
+    const svar = await fetch('/api/lag/' + id + '/historikk');
+    if (!svar.ok) throw new Error('HTTP ' + svar.status);
+    bilder = await svar.json();
+  } catch (e) {
+    mal.replaceChildren();
+    return;
+  }
+
+  if (!bilder.length) {
+    const tom = document.createElement('div');
+    tom.className = 'graf-tom';
+    tom.textContent = 'Ingen historikk ennå';
+    mal.replaceChildren(tom);
+    return;
+  }
+
+  const BREDDE = 260, HOYDE = 26;
+  const n = Math.max(24, bilder.length);
+  const barBredde = BREDDE / n;
+  const maks = Math.max(1, ...bilder.map((b) => b.antall));
+
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('class', 'graf');
+  svg.setAttribute('viewBox', `0 0 ${BREDDE} ${HOYDE}`);
+  svg.setAttribute('preserveAspectRatio', 'none');
+  const forste = new Date(bilder[0].tidspunkt).toLocaleTimeString('no-NO', { hour: '2-digit', minute: '2-digit' });
+  const siste = new Date(bilder[bilder.length - 1].tidspunkt).toLocaleTimeString('no-NO', { hour: '2-digit', minute: '2-digit' });
+  svg.setAttribute('aria-label', `Antall per time siste døgn, fra ${forste} til ${siste}`);
+
+  bilder.forEach((b, i) => {
+    const h = Math.max(1, (b.antall / maks) * HOYDE);
+    const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+    rect.setAttribute('x', String(i * barBredde));
+    rect.setAttribute('y', String(HOYDE - h));
+    rect.setAttribute('width', String(Math.max(0, barBredde - 1)));
+    rect.setAttribute('height', String(h));
+    rect.setAttribute('fill', oppf.farge);
+
+    const tittel = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+    const tid = new Date(b.tidspunkt).toLocaleTimeString('no-NO', { hour: '2-digit', minute: '2-digit' });
+    tittel.textContent = `${tid}: ${b.antall}`;
+    rect.appendChild(tittel);
+
+    svg.appendChild(rect);
+  });
+
+  mal.replaceChildren(svg);
 }
 
 // ---------------------------------------------------------------------------

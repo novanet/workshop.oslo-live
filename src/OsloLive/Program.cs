@@ -1,4 +1,5 @@
 using System.Globalization;
+using OsloLive.Historikk;
 using OsloLive.Kart;
 using OsloLive.Lag;
 
@@ -32,6 +33,11 @@ builder.Services.AddMemoryCache();
 builder.Services.AddSingleton<ILag, LuftkvalitetLag>();
 builder.Services.AddSingleton<ILag, FlyLag>();
 
+// Historikk: ett bilde av hvert lag i timen, lagret som filer. Se Historikk/Bildejobb.cs.
+builder.Services.AddSingleton(tjenester =>
+    new Bildelager(Bildelager.FinnMappe(tjenester.GetRequiredService<IConfiguration>()["Historikk:Mappe"])));
+builder.Services.AddHostedService<Bildejobb>();
+
 var app = builder.Build();
 
 app.UseDefaultFiles();
@@ -60,6 +66,18 @@ app.MapGet("/api/lag/{id}", async (string id, IEnumerable<ILag> lag, Cancellatio
         app.Logger.LogError(ex, "Laget {Id} feilet", id);
         return Results.Json(new { feil = ex.Message }, statusCode: 502);
     }
+});
+
+// Antall punkter per time i ett lag, siste døgn, eldste først.
+app.MapGet("/api/lag/{id}/historikk", (string id, IEnumerable<ILag> lag, Bildelager lager) =>
+{
+    var valgt = lag.FirstOrDefault(l => string.Equals(l.Id, id, StringComparison.OrdinalIgnoreCase));
+    if (valgt is null)
+    {
+        return Results.NotFound(new { feil = $"Fant ingen lag med id «{id}»." });
+    }
+
+    return Results.Ok(lager.Les(valgt.Id, DateTimeOffset.UtcNow));
 });
 
 app.MapGet("/api/helse", () => new { status = "ok", tid = DateTimeOffset.Now });
