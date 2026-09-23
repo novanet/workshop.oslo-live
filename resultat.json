@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:38:43",
+  "oppdatert": "2026-09-23T10:39:09",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -394,7 +394,7 @@
       "issue": 6,
       "navn": "Delt mobilitet",
       "startet": "2026-09-23T08:36:06.1007878+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-wilma",
@@ -402,7 +402,7 @@
       "issue": 32,
       "navn": "Strømpris",
       "startet": "2026-09-23T08:37:51.7658572+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-jon",
@@ -598,6 +598,12 @@
       "navn": "Nytt lag: museer og samlinger",
       "github": "jthagesk",
       "oppdatert": "2026-09-23T08:38:37Z"
+    },
+    {
+      "issue": 30,
+      "navn": "Vis vannstanden i fjorden",
+      "github": "nilsgs",
+      "oppdatert": "2026-09-23T08:38:52Z"
     },
     {
       "issue": 32,
