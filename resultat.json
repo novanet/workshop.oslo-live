@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T13:56:55",
+  "oppdatert": "2026-09-23T13:57:34",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -554,7 +554,7 @@
       "issue": 132,
       "navn": "Ekte sollys på 3D-byggene",
       "startet": "2026-09-23T11:50:10.530436+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-leif",
@@ -562,7 +562,7 @@
       "issue": 141,
       "navn": "Tydelige kartsymboler: båter som ser ut som båter",
       "startet": "2026-09-23T11:52:28.401471+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-knive",
@@ -570,7 +570,7 @@
       "issue": 28,
       "navn": "Tog",
       "startet": "2026-09-23T11:54:26.4054208+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-frode",
@@ -579,6 +579,14 @@
       "navn": "Simulering: tsunami i Oslofjorden",
       "startet": "2026-09-23T11:55:48.9774309+00:00",
       "minutter": 1
+    },
+    {
+      "agent": "mini-jon",
+      "github": "yonzo",
+      "issue": 44,
+      "navn": "Sammenlign tid",
+      "startet": "2026-09-23T11:57:22.3942011+00:00",
+      "minutter": 0
     }
   ],
   "main": {
@@ -737,7 +745,7 @@
       "issue": 44,
       "navn": "Sammenlign to tidspunkt",
       "github": "yonzo",
-      "oppdatert": "2026-09-23T11:56:34Z"
+      "oppdatert": "2026-09-23T11:57:23Z"
     },
     {
       "issue": 46,
@@ -947,13 +955,13 @@
       "issue": 132,
       "navn": "Ekte sollys på 3D-byggene",
       "github": "audmaha",
-      "oppdatert": "2026-09-23T11:56:22Z"
+      "oppdatert": "2026-09-23T11:56:58Z"
     },
     {
       "issue": 132,
       "navn": "Ekte sollys på 3D-byggene",
       "github": "nilsgs",
-      "oppdatert": "2026-09-23T11:56:22Z"
+      "oppdatert": "2026-09-23T11:56:58Z"
     },
     {
       "issue": 141,
@@ -969,7 +977,7 @@
       "github": "randsu",
       "agent": "mini-richard",
       "opprettet": "2026-09-23T08:58:22Z",
-      "oppdatert": "2026-09-23T11:55:59Z",
+      "oppdatert": "2026-09-23T11:57:18Z",
       "utkast": false,
       "issues": [
         25
