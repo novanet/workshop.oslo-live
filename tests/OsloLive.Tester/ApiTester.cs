@@ -119,6 +119,69 @@ public class ApiTester(VertUtenBakgrunnssjekk vert) : IClassFixture<VertUtenBakg
     }
 
     [Fact]
+    public async Task Lagoversikten_har_spisesteder()
+    {
+        var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
+
+        var spisesteder = lag!.Single(l => l.Id == "spisesteder");
+        Assert.Equal("Spisesteder", spisesteder.Navn);
+        Assert.False(string.IsNullOrWhiteSpace(spisesteder.Beskrivelse));
+        Assert.False(string.IsNullOrWhiteSpace(spisesteder.Ikon));
+    }
+
+    [Fact]
+    public async Task Spisestederlaget_gir_featurecollection_uten_nett()
+    {
+        const string svar = """
+            {
+                "source": "poi_norge",
+                "operation": "search_poi",
+                "parameters": {},
+                "data": {
+                    "matched": 1,
+                    "offset": 0,
+                    "count": 1,
+                    "items": [
+                        {
+                            "id": 5315431323,
+                            "lat": 59.911,
+                            "lon": 10.745,
+                            "type": "amenity",
+                            "category": "restaurant",
+                            "name": "Olivia",
+                            "distance_km": 0.1
+                        }
+                    ],
+                    "limit": 100,
+                    "returned": 1,
+                    "has_more_results": false,
+                    "truncated": false
+                }
+            }
+            """;
+
+        using var vertUtenNett = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient<Allemannsdata>().ConfigurePrimaryHttpMessageHandler(() => new FastSvarHandler(svar))));
+        var klient = vertUtenNett.CreateClient();
+
+        Allemannsdata.TømMellomlager();
+        try
+        {
+            var respons = await klient.GetAsync("/api/lag/spisesteder");
+            var lag = await respons.Content.ReadFromJsonAsync<Kartlag>();
+
+            Assert.Equal(HttpStatusCode.OK, respons.StatusCode);
+            Assert.Equal("FeatureCollection", lag!.Type);
+            Assert.NotEmpty(lag.Features);
+            Assert.Equal([10.745, 59.911], lag.Features[0].Geometry.Coordinates);
+        }
+        finally
+        {
+            Allemannsdata.TømMellomlager();
+        }
+    }
+
+    [Fact]
     public async Task Mobilitetslaget_gir_featurecollection_uten_nett()
     {
         const string svar = """
