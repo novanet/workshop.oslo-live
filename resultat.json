@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T15:29:31",
+  "oppdatert": "2026-09-23T15:30:13",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -701,7 +701,7 @@
       "issue": 186,
       "navn": "Nytt lag: bysykkelstasjoner som fyllingsringer",
       "startet": "2026-09-23T13:22:58.2011074+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-wilma",
@@ -725,7 +725,7 @@
       "issue": 55,
       "navn": "Ytelse",
       "startet": "2026-09-23T13:28:44.0134563+00:00",
-      "minutter": 0
+      "minutter": 1
     }
   ],
   "main": {
@@ -1234,6 +1234,18 @@
   ],
   "aapne": [
     {
+      "pr": 238,
+      "tittel": "#119: Mørkt kart når sola går ned i Oslo",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T12:48:17Z",
+      "oppdatert": "2026-09-23T13:29:52Z",
+      "utkast": false,
+      "issues": [
+        119
+      ]
+    },
+    {
       "pr": 67,
       "tittel": "Hent lagene parallelt",
       "github": "FrodeBl",
@@ -1519,18 +1531,6 @@
       "utkast": false,
       "issues": [
         55
-      ]
-    },
-    {
-      "pr": 238,
-      "tittel": "#119: Mørkt kart når sola går ned i Oslo",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T12:48:17Z",
-      "oppdatert": "2026-09-23T12:52:29Z",
-      "utkast": false,
-      "issues": [
-        119
       ]
     },
     {
