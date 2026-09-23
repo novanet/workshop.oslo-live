@@ -156,4 +156,23 @@ public class FolketellingLagTester
         Assert.NotNull(punkt);
         Assert.Equal("Point", punkt!.Geometry.Type);
     }
+
+    // Hele svaret fra arkivverket/search_census_properties?query=Kristiania&limit=50, fanget
+    // 23. september 2026 og lagret uendret i Data/folketelling-kristiania.json. Testen kjører
+    // lagets egen oversettelse over alle radene, uten nettverk, og viser at søket gir punkter
+    // innenfor kartutsnittet.
+    [Fact]
+    public void Ekte_svar_fra_kilden_gir_minst_ett_punkt_i_utsnittet()
+    {
+        var svar = JsonDocument.Parse(File.ReadAllText(Path.Combine("Data", "folketelling-kristiania.json"))).RootElement;
+        var data = svar.GetProperty("data");
+        var rader = data.ValueKind == JsonValueKind.Array
+            ? data.EnumerateArray()
+            : data.EnumerateObject().First(e => e.Value.ValueKind == JsonValueKind.Array).Value.EnumerateArray();
+
+        var lag = Geo.Samle(rader.Select(FolketellingLag.TilPunkt));
+
+        Assert.True(lag.Features.Count >= 1, $"forventet punkter i utsnittet, fikk {lag.Features.Count}");
+        Assert.Equal(44, lag.Features.Count);
+    }
 }
