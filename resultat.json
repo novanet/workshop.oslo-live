@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:31:28",
+  "oppdatert": "2026-09-23T11:31:56",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -384,13 +384,13 @@
       "feil": [],
       "lag": [],
       "levert": [],
-      "dollar": 7.229,
-      "tokens": 15094376,
-      "sekunder": 2064,
+      "dollar": 9.086,
+      "tokens": 18645314,
+      "sekunder": 2589,
       "pr": 1,
       "utkast": 0,
       "merget": 0,
-      "kjoeringer": 5,
+      "kjoeringer": 6,
       "utenPr": 2,
       "bygg": [],
       "estimert": false,
@@ -399,17 +399,17 @@
     {
       "navn": "mini-kirsten",
       "github": "jthagesk",
-      "poeng": 0,
+      "poeng": -1,
       "feil": [],
       "lag": [],
       "levert": [],
-      "dollar": 8.878,
-      "tokens": 19324602,
-      "sekunder": 2955,
+      "dollar": 10.315,
+      "tokens": 22223515,
+      "sekunder": 3473,
       "pr": 4,
       "utkast": 0,
       "merget": 0,
-      "kjoeringer": 6,
+      "kjoeringer": 7,
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
@@ -436,22 +436,6 @@
     }
   ],
   "kjoerer": [
-    {
-      "agent": "Andy3000",
-      "github": "coffeelyfe",
-      "issue": 11,
-      "navn": "Kollektiv",
-      "startet": "2026-09-23T09:22:13.4670027+00:00",
-      "minutter": 9
-    },
-    {
-      "agent": "mini-kirsten",
-      "github": "jthagesk",
-      "issue": 45,
-      "navn": "Varsler",
-      "startet": "2026-09-23T09:22:36.7039942+00:00",
-      "minutter": 8
-    },
     {
       "agent": "mini-sindre",
       "github": "sin-rha",
@@ -598,7 +582,7 @@
       "issue": 11,
       "navn": "Nytt lag: kollektivtrafikk som beveger seg",
       "github": "coffeelyfe",
-      "oppdatert": "2026-09-23T09:31:12Z"
+      "oppdatert": "2026-09-23T09:31:31Z"
     },
     {
       "issue": 13,
@@ -808,7 +792,7 @@
       "issue": 45,
       "navn": "Varsle når noe skjer",
       "github": "jthagesk",
-      "oppdatert": "2026-09-23T09:22:37Z"
+      "oppdatert": "2026-09-23T09:31:39Z"
     },
     {
       "issue": 46,
@@ -902,6 +886,30 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 84,
+      "tittel": "Varsle når noe skjer",
+      "github": "jthagesk",
+      "agent": "mini-kirsten",
+      "opprettet": "2026-09-23T08:34:32Z",
+      "oppdatert": "2026-09-23T09:31:38Z",
+      "utkast": false,
+      "issues": [
+        45
+      ]
+    },
+    {
+      "pr": 65,
+      "tittel": "#11: Nytt lag: kollektivtrafikk som beveger seg",
+      "github": "coffeelyfe",
+      "agent": "Andy3000",
+      "opprettet": "2026-09-23T07:50:13Z",
+      "oppdatert": "2026-09-23T09:31:29Z",
+      "utkast": false,
+      "issues": [
+        11
+      ]
+    },
     {
       "pr": 101,
       "tittel": "#34: Skru tiden tilbake med en tidslinje",
@@ -1035,18 +1043,6 @@
       ]
     },
     {
-      "pr": 65,
-      "tittel": "#11: Nytt lag: kollektivtrafikk som beveger seg",
-      "github": "coffeelyfe",
-      "agent": "Andy3000",
-      "opprettet": "2026-09-23T07:50:13Z",
-      "oppdatert": "2026-09-23T09:16:17Z",
-      "utkast": false,
-      "issues": [
-        11
-      ]
-    },
-    {
       "pr": 73,
       "tittel": "Vær grei mot kildene (#54)",
       "github": "Puiu",
@@ -1140,18 +1136,6 @@
       "utkast": false,
       "issues": [
         47
-      ]
-    },
-    {
-      "pr": 84,
-      "tittel": "Varsle når noe skjer",
-      "github": "jthagesk",
-      "agent": "mini-kirsten",
-      "opprettet": "2026-09-23T08:34:32Z",
-      "oppdatert": "2026-09-23T08:55:09Z",
-      "utkast": false,
-      "issues": [
-        45
       ]
     },
     {
