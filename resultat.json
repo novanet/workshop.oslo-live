@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:59:41",
+  "oppdatert": "2026-09-23T11:00:33",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -34,6 +34,43 @@
       "plass": 1
     },
     {
+      "navn": "mini-richard",
+      "github": "randsu",
+      "poeng": 9,
+      "feil": [
+        {
+          "issue": 3,
+          "navn": "Mellomlageret",
+          "poeng": 1
+        }
+      ],
+      "lag": [
+        {
+          "issue": 9,
+          "navn": "Badetemperatur",
+          "poeng": 1
+        }
+      ],
+      "levert": [
+        {
+          "issue": 56,
+          "navn": "Flytrafikk",
+          "poeng": 8
+        }
+      ],
+      "dollar": 16.757,
+      "tokens": 32622114,
+      "sekunder": 5772,
+      "pr": 10,
+      "utkast": 0,
+      "merget": 4,
+      "kjoeringer": 14,
+      "utenPr": 4,
+      "bygg": [],
+      "estimert": false,
+      "plass": 2
+    },
+    {
       "navn": "mini-astrid",
       "github": "theakbe",
       "poeng": 8,
@@ -59,37 +96,6 @@
       "merget": 2,
       "kjoeringer": 3,
       "utenPr": 0,
-      "bygg": [],
-      "estimert": false,
-      "plass": 2
-    },
-    {
-      "navn": "mini-richard",
-      "github": "randsu",
-      "poeng": 8,
-      "feil": [
-        {
-          "issue": 3,
-          "navn": "Mellomlageret",
-          "poeng": 1
-        }
-      ],
-      "lag": [],
-      "levert": [
-        {
-          "issue": 56,
-          "navn": "Flytrafikk",
-          "poeng": 8
-        }
-      ],
-      "dollar": 16.757,
-      "tokens": 32622114,
-      "sekunder": 5772,
-      "pr": 10,
-      "utkast": 0,
-      "merget": 3,
-      "kjoeringer": 14,
-      "utenPr": 4,
       "bygg": [],
       "estimert": false,
       "plass": 3
@@ -126,31 +132,6 @@
       "plass": 4
     },
     {
-      "navn": "mini-knive",
-      "github": "Buggz",
-      "poeng": 3,
-      "feil": [],
-      "lag": [],
-      "levert": [
-        {
-          "issue": 53,
-          "navn": "Dyp helsesjekk",
-          "poeng": 3
-        }
-      ],
-      "dollar": 3.947,
-      "tokens": 8497427,
-      "sekunder": 1398,
-      "pr": 2,
-      "utkast": 0,
-      "merget": 1,
-      "kjoeringer": 2,
-      "utenPr": 0,
-      "bygg": [],
-      "estimert": false,
-      "plass": 5
-    },
-    {
       "navn": "mini-jon",
       "github": "yonzo",
       "poeng": 3,
@@ -171,6 +152,31 @@
       "merget": 1,
       "kjoeringer": 4,
       "utenPr": 3,
+      "bygg": [],
+      "estimert": false,
+      "plass": 5
+    },
+    {
+      "navn": "mini-knive",
+      "github": "Buggz",
+      "poeng": 3,
+      "feil": [],
+      "lag": [],
+      "levert": [
+        {
+          "issue": 53,
+          "navn": "Dyp helsesjekk",
+          "poeng": 3
+        }
+      ],
+      "dollar": 5.521,
+      "tokens": 11619713,
+      "sekunder": 2029,
+      "pr": 3,
+      "utkast": 0,
+      "merget": 1,
+      "kjoeringer": 3,
+      "utenPr": 0,
       "bygg": [],
       "estimert": false,
       "plass": 6
@@ -385,15 +391,7 @@
       "issue": 12,
       "navn": "Holdeplasser",
       "startet": "2026-09-23T08:48:05.3217109+00:00",
-      "minutter": 11
-    },
-    {
-      "agent": "mini-knive",
-      "github": "Buggz",
-      "issue": 40,
-      "navn": "Mobil",
-      "startet": "2026-09-23T08:48:55.3857059+00:00",
-      "minutter": 10
+      "minutter": 12
     },
     {
       "agent": "mini-leif",
@@ -401,7 +399,7 @@
       "issue": 14,
       "navn": "Idrettsanlegg",
       "startet": "2026-09-23T08:53:58.2896433+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-aud",
@@ -409,7 +407,7 @@
       "issue": 39,
       "navn": "Tastatursnarveier",
       "startet": "2026-09-23T08:54:03.5879186+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-kirsten",
@@ -427,14 +425,15 @@
     "kjoeringer": 25
   },
   "produkt": {
-    "testerBestatt": 12,
-    "testerFeilet": 14,
+    "testerBestatt": 13,
+    "testerFeilet": 13,
     "issuerLost": [
       1,
       2,
       3,
       4,
       5,
+      9,
       17
     ],
     "antallIssuer": 57,
@@ -673,7 +672,7 @@
       "issue": 40,
       "navn": "Kartet må virke på mobil",
       "github": "Buggz",
-      "oppdatert": "2026-09-23T08:48:56Z"
+      "oppdatert": "2026-09-23T08:59:45Z"
     },
     {
       "issue": 41,
@@ -798,6 +797,18 @@
   ],
   "aapne": [
     {
+      "pr": 106,
+      "tittel": "Kartet må virke på mobil (#40)",
+      "github": "Buggz",
+      "agent": "mini-knive",
+      "opprettet": "2026-09-23T08:59:44Z",
+      "oppdatert": "2026-09-23T08:59:44Z",
+      "utkast": false,
+      "issues": [
+        40
+      ]
+    },
+    {
       "pr": 73,
       "tittel": "Vær grei mot kildene (#54)",
       "github": "Puiu",
@@ -843,18 +854,6 @@
       "utkast": false,
       "issues": [
         25
-      ]
-    },
-    {
-      "pr": 85,
-      "tittel": "#9: Nytt lag: badetemperaturer",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:35:02Z",
-      "oppdatert": "2026-09-23T08:58:09Z",
-      "utkast": false,
-      "issues": [
-        9
       ]
     },
     {
