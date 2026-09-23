@@ -142,6 +142,17 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
     }
 
     [Fact]
+    public async Task Lagoversikten_har_vannmaalere()
+    {
+        var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
+
+        var vannmaalere = lag!.Single(l => l.Id == "vannmaalere");
+        Assert.Equal("Vannmålere", vannmaalere.Navn);
+        Assert.False(string.IsNullOrWhiteSpace(vannmaalere.Beskrivelse));
+        Assert.False(string.IsNullOrWhiteSpace(vannmaalere.Ikon));
+    }
+
+    [Fact]
     public async Task Spisestederlaget_gir_featurecollection_uten_nett()
     {
         const string svar = """
@@ -298,6 +309,80 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
             {
                 Content = new StringContent(svar, Encoding.UTF8, "application/json"),
             });
+    }
+
+    [Fact]
+    public async Task Vannmaalerlaget_gir_featurecollection_uten_nett()
+    {
+        const string svar = """
+            {
+                "source": "nve",
+                "operation": "find_hydro_stations",
+                "parameters": {},
+                "data": {
+                    "count": 1,
+                    "returned": 1,
+                    "stations": [
+                        {
+                            "station_id": "6.38.0",
+                            "station_name": "Akerselva v/Elvebakken",
+                            "river": "Nordmarkvassdraget",
+                            "municipality": "Oslo",
+                            "county": "Oslo",
+                            "latitude": 59.91945,
+                            "longitude": 10.75348,
+                            "masl": 4,
+                            "latest_observation_at": "2026-09-23T11:00:00Z",
+                            "series": [
+                                {"parameter":1000,"name":"Vannstand","unit":"m","from":null,"to":null,"latest_data_at":"2026-09-23T11:00:00Z","resolutions":[0,60,1440]}
+                            ],
+                            "distance_km": 1.1
+                        }
+                    ],
+                    "limit": 100,
+                    "offset": 0,
+                    "has_more_results": false,
+                    "truncated": false
+                }
+            }
+            """;
+
+        var handler = new OpptakendeSvarHandler(svar);
+        using var vertUtenNett = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient<Allemannsdata>().ConfigurePrimaryHttpMessageHandler(() => handler)));
+        var klient = vertUtenNett.CreateClient();
+
+        Allemannsdata.TømMellomlager();
+        try
+        {
+            var respons = await klient.GetAsync("/api/lag/vannmaalere");
+            var lag = await respons.Content.ReadFromJsonAsync<Kartlag>();
+
+            Assert.Equal(HttpStatusCode.OK, respons.StatusCode);
+            Assert.Equal("FeatureCollection", lag!.Type);
+            Assert.NotEmpty(lag.Features);
+            Assert.Equal([10.75348, 59.91945], lag.Features[0].Geometry.Coordinates);
+            Assert.Contains("nve/find_hydro_stations", handler.SisteAdresse!.ToString());
+            Assert.Contains("has_recent_data=true", handler.SisteAdresse!.ToString());
+        }
+        finally
+        {
+            Allemannsdata.TømMellomlager();
+        }
+    }
+
+    private sealed class OpptakendeSvarHandler(string svar) : HttpMessageHandler
+    {
+        public Uri? SisteAdresse { get; private set; }
+
+        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage forespørsel, CancellationToken stopp)
+        {
+            SisteAdresse = forespørsel.RequestUri;
+            return Task.FromResult(new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(svar, Encoding.UTF8, "application/json"),
+            });
+        }
     }
 
     [Fact]
