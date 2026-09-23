@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:33:35",
+  "oppdatert": "2026-09-23T11:34:02",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -459,6 +459,14 @@
       "navn": "Ytelse",
       "startet": "2026-09-23T09:26:04.1878556+00:00",
       "minutter": 7
+    },
+    {
+      "agent": "mini-kirsten",
+      "github": "jthagesk",
+      "issue": 29,
+      "navn": "Museer",
+      "startet": "2026-09-23T09:33:36.7988647+00:00",
+      "minutter": 0
     }
   ],
   "main": {
@@ -519,13 +527,13 @@
       "issue": 3,
       "navn": "Kartet oppdaterer seg ikke, dataene står stille",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T08:35:41Z"
+      "oppdatert": "2026-09-23T09:33:50Z"
     },
     {
       "issue": 3,
       "navn": "Kartet oppdaterer seg ikke, dataene står stille",
       "github": "randsu",
-      "oppdatert": "2026-09-23T08:35:41Z"
+      "oppdatert": "2026-09-23T09:33:50Z"
     },
     {
       "issue": 4,
@@ -705,7 +713,7 @@
       "issue": 29,
       "navn": "Nytt lag: museer og samlinger",
       "github": "jthagesk",
-      "oppdatert": "2026-09-23T09:33:05Z"
+      "oppdatert": "2026-09-23T09:33:37Z"
     },
     {
       "issue": 30,
