@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T15:26:01",
+  "oppdatert": "2026-09-23T15:26:44",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -701,7 +701,7 @@
       "issue": 193,
       "navn": "Nytt lag: hjertestartere",
       "startet": "2026-09-23T13:20:02.3717642+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-frode",
@@ -717,7 +717,7 @@
       "issue": 184,
       "navn": "Neste avganger når du klikker på en holdeplass",
       "startet": "2026-09-23T13:24:18.5982608+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-wilma",
@@ -725,7 +725,7 @@
       "issue": 183,
       "navn": "Regner det i Oslo sentrum de neste to timene?",
       "startet": "2026-09-23T13:24:20.6110309+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-frode",
@@ -733,7 +733,7 @@
       "issue": 48,
       "navn": "Parallell henting",
       "startet": "2026-09-23T13:24:27.3250644+00:00",
-      "minutter": 1
+      "minutter": 2
     }
   ],
   "main": {
@@ -1242,6 +1242,18 @@
   ],
   "aapne": [
     {
+      "pr": 97,
+      "tittel": "Søk på tvers av alle lag (#47)",
+      "github": "Puiu",
+      "agent": "mini-taco",
+      "opprettet": "2026-09-23T08:46:56Z",
+      "oppdatert": "2026-09-23T13:26:15Z",
+      "utkast": false,
+      "issues": [
+        47
+      ]
+    },
+    {
       "pr": 83,
       "tittel": "Nytt lag: museer og samlinger",
       "github": "jthagesk",
@@ -1299,18 +1311,6 @@
       "utkast": false,
       "issues": [
         120
-      ]
-    },
-    {
-      "pr": 97,
-      "tittel": "Søk på tvers av alle lag (#47)",
-      "github": "Puiu",
-      "agent": "mini-taco",
-      "opprettet": "2026-09-23T08:46:56Z",
-      "oppdatert": "2026-09-23T13:16:16Z",
-      "utkast": false,
-      "issues": [
-        47
       ]
     },
     {
