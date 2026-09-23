@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T15:14:39",
+  "oppdatert": "2026-09-23T15:15:21",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -200,7 +200,7 @@
     {
       "navn": "mini-frode",
       "github": "FrodeBl",
-      "poeng": 9,
+      "poeng": 8,
       "feil": [],
       "lag": [
         {
@@ -221,13 +221,13 @@
           "poeng": 2
         }
       ],
-      "dollar": 19.096,
-      "tokens": 32025918,
-      "sekunder": 6272,
+      "dollar": 20.645,
+      "tokens": 33467140,
+      "sekunder": 6691,
       "pr": 5,
       "utkast": 0,
       "merget": 3,
-      "kjoeringer": 26,
+      "kjoeringer": 27,
       "utenPr": 19,
       "bygg": [],
       "estimert": false,
@@ -685,15 +685,7 @@
       "issue": 11,
       "navn": "Kollektiv",
       "startet": "2026-09-23T13:05:41.9082982+00:00",
-      "minutter": 8
-    },
-    {
-      "agent": "mini-frode",
-      "github": "FrodeBl",
-      "issue": 50,
-      "navn": "Metrikker",
-      "startet": "2026-09-23T13:07:05.7797026+00:00",
-      "minutter": 7
+      "minutter": 9
     },
     {
       "agent": "mini-gir",
@@ -701,7 +693,7 @@
       "issue": 18,
       "navn": "Kulturminner",
       "startet": "2026-09-23T13:08:06.7329467+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-jon",
@@ -717,7 +709,7 @@
       "issue": 186,
       "navn": "Nytt lag: bysykkelstasjoner som fyllingsringer",
       "startet": "2026-09-23T13:09:04.334225+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-frode",
@@ -741,7 +733,7 @@
       "issue": 206,
       "navn": "Popupene viser rådata: ISO-tider, «ikon: 😊» og tall uten enhet",
       "startet": "2026-09-23T13:13:02.1051821+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-johan",
@@ -749,7 +741,7 @@
       "issue": 115,
       "navn": "Nytt lag: parker og torg",
       "startet": "2026-09-23T13:13:50.233699+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-johan",
@@ -757,7 +749,7 @@
       "issue": 27,
       "navn": "Verneområder",
       "startet": "2026-09-23T13:13:51.5701165+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-leif",
@@ -765,7 +757,7 @@
       "issue": 187,
       "navn": "Skipets spor det siste døgnet",
       "startet": "2026-09-23T13:13:58.9663843+00:00",
-      "minutter": 0
+      "minutter": 1
     }
   ],
   "main": {
@@ -921,7 +913,7 @@
       "issue": 50,
       "navn": "Mål hva som skjer",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T13:07:06Z"
+      "oppdatert": "2026-09-23T13:14:37Z"
     },
     {
       "issue": 51,
@@ -1274,6 +1266,30 @@
   ],
   "aapne": [
     {
+      "pr": 140,
+      "tittel": "Vis endringen per lag i lagvelgeren",
+      "github": "larsajakobsen",
+      "agent": "mini-wilma",
+      "opprettet": "2026-09-23T11:40:24Z",
+      "oppdatert": "2026-09-23T13:14:58Z",
+      "utkast": false,
+      "issues": [
+        120
+      ]
+    },
+    {
+      "pr": 71,
+      "tittel": "Mål hva som skjer",
+      "github": "FrodeBl",
+      "agent": "mini-frode",
+      "opprettet": "2026-09-23T08:12:09Z",
+      "oppdatert": "2026-09-23T13:14:35Z",
+      "utkast": false,
+      "issues": [
+        50
+      ]
+    },
+    {
       "pr": 251,
       "tittel": "Nytt lag: veiarbeid og stengte veier",
       "github": "pr0nin",
@@ -1331,18 +1347,6 @@
       "utkast": false,
       "issues": [
         48
-      ]
-    },
-    {
-      "pr": 71,
-      "tittel": "Mål hva som skjer",
-      "github": "FrodeBl",
-      "agent": "mini-frode",
-      "opprettet": "2026-09-23T08:12:09Z",
-      "oppdatert": "2026-09-23T13:11:34Z",
-      "utkast": false,
-      "issues": [
-        50
       ]
     },
     {
@@ -1619,18 +1623,6 @@
       "utkast": false,
       "issues": [
         197
-      ]
-    },
-    {
-      "pr": 140,
-      "tittel": "Vis endringen per lag i lagvelgeren",
-      "github": "larsajakobsen",
-      "agent": "mini-wilma",
-      "opprettet": "2026-09-23T11:40:24Z",
-      "oppdatert": "2026-09-23T11:51:15Z",
-      "utkast": false,
-      "issues": [
-        120
       ]
     },
     {
