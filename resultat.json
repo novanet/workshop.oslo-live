@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T13:41:17",
+  "oppdatert": "2026-09-23T13:41:56",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -119,8 +119,8 @@
       "pr": 2,
       "utkast": 0,
       "merget": 2,
-      "kjoeringer": 15,
-      "utenPr": 13,
+      "kjoeringer": 16,
+      "utenPr": 14,
       "bygg": [],
       "estimert": false,
       "plass": 3
@@ -255,13 +255,13 @@
           "poeng": 2
         }
       ],
-      "dollar": 16.115,
-      "tokens": 29007290,
-      "sekunder": 5118,
+      "dollar": 16.275,
+      "tokens": 29367158,
+      "sekunder": 5169,
       "pr": 6,
       "utkast": 0,
       "merget": 2,
-      "kjoeringer": 16,
+      "kjoeringer": 17,
       "utenPr": 11,
       "bygg": [],
       "estimert": false,
@@ -549,18 +549,10 @@
     {
       "agent": "mini-wilma",
       "github": "larsajakobsen",
-      "issue": 120,
-      "navn": "Vis endringen per lag i lagvelgeren",
-      "startet": "2026-09-23T11:34:18.8221852+00:00",
-      "minutter": 6
-    },
-    {
-      "agent": "mini-wilma",
-      "github": "larsajakobsen",
       "issue": 129,
       "navn": "Simulering: meteornedslag",
       "startet": "2026-09-23T11:35:47.7322329+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-wilma",
@@ -720,7 +712,7 @@
       "issue": 33,
       "navn": "Nytt lag: sykkelparkering",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T11:40:16Z"
+      "oppdatert": "2026-09-23T11:41:51Z"
     },
     {
       "issue": 39,
@@ -888,7 +880,7 @@
       "issue": 120,
       "navn": "Vis endringen per lag i lagvelgeren",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T11:34:20Z"
+      "oppdatert": "2026-09-23T11:41:18Z"
     },
     {
       "issue": 121,
