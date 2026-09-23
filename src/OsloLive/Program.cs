@@ -75,7 +75,7 @@ app.MapGet("/api/lag/{id}", async (string id, string? tid, IEnumerable<ILag> lag
 
     if (tid is not null)
     {
-        if (!DateTimeOffset.TryParse(tid, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal, out var tidspunkt))
+        if (!Bildelager.TolkTid(tid, out var tidspunkt))
         {
             return Results.BadRequest(new { feil = $"«{tid}» er ikke et gyldig tidspunkt. Bruk ISO 8601, for eksempel 2026-09-18T08:00:00Z." });
         }
@@ -91,6 +91,43 @@ app.MapGet("/api/lag/{id}", async (string id, string? tid, IEnumerable<ILag> lag
     {
         // Et lag som feiler skal ikke ta ned kartet.
         app.Logger.LogError(ex, "Laget {Id} feilet", id);
+        return Results.Json(new { feil = ex.Message }, statusCode: 502);
+    }
+});
+
+// Antall punkter per bydel for ett lag. Tilstandsløs; bydelssentrene hentes
+// via Allemannsdata (mellomlagret 30 s der, som resten av kallene).
+// Med ?tid= telles bildet lagret nærmest det tidspunktet, som for /api/lag/{id}, slik at tellingen følger tidslinjen.
+app.MapGet("/api/lag/{id}/bydeler", async (string id, string? tid, IEnumerable<ILag> lag, Allemannsdata data, Bildelager bilder, CancellationToken stopp) =>
+{
+    var valgt = lag.FirstOrDefault(l => string.Equals(l.Id, id, StringComparison.OrdinalIgnoreCase));
+    if (valgt is null)
+    {
+        return Results.NotFound(new { feil = $"Fant ingen lag med id «{id}»." });
+    }
+
+    DateTimeOffset? tidspunkt = null;
+    if (tid is not null)
+    {
+        if (!Bildelager.TolkTid(tid, out var t))
+        {
+            return Results.BadRequest(new { feil = $"«{tid}» er ikke et gyldig tidspunkt. Bruk ISO 8601, for eksempel 2026-09-18T08:00:00Z." });
+        }
+
+        tidspunkt = t;
+    }
+
+    try
+    {
+        var punkter = tidspunkt is null
+            ? await valgt.Hent(stopp)
+            : await bilder.HentNærmest(valgt.Id, tidspunkt.Value, stopp) ?? new Kartlag("FeatureCollection", []);
+        var sentre = await Bydeler.Hent(data, stopp);
+        return Results.Ok(Bydeler.Tell(punkter, sentre));
+    }
+    catch (Exception ex)
+    {
+        app.Logger.LogError(ex, "Bydelstelling for laget {Id} feilet", id);
         return Results.Json(new { feil = ex.Message }, statusCode: 502);
     }
 });

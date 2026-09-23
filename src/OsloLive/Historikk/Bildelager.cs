@@ -21,6 +21,10 @@ public sealed class Bildelager(string mappe)
 
     private const string Tidsformat = "yyyyMMdd'T'HHmmss'Z'";
 
+    /// <summary>Tolker <c>?tid=</c> fra en spørring: ISO 8601, alltid regnet som UTC.</summary>
+    public static bool TolkTid(string tid, out DateTimeOffset tidspunkt) =>
+        DateTimeOffset.TryParse(tid, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal, out tidspunkt);
+
     private static string FilNavn(DateTimeOffset tidspunkt) =>
         tidspunkt.UtcDateTime.ToString(Tidsformat, CultureInfo.InvariantCulture) + ".json";
 

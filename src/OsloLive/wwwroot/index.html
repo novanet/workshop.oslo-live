@@ -159,6 +159,14 @@
   .tidslinje { position:absolute; bottom:24px; left:50%; transform:translateX(-50%); z-index:10; width:min(520px, calc(100% - 220px)); display:flex; align-items:center; gap:10px; background:rgba(255,255,255,.95); border:1.5px solid var(--kant); border-radius:10px; padding:8px 12px; box-shadow:0 6px 20px rgba(0,0,0,.14); font-size:12px; }
   .tidslinje input { flex:1; accent-color:#111; }
   .tidslinje #tid-tekst { min-width:110px; text-align:right; font-variant-numeric:tabular-nums; font-weight:600; }
+  .bydeler { margin-top: 12px; padding-top: 12px; border-top: 1px solid #e5e7eb; }
+  .bydeler .topp { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .bydeler h2 { margin: 0; font-size: 16px; }
+  .bydeler select { font: inherit; font-size: 12px; border: 1.5px solid var(--kant); border-radius: 6px; padding: 3px 5px; max-width: 110px; }
+  .bydeler ol { list-style: none; margin: 0; padding: 0; }
+  .bydeler li { display: flex; justify-content: space-between; padding: 4px 2px; font-size: 13px; }
+  .bydeler li .antall { font-variant-numeric: tabular-nums; color: var(--dempet); }
+
   .panel.omrade { top: auto; left: 16px; bottom: 24px; width: 240px; }
   .omrade h2 { margin: 0 0 8px; font-size: 16px; }
   .omrade .rad { display: flex; justify-content: space-between; font-size: 13px; padding: 3px 2px; }
@@ -175,6 +183,10 @@
   </div>
   <p class="under">Levende data fra Allemannsdata</p>
   <div id="lagliste"><p class="tom">Laster lag …</p></div>
+  <div class="bydeler">
+    <div class="topp"><h2>Flest punkter per bydel</h2><select id="bydel-lag" aria-label="Velg lag"></select></div>
+    <ol id="bydel-liste"><li class="tom">Laster …</li></ol>
+  </div>
   <div class="bunn">
     <span id="oppdatert">–</span>
     <span id="sum">–</span>
@@ -547,6 +559,7 @@ document.getElementById('tid').addEventListener('input', (ev) => {
     valgtTid = d;
     tidGenerasjon++;
     lagene.forEach((_, id) => hent(id));
+    hentBydeler();
   }, 250);
 });
 
@@ -564,6 +577,7 @@ async function start() {
   }
 
   liste.innerHTML = '';
+  const bydelSelect = document.getElementById('bydel-lag');
   const varmevalg = lesVarmevalg();
   lag.forEach((l, nr) => {
     const farge = fargeFor(l.id, nr);
@@ -592,13 +606,63 @@ async function start() {
     });
     liste.appendChild(rad);
 
+    const valg = document.createElement('option');
+    valg.value = l.id;
+    valg.textContent = l.navn;
+    bydelSelect.appendChild(valg);
+
     hent(l.id);
   });
 
-  setInterval(() => { if (valgtTid) return; lagene.forEach((_, id) => hent(id)); }, 15000);
+  bydelSelect.addEventListener('change', hentBydeler);
+  hentBydeler();
+
+  // Står tidslinjen på et annet tidspunkt enn nå, hentes ingen levende data før den settes tilbake.
+  setInterval(() => { if (valgtTid) return; lagene.forEach((_, id) => hent(id)); hentBydeler(); }, 15000);
 
   // Først nå finnes lagene, så demoen har noe å vise og noe å sette tilbake etterpå.
   document.getElementById('demo').disabled = false;
+}
+
+/** Løpenummer for siste bydelskall. Et tregt svar fra et eldre kall skal ikke overskrive et nyere. */
+let sisteBydelkall = 0;
+
+/** Henter og viser de fem bydelene med flest punkter for laget som er valgt i bydel-panelet. */
+async function hentBydeler() {
+  const select = document.getElementById('bydel-lag');
+  const liste = document.getElementById('bydel-liste');
+  const id = select.value;
+  if (!id) return;
+  const kall = ++sisteBydelkall;
+
+  try {
+    // Samme ?tid= som lagene, slik at tellingen følger tidslinjen.
+    const svar = await fetch('/api/lag/' + encodeURIComponent(id) + '/bydeler' + (valgtTid ? '?tid=' + encodeURIComponent(valgtTid.toISOString()) : ''));
+    if (kall !== sisteBydelkall) return;   // et nyere kall er sendt (byttet lag eller neste oppdatering)
+    if (!svar.ok) throw new Error('HTTP ' + svar.status);
+    const tellinger = await svar.json();
+    if (kall !== sisteBydelkall) return;
+
+    tellinger.sort((a, b) => b.antall - a.antall);
+    liste.innerHTML = '';
+    if (!tellinger.length) {
+      liste.innerHTML = '<li class="tom">Ingen punkter i bydelene</li>';
+      return;
+    }
+    for (const t of tellinger.slice(0, 5)) {
+      const rad = document.createElement('li');
+      const navn = document.createElement('span');
+      navn.textContent = t.bydel;               // bydelsnavn kommer fra en ekstern kilde
+      const antall = document.createElement('span');
+      antall.className = 'antall';
+      antall.textContent = t.antall;
+      rad.append(navn, antall);
+      liste.appendChild(rad);
+    }
+  } catch (e) {
+    if (kall !== sisteBydelkall) return;
+    liste.innerHTML = '<li class="tom">Kunne ikke telle bydeler</li>';
+  }
 }
 
 // ---------------------------------------------------------------------------

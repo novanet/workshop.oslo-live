@@ -74,6 +74,30 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
     }
 
     [Fact]
+    public async Task Ukjent_lag_gir_404_ogsaa_for_bydeler()
+    {
+        var svar = await Klient.GetAsync("/api/lag/finnes-ikke/bydeler");
+
+        Assert.Equal(HttpStatusCode.NotFound, svar.StatusCode);
+    }
+
+    [Fact]
+    public async Task Svikt_i_kilden_gir_502_for_bydeler()
+    {
+        Allemannsdata.TømMellomlager();
+
+        using var vertMedSvikt = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient<Allemannsdata>().ConfigurePrimaryHttpMessageHandler(() => new SviktHandler())));
+        var klient = vertMedSvikt.CreateClient();
+
+        var bydeler = await klient.GetAsync("/api/lag/luftkvalitet/bydeler");
+        var helse = await klient.GetAsync("/api/helse");
+
+        Assert.Equal(HttpStatusCode.BadGateway, bydeler.StatusCode);
+        Assert.Equal(HttpStatusCode.OK, helse.StatusCode);
+    }
+
+    [Fact]
     public async Task Lagoversikten_har_badetemperaturlaget()
     {
         var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
@@ -208,6 +232,51 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
         var svar = await Klient.GetAsync("/api/lag/finnes-ikke?tid=2026-09-18T08:00:00Z");
 
         Assert.Equal(HttpStatusCode.NotFound, svar.StatusCode);
+    }
+
+    [Fact]
+    public async Task Ugyldig_tid_gir_400_ogsaa_for_bydeler()
+    {
+        var svar = await Klient.GetAsync("/api/lag/luftkvalitet/bydeler?tid=ikke-en-tid");
+
+        Assert.Equal(HttpStatusCode.BadRequest, svar.StatusCode);
+    }
+
+    [Fact]
+    public async Task Bydeler_med_tid_teller_bildet_som_er_lagret_naermest()
+    {
+        Allemannsdata.TømMellomlager();
+        var tid = DateTimeOffset.Parse("2026-09-18T08:00:00Z");
+        var punkt = Geo.Lag("strand-a", 59.9139, 10.7522, "Strand A", "Test");
+        var bilder = vert.Services.GetRequiredService<Bildelager>();
+        await bilder.Lagre("badetemperatur", Geo.Samle([punkt]), tid.AddMinutes(-30));
+
+        // Bydelssentrene kommer fra Allemannsdata; her ett senter nær punktet, uten nettverk.
+        var sentre = JsonSerializer.Serialize(new
+        {
+            source = "geonorge",
+            operation = "search_place_name",
+            parameters = new { },
+            data = new
+            {
+                places = new[]
+                {
+                    new { place_id = 1L, status = "aktiv", lat = 59.91725, lon = 10.70, names = new[] { new { name = "Frogner", status = "hovednavn" } } },
+                },
+            },
+        });
+        using var vertMedStub = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient<Allemannsdata>().ConfigurePrimaryHttpMessageHandler(() => new StubHandler(sentre))));
+        var klient = vertMedStub.CreateClient();
+
+        var svar = await klient.GetAsync("/api/lag/badetemperatur/bydeler?tid=" + Uri.EscapeDataString(tid.ToString("O")));
+        var tellinger = await svar.Content.ReadFromJsonAsync<JsonElement>();
+
+        Assert.Equal(HttpStatusCode.OK, svar.StatusCode);
+        var eneste = Assert.Single(tellinger.EnumerateArray());
+        Assert.Equal("Frogner", eneste.GetProperty("bydel").GetString());
+        Assert.Equal(1, eneste.GetProperty("antall").GetInt32());
+        Allemannsdata.TømMellomlager();
     }
 
     [Fact]
