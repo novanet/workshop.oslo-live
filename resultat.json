@@ -1,7 +1,42 @@
 {
-  "oppdatert": "2026-09-23T11:00:33",
+  "oppdatert": "2026-09-23T11:01:24",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
+    {
+      "navn": "mini-astrid",
+      "github": "theakbe",
+      "poeng": 13,
+      "feil": [],
+      "lag": [],
+      "levert": [
+        {
+          "issue": 35,
+          "navn": "Varmekart",
+          "poeng": 5
+        },
+        {
+          "issue": 36,
+          "navn": "Tegn område",
+          "poeng": 5
+        },
+        {
+          "issue": 42,
+          "navn": "Nærmeste punkt",
+          "poeng": 3
+        }
+      ],
+      "dollar": 4.154,
+      "tokens": 8557398,
+      "sekunder": 1535,
+      "pr": 3,
+      "utkast": 0,
+      "merget": 3,
+      "kjoeringer": 3,
+      "utenPr": 0,
+      "bygg": [],
+      "estimert": false,
+      "plass": 1
+    },
     {
       "navn": "mini-gir",
       "github": "GIR75",
@@ -31,12 +66,12 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 1
+      "plass": 2
     },
     {
       "navn": "mini-richard",
       "github": "randsu",
-      "poeng": 9,
+      "poeng": 11,
       "feil": [
         {
           "issue": 3,
@@ -45,6 +80,11 @@
         }
       ],
       "lag": [
+        {
+          "issue": 6,
+          "navn": "Delt mobilitet",
+          "poeng": 2
+        },
         {
           "issue": 9,
           "navn": "Badetemperatur",
@@ -66,36 +106,6 @@
       "merget": 4,
       "kjoeringer": 14,
       "utenPr": 4,
-      "bygg": [],
-      "estimert": false,
-      "plass": 2
-    },
-    {
-      "navn": "mini-astrid",
-      "github": "theakbe",
-      "poeng": 8,
-      "feil": [],
-      "lag": [],
-      "levert": [
-        {
-          "issue": 35,
-          "navn": "Varmekart",
-          "poeng": 5
-        },
-        {
-          "issue": 42,
-          "navn": "Nærmeste punkt",
-          "poeng": 3
-        }
-      ],
-      "dollar": 4.154,
-      "tokens": 8557398,
-      "sekunder": 1535,
-      "pr": 3,
-      "utkast": 0,
-      "merget": 2,
-      "kjoeringer": 3,
-      "utenPr": 0,
       "bygg": [],
       "estimert": false,
       "plass": 3
@@ -333,13 +343,13 @@
       "feil": [],
       "lag": [],
       "levert": [],
-      "dollar": 5.199,
-      "tokens": 9070437,
-      "sekunder": 1886,
-      "pr": 3,
+      "dollar": 6.139,
+      "tokens": 10875517,
+      "sekunder": 2265,
+      "pr": 4,
       "utkast": 0,
       "merget": 0,
-      "kjoeringer": 6,
+      "kjoeringer": 7,
       "utenPr": 3,
       "bygg": [],
       "estimert": false,
@@ -399,15 +409,7 @@
       "issue": 14,
       "navn": "Idrettsanlegg",
       "startet": "2026-09-23T08:53:58.2896433+00:00",
-      "minutter": 6
-    },
-    {
-      "agent": "mini-aud",
-      "github": "audmaha",
-      "issue": 39,
-      "navn": "Tastatursnarveier",
-      "startet": "2026-09-23T08:54:03.5879186+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-kirsten",
@@ -415,6 +417,14 @@
       "issue": 45,
       "navn": "Varsler",
       "startet": "2026-09-23T08:59:36.7600891+00:00",
+      "minutter": 1
+    },
+    {
+      "agent": "mini-knive",
+      "github": "Buggz",
+      "issue": 28,
+      "navn": "Tog",
+      "startet": "2026-09-23T09:00:55.0559627+00:00",
       "minutter": 0
     }
   ],
@@ -422,17 +432,18 @@
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
     "pr": null,
-    "kjoeringer": 25
+    "kjoeringer": 26
   },
   "produkt": {
-    "testerBestatt": 13,
-    "testerFeilet": 13,
+    "testerBestatt": 14,
+    "testerFeilet": 12,
     "issuerLost": [
       1,
       2,
       3,
       4,
       5,
+      6,
       9,
       17
     ],
@@ -615,6 +626,12 @@
       "oppdatert": "2026-09-23T08:58:24Z"
     },
     {
+      "issue": 28,
+      "navn": "Nytt lag: togtrafikk",
+      "github": "Buggz",
+      "oppdatert": "2026-09-23T09:00:55Z"
+    },
+    {
       "issue": 29,
       "navn": "Nytt lag: museer og samlinger",
       "github": "jthagesk",
@@ -666,7 +683,7 @@
       "issue": 39,
       "navn": "Tastatursnarveier",
       "github": "audmaha",
-      "oppdatert": "2026-09-23T08:54:04Z"
+      "oppdatert": "2026-09-23T09:00:43Z"
     },
     {
       "issue": 40,
@@ -797,6 +814,30 @@
   ],
   "aapne": [
     {
+      "pr": 107,
+      "tittel": "Tastatursnarveier",
+      "github": "audmaha",
+      "agent": "mini-aud",
+      "opprettet": "2026-09-23T09:00:42Z",
+      "oppdatert": "2026-09-23T09:00:43Z",
+      "utkast": false,
+      "issues": [
+        39
+      ]
+    },
+    {
+      "pr": 103,
+      "tittel": "#24: Tell punkter per bydel",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:56:50Z",
+      "oppdatert": "2026-09-23T08:59:53Z",
+      "utkast": false,
+      "issues": [
+        24
+      ]
+    },
+    {
       "pr": 106,
       "tittel": "Kartet må virke på mobil (#40)",
       "github": "Buggz",
@@ -833,18 +874,6 @@
       ]
     },
     {
-      "pr": 105,
-      "tittel": "Tegn et område og tell hva som er inni",
-      "github": "theakbe",
-      "agent": "mini-astrid",
-      "opprettet": "2026-09-23T08:59:01Z",
-      "oppdatert": "2026-09-23T08:59:01Z",
-      "utkast": false,
-      "issues": [
-        36
-      ]
-    },
-    {
       "pr": 104,
       "tittel": "#25: Ta vare på et øyeblikksbilde hver time",
       "github": "randsu",
@@ -866,18 +895,6 @@
       "utkast": false,
       "issues": [
         34
-      ]
-    },
-    {
-      "pr": 103,
-      "tittel": "#24: Tell punkter per bydel",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:56:50Z",
-      "oppdatert": "2026-09-23T08:56:51Z",
-      "utkast": false,
-      "issues": [
-        24
       ]
     },
     {
