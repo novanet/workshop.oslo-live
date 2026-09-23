@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:36:46",
+  "oppdatert": "2026-09-23T14:37:26",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -623,7 +623,7 @@
       "issue": 214,
       "navn": "Lagvelgeren er for høy: historikkgrafen tar en egen rad per lag",
       "startet": "2026-09-23T12:31:25.313151+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "henrik",
@@ -631,7 +631,7 @@
       "issue": 114,
       "navn": "Nytt lag: Kristiania i 1910",
       "startet": "2026-09-23T12:32:02.4130394+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-wilma",
@@ -639,7 +639,7 @@
       "issue": 206,
       "navn": "Popupene viser rådata: ISO-tider, «ikon: 😊» og tall uten enhet",
       "startet": "2026-09-23T12:32:25.3380267+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-richard",
@@ -655,7 +655,7 @@
       "issue": 215,
       "navn": "Svarte klynger dekker sentrum og skjuler hvilke lag som er der",
       "startet": "2026-09-23T12:34:13.5766398+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-kirsten",
@@ -663,7 +663,7 @@
       "issue": 29,
       "navn": "Museer",
       "startet": "2026-09-23T12:34:23.8175869+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-leif",
@@ -711,7 +711,7 @@
       "issue": 51,
       "navn": "Logging",
       "startet": "2026-09-23T12:35:46.639797+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-gir",
@@ -719,7 +719,7 @@
       "issue": 33,
       "navn": "Sykkelparkering",
       "startet": "2026-09-23T12:35:47.0074899+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "helstein",
@@ -1097,7 +1097,7 @@
       "issue": 193,
       "navn": "Nytt lag: hjertestartere",
       "github": "SasaRad",
-      "oppdatert": "2026-09-23T12:31:30Z"
+      "oppdatert": "2026-09-23T12:37:20Z"
     },
     {
       "issue": 194,
@@ -1143,6 +1143,18 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 91,
+      "tittel": "Fargene må virke for alle",
+      "github": "audmaha",
+      "agent": "mini-aud",
+      "opprettet": "2026-09-23T08:42:14Z",
+      "oppdatert": "2026-09-23T12:37:06Z",
+      "utkast": false,
+      "issues": [
+        41
+      ]
+    },
     {
       "pr": 222,
       "tittel": "Havet stiger: hva havner under vann? (#133)",
@@ -1225,18 +1237,6 @@
       "utkast": true,
       "issues": [
         129
-      ]
-    },
-    {
-      "pr": 91,
-      "tittel": "Fargene må virke for alle",
-      "github": "audmaha",
-      "agent": "mini-aud",
-      "opprettet": "2026-09-23T08:42:14Z",
-      "oppdatert": "2026-09-23T12:30:19Z",
-      "utkast": false,
-      "issues": [
-        41
       ]
     },
     {
