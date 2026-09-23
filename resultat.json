@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:03:53",
+  "oppdatert": "2026-09-23T11:04:20",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -440,13 +440,21 @@
       "navn": "Skoler",
       "startet": "2026-09-23T09:03:43.3920206+00:00",
       "minutter": 0
+    },
+    {
+      "agent": "Andy3000",
+      "github": "coffeelyfe",
+      "issue": 11,
+      "navn": "Kollektiv",
+      "startet": "2026-09-23T09:04:10.6494291+00:00",
+      "minutter": 0
     }
   ],
   "main": {
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
     "pr": null,
-    "kjoeringer": 28
+    "kjoeringer": 29
   },
   "produkt": {
     "testerBestatt": 14,
@@ -571,7 +579,7 @@
       "issue": 11,
       "navn": "Nytt lag: kollektivtrafikk som beveger seg",
       "github": "coffeelyfe",
-      "oppdatert": "2026-09-23T09:03:21Z"
+      "oppdatert": "2026-09-23T09:04:11Z"
     },
     {
       "issue": 14,
@@ -840,6 +848,18 @@
   ],
   "aapne": [
     {
+      "pr": 104,
+      "tittel": "#25: Ta vare på et øyeblikksbilde hver time",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:58:22Z",
+      "oppdatert": "2026-09-23T09:03:40Z",
+      "utkast": false,
+      "issues": [
+        25
+      ]
+    },
+    {
       "pr": 108,
       "tittel": "Nytt lag: idretts- og friluftsanlegg (#14)",
       "github": "leif-larsen",
@@ -897,18 +917,6 @@
       "utkast": false,
       "issues": [
         24
-      ]
-    },
-    {
-      "pr": 104,
-      "tittel": "#25: Ta vare på et øyeblikksbilde hver time",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:58:22Z",
-      "oppdatert": "2026-09-23T08:58:23Z",
-      "utkast": false,
-      "issues": [
-        25
       ]
     },
     {
