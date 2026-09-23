@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:46:49",
+  "oppdatert": "2026-09-23T10:47:28",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -36,10 +36,15 @@
     {
       "navn": "mini-astrid",
       "github": "theakbe",
-      "poeng": 3,
+      "poeng": 8,
       "feil": [],
       "lag": [],
       "levert": [
+        {
+          "issue": 35,
+          "navn": "Varmekart",
+          "poeng": 5
+        },
         {
           "issue": 42,
           "navn": "Nærmeste punkt",
@@ -51,7 +56,7 @@
       "sekunder": 1000,
       "pr": 2,
       "utkast": 0,
-      "merget": 1,
+      "merget": 2,
       "kjoeringer": 2,
       "utenPr": 0,
       "bygg": [],
@@ -203,25 +208,6 @@
       "plass": 8
     },
     {
-      "navn": "mini-taco",
-      "github": "Puiu",
-      "poeng": 0,
-      "feil": [],
-      "lag": [],
-      "levert": [],
-      "dollar": 1.654,
-      "tokens": 3189417,
-      "sekunder": 707,
-      "pr": 1,
-      "utkast": 0,
-      "merget": 0,
-      "kjoeringer": 1,
-      "utenPr": 0,
-      "bygg": [],
-      "estimert": false,
-      "plass": 9
-    },
-    {
       "navn": "mini-sindre",
       "github": "sin-rha",
       "poeng": 0,
@@ -238,7 +224,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 10
+      "plass": 9
     },
     {
       "navn": "helstein",
@@ -255,6 +241,25 @@
       "merget": 0,
       "kjoeringer": 2,
       "utenPr": 1,
+      "bygg": [],
+      "estimert": false,
+      "plass": 10
+    },
+    {
+      "navn": "mini-taco",
+      "github": "Puiu",
+      "poeng": 0,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 2.719,
+      "tokens": 5585224,
+      "sekunder": 1114,
+      "pr": 2,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 2,
+      "utenPr": 0,
       "bygg": [],
       "estimert": false,
       "plass": 11
@@ -362,7 +367,7 @@
       "issue": 32,
       "navn": "Strømpris",
       "startet": "2026-09-23T08:37:51.7658572+00:00",
-      "minutter": 8
+      "minutter": 9
     },
     {
       "agent": "mini-kirsten",
@@ -389,20 +394,12 @@
       "minutter": 7
     },
     {
-      "agent": "mini-taco",
-      "github": "Puiu",
-      "issue": 47,
-      "navn": "Søk på tvers",
-      "startet": "2026-09-23T08:39:51.4798178+00:00",
-      "minutter": 6
-    },
-    {
       "agent": "mini-kirsten",
       "github": "jthagesk",
       "issue": 52,
       "navn": "Konfigurerbar bbox",
       "startet": "2026-09-23T08:42:06.8631198+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-kirsten",
@@ -410,7 +407,7 @@
       "issue": 59,
       "navn": "",
       "startet": "2026-09-23T08:44:07.3435998+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-frode",
@@ -695,7 +692,7 @@
       "issue": 47,
       "navn": "Søk på tvers av alle lag",
       "github": "Puiu",
-      "oppdatert": "2026-09-23T08:39:52Z"
+      "oppdatert": "2026-09-23T08:46:58Z"
     },
     {
       "issue": 48,
@@ -772,6 +769,18 @@
   ],
   "aapne": [
     {
+      "pr": 97,
+      "tittel": "Søk på tvers av alle lag (#47)",
+      "github": "Puiu",
+      "agent": "mini-taco",
+      "opprettet": "2026-09-23T08:46:56Z",
+      "oppdatert": "2026-09-23T08:46:57Z",
+      "utkast": false,
+      "issues": [
+        47
+      ]
+    },
+    {
       "pr": 96,
       "tittel": "#22: Slå sammen punkter som ligger oppå hverandre",
       "github": "randsu",
@@ -793,18 +802,6 @@
       "utkast": false,
       "issues": [
         6
-      ]
-    },
-    {
-      "pr": 95,
-      "tittel": "Varmekart i stedet for punkter",
-      "github": "theakbe",
-      "agent": "mini-astrid",
-      "opprettet": "2026-09-23T08:45:57Z",
-      "oppdatert": "2026-09-23T08:45:58Z",
-      "utkast": false,
-      "issues": [
-        35
       ]
     },
     {
