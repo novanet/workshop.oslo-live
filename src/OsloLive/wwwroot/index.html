@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.js"></script>
 <script defer src="effekter/symboler.js"></script>
+<script defer src="effekter/popupformat.js"></script>
 <script src="effekter/tsunami.js" defer></script>
 <style>
   :root {
@@ -643,7 +644,9 @@ function popup(e) {
   const skjul = new Set(['id', 'navn', 'kilde']);
   const rader = Object.entries(e)
     .filter(([k, v]) => !skjul.has(k) && v !== null && v !== undefined && v !== '')
-    .map(([k, v]) => `<div class="rad">${esc(k)}: <span>${esc(k === 'kurs' ? v + '°' : v)}</span></div>`)
+    .map(([k, v]) => (typeof window.formaterEgenskap === 'function' ? window.formaterEgenskap(k, v) : { nøkkel: k, verdi: v }))
+    .filter(Boolean)
+    .map((f) => `<div class="rad">${esc(f.nøkkel)}: <span>${esc(f.verdi)}</span></div>`)
     .join('');
   return `<b>${esc(e.navn ?? 'Uten navn')}</b>${rader}<div class="rad" style="margin-top:6px;opacity:.7">${esc(e.kilde ?? '')}</div>`;
 }
