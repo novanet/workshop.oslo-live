@@ -91,4 +91,32 @@ public class StatistikkTester
             CultureInfo.CurrentCulture = forrigeKultur;
         }
     }
+
+    [Fact]
+    public void Dato_uten_klokkeslett_tolkes_som_midnatt_i_Oslo()
+    {
+        var tekst = "2026-08-12";
+
+        var tolket = Lagstatistikk.Tolk(tekst);
+
+        Assert.Equal(new DateTimeOffset(2026, 8, 12, 0, 0, 0, TimeSpan.FromHours(2)), tolket);
+        Assert.Equal(TimeSpan.FromHours(2), tolket!.Value.Offset);
+    }
+
+    [Fact]
+    public void Sist_målt_og_tilsyn_gir_eldste_og_nyeste()
+    {
+        var lag = Geo.Samle([
+            Geo.Lag("vann", 59.91, 10.75, "Akerselva", "Test", new() { ["sist målt"] = "2026-09-23T08:00:00Z" }),
+            Geo.Lag("mat", 59.92, 10.76, "Kafé", "Test", new() { ["tilsyn"] = "2026-08-12" }),
+        ]);
+        var statistikk = new Lagstatistikk();
+
+        statistikk.Vellykket("a", lag, DateTimeOffset.UtcNow);
+        var status = statistikk.Hent("a");
+
+        Assert.Equal(2, status.Antall);
+        Assert.Equal(new DateTimeOffset(2026, 8, 12, 0, 0, 0, TimeSpan.FromHours(2)), status.Eldste);
+        Assert.Equal(DateTimeOffset.Parse("2026-09-23T08:00:00Z", CultureInfo.InvariantCulture), status.Nyeste);
+    }
 }

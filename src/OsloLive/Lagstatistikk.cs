@@ -13,8 +13,11 @@ public sealed record Lagstatus(int? Antall, DateTimeOffset? Eldste, DateTimeOffs
 /// </summary>
 public sealed class Lagstatistikk
 {
-    /// <summary>Egenskaper i et kartpunkt som regnes som tidsstempel.</summary>
-    public static readonly string[] Tidsnøkler = ["målt"];
+    /// <summary>
+    /// Egenskaper i et kartpunkt som regnes som tidsstempel: «målt» (luftkvalitet og
+    /// badetemperatur), «sist målt» (vannmålere) og «tilsyn» (smilefjes).
+    /// </summary>
+    public static readonly string[] Tidsnøkler = ["målt", "sist målt", "tilsyn"];
 
     private readonly ConcurrentDictionary<string, Lagstatus> status = new(StringComparer.OrdinalIgnoreCase);
 
@@ -51,8 +54,7 @@ public sealed class Lagstatistikk
                 {
                     tidspunkter.Add(tidspunkt);
                 }
-                else if (verdi is string tekst
-                    && DateTimeOffset.TryParse(tekst, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out var tolket))
+                else if (verdi is string tekst && Tolk(tekst) is { } tolket)
                 {
                     tidspunkter.Add(tolket);
                 }
@@ -62,5 +64,24 @@ public sealed class Lagstatistikk
         return tidspunkter.Count > 0
             ? (tidspunkter.Min(), tidspunkter.Max())
             : (null, null);
+    }
+
+    /// <summary>
+    /// Tolker et tidsstempel skrevet som tekst. En dato uten klokkeslett («2026-08-12»,
+    /// slik smilefjesene gir «tilsyn») tolkes som midnatt i Oslo-tid, med samme tidssone
+    /// som strømprisen bruker. Alt annet tolkes som ISO 8601, og mangler tidssonen antas
+    /// UTC. Gir null hvis teksten ikke er en dato.
+    /// </summary>
+    public static DateTimeOffset? Tolk(string tekst)
+    {
+        if (DateOnly.TryParseExact(tekst, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out var dato))
+        {
+            var midnatt = dato.ToDateTime(TimeOnly.MinValue, DateTimeKind.Unspecified);
+            return new DateTimeOffset(midnatt, Stroempris.Oslo.GetUtcOffset(midnatt));
+        }
+
+        return DateTimeOffset.TryParse(tekst, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out var tolket)
+            ? tolket
+            : null;
     }
 }
