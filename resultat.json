@@ -1,11 +1,11 @@
 {
-  "oppdatert": "2026-09-23T13:58:13",
+  "oppdatert": "2026-09-23T13:59:20",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
       "navn": "mini-richard",
       "github": "randsu",
-      "poeng": 34,
+      "poeng": 32,
       "feil": [
         {
           "issue": 3,
@@ -14,11 +14,6 @@
         }
       ],
       "lag": [
-        {
-          "issue": 6,
-          "navn": "Delt mobilitet",
-          "poeng": 2
-        },
         {
           "issue": 9,
           "navn": "Badetemperatur",
@@ -549,20 +544,12 @@
   ],
   "kjoerer": [
     {
-      "agent": "helstein",
-      "github": "nilsgs",
-      "issue": 132,
-      "navn": "Ekte sollys på 3D-byggene",
-      "startet": "2026-09-23T11:50:10.530436+00:00",
-      "minutter": 8
-    },
-    {
       "agent": "mini-leif",
       "github": "leif-larsen",
       "issue": 141,
       "navn": "Tydelige kartsymboler: båter som ser ut som båter",
       "startet": "2026-09-23T11:52:28.401471+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-knive",
@@ -570,7 +557,7 @@
       "issue": 28,
       "navn": "Tog",
       "startet": "2026-09-23T11:54:26.4054208+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-frode",
@@ -578,7 +565,7 @@
       "issue": 128,
       "navn": "Simulering: tsunami i Oslofjorden",
       "startet": "2026-09-23T11:55:48.9774309+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-jon",
@@ -586,7 +573,7 @@
       "issue": 44,
       "navn": "Sammenlign tid",
       "startet": "2026-09-23T11:57:22.3942011+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-richard",
@@ -595,24 +582,39 @@
       "navn": "Kurs på skipene",
       "startet": "2026-09-23T11:58:03.6775072+00:00",
       "minutter": 0
+    },
+    {
+      "agent": "helstein",
+      "github": "nilsgs",
+      "issue": 132,
+      "navn": "Ekte sollys på 3D-byggene",
+      "startet": "2026-09-23T11:58:13.6241597+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-johan",
+      "github": "pr0nin",
+      "issue": 10,
+      "navn": "Trafikk",
+      "startet": "2026-09-23T11:58:33.8078294+00:00",
+      "minutter": 0
     }
   ],
   "main": {
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
     "pr": null,
-    "kjoeringer": 41
+    "kjoeringer": 42
   },
   "produkt": {
-    "testerBestatt": 17,
-    "testerFeilet": 9,
+    "testerBestatt": 16,
+    "testerFeilet": 10,
     "issuerLost": [
       1,
       2,
       3,
       4,
       5,
-      6,
       7,
       9,
       12,
@@ -633,7 +635,7 @@
       "issue": 10,
       "navn": "Nytt lag: trafikkregistreringspunkt",
       "github": "pr0nin",
-      "oppdatert": "2026-09-23T11:57:40Z"
+      "oppdatert": "2026-09-23T11:58:34Z"
     },
     {
       "issue": 11,
@@ -651,7 +653,7 @@
       "issue": 13,
       "navn": "Nytt lag: veiarbeid og stengte veier",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T11:40:59Z"
+      "oppdatert": "2026-09-23T11:58:26Z"
     },
     {
       "issue": 14,
@@ -669,7 +671,7 @@
       "issue": 18,
       "navn": "Nytt lag: kulturminner",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T11:40:53Z"
+      "oppdatert": "2026-09-23T11:58:19Z"
     },
     {
       "issue": 19,
@@ -729,7 +731,7 @@
       "issue": 33,
       "navn": "Nytt lag: sykkelparkering",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T11:41:51Z"
+      "oppdatert": "2026-09-23T11:58:41Z"
     },
     {
       "issue": 39,
@@ -783,7 +785,7 @@
       "issue": 51,
       "navn": "Strukturert logging",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T11:40:58Z"
+      "oppdatert": "2026-09-23T11:58:34Z"
     },
     {
       "issue": 52,
@@ -963,13 +965,13 @@
       "issue": 132,
       "navn": "Ekte sollys på 3D-byggene",
       "github": "audmaha",
-      "oppdatert": "2026-09-23T11:56:58Z"
+      "oppdatert": "2026-09-23T11:58:14Z"
     },
     {
       "issue": 132,
       "navn": "Ekte sollys på 3D-byggene",
       "github": "nilsgs",
-      "oppdatert": "2026-09-23T11:56:58Z"
+      "oppdatert": "2026-09-23T11:58:14Z"
     },
     {
       "issue": 141,
