@@ -369,7 +369,8 @@
     return '<tfoot><tr>' +
       '<td></td><td colspan="2"><span class="sum-tekst">Sum for ' + folk.length + ' agenter</span></td>' +
       '<td><span class="tall">' + (estimert ? '~' : '') + '$' + dollar.toFixed(2) + '</span>' +
-        '<span class="under">' + Math.round(tokens / 1000) + 'k tokens</span></td>' +
+        '<span class="under">' + (tokens >= 1e7 ? (tokens / 1e6).toFixed(0) + 'M' : Math.round(tokens / 1000) + 'k') +
+          ' tokens</span></td>' +
       '<td class="h"><span class="tall">' + poeng + '</span></td>' +
       '<td><span class="tall">' + (dollar > 0 ? (poeng / dollar).toFixed(1) : '0.0') + '</span></td>' +
       '</tr></tfoot>';

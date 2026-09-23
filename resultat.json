@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:44:48",
+  "oppdatert": "2026-09-23T14:45:30",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -65,7 +65,7 @@
       "dollar": 24.119,
       "tokens": 46643942,
       "sekunder": 8830,
-      "pr": 15,
+      "pr": 16,
       "utkast": 0,
       "merget": 11,
       "kjoeringer": 29,
@@ -194,14 +194,14 @@
           "poeng": 3
         }
       ],
-      "dollar": 4.418,
-      "tokens": 7735191,
-      "sekunder": 1519,
+      "dollar": 5.126,
+      "tokens": 8659113,
+      "sekunder": 1695,
       "pr": 2,
       "utkast": 0,
       "merget": 2,
-      "kjoeringer": 7,
-      "utenPr": 5,
+      "kjoeringer": 8,
+      "utenPr": 6,
       "bygg": [],
       "estimert": false,
       "plass": 5
@@ -396,6 +396,36 @@
       "plass": 11
     },
     {
+      "navn": "martin-holth",
+      "github": "martinrholth",
+      "poeng": 2,
+      "feil": [],
+      "lag": [],
+      "levert": [
+        {
+          "issue": 111,
+          "navn": "Nytt lag: kaier og ferjekaier",
+          "poeng": 1
+        },
+        {
+          "issue": 205,
+          "navn": "Strømprisen vises med desimalpunktum",
+          "poeng": 1
+        }
+      ],
+      "dollar": 2.951,
+      "tokens": 5643970,
+      "sekunder": 918,
+      "pr": 2,
+      "utkast": 0,
+      "merget": 2,
+      "kjoeringer": 8,
+      "utenPr": 6,
+      "bygg": [],
+      "estimert": false,
+      "plass": 12
+    },
+    {
       "navn": "Dmitry-agent",
       "github": "FilonenkoDmitry",
       "poeng": 2,
@@ -418,7 +448,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 12
+      "plass": 13
     },
     {
       "navn": "henrik",
@@ -443,7 +473,7 @@
       "utenPr": 6,
       "bygg": [],
       "estimert": false,
-      "plass": 13
+      "plass": 14
     },
     {
       "navn": "mini-frode",
@@ -466,31 +496,6 @@
       "merget": 1,
       "kjoeringer": 22,
       "utenPr": 17,
-      "bygg": [],
-      "estimert": false,
-      "plass": 14
-    },
-    {
-      "navn": "martin-holth",
-      "github": "martinrholth",
-      "poeng": 1,
-      "feil": [],
-      "lag": [],
-      "levert": [
-        {
-          "issue": 111,
-          "navn": "Nytt lag: kaier og ferjekaier",
-          "poeng": 1
-        }
-      ],
-      "dollar": 2.951,
-      "tokens": 5643970,
-      "sekunder": 918,
-      "pr": 2,
-      "utkast": 0,
-      "merget": 1,
-      "kjoeringer": 8,
-      "utenPr": 6,
       "bygg": [],
       "estimert": false,
       "plass": 15
@@ -623,7 +628,7 @@
       "issue": 214,
       "navn": "Lagvelgeren er for høy: historikkgrafen tar en egen rad per lag",
       "startet": "2026-09-23T12:31:25.313151+00:00",
-      "minutter": 13
+      "minutter": 14
     },
     {
       "agent": "mini-knive",
@@ -631,7 +636,7 @@
       "issue": 215,
       "navn": "Svarte klynger dekker sentrum og skjuler hvilke lag som er der",
       "startet": "2026-09-23T12:34:13.5766398+00:00",
-      "minutter": 10
+      "minutter": 11
     },
     {
       "agent": "mini-kirsten",
@@ -639,7 +644,7 @@
       "issue": 29,
       "navn": "Museer",
       "startet": "2026-09-23T12:34:23.8175869+00:00",
-      "minutter": 10
+      "minutter": 11
     },
     {
       "agent": "mini-jon",
@@ -647,7 +652,7 @@
       "issue": 189,
       "navn": "Travlere enn vanlig på veiene",
       "startet": "2026-09-23T12:34:43.2826697+00:00",
-      "minutter": 9
+      "minutter": 10
     },
     {
       "agent": "mini-gir",
@@ -655,7 +660,7 @@
       "issue": 51,
       "navn": "Logging",
       "startet": "2026-09-23T12:35:46.639797+00:00",
-      "minutter": 8
+      "minutter": 9
     },
     {
       "agent": "mini-gir",
@@ -663,7 +668,7 @@
       "issue": 33,
       "navn": "Sykkelparkering",
       "startet": "2026-09-23T12:35:47.0074899+00:00",
-      "minutter": 8
+      "minutter": 9
     },
     {
       "agent": "helstein",
@@ -671,7 +676,7 @@
       "issue": 194,
       "navn": "Nytt lag: bomstasjoner",
       "startet": "2026-09-23T12:36:39.65381+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "mini-richard",
@@ -679,15 +684,7 @@
       "issue": 119,
       "navn": "Mørkt kart når sola går ned i Oslo",
       "startet": "2026-09-23T12:39:26.8247317+00:00",
-      "minutter": 5
-    },
-    {
-      "agent": "mini-ingve",
-      "github": "ingvevs",
-      "issue": 11,
-      "navn": "Kollektiv",
-      "startet": "2026-09-23T12:42:10.8697351+00:00",
-      "minutter": 2
+      "minutter": 6
     },
     {
       "agent": "mini-johan",
@@ -695,7 +692,7 @@
       "issue": 10,
       "navn": "Trafikk",
       "startet": "2026-09-23T12:42:27.1051764+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-astrid",
@@ -703,7 +700,7 @@
       "issue": 188,
       "navn": "Vinden som strømmer over byen",
       "startet": "2026-09-23T12:42:40.4886016+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-richard",
@@ -711,7 +708,7 @@
       "issue": 124,
       "navn": "Punkter som flytter seg, glir til ny posisjon",
       "startet": "2026-09-23T12:42:56.8988058+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-leif",
@@ -719,7 +716,7 @@
       "issue": 14,
       "navn": "Idrettsanlegg",
       "startet": "2026-09-23T12:42:57.8459655+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-frode",
@@ -727,7 +724,7 @@
       "issue": 209,
       "navn": "Bysykkelstasjoner blir 33 punkter oppå hverandre",
       "startet": "2026-09-23T12:43:09.4165177+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "helstein",
@@ -735,7 +732,7 @@
       "issue": 212,
       "navn": "Feilmeldingene fra API-et er engelske unntakstekster",
       "startet": "2026-09-23T12:43:30.6513419+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "henrik",
@@ -743,7 +740,7 @@
       "issue": 114,
       "navn": "Nytt lag: Kristiania i 1910",
       "startet": "2026-09-23T12:43:33.13049+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-sindre",
@@ -751,6 +748,14 @@
       "issue": 55,
       "navn": "Ytelse",
       "startet": "2026-09-23T12:44:17.4643227+00:00",
+      "minutter": 1
+    },
+    {
+      "agent": "mini-frode",
+      "github": "FrodeBl",
+      "issue": 19,
+      "navn": "Artsobservasjoner",
+      "startet": "2026-09-23T12:45:18.4146535+00:00",
       "minutter": 0
     }
   ],
@@ -780,6 +785,12 @@
     "feilmelding": null
   },
   "tildelt": [
+    {
+      "issue": 26,
+      "navn": "Nytt lag: skoler og barnehager",
+      "github": "larsajakobsen",
+      "oppdatert": "2026-09-23T12:42:16Z"
+    },
     {
       "issue": 27,
       "navn": "Nytt lag: verneområder og naturtyper",
@@ -952,13 +963,13 @@
       "issue": 118,
       "navn": "Nyhetslinje nederst på skjermen",
       "github": "leif-larsen",
-      "oppdatert": "2026-09-23T12:42:42Z"
+      "oppdatert": "2026-09-23T12:45:10Z"
     },
     {
       "issue": 118,
       "navn": "Nyhetslinje nederst på skjermen",
       "github": "randsu",
-      "oppdatert": "2026-09-23T12:42:42Z"
+      "oppdatert": "2026-09-23T12:45:10Z"
     },
     {
       "issue": 119,
@@ -1024,19 +1035,25 @@
       "issue": 130,
       "navn": "Fyrverkeri over Rådhuset når en PR blir merget",
       "github": "Copilot",
-      "oppdatert": "2026-09-23T12:30:00Z"
+      "oppdatert": "2026-09-23T12:45:25Z"
     },
     {
       "issue": 130,
       "navn": "Fyrverkeri over Rådhuset når en PR blir merget",
       "github": "SasaRad",
-      "oppdatert": "2026-09-23T12:30:00Z"
+      "oppdatert": "2026-09-23T12:45:25Z"
     },
     {
       "issue": 130,
       "navn": "Fyrverkeri over Rådhuset når en PR blir merget",
       "github": "monet820",
-      "oppdatert": "2026-09-23T12:30:00Z"
+      "oppdatert": "2026-09-23T12:45:25Z"
+    },
+    {
+      "issue": 130,
+      "navn": "Fyrverkeri over Rådhuset når en PR blir merget",
+      "github": "randsu",
+      "oppdatert": "2026-09-23T12:45:25Z"
     },
     {
       "issue": 131,
@@ -1147,12 +1164,6 @@
       "oppdatert": "2026-09-23T12:31:34Z"
     },
     {
-      "issue": 205,
-      "navn": "Strømprisen vises med desimalpunktum",
-      "github": "martinrholth",
-      "oppdatert": "2026-09-23T12:43:04Z"
-    },
-    {
       "issue": 206,
       "navn": "Popupene viser rådata: ISO-tider, «ikon: 😊» og tall uten enhet",
       "github": "larsajakobsen",
@@ -1202,6 +1213,18 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 232,
+      "tittel": "#207: Delt mobilitet viser «drivstoff: ELECTRIC» og «COMBUSTION»",
+      "github": "randsu",
+      "agent": "randsu",
+      "opprettet": "2026-09-23T12:45:02Z",
+      "oppdatert": "2026-09-23T12:45:06Z",
+      "utkast": false,
+      "issues": [
+        207
+      ]
+    },
     {
       "pr": 76,
       "tittel": "Nytt lag: artsobservasjoner",
@@ -1272,18 +1295,6 @@
       "utkast": false,
       "issues": [
         54
-      ]
-    },
-    {
-      "pr": 231,
-      "tittel": "Strømprisen vises med desimalpunktum",
-      "github": "martinrholth",
-      "agent": "martin-holth",
-      "opprettet": "2026-09-23T12:43:03Z",
-      "oppdatert": "2026-09-23T12:43:04Z",
-      "utkast": false,
-      "issues": [
-        205
       ]
     },
     {
