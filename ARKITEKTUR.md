@@ -30,6 +30,8 @@ Prinsipp: kartet er en liste med lag. `ILag → Kartlag (GeoJSON) → MapLibre`.
 |---|---|
 | `GET /api/lag` | `[{ id, navn, beskrivelse, ikon }]` |
 | `GET /api/lag/{id}` | `Kartlag` som GeoJSON `FeatureCollection`. 404 ved ukjent id. 502 `{ feil }` hvis laget kaster; de andre lagene påvirkes ikke. Med `?tid=` (ISO 8601) svares det med bildet lagret nærmest det tidspunktet i stedet for levende data; tom `FeatureCollection` hvis ingen bilde er innenfor to timer, 400 ved ugyldig `tid`. Se `Historikk/`. |
+| `GET /api/stroempris` | Strømprisen i Oslo (NO1) i dag: `{ naa, billigst: { time, pris }, dyrest: { time, pris }, timer: [{ time, pris }, …] }`, øre/kWh inkl. mva. 502 `{ feil }` hvis kilden svikter. |
+| `GET /api/helse` | `{ status: "ok", tid }` |
 | `GET /api/helse` | `{ status: "ok", tid }`. Lever prosessen? Ingen kall til kildene, svarer alltid umiddelbart. |
 | `GET /api/helse/kilder` | `{ status: "ok"\|"degradert", kilder: [{ kilde, status: "ok"\|"feil"\|"ukjent", sistSjekket, varighetMs }] }`. Virker tjenesten? Leser siste resultat fra `HelseSjekker`, en bakgrunnstjeneste som sjekker hvert lags kilde med et intervall satt i `appsettings.json` (`Helse:IntervallSekunder`, standard 60). Venter aldri på kildene i selve forespørselen. |
 

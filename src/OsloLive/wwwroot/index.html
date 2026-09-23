@@ -42,6 +42,16 @@
   .tom { font-size: 13px; color: var(--dempet); line-height: 1.5; padding: 4px 2px; }
   .bunn { margin-top: 12px; padding-top: 12px; border-top: 1px solid #e5e7eb; font-size: 11px; color: var(--dempet); display: flex; justify-content: space-between; }
 
+  .stroem { margin-top: 12px; padding-top: 12px; border-top: 1px solid #e5e7eb; }
+  .stroem h2 { margin: 0 0 6px; font-size: 13px; }
+  .stroem .naa { font-size: 22px; font-weight: 700; }
+  .stroem .naa .enhet { font-size: 12px; font-weight: 400; color: var(--dempet); }
+  .stroem .rad { font-size: 12px; margin: 3px 0; }
+  .stroem .rad b { font-variant-numeric: tabular-nums; }
+  .stroem .graf { display: flex; align-items: flex-end; gap: 1px; height: 34px; margin-top: 8px; }
+  .stroem .graf span { flex: 1; background: #d6cbb0; border-radius: 1px 1px 0 0; }
+  .stroem .graf span.naa-time { background: #111; }
+
   .kamera {
     position: absolute; bottom: 24px; right: 16px; z-index: 10;
     display: flex; flex-direction: column; gap: 6px;
@@ -81,6 +91,44 @@
   .maplibregl-popup-content .rad span { color: var(--tekst); }
   .maplibregl-ctrl-group { border: 1.5px solid var(--kant) !important; box-shadow: none !important; }
 
+  /* Mobilvisning: panelet ligger nederst, sammenslått til én linje som kan dras eller trykkes opp. */
+  @media (max-width: 699.98px) {
+    #hovedpanel {
+      position: fixed; top: auto; left: 0; right: 0; bottom: 0; width: 100%;
+      border-radius: 14px 14px 0 0;
+      max-height: 20vh; max-height: 20dvh;
+      padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+      display: flex; flex-direction: column;
+      overflow: hidden;
+      transition: max-height .25s ease;
+    }
+    #hovedpanel.apen { max-height: 60vh; max-height: 60dvh; }
+
+    #hovedpanel .panel-header {
+      display: flex; align-items: center; gap: 10px; flex: none;
+      padding: 4px 0; cursor: pointer; touch-action: none;
+    }
+    #hovedpanel .handtak { width: 36px; height: 5px; border-radius: 3px; background: #d1d5db; flex: none; }
+    #hovedpanel h1 { font-size: 16px; margin: 0; }
+    #hovedpanel .under { display: none; }
+    #hovedpanel #lagliste { display: none; overflow-y: auto; flex: 1; min-height: 0; }
+    #hovedpanel .bunn { display: none; flex: none; }
+    #hovedpanel.apen .under { display: block; }
+    #hovedpanel.apen .bunn { display: flex; }
+    #hovedpanel.apen #lagliste { display: block; }
+
+    .kamera {
+      left: 12px; right: auto; bottom: calc(var(--panelhoyde, 20vh) + 12px);
+      flex-direction: row;
+    }
+
+    /* Tidslinjen ligger over kameraknappene, som igjen ligger over panelet nederst. */
+    .tidslinje {
+      left: 12px; right: 12px; width: auto; transform: none;
+      bottom: calc(var(--panelhoyde, 20vh) + 54px);
+    }
+  }
+
   .panel.naermest { left: auto; right: 16px; width: 280px; }
   .naermest .topp { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
   .naermest h2 { margin: 0; font-size: 16px; }
@@ -95,22 +143,35 @@
   .tidslinje { position:absolute; bottom:24px; left:50%; transform:translateX(-50%); z-index:10; width:min(520px, calc(100% - 220px)); display:flex; align-items:center; gap:10px; background:rgba(255,255,255,.95); border:1.5px solid var(--kant); border-radius:10px; padding:8px 12px; box-shadow:0 6px 20px rgba(0,0,0,.14); font-size:12px; }
   .tidslinje input { flex:1; accent-color:#111; }
   .tidslinje #tid-tekst { min-width:110px; text-align:right; font-variant-numeric:tabular-nums; font-weight:600; }
+  .panel.omrade { top: auto; left: 16px; bottom: 24px; width: 240px; }
+  .omrade h2 { margin: 0 0 8px; font-size: 16px; }
+  .omrade .rad { display: flex; justify-content: space-between; font-size: 13px; padding: 3px 2px; }
+  .omrade .sum { display: flex; justify-content: space-between; margin-top: 8px; padding-top: 8px; border-top: 1px solid #e5e7eb; font-weight: 600; font-size: 13px; }
 </style>
 </head>
 <body>
 <div id="kart"></div>
 
-<div class="panel">
-  <h1>Oslo Live</h1>
+<div class="panel" id="hovedpanel">
+  <div class="panel-header" id="panel-header">
+    <span class="handtak" aria-hidden="true"></span>
+    <h1>Oslo Live</h1>
+  </div>
   <p class="under">Levende data fra Allemannsdata</p>
   <div id="lagliste"><p class="tom">Laster lag …</p></div>
   <div class="bunn">
     <span id="oppdatert">–</span>
     <span id="sum">–</span>
   </div>
+  <div class="stroem" id="stroem">
+    <h2>Strømpris i Oslo (NO1)</h2>
+    <p class="tom">Henter strømpris …</p>
+  </div>
 </div>
 
 <div class="kamera">
+  <button id="tegn-omrade" type="button" aria-pressed="false">Tegn område</button>
+  <button id="fjern-omrade" type="button" hidden>Fjern område</button>
   <button id="snurr" type="button" aria-pressed="false">Snurr</button>
   <button id="flatt" type="button">2D</button>
   <button id="hjem" type="button">Sentrum</button>
@@ -127,6 +188,11 @@
   <div id="naermest-liste"></div>
 </div>
 
+<div class="panel omrade" id="omrade-panel" hidden>
+  <h2>Område</h2>
+  <div id="omrade-liste"></div>
+</div>
+
 <script>
 const SENTRUM = [10.7522, 59.9139];
 
@@ -139,14 +205,19 @@ const kart = new maplibregl.Map({
   bearing: -20,
   antialias: true,
   preserveDrawingBuffer: true,
-  attributionControl: { compact: true }
+  attributionControl: { compact: true },
+  touchPitch: true,
+  touchZoomRotate: true
 });
 
 kart.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), 'bottom-right');
 
 kart.on('style.load', () => {
   varmTema(kart);
+  settOppOmrade();
   start();
+  hentStroem();
+  setInterval(hentStroem, 60000); // maks én gang i minuttet, ikke som lagene hvert 15. sekund
 });
 
 /**
@@ -389,10 +460,12 @@ async function hent(id) {
       el.style.background = p.advarsel ? '#b91c1c' : oppf.farge;
       el.textContent = p.advarsel ? '⚠️' : (p.ikon ?? oppf.ikon);
 
+      const boble = new maplibregl.Popup({ offset: 18, closeButton: true }).setHTML(popup(p));
+      boble.on('open', () => sikreSynligPopup(boble));
+
       const m = new maplibregl.Marker({ element: el })
         .setLngLat([c[0], c[1]])
-        .setPopup(new maplibregl.Popup({ offset: 18, closeButton: true })
-          .setHTML(popup(p)));
+        .setPopup(boble);
 
       if (oppf.på && !oppf.varme) m.addTo(kart);
       oppf.markorer.push(m);
@@ -414,6 +487,7 @@ async function hent(id) {
   }
   oppdaterBunn();
   if (valgtSted) visNaermest();
+  if (omradeLukket) visOmrade();
 }
 
 function oppdaterBunn() {
@@ -472,6 +546,7 @@ async function start() {
       visLag(l.id);
       oppdaterBunn();
       if (valgtSted) visNaermest();
+      if (omradeLukket) visOmrade();
     });
     rad.querySelector('.visning').addEventListener('click', (ev) => {
       ev.preventDefault(); ev.stopPropagation();
@@ -488,6 +563,45 @@ async function start() {
   });
 
   setInterval(() => { if (valgtTid) return; lagene.forEach((_, id) => hent(id)); }, 15000);
+}
+
+// ---------------------------------------------------------------------------
+// Strømpris
+// ---------------------------------------------------------------------------
+function klokkeslett(time) {
+  return String(time).padStart(2, '0') + '–' + String((time + 1) % 24).padStart(2, '0');
+}
+
+// Klokka i Oslo, uansett hvor i verden nettleseren står.
+function osloTime() {
+  return Number(new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Oslo', hour: 'numeric', hour12: false }).format(new Date()));
+}
+
+async function hentStroem() {
+  const boks = document.getElementById('stroem');
+  try {
+    const svar = await fetch('/api/stroempris');
+    if (!svar.ok) throw new Error('HTTP ' + svar.status);
+    const p = await svar.json();
+
+    // Skalerer på min/maks, ikke bare maks: prisen kan være 0 eller negativ.
+    const priser = p.timer.map((t) => t.pris);
+    const min = Math.min(...priser);
+    const spenn = Math.max(...priser) - min || 1;
+    const naaTime = osloTime();
+    const graf = p.timer
+      .map((t) => `<span class="${t.time === naaTime ? 'naa-time' : ''}" style="height:${4 + ((t.pris - min) / spenn) * 96}%" title="kl. ${klokkeslett(t.time)}: ${esc(t.pris.toFixed(1))} øre"></span>`)
+      .join('');
+
+    boks.innerHTML =
+      `<h2>Strømpris i Oslo (NO1)</h2>` +
+      `<p class="naa">${esc(p.naa.toFixed(1))} <span class="enhet">øre/kWh inkl. mva</span></p>` +
+      `<p class="rad">Billigst kl. ${klokkeslett(p.billigst.time)}: <b>${esc(p.billigst.pris.toFixed(1))}</b> øre</p>` +
+      `<p class="rad">Dyrest kl. ${klokkeslett(p.dyrest.time)}: <b>${esc(p.dyrest.pris.toFixed(1))}</b> øre</p>` +
+      `<div class="graf">${graf}</div>`;
+  } catch (e) {
+    boks.innerHTML = `<h2>Strømpris i Oslo (NO1)</h2><p class="tom">Strømprisen er ikke tilgjengelig akkurat nå.</p>`;
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -572,6 +686,73 @@ kart.on('touchmove', (e) => {
 ['touchend', 'touchcancel', 'dragstart', 'zoomstart'].forEach((h) => kart.on(h, () => clearTimeout(trykkTimer)));
 
 // ---------------------------------------------------------------------------
+// Mobilpanel: under 700px ligger panelet nederst, sammenslått til én linje
+// som kan dras eller trykkes opp. --panelhoyde holder kameraknappene unna.
+// ---------------------------------------------------------------------------
+const hovedpanel = document.getElementById('hovedpanel');
+const panelHeader = document.getElementById('panel-header');
+
+function erMobil() {
+  return window.matchMedia('(max-width: 699.98px)').matches;
+}
+
+function oppdaterPanelhoyde() {
+  document.documentElement.style.setProperty('--panelhoyde', hovedpanel.offsetHeight + 'px');
+}
+
+function settPanelApen(apen) {
+  hovedpanel.classList.toggle('apen', apen);
+}
+
+new ResizeObserver(oppdaterPanelhoyde).observe(hovedpanel);
+window.addEventListener('resize', oppdaterPanelhoyde);
+oppdaterPanelhoyde();
+
+let panelDragY = null, panelDratt = false;
+
+panelHeader.addEventListener('touchstart', (e) => {
+  if (!erMobil() || e.touches.length !== 1) return;
+  panelDragY = e.touches[0].clientY;
+  panelDratt = false;
+}, { passive: true });
+
+panelHeader.addEventListener('touchmove', (e) => {
+  if (panelDragY === null) return;
+  if (Math.abs(panelDragY - e.touches[0].clientY) > 6) panelDratt = true;
+}, { passive: true });
+
+panelHeader.addEventListener('touchend', (e) => {
+  if (panelDragY === null) return;
+  const dy = panelDragY - (e.changedTouches[0]?.clientY ?? panelDragY);
+  panelDragY = null;
+  if (Math.abs(dy) > 30) { settPanelApen(dy > 0); e.preventDefault(); }
+  else if (!panelDratt) { settPanelApen(!hovedpanel.classList.contains('apen')); e.preventDefault(); }
+});
+
+panelHeader.addEventListener('click', () => {
+  if (!erMobil() || panelDratt) { panelDratt = false; return; }
+  settPanelApen(!hovedpanel.classList.contains('apen'));
+});
+
+/** Lukker panelet og flytter kartet slik at en nyåpnet popup ikke havner bak det, på mobil. */
+function sikreSynligPopup(boble) {
+  if (!erMobil()) return;
+  settPanelApen(false);
+  const flytt = () => {
+    requestAnimationFrame(() => {
+      if (!boble.isOpen()) return;
+      const el = boble.getElement();
+      if (!el) return;
+      const boks = el.getBoundingClientRect();
+      const grense = window.innerHeight - hovedpanel.offsetHeight - 12;
+      const overheng = boks.bottom - grense;
+      if (overheng > 0) kart.panBy([0, overheng], { duration: 300 });
+    });
+  };
+  if (kart.isMoving()) kart.once('moveend', flytt); else flytt();
+}
+
+// ---------------------------------------------------------------------------
 // Kamera
 // ---------------------------------------------------------------------------
 let snurrer = false;
@@ -604,6 +785,174 @@ kart.on('mousedown', () => {
     snurrer = false;
     document.getElementById('snurr').setAttribute('aria-pressed', 'false');
   }
+});
+
+// ---------------------------------------------------------------------------
+// Tegn område: klikk for hvert hjørne, dobbeltklikk lukker, Escape avbryter.
+// ---------------------------------------------------------------------------
+const OMRADE_KILDE = 'omrade-tegning';
+let tegnemodus = false;
+let omradeLukket = false;
+let omradeHjørner = [];   // [{ lat, lon }], i tegneretning
+
+function settOppOmrade() {
+  if (kart.getSource(OMRADE_KILDE)) return;
+
+  kart.addSource(OMRADE_KILDE, { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
+  kart.addLayer({
+    id: 'omrade-fyll', type: 'fill', source: OMRADE_KILDE,
+    filter: ['==', ['geometry-type'], 'Polygon'],
+    paint: { 'fill-color': '#2563eb', 'fill-opacity': 0.15 }
+  });
+  kart.addLayer({
+    id: 'omrade-linje', type: 'line', source: OMRADE_KILDE,
+    filter: ['in', ['geometry-type'], ['literal', ['LineString', 'Polygon']]],
+    paint: { 'line-color': '#2563eb', 'line-width': 2, 'line-dasharray': [2, 2] }
+  });
+  kart.addLayer({
+    id: 'omrade-hjorner', type: 'circle', source: OMRADE_KILDE,
+    filter: ['==', ['geometry-type'], 'Point'],
+    paint: { 'circle-radius': 5, 'circle-color': '#2563eb', 'circle-stroke-width': 2, 'circle-stroke-color': '#fff' }
+  });
+}
+
+function tegnOppdater() {
+  const kilde = kart.getSource(OMRADE_KILDE);
+  if (!kilde) return;
+
+  const features = omradeHjørner.map((h) => (
+    { type: 'Feature', geometry: { type: 'Point', coordinates: [h.lon, h.lat] }, properties: {} }
+  ));
+
+  if (omradeHjørner.length >= 2) {
+    const koordinater = omradeHjørner.map((h) => [h.lon, h.lat]);
+    if (omradeLukket) {
+      koordinater.push(koordinater[0]);
+      features.push({ type: 'Feature', geometry: { type: 'Polygon', coordinates: [koordinater] }, properties: {} });
+    } else {
+      features.push({ type: 'Feature', geometry: { type: 'LineString', coordinates: koordinater }, properties: {} });
+    }
+  }
+
+  kilde.setData({ type: 'FeatureCollection', features });
+}
+
+/** Samme algoritme som Geo.IPolygon i Kart/Geo.cs: ray casting, punkt på kant regnes som innenfor. */
+function iPolygon(lat, lon, hjørner) {
+  if (hjørner.length < 3) return false;
+
+  const paaKant = (a, b) => {
+    const eps = 1e-9;
+    const kryssprodukt = (b.lon - a.lon) * (lat - a.lat) - (b.lat - a.lat) * (lon - a.lon);
+    if (Math.abs(kryssprodukt) > eps) return false;
+    return lon >= Math.min(a.lon, b.lon) - eps && lon <= Math.max(a.lon, b.lon) + eps
+        && lat >= Math.min(a.lat, b.lat) - eps && lat <= Math.max(a.lat, b.lat) + eps;
+  };
+  for (let i = 0; i < hjørner.length; i++) {
+    if (paaKant(hjørner[i], hjørner[(i + 1) % hjørner.length])) return true;
+  }
+
+  let innenfor = false;
+  for (let i = 0, j = hjørner.length - 1; i < hjørner.length; j = i++) {
+    const { lat: latI, lon: lonI } = hjørner[i];
+    const { lat: latJ, lon: lonJ } = hjørner[j];
+    if ((lonI > lon) !== (lonJ > lon) && lat < (latJ - latI) * (lon - lonI) / (lonJ - lonI) + latI) {
+      innenfor = !innenfor;
+    }
+  }
+  return innenfor;
+}
+
+function visOmrade() {
+  const panel = document.getElementById('omrade-panel');
+  if (!omradeLukket) { panel.hidden = true; return; }
+
+  const liste = document.getElementById('omrade-liste');
+  liste.innerHTML = '';
+  let sum = 0;
+  for (const oppf of lagene.values()) {
+    if (!oppf.på) continue;
+    const antall = oppf.punkter.filter((p) => iPolygon(p.lat, p.lon, omradeHjørner)).length;
+    sum += antall;
+
+    const rad = document.createElement('div');
+    rad.className = 'rad';
+    rad.innerHTML = `<span>${esc(oppf.navn)}</span><span>${antall}</span>`;
+    liste.appendChild(rad);
+  }
+
+  const sumRad = document.createElement('div');
+  sumRad.className = 'sum';
+  sumRad.innerHTML = `<span>Sum</span><span>${sum}</span>`;
+  liste.appendChild(sumRad);
+  panel.hidden = false;
+}
+
+const knappTegn = document.getElementById('tegn-omrade');
+const knappFjern = document.getElementById('fjern-omrade');
+
+function startTegning() {
+  tegnemodus = true;
+  omradeLukket = false;
+  omradeHjørner = [];
+  tegnOppdater();
+  knappTegn.setAttribute('aria-pressed', 'true');
+  kart.doubleClickZoom.disable();
+  kart.getCanvas().style.cursor = 'crosshair';
+}
+
+function avbrytTegning() {
+  tegnemodus = false;
+  omradeHjørner = [];
+  tegnOppdater();
+  knappTegn.setAttribute('aria-pressed', 'false');
+  kart.doubleClickZoom.enable();
+  kart.getCanvas().style.cursor = '';
+}
+
+function fullførTegning() {
+  tegnemodus = false;
+  omradeLukket = true;
+  tegnOppdater();
+  knappTegn.setAttribute('aria-pressed', 'false');
+  kart.doubleClickZoom.enable();
+  kart.getCanvas().style.cursor = '';
+  knappFjern.hidden = false;
+  visOmrade();
+}
+
+function fjernOmrade() {
+  omradeHjørner = [];
+  omradeLukket = false;
+  tegnOppdater();
+  knappFjern.hidden = true;
+  document.getElementById('omrade-panel').hidden = true;
+}
+
+knappTegn.addEventListener('click', () => {
+  if (tegnemodus) { avbrytTegning(); return; }
+  fjernOmrade();
+  startTegning();
+});
+knappFjern.addEventListener('click', fjernOmrade);
+
+kart.on('click', (e) => {
+  if (!tegnemodus) return;
+  omradeHjørner.push({ lat: e.lngLat.lat, lon: e.lngLat.lng });
+  tegnOppdater();
+});
+
+kart.on('dblclick', (e) => {
+  if (!tegnemodus) return;
+  e.preventDefault();
+  // Dobbeltklikket sender selv to «click»-hendelser før dette; de hører ikke
+  // med som egne hjørner, de er bare lukkesignalet.
+  omradeHjørner.splice(-2, 2);
+  if (omradeHjørner.length >= 3) fullførTegning(); else avbrytTegning();
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && tegnemodus) avbrytTegning();
 });
 </script>
 </body>
