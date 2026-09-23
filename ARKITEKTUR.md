@@ -27,7 +27,9 @@ Prinsipp: kartet er en liste med lag. `ILag → Kartlag (GeoJSON) → MapLibre`.
 |---|---|
 | `GET /api/lag` | `[{ id, navn, beskrivelse, ikon }]` |
 | `GET /api/lag/{id}` | `Kartlag` som GeoJSON `FeatureCollection`. 404 ved ukjent id. 502 `{ feil }` hvis laget kaster; de andre lagene påvirkes ikke. |
-| `GET /api/helse` | `{ status: "ok", tid }` |
+| `GET /api/lag/{id}/historikk` | `[{ tidspunkt, antall }]`, siste 24 timer, eldste først. 404 ved ukjent id, tom liste hvis laget ikke har bilder ennå. `Bildejobb` (bakgrunnstjeneste) tar ett bilde av hvert lag i timen og lagrer det som fil under `Historikk:Mappe` i `appsettings.json` (relativ sti havner under temp-mappa); bilder eldre enn 7 dager slettes. |
+| `GET /api/helse` | `{ status: "ok", tid }`. Lever prosessen? Ingen kall til kildene, svarer alltid umiddelbart. |
+| `GET /api/helse/kilder` | `{ status: "ok"\|"degradert", kilder: [{ kilde, status: "ok"\|"feil"\|"ukjent", sistSjekket, varighetMs }] }`. Virker tjenesten? Leser siste resultat fra `HelseSjekker`, en bakgrunnstjeneste som sjekker hvert lags kilde med et intervall satt i `appsettings.json` (`Helse:IntervallSekunder`, standard 60). Venter aldri på kildene i selve forespørselen. |
 
 Frontenden henter `/api/lag` ved oppstart og hvert lag hvert 15. sekund. Et lag som svarer 502 markeres rødt i lagvelgeren.
 

@@ -1,12 +1,16 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Hosting;
 
 namespace OsloLive.Tester;
 
 /// <summary>
-/// Testverten for hele appen. Skrur av historikkjobben og peker
-/// historikklageret til en midlertidig mappe, slik at testene aldri gjør
-/// nettverkskall i bakgrunnen eller skriver filer utenfor sin egen mappe.
+/// Testverten for hele appen. Fjerner bakgrunnstjenestene (helsesjekken og
+/// historikkjobben) og peker historikklageret til en midlertidig mappe, slik
+/// at testene aldri gjør nettverkskall i bakgrunnen eller skriver filer
+/// utenfor sin egen mappe.
 /// </summary>
 public sealed class TestVert : WebApplicationFactory<Program>
 {
@@ -16,6 +20,7 @@ public sealed class TestVert : WebApplicationFactory<Program>
     {
         builder.UseSetting("Historikk:Aktiv", "false");
         builder.UseSetting("Historikk:Mappe", Mappe);
+        builder.ConfigureServices(tjenester => tjenester.RemoveAll<IHostedService>());
     }
 
     protected override void Dispose(bool disposing)
