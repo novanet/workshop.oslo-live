@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Net;
 using System.Net.Http.Json;
 using System.Text;
@@ -473,6 +474,62 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
     }
 
     [Fact]
+    public async Task Vannstand_svarer_200_med_naa_neste_og_maalt()
+    {
+        // Mellomlageret er statisk og delt mellom tester, så det må tømmes før hvert kall.
+        Allemannsdata.TømMellomlager();
+        var nå = DateTimeOffset.UtcNow;
+        var naaJson = $$"""[{"time":"{{nå.AddMinutes(-20).ToString("o", CultureInfo.InvariantCulture)}}","tide_cm":10.0,"sea_level_cm":12.5,"surge_cm":2.5}]""";
+        var tabellJson = $$"""[{"time":"{{nå.AddHours(3).ToString("o", CultureInfo.InvariantCulture)}}","height_cm":24.0,"kind":"high"},{"time":"{{nå.AddHours(9).ToString("o", CultureInfo.InvariantCulture)}}","height_cm":-12.0,"kind":"low"}]""";
+
+        using var vertMedData = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient<Allemannsdata>().ConfigurePrimaryHttpMessageHandler(() => new VannstandHandler(naaJson, tabellJson))));
+        var klient = vertMedData.CreateClient();
+
+        var svar = await klient.GetAsync("/api/vannstand");
+        var kropp = await svar.Content.ReadFromJsonAsync<JsonElement>();
+
+        Assert.Equal(HttpStatusCode.OK, svar.StatusCode);
+        Assert.Equal(12.5, kropp.GetProperty("naa").GetDouble());
+        Assert.True(DateTimeOffset.TryParse(kropp.GetProperty("maalt").GetString(), out _));
+        Assert.Equal("høyvann", kropp.GetProperty("neste").GetProperty("type").GetString());
+        Assert.True(DateTimeOffset.TryParse(kropp.GetProperty("neste").GetProperty("tidspunkt").GetString(), out _));
+        Assert.Equal(24.0, kropp.GetProperty("neste").GetProperty("verdi").GetDouble());
+    }
+
+    [Fact]
+    public async Task Svikt_i_vannstandskilden_gir_502_med_feil()
+    {
+        Allemannsdata.TømMellomlager();
+        using var vertMedSvikt = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient<Allemannsdata>().ConfigurePrimaryHttpMessageHandler(() => new SviktHandler())));
+        var klient = vertMedSvikt.CreateClient();
+
+        var svar = await klient.GetAsync("/api/vannstand");
+        var kropp = await svar.Content.ReadFromJsonAsync<JsonElement>();
+
+        Assert.Equal(HttpStatusCode.BadGateway, svar.StatusCode);
+        Assert.False(string.IsNullOrWhiteSpace(kropp.GetProperty("feil").GetString()));
+    }
+
+    [Fact]
+    public async Task Svikt_i_vannstandskilden_rammer_ikke_lagoversikten()
+    {
+        Allemannsdata.TømMellomlager();
+        using var vertMedSvikt = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient<Allemannsdata>().ConfigurePrimaryHttpMessageHandler(() => new SviktHandler())));
+        var klient = vertMedSvikt.CreateClient();
+
+        var vannstand = await klient.GetAsync("/api/vannstand");
+        var lag = await klient.GetAsync("/api/lag");
+        var helse = await klient.GetAsync("/api/helse");
+
+        Assert.Equal(HttpStatusCode.BadGateway, vannstand.StatusCode);
+        Assert.Equal(HttpStatusCode.OK, lag.StatusCode);
+        Assert.Equal(HttpStatusCode.OK, helse.StatusCode);
+    }
+
+    [Fact]
     public async Task Testverten_kjoerer_ingen_bakgrunnsjobb_og_lagrer_bare_i_sin_egen_mappe()
     {
         // Øyeblikksjobb og helsesjekken er fjernet fra testverten, og Historikk:Mappe peker på
@@ -705,6 +762,24 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
             throw new HttpRequestException("Kilden er nede.");
     }
 
+    /// <summary>Svarer med tidsserien til «naa» eller tabellen til «neste», avhengig av hvilken operasjon adressen ber om.</summary>
+    private sealed class VannstandHandler(string naaJson, string tabellJson) : HttpMessageHandler
+    {
+        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage forespørsel, CancellationToken stopp)
+        {
+            var erTabell = forespørsel.RequestUri!.ToString().Contains("get_tide_table");
+            var kropp = Innpakket(erTabell ? "get_tide_table" : "get_tide_forecast", erTabell ? tabellJson : naaJson);
+
+            return Task.FromResult(new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(kropp, Encoding.UTF8, "application/json"),
+            });
+        }
+    }
+
+    private static string Innpakket(string operasjon, string data) =>
+        $$"""{"source":"weather","operation":"{{operasjon}}","parameters":{},"data":{{data}}}""";
+
     private sealed class StubHandler(string svar) : HttpMessageHandler
     {
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage forespørsel, CancellationToken stopp) =>
@@ -713,7 +788,6 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
                 Content = new StringContent(svar, System.Text.Encoding.UTF8, "application/json"),
             });
     }
-
     private sealed record Lagoppforing(string Id, string Navn, string Beskrivelse, string Ikon);
 
     private sealed record Statistikkoppforing(string Id, string Navn, int? Antall, DateTimeOffset? Eldste, DateTimeOffset? Nyeste, DateTimeOffset? Hentet, bool Feiler);
