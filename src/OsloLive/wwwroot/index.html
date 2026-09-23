@@ -88,26 +88,6 @@
   body.demo .panel { opacity: 0; pointer-events: none; transition: opacity 1s ease; }
   body.demo .tidslinje { opacity: 0; pointer-events: none; transition: opacity 1s ease; }
 
-  /* Markører: farget skive med mørk ring, så punktene står fram
-     mot det beige kartet. */
-  .merke {
-    width: 28px; height: 28px; border-radius: 50%;
-    border: 2px solid #111;
-    display: grid; place-items: center;
-    font-size: 14px; line-height: 1; cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0,0,0,.3);
-    transition: transform .12s ease;
-    text-shadow: 0 0 3px rgba(255,255,255,.95);
-  }
-  .merke:hover { transform: scale(1.32); }
-
-  /* Varsel: blinker minst 3 ganger når en regel slår til første gang for et punkt. */
-  @keyframes varsel-blink {
-    0%, 100% { opacity: 1; box-shadow: 0 2px 5px rgba(0,0,0,.3); }
-    50% { opacity: .2; box-shadow: 0 0 14px 4px rgba(185,28,28,.9); }
-  }
-  .merke.blink { animation: varsel-blink .5s ease-in-out 3; }
-
   .maplibregl-popup-content {
     background: #fff; color: var(--tekst);
     border: 1.5px solid var(--kant); border-radius: 10px;
@@ -325,6 +305,7 @@ kart.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), 'bot
 kart.on('style.load', () => {
   varmTema(kart);
   settOppOmrade();
+  leggTilPunktlag();
   start();
   hentStroem();
   setInterval(hentStroem, 60000); // maks én gang i minuttet, ikke som lagene hvert 15. sekund
@@ -514,14 +495,159 @@ function tidTekst(d) {
   return d ? d.toLocaleString('no-NO', { weekday: 'short', hour: '2-digit', minute: '2-digit' }) : 'Nå';
 }
 
-/** Viser markører eller varmekart for laget, ut fra på/av og valgt visning. */
+// Tegner samme skive som .merke før: lagets farge, mørk ring, ikonet i midten.
+function lagMerkebilde(navn, farge, ikon) {
+  if (kart.hasImage(navn)) return;
+  const s = 56, c = document.createElement('canvas');
+  c.width = c.height = s;
+  const g = c.getContext('2d');
+  g.beginPath(); g.arc(s / 2, s / 2, s / 2 - 3, 0, Math.PI * 2);
+  g.fillStyle = farge; g.fill();
+  g.lineWidth = 4; g.strokeStyle = '#111'; g.stroke();
+  g.font = '28px sans-serif'; g.textAlign = 'center'; g.textBaseline = 'middle';
+  g.shadowColor = 'rgba(255,255,255,.95)'; g.shadowBlur = 3;
+  g.fillText(ikon, s / 2, s / 2 + 2);
+  kart.addImage(navn, g.getImageData(0, 0, s, s), { pixelRatio: 2 });
+}
+
+// Bildet et punkt tegnes med: lagets farge og ikon, eller punktets eget ikon
+// (smilefjes) eller advarsel. Bildene lages første gang de trengs.
+function bildeFor(id, oppf, p) {
+  if (p.egenskaper.advarsel) return 'merke-advarsel';
+  const eget = p.egenskaper.ikon;
+  const navn = eget ? 'merke-' + id + '-' + eget : 'merke-' + id;
+  lagMerkebilde(navn, oppf.farge, eget || oppf.ikon);
+  return navn;
+}
+
+// Delt popup: brukes både av klikk på kartet og av «Nærmest her». Vi husker
+// hvilket lag og punkt den hører til, så den lukkes når laget slås av eller
+// byttes til varmekart, og følger punktet (eller forsvinner med det) når
+// laget hentes på nytt.
+let aapenPopup = null;   // { boble, lag, id }
+
+function visPopup(lag, p) {
+  lukkPopup();
+  const boble = new maplibregl.Popup({ offset: 18, closeButton: true })
+    .setLngLat([p.lon, p.lat]).setHTML(popup(p.egenskaper)).addTo(kart);
+  boble.on('close', () => { if (aapenPopup?.boble === boble) aapenPopup = null; });
+  aapenPopup = { boble, lag, id: p.id };
+  sikreSynligPopup(boble);
+}
+
+/** Lukker popupen. Med lag oppgitt: bare hvis den hører til det laget. */
+function lukkPopup(lag) {
+  if (!aapenPopup || (lag && aapenPopup.lag !== lag)) return;
+  aapenPopup.boble.remove();
+  aapenPopup = null;
+}
+
+function leggTilPunktlag() {
+  if (kart.getSource('punkter')) return;
+
+  lagMerkebilde('merke-advarsel', '#b91c1c', '⚠️');
+
+  // Én kilde for alle lag, med klynging innebygd i MapLibre. Punkter innenfor
+  // 50 piksler samles; fra zoom 16 (clusterMaxZoom + 1) er alt enkeltpunkter.
+  kart.addSource('punkter', {
+    type: 'geojson',
+    data: { type: 'FeatureCollection', features: [] },
+    cluster: true,
+    clusterRadius: 50,
+    clusterMaxZoom: 15
+  });
+  kart.addLayer({ id: 'punkter-klynge', type: 'circle', source: 'punkter',
+    filter: ['has', 'point_count'],
+    paint: {
+      'circle-color': '#111',
+      'circle-radius': ['step', ['get', 'point_count'], 16, 10, 20, 50, 26],
+      'circle-stroke-width': 2, 'circle-stroke-color': '#fff'
+    } });
+  // Antallet i klyngen. Fonten må finnes hos kartstilens glyph-tjeneste
+  // (tiles.openfreemap.org/fonts/{fontstack}/{range}.pbf): «Noto Sans Bold»
+  // er den liberty-stilen selv bruker på land- og hovedstadsnavn. Tjenesten
+  // svarer 404 på sammensatte fontstabler, så her skal det stå én font.
+  kart.addLayer({ id: 'punkter-antall', type: 'symbol', source: 'punkter',
+    filter: ['has', 'point_count'],
+    layout: {
+      'text-field': ['get', 'point_count_abbreviated'],
+      'text-font': ['Noto Sans Bold'],
+      'text-size': 13,
+      'text-allow-overlap': true, 'text-ignore-placement': true
+    },
+    paint: { 'text-color': '#fff' } });
+  // Varsel: rød glorie under punktet, som blinker minst 3 ganger når en regel
+  // slår til første gang for et punkt (erstatter CSS-animasjonen på .merke).
+  kart.addLayer({ id: 'punkter-blink', type: 'circle', source: 'punkter',
+    filter: ['all', ['!', ['has', 'point_count']], ['==', ['get', 'blink'], 1]],
+    paint: {
+      'circle-color': 'rgba(185,28,28,.9)',
+      'circle-radius': 22, 'circle-blur': 0.6, 'circle-opacity': 0
+    } });
+  kart.addLayer({ id: 'punkter-enkelt', type: 'symbol', source: 'punkter',
+    filter: ['!', ['has', 'point_count']],
+    layout: {
+      'icon-image': ['get', 'bilde'],
+      'icon-allow-overlap': true, 'icon-ignore-placement': true
+    } });
+
+  // Klikk på en klynge zoomer inn til den sprer seg.
+  kart.on('click', 'punkter-klynge', async (e) => {
+    if (tegnemodus) return;
+    const f = e.features[0];
+    try {
+      const zoom = await kart.getSource('punkter').getClusterExpansionZoom(f.properties.cluster_id);
+      kart.easeTo({ center: f.geometry.coordinates, zoom });
+    } catch (err) { /* klyngen finnes ikke lenger; dataene ble hentet på nytt */ }
+  });
+  kart.on('click', 'punkter-enkelt', (e) => {
+    if (tegnemodus) return;
+    const { lag, id } = e.features[0].properties;
+    const punkt = lagene.get(lag)?.punkter.find((p) => p.id === id);
+    if (punkt) visPopup(lag, punkt);
+  });
+  ['punkter-klynge', 'punkter-enkelt'].forEach((id) => {
+    kart.on('mouseenter', id, () => { kart.getCanvas().style.cursor = 'pointer'; });
+    kart.on('mouseleave', id, () => { kart.getCanvas().style.cursor = ''; });
+  });
+}
+
+/** Bygger kilden på nytt av lagene som er på og viser punkter, ikke varmekart. */
+function oppdaterKilde() {
+  const features = [];
+  for (const [id, oppf] of lagene) {
+    if (!oppf.på || oppf.varme) continue;
+    for (const p of oppf.punkter) features.push({
+      type: 'Feature',
+      geometry: { type: 'Point', coordinates: [p.lon, p.lat] },
+      properties: { lag: id, id: p.id, bilde: bildeFor(id, oppf, p), blink: p.blink ? 1 : 0 }
+    });
+  }
+  kart.getSource('punkter')?.setData({ type: 'FeatureCollection', features });
+}
+
+/** Blinker glorien på punktene med blink=1 tre ganger, og nullstiller så flagget. */
+let blinkTimer = null;
+function blinkVarsler() {
+  if (blinkTimer) return;
+  let steg = 0;
+  blinkTimer = setInterval(() => {
+    steg++;
+    if (kart.getLayer('punkter-blink')) kart.setPaintProperty('punkter-blink', 'circle-opacity', steg % 2 ? 1 : 0);
+    if (steg < 6) return;
+    clearInterval(blinkTimer); blinkTimer = null;
+    for (const oppf of lagene.values()) for (const p of oppf.punkter) p.blink = false;
+    oppdaterKilde();
+  }, 250);
+}
+
+/** Viser punkter eller varmekart for laget, ut fra på/av og valgt visning. */
 function visLag(id) {
   const oppf = lagene.get(id);
-  const markorerSynlige = oppf.på && !oppf.varme;
-  for (const m of oppf.markorer) { if (markorerSynlige) { m.addTo(kart); } else { m.remove(); } }
   if (kart.getLayer('varme-' + id)) {
     kart.setLayoutProperty('varme-' + id, 'visibility', oppf.på && oppf.varme ? 'visible' : 'none');
   }
+  oppdaterKilde();
 }
 
 function varmekart(id, features) {
@@ -530,6 +656,7 @@ function varmekart(id, features) {
   const kilde = kart.getSource('varme-' + id);
   if (kilde) { kilde.setData(data); return; }
   kart.addSource('varme-' + id, { type: 'geojson', data });
+  // Legges under punktlagene, så ikonene ligger over varmen fra andre lag.
   kart.addLayer({
     id: 'varme-' + id, type: 'heatmap', source: 'varme-' + id,
     layout: { visibility: 'none' },
@@ -541,7 +668,7 @@ function varmekart(id, features) {
       'heatmap-color': ['interpolate', ['linear'], ['heatmap-density'],
         0, rgba(oppf.farge, 0), 0.2, rgba(oppf.farge, 0.25), 0.6, rgba(oppf.farge, 0.6), 1, rgba(oppf.farge, 0.95)]
     }
-  });
+  }, kart.getLayer('punkter-klynge') ? 'punkter-klynge' : undefined);
 }
 
 // ---------------------------------------------------------------------------
@@ -576,7 +703,7 @@ const varselOppfylt = new Set();   // nøkler (lag|punkt-id|regel-id) som er opp
 const varselLukket = new Set();    // nøkler brukeren har lukket; kommer ikke tilbake så lenge siden er åpen
 
 /** Kjører reglene for laget mot ett punkt, og varsler ved nye brudd. */
-function sjekkVarsler(lagId, oppf, p, el) {
+function sjekkVarsler(lagId, oppf, p, punkt) {
   for (const r of VARSELREGLER) {
     if (r.lag !== lagId) continue;
 
@@ -587,7 +714,8 @@ function sjekkVarsler(lagId, oppf, p, el) {
     varselOppfylt.add(nøkkel);
     if (varselLukket.has(nøkkel)) continue;    // lukket av brukeren denne økten
 
-    el.classList.add('blink');
+    punkt.blink = true;
+    blinkVarsler();
     leggTilVarsel(nøkkel, oppf.ikon, p.navn ?? 'Uten navn', r.tekst(p));
   }
 }
@@ -628,40 +756,29 @@ async function hent(id) {
     const geo = await svar.json();
     if (gen !== tidGenerasjon) return;   // et tregt svar fra en annen tid enn den valgte nå
 
-    for (const m of oppf.markorer) m.remove();
-    oppf.markorer = [];
-    oppf.punkter = [];
-
-    const gyldige = [];
+    const liste = [];
     for (const f of (geo.features ?? [])) {
       const c = f.geometry?.coordinates;
       if (!Array.isArray(c) || c.length < 2) continue;
 
       const p = f.properties ?? {};
-      const el = document.createElement('div');
-      el.className = 'merke';
-      el.style.background = p.advarsel ? '#b91c1c' : oppf.farge;
-      el.textContent = p.advarsel ? '⚠️' : (p.ikon ?? oppf.ikon);
-
-      sjekkVarsler(id, oppf, p, el);
-
-      const boble = new maplibregl.Popup({ offset: 18, closeButton: true }).setHTML(popup(p));
-      boble.on('open', () => sikreSynligPopup(boble));
-
-      const m = new maplibregl.Marker({ element: el })
-        .setLngLat([c[0], c[1]])
-        .setPopup(boble);
-
-      if (oppf.på && !oppf.varme) m.addTo(kart);
-      oppf.markorer.push(m);
-      oppf.punkter.push({ markor: m, navn: f.properties?.navn ?? 'Uten navn', lon: c[0], lat: c[1] });
-      gyldige.push({ type: 'Feature', geometry: { type: 'Point', coordinates: [c[0], c[1]] }, properties: {} });
+      const punkt = { id: String(p.id ?? (p.navn ?? '') + '|' + c[0] + '|' + c[1]), navn: p.navn ?? 'Uten navn', lon: c[0], lat: c[1], egenskaper: p };
+      sjekkVarsler(id, oppf, p, punkt);
+      liste.push(punkt);
     }
 
-    varmekart(id, gyldige);
+    // Popupen følger punktet sitt om det fortsatt finnes, ellers forsvinner den med det.
+    if (aapenPopup?.lag === id) {
+      const igjen = liste.find((p) => p.id === aapenPopup.id);
+      if (igjen) aapenPopup.boble.setLngLat([igjen.lon, igjen.lat]).setHTML(popup(igjen.egenskaper));
+      else lukkPopup(id);
+    }
+    oppf.punkter = liste;
+
+    varmekart(id, liste.map((p) => ({ type: 'Feature', geometry: { type: 'Point', coordinates: [p.lon, p.lat] }, properties: {} })));
     visLag(id);
 
-    oppf.antall = oppf.markorer.length;
+    oppf.antall = oppf.punkter.length;
     oppf.feil = false;
     if (levende) oppf.sistOk = new Date();
     teller.textContent = oppf.antall;
@@ -670,10 +787,10 @@ async function hent(id) {
     if (gen !== tidGenerasjon) return;
     // Ta bort punktene fra forrige henting, ellers blir de stående i kartet
     // selv om laget er markert som feilende og demoen hopper over det.
-    for (const m of oppf.markorer) m.remove();
-    oppf.markorer = [];
+    lukkPopup(id);
     oppf.punkter = [];
     varmekart(id, []);
+    visLag(id);
     oppf.antall = 0;
     oppf.feil = true;
     teller.textContent = 'feil';
@@ -688,6 +805,7 @@ function settPå(id, på) {
   const oppf = lagene.get(id);
   oppf.på = på;
   if (oppf.boks) oppf.boks.checked = på;
+  if (!på) lukkPopup(id);
   visLag(id);
   oppdaterBunn();
   if (valgtSted) visNaermest();
@@ -791,7 +909,7 @@ async function start() {
   lag.forEach((l, nr) => {
     const farge = fargeFor(l.id, nr);
     const på = onsket ? onsket.has(l.id) : true;
-    lagene.set(l.id, { ikon: l.ikon || '📍', navn: l.navn, farge, markorer: [], punkter: [], antall: 0, på, feil: false, boks: null, varme: !!varmevalg[l.id], sistOk: null });
+    lagene.set(l.id, { ikon: l.ikon || '📍', navn: l.navn, farge, punkter: [], antall: 0, på, feil: false, boks: null, varme: !!varmevalg[l.id], sistOk: null });
 
     const rad = document.createElement('label');
     rad.className = 'lag';
@@ -806,10 +924,14 @@ async function start() {
 
     lagene.get(l.id).boks = rad.querySelector('input');
     rad.querySelector('input').addEventListener('change', (ev) => settPå(l.id, ev.target.checked));
+    // Lag som adressen har slått av, skjules med én gang, samme vei som avkrysningen:
+    // settPå holder laget ute av kartkilden (oppdaterKilde) også når punktene hentes senere.
+    if (!på) settPå(l.id, false);
     rad.querySelector('.visning').addEventListener('click', (ev) => {
       ev.preventDefault(); ev.stopPropagation();
       const oppf = lagene.get(l.id);
       oppf.varme = !oppf.varme;
+      if (oppf.varme) lukkPopup(l.id);
       ev.currentTarget.setAttribute('aria-pressed', String(oppf.varme));
       ev.currentTarget.textContent = oppf.varme ? 'Varme' : 'Punkter';
       lagreVarmevalg();
@@ -940,21 +1062,21 @@ function velgSted(lngLat) {
 
 function visNaermest() {
   const innslag = [];
-  for (const oppf of lagene.values()) {
+  for (const [id, oppf] of lagene) {
     if (!oppf.på || !oppf.punkter.length) continue;          // lag uten punkter vises ikke
     let best = null;
     for (const p of oppf.punkter) {
       const d = avstand(valgtSted.lat, valgtSted.lng, p.lat, p.lon);
       if (!best || d < best.d) best = { ...p, d };
     }
-    innslag.push({ oppf, best });
+    innslag.push({ id, oppf, best });
   }
   innslag.sort((a, b) => a.best.d - b.best.d);               // korteste øverst
 
   const liste = document.getElementById('naermest-liste');
   liste.innerHTML = '';
   if (!innslag.length) liste.innerHTML = '<p class="tom">Ingen punkter i lagene som er på.</p>';
-  for (const { oppf, best } of innslag) {
+  for (const { id, oppf, best } of innslag) {
     const rad = document.createElement('div');
     rad.className = 'innslag';
     rad.innerHTML = '<span class="ikon"></span><span class="tekst"><span class="punkt"></span><small class="lagnavn"></small></span><span class="meter"></span>';
@@ -965,10 +1087,7 @@ function visNaermest() {
     rad.querySelector('.meter').textContent = Math.round(best.d) + ' m';
     rad.addEventListener('click', () => {
       kart.flyTo({ center: [best.lon, best.lat], zoom: Math.max(kart.getZoom(), 16), duration: 1200 });
-      const popup = best.markor.getPopup();
-      if (popup && !popup.isOpen()) {
-        if (oppf.på && !oppf.varme) { best.markor.togglePopup(); } else { popup.setLngLat([best.lon, best.lat]).addTo(kart); }
-      }
+      visPopup(id, best);
     });
     liste.appendChild(rad);
   }
