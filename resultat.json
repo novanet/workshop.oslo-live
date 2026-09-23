@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:14:30",
+  "oppdatert": "2026-09-23T14:15:10",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -377,12 +377,12 @@
       "levert": [],
       "dollar": 6.25,
       "tokens": 12072609,
-      "sekunder": 2097,
+      "sekunder": 2098,
       "pr": 3,
       "utkast": 0,
       "merget": 1,
-      "kjoeringer": 10,
-      "utenPr": 7,
+      "kjoeringer": 11,
+      "utenPr": 8,
       "bygg": [],
       "estimert": false,
       "plass": 12
@@ -465,12 +465,12 @@
       "levert": [],
       "dollar": 0.921,
       "tokens": 1496171,
-      "sekunder": 290,
+      "sekunder": 291,
       "pr": 0,
       "utkast": 0,
       "merget": 0,
-      "kjoeringer": 4,
-      "utenPr": 4,
+      "kjoeringer": 5,
+      "utenPr": 5,
       "bygg": [],
       "estimert": false,
       "plass": 16
@@ -560,12 +560,12 @@
       "levert": [],
       "dollar": 13.115,
       "tokens": 25524857,
-      "sekunder": 4548,
+      "sekunder": 4549,
       "pr": 3,
       "utkast": 0,
       "merget": 0,
-      "kjoeringer": 19,
-      "utenPr": 15,
+      "kjoeringer": 20,
+      "utenPr": 16,
       "bygg": [],
       "estimert": false,
       "plass": 21
@@ -586,7 +586,7 @@
       "issue": 132,
       "navn": "Ekte sollys på 3D-byggene",
       "startet": "2026-09-23T12:07:36.4342939+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-wilma",
@@ -594,7 +594,7 @@
       "issue": 8,
       "navn": "Hendelser",
       "startet": "2026-09-23T12:10:34.6234355+00:00",
-      "minutter": 3
+      "minutter": 4
     }
   ],
   "main": {
@@ -623,30 +623,6 @@
     "feilmelding": null
   },
   "tildelt": [
-    {
-      "issue": 8,
-      "navn": "Nytt lag: politilogg og nyhetshendelser",
-      "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T12:10:35Z"
-    },
-    {
-      "issue": 10,
-      "navn": "Nytt lag: trafikkregistreringspunkt",
-      "github": "pr0nin",
-      "oppdatert": "2026-09-23T12:10:45Z"
-    },
-    {
-      "issue": 11,
-      "navn": "Nytt lag: kollektivtrafikk som beveger seg",
-      "github": "coffeelyfe",
-      "oppdatert": "2026-09-23T12:08:47Z"
-    },
-    {
-      "issue": 11,
-      "navn": "Nytt lag: kollektivtrafikk som beveger seg",
-      "github": "ingvevs",
-      "oppdatert": "2026-09-23T12:08:47Z"
-    },
     {
       "issue": 13,
       "navn": "Nytt lag: veiarbeid og stengte veier",
@@ -699,7 +675,7 @@
       "issue": 28,
       "navn": "Nytt lag: togtrafikk",
       "github": "Buggz",
-      "oppdatert": "2026-09-23T11:59:15Z"
+      "oppdatert": "2026-09-23T12:14:59Z"
     },
     {
       "issue": 29,
@@ -825,7 +801,7 @@
       "issue": 111,
       "navn": "Nytt lag: kaier og ferjekaier",
       "github": "martinrholth",
-      "oppdatert": "2026-09-23T12:14:25Z"
+      "oppdatert": "2026-09-23T12:15:03Z"
     },
     {
       "issue": 113,
@@ -933,7 +909,7 @@
       "issue": 128,
       "navn": "Simulering: tsunami i Oslofjorden",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T12:13:52Z"
+      "oppdatert": "2026-09-23T12:14:52Z"
     },
     {
       "issue": 129,
@@ -969,13 +945,13 @@
       "issue": 132,
       "navn": "Ekte sollys på 3D-byggene",
       "github": "audmaha",
-      "oppdatert": "2026-09-23T12:13:54Z"
+      "oppdatert": "2026-09-23T12:15:00Z"
     },
     {
       "issue": 132,
       "navn": "Ekte sollys på 3D-byggene",
       "github": "nilsgs",
-      "oppdatert": "2026-09-23T12:13:54Z"
+      "oppdatert": "2026-09-23T12:15:00Z"
     },
     {
       "issue": 141,
