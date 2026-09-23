@@ -165,6 +165,17 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
     }
 
     [Fact]
+    public async Task Lagoversikten_har_sykkelparkering()
+    {
+        var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
+
+        var sykkelparkering = lag!.Single(l => l.Id == "sykkelparkering");
+        Assert.Equal("Sykkelparkering", sykkelparkering.Navn);
+        Assert.False(string.IsNullOrWhiteSpace(sykkelparkering.Beskrivelse));
+        Assert.False(string.IsNullOrWhiteSpace(sykkelparkering.Ikon));
+    }
+
+    [Fact]
     public async Task Spisestederlaget_gir_featurecollection_uten_nett()
     {
         const string svar = """
