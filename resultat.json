@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T13:41:56",
+  "oppdatert": "2026-09-23T13:42:35",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -255,14 +255,14 @@
           "poeng": 2
         }
       ],
-      "dollar": 16.275,
-      "tokens": 29367158,
-      "sekunder": 5169,
+      "dollar": 17.384,
+      "tokens": 30976952,
+      "sekunder": 5565,
       "pr": 6,
       "utkast": 0,
       "merget": 2,
-      "kjoeringer": 17,
-      "utenPr": 11,
+      "kjoeringer": 18,
+      "utenPr": 12,
       "bygg": [],
       "estimert": false,
       "plass": 8
@@ -549,18 +549,10 @@
     {
       "agent": "mini-wilma",
       "github": "larsajakobsen",
-      "issue": 129,
-      "navn": "Simulering: meteornedslag",
-      "startet": "2026-09-23T11:35:47.7322329+00:00",
-      "minutter": 6
-    },
-    {
-      "agent": "mini-wilma",
-      "github": "larsajakobsen",
       "issue": 112,
       "navn": "Nytt lag: målestasjoner i elvene",
       "startet": "2026-09-23T11:41:09.4028616+00:00",
-      "minutter": 0
+      "minutter": 1
     }
   ],
   "main": {
@@ -922,7 +914,7 @@
       "issue": 129,
       "navn": "Simulering: meteornedslag",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T11:35:48Z"
+      "oppdatert": "2026-09-23T11:42:31Z"
     },
     {
       "issue": 130,
@@ -952,13 +944,13 @@
       "issue": 132,
       "navn": "Ekte sollys på 3D-byggene",
       "github": "audmaha",
-      "oppdatert": "2026-09-23T11:39:29Z"
+      "oppdatert": "2026-09-23T11:42:03Z"
     },
     {
       "issue": 132,
       "navn": "Ekte sollys på 3D-byggene",
       "github": "nilsgs",
-      "oppdatert": "2026-09-23T11:39:29Z"
+      "oppdatert": "2026-09-23T11:42:03Z"
     }
   ],
   "aapne": [
