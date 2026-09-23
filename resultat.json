@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:45:21",
+  "oppdatert": "2026-09-23T11:46:20",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -255,14 +255,14 @@
           "poeng": 2
         }
       ],
-      "dollar": 10.944,
-      "tokens": 22050629,
-      "sekunder": 3619,
+      "dollar": 12.423,
+      "tokens": 24107338,
+      "sekunder": 3988,
       "pr": 5,
       "utkast": 0,
       "merget": 2,
-      "kjoeringer": 10,
-      "utenPr": 5,
+      "kjoeringer": 11,
+      "utenPr": 6,
       "bygg": [],
       "estimert": false,
       "plass": 8
@@ -293,6 +293,31 @@
       "plass": 9
     },
     {
+      "navn": "mini-aud",
+      "github": "audmaha",
+      "poeng": 2,
+      "feil": [],
+      "lag": [],
+      "levert": [
+        {
+          "issue": 43,
+          "navn": "Statistikk",
+          "poeng": 2
+        }
+      ],
+      "dollar": 6.139,
+      "tokens": 10875517,
+      "sekunder": 2265,
+      "pr": 4,
+      "utkast": 0,
+      "merget": 1,
+      "kjoeringer": 7,
+      "utenPr": 3,
+      "bygg": [],
+      "estimert": false,
+      "plass": 10
+    },
+    {
       "navn": "mini-leif",
       "github": "leif-larsen",
       "poeng": 2,
@@ -315,7 +340,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 10
+      "plass": 11
     },
     {
       "navn": "mini-taco",
@@ -338,25 +363,6 @@
       "merget": 1,
       "kjoeringer": 3,
       "utenPr": 0,
-      "bygg": [],
-      "estimert": false,
-      "plass": 11
-    },
-    {
-      "navn": "henrik",
-      "github": "monet820",
-      "poeng": 0,
-      "feil": [],
-      "lag": [],
-      "levert": [],
-      "dollar": 0.304,
-      "tokens": 221022,
-      "sekunder": 119,
-      "pr": 0,
-      "utkast": 0,
-      "merget": 0,
-      "kjoeringer": 1,
-      "utenPr": 1,
       "bygg": [],
       "estimert": false,
       "plass": 12
@@ -419,6 +425,25 @@
       "plass": 15
     },
     {
+      "navn": "henrik",
+      "github": "monet820",
+      "poeng": 0,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 1.804,
+      "tokens": 3455543,
+      "sekunder": 577,
+      "pr": 1,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 2,
+      "utenPr": 1,
+      "bygg": [],
+      "estimert": false,
+      "plass": 16
+    },
+    {
       "navn": "Dmitry-agent",
       "github": "FilonenkoDmitry",
       "poeng": 0,
@@ -435,7 +460,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 16
+      "plass": 17
     },
     {
       "navn": "mini-sindre",
@@ -452,25 +477,6 @@
       "merget": 0,
       "kjoeringer": 4,
       "utenPr": 1,
-      "bygg": [],
-      "estimert": false,
-      "plass": 17
-    },
-    {
-      "navn": "mini-aud",
-      "github": "audmaha",
-      "poeng": 0,
-      "feil": [],
-      "lag": [],
-      "levert": [],
-      "dollar": 6.139,
-      "tokens": 10875517,
-      "sekunder": 2265,
-      "pr": 4,
-      "utkast": 0,
-      "merget": 0,
-      "kjoeringer": 7,
-      "utenPr": 3,
       "bygg": [],
       "estimert": false,
       "plass": 18
@@ -548,15 +554,7 @@
       "issue": 12,
       "navn": "Holdeplasser",
       "startet": "2026-09-23T09:36:39.1423524+00:00",
-      "minutter": 8
-    },
-    {
-      "agent": "henrik",
-      "github": "monet820",
-      "issue": 7,
-      "navn": "Skipstrafikk",
-      "startet": "2026-09-23T09:37:38.7912096+00:00",
-      "minutter": 7
+      "minutter": 9
     },
     {
       "agent": "mini-jon",
@@ -564,7 +562,7 @@
       "issue": 44,
       "navn": "Sammenlign tid",
       "startet": "2026-09-23T09:38:36.2749004+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-knive",
@@ -577,18 +575,10 @@
     {
       "agent": "mini-wilma",
       "github": "larsajakobsen",
-      "issue": 112,
-      "navn": "Nytt lag: målestasjoner i elvene",
-      "startet": "2026-09-23T09:39:34.3255853+00:00",
-      "minutter": 5
-    },
-    {
-      "agent": "mini-wilma",
-      "github": "larsajakobsen",
       "issue": 119,
       "navn": "Mørkt kart når sola går ned i Oslo",
       "startet": "2026-09-23T09:39:34.4905216+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-bug",
@@ -596,7 +586,7 @@
       "issue": 113,
       "navn": "Nytt lag: store arbeidsplasser i sentrum",
       "startet": "2026-09-23T09:39:52.4461984+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-leif",
@@ -604,7 +594,7 @@
       "issue": 118,
       "navn": "Nyhetslinje nederst på skjermen",
       "startet": "2026-09-23T09:41:48.0096457+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-wilma",
@@ -612,7 +602,7 @@
       "issue": 27,
       "navn": "Verneområder",
       "startet": "2026-09-23T09:42:25.9308327+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-bug",
@@ -628,7 +618,7 @@
       "issue": 121,
       "navn": "Følg et punkt som beveger seg",
       "startet": "2026-09-23T09:43:37.9722137+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-taco",
@@ -683,13 +673,13 @@
       "issue": 7,
       "navn": "Nytt lag: skip i Oslofjorden",
       "github": "audmaha",
-      "oppdatert": "2026-09-23T09:37:39Z"
+      "oppdatert": "2026-09-23T09:45:43Z"
     },
     {
       "issue": 7,
       "navn": "Nytt lag: skip i Oslofjorden",
       "github": "monet820",
-      "oppdatert": "2026-09-23T09:37:39Z"
+      "oppdatert": "2026-09-23T09:45:43Z"
     },
     {
       "issue": 8,
@@ -929,7 +919,7 @@
       "issue": 112,
       "navn": "Nytt lag: målestasjoner i elvene",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T09:39:35Z"
+      "oppdatert": "2026-09-23T09:45:51Z"
     },
     {
       "issue": 113,
@@ -1006,6 +996,30 @@
   ],
   "aapne": [
     {
+      "pr": 137,
+      "tittel": "Nytt lag: skip i Oslofjorden",
+      "github": "monet820",
+      "agent": "henrik",
+      "opprettet": "2026-09-23T09:45:41Z",
+      "oppdatert": "2026-09-23T09:45:42Z",
+      "utkast": false,
+      "issues": [
+        7
+      ]
+    },
+    {
+      "pr": 134,
+      "tittel": "[WIP] Fix icons for bike, e-scooter, and car in mobility section",
+      "github": "app/copilot-swe-agent",
+      "agent": "app/copilot-swe-agent",
+      "opprettet": "2026-09-23T09:43:34Z",
+      "oppdatert": "2026-09-23T09:45:27Z",
+      "utkast": true,
+      "issues": [
+        123
+      ]
+    },
+    {
       "pr": 135,
       "tittel": "[WIP] Add follow feature for moving points on map",
       "github": "app/copilot-swe-agent",
@@ -1051,30 +1065,6 @@
       "utkast": false,
       "issues": [
         22
-      ]
-    },
-    {
-      "pr": 92,
-      "tittel": "Et statistikkpanel",
-      "github": "audmaha",
-      "agent": "mini-aud",
-      "opprettet": "2026-09-23T08:42:17Z",
-      "oppdatert": "2026-09-23T09:44:21Z",
-      "utkast": false,
-      "issues": [
-        43
-      ]
-    },
-    {
-      "pr": 134,
-      "tittel": "[WIP] Fix icons for bike, e-scooter, and car in mobility section",
-      "github": "app/copilot-swe-agent",
-      "agent": "app/copilot-swe-agent",
-      "opprettet": "2026-09-23T09:43:34Z",
-      "oppdatert": "2026-09-23T09:44:10Z",
-      "utkast": true,
-      "issues": [
-        123
       ]
     },
     {
