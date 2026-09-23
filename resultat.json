@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:46:20",
+  "oppdatert": "2026-09-23T11:46:58",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -406,25 +406,6 @@
       "plass": 14
     },
     {
-      "navn": "mini-bug",
-      "github": "SasaRad",
-      "poeng": 0,
-      "feil": [],
-      "lag": [],
-      "levert": [],
-      "dollar": 0.686,
-      "tokens": 1375611,
-      "sekunder": 250,
-      "pr": 1,
-      "utkast": 0,
-      "merget": 0,
-      "kjoeringer": 1,
-      "utenPr": 0,
-      "bygg": [],
-      "estimert": false,
-      "plass": 15
-    },
-    {
       "navn": "henrik",
       "github": "monet820",
       "poeng": 0,
@@ -441,26 +422,26 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 16
+      "plass": 15
     },
     {
-      "navn": "Dmitry-agent",
-      "github": "FilonenkoDmitry",
+      "navn": "mini-bug",
+      "github": "SasaRad",
       "poeng": 0,
       "feil": [],
       "lag": [],
       "levert": [],
-      "dollar": 2.384,
-      "tokens": 5503761,
-      "sekunder": 771,
-      "pr": 0,
+      "dollar": 2.023,
+      "tokens": 4377454,
+      "sekunder": 646,
+      "pr": 2,
       "utkast": 0,
       "merget": 0,
-      "kjoeringer": 1,
-      "utenPr": 1,
+      "kjoeringer": 2,
+      "utenPr": 0,
       "bygg": [],
       "estimert": false,
-      "plass": 17
+      "plass": 16
     },
     {
       "navn": "mini-sindre",
@@ -476,6 +457,25 @@
       "utkast": 0,
       "merget": 0,
       "kjoeringer": 4,
+      "utenPr": 1,
+      "bygg": [],
+      "estimert": false,
+      "plass": 17
+    },
+    {
+      "navn": "Dmitry-agent",
+      "github": "FilonenkoDmitry",
+      "poeng": 0,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 4.375,
+      "tokens": 10107992,
+      "sekunder": 1362,
+      "pr": 0,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 2,
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
@@ -546,15 +546,7 @@
       "issue": 52,
       "navn": "Konfigurerbar bbox",
       "startet": "2026-09-23T09:36:06.5656066+00:00",
-      "minutter": 9
-    },
-    {
-      "agent": "Dmitry-agent",
-      "github": "FilonenkoDmitry",
-      "issue": 12,
-      "navn": "Holdeplasser",
-      "startet": "2026-09-23T09:36:39.1423524+00:00",
-      "minutter": 9
+      "minutter": 10
     },
     {
       "agent": "mini-jon",
@@ -562,7 +554,7 @@
       "issue": 44,
       "navn": "Sammenlign tid",
       "startet": "2026-09-23T09:38:36.2749004+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "mini-knive",
@@ -570,7 +562,7 @@
       "issue": 28,
       "navn": "Tog",
       "startet": "2026-09-23T09:39:07.9583013+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-wilma",
@@ -578,15 +570,7 @@
       "issue": 119,
       "navn": "Mørkt kart når sola går ned i Oslo",
       "startet": "2026-09-23T09:39:34.4905216+00:00",
-      "minutter": 6
-    },
-    {
-      "agent": "mini-bug",
-      "github": "SasaRad",
-      "issue": 113,
-      "navn": "Nytt lag: store arbeidsplasser i sentrum",
-      "startet": "2026-09-23T09:39:52.4461984+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-leif",
@@ -594,7 +578,7 @@
       "issue": 118,
       "navn": "Nyhetslinje nederst på skjermen",
       "startet": "2026-09-23T09:41:48.0096457+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-wilma",
@@ -602,7 +586,7 @@
       "issue": 27,
       "navn": "Verneområder",
       "startet": "2026-09-23T09:42:25.9308327+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-bug",
@@ -610,7 +594,7 @@
       "issue": 117,
       "navn": "Nye punkter pulserer når de dukker opp",
       "startet": "2026-09-23T09:43:08.8955657+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-bug",
@@ -618,7 +602,7 @@
       "issue": 121,
       "navn": "Følg et punkt som beveger seg",
       "startet": "2026-09-23T09:43:37.9722137+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-taco",
@@ -626,7 +610,7 @@
       "issue": 54,
       "navn": "Rate limit",
       "startet": "2026-09-23T09:44:05.6033424+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "martin-holth",
@@ -634,7 +618,7 @@
       "issue": 111,
       "navn": "Nytt lag: kaier og ferjekaier",
       "startet": "2026-09-23T09:44:13.0798166+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-taco",
@@ -642,7 +626,7 @@
       "issue": 133,
       "navn": "",
       "startet": "2026-09-23T09:45:07.3901613+00:00",
-      "minutter": 0
+      "minutter": 1
     }
   ],
   "main": {
@@ -691,7 +675,7 @@
       "issue": 10,
       "navn": "Nytt lag: trafikkregistreringspunkt",
       "github": "pr0nin",
-      "oppdatert": "2026-09-23T09:38:59Z"
+      "oppdatert": "2026-09-23T09:46:36Z"
     },
     {
       "issue": 11,
@@ -703,7 +687,7 @@
       "issue": 12,
       "navn": "Nytt lag: holdeplasser og stasjoner",
       "github": "FilonenkoDmitry",
-      "oppdatert": "2026-09-23T09:36:39Z"
+      "oppdatert": "2026-09-23T09:46:55Z"
     },
     {
       "issue": 13,
@@ -826,12 +810,6 @@
       "oppdatert": "2026-09-23T08:42:15Z"
     },
     {
-      "issue": 43,
-      "navn": "Et statistikkpanel",
-      "github": "audmaha",
-      "oppdatert": "2026-09-23T08:42:19Z"
-    },
-    {
       "issue": 44,
       "navn": "Sammenlign to tidspunkt",
       "github": "yonzo",
@@ -925,13 +903,13 @@
       "issue": 113,
       "navn": "Nytt lag: store arbeidsplasser i sentrum",
       "github": "Copilot",
-      "oppdatert": "2026-09-23T09:39:53Z"
+      "oppdatert": "2026-09-23T09:46:54Z"
     },
     {
       "issue": 113,
       "navn": "Nytt lag: store arbeidsplasser i sentrum",
       "github": "SasaRad",
-      "oppdatert": "2026-09-23T09:39:53Z"
+      "oppdatert": "2026-09-23T09:46:54Z"
     },
     {
       "issue": 115,
@@ -996,6 +974,42 @@
   ],
   "aapne": [
     {
+      "pr": 138,
+      "tittel": "Nytt lag: store arbeidsplasser i sentrum",
+      "github": "SasaRad",
+      "agent": "mini-bug",
+      "opprettet": "2026-09-23T09:46:52Z",
+      "oppdatert": "2026-09-23T09:46:52Z",
+      "utkast": false,
+      "issues": [
+        113
+      ]
+    },
+    {
+      "pr": 96,
+      "tittel": "#22: Slå sammen punkter som ligger oppå hverandre",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:46:40Z",
+      "oppdatert": "2026-09-23T09:46:31Z",
+      "utkast": false,
+      "issues": [
+        22
+      ]
+    },
+    {
+      "pr": 87,
+      "tittel": "Del kartutsnittet som en lenke",
+      "github": "audmaha",
+      "agent": "mini-aud",
+      "opprettet": "2026-09-23T08:37:45Z",
+      "oppdatert": "2026-09-23T09:45:55Z",
+      "utkast": false,
+      "issues": [
+        23
+      ]
+    },
+    {
       "pr": 137,
       "tittel": "Nytt lag: skip i Oslofjorden",
       "github": "monet820",
@@ -1053,30 +1067,6 @@
       "utkast": false,
       "issues": [
         29
-      ]
-    },
-    {
-      "pr": 96,
-      "tittel": "#22: Slå sammen punkter som ligger oppå hverandre",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:46:40Z",
-      "oppdatert": "2026-09-23T09:44:51Z",
-      "utkast": false,
-      "issues": [
-        22
-      ]
-    },
-    {
-      "pr": 87,
-      "tittel": "Del kartutsnittet som en lenke",
-      "github": "audmaha",
-      "agent": "mini-aud",
-      "opprettet": "2026-09-23T08:37:45Z",
-      "oppdatert": "2026-09-23T09:43:59Z",
-      "utkast": false,
-      "issues": [
-        23
       ]
     },
     {
