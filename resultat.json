@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:41:26",
+  "oppdatert": "2026-09-23T10:41:52",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -370,7 +370,7 @@
       "issue": 53,
       "navn": "Dyp helsesjekk",
       "startet": "2026-09-23T08:33:27.9645236+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "mini-aud",
@@ -378,7 +378,7 @@
       "issue": 43,
       "navn": "Statistikk",
       "startet": "2026-09-23T08:33:40.253268+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "mini-richard",
@@ -394,7 +394,7 @@
       "issue": 32,
       "navn": "Strømpris",
       "startet": "2026-09-23T08:37:51.7658572+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-jon",
@@ -402,7 +402,7 @@
       "issue": 44,
       "navn": "Sammenlign tid",
       "startet": "2026-09-23T08:38:34.7845421+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-kirsten",
@@ -410,7 +410,7 @@
       "issue": 29,
       "navn": "Museer",
       "startet": "2026-09-23T08:38:36.2729853+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-richard",
@@ -418,7 +418,7 @@
       "issue": 22,
       "navn": "Klynging",
       "startet": "2026-09-23T08:38:37.6037617+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-richard",
@@ -426,7 +426,7 @@
       "issue": 34,
       "navn": "Tidslinje",
       "startet": "2026-09-23T08:39:29.3560815+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "Andy3000",
@@ -434,7 +434,7 @@
       "issue": 11,
       "navn": "Kollektiv",
       "startet": "2026-09-23T08:39:29.9026946+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "helstein",
@@ -442,7 +442,7 @@
       "issue": 30,
       "navn": "Vannstand",
       "startet": "2026-09-23T08:39:37.818134+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-astrid",
@@ -450,7 +450,7 @@
       "issue": 35,
       "navn": "Varmekart",
       "startet": "2026-09-23T08:39:47.6963928+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-taco",
@@ -458,7 +458,7 @@
       "issue": 47,
       "navn": "Søk på tvers",
       "startet": "2026-09-23T08:39:51.4798178+00:00",
-      "minutter": 1
+      "minutter": 2
     }
   ],
   "main": {
@@ -772,6 +772,30 @@
   ],
   "aapne": [
     {
+      "pr": 88,
+      "tittel": "#38: Demomodus for storskjerm",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:37:47Z",
+      "oppdatert": "2026-09-23T08:41:31Z",
+      "utkast": false,
+      "issues": [
+        38
+      ]
+    },
+    {
+      "pr": 89,
+      "tittel": "#23: Del kartutsnittet som en lenke",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:38:25Z",
+      "oppdatert": "2026-09-23T08:41:15Z",
+      "utkast": false,
+      "issues": [
+        23
+      ]
+    },
+    {
       "pr": 80,
       "tittel": "Nytt lag: politilogg og nyhetshendelser",
       "github": "larsajakobsen",
@@ -784,18 +808,6 @@
       ]
     },
     {
-      "pr": 88,
-      "tittel": "#38: Demomodus for storskjerm",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:37:47Z",
-      "oppdatert": "2026-09-23T08:41:00Z",
-      "utkast": false,
-      "issues": [
-        38
-      ]
-    },
-    {
       "pr": 90,
       "tittel": "Fargene må virke for alle",
       "github": "nilsgs",
@@ -805,18 +817,6 @@
       "utkast": false,
       "issues": [
         41
-      ]
-    },
-    {
-      "pr": 89,
-      "tittel": "#23: Del kartutsnittet som en lenke",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:38:25Z",
-      "oppdatert": "2026-09-23T08:38:26Z",
-      "utkast": false,
-      "issues": [
-        23
       ]
     },
     {
