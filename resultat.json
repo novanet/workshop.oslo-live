@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T15:03:56",
+  "oppdatert": "2026-09-23T15:04:38",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -78,8 +78,8 @@
       "pr": 21,
       "utkast": 0,
       "merget": 12,
-      "kjoeringer": 41,
-      "utenPr": 23,
+      "kjoeringer": 42,
+      "utenPr": 24,
       "bygg": [],
       "estimert": false,
       "plass": 1
@@ -689,7 +689,7 @@
       "issue": 118,
       "navn": "Nyhetslinje nederst på skjermen",
       "startet": "2026-09-23T13:03:29.1360578+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-wilma",
@@ -1039,7 +1039,7 @@
       "issue": 149,
       "navn": "Hvilken versjon kjører nå?",
       "github": "randsu",
-      "oppdatert": "2026-09-23T13:03:22Z"
+      "oppdatert": "2026-09-23T13:04:05Z"
     },
     {
       "issue": 150,
