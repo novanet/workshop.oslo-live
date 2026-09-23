@@ -1,0 +1,11 @@
+.havet-stiger-panel {
+  position: absolute; bottom: 24px; right: 190px; z-index: 10; width: 220px;
+  background: rgba(255,255,255,.95);
+  border: 1.5px solid #111111; border-radius: 10px;
+  padding: 10px 14px; box-shadow: 0 6px 20px rgba(0,0,0,.14);
+  backdrop-filter: blur(8px);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 12px;
+}
+.havet-stiger-tekst { margin: 0 0 6px; font-weight: 600; }
+.havet-stiger-panel input[type="range"] { width: 100%; accent-color: #111111; }
+.havet-stiger-advarsel { margin: 8px 0 0; color: #6b7280; font-size: 11px; line-height: 1.4; }
