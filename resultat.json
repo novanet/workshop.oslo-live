@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:48:49",
+  "oppdatert": "2026-09-23T10:49:16",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -367,7 +367,7 @@
       "issue": 32,
       "navn": "Strømpris",
       "startet": "2026-09-23T08:37:51.7658572+00:00",
-      "minutter": 10
+      "minutter": 11
     },
     {
       "agent": "mini-richard",
@@ -391,7 +391,7 @@
       "issue": 52,
       "navn": "Konfigurerbar bbox",
       "startet": "2026-09-23T08:42:06.8631198+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-frode",
@@ -431,7 +431,7 @@
       "issue": 25,
       "navn": "Historikk",
       "startet": "2026-09-23T08:47:59.0992794+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "Dmitry-agent",
@@ -439,6 +439,22 @@
       "issue": 12,
       "navn": "Holdeplasser",
       "startet": "2026-09-23T08:48:05.3217109+00:00",
+      "minutter": 1
+    },
+    {
+      "agent": "mini-knive",
+      "github": "Buggz",
+      "issue": 40,
+      "navn": "Mobil",
+      "startet": "2026-09-23T08:48:55.3857059+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "Andy3000",
+      "github": "coffeelyfe",
+      "issue": 11,
+      "navn": "Kollektiv",
+      "startet": "2026-09-23T08:49:04.1157424+00:00",
       "minutter": 0
     }
   ],
@@ -446,7 +462,7 @@
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
     "pr": null,
-    "kjoeringer": 21
+    "kjoeringer": 22
   },
   "produkt": {
     "testerBestatt": 11,
@@ -562,7 +578,7 @@
       "issue": 11,
       "navn": "Nytt lag: kollektivtrafikk som beveger seg",
       "github": "coffeelyfe",
-      "oppdatert": "2026-09-23T08:48:05Z"
+      "oppdatert": "2026-09-23T08:49:05Z"
     },
     {
       "issue": 14,
@@ -659,6 +675,12 @@
       "navn": "Demomodus for storskjerm",
       "github": "randsu",
       "oppdatert": "2026-09-23T08:37:48Z"
+    },
+    {
+      "issue": 40,
+      "navn": "Kartet må virke på mobil",
+      "github": "Buggz",
+      "oppdatert": "2026-09-23T08:48:56Z"
     },
     {
       "issue": 41,
@@ -783,6 +805,18 @@
   ],
   "aapne": [
     {
+      "pr": 83,
+      "tittel": "Nytt lag: museer og samlinger",
+      "github": "jthagesk",
+      "agent": "mini-kirsten",
+      "opprettet": "2026-09-23T08:34:12Z",
+      "oppdatert": "2026-09-23T08:48:45Z",
+      "utkast": false,
+      "issues": [
+        29
+      ]
+    },
+    {
       "pr": 98,
       "tittel": "Overlapping boxes",
       "github": "jthagesk",
@@ -792,18 +826,6 @@
       "utkast": false,
       "issues": [
         59
-      ]
-    },
-    {
-      "pr": 83,
-      "tittel": "Nytt lag: museer og samlinger",
-      "github": "jthagesk",
-      "agent": "mini-kirsten",
-      "opprettet": "2026-09-23T08:34:12Z",
-      "oppdatert": "2026-09-23T08:48:43Z",
-      "utkast": false,
-      "issues": [
-        29
       ]
     },
     {
