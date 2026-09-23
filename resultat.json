@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T15:27:25",
+  "oppdatert": "2026-09-23T15:28:07",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -288,10 +288,10 @@
           "poeng": 1
         }
       ],
-      "dollar": 42.877,
-      "tokens": 69287847,
-      "sekunder": 13172,
-      "pr": 14,
+      "dollar": 44.363,
+      "tokens": 70703268,
+      "sekunder": 13604,
+      "pr": 15,
       "utkast": 3,
       "merget": 8,
       "kjoeringer": 32,
@@ -701,7 +701,7 @@
       "issue": 193,
       "navn": "Nytt lag: hjertestartere",
       "startet": "2026-09-23T13:20:02.3717642+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "mini-frode",
@@ -709,7 +709,7 @@
       "issue": 186,
       "navn": "Nytt lag: bysykkelstasjoner som fyllingsringer",
       "startet": "2026-09-23T13:22:58.2011074+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-wilma",
@@ -733,7 +733,7 @@
       "issue": 48,
       "navn": "Parallell henting",
       "startet": "2026-09-23T13:24:27.3250644+00:00",
-      "minutter": 2
+      "minutter": 3
     }
   ],
   "main": {
@@ -889,7 +889,7 @@
       "issue": 55,
       "navn": "Kartet blir tregt med mange punkter",
       "github": "sin-rha",
-      "oppdatert": "2026-09-23T12:57:59Z"
+      "oppdatert": "2026-09-23T13:27:34Z"
     },
     {
       "issue": 57,
@@ -1241,6 +1241,18 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 255,
+      "tittel": "Nytt lag: hjertestartere",
+      "github": "larsajakobsen",
+      "agent": "mini-wilma",
+      "opprettet": "2026-09-23T13:27:44Z",
+      "oppdatert": "2026-09-23T13:27:45Z",
+      "utkast": false,
+      "issues": [
+        193
+      ]
+    },
     {
       "pr": 97,
       "tittel": "Søk på tvers av alle lag (#47)",
