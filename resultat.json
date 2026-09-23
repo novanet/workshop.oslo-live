@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T15:10:57",
+  "oppdatert": "2026-09-23T15:11:56",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -120,6 +120,53 @@
       "plass": 2
     },
     {
+      "navn": "mini-leif",
+      "github": "leif-larsen",
+      "poeng": 11,
+      "feil": [
+        {
+          "issue": 2,
+          "navn": "Utsnittet",
+          "poeng": 2
+        }
+      ],
+      "lag": [
+        {
+          "issue": 14,
+          "navn": "Idrettsanlegg",
+          "poeng": 2
+        }
+      ],
+      "levert": [
+        {
+          "issue": 21,
+          "navn": "Adressesøk",
+          "poeng": 3
+        },
+        {
+          "issue": 118,
+          "navn": "Nyhetslinje nederst på skjermen",
+          "poeng": 2
+        },
+        {
+          "issue": 141,
+          "navn": "Tydelige kartsymboler: båter som ser ut som båter",
+          "poeng": 3
+        }
+      ],
+      "dollar": 13.372,
+      "tokens": 29131791,
+      "sekunder": 4771,
+      "pr": 5,
+      "utkast": 0,
+      "merget": 5,
+      "kjoeringer": 24,
+      "utenPr": 10,
+      "bygg": [],
+      "estimert": false,
+      "plass": 3
+    },
+    {
       "navn": "mini-gir",
       "github": "GIR75",
       "poeng": 10,
@@ -148,7 +195,7 @@
       "utenPr": 27,
       "bygg": [],
       "estimert": false,
-      "plass": 3
+      "plass": 4
     },
     {
       "navn": "mini-frode",
@@ -182,48 +229,6 @@
       "merget": 3,
       "kjoeringer": 26,
       "utenPr": 19,
-      "bygg": [],
-      "estimert": false,
-      "plass": 4
-    },
-    {
-      "navn": "mini-leif",
-      "github": "leif-larsen",
-      "poeng": 8,
-      "feil": [
-        {
-          "issue": 2,
-          "navn": "Utsnittet",
-          "poeng": 2
-        }
-      ],
-      "lag": [
-        {
-          "issue": 14,
-          "navn": "Idrettsanlegg",
-          "poeng": 2
-        }
-      ],
-      "levert": [
-        {
-          "issue": 118,
-          "navn": "Nyhetslinje nederst på skjermen",
-          "poeng": 2
-        },
-        {
-          "issue": 141,
-          "navn": "Tydelige kartsymboler: båter som ser ut som båter",
-          "poeng": 3
-        }
-      ],
-      "dollar": 13.372,
-      "tokens": 29131791,
-      "sekunder": 4771,
-      "pr": 5,
-      "utkast": 0,
-      "merget": 4,
-      "kjoeringer": 24,
-      "utenPr": 10,
       "bygg": [],
       "estimert": false,
       "plass": 5
@@ -430,14 +435,14 @@
           "poeng": 1
         }
       ],
-      "dollar": 41.238,
-      "tokens": 67589232,
-      "sekunder": 12624,
+      "dollar": 42.698,
+      "tokens": 69503228,
+      "sekunder": 12980,
       "pr": 13,
       "utkast": 3,
       "merget": 6,
-      "kjoeringer": 29,
-      "utenPr": 14,
+      "kjoeringer": 31,
+      "utenPr": 15,
       "bygg": [],
       "estimert": false,
       "plass": 11
@@ -592,25 +597,6 @@
       "plass": 17
     },
     {
-      "navn": "mini-bug",
-      "github": "SasaRad",
-      "poeng": 0,
-      "feil": [],
-      "lag": [],
-      "levert": [],
-      "dollar": 3.443,
-      "tokens": 6292460,
-      "sekunder": 1133,
-      "pr": 2,
-      "utkast": 0,
-      "merget": 0,
-      "kjoeringer": 5,
-      "utenPr": 3,
-      "bygg": [],
-      "estimert": false,
-      "plass": 18
-    },
-    {
       "navn": "mini-sindre",
       "github": "sin-rha",
       "poeng": 0,
@@ -625,6 +611,25 @@
       "merget": 0,
       "kjoeringer": 12,
       "utenPr": 8,
+      "bygg": [],
+      "estimert": false,
+      "plass": 18
+    },
+    {
+      "navn": "mini-bug",
+      "github": "SasaRad",
+      "poeng": 0,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 4.245,
+      "tokens": 7667429,
+      "sekunder": 1390,
+      "pr": 2,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 6,
+      "utenPr": 4,
       "bygg": [],
       "estimert": false,
       "plass": 19
@@ -678,14 +683,6 @@
       "minutter": 8
     },
     {
-      "agent": "mini-wilma",
-      "github": "larsajakobsen",
-      "issue": 204,
-      "navn": "Lagraden sprenger panelet når navnet er langt",
-      "startet": "2026-09-23T13:03:40.229746+00:00",
-      "minutter": 7
-    },
-    {
       "agent": "mini-knive",
       "github": "Buggz",
       "issue": 195,
@@ -707,7 +704,7 @@
       "issue": 50,
       "navn": "Metrikker",
       "startet": "2026-09-23T13:07:05.7797026+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-gir",
@@ -715,7 +712,7 @@
       "issue": 18,
       "navn": "Kulturminner",
       "startet": "2026-09-23T13:08:06.7329467+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-gir",
@@ -723,7 +720,7 @@
       "issue": 13,
       "navn": "Veiarbeid",
       "startet": "2026-09-23T13:08:14.600688+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-jon",
@@ -731,7 +728,7 @@
       "issue": 189,
       "navn": "Travlere enn vanlig på veiene",
       "startet": "2026-09-23T13:08:36.0345655+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-frode",
@@ -739,7 +736,7 @@
       "issue": 186,
       "navn": "Nytt lag: bysykkelstasjoner som fyllingsringer",
       "startet": "2026-09-23T13:09:04.334225+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-leif",
@@ -748,13 +745,21 @@
       "navn": "Adressesøk",
       "startet": "2026-09-23T13:09:40.703571+00:00",
       "minutter": 1
+    },
+    {
+      "agent": "mini-frode",
+      "github": "FrodeBl",
+      "issue": 192,
+      "navn": "Nytt lag: Wikipedia-artikler rundt deg",
+      "startet": "2026-09-23T13:11:25.786562+00:00",
+      "minutter": 0
     }
   ],
   "main": {
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
     "pr": null,
-    "kjoeringer": 59
+    "kjoeringer": 60
   },
   "produkt": {
     "testerBestatt": 20,
@@ -1149,7 +1154,7 @@
       "issue": 189,
       "navn": "Travlere enn vanlig på veiene",
       "github": "yonzo",
-      "oppdatert": "2026-09-23T13:08:36Z"
+      "oppdatert": "2026-09-23T13:11:34Z"
     },
     {
       "issue": 190,
@@ -1162,6 +1167,12 @@
       "navn": "Et døgn med bysykkelturer på 90 sekunder",
       "github": "randsu",
       "oppdatert": "2026-09-23T12:31:29Z"
+    },
+    {
+      "issue": 192,
+      "navn": "Nytt lag: Wikipedia-artikler rundt deg",
+      "github": "FrodeBl",
+      "oppdatert": "2026-09-23T13:11:26Z"
     },
     {
       "issue": 193,
@@ -1203,7 +1214,7 @@
       "issue": 204,
       "navn": "Lagraden sprenger panelet når navnet er langt",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T13:03:41Z"
+      "oppdatert": "2026-09-23T13:11:27Z"
     },
     {
       "issue": 206,
@@ -1243,6 +1254,18 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 83,
+      "tittel": "Nytt lag: museer og samlinger",
+      "github": "jthagesk",
+      "agent": "mini-kirsten",
+      "opprettet": "2026-09-23T08:34:12Z",
+      "oppdatert": "2026-09-23T13:11:22Z",
+      "utkast": false,
+      "issues": [
+        29
+      ]
+    },
     {
       "pr": 249,
       "tittel": "Lagraden sprenger panelet når navnet er langt",
@@ -1289,30 +1312,6 @@
       "utkast": false,
       "issues": [
         16
-      ]
-    },
-    {
-      "pr": 72,
-      "tittel": "Søk etter adresse og hopp dit på kartet (#21)",
-      "github": "leif-larsen",
-      "agent": "mini-leif",
-      "opprettet": "2026-09-23T08:12:16Z",
-      "oppdatert": "2026-09-23T13:09:46Z",
-      "utkast": false,
-      "issues": [
-        21
-      ]
-    },
-    {
-      "pr": 83,
-      "tittel": "Nytt lag: museer og samlinger",
-      "github": "jthagesk",
-      "agent": "mini-kirsten",
-      "opprettet": "2026-09-23T08:34:12Z",
-      "oppdatert": "2026-09-23T13:09:40Z",
-      "utkast": false,
-      "issues": [
-        29
       ]
     },
     {
