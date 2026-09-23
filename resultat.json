@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:20:30",
+  "oppdatert": "2026-09-23T11:20:57",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -441,7 +441,7 @@
       "issue": 26,
       "navn": "Skoler",
       "startet": "2026-09-23T09:03:43.3920206+00:00",
-      "minutter": 16
+      "minutter": 17
     },
     {
       "agent": "helstein",
@@ -449,7 +449,7 @@
       "issue": 15,
       "navn": "Spisesteder",
       "startet": "2026-09-23T09:16:56.867472+00:00",
-      "minutter": 3
+      "minutter": 4
     }
   ],
   "main": {
@@ -886,6 +886,18 @@
   ],
   "aapne": [
     {
+      "pr": 101,
+      "tittel": "#34: Skru tiden tilbake med en tidslinje",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:51:10Z",
+      "oppdatert": "2026-09-23T09:20:42Z",
+      "utkast": false,
+      "issues": [
+        34
+      ]
+    },
+    {
       "pr": 80,
       "tittel": "Nytt lag: politilogg og nyhetshendelser",
       "github": "larsajakobsen",
@@ -967,18 +979,6 @@
       "utkast": false,
       "issues": [
         11
-      ]
-    },
-    {
-      "pr": 101,
-      "tittel": "#34: Skru tiden tilbake med en tidslinje",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:51:10Z",
-      "oppdatert": "2026-09-23T09:13:53Z",
-      "utkast": false,
-      "issues": [
-        34
       ]
     },
     {
