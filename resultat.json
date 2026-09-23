@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:22:16",
+  "oppdatert": "2026-09-23T10:22:42",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -259,7 +259,7 @@
       "issue": 49,
       "navn": "Nytt forsøk",
       "startet": "2026-09-23T08:16:16.8577675+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-knive",
@@ -267,7 +267,7 @@
       "issue": 57,
       "navn": "Avgangstavle",
       "startet": "2026-09-23T08:16:36.122853+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-leif",
@@ -275,7 +275,7 @@
       "issue": 21,
       "navn": "Adressesøk",
       "startet": "2026-09-23T08:18:27.0600008+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-wilma",
@@ -291,7 +291,7 @@
       "issue": 2,
       "navn": "Utsnittet",
       "startet": "2026-09-23T08:21:26.6777013+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-jon",
@@ -299,6 +299,14 @@
       "issue": 20,
       "navn": "Luftvarsel",
       "startet": "2026-09-23T08:22:06.0655338+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-kirsten",
+      "github": "jthagesk",
+      "issue": 45,
+      "navn": "Varsler",
+      "startet": "2026-09-23T08:22:20.0747631+00:00",
       "minutter": 0
     }
   ],
@@ -422,6 +430,12 @@
       "navn": "Sammenlign to tidspunkt",
       "github": "yonzo",
       "oppdatert": "2026-09-23T08:15:47Z"
+    },
+    {
+      "issue": 45,
+      "navn": "Varsle når noe skjer",
+      "github": "jthagesk",
+      "oppdatert": "2026-09-23T08:22:21Z"
     },
     {
       "issue": 46,
