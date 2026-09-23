@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:39:36",
+  "oppdatert": "2026-09-23T10:40:03",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -203,25 +203,6 @@
       "plass": 8
     },
     {
-      "navn": "helstein",
-      "github": "nilsgs",
-      "poeng": 0,
-      "feil": [],
-      "lag": [],
-      "levert": [],
-      "dollar": 0.467,
-      "tokens": 323649,
-      "sekunder": 138,
-      "pr": 0,
-      "utkast": 0,
-      "merget": 0,
-      "kjoeringer": 1,
-      "utenPr": 1,
-      "bygg": [],
-      "estimert": false,
-      "plass": 9
-    },
-    {
       "navn": "mini-aud",
       "github": "audmaha",
       "poeng": 0,
@@ -238,7 +219,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 10
+      "plass": 9
     },
     {
       "navn": "mini-taco",
@@ -257,7 +238,7 @@
       "utenPr": 0,
       "bygg": [],
       "estimert": false,
-      "plass": 11
+      "plass": 10
     },
     {
       "navn": "mini-sindre",
@@ -273,6 +254,25 @@
       "utkast": 0,
       "merget": 0,
       "kjoeringer": 3,
+      "utenPr": 1,
+      "bygg": [],
+      "estimert": false,
+      "plass": 11
+    },
+    {
+      "navn": "helstein",
+      "github": "nilsgs",
+      "poeng": 0,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 1.955,
+      "tokens": 3251019,
+      "sekunder": 808,
+      "pr": 1,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 2,
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
@@ -357,14 +357,6 @@
   ],
   "kjoerer": [
     {
-      "agent": "helstein",
-      "github": "nilsgs",
-      "issue": 41,
-      "navn": "Fargeblindhet",
-      "startet": "2026-09-23T08:28:15.5659433+00:00",
-      "minutter": 11
-    },
-    {
       "agent": "mini-aud",
       "github": "audmaha",
       "issue": 41,
@@ -386,7 +378,7 @@
       "issue": 43,
       "navn": "Statistikk",
       "startet": "2026-09-23T08:33:40.253268+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-richard",
@@ -402,7 +394,7 @@
       "issue": 32,
       "navn": "Strømpris",
       "startet": "2026-09-23T08:37:51.7658572+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-jon",
@@ -426,7 +418,7 @@
       "issue": 22,
       "navn": "Klynging",
       "startet": "2026-09-23T08:38:37.6037617+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-richard",
@@ -443,13 +435,37 @@
       "navn": "Kollektiv",
       "startet": "2026-09-23T08:39:29.9026946+00:00",
       "minutter": 0
+    },
+    {
+      "agent": "helstein",
+      "github": "nilsgs",
+      "issue": 30,
+      "navn": "Vannstand",
+      "startet": "2026-09-23T08:39:37.818134+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-astrid",
+      "github": "theakbe",
+      "issue": 35,
+      "navn": "Varmekart",
+      "startet": "2026-09-23T08:39:47.6963928+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-taco",
+      "github": "Puiu",
+      "issue": 47,
+      "navn": "Søk på tvers",
+      "startet": "2026-09-23T08:39:51.4798178+00:00",
+      "minutter": 0
     }
   ],
   "main": {
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
     "pr": null,
-    "kjoeringer": 20
+    "kjoeringer": 21
   },
   "produkt": {
     "testerBestatt": 11,
@@ -619,7 +635,7 @@
       "issue": 30,
       "navn": "Vis vannstanden i fjorden",
       "github": "nilsgs",
-      "oppdatert": "2026-09-23T08:38:52Z"
+      "oppdatert": "2026-09-23T08:39:39Z"
     },
     {
       "issue": 32,
@@ -634,6 +650,12 @@
       "oppdatert": "2026-09-23T08:39:30Z"
     },
     {
+      "issue": 35,
+      "navn": "Varmekart i stedet for punkter",
+      "github": "theakbe",
+      "oppdatert": "2026-09-23T08:39:48Z"
+    },
+    {
       "issue": 38,
       "navn": "Demomodus for storskjerm",
       "github": "randsu",
@@ -643,13 +665,13 @@
       "issue": 41,
       "navn": "Fargene må virke for alle",
       "github": "audmaha",
-      "oppdatert": "2026-09-23T08:32:13Z"
+      "oppdatert": "2026-09-23T08:39:46Z"
     },
     {
       "issue": 41,
       "navn": "Fargene må virke for alle",
       "github": "nilsgs",
-      "oppdatert": "2026-09-23T08:32:13Z"
+      "oppdatert": "2026-09-23T08:39:46Z"
     },
     {
       "issue": 42,
@@ -680,6 +702,12 @@
       "navn": "Tegn bydelsgrensene",
       "github": "nilsgs",
       "oppdatert": "2026-09-23T08:33:31Z"
+    },
+    {
+      "issue": 47,
+      "navn": "Søk på tvers av alle lag",
+      "github": "Puiu",
+      "oppdatert": "2026-09-23T08:39:52Z"
     },
     {
       "issue": 48,
@@ -743,6 +771,18 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 90,
+      "tittel": "Fargene må virke for alle",
+      "github": "nilsgs",
+      "agent": "helstein",
+      "opprettet": "2026-09-23T08:39:44Z",
+      "oppdatert": "2026-09-23T08:39:48Z",
+      "utkast": false,
+      "issues": [
+        41
+      ]
+    },
     {
       "pr": 89,
       "tittel": "#23: Del kartutsnittet som en lenke",
