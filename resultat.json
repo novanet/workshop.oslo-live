@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:41:52",
+  "oppdatert": "2026-09-23T10:42:20",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -203,25 +203,6 @@
       "plass": 8
     },
     {
-      "navn": "mini-aud",
-      "github": "audmaha",
-      "poeng": 0,
-      "feil": [],
-      "lag": [],
-      "levert": [],
-      "dollar": 1.176,
-      "tokens": 2061400,
-      "sekunder": 456,
-      "pr": 1,
-      "utkast": 0,
-      "merget": 0,
-      "kjoeringer": 2,
-      "utenPr": 1,
-      "bygg": [],
-      "estimert": false,
-      "plass": 9
-    },
-    {
       "navn": "mini-taco",
       "github": "Puiu",
       "poeng": 0,
@@ -238,7 +219,7 @@
       "utenPr": 0,
       "bygg": [],
       "estimert": false,
-      "plass": 10
+      "plass": 9
     },
     {
       "navn": "mini-sindre",
@@ -257,7 +238,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 11
+      "plass": 10
     },
     {
       "navn": "helstein",
@@ -276,7 +257,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 12
+      "plass": 11
     },
     {
       "navn": "mini-knive",
@@ -295,26 +276,26 @@
       "utenPr": 0,
       "bygg": [],
       "estimert": false,
-      "plass": 13
+      "plass": 12
     },
     {
-      "navn": "Andy3000",
-      "github": "coffeelyfe",
+      "navn": "mini-aud",
+      "github": "audmaha",
       "poeng": 0,
       "feil": [],
       "lag": [],
       "levert": [],
-      "dollar": 3.453,
-      "tokens": 8571185,
-      "sekunder": 1055,
-      "pr": 1,
+      "dollar": 2.576,
+      "tokens": 4995747,
+      "sekunder": 1037,
+      "pr": 2,
       "utkast": 0,
       "merget": 0,
-      "kjoeringer": 2,
-      "utenPr": 0,
+      "kjoeringer": 3,
+      "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 14
+      "plass": 13
     },
     {
       "navn": "mini-kirsten",
@@ -331,6 +312,25 @@
       "merget": 0,
       "kjoeringer": 2,
       "utenPr": 0,
+      "bygg": [],
+      "estimert": false,
+      "plass": 14
+    },
+    {
+      "navn": "Andy3000",
+      "github": "coffeelyfe",
+      "poeng": 0,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 4.005,
+      "tokens": 9558502,
+      "sekunder": 1208,
+      "pr": 1,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 3,
+      "utenPr": 1,
       "bygg": [],
       "estimert": false,
       "plass": 15
@@ -357,14 +357,6 @@
   ],
   "kjoerer": [
     {
-      "agent": "mini-aud",
-      "github": "audmaha",
-      "issue": 41,
-      "navn": "Fargeblindhet",
-      "startet": "2026-09-23T08:32:12.9324331+00:00",
-      "minutter": 9
-    },
-    {
       "agent": "mini-knive",
       "github": "Buggz",
       "issue": 53,
@@ -386,7 +378,7 @@
       "issue": 6,
       "navn": "Delt mobilitet",
       "startet": "2026-09-23T08:36:06.1007878+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-wilma",
@@ -429,14 +421,6 @@
       "minutter": 2
     },
     {
-      "agent": "Andy3000",
-      "github": "coffeelyfe",
-      "issue": 11,
-      "navn": "Kollektiv",
-      "startet": "2026-09-23T08:39:29.9026946+00:00",
-      "minutter": 2
-    },
-    {
       "agent": "helstein",
       "github": "nilsgs",
       "issue": 30,
@@ -459,6 +443,14 @@
       "navn": "Søk på tvers",
       "startet": "2026-09-23T08:39:51.4798178+00:00",
       "minutter": 2
+    },
+    {
+      "agent": "mini-kirsten",
+      "github": "jthagesk",
+      "issue": 52,
+      "navn": "Konfigurerbar bbox",
+      "startet": "2026-09-23T08:42:06.8631198+00:00",
+      "minutter": 0
     }
   ],
   "main": {
@@ -581,7 +573,7 @@
       "issue": 11,
       "navn": "Nytt lag: kollektivtrafikk som beveger seg",
       "github": "coffeelyfe",
-      "oppdatert": "2026-09-23T08:41:07Z"
+      "oppdatert": "2026-09-23T08:42:13Z"
     },
     {
       "issue": 17,
@@ -665,13 +657,13 @@
       "issue": 41,
       "navn": "Fargene må virke for alle",
       "github": "audmaha",
-      "oppdatert": "2026-09-23T08:39:46Z"
+      "oppdatert": "2026-09-23T08:42:15Z"
     },
     {
       "issue": 41,
       "navn": "Fargene må virke for alle",
       "github": "nilsgs",
-      "oppdatert": "2026-09-23T08:39:46Z"
+      "oppdatert": "2026-09-23T08:42:15Z"
     },
     {
       "issue": 42,
@@ -728,6 +720,12 @@
       "oppdatert": "2026-09-23T08:35:59Z"
     },
     {
+      "issue": 52,
+      "navn": "Gjør kartutsnittet konfigurerbart",
+      "github": "jthagesk",
+      "oppdatert": "2026-09-23T08:42:08Z"
+    },
+    {
       "issue": 53,
       "navn": "En helsesjekk som betyr noe",
       "github": "Buggz",
@@ -771,6 +769,18 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 91,
+      "tittel": "Fargene må virke for alle",
+      "github": "audmaha",
+      "agent": "mini-aud",
+      "opprettet": "2026-09-23T08:42:14Z",
+      "oppdatert": "2026-09-23T08:42:15Z",
+      "utkast": false,
+      "issues": [
+        41
+      ]
+    },
     {
       "pr": 88,
       "tittel": "#38: Demomodus for storskjerm",

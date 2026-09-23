@@ -81,6 +81,7 @@
     padding: 6px 14px 6px 0; vertical-align: middle;
   }
   tbody td:first-child { border-left: 1px solid var(--line); border-radius: 10px 0 0 10px; padding-left: 13px; }
+  tbody td.h { text-align: right; }
   tbody td:last-child { border-right: 1px solid var(--line); border-radius: 0 10px 10px 0; padding-right: 13px; text-align: right; }
   tbody tr.mellom { background: transparent; }
   tbody tr.mellom td { border: 0; padding: 0; height: 4px; background: transparent; }
@@ -299,6 +300,24 @@
     return 'https://github.com/' + encodeURI(repo || '') + '/pull/' + encodeURIComponent(nr);
   }
 
+  // Poeng per dollar. Kostnaden regnes som minst 1 cent, og uten poeng er forholdet 0.
+  function perDollar(d) {
+    var p = d.poeng || 0;
+    if (!p) return 0;
+    return p / Math.max(d.dollar || 0, 0.01);
+  }
+
+  function sorterPerDollar(folk) {
+    return folk.slice().sort(function (a, b) {
+      return (perDollar(b) - perDollar(a)) || ((b.poeng || 0) - (a.poeng || 0)) || ((a.dollar || 0) - (b.dollar || 0));
+    }).map(function (d, i) {
+      var kopi = {};
+      for (var k in d) kopi[k] = d[k];
+      kopi.plass = i + 1;
+      return kopi;
+    });
+  }
+
   function rad(d) {
     var merker = [];
     function merke(x, klasse) {
@@ -318,7 +337,7 @@
     var dyrt = (d.dollar || 0) >= 5 ? ' dyrt' : '';
 
     return '' +
-      '<tr class="' + (d.plass === 1 && d.poeng > 0 ? 'topp' : '') + '">' +
+      '<tr class="' + (d.plass === 1 && perDollar(d) > 0 ? 'topp' : '') + '">' +
         '<td class="plass">' + d.plass + '</td>' +
         '<td><div class="navn">' + esc(d.navn) + '</div>' +
             '<div class="repo">' + (d.github && d.github !== d.navn ? esc(d.github) + ' · ' : '') + (d.merget || 0) + ' merget av ' + (d.pr || 0) + ' PR</div></td>' +
@@ -326,9 +345,10 @@
         '<td><span class="tall' + dyrt + '"' + (d.estimert ? ' title="Deler av kostnaden er beregnet fra tokens og listepris"' : '') + '>' + (d.estimert ? '~' : '') + '$' + (d.dollar || 0).toFixed(2) + '</span>' +
             '<span class="under">' + Math.round((d.tokens || 0) / 1000) + 'k tokens' +
             (d.utenPr ? ' · ' + d.utenPr + ' uten PR' : '') + '</span></td>' +
-        '<td><span class="poeng' + (d.poeng < 0 ? ' negativ' : '') + '">' + d.poeng + '</span></td>' +
+        '<td class="h"><span class="tall">' + d.poeng + '</span></td>' +
+        '<td><span class="poeng' + (d.poeng < 0 ? ' negativ' : '') + '">' + perDollar(d).toFixed(1) + '</span></td>' +
       '</tr>' +
-      '<tr class="mellom"><td colspan="5"></td></tr>';
+      '<tr class="mellom"><td colspan="6"></td></tr>';
   }
 
   function tegnFramdrift(data) {
@@ -423,12 +443,12 @@
         '<div class="beskjed">Ingen pull requests ennå. Slipp agenten løs.</div>';
     } else {
       document.getElementById('innhold').innerHTML =
-        '<div class="score-topp"><h2>Poengtavle</h2><span>Poeng og kostnad per deltaker</span></div>' +
+        '<div class="score-topp"><h2>Poengtavle</h2><span>Sortert etter poeng per dollar</span></div>' +
         '<div class="rull"><table>' +
           '<thead><tr>' +
             '<th>#</th><th>Agent</th><th>Løst</th>' +
-            '<th>Kostnad</th><th class="h">Poeng</th>' +
-          '</tr></thead><tbody>' + folk.map(rad).join('') + '</tbody>' +
+            '<th>Kostnad</th><th class="h">Poeng</th><th class="h">Poeng/$</th>' +
+          '</tr></thead><tbody>' + sorterPerDollar(folk).map(rad).join('') + '</tbody>' +
         '</table></div>';
     }
 
