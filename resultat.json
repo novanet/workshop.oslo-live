@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:23:13",
+  "oppdatert": "2026-09-23T14:23:53",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -57,14 +57,14 @@
           "poeng": 8
         }
       ],
-      "dollar": 17.498,
-      "tokens": 34580100,
-      "sekunder": 6065,
+      "dollar": 18.481,
+      "tokens": 36126790,
+      "sekunder": 6545,
       "pr": 11,
       "utkast": 0,
       "merget": 10,
-      "kjoeringer": 19,
-      "utenPr": 8,
+      "kjoeringer": 21,
+      "utenPr": 10,
       "bygg": [],
       "estimert": false,
       "plass": 1
@@ -339,31 +339,6 @@
       "plass": 10
     },
     {
-      "navn": "helstein",
-      "github": "nilsgs",
-      "poeng": 2,
-      "feil": [],
-      "lag": [
-        {
-          "issue": 15,
-          "navn": "Spisesteder",
-          "poeng": 2
-        }
-      ],
-      "levert": [],
-      "dollar": 6.637,
-      "tokens": 12434456,
-      "sekunder": 2218,
-      "pr": 3,
-      "utkast": 0,
-      "merget": 1,
-      "kjoeringer": 12,
-      "utenPr": 9,
-      "bygg": [],
-      "estimert": false,
-      "plass": 11
-    },
-    {
       "navn": "mini-aud",
       "github": "audmaha",
       "poeng": 2,
@@ -384,6 +359,31 @@
       "merget": 1,
       "kjoeringer": 10,
       "utenPr": 5,
+      "bygg": [],
+      "estimert": false,
+      "plass": 11
+    },
+    {
+      "navn": "helstein",
+      "github": "nilsgs",
+      "poeng": 2,
+      "feil": [],
+      "lag": [
+        {
+          "issue": 15,
+          "navn": "Spisesteder",
+          "poeng": 2
+        }
+      ],
+      "levert": [],
+      "dollar": 7.357,
+      "tokens": 13111920,
+      "sekunder": 2415,
+      "pr": 3,
+      "utkast": 0,
+      "merget": 1,
+      "kjoeringer": 13,
+      "utenPr": 10,
       "bygg": [],
       "estimert": false,
       "plass": 12
@@ -579,15 +579,7 @@
       "issue": 198,
       "navn": "",
       "startet": "2026-09-23T12:16:25.0295863+00:00",
-      "minutter": 6
-    },
-    {
-      "agent": "mini-richard",
-      "github": "randsu",
-      "issue": 157,
-      "navn": "",
-      "startet": "2026-09-23T12:19:02.3675258+00:00",
-      "minutter": 4
+      "minutter": 7
     },
     {
       "agent": "mini-richard",
@@ -603,15 +595,7 @@
       "issue": 141,
       "navn": "Tydelige kartsymboler: båter som ser ut som båter",
       "startet": "2026-09-23T12:19:28.1326146+00:00",
-      "minutter": 3
-    },
-    {
-      "agent": "mini-richard",
-      "github": "randsu",
-      "issue": 169,
-      "navn": "",
-      "startet": "2026-09-23T12:19:32.4225991+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-wilma",
@@ -619,7 +603,7 @@
       "issue": 190,
       "navn": "",
       "startet": "2026-09-23T12:19:34.8533908+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-frode",
@@ -627,7 +611,7 @@
       "issue": 128,
       "navn": "Simulering: tsunami i Oslofjorden",
       "startet": "2026-09-23T12:19:38.2554331+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-kirsten",
@@ -635,7 +619,7 @@
       "issue": 29,
       "navn": "Museer",
       "startet": "2026-09-23T12:19:47.6786683+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-wilma",
@@ -643,15 +627,7 @@
       "issue": 129,
       "navn": "Simulering: meteornedslag",
       "startet": "2026-09-23T12:20:25.1910717+00:00",
-      "minutter": 2
-    },
-    {
-      "agent": "helstein",
-      "github": "nilsgs",
-      "issue": 46,
-      "navn": "Bydelsgrenser",
-      "startet": "2026-09-23T12:20:35.6518254+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-taco",
@@ -659,7 +635,7 @@
       "issue": 133,
       "navn": "Havet stiger: hva havner under vann?",
       "startet": "2026-09-23T12:20:40.4209313+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-jon",
@@ -667,7 +643,7 @@
       "issue": 197,
       "navn": "",
       "startet": "2026-09-23T12:20:43.3709734+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "martin-holth",
@@ -675,7 +651,7 @@
       "issue": 111,
       "navn": "Nytt lag: kaier og ferjekaier",
       "startet": "2026-09-23T12:20:50.7551895+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-knive",
@@ -683,14 +659,22 @@
       "issue": 28,
       "navn": "Tog",
       "startet": "2026-09-23T12:21:43.7886322+00:00",
-      "minutter": 1
+      "minutter": 2
+    },
+    {
+      "agent": "mini-astrid",
+      "github": "theakbe",
+      "issue": 188,
+      "navn": "",
+      "startet": "2026-09-23T12:23:41.4076789+00:00",
+      "minutter": 0
     }
   ],
   "main": {
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
     "pr": null,
-    "kjoeringer": 43
+    "kjoeringer": 44
   },
   "produkt": {
     "testerBestatt": 17,
@@ -713,96 +697,6 @@
   },
   "tildelt": [
     {
-      "issue": 13,
-      "navn": "Nytt lag: veiarbeid og stengte veier",
-      "github": "GIR75",
-      "oppdatert": "2026-09-23T12:16:22Z"
-    },
-    {
-      "issue": 14,
-      "navn": "Nytt lag: idretts- og friluftsanlegg",
-      "github": "leif-larsen",
-      "oppdatert": "2026-09-23T09:11:42Z"
-    },
-    {
-      "issue": 16,
-      "navn": "Nytt lag: ladestasjoner for elbil",
-      "github": "randsu",
-      "oppdatert": "2026-09-23T08:57:05Z"
-    },
-    {
-      "issue": 18,
-      "navn": "Nytt lag: kulturminner",
-      "github": "GIR75",
-      "oppdatert": "2026-09-23T12:16:21Z"
-    },
-    {
-      "issue": 19,
-      "navn": "Nytt lag: artsobservasjoner",
-      "github": "FrodeBl",
-      "oppdatert": "2026-09-23T10:00:46Z"
-    },
-    {
-      "issue": 21,
-      "navn": "Søk etter adresse og hopp dit på kartet",
-      "github": "leif-larsen",
-      "oppdatert": "2026-09-23T12:04:35Z"
-    },
-    {
-      "issue": 26,
-      "navn": "Nytt lag: skoler og barnehager",
-      "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T12:18:25Z"
-    },
-    {
-      "issue": 27,
-      "navn": "Nytt lag: verneområder og naturtyper",
-      "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T09:47:36Z"
-    },
-    {
-      "issue": 28,
-      "navn": "Nytt lag: togtrafikk",
-      "github": "Buggz",
-      "oppdatert": "2026-09-23T12:21:44Z"
-    },
-    {
-      "issue": 29,
-      "navn": "Nytt lag: museer og samlinger",
-      "github": "jthagesk",
-      "oppdatert": "2026-09-23T12:19:49Z"
-    },
-    {
-      "issue": 30,
-      "navn": "Vis vannstanden i fjorden",
-      "github": "nilsgs",
-      "oppdatert": "2026-09-23T08:50:43Z"
-    },
-    {
-      "issue": 31,
-      "navn": "Vis været over kartet",
-      "github": "audmaha",
-      "oppdatert": "2026-09-23T08:57:49Z"
-    },
-    {
-      "issue": 33,
-      "navn": "Nytt lag: sykkelparkering",
-      "github": "GIR75",
-      "oppdatert": "2026-09-23T12:16:42Z"
-    },
-    {
-      "issue": 37,
-      "navn": "Eksporter det du ser",
-      "github": "renaa",
-      "oppdatert": "2026-09-23T12:06:19Z"
-    },
-    {
-      "issue": 39,
-      "navn": "Tastatursnarveier",
-      "github": "audmaha",
-      "oppdatert": "2026-09-23T09:00:43Z"
-    },
-    {
       "issue": 41,
       "navn": "Fargene må virke for alle",
       "github": "audmaha",
@@ -824,7 +718,7 @@
       "issue": 46,
       "navn": "Tegn bydelsgrensene",
       "github": "nilsgs",
-      "oppdatert": "2026-09-23T12:20:37Z"
+      "oppdatert": "2026-09-23T12:23:40Z"
     },
     {
       "issue": 47,
@@ -1064,7 +958,7 @@
       "issue": 157,
       "navn": "Kontrakttester for alle lag",
       "github": "randsu",
-      "oppdatert": "2026-09-23T12:19:03Z"
+      "oppdatert": "2026-09-23T12:23:25Z"
     },
     {
       "issue": 158,
@@ -1076,7 +970,7 @@
       "issue": 169,
       "navn": "Filtrer punktene i et lag",
       "github": "randsu",
-      "oppdatert": "2026-09-23T12:19:33Z"
+      "oppdatert": "2026-09-23T12:23:19Z"
     },
     {
       "issue": 170,
@@ -1091,6 +985,12 @@
       "oppdatert": "2026-09-23T12:21:56Z"
     },
     {
+      "issue": 188,
+      "navn": "Vinden som strømmer over byen",
+      "github": "theakbe",
+      "oppdatert": "2026-09-23T12:23:42Z"
+    },
+    {
       "issue": 190,
       "navn": "Hvor langt når jeg på 15 minutter?",
       "github": "larsajakobsen",
@@ -1101,6 +1001,12 @@
       "navn": "Et døgn med bysykkelturer på 90 sekunder",
       "github": "randsu",
       "oppdatert": "2026-09-23T12:19:03Z"
+    },
+    {
+      "issue": 194,
+      "navn": "Nytt lag: bomstasjoner",
+      "github": "nilsgs",
+      "oppdatert": "2026-09-23T12:23:46Z"
     },
     {
       "issue": 197,
