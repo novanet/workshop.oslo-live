@@ -18,4 +18,8 @@
     <ProjectReference Include="..\..\src\OsloLive\OsloLive.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="Data\**" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
 </Project>

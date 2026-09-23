@@ -92,6 +92,17 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
     }
 
     [Fact]
+    public async Task Lagoversikten_har_veiarbeid()
+    {
+        var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
+
+        var veiarbeid = lag!.Single(l => l.Id == "veiarbeid");
+        Assert.Equal("Veiarbeid", veiarbeid.Navn);
+        Assert.False(string.IsNullOrWhiteSpace(veiarbeid.Beskrivelse));
+        Assert.False(string.IsNullOrWhiteSpace(veiarbeid.Ikon));
+    }
+
+    [Fact]
     public async Task Ukjent_lag_gir_404()
     {
         var svar = await Klient.GetAsync("/api/lag/finnes-ikke");
@@ -573,6 +584,73 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
             Assert.Equal([10.747188, 59.906647], lag.Features[0].Geometry.Coordinates);
             Assert.Contains("kystdatahuset/find_ports_nearby", handler.SisteAdresse!.ToString());
             Assert.Contains("radius_km=", handler.SisteAdresse!.ToString());
+        }
+        finally
+        {
+            Allemannsdata.TømMellomlager();
+        }
+    }
+
+    [Fact]
+    public async Task Metrikker_svarer_med_siden_og_kilder()
+    {
+        var svar = await Klient.GetAsync("/api/metrikker");
+        var json = await svar.Content.ReadFromJsonAsync<JsonElement>();
+
+        Assert.Equal(HttpStatusCode.OK, svar.StatusCode);
+        Assert.True(DateTimeOffset.TryParse(json.GetProperty("siden").GetString(), CultureInfo.InvariantCulture, out _));
+        Assert.Equal(JsonValueKind.Array, json.GetProperty("kilder").ValueKind);
+    }
+
+    [Fact]
+    public async Task To_kall_til_luftkvalitet_gir_ett_treff_og_en_bom()
+    {
+        // Ingen stasjoner i svaret, så laget gjør bare ett oppslag per forespørsel og ingen varselkall.
+        const string svar = """{ "source": "luftkvalitet", "operation": "get_air_quality_nearby", "parameters": {}, "data": [] }""";
+        using var vertUtenNett = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient<Allemannsdata>().ConfigurePrimaryHttpMessageHandler(() => new FastSvarHandler(svar))));
+        var klient = vertUtenNett.CreateClient();
+
+        Allemannsdata.TømMellomlager();
+        try
+        {
+            await klient.GetAsync("/api/lag/luftkvalitet");
+            await klient.GetAsync("/api/lag/luftkvalitet");
+            var json = await klient.GetFromJsonAsync<JsonElement>("/api/metrikker");
+
+            var luft = json.GetProperty("kilder").EnumerateArray().Single(k => k.GetProperty("kilde").GetString() == "luftkvalitet");
+            Assert.Equal(2, luft.GetProperty("kall").GetInt64());
+            Assert.Equal(1, luft.GetProperty("treff").GetInt64());
+            Assert.Equal(1, luft.GetProperty("bom").GetInt64());
+            Assert.Equal(0, luft.GetProperty("feil").GetInt64());
+            Assert.True(luft.GetProperty("snittMs").GetDouble() >= 0);
+        }
+        finally
+        {
+            Allemannsdata.TømMellomlager();
+        }
+    }
+
+    [Fact]
+    public async Task Metrikker_nullstilles_ikke_ved_oppslag()
+    {
+        const string svar = """{ "data": [] }""";
+        using var vertUtenNett = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient<Allemannsdata>().ConfigurePrimaryHttpMessageHandler(() => new FastSvarHandler(svar))));
+        var klient = vertUtenNett.CreateClient();
+
+        Allemannsdata.TømMellomlager();
+        try
+        {
+            await klient.GetAsync("/api/lag/luftkvalitet");
+            var første = await klient.GetFromJsonAsync<JsonElement>("/api/metrikker");
+            var andre = await klient.GetFromJsonAsync<JsonElement>("/api/metrikker");
+
+            Assert.Equal(første.GetProperty("siden").GetString(), andre.GetProperty("siden").GetString());
+            var førsteKilde = første.GetProperty("kilder").EnumerateArray().Single(k => k.GetProperty("kilde").GetString() == "luftkvalitet");
+            var andreKilde = andre.GetProperty("kilder").EnumerateArray().Single(k => k.GetProperty("kilde").GetString() == "luftkvalitet");
+            Assert.Equal(1, førsteKilde.GetProperty("kall").GetInt64());
+            Assert.True(andreKilde.GetProperty("kall").GetInt64() >= førsteKilde.GetProperty("kall").GetInt64());
         }
         finally
         {
