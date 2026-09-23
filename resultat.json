@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:01:21",
+  "oppdatert": "2026-09-23T14:02:01",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -534,14 +534,14 @@
       "feil": [],
       "lag": [],
       "levert": [],
-      "dollar": 10.883,
-      "tokens": 23741011,
-      "sekunder": 3763,
+      "dollar": 11.773,
+      "tokens": 24325634,
+      "sekunder": 4102,
       "pr": 3,
       "utkast": 0,
       "merget": 0,
-      "kjoeringer": 16,
-      "utenPr": 12,
+      "kjoeringer": 17,
+      "utenPr": 13,
       "bygg": [],
       "estimert": false,
       "plass": 20
@@ -549,20 +549,12 @@
   ],
   "kjoerer": [
     {
-      "agent": "mini-frode",
-      "github": "FrodeBl",
-      "issue": 128,
-      "navn": "Simulering: tsunami i Oslofjorden",
-      "startet": "2026-09-23T11:55:48.9774309+00:00",
-      "minutter": 5
-    },
-    {
       "agent": "mini-jon",
       "github": "yonzo",
       "issue": 44,
       "navn": "Sammenlign tid",
       "startet": "2026-09-23T11:57:22.3942011+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-richard",
@@ -578,7 +570,7 @@
       "issue": 18,
       "navn": "Kulturminner",
       "startet": "2026-09-23T11:59:00.1192606+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-gir",
@@ -586,7 +578,7 @@
       "issue": 13,
       "navn": "Veiarbeid",
       "startet": "2026-09-23T11:59:00.4345493+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-gir",
@@ -594,14 +586,6 @@
       "issue": 51,
       "navn": "Logging",
       "startet": "2026-09-23T11:59:02.268638+00:00",
-      "minutter": 2
-    },
-    {
-      "agent": "mini-taco",
-      "github": "Puiu",
-      "issue": 54,
-      "navn": "Rate limit",
-      "startet": "2026-09-23T11:59:17.602128+00:00",
       "minutter": 2
     },
     {
@@ -618,7 +602,7 @@
       "issue": 21,
       "navn": "Adressesøk",
       "startet": "2026-09-23T12:00:22.8365202+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "helstein",
@@ -626,7 +610,7 @@
       "issue": 116,
       "navn": "Nytt lag: værstasjoner",
       "startet": "2026-09-23T12:00:52.2811185+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-gir",
@@ -634,7 +618,7 @@
       "issue": 33,
       "navn": "Sykkelparkering",
       "startet": "2026-09-23T12:00:56.0494312+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-wilma",
@@ -642,6 +626,22 @@
       "issue": 8,
       "navn": "Hendelser",
       "startet": "2026-09-23T12:01:11.9782453+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-taco",
+      "github": "Puiu",
+      "issue": 54,
+      "navn": "Rate limit",
+      "startet": "2026-09-23T12:01:39.5119902+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-ingve",
+      "github": "ingvevs",
+      "issue": 11,
+      "navn": "Kollektiv",
+      "startet": "2026-09-23T12:01:44.272017+00:00",
       "minutter": 0
     }
   ],
@@ -686,13 +686,13 @@
       "issue": 11,
       "navn": "Nytt lag: kollektivtrafikk som beveger seg",
       "github": "coffeelyfe",
-      "oppdatert": "2026-09-23T12:00:43Z"
+      "oppdatert": "2026-09-23T12:01:45Z"
     },
     {
       "issue": 11,
       "navn": "Nytt lag: kollektivtrafikk som beveger seg",
       "github": "ingvevs",
-      "oppdatert": "2026-09-23T12:00:43Z"
+      "oppdatert": "2026-09-23T12:01:45Z"
     },
     {
       "issue": 13,
@@ -752,7 +752,7 @@
       "issue": 29,
       "navn": "Nytt lag: museer og samlinger",
       "github": "jthagesk",
-      "oppdatert": "2026-09-23T12:01:04Z"
+      "oppdatert": "2026-09-23T12:01:57Z"
     },
     {
       "issue": 30,
@@ -836,7 +836,7 @@
       "issue": 54,
       "navn": "Vær grei mot kildene",
       "github": "Puiu",
-      "oppdatert": "2026-09-23T12:00:47Z"
+      "oppdatert": "2026-09-23T12:01:40Z"
     },
     {
       "issue": 55,
@@ -974,13 +974,13 @@
       "issue": 124,
       "navn": "Punkter som flytter seg, glir til ny posisjon",
       "github": "novanettor",
-      "oppdatert": "2026-09-23T12:00:19Z"
+      "oppdatert": "2026-09-23T12:01:21Z"
     },
     {
       "issue": 128,
       "navn": "Simulering: tsunami i Oslofjorden",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T11:55:49Z"
+      "oppdatert": "2026-09-23T12:01:37Z"
     },
     {
       "issue": 129,
