@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:07:58",
+  "oppdatert": "2026-09-23T11:08:24",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -56,14 +56,14 @@
         }
       ],
       "levert": [],
-      "dollar": 4.573,
-      "tokens": 8498747,
-      "sekunder": 1669,
+      "dollar": 5.063,
+      "tokens": 9244002,
+      "sekunder": 1823,
       "pr": 2,
       "utkast": 0,
       "merget": 2,
-      "kjoeringer": 5,
-      "utenPr": 3,
+      "kjoeringer": 6,
+      "utenPr": 4,
       "bygg": [],
       "estimert": false,
       "plass": 2
@@ -190,14 +190,14 @@
           "poeng": 2
         }
       ],
-      "dollar": 5.906,
-      "tokens": 13222823,
-      "sekunder": 1956,
+      "dollar": 6.754,
+      "tokens": 14279162,
+      "sekunder": 2211,
       "pr": 4,
       "utkast": 0,
       "merget": 2,
-      "kjoeringer": 7,
-      "utenPr": 3,
+      "kjoeringer": 8,
+      "utenPr": 4,
       "bygg": [],
       "estimert": false,
       "plass": 6
@@ -428,14 +428,6 @@
     {
       "agent": "mini-wilma",
       "github": "larsajakobsen",
-      "issue": 27,
-      "navn": "Verneområder",
-      "startet": "2026-09-23T09:03:41.4652664+00:00",
-      "minutter": 4
-    },
-    {
-      "agent": "mini-wilma",
-      "github": "larsajakobsen",
       "issue": 26,
       "navn": "Skoler",
       "startet": "2026-09-23T09:03:43.3920206+00:00",
@@ -447,15 +439,7 @@
       "issue": 11,
       "navn": "Kollektiv",
       "startet": "2026-09-23T09:04:10.6494291+00:00",
-      "minutter": 3
-    },
-    {
-      "agent": "mini-gir",
-      "github": "GIR75",
-      "issue": 13,
-      "navn": "Veiarbeid",
-      "startet": "2026-09-23T09:05:17.8039862+00:00",
-      "minutter": 2
+      "minutter": 4
     },
     {
       "agent": "mini-gir",
@@ -609,7 +593,7 @@
       "issue": 13,
       "navn": "Nytt lag: veiarbeid og stengte veier",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T09:05:18Z"
+      "oppdatert": "2026-09-23T09:07:59Z"
     },
     {
       "issue": 14,
@@ -699,7 +683,7 @@
       "issue": 27,
       "navn": "Nytt lag: verneområder og naturtyper",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T09:03:42Z"
+      "oppdatert": "2026-09-23T09:08:04Z"
     },
     {
       "issue": 28,
@@ -902,6 +886,66 @@
   ],
   "aapne": [
     {
+      "pr": 108,
+      "tittel": "Nytt lag: idretts- og friluftsanlegg (#14)",
+      "github": "leif-larsen",
+      "agent": "mini-leif",
+      "opprettet": "2026-09-23T09:02:50Z",
+      "oppdatert": "2026-09-23T09:08:06Z",
+      "utkast": false,
+      "issues": [
+        14
+      ]
+    },
+    {
+      "pr": 104,
+      "tittel": "#25: Ta vare på et øyeblikksbilde hver time",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:58:22Z",
+      "oppdatert": "2026-09-23T09:08:03Z",
+      "utkast": false,
+      "issues": [
+        25
+      ]
+    },
+    {
+      "pr": 102,
+      "tittel": "Gjør kartutsnittet konfigurerbart",
+      "github": "jthagesk",
+      "agent": "mini-kirsten",
+      "opprettet": "2026-09-23T08:52:16Z",
+      "oppdatert": "2026-09-23T09:08:01Z",
+      "utkast": false,
+      "issues": [
+        52
+      ]
+    },
+    {
+      "pr": 90,
+      "tittel": "Fargene må virke for alle",
+      "github": "nilsgs",
+      "agent": "helstein",
+      "opprettet": "2026-09-23T08:39:44Z",
+      "oppdatert": "2026-09-23T09:07:59Z",
+      "utkast": false,
+      "issues": [
+        41
+      ]
+    },
+    {
+      "pr": 80,
+      "tittel": "Nytt lag: politilogg og nyhetshendelser",
+      "github": "larsajakobsen",
+      "agent": "mini-wilma",
+      "opprettet": "2026-09-23T08:30:50Z",
+      "oppdatert": "2026-09-23T09:07:57Z",
+      "utkast": false,
+      "issues": [
+        8
+      ]
+    },
+    {
       "pr": 73,
       "tittel": "Vær grei mot kildene (#54)",
       "github": "Puiu",
@@ -935,30 +979,6 @@
       "utkast": false,
       "issues": [
         55
-      ]
-    },
-    {
-      "pr": 104,
-      "tittel": "#25: Ta vare på et øyeblikksbilde hver time",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:58:22Z",
-      "oppdatert": "2026-09-23T09:03:40Z",
-      "utkast": false,
-      "issues": [
-        25
-      ]
-    },
-    {
-      "pr": 108,
-      "tittel": "Nytt lag: idretts- og friluftsanlegg (#14)",
-      "github": "leif-larsen",
-      "agent": "mini-leif",
-      "opprettet": "2026-09-23T09:02:50Z",
-      "oppdatert": "2026-09-23T09:02:51Z",
-      "utkast": false,
-      "issues": [
-        14
       ]
     },
     {
@@ -1058,18 +1078,6 @@
       ]
     },
     {
-      "pr": 102,
-      "tittel": "Gjør kartutsnittet konfigurerbart",
-      "github": "jthagesk",
-      "agent": "mini-kirsten",
-      "opprettet": "2026-09-23T08:52:16Z",
-      "oppdatert": "2026-09-23T08:52:17Z",
-      "utkast": false,
-      "issues": [
-        52
-      ]
-    },
-    {
       "pr": 96,
       "tittel": "#22: Slå sammen punkter som ligger oppå hverandre",
       "github": "randsu",
@@ -1130,18 +1138,6 @@
       ]
     },
     {
-      "pr": 80,
-      "tittel": "Nytt lag: politilogg og nyhetshendelser",
-      "github": "larsajakobsen",
-      "agent": "mini-wilma",
-      "opprettet": "2026-09-23T08:30:50Z",
-      "oppdatert": "2026-09-23T08:44:19Z",
-      "utkast": false,
-      "issues": [
-        8
-      ]
-    },
-    {
       "pr": 91,
       "tittel": "Fargene må virke for alle",
       "github": "audmaha",
@@ -1163,18 +1159,6 @@
       "utkast": false,
       "issues": [
         23
-      ]
-    },
-    {
-      "pr": 90,
-      "tittel": "Fargene må virke for alle",
-      "github": "nilsgs",
-      "agent": "helstein",
-      "opprettet": "2026-09-23T08:39:44Z",
-      "oppdatert": "2026-09-23T08:39:48Z",
-      "utkast": false,
-      "issues": [
-        41
       ]
     },
     {
