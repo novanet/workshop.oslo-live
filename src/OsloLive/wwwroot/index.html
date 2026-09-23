@@ -6,6 +6,7 @@
 <title>Oslo Live</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.js"></script>
+<script defer src="effekter/symboler.js"></script>
 <script src="effekter/tsunami.js" defer></script>
 <style>
   :root {
@@ -46,6 +47,8 @@
   .graf { display: block; width: 100%; height: 26px; margin: 0 0 4px; padding: 0 8px; }
   .graf-tom { font-size: 11px; color: var(--dempet); padding: 0 8px 4px; }
   .bunn { margin-top: 12px; padding-top: 12px; border-top: 1px solid #e5e7eb; font-size: 11px; color: var(--dempet); display: flex; justify-content: space-between; }
+  .vannstand { margin-top: 10px; font-size: 13px; font-variant-numeric: tabular-nums; }
+  .vannstand.feil { color: var(--feil); }
 
   .statistikk { margin-top: 12px; padding-top: 12px; border-top: 1px solid #e5e7eb; font-size: 12px; }
   .statistikk summary { cursor: pointer; font-weight: 600; font-size: 13px; }
@@ -195,6 +198,7 @@
     <ol id="varsel-liste" aria-live="polite"></ol>
   </div>
   <div id="lagliste"><p class="tom">Laster lag …</p></div>
+  <div class="vannstand" id="vannstand">🌊 Vannstand: laster …</div>
   <div class="bydeler">
     <div class="topp"><h2>Flest punkter per bydel</h2><select id="bydel-lag" aria-label="Velg lag"></select></div>
     <ol id="bydel-liste"><li class="tom">Laster …</li></ol>
@@ -313,6 +317,10 @@ kart.on('style.load', () => {
   hentStroem();
   setInterval(hentStroem, 60000); // maks én gang i minuttet, ikke som lagene hvert 15. sekund
 });
+
+// Vannstanden er ikke knyttet til lagene og skal oppdateres selv om ingen lag finnes.
+hentVannstand();
+setInterval(hentVannstand, 15000);
 
 /**
  * Varmt tema: beige land, blaagroenn fjord, oransje hovedveier og bygninger
@@ -513,10 +521,49 @@ function lagMerkebilde(navn, farge, ikon) {
   kart.addImage(navn, g.getImageData(0, 0, s, s), { pixelRatio: 2 });
 }
 
-// Bildet et punkt tegnes med: lagets farge og ikon, eller punktets eget ikon
-// (smilefjes) eller advarsel. Bildene lages første gang de trengs.
+// SVG-symboler fra effekter/symboler.js blir MapLibre-bilder. SVG-en må
+// lastes asynkront via en <img>, så punktet vises med vanlig merke inntil
+// bildet er klart.
+const symbolLaster = new Set();
+let symbolOppdatering = 0;
+
+function kortHash(str) {
+  let h = 5381;
+  for (let i = 0; i < str.length; i++) h = ((h << 5) + h) ^ str.charCodeAt(i);
+  return Math.abs(h).toString(36);
+}
+
+// Bilde for lagets eget symbol (skip, fly, mobilitet), eller null når laget
+// ikke har et, eller symbolet ennå ikke er lastet.
+function symbolbilde(id, oppf, p) {
+  if (typeof window.lagSymbol !== 'function') return null;
+  const el = window.lagSymbol(id, p.egenskaper, oppf.farge);
+  if (!el) return null;
+  const svgTekst = new XMLSerializer().serializeToString(el);
+  const navn = 'symbol-' + id + '-' + kortHash(svgTekst);
+  if (kart.hasImage(navn)) return navn;
+  if (!symbolLaster.has(navn)) {
+    symbolLaster.add(navn);
+    const bilde = new Image();
+    bilde.onload = () => {
+      if (!kart.hasImage(navn)) kart.addImage(navn, bilde, { pixelRatio: 2 });
+      if (!symbolOppdatering) symbolOppdatering = requestAnimationFrame(() => {
+        symbolOppdatering = 0;
+        oppdaterKilde();
+      });
+    };
+    bilde.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgTekst);
+  }
+  return null;
+}
+
+// Bildet et punkt tegnes med: eget symbol (skip, fly, mobilitet), ellers
+// lagets farge og ikon, eller punktets eget ikon (smilefjes) eller advarsel.
+// Bildene lages første gang de trengs.
 function bildeFor(id, oppf, p) {
   if (p.egenskaper.advarsel) return 'merke-advarsel';
+  const symbol = symbolbilde(id, oppf, p);
+  if (symbol) return symbol;
   const eget = p.egenskaper.ikon;
   const navn = eget ? 'merke-' + id + '-' + eget : 'merke-' + id;
   lagMerkebilde(navn, oppf.farge, eget || oppf.ikon);
@@ -591,6 +638,9 @@ function leggTilPunktlag() {
     filter: ['!', ['has', 'point_count']],
     layout: {
       'icon-image': ['get', 'bilde'],
+      // Bildene har pixelRatio 2 på et 64 px lerret, så icon-size 1 gir et
+      // 32 px symbol – over kravet om minst 28 px.
+      'icon-size': 1,
       'icon-allow-overlap': true, 'icon-ignore-placement': true
     } });
 
@@ -823,6 +873,20 @@ function oppdaterBunn() {
   document.getElementById('oppdatert').textContent = valgtTid ? 'Viser ' + tidTekst(valgtTid) : new Date().toLocaleTimeString('no-NO');
 }
 
+async function hentVannstand() {
+  const felt = document.getElementById('vannstand');
+  try {
+    const svar = await fetch('/api/vannstand');
+    if (!svar.ok) throw new Error('HTTP ' + svar.status);
+    const v = await svar.json();
+    const kl = new Date(v.neste.tidspunkt).toLocaleTimeString('no-NO', { hour: '2-digit', minute: '2-digit' });
+    felt.textContent = `🌊 Vannstand ${Math.round(v.naa)} cm · ${v.neste.type} kl. ${kl} (${Math.round(v.neste.verdi)} cm)`;
+    felt.className = 'vannstand';
+  } catch (e) {
+    felt.textContent = '🌊 Vannstand: utilgjengelig';
+    felt.className = 'vannstand feil';
+  }
+}
 const STATISTIKK_NØKKEL = 'oslolive.statistikk.åpen';
 const statistikkPanel = document.getElementById('statistikk');
 statistikkPanel.open = localStorage.getItem(STATISTIKK_NØKKEL) === '1';
@@ -891,7 +955,6 @@ document.getElementById('tid').addEventListener('input', (ev) => {
     hentBydeler();
   }, 250);
 });
-
 async function start() {
   let lag = [];
   try {
@@ -1562,5 +1625,6 @@ function stoppDemo() {
 
 demoKnapp.addEventListener('click', () => { demo.på ? stoppDemo() : startDemo(); });
 </script>
+<script src="effekter/lyd.js" defer></script>
 </body>
 </html>
