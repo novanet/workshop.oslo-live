@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:19:07",
+  "oppdatert": "2026-09-23T14:19:47",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -250,14 +250,14 @@
           "poeng": 2
         }
       ],
-      "dollar": 26.129,
-      "tokens": 45336919,
-      "sekunder": 8052,
+      "dollar": 26.804,
+      "tokens": 46174277,
+      "sekunder": 8070,
       "pr": 7,
       "utkast": 0,
       "merget": 3,
       "kjoeringer": 22,
-      "utenPr": 14,
+      "utenPr": 13,
       "bygg": [],
       "estimert": false,
       "plass": 7
@@ -526,8 +526,8 @@
       "pr": 2,
       "utkast": 0,
       "merget": 0,
-      "kjoeringer": 6,
-      "utenPr": 4,
+      "kjoeringer": 5,
+      "utenPr": 3,
       "bygg": [],
       "estimert": false,
       "plass": 19
@@ -575,18 +575,58 @@
     {
       "agent": "mini-wilma",
       "github": "larsajakobsen",
-      "issue": 8,
-      "navn": "Hendelser",
-      "startet": "2026-09-23T12:10:34.6234355+00:00",
-      "minutter": 8
+      "issue": 198,
+      "navn": "",
+      "startet": "2026-09-23T12:16:25.0295863+00:00",
+      "minutter": 3
+    },
+    {
+      "agent": "mini-richard",
+      "github": "randsu",
+      "issue": 157,
+      "navn": "",
+      "startet": "2026-09-23T12:19:02.3675258+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-richard",
+      "github": "randsu",
+      "issue": 191,
+      "navn": "",
+      "startet": "2026-09-23T12:19:02.7888497+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-leif",
+      "github": "leif-larsen",
+      "issue": 141,
+      "navn": "Tydelige kartsymboler: båter som ser ut som båter",
+      "startet": "2026-09-23T12:19:28.1326146+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-richard",
+      "github": "randsu",
+      "issue": 169,
+      "navn": "",
+      "startet": "2026-09-23T12:19:32.4225991+00:00",
+      "minutter": 0
     },
     {
       "agent": "mini-wilma",
       "github": "larsajakobsen",
-      "issue": 198,
+      "issue": 190,
       "navn": "",
-      "startet": "2026-09-23T12:16:25.0295863+00:00",
-      "minutter": 2
+      "startet": "2026-09-23T12:19:34.8533908+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-frode",
+      "github": "FrodeBl",
+      "issue": 128,
+      "navn": "Simulering: tsunami i Oslofjorden",
+      "startet": "2026-09-23T12:19:38.2554331+00:00",
+      "minutter": 0
     }
   ],
   "main": {
@@ -667,7 +707,7 @@
       "issue": 28,
       "navn": "Nytt lag: togtrafikk",
       "github": "Buggz",
-      "oppdatert": "2026-09-23T12:15:58Z"
+      "oppdatert": "2026-09-23T12:19:07Z"
     },
     {
       "issue": 29,
@@ -727,7 +767,7 @@
       "issue": 46,
       "navn": "Tegn bydelsgrensene",
       "github": "nilsgs",
-      "oppdatert": "2026-09-23T08:33:31Z"
+      "oppdatert": "2026-09-23T12:19:26Z"
     },
     {
       "issue": 47,
@@ -829,13 +869,13 @@
       "issue": 116,
       "navn": "Nytt lag: værstasjoner",
       "github": "monet820",
-      "oppdatert": "2026-09-23T12:02:17Z"
+      "oppdatert": "2026-09-23T12:19:13Z"
     },
     {
       "issue": 116,
       "navn": "Nytt lag: værstasjoner",
       "github": "nilsgs",
-      "oppdatert": "2026-09-23T12:02:17Z"
+      "oppdatert": "2026-09-23T12:19:13Z"
     },
     {
       "issue": 117,
@@ -901,7 +941,7 @@
       "issue": 128,
       "navn": "Simulering: tsunami i Oslofjorden",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T12:18:58Z"
+      "oppdatert": "2026-09-23T12:19:38Z"
     },
     {
       "issue": 129,
@@ -949,7 +989,7 @@
       "issue": 141,
       "navn": "Tydelige kartsymboler: båter som ser ut som båter",
       "github": "leif-larsen",
-      "oppdatert": "2026-09-23T12:18:40Z"
+      "oppdatert": "2026-09-23T12:19:29Z"
     },
     {
       "issue": 142,
@@ -970,6 +1010,12 @@
       "oppdatert": "2026-09-23T12:16:17Z"
     },
     {
+      "issue": 169,
+      "navn": "Filtrer punktene i et lag",
+      "github": "randsu",
+      "oppdatert": "2026-09-23T12:19:33Z"
+    },
+    {
       "issue": 170,
       "navn": "Fortell en historie med kartet, styrt med presentasjonsklikker",
       "github": "randsu",
@@ -980,6 +1026,12 @@
       "navn": "Døgnet på ett minutt: reprise av byen",
       "github": "randsu",
       "oppdatert": "2026-09-23T12:16:46Z"
+    },
+    {
+      "issue": 190,
+      "navn": "Hvor langt når jeg på 15 minutter?",
+      "github": "larsajakobsen",
+      "oppdatert": "2026-09-23T12:19:36Z"
     },
     {
       "issue": 191,
@@ -997,10 +1049,22 @@
       "issue": 199,
       "navn": "Styr storskjermen fra mobilen",
       "github": "yonzo",
-      "oppdatert": "2026-09-23T12:16:48Z"
+      "oppdatert": "2026-09-23T12:19:44Z"
     }
   ],
   "aapne": [
+    {
+      "pr": 144,
+      "tittel": "Tydelige kartsymboler: båter som ser ut som båter (#141)",
+      "github": "leif-larsen",
+      "agent": "mini-leif",
+      "opprettet": "2026-09-23T11:58:52Z",
+      "oppdatert": "2026-09-23T12:19:27Z",
+      "utkast": false,
+      "issues": [
+        141
+      ]
+    },
     {
       "pr": 200,
       "tittel": "Ekte sollys på 3D-byggene",
@@ -1023,18 +1087,6 @@
       "utkast": false,
       "issues": [
         8
-      ]
-    },
-    {
-      "pr": 144,
-      "tittel": "Tydelige kartsymboler: båter som ser ut som båter (#141)",
-      "github": "leif-larsen",
-      "agent": "mini-leif",
-      "opprettet": "2026-09-23T11:58:52Z",
-      "oppdatert": "2026-09-23T12:17:13Z",
-      "utkast": false,
-      "issues": [
-        141
       ]
     },
     {
