@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:17:26",
+  "oppdatert": "2026-09-23T10:17:52",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -275,6 +275,14 @@
       "issue": 57,
       "navn": "Avgangstavle",
       "startet": "2026-09-23T08:16:36.122853+00:00",
+      "minutter": 1
+    },
+    {
+      "agent": "mini-richard",
+      "github": "randsu",
+      "issue": 2,
+      "navn": "Utsnittet",
+      "startet": "2026-09-23T08:17:30.8091834+00:00",
       "minutter": 0
     }
   ],
@@ -307,7 +315,13 @@
       "issue": 2,
       "navn": "Steder langt utenfor Oslo slipper inn i kartet",
       "github": "leif-larsen",
-      "oppdatert": "2026-09-23T08:16:36Z"
+      "oppdatert": "2026-09-23T08:17:31Z"
+    },
+    {
+      "issue": 2,
+      "navn": "Steder langt utenfor Oslo slipper inn i kartet",
+      "github": "randsu",
+      "oppdatert": "2026-09-23T08:17:31Z"
     },
     {
       "issue": 3,
@@ -361,7 +375,7 @@
       "issue": 21,
       "navn": "Søk etter adresse og hopp dit på kartet",
       "github": "leif-larsen",
-      "oppdatert": "2026-09-23T08:12:18Z"
+      "oppdatert": "2026-09-23T08:17:45Z"
     },
     {
       "issue": 44,
