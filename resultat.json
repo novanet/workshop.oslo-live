@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:12:21",
+  "oppdatert": "2026-09-23T11:12:49",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -436,7 +436,7 @@
       "issue": 26,
       "navn": "Skoler",
       "startet": "2026-09-23T09:03:43.3920206+00:00",
-      "minutter": 8
+      "minutter": 9
     },
     {
       "agent": "Andy3000",
@@ -445,6 +445,14 @@
       "navn": "Kollektiv",
       "startet": "2026-09-23T09:04:10.6494291+00:00",
       "minutter": 8
+    },
+    {
+      "agent": "mini-leif",
+      "github": "leif-larsen",
+      "issue": 108,
+      "navn": "",
+      "startet": "2026-09-23T09:12:25.1252417+00:00",
+      "minutter": 0
     }
   ],
   "main": {
@@ -576,7 +584,7 @@
       "issue": 11,
       "navn": "Nytt lag: kollektivtrafikk som beveger seg",
       "github": "coffeelyfe",
-      "oppdatert": "2026-09-23T09:07:08Z"
+      "oppdatert": "2026-09-23T09:12:33Z"
     },
     {
       "issue": 13,
@@ -875,6 +883,18 @@
   ],
   "aapne": [
     {
+      "pr": 108,
+      "tittel": "Nytt lag: idretts- og friluftsanlegg (#14)",
+      "github": "leif-larsen",
+      "agent": "mini-leif",
+      "opprettet": "2026-09-23T09:02:50Z",
+      "oppdatert": "2026-09-23T09:12:26Z",
+      "utkast": false,
+      "issues": [
+        14
+      ]
+    },
+    {
       "pr": 73,
       "tittel": "Vær grei mot kildene (#54)",
       "github": "Puiu",
@@ -1004,18 +1024,6 @@
       "utkast": false,
       "issues": [
         48
-      ]
-    },
-    {
-      "pr": 108,
-      "tittel": "Nytt lag: idretts- og friluftsanlegg (#14)",
-      "github": "leif-larsen",
-      "agent": "mini-leif",
-      "opprettet": "2026-09-23T09:02:50Z",
-      "oppdatert": "2026-09-23T09:08:06Z",
-      "utkast": false,
-      "issues": [
-        14
       ]
     },
     {
