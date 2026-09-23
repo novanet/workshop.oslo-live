@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:13:44",
+  "oppdatert": "2026-09-23T11:14:11",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -444,7 +444,7 @@
       "issue": 11,
       "navn": "Kollektiv",
       "startet": "2026-09-23T09:04:10.6494291+00:00",
-      "minutter": 9
+      "minutter": 10
     },
     {
       "agent": "mini-leif",
@@ -460,7 +460,7 @@
       "issue": 72,
       "navn": "",
       "startet": "2026-09-23T09:12:59.4083914+00:00",
-      "minutter": 0
+      "minutter": 1
     }
   ],
   "main": {
@@ -891,6 +891,30 @@
   ],
   "aapne": [
     {
+      "pr": 103,
+      "tittel": "#24: Tell punkter per bydel",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:56:50Z",
+      "oppdatert": "2026-09-23T09:14:02Z",
+      "utkast": false,
+      "issues": [
+        24
+      ]
+    },
+    {
+      "pr": 101,
+      "tittel": "#34: Skru tiden tilbake med en tidslinje",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:51:10Z",
+      "oppdatert": "2026-09-23T09:13:53Z",
+      "utkast": false,
+      "issues": [
+        34
+      ]
+    },
+    {
       "pr": 72,
       "tittel": "Søk etter adresse og hopp dit på kartet (#21)",
       "github": "leif-larsen",
@@ -939,18 +963,6 @@
       ]
     },
     {
-      "pr": 101,
-      "tittel": "#34: Skru tiden tilbake med en tidslinje",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:51:10Z",
-      "oppdatert": "2026-09-23T09:10:34Z",
-      "utkast": false,
-      "issues": [
-        34
-      ]
-    },
-    {
       "pr": 96,
       "tittel": "#22: Slå sammen punkter som ligger oppå hverandre",
       "github": "randsu",
@@ -972,18 +984,6 @@
       "utkast": false,
       "issues": [
         39
-      ]
-    },
-    {
-      "pr": 103,
-      "tittel": "#24: Tell punkter per bydel",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:56:50Z",
-      "oppdatert": "2026-09-23T09:09:00Z",
-      "utkast": false,
-      "issues": [
-        24
       ]
     },
     {
