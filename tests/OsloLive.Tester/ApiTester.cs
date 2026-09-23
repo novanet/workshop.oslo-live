@@ -706,6 +706,8 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
         {
             var forsteRespons = await klient.GetAsync("/api/lag/museum");
             Assert.Equal(HttpStatusCode.OK, forsteRespons.StatusCode);
+            var lag = await forsteRespons.Content.ReadFromJsonAsync<Kartlag>();
+            Assert.Equal(MuseumLag.KjenteMuseer.Count, lag!.Features.Count);
             Assert.Equal(1, handler.MuseumsKall);
             Assert.Equal(MuseumLag.MaksKallPerOppdatering - 1, handler.ObjektKall);
 

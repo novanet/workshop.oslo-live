@@ -10,9 +10,10 @@ namespace OsloLive.Lag;
 /// kommer fra Allemannsdata sin «kulturarv»-kilde.
 ///
 /// Askeladden registrerer museumsbygninger, ikke museer: radene heter ting
-/// som «Tilbygg. Nf 325» eller «Tø03 Botanisk museum». <see cref="KjenteMuseer"/>
-/// gir derfor museets navn og samlingskode i DigitaltMuseum, mens Askeladden
-/// gir koordinatene.
+/// som «Tilbygg. Nf 325» eller «Tø03 Botanisk museum», og noen er ikke museer
+/// i dag. <see cref="KjenteMuseer"/> er derfor listen over museer som vises,
+/// med museets navn og samlingskode i DigitaltMuseum, mens Askeladden gir
+/// koordinatene.
 ///
 /// Hele laget, smakebitene inkludert, mellomlagres i <see cref="IMemoryCache"/>
 /// og hentes bare på nytt når museumslisten er utløpt. Senere kall rører ikke
@@ -45,7 +46,8 @@ public sealed class MuseumLag(Allemannsdata data, IMemoryCache mellomlager) : IL
     /// Kjente museer i Oslo, etter Askeladden sitt <c>heritage_site_id</c>.
     /// Samlingskodene kommer fra <c>list_museums</c>; overordnede koder som
     /// «NMK» og «KHMUIO» har nesten ingen objekter selv, så vi bruker
-    /// undersamlingene.
+    /// undersamlingene. Museer med <c>null</c> publiserer ikke på
+    /// DigitaltMuseum, så de vises uten smakebit.
     /// </summary>
     public static readonly IReadOnlyDictionary<long, Museum> KjenteMuseer = new Dictionary<long, Museum>
     {
@@ -82,7 +84,7 @@ public sealed class MuseumLag(Allemannsdata data, IMemoryCache mellomlager) : IL
         }
 
         var museer = await HentMuseer(stopp);
-        var eksempler = await Task.WhenAll(museer.Select(m => HentEksempel(Oppslag(m).Samling, stopp)));
+        var eksempler = await Task.WhenAll(museer.Select(m => HentEksempel(Oppslag(m)?.Samling, stopp)));
 
         var lag = Geo.Samle(museer.Select((m, i) => TilPunkt(m, eksempler[i])));
         mellomlager.Set(LagNøkkel, lag, lag.Features.Count > 0 ? LagLevetid : TomtLagLevetid);
@@ -127,23 +129,16 @@ public sealed class MuseumLag(Allemannsdata data, IMemoryCache mellomlager) : IL
             .ToList();
 
     /// <summary>
-    /// Museet en Askeladden-rad hører til: fra <see cref="KjenteMuseer"/> når
-    /// vi kjenner det, ellers radens eget navn og ingen samling.
+    /// Museet en Askeladden-rad hører til, fra <see cref="KjenteMuseer"/>.
+    /// Ukjente bygninger gir null, siden radens navn er et bygningsnavn og
+    /// ikke museets navn.
     /// </summary>
-    public static Museum Oppslag(JsonElement rad)
-    {
-        if (rad.TryGetProperty("heritage_site_id", out var id)
-            && id.ValueKind == JsonValueKind.Number
-            && KjenteMuseer.TryGetValue(id.GetInt64(), out var kjent))
-        {
-            return kjent;
-        }
-
-        var navn = rad.TryGetProperty("navn", out var n) && n.ValueKind == JsonValueKind.String
-            ? n.GetString() ?? "Ukjent museum"
-            : "Ukjent museum";
-        return new Museum(navn, null);
-    }
+    public static Museum? Oppslag(JsonElement rad) =>
+        rad.TryGetProperty("heritage_site_id", out var id)
+        && id.ValueKind == JsonValueKind.Number
+        && KjenteMuseer.TryGetValue(id.GetInt64(), out var kjent)
+            ? kjent
+            : null;
 
     /// <summary>
     /// Henter smakebit-objektet fra museets samling: tittelen på det første
@@ -187,11 +182,16 @@ public sealed class MuseumLag(Allemannsdata data, IMemoryCache mellomlager) : IL
     /// <summary>
     /// Oversetter én museumsrad fra <c>search_heritage_sites</c> til et
     /// kartpunkt, med navnet fra <see cref="Oppslag"/>. Rader uten id eller
-    /// koordinater gir null.
+    /// koordinater, og bygninger som ikke er et kjent museum, gir null.
     /// </summary>
     public static Kartpunkt? TilPunkt(JsonElement museum, string? eksempel)
     {
         if (!museum.TryGetProperty("heritage_site_id", out var idFelt) || idFelt.ValueKind != JsonValueKind.Number)
+        {
+            return null;
+        }
+
+        if (Oppslag(museum) is not { } kjent)
         {
             return null;
         }
@@ -214,7 +214,7 @@ public sealed class MuseumLag(Allemannsdata data, IMemoryCache mellomlager) : IL
             id: idFelt.GetRawText(),
             lat: lat,
             lon: lon,
-            navn: Oppslag(museum).Navn,
+            navn: kjent.Navn,
             kilde: "Askeladden og DigitaltMuseum (Riksantikvaren)",
             detaljer: detaljer);
     }

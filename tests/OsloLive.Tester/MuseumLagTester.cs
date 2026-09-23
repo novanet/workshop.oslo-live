@@ -65,20 +65,20 @@ public class MuseumLagTester
     }
 
     [Fact]
-    public void Museum_uten_navn_faar_standardnavn()
+    public void Kjent_museum_uten_navn_i_askeladden_faar_navnet_fra_tabellen()
     {
         var punkt = MuseumLag.TilPunkt(Rad("""
-            { "heritage_site_id": 1, "lon_lat": [10.743, 59.918] }
+            { "heritage_site_id": 135892, "lon_lat": [10.743, 59.918] }
             """), eksempel: null);
 
-        Assert.Equal("Ukjent museum", punkt!.Properties["navn"]);
+        Assert.Equal("Kunstindustrimuseet", punkt!.Properties["navn"]);
     }
 
     [Fact]
     public void Museum_utenfor_oslo_blir_forkastet()
     {
         var punkt = MuseumLag.TilPunkt(Rad("""
-            { "heritage_site_id": 1, "navn": "Nidarosmuseet", "lon_lat": [10.39, 63.43] }
+            { "heritage_site_id": 135892, "navn": "Kunstindustrimuseet", "lon_lat": [10.39, 63.43] }
             """), eksempel: null);
 
         Assert.Null(punkt);
@@ -143,13 +143,25 @@ public class MuseumLagTester
     }
 
     [Fact]
-    public void Ukjent_museum_beholder_navnet_fra_askeladden_uten_samling()
+    public void Ukjent_bygning_blir_ikke_punkt()
     {
-        var museum = MuseumLag.Oppslag(Rad("""
-            { "heritage_site_id": 1, "navn": "Et lite galleri" }
-            """));
+        var rad = Rad("""
+            { "heritage_site_id": 98246, "navn": "Bakgårdsbygning", "lon_lat": [10.7587, 59.9278] }
+            """);
 
-        Assert.Equal(new MuseumLag.Museum("Et lite galleri", null), museum);
+        Assert.Null(MuseumLag.Oppslag(rad));
+        Assert.Null(MuseumLag.TilPunkt(rad, eksempel: null));
+    }
+
+    [Fact]
+    public void Kjent_museum_uten_samling_vises_uten_eksempel()
+    {
+        var punkt = MuseumLag.TilPunkt(Rad("""
+            { "heritage_site_id": 168599, "navn": "Kulturinstitusjoner - Frammuseet - Bygdøynesveien 0", "lon_lat": [10.6995, 59.9034] }
+            """), eksempel: null);
+
+        Assert.Equal("Frammuseet", punkt!.Properties["navn"]);
+        Assert.False(punkt.Properties.ContainsKey("eksempel"));
     }
 
     [Fact]
