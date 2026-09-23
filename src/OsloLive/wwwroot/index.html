@@ -155,9 +155,14 @@
   }
 
   .panel.naermest { left: auto; right: 16px; width: 280px; }
-  .naermest .topp { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-  .naermest h2 { margin: 0; font-size: 16px; }
-  .naermest .lukk { border: 0; background: none; font-size: 18px; cursor: pointer; color: var(--dempet); }
+  .panel.snarveier { left: 50%; top: 50%; right: auto; width: 320px; transform: translate(-50%, -50%); }
+  .naermest .topp, .snarveier .topp { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .naermest h2, .snarveier h2 { margin: 0; font-size: 16px; }
+  .naermest .lukk, .snarveier .lukk { border: 0; background: none; font-size: 18px; cursor: pointer; color: var(--dempet); }
+  .snarveier dl { margin: 0; }
+  .snarveier dt { font-weight: 600; font-size: 13px; margin-top: 10px; }
+  .snarveier dt:first-child { margin-top: 0; }
+  .snarveier dd { margin: 2px 0 0; font-size: 12px; color: var(--dempet); }
   .innslag { display: flex; gap: 9px; align-items: center; padding: 7px 8px; border-radius: 7px; cursor: pointer; }
   .innslag:hover { background: #f3f4f6; }
   .innslag .ikon { width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid #111; display: grid; place-items: center; font-size: 12px; flex: none; }
@@ -241,6 +246,17 @@
 <div class="panel naermest" id="naermest" hidden>
   <div class="topp"><h2>Nærmest her</h2><button class="lukk" id="lukk-naermest" type="button" aria-label="Lukk">×</button></div>
   <div id="naermest-liste"></div>
+</div>
+
+<div class="panel snarveier" id="snarveier" hidden>
+  <div class="topp"><h2>Tastatursnarveier</h2><button class="lukk" id="lukk-snarveier" type="button" aria-label="Lukk">×</button></div>
+  <dl>
+    <dt>1, 2, 4–9</dt><dd>Slå lag av/på</dd>
+    <dt>r</dt><dd>Snurr</dd>
+    <dt>3</dt><dd>2D/3D</dd>
+    <dt>h</dt><dd>Sentrum</dd>
+    <dt>?</dt><dd>Vis/skjul denne listen</dd>
+  </dl>
 </div>
 
 <div class="panel omrade" id="omrade-panel" hidden>
@@ -981,6 +997,39 @@ kart.on('mousedown', () => {
     snurrer = false;
     document.getElementById('snurr').setAttribute('aria-pressed', 'false');
   }
+});
+
+// ---------------------------------------------------------------------------
+// Tastatursnarveier
+// ---------------------------------------------------------------------------
+function veksleSnarveier(vis) {
+  const panel = document.getElementById('snarveier');
+  panel.hidden = !(vis ?? panel.hidden);
+}
+document.getElementById('lukk-snarveier').addEventListener('click', () => veksleSnarveier(false));
+
+/** Slår av/på lag nummer `nr` (1-indeksert), i samme rekkefølge som fra /api/lag. */
+function slaAvPaaLag(nr) {
+  const bokser = document.querySelectorAll('#lagliste .lag input[type="checkbox"]');
+  const boks = bokser[nr - 1];
+  if (boks) boks.click();
+}
+
+document.addEventListener('keydown', (ev) => {
+  if (ev.ctrlKey || ev.altKey || ev.metaKey || ev.repeat) return;
+  const mål = ev.target;
+  if (['INPUT', 'TEXTAREA', 'SELECT'].includes(mål.tagName) || mål.isContentEditable) return;
+
+  // Issuen gir tasten 3 to oppgaver (lag 3 og 2D/3D). 2D/3D er det mest
+  // konkrete kravet, så 3 veksler visning og lag 3 har ingen tast.
+  switch (ev.key) {
+    case '3': document.getElementById('flatt').click(); return;
+    case 'r': document.getElementById('snurr').click(); return;
+    case 'h': document.getElementById('hjem').click(); return;
+    case '?': veksleSnarveier(); return;
+    case 'Escape': veksleSnarveier(false); return;
+  }
+  if (ev.key >= '1' && ev.key <= '9') slaAvPaaLag(Number(ev.key));
 });
 
 // ---------------------------------------------------------------------------
