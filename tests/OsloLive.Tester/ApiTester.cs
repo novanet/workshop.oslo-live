@@ -1,7 +1,10 @@
 using System.Net;
 using System.Net.Http.Json;
+using System.Text;
+using System.Text.Json;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
+using OsloLive.Kart;
 
 namespace OsloLive.Tester;
 
@@ -67,6 +70,73 @@ public class ApiTester(VertUtenBakgrunnssjekk vert) : IClassFixture<VertUtenBakg
         Assert.Equal("Flytrafikk", fly.Navn);
         Assert.False(string.IsNullOrWhiteSpace(fly.Beskrivelse));
         Assert.False(string.IsNullOrWhiteSpace(fly.Ikon));
+    }
+
+    [Fact]
+    public async Task Lagoversikten_har_mobilitetslaget()
+    {
+        var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
+
+        var mobilitet = lag!.Single(l => l.Id == "mobilitet");
+        Assert.Equal("Delt mobilitet", mobilitet.Navn);
+        Assert.False(string.IsNullOrWhiteSpace(mobilitet.Beskrivelse));
+        Assert.False(string.IsNullOrWhiteSpace(mobilitet.Ikon));
+    }
+
+    [Fact]
+    public async Task Mobilitetslaget_gir_featurecollection_uten_nett()
+    {
+        const string svar = """
+            {
+                "source": "entur",
+                "operation": "find_shared_mobility_nearby",
+                "parameters": {},
+                "data": {
+                    "vehicles": [
+                        {
+                            "id": "YRY:Vehicle:ea325240",
+                            "form_factor": "SCOOTER_STANDING",
+                            "lat": 59.909607,
+                            "lon": 10.749284,
+                            "reserved": false,
+                            "disabled": false,
+                            "operator": "Ryde",
+                            "system_id": "rydeoslo"
+                        }
+                    ],
+                    "stations": []
+                }
+            }
+            """;
+
+        using var vertUtenNett = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient<Allemannsdata>().ConfigurePrimaryHttpMessageHandler(() => new FastSvarHandler(svar))));
+        var klient = vertUtenNett.CreateClient();
+
+        Allemannsdata.TømMellomlager();
+        try
+        {
+            var respons = await klient.GetAsync("/api/lag/mobilitet");
+            var lag = await respons.Content.ReadFromJsonAsync<Kartlag>();
+
+            Assert.Equal(HttpStatusCode.OK, respons.StatusCode);
+            Assert.Equal("FeatureCollection", lag!.Type);
+            Assert.NotEmpty(lag.Features);
+            Assert.Equal([10.749284, 59.909607], lag.Features[0].Geometry.Coordinates);
+        }
+        finally
+        {
+            Allemannsdata.TømMellomlager();
+        }
+    }
+
+    private sealed class FastSvarHandler(string svar) : HttpMessageHandler
+    {
+        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage forespørsel, CancellationToken stopp) =>
+            Task.FromResult(new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(svar, Encoding.UTF8, "application/json"),
+            });
     }
 
     [Fact]
