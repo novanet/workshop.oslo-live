@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T13:02:24",
+  "oppdatert": "2026-09-23T13:03:02",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -53,8 +53,8 @@
       "pr": 10,
       "utkast": 0,
       "merget": 7,
-      "kjoeringer": 14,
-      "utenPr": 4,
+      "kjoeringer": 15,
+      "utenPr": 5,
       "bygg": [],
       "estimert": false,
       "plass": 1
@@ -900,6 +900,12 @@
       "navn": "Fyrverkeri over Rådhuset når en PR blir merget",
       "github": "monet820",
       "oppdatert": "2026-09-23T09:50:25Z"
+    },
+    {
+      "issue": 131,
+      "navn": "Kameratur over Oslo når ingen rører skjermen",
+      "github": "randsu",
+      "oppdatert": "2026-09-23T11:02:42Z"
     },
     {
       "issue": 132,
