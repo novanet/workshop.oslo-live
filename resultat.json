@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:39:09",
+  "oppdatert": "2026-09-23T10:39:36",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -362,7 +362,7 @@
       "issue": 41,
       "navn": "Fargeblindhet",
       "startet": "2026-09-23T08:28:15.5659433+00:00",
-      "minutter": 10
+      "minutter": 11
     },
     {
       "agent": "mini-aud",
@@ -370,7 +370,7 @@
       "issue": 41,
       "navn": "Fargeblindhet",
       "startet": "2026-09-23T08:32:12.9324331+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-knive",
@@ -378,7 +378,7 @@
       "issue": 53,
       "navn": "Dyp helsesjekk",
       "startet": "2026-09-23T08:33:27.9645236+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-aud",
@@ -410,7 +410,7 @@
       "issue": 44,
       "navn": "Sammenlign tid",
       "startet": "2026-09-23T08:38:34.7845421+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-kirsten",
@@ -418,7 +418,7 @@
       "issue": 29,
       "navn": "Museer",
       "startet": "2026-09-23T08:38:36.2729853+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-richard",
@@ -426,6 +426,22 @@
       "issue": 22,
       "navn": "Klynging",
       "startet": "2026-09-23T08:38:37.6037617+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-richard",
+      "github": "randsu",
+      "issue": 34,
+      "navn": "Tidslinje",
+      "startet": "2026-09-23T08:39:29.3560815+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "Andy3000",
+      "github": "coffeelyfe",
+      "issue": 11,
+      "navn": "Kollektiv",
+      "startet": "2026-09-23T08:39:29.9026946+00:00",
       "minutter": 0
     }
   ],
@@ -549,7 +565,7 @@
       "issue": 11,
       "navn": "Nytt lag: kollektivtrafikk som beveger seg",
       "github": "coffeelyfe",
-      "oppdatert": "2026-09-23T08:38:21Z"
+      "oppdatert": "2026-09-23T08:39:30Z"
     },
     {
       "issue": 17,
@@ -610,6 +626,12 @@
       "navn": "Vis strømprisen for Oslo",
       "github": "larsajakobsen",
       "oppdatert": "2026-09-23T08:37:52Z"
+    },
+    {
+      "issue": 34,
+      "navn": "Skru tiden tilbake med en tidslinje",
+      "github": "randsu",
+      "oppdatert": "2026-09-23T08:39:30Z"
     },
     {
       "issue": 38,
