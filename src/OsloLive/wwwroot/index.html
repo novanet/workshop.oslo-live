@@ -796,6 +796,29 @@ function leggTilVarsel(nøkkel, ikon, navn, hva) {
   seksjon.hidden = false;
 }
 
+/** Nyhetslinja nederst: siste hendelser på kartet, nyeste først, maks NYHETSLINJE_MAKS innslag. */
+const NYHETSLINJE_MAKS = 20;
+const nyhetslinjeInnslag = [];   // { tid: Date, tekst } – nyeste først
+
+function leggTilNyhetslinjeInnslag(tekst) {
+  nyhetslinjeInnslag.unshift({ tid: new Date(), tekst });
+  nyhetslinjeInnslag.length = Math.min(nyhetslinjeInnslag.length, NYHETSLINJE_MAKS);
+  visNyhetslinje();
+}
+
+function visNyhetslinje() {
+  const rullende = document.getElementById('nyhetslinje-rullende');
+  const stille = document.getElementById('nyhetslinje-stille');
+  if (!nyhetslinjeInnslag.length) {
+    rullende.textContent = 'Ingen nye hendelser ennå';
+    stille.textContent = 'Ingen nye hendelser ennå';
+    return;
+  }
+  const formatert = nyhetslinjeInnslag.map((i) => klokkeHMS(i.tid).slice(0, 5) + '  ' + i.tekst);
+  rullende.textContent = formatert.join('     •     ');
+  stille.textContent = formatert[0];
+}
+
 async function hent(id) {
   const oppf = lagene.get(id);
   const teller = document.getElementById('antall-' + id);
@@ -974,7 +997,7 @@ async function start() {
   lag.forEach((l, nr) => {
     const farge = fargeFor(l.id, nr);
     const på = onsket ? onsket.has(l.id) : true;
-    lagene.set(l.id, { ikon: l.ikon || '📍', navn: l.navn, farge, punkter: [], antall: 0, på, feil: false, boks: null, varme: !!varmevalg[l.id], sistOk: null });
+    lagene.set(l.id, { ikon: l.ikon || '📍', navn: l.navn, farge, punkter: [], antall: 0, på, feil: false, boks: null, varme: !!varmevalg[l.id], sistOk: null, nyhetKjenteIder: null, nyhetHarRespondert: false, nyhetFeiler: false });
 
     const rad = document.createElement('label');
     rad.className = 'lag';
