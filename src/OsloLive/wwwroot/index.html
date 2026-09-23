@@ -778,7 +778,7 @@ function leggTilPunktlag() {
 }
 
 /** Bygger kilden på nytt av lagene som er på og viser punkter, ikke varmekart. */
-function oppdaterKilde() {
+function byggKilde() {
   const features = [];
   for (const [id, oppf] of lagene) {
     if (!oppf.på || oppf.varme) continue;
@@ -789,6 +789,18 @@ function oppdaterKilde() {
     });
   }
   kart.getSource('punkter')?.setData({ type: 'FeatureCollection', features });
+}
+
+// Lagene henter data uavhengig av hverandre hver 15. sekund, og hver hent()
+// kaller oppdaterKilde(). Uten samling ville det gitt ett setData-kall per
+// lag i samme runde; rAF samler dem til ett kall per bilde.
+let kildeOppdatering = 0;
+function oppdaterKilde() {
+  if (kildeOppdatering) return;
+  kildeOppdatering = requestAnimationFrame(() => {
+    kildeOppdatering = 0;
+    byggKilde();
+  });
 }
 
 /** Blinker glorien på punktene med blink=1 tre ganger, og nullstiller så flagget. */
