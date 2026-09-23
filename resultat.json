@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:54:17",
+  "oppdatert": "2026-09-23T11:54:55",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -545,7 +545,16 @@
       "plass": 21
     }
   ],
-  "kjoerer": [],
+  "kjoerer": [
+    {
+      "agent": "mini-wilma",
+      "github": "larsajakobsen",
+      "issue": 120,
+      "navn": "Vis endringen per lag i lagvelgeren",
+      "startet": "2026-09-23T09:54:30.8861702+00:00",
+      "minutter": 0
+    }
+  ],
   "main": {
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
@@ -587,7 +596,7 @@
       "issue": 11,
       "navn": "Nytt lag: kollektivtrafikk som beveger seg",
       "github": "coffeelyfe",
-      "oppdatert": "2026-09-23T09:42:33Z"
+      "oppdatert": "2026-09-23T09:54:42Z"
     },
     {
       "issue": 12,
@@ -852,6 +861,12 @@
       "navn": "Mørkt kart når sola går ned i Oslo",
       "github": "larsajakobsen",
       "oppdatert": "2026-09-23T09:47:47Z"
+    },
+    {
+      "issue": 120,
+      "navn": "Vis endringen per lag i lagvelgeren",
+      "github": "larsajakobsen",
+      "oppdatert": "2026-09-23T09:54:31Z"
     },
     {
       "issue": 121,
