@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:58:17",
+  "oppdatert": "2026-09-23T14:59:00",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -217,12 +217,12 @@
       ],
       "dollar": 10.943,
       "tokens": 19946944,
-      "sekunder": 3743,
+      "sekunder": 3744,
       "pr": 5,
       "utkast": 0,
       "merget": 4,
-      "kjoeringer": 16,
-      "utenPr": 11,
+      "kjoeringer": 17,
+      "utenPr": 12,
       "bygg": [],
       "estimert": false,
       "plass": 5
@@ -658,7 +658,16 @@
       "plass": 21
     }
   ],
-  "kjoerer": [],
+  "kjoerer": [
+    {
+      "agent": "mini-johan",
+      "github": "pr0nin",
+      "issue": 16,
+      "navn": "Ladestasjoner",
+      "startet": "2026-09-23T12:58:49.3581962+00:00",
+      "minutter": 0
+    }
+  ],
   "main": {
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
@@ -692,13 +701,25 @@
       "issue": 13,
       "navn": "Nytt lag: veiarbeid og stengte veier",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T12:39:19Z"
+      "oppdatert": "2026-09-23T12:58:25Z"
+    },
+    {
+      "issue": 13,
+      "navn": "Nytt lag: veiarbeid og stengte veier",
+      "github": "pr0nin",
+      "oppdatert": "2026-09-23T12:58:25Z"
+    },
+    {
+      "issue": 16,
+      "navn": "Nytt lag: ladestasjoner for elbil",
+      "github": "pr0nin",
+      "oppdatert": "2026-09-23T12:58:55Z"
     },
     {
       "issue": 16,
       "navn": "Nytt lag: ladestasjoner for elbil",
       "github": "randsu",
-      "oppdatert": "2026-09-23T12:30:45Z"
+      "oppdatert": "2026-09-23T12:58:55Z"
     },
     {
       "issue": 18,
@@ -1058,7 +1079,7 @@
       "issue": 196,
       "navn": "Nytt lag: forsinkelser på knutepunktene",
       "github": "randsu",
-      "oppdatert": "2026-09-23T12:57:12Z"
+      "oppdatert": "2026-09-23T12:58:57Z"
     },
     {
       "issue": 197,
@@ -1103,6 +1124,12 @@
       "oppdatert": "2026-09-23T12:52:35Z"
     },
     {
+      "issue": 213,
+      "navn": "Oppstarten kjøres på nytt hvis kartstilen lastes på nytt",
+      "github": "nilsgs",
+      "oppdatert": "2026-09-23T12:58:30Z"
+    },
+    {
       "issue": 214,
       "navn": "Lagvelgeren er for høy: historikkgrafen tar en egen rad per lag",
       "github": "larsajakobsen",
@@ -1116,6 +1143,18 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 225,
+      "tittel": "#114: Nytt lag: Kristiania i 1910",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T12:38:28Z",
+      "oppdatert": "2026-09-23T12:58:32Z",
+      "utkast": false,
+      "issues": [
+        114
+      ]
+    },
     {
       "pr": 243,
       "tittel": "#130: Fyrverkeri over Rådhuset når en PR blir merget",
@@ -1198,18 +1237,6 @@
       "utkast": false,
       "issues": [
         48
-      ]
-    },
-    {
-      "pr": 225,
-      "tittel": "#114: Nytt lag: Kristiania i 1910",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T12:38:28Z",
-      "oppdatert": "2026-09-23T12:56:17Z",
-      "utkast": false,
-      "issues": [
-        114
       ]
     },
     {
