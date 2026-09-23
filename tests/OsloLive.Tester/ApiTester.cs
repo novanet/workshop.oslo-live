@@ -177,6 +177,17 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
     }
 
     [Fact]
+    public async Task Lagoversikten_har_kaier()
+    {
+        var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
+
+        var kaier = lag!.Single(l => l.Id == "kaier");
+        Assert.Equal("Kaier", kaier.Navn);
+        Assert.False(string.IsNullOrWhiteSpace(kaier.Beskrivelse));
+        Assert.False(string.IsNullOrWhiteSpace(kaier.Ikon));
+    }
+
+    [Fact]
     public async Task Spisestederlaget_gir_featurecollection_uten_nett()
     {
         const string svar = """
@@ -435,6 +446,57 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
             Assert.Equal([10.75348, 59.91945], lag.Features[0].Geometry.Coordinates);
             Assert.Contains("nve/find_hydro_stations", handler.SisteAdresse!.ToString());
             Assert.Contains("has_recent_data=true", handler.SisteAdresse!.ToString());
+        }
+        finally
+        {
+            Allemannsdata.TømMellomlager();
+        }
+    }
+
+    [Fact]
+    public async Task Kaierlaget_gir_featurecollection_uten_nett()
+    {
+        const string svar = """
+            {
+                "source": "kystdatahuset",
+                "operation": "find_ports_nearby",
+                "parameters": {},
+                "data": {
+                    "havner": [
+                        {
+                            "port_id": 2467069,
+                            "navn": "Salt brygge FK",
+                            "kode": "NOOSL",
+                            "type": "Ferjekai",
+                            "kommune": "Oslo",
+                            "fylke": "Oslo",
+                            "lat": 59.906647,
+                            "lon": 10.747188,
+                            "avstand_km": 0.4
+                        }
+                    ],
+                    "radius_km": 20
+                }
+            }
+            """;
+
+        var handler = new OpptakendeSvarHandler(svar);
+        using var vertUtenNett = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient<Allemannsdata>().ConfigurePrimaryHttpMessageHandler(() => handler)));
+        var klient = vertUtenNett.CreateClient();
+
+        Allemannsdata.TømMellomlager();
+        try
+        {
+            var respons = await klient.GetAsync("/api/lag/kaier");
+            var lag = await respons.Content.ReadFromJsonAsync<Kartlag>();
+
+            Assert.Equal(HttpStatusCode.OK, respons.StatusCode);
+            Assert.Equal("FeatureCollection", lag!.Type);
+            Assert.NotEmpty(lag.Features);
+            Assert.Equal([10.747188, 59.906647], lag.Features[0].Geometry.Coordinates);
+            Assert.Contains("kystdatahuset/find_ports_nearby", handler.SisteAdresse!.ToString());
+            Assert.Contains("radius_km=", handler.SisteAdresse!.ToString());
         }
         finally
         {
