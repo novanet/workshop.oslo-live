@@ -1,4 +1,5 @@
 using System.Globalization;
+using OsloLive;
 using OsloLive.Kart;
 using OsloLive.Lag;
 
@@ -25,6 +26,7 @@ builder.Services.AddHttpClient("fly", klient =>
     klient.DefaultRequestHeaders.UserAgent.ParseAdd("OsloLive/1.0 (kurs)");
 });
 builder.Services.AddMemoryCache();
+builder.Services.AddSingleton<Lagstatistikk>();
 
 // ---------------------------------------------------------------------------
 // Lagene på kartet. Nytt lag? Legg til én linje her.
@@ -42,7 +44,7 @@ app.MapGet("/api/lag", (IEnumerable<ILag> lag) =>
     lag.Select(l => new { id = l.Id, navn = l.Navn, beskrivelse = l.Beskrivelse, ikon = l.Ikon }));
 
 // Punktene i ett lag, som GeoJSON.
-app.MapGet("/api/lag/{id}", async (string id, IEnumerable<ILag> lag, CancellationToken stopp) =>
+app.MapGet("/api/lag/{id}", async (string id, IEnumerable<ILag> lag, Lagstatistikk statistikk, CancellationToken stopp) =>
 {
     var valgt = lag.FirstOrDefault(l => string.Equals(l.Id, id, StringComparison.OrdinalIgnoreCase));
     if (valgt is null)
@@ -52,17 +54,32 @@ app.MapGet("/api/lag/{id}", async (string id, IEnumerable<ILag> lag, Cancellatio
 
     try
     {
-        return Results.Ok(await valgt.Hent(stopp));
+        var kartlag = await valgt.Hent(stopp);
+        statistikk.Vellykket(valgt.Id, kartlag, DateTimeOffset.UtcNow);
+        return Results.Ok(kartlag);
     }
     catch (Exception ex)
     {
         // Et lag som feiler skal ikke ta ned kartet.
+        if (!stopp.IsCancellationRequested)
+        {
+            statistikk.Feilet(valgt.Id);
+        }
+
         app.Logger.LogError(ex, "Laget {Id} feilet", id);
         return Results.Json(new { feil = ex.Message }, statusCode: 502);
     }
 });
 
 app.MapGet("/api/helse", () => new { status = "ok", tid = DateTimeOffset.Now });
+
+// Tall om lagene, fra det /api/lag/{id} sist hentet. Henter ingenting selv.
+app.MapGet("/api/statistikk", (IEnumerable<ILag> lag, Lagstatistikk statistikk) =>
+    lag.Select(l =>
+    {
+        var s = statistikk.Hent(l.Id);
+        return new { id = l.Id, navn = l.Navn, antall = s.Antall, eldste = s.Eldste, nyeste = s.Nyeste, hentet = s.Hentet, feiler = s.Feiler };
+    }));
 
 app.Run();
 
