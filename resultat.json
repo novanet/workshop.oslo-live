@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:59:53",
+  "oppdatert": "2026-09-23T12:00:31",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -540,7 +540,16 @@
       "plass": 21
     }
   ],
-  "kjoerer": [],
+  "kjoerer": [
+    {
+      "agent": "mini-frode",
+      "github": "FrodeBl",
+      "issue": 19,
+      "navn": "Artsobservasjoner",
+      "startet": "2026-09-23T10:00:22.3571057+00:00",
+      "minutter": 0
+    }
+  ],
   "main": {
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
@@ -617,7 +626,7 @@
       "issue": 19,
       "navn": "Nytt lag: artsobservasjoner",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T09:59:34Z"
+      "oppdatert": "2026-09-23T10:00:23Z"
     },
     {
       "issue": 21,
@@ -755,7 +764,7 @@
       "issue": 55,
       "navn": "Kartet blir tregt med mange punkter",
       "github": "sin-rha",
-      "oppdatert": "2026-09-23T09:51:11Z"
+      "oppdatert": "2026-09-23T10:00:24Z"
     },
     {
       "issue": 57,
@@ -903,6 +912,18 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 73,
+      "tittel": "Vær grei mot kildene (#54)",
+      "github": "Puiu",
+      "agent": "mini-taco",
+      "opprettet": "2026-09-23T08:15:23Z",
+      "oppdatert": "2026-09-23T10:00:18Z",
+      "utkast": false,
+      "issues": [
+        54
+      ]
+    },
     {
       "pr": 139,
       "tittel": "Nytt lag: holdeplasser og stasjoner",
@@ -1129,18 +1150,6 @@
       "utkast": false,
       "issues": [
         21
-      ]
-    },
-    {
-      "pr": 73,
-      "tittel": "Vær grei mot kildene (#54)",
-      "github": "Puiu",
-      "agent": "mini-taco",
-      "opprettet": "2026-09-23T08:15:23Z",
-      "oppdatert": "2026-09-23T09:11:28Z",
-      "utkast": false,
-      "issues": [
-        54
       ]
     },
     {
