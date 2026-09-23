@@ -41,6 +41,7 @@
       <li>Du har <code>Receiver URL</code> og <code>Issue label</code> fra <strong>Actions → Summary</strong>. Med <code>AGENT_NAME=kari</code> er etiketten <code>kari</code>.</li>
       <li>Kurslederen har koblet webhooken din til Oslo Live, før eller i lunsjen.</li>
     </ul>
+    <div class="callout"><b>Bruk pwsh</b>Kommandoene er skrevet for <code>pwsh</code>. Står du i zsh eller bash på Mac eller Linux, skriver du <code>pwsh</code> først. Mangler du den på Mac: <code>brew install --cask powershell</code>. <code>Copy-Item</code>, <code>$Variabel = ...</code> og <code>curl.exe</code> virker bare i pwsh. <code>dotnet</code>, <code>git</code> og <code>gh</code> virker overalt.</div>
     <div class="callout"><b>Første virkelige kjøring</b>Lab 1 var lokal og skrivebeskyttet. Ikke opprett PR, skriv kommentar eller tildel issue manuelt. Nå er det Azure-workeren som tildeler issue, skriver kommentarer og oppretter PR.</div>
   </section>
 
@@ -116,10 +117,7 @@ Invoke-RestMethod "$ReceiverUrl/"</pre>
           <h3>Velg Lab 3-spor og test 401</h3>
           <p>En kjøring tar typisk 10 til 20 minutter. Velg Lab 3-spor og gjør endringen lokalt, men ikke push før jobben din er ferdig. Test så at mottaket avviser feil hemmelighet:</p>
           <pre>$Body = '{"repo":"novanet/workshop.oslo-live","issueNumber":2}'
-curl.exe -i -X POST "$ReceiverUrl/tasks" `
-  -H "X-Webhook-Secret: deliberately-wrong" `
-  -H "Content-Type: application/json" `
-  --data-raw $Body</pre>
+curl.exe -i -X POST "$ReceiverUrl/tasks" -H "X-Webhook-Secret: deliberately-wrong" -H "Content-Type: application/json" --data-raw $Body</pre>
           <p>Forvent <code>401 Unauthorized</code>. Dette starter ingen jobb. Finn kontrollen i <code>src/Receiver/Program.cs</code>. <code>/tasks</code> krever hemmeligheten i en header, og webhooken fra GitHub er signert med HMAC. Selve kømeldingen er ikke signert, så mottaket er porten.</p>
         </div>
       </article>
