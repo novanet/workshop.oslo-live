@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:07:30",
+  "oppdatert": "2026-09-23T11:07:58",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -56,14 +56,14 @@
         }
       ],
       "levert": [],
-      "dollar": 4.021,
-      "tokens": 7576468,
-      "sekunder": 1548,
+      "dollar": 4.573,
+      "tokens": 8498747,
+      "sekunder": 1669,
       "pr": 2,
       "utkast": 0,
       "merget": 2,
-      "kjoeringer": 4,
-      "utenPr": 2,
+      "kjoeringer": 5,
+      "utenPr": 3,
       "bygg": [],
       "estimert": false,
       "plass": 2
@@ -431,7 +431,7 @@
       "issue": 27,
       "navn": "Verneområder",
       "startet": "2026-09-23T09:03:41.4652664+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-wilma",
@@ -439,7 +439,7 @@
       "issue": 26,
       "navn": "Skoler",
       "startet": "2026-09-23T09:03:43.3920206+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "Andy3000",
@@ -460,18 +460,10 @@
     {
       "agent": "mini-gir",
       "github": "GIR75",
-      "issue": 15,
-      "navn": "Spisesteder",
-      "startet": "2026-09-23T09:05:32.6022247+00:00",
-      "minutter": 1
-    },
-    {
-      "agent": "mini-gir",
-      "github": "GIR75",
       "issue": 51,
       "navn": "Logging",
       "startet": "2026-09-23T09:06:55.8322066+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-gir",
@@ -479,7 +471,7 @@
       "issue": 33,
       "navn": "Sykkelparkering",
       "startet": "2026-09-23T09:06:56.2114677+00:00",
-      "minutter": 0
+      "minutter": 1
     }
   ],
   "main": {
@@ -629,7 +621,7 @@
       "issue": 15,
       "navn": "Nytt lag: spisesteder",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T09:05:33Z"
+      "oppdatert": "2026-09-23T09:07:40Z"
     },
     {
       "issue": 16,
@@ -910,6 +902,18 @@
   ],
   "aapne": [
     {
+      "pr": 73,
+      "tittel": "Vær grei mot kildene (#54)",
+      "github": "Puiu",
+      "agent": "mini-taco",
+      "opprettet": "2026-09-23T08:15:23Z",
+      "oppdatert": "2026-09-23T09:07:28Z",
+      "utkast": false,
+      "issues": [
+        54
+      ]
+    },
+    {
       "pr": 103,
       "tittel": "#24: Tell punkter per bydel",
       "github": "randsu",
@@ -919,18 +923,6 @@
       "utkast": false,
       "issues": [
         24
-      ]
-    },
-    {
-      "pr": 73,
-      "tittel": "Vær grei mot kildene (#54)",
-      "github": "Puiu",
-      "agent": "mini-taco",
-      "opprettet": "2026-09-23T08:15:23Z",
-      "oppdatert": "2026-09-23T09:06:47Z",
-      "utkast": false,
-      "issues": [
-        54
       ]
     },
     {
