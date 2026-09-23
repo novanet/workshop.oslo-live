@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:51:44",
+  "oppdatert": "2026-09-23T11:52:22",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -115,12 +115,12 @@
       "levert": [],
       "dollar": 6.227,
       "tokens": 10706439,
-      "sekunder": 2284,
+      "sekunder": 2285,
       "pr": 2,
       "utkast": 0,
       "merget": 2,
-      "kjoeringer": 8,
-      "utenPr": 6,
+      "kjoeringer": 11,
+      "utenPr": 9,
       "bygg": [],
       "estimert": false,
       "plass": 3
@@ -515,12 +515,12 @@
       "levert": [],
       "dollar": 10.883,
       "tokens": 23741011,
-      "sekunder": 3762,
+      "sekunder": 3763,
       "pr": 3,
       "utkast": 0,
       "merget": 0,
-      "kjoeringer": 13,
-      "utenPr": 9,
+      "kjoeringer": 14,
+      "utenPr": 10,
       "bygg": [],
       "estimert": false,
       "plass": 20
@@ -545,40 +545,7 @@
       "plass": 21
     }
   ],
-  "kjoerer": [
-    {
-      "agent": "mini-gir",
-      "github": "GIR75",
-      "issue": 18,
-      "navn": "Kulturminner",
-      "startet": "2026-09-23T09:51:23.2543792+00:00",
-      "minutter": 0
-    },
-    {
-      "agent": "mini-frode",
-      "github": "FrodeBl",
-      "issue": 19,
-      "navn": "Artsobservasjoner",
-      "startet": "2026-09-23T09:51:25.4767949+00:00",
-      "minutter": 0
-    },
-    {
-      "agent": "mini-gir",
-      "github": "GIR75",
-      "issue": 13,
-      "navn": "Veiarbeid",
-      "startet": "2026-09-23T09:51:26.3738817+00:00",
-      "minutter": 0
-    },
-    {
-      "agent": "mini-gir",
-      "github": "GIR75",
-      "issue": 51,
-      "navn": "Logging",
-      "startet": "2026-09-23T09:51:32.1890013+00:00",
-      "minutter": 0
-    }
-  ],
+  "kjoerer": [],
   "main": {
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
@@ -632,7 +599,7 @@
       "issue": 13,
       "navn": "Nytt lag: veiarbeid og stengte veier",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T09:51:27Z"
+      "oppdatert": "2026-09-23T09:51:51Z"
     },
     {
       "issue": 14,
@@ -650,13 +617,13 @@
       "issue": 18,
       "navn": "Nytt lag: kulturminner",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T09:51:24Z"
+      "oppdatert": "2026-09-23T09:51:46Z"
     },
     {
       "issue": 19,
       "navn": "Nytt lag: artsobservasjoner",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T09:51:26Z"
+      "oppdatert": "2026-09-23T09:51:49Z"
     },
     {
       "issue": 21,
@@ -728,7 +695,7 @@
       "issue": 33,
       "navn": "Nytt lag: sykkelparkering",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T09:51:03Z"
+      "oppdatert": "2026-09-23T09:52:20Z"
     },
     {
       "issue": 39,
@@ -782,7 +749,7 @@
       "issue": 51,
       "navn": "Strukturert logging",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T09:51:34Z"
+      "oppdatert": "2026-09-23T09:51:57Z"
     },
     {
       "issue": 52,
