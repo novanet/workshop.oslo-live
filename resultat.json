@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:34:08",
+  "oppdatert": "2026-09-23T10:34:35",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -254,6 +254,25 @@
       "plass": 11
     },
     {
+      "navn": "mini-kirsten",
+      "github": "jthagesk",
+      "poeng": 0,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 1.92,
+      "tokens": 4323614,
+      "sekunder": 636,
+      "pr": 1,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 1,
+      "utenPr": 0,
+      "bygg": [],
+      "estimert": false,
+      "plass": 12
+    },
+    {
       "navn": "mini-knive",
       "github": "Buggz",
       "poeng": 0,
@@ -270,7 +289,7 @@
       "utenPr": 0,
       "bygg": [],
       "estimert": false,
-      "plass": 12
+      "plass": 13
     },
     {
       "navn": "Andy3000",
@@ -289,7 +308,7 @@
       "utenPr": 0,
       "bygg": [],
       "estimert": false,
-      "plass": 13
+      "plass": 14
     },
     {
       "navn": "mini-frode",
@@ -308,7 +327,7 @@
       "utenPr": 3,
       "bygg": [],
       "estimert": false,
-      "plass": 14
+      "plass": 15
     }
   ],
   "kjoerer": [
@@ -318,15 +337,7 @@
       "issue": 45,
       "navn": "Varsler",
       "startet": "2026-09-23T08:22:20.0747631+00:00",
-      "minutter": 11
-    },
-    {
-      "agent": "mini-kirsten",
-      "github": "jthagesk",
-      "issue": 29,
-      "navn": "Museer",
-      "startet": "2026-09-23T08:23:16.9053574+00:00",
-      "minutter": 10
+      "minutter": 12
     },
     {
       "agent": "mini-astrid",
@@ -334,7 +345,7 @@
       "issue": 42,
       "navn": "Nærmeste punkt",
       "startet": "2026-09-23T08:25:30.8766176+00:00",
-      "minutter": 8
+      "minutter": 9
     },
     {
       "agent": "mini-frode",
@@ -350,7 +361,7 @@
       "issue": 19,
       "navn": "Artsobservasjoner",
       "startet": "2026-09-23T08:28:01.690939+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "helstein",
@@ -358,7 +369,7 @@
       "issue": 41,
       "navn": "Fargeblindhet",
       "startet": "2026-09-23T08:28:15.5659433+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-richard",
@@ -366,7 +377,7 @@
       "issue": 38,
       "navn": "Demomodus",
       "startet": "2026-09-23T08:30:23.0330294+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-richard",
@@ -374,7 +385,7 @@
       "issue": 9,
       "navn": "Badetemperatur",
       "startet": "2026-09-23T08:30:34.0929688+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-richard",
@@ -390,7 +401,7 @@
       "issue": 23,
       "navn": "Delbart utsnitt",
       "startet": "2026-09-23T08:32:03.1180412+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-aud",
@@ -398,7 +409,7 @@
       "issue": 41,
       "navn": "Fargeblindhet",
       "startet": "2026-09-23T08:32:12.9324331+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-knive",
@@ -406,7 +417,7 @@
       "issue": 53,
       "navn": "Dyp helsesjekk",
       "startet": "2026-09-23T08:33:27.9645236+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-aud",
@@ -579,7 +590,7 @@
       "issue": 29,
       "navn": "Nytt lag: museer og samlinger",
       "github": "jthagesk",
-      "oppdatert": "2026-09-23T08:23:18Z"
+      "oppdatert": "2026-09-23T08:34:14Z"
     },
     {
       "issue": 38,
@@ -691,6 +702,18 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 83,
+      "tittel": "Nytt lag: museer og samlinger",
+      "github": "jthagesk",
+      "agent": "mini-kirsten",
+      "opprettet": "2026-09-23T08:34:12Z",
+      "oppdatert": "2026-09-23T08:34:13Z",
+      "utkast": false,
+      "issues": [
+        29
+      ]
+    },
     {
       "pr": 81,
       "tittel": "Avgangstavle for Gardermoen (#57)",
