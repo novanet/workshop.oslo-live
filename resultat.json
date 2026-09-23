@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:57:35",
+  "oppdatert": "2026-09-23T14:58:17",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -78,8 +78,8 @@
       "pr": 21,
       "utkast": 0,
       "merget": 12,
-      "kjoeringer": 35,
-      "utenPr": 17,
+      "kjoeringer": 38,
+      "utenPr": 20,
       "bygg": [],
       "estimert": false,
       "plass": 1
@@ -350,12 +350,12 @@
       ],
       "dollar": 12.712,
       "tokens": 22912342,
-      "sekunder": 4509,
+      "sekunder": 4510,
       "pr": 5,
       "utkast": 0,
       "merget": 2,
-      "kjoeringer": 11,
-      "utenPr": 6,
+      "kjoeringer": 12,
+      "utenPr": 7,
       "bygg": [],
       "estimert": false,
       "plass": 9
@@ -628,12 +628,12 @@
       "levert": [],
       "dollar": 4.188,
       "tokens": 8089256,
-      "sekunder": 1624,
+      "sekunder": 1625,
       "pr": 2,
       "utkast": 0,
       "merget": 0,
-      "kjoeringer": 11,
-      "utenPr": 7,
+      "kjoeringer": 12,
+      "utenPr": 8,
       "bygg": [],
       "estimert": false,
       "plass": 20
@@ -806,7 +806,7 @@
       "issue": 55,
       "navn": "Kartet blir tregt med mange punkter",
       "github": "sin-rha",
-      "oppdatert": "2026-09-23T12:56:55Z"
+      "oppdatert": "2026-09-23T12:57:59Z"
     },
     {
       "issue": 57,
@@ -1004,13 +1004,13 @@
       "issue": 157,
       "navn": "Kontrakttester for alle lag",
       "github": "randsu",
-      "oppdatert": "2026-09-23T12:33:20Z"
+      "oppdatert": "2026-09-23T12:58:03Z"
     },
     {
       "issue": 169,
       "navn": "Filtrer punktene i et lag",
       "github": "randsu",
-      "oppdatert": "2026-09-23T12:33:26Z"
+      "oppdatert": "2026-09-23T12:58:02Z"
     },
     {
       "issue": 180,
@@ -1049,6 +1049,12 @@
       "oppdatert": "2026-09-23T12:37:20Z"
     },
     {
+      "issue": 195,
+      "navn": "Nytt lag: avvik i kollektivtrafikken",
+      "github": "Buggz",
+      "oppdatert": "2026-09-23T12:57:50Z"
+    },
+    {
       "issue": 196,
       "navn": "Nytt lag: forsinkelser på knutepunktene",
       "github": "randsu",
@@ -1082,7 +1088,7 @@
       "issue": 207,
       "navn": "Delt mobilitet viser «drivstoff: ELECTRIC» og «COMBUSTION»",
       "github": "randsu",
-      "oppdatert": "2026-09-23T12:38:06Z"
+      "oppdatert": "2026-09-23T12:58:03Z"
     },
     {
       "issue": 208,
@@ -1116,7 +1122,7 @@
       "github": "randsu",
       "agent": "mini-richard",
       "opprettet": "2026-09-23T12:51:21Z",
-      "oppdatert": "2026-09-23T12:57:20Z",
+      "oppdatert": "2026-09-23T12:57:29Z",
       "utkast": false,
       "issues": [
         130
