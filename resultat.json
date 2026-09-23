@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:23:43",
+  "oppdatert": "2026-09-23T11:24:10",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -441,7 +441,7 @@
       "issue": 26,
       "navn": "Skoler",
       "startet": "2026-09-23T09:03:43.3920206+00:00",
-      "minutter": 19
+      "minutter": 20
     },
     {
       "agent": "helstein",
@@ -449,7 +449,7 @@
       "issue": 15,
       "navn": "Spisesteder",
       "startet": "2026-09-23T09:16:56.867472+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "Andy3000",
@@ -902,6 +902,18 @@
   ],
   "aapne": [
     {
+      "pr": 109,
+      "tittel": "Nytt lag: skoler og barnehager",
+      "github": "larsajakobsen",
+      "agent": "mini-wilma",
+      "opprettet": "2026-09-23T09:21:55Z",
+      "oppdatert": "2026-09-23T09:23:37Z",
+      "utkast": false,
+      "issues": [
+        26
+      ]
+    },
+    {
       "pr": 104,
       "tittel": "#25: Ta vare på et øyeblikksbilde hver time",
       "github": "randsu",
@@ -947,18 +959,6 @@
       "utkast": false,
       "issues": [
         34
-      ]
-    },
-    {
-      "pr": 109,
-      "tittel": "Nytt lag: skoler og barnehager",
-      "github": "larsajakobsen",
-      "agent": "mini-wilma",
-      "opprettet": "2026-09-23T09:21:55Z",
-      "oppdatert": "2026-09-23T09:21:56Z",
-      "utkast": false,
-      "issues": [
-        26
       ]
     },
     {
