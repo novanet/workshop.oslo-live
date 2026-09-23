@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:27:37",
+  "oppdatert": "2026-09-23T10:28:04",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -249,7 +249,7 @@
       "issue": 17,
       "navn": "Smilefjes",
       "startet": "2026-09-23T08:10:01.588657+00:00",
-      "minutter": 17
+      "minutter": 18
     },
     {
       "agent": "mini-knive",
@@ -281,7 +281,7 @@
       "issue": 8,
       "navn": "Hendelser",
       "startet": "2026-09-23T08:22:51.9896553+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-kirsten",
@@ -321,6 +321,22 @@
       "issue": 6,
       "navn": "Delt mobilitet",
       "startet": "2026-09-23T08:26:52.0303298+00:00",
+      "minutter": 1
+    },
+    {
+      "agent": "mini-aud",
+      "github": "audmaha",
+      "issue": 4,
+      "navn": "Duplikatfjerning",
+      "startet": "2026-09-23T08:27:45.2786784+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-frode",
+      "github": "FrodeBl",
+      "issue": 50,
+      "navn": "Metrikker",
+      "startet": "2026-09-23T08:27:51.3617499+00:00",
       "minutter": 0
     }
   ],
@@ -389,14 +405,20 @@
     {
       "issue": 4,
       "navn": "Hvert lag viser bare ett eneste punkt",
+      "github": "audmaha",
+      "oppdatert": "2026-09-23T08:27:46Z"
+    },
+    {
+      "issue": 4,
+      "navn": "Hvert lag viser bare ett eneste punkt",
       "github": "ingvevs",
-      "oppdatert": "2026-09-23T08:26:41Z"
+      "oppdatert": "2026-09-23T08:27:46Z"
     },
     {
       "issue": 4,
       "navn": "Hvert lag viser bare ett eneste punkt",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T08:26:41Z"
+      "oppdatert": "2026-09-23T08:27:46Z"
     },
     {
       "issue": 5,
@@ -444,7 +466,7 @@
       "issue": 19,
       "navn": "Nytt lag: artsobservasjoner",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T08:27:29Z"
+      "oppdatert": "2026-09-23T08:28:02Z"
     },
     {
       "issue": 20,
@@ -510,7 +532,7 @@
       "issue": 50,
       "navn": "Mål hva som skjer",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T08:26:43Z"
+      "oppdatert": "2026-09-23T08:27:52Z"
     },
     {
       "issue": 54,
