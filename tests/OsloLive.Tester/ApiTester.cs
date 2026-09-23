@@ -139,6 +139,7 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
         Assert.Equal("Holdeplasser", holdeplasser.Navn);
         Assert.False(string.IsNullOrWhiteSpace(holdeplasser.Beskrivelse));
         Assert.False(string.IsNullOrWhiteSpace(holdeplasser.Ikon));
+    }
     
     [Fact]
     public async Task Lagoversikten_har_skip()
