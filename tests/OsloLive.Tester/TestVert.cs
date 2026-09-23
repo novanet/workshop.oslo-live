@@ -7,10 +7,10 @@ using Microsoft.Extensions.Hosting;
 namespace OsloLive.Tester;
 
 /// <summary>
-/// Testverten for hele appen. Fjerner bakgrunnstjenestene (helsesjekken og
-/// historikkjobben) og peker historikklageret til en midlertidig mappe, slik
-/// at testene aldri gjør nettverkskall i bakgrunnen eller skriver filer
-/// utenfor sin egen mappe.
+/// Testverten for API-testene. Fjerner bakgrunnstjenestene (øyeblikksjobben og
+/// kildehelsesjekken) og peker <c>Historikk:Mappe</c> på en egen midlertidig mappe,
+/// slik at testene verken gjør nettverkskall i bakgrunnen eller skriver i den
+/// ekte historikkmappa. <see cref="Bildelager"/> beholdes, så testene kan lagre bilder selv.
 /// </summary>
 public sealed class TestVert : WebApplicationFactory<Program>
 {
@@ -18,7 +18,7 @@ public sealed class TestVert : WebApplicationFactory<Program>
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
-        builder.UseSetting("Historikk:Aktiv", "false");
+        builder.UseSetting("Historikk:Jobb", "false");
         builder.UseSetting("Historikk:Mappe", Mappe);
         builder.ConfigureServices(tjenester => tjenester.RemoveAll<IHostedService>());
     }
@@ -26,6 +26,7 @@ public sealed class TestVert : WebApplicationFactory<Program>
     protected override void Dispose(bool disposing)
     {
         base.Dispose(disposing);
+
         if (Directory.Exists(Mappe))
         {
             Directory.Delete(Mappe, recursive: true);
