@@ -366,7 +366,7 @@ async function hent(id) {
       const el = document.createElement('div');
       el.className = 'merke';
       el.style.background = p.advarsel ? '#b91c1c' : oppf.farge;
-      el.textContent = p.advarsel ? '⚠️' : oppf.ikon;
+      el.textContent = p.advarsel ? '⚠️' : (p.ikon ?? oppf.ikon);
 
       const m = new maplibregl.Marker({ element: el })
         .setLngLat([c[0], c[1]])
