@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:47:28",
+  "oppdatert": "2026-09-23T10:47:55",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -367,7 +367,7 @@
       "issue": 32,
       "navn": "Strømpris",
       "startet": "2026-09-23T08:37:51.7658572+00:00",
-      "minutter": 9
+      "minutter": 10
     },
     {
       "agent": "mini-kirsten",
@@ -375,7 +375,7 @@
       "issue": 29,
       "navn": "Museer",
       "startet": "2026-09-23T08:38:36.2729853+00:00",
-      "minutter": 8
+      "minutter": 9
     },
     {
       "agent": "mini-richard",
@@ -383,7 +383,7 @@
       "issue": 34,
       "navn": "Tidslinje",
       "startet": "2026-09-23T08:39:29.3560815+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "helstein",
@@ -391,7 +391,7 @@
       "issue": 30,
       "navn": "Vannstand",
       "startet": "2026-09-23T08:39:37.818134+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "mini-kirsten",
@@ -415,7 +415,7 @@
       "issue": 48,
       "navn": "Parallell henting",
       "startet": "2026-09-23T08:45:28.6931293+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-richard",
@@ -423,7 +423,7 @@
       "issue": 24,
       "navn": "Bydeler",
       "startet": "2026-09-23T08:45:28.8651408+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-frode",
@@ -431,6 +431,14 @@
       "issue": 19,
       "navn": "Artsobservasjoner",
       "startet": "2026-09-23T08:46:29.0268417+00:00",
+      "minutter": 1
+    },
+    {
+      "agent": "mini-frode",
+      "github": "FrodeBl",
+      "issue": 50,
+      "navn": "Metrikker",
+      "startet": "2026-09-23T08:47:21.1306878+00:00",
       "minutter": 0
     }
   ],
@@ -710,7 +718,7 @@
       "issue": 50,
       "navn": "Mål hva som skjer",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T08:46:37Z"
+      "oppdatert": "2026-09-23T08:47:22Z"
     },
     {
       "issue": 52,
@@ -769,6 +777,18 @@
   ],
   "aapne": [
     {
+      "pr": 96,
+      "tittel": "#22: Slå sammen punkter som ligger oppå hverandre",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:46:40Z",
+      "oppdatert": "2026-09-23T08:47:37Z",
+      "utkast": false,
+      "issues": [
+        22
+      ]
+    },
+    {
       "pr": 97,
       "tittel": "Søk på tvers av alle lag (#47)",
       "github": "Puiu",
@@ -778,18 +798,6 @@
       "utkast": false,
       "issues": [
         47
-      ]
-    },
-    {
-      "pr": 96,
-      "tittel": "#22: Slå sammen punkter som ligger oppå hverandre",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:46:40Z",
-      "oppdatert": "2026-09-23T08:46:41Z",
-      "utkast": false,
-      "issues": [
-        22
       ]
     },
     {
