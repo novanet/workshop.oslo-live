@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:55:34",
+  "oppdatert": "2026-09-23T11:56:12",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -500,8 +500,8 @@
       "pr": 1,
       "utkast": 0,
       "merget": 0,
-      "kjoeringer": 7,
-      "utenPr": 3,
+      "kjoeringer": 8,
+      "utenPr": 4,
       "bygg": [],
       "estimert": false,
       "plass": 19
@@ -587,7 +587,7 @@
       "issue": 11,
       "navn": "Nytt lag: kollektivtrafikk som beveger seg",
       "github": "coffeelyfe",
-      "oppdatert": "2026-09-23T09:54:42Z"
+      "oppdatert": "2026-09-23T09:56:04Z"
     },
     {
       "issue": 12,
