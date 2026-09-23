@@ -17,7 +17,11 @@ src/OsloLive/
   Historikk/
     Bildelager.cs         øyeblikksbilder på disk, nærmeste bilde, sletting etter sju dager
     Øyeblikksjobb.cs      bakgrunnsjobb: bilde av hvert lag hver time, se «Historikk og tidslinjen»
+  Bysykkel/
+    Bysykkeldogn.cs       ren logikk: velger travleste hverdag, filtrerer turer, tidssone
+    Bysykkeltjeneste.cs   nedlasting, mellomlagring i IMemoryCache og komprimert på disk (#191)
   wwwroot/index.html      hele frontenden, én fil, ingen byggesteg
+  wwwroot/effekter/       frontendeffekter lastet med egen <script defer>, f.eks. bysykkeldogn.js
 tests/OsloLive.Tester/    xUnit. ApiTester.cs (WebApplicationFactory), KartTester.cs (Geo, Allemannsdata)
 issues/                   issuetekstene. Ikke rør.
 ```
@@ -33,6 +37,7 @@ Prinsipp: kartet er en liste med lag. `ILag → Kartlag (GeoJSON) → MapLibre`.
 | `GET /api/lag/{id}/historikk` | `[{ tidspunkt, antall }]`, siste 24 timer, eldste først. 404 ved ukjent id, tom liste hvis laget ikke har bilder ennå. Bildene tas av `Historikk/Øyeblikksjobb`, samme jobb og samme lager som tidslinjen bruker; se «Historikk og tidslinjen». |
 | `GET /api/lag/{id}/bydeler` | `[{ bydel, antall }]`, antall punkter i laget per bydel, sortert synkende. Bydel = nærmeste bydelssenter fra Kartverket; punkter lenger enn 5 km fra alle sentre utelates. 404 ved ukjent id, 502 `{ feil }` hvis laget eller oppslaget svikter. Én oppdatering gjør 9 kall mot Allemannsdata (ett per forbokstav i `Bydeler.Prefikser`), uavhengig av antall punkter, aldri ett kall per punkt. Svarene mellomlagres 30 s som alt annet. Med `?tid=` telles bildet lagret nærmest tidspunktet, som for `/api/lag/{id}`, så tellingen følger tidslinjen. |
 | `GET /api/stroempris` | Strømprisen i Oslo (NO1) i dag: `{ naa, billigst: { time, pris }, dyrest: { time, pris }, timer: [{ time, pris }, …] }`, øre/kWh inkl. mva. 502 `{ feil }` hvis kilden svikter. |
+| `GET /api/bysykkeldogn` | `{ dato, turer: [{ fra, til, start, slutt }] }` for den travleste hverdagen i siste hele måned med Oslo Bysykkel-turer (`fra`/`til` er `[lon, lat]`, `start`/`slutt` sekunder etter midnatt Oslo-tid). Kilden er Oslo Bysykkels egne åpne data, ikke Allemannsdata; se `Bysykkel/`. 202 `{ status: "forbereder" }` mens månedsfila (rundt 90 MB) lastes ned og strømmes gjennom i bakgrunnen; to samtidige kall starter aldri to nedlastinger. 502 `{ feil }` hvis kilden svikter. Resultatet mellomlagres i `IMemoryCache` og komprimert på disk under `App_Data/bysykkel` (`Bysykkel:Mappe`), så nedlasting skjer høyst én gang per måned per prosess. HttpClient-en `bysykkel` har 10 minutters tidsavbrudd. |
 | `GET /api/helse` | `{ status: "ok", tid }` |
 | `GET /api/helse` | `{ status: "ok", tid }`. Lever prosessen? Ingen kall til kildene, svarer alltid umiddelbart. |
 | `GET /api/helse/kilder` | `{ status: "ok"\|"degradert", kilder: [{ kilde, status: "ok"\|"feil"\|"ukjent", sistSjekket, varighetMs }] }`. Virker tjenesten? Leser siste resultat fra `HelseSjekker`, en bakgrunnstjeneste som sjekker hvert lags kilde med et intervall satt i `appsettings.json` (`Helse:IntervallSekunder`, standard 60). Venter aldri på kildene i selve forespørselen. |
