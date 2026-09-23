@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:38:06",
+  "oppdatert": "2026-09-23T14:38:47",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -62,13 +62,13 @@
           "poeng": 8
         }
       ],
-      "dollar": 22.32,
-      "tokens": 42239769,
-      "sekunder": 8046,
-      "pr": 12,
+      "dollar": 22.97,
+      "tokens": 43894602,
+      "sekunder": 8309,
+      "pr": 13,
       "utkast": 0,
       "merget": 10,
-      "kjoeringer": 26,
+      "kjoeringer": 27,
       "utenPr": 14,
       "bygg": [],
       "estimert": false,
@@ -267,10 +267,10 @@
           "poeng": 1
         }
       ],
-      "dollar": 32.131,
-      "tokens": 53211337,
-      "sekunder": 9937,
-      "pr": 9,
+      "dollar": 33.165,
+      "tokens": 54551669,
+      "sekunder": 10279,
+      "pr": 10,
       "utkast": 1,
       "merget": 5,
       "kjoeringer": 25,
@@ -607,7 +607,7 @@
       "issue": 26,
       "navn": "Skoler",
       "startet": "2026-09-23T12:28:26.4775068+00:00",
-      "minutter": 9
+      "minutter": 10
     },
     {
       "agent": "mini-wilma",
@@ -615,7 +615,7 @@
       "issue": 214,
       "navn": "Lagvelgeren er for høy: historikkgrafen tar en egen rad per lag",
       "startet": "2026-09-23T12:31:25.313151+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "henrik",
@@ -631,15 +631,7 @@
       "issue": 206,
       "navn": "Popupene viser rådata: ISO-tider, «ikon: 😊» og tall uten enhet",
       "startet": "2026-09-23T12:32:25.3380267+00:00",
-      "minutter": 5
-    },
-    {
-      "agent": "mini-richard",
-      "github": "randsu",
-      "issue": 114,
-      "navn": "Nytt lag: Kristiania i 1910",
-      "startet": "2026-09-23T12:33:37.8320639+00:00",
-      "minutter": 4
+      "minutter": 6
     },
     {
       "agent": "mini-knive",
@@ -647,7 +639,7 @@
       "issue": 215,
       "navn": "Svarte klynger dekker sentrum og skjuler hvilke lag som er der",
       "startet": "2026-09-23T12:34:13.5766398+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-kirsten",
@@ -655,7 +647,7 @@
       "issue": 29,
       "navn": "Museer",
       "startet": "2026-09-23T12:34:23.8175869+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-leif",
@@ -663,7 +655,7 @@
       "issue": 118,
       "navn": "Nyhetslinje nederst på skjermen",
       "startet": "2026-09-23T12:34:25.9928919+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-richard",
@@ -671,7 +663,7 @@
       "issue": 116,
       "navn": "Nytt lag: værstasjoner",
       "startet": "2026-09-23T12:34:27.1286355+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-jon",
@@ -679,7 +671,7 @@
       "issue": 189,
       "navn": "Travlere enn vanlig på veiene",
       "startet": "2026-09-23T12:34:43.2826697+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-gir",
@@ -687,7 +679,7 @@
       "issue": 18,
       "navn": "Kulturminner",
       "startet": "2026-09-23T12:35:26.9487115+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-gir",
@@ -695,7 +687,7 @@
       "issue": 13,
       "navn": "Veiarbeid",
       "startet": "2026-09-23T12:35:36.9770034+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-gir",
@@ -719,7 +711,7 @@
       "issue": 194,
       "navn": "Nytt lag: bomstasjoner",
       "startet": "2026-09-23T12:36:39.65381+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-richard",
@@ -727,6 +719,14 @@
       "issue": 118,
       "navn": "Nyhetslinje nederst på skjermen",
       "startet": "2026-09-23T12:37:27.3384308+00:00",
+      "minutter": 1
+    },
+    {
+      "agent": "martin-holth",
+      "github": "martinrholth",
+      "issue": 205,
+      "navn": "Strømprisen vises med desimalpunktum",
+      "startet": "2026-09-23T12:38:19.4975108+00:00",
       "minutter": 0
     }
   ],
@@ -875,13 +875,13 @@
       "issue": 114,
       "navn": "Nytt lag: Kristiania i 1910",
       "github": "monet820",
-      "oppdatert": "2026-09-23T12:33:38Z"
+      "oppdatert": "2026-09-23T12:38:29Z"
     },
     {
       "issue": 114,
       "navn": "Nytt lag: Kristiania i 1910",
       "github": "randsu",
-      "oppdatert": "2026-09-23T12:33:38Z"
+      "oppdatert": "2026-09-23T12:38:29Z"
     },
     {
       "issue": 115,
@@ -1046,6 +1046,18 @@
       "oppdatert": "2026-09-23T12:30:03Z"
     },
     {
+      "issue": 149,
+      "navn": "Hvilken versjon kjører nå?",
+      "github": "randsu",
+      "oppdatert": "2026-09-23T12:38:13Z"
+    },
+    {
+      "issue": 150,
+      "navn": "Ukjente API-adresser svarer med JSON",
+      "github": "randsu",
+      "oppdatert": "2026-09-23T12:38:17Z"
+    },
+    {
       "issue": 157,
       "navn": "Kontrakttester for alle lag",
       "github": "randsu",
@@ -1127,13 +1139,31 @@
       "issue": 205,
       "navn": "Strømprisen vises med desimalpunktum",
       "github": "martinrholth",
-      "oppdatert": "2026-09-23T12:37:47Z"
+      "oppdatert": "2026-09-23T12:38:20Z"
     },
     {
       "issue": 206,
       "navn": "Popupene viser rådata: ISO-tider, «ikon: 😊» og tall uten enhet",
       "github": "larsajakobsen",
       "oppdatert": "2026-09-23T12:32:26Z"
+    },
+    {
+      "issue": 207,
+      "navn": "Delt mobilitet viser «drivstoff: ELECTRIC» og «COMBUSTION»",
+      "github": "randsu",
+      "oppdatert": "2026-09-23T12:38:06Z"
+    },
+    {
+      "issue": 208,
+      "navn": "Skipslaget viser «destinasjon: N/A» og fart uten enhet",
+      "github": "randsu",
+      "oppdatert": "2026-09-23T12:38:11Z"
+    },
+    {
+      "issue": 211,
+      "navn": "Statistikken viser ikke «Nyeste» for vannmålere og smilefjes",
+      "github": "randsu",
+      "oppdatert": "2026-09-23T12:38:08Z"
     },
     {
       "issue": 214,
@@ -1150,12 +1180,60 @@
   ],
   "aapne": [
     {
+      "pr": 226,
+      "tittel": "Popupene viser rådata: ISO-tider, «ikon: 😊» og tall uten enhet",
+      "github": "larsajakobsen",
+      "agent": "mini-wilma",
+      "opprettet": "2026-09-23T12:38:36Z",
+      "oppdatert": "2026-09-23T12:38:37Z",
+      "utkast": false,
+      "issues": [
+        206
+      ]
+    },
+    {
+      "pr": 225,
+      "tittel": "#114: Nytt lag: Kristiania i 1910",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T12:38:28Z",
+      "oppdatert": "2026-09-23T12:38:29Z",
+      "utkast": false,
+      "issues": [
+        114
+      ]
+    },
+    {
+      "pr": 219,
+      "tittel": "Simulering: tsunami i Oslofjorden",
+      "github": "FrodeBl",
+      "agent": "mini-frode",
+      "opprettet": "2026-09-23T12:28:49Z",
+      "oppdatert": "2026-09-23T12:38:24Z",
+      "utkast": false,
+      "issues": [
+        128
+      ]
+    },
+    {
+      "pr": 222,
+      "tittel": "Havet stiger: hva havner under vann? (#133)",
+      "github": "Puiu",
+      "agent": "mini-taco",
+      "opprettet": "2026-09-23T12:30:27Z",
+      "oppdatert": "2026-09-23T12:38:05Z",
+      "utkast": false,
+      "issues": [
+        133
+      ]
+    },
+    {
       "pr": 224,
       "tittel": "Vinden som strømmer over byen",
       "github": "theakbe",
       "agent": "mini-astrid",
       "opprettet": "2026-09-23T12:37:37Z",
-      "oppdatert": "2026-09-23T12:37:38Z",
+      "oppdatert": "2026-09-23T12:37:53Z",
       "utkast": false,
       "issues": [
         188
@@ -1171,18 +1249,6 @@
       "utkast": false,
       "issues": [
         41
-      ]
-    },
-    {
-      "pr": 222,
-      "tittel": "Havet stiger: hva havner under vann? (#133)",
-      "github": "Puiu",
-      "agent": "mini-taco",
-      "opprettet": "2026-09-23T12:30:27Z",
-      "oppdatert": "2026-09-23T12:36:09Z",
-      "utkast": false,
-      "issues": [
-        133
       ]
     },
     {
@@ -1207,18 +1273,6 @@
       "utkast": false,
       "issues": [
         142
-      ]
-    },
-    {
-      "pr": 219,
-      "tittel": "Simulering: tsunami i Oslofjorden",
-      "github": "FrodeBl",
-      "agent": "mini-frode",
-      "opprettet": "2026-09-23T12:28:49Z",
-      "oppdatert": "2026-09-23T12:32:48Z",
-      "utkast": false,
-      "issues": [
-        128
       ]
     },
     {
