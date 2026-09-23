@@ -20,7 +20,7 @@ namespace OsloLive.Kart;
 /// (for eksempel { "vehicles": [...] }). Bruk MCP-serveren til å finne ut
 /// hvilken form den kilden du jobber med har - se README.
 /// </summary>
-public sealed class Allemannsdata(HttpClient http, ILogger<Allemannsdata> logg, TimeProvider? klokke = null)
+public sealed class Allemannsdata(HttpClient http, ILogger<Allemannsdata> logg, Metrikker metrikker, TimeProvider? klokke = null)
 {
     private const string Rot = "https://allemannsdata.com/wiki/api/v1/kilder";
 
@@ -73,11 +73,33 @@ public sealed class Allemannsdata(HttpClient http, ILogger<Allemannsdata> logg, 
 
         if (Mellomlager.TryGetValue(url, out var lagret) && DateTimeOffset.UtcNow - lagret.Hentet < Levetid)
         {
+            metrikker.RegistrerTreff(kilde);
             return lagret.Svar;
         }
 
         logg.LogInformation("Henter {Kilde}/{Operasjon}", kilde, operasjon);
 
+        var tid = klokke ?? TimeProvider.System;
+        var start = tid.GetTimestamp();
+        var feilet = false;
+        try
+        {
+            return await HentFraKilden(kilde, operasjon, url, stopp);
+        }
+        catch
+        {
+            feilet = true;
+            throw;
+        }
+        finally
+        {
+            metrikker.RegistrerBom(kilde, tid.GetElapsedTime(start), feilet);
+        }
+    }
+
+    /// <summary>Kaller kilden, pakker ut «data» og legger svaret i mellomlageret.</summary>
+    private async Task<JsonElement> HentFraKilden(string kilde, string operasjon, string url, CancellationToken stopp)
+    {
         using var svar = await HentMedNyeForsøk(kilde, operasjon, url, stopp);
         svar.EnsureSuccessStatusCode();
 

@@ -36,6 +36,77 @@ public class MobilitetLagTester
         Assert.Equal(forventet, MobilitetLag.Operatør(systemId, operatør));
     }
 
+    [Theory]
+    [InlineData("ELECTRIC", "elektrisk")]
+    [InlineData("ELECTRIC_ASSIST", "elektrisk")]
+    [InlineData("COMBUSTION", "fossil")]
+    [InlineData("COMBUSTION_DIESEL", "fossil")]
+    [InlineData("HYBRID", "hybrid")]
+    [InlineData("PLUG_IN_HYBRID", "hybrid")]
+    [InlineData("HUMAN", "tråkk")]
+    public void Drivstoff_oversettes_fra_propulsion(string propulsion, string forventet)
+    {
+        Assert.Equal(forventet, MobilitetLag.Drivstoff(propulsion));
+    }
+
+    [Theory]
+    [InlineData("HYDROGEN")]
+    [InlineData("electric")]
+    [InlineData(null)]
+    public void Ukjent_drivstoff_gir_null(string? propulsion)
+    {
+        Assert.Null(MobilitetLag.Drivstoff(propulsion));
+    }
+
+    [Theory]
+    [InlineData("COMBUSTION", "fossil")]
+    [InlineData("ELECTRIC", "elektrisk")]
+    public void Kjøretøy_får_drivstoff_på_norsk(string propulsion, string forventet)
+    {
+        var punkt = MobilitetLag.FraKjøretøy(Rad($$"""
+            {
+                "id": "HYR:Vehicle:1",
+                "form_factor": "CAR",
+                "propulsion": "{{propulsion}}",
+                "lat": 59.912,
+                "lon": 10.752,
+                "range_m": 83000,
+                "reserved": false,
+                "disabled": false,
+                "operator": "Hyre",
+                "system_id": "hyrenorge"
+            }
+            """));
+
+        Assert.NotNull(punkt);
+        Assert.Equal(forventet, punkt!.Properties["drivstoff"]);
+    }
+
+    [Theory]
+    [InlineData("\"propulsion\": \"HYDROGEN\",")]
+    [InlineData("\"propulsion\": 3,")]
+    [InlineData("\"propulsion\": null,")]
+    [InlineData("")]
+    public void Kjøretøy_med_ukjent_eller_manglende_drivstoff_mangler_feltet(string propulsionFragment)
+    {
+        var punkt = MobilitetLag.FraKjøretøy(Rad($$"""
+            {
+                "id": "HYR:Vehicle:1",
+                "form_factor": "CAR",
+                {{propulsionFragment}}
+                "lat": 59.912,
+                "lon": 10.752,
+                "reserved": false,
+                "disabled": false,
+                "operator": "Hyre",
+                "system_id": "hyrenorge"
+            }
+            """));
+
+        Assert.NotNull(punkt);
+        Assert.False(punkt!.Properties.ContainsKey("drivstoff"));
+    }
+
     [Fact]
     public void Ledig_kjøretøy_gir_punkt_med_lon_lat()
     {
@@ -119,8 +190,10 @@ public class MobilitetLagTester
     }
 
     [Fact]
-    public void Bysykkelstasjon_gir_ett_punkt_per_ledig_sykkel()
+    public void Bysykkelstasjon_gir_ett_punkt_med_antall_ledige_sykler()
     {
+        // Tidligere ble det ett punkt per ledig sykkel, alle på samme koordinat,
+        // og de kunne aldri skilles på kartet (#209). Nå er én stasjon ett punkt.
         var punkter = MobilitetLag.FraBysykkelstasjon(Rad("""
             {
                 "id": "YOS:Station:599",
@@ -133,22 +206,38 @@ public class MobilitetLagTester
             }
             """)).ToList();
 
-        Assert.Equal(3, punkter.Count);
-        Assert.All(punkter, p => Assert.NotNull(p));
-        Assert.Equal(3, punkter.Select(p => p!.Properties["id"]).Distinct().Count());
-        Assert.All(punkter, p =>
-        {
-            Assert.Equal([10.7499929, 59.9103199], p!.Geometry.Coordinates);
-            Assert.StartsWith("Paléhaven", (string)p.Properties["navn"]!);
-            Assert.Equal("Entur delt mobilitet", p.Properties["kilde"]);
-            Assert.Equal("Oslo Bysykkel", p.Properties["operatør"]);
-            Assert.Equal("sykkel", p.Properties["type"]);
-            Assert.Equal("Paléhaven", p.Properties["stasjon"]);
-        });
+        var p = Assert.Single(punkter);
+        Assert.NotNull(p);
+        Assert.Equal("YOS:Station:599", p!.Properties["id"]);
+        Assert.Equal([10.7499929, 59.9103199], p.Geometry.Coordinates);
+        Assert.Equal("Paléhaven", p.Properties["navn"]);
+        Assert.Equal("Entur delt mobilitet", p.Properties["kilde"]);
+        Assert.Equal("Oslo Bysykkel", p.Properties["operatør"]);
+        Assert.Equal("sykkel", p.Properties["type"]);
+        Assert.Equal("Paléhaven", p.Properties["stasjon"]);
+        Assert.IsType<int>(p.Properties["ledige sykler"]);
+        Assert.Equal(3, p.Properties["ledige sykler"]);
     }
 
     [Fact]
-    public void Samle_gir_ett_punkt_per_kjøretøy_og_per_ledig_bysykkel()
+    public void Samme_bysykkelstasjon_fra_flere_formfaktorer_gir_ett_punkt()
+    {
+        // Laget spør både BICYCLE og CARGO_BICYCLE, så samme stasjon kan komme to ganger.
+        var stasjoner = Liste("""
+            [
+                { "id": "YOS:Station:599", "name": "Paléhaven", "lat": 59.91, "lon": 10.75, "vehicles_available": 33, "operator": "UIP Bauer Media Outdoor Norge AS", "system_id": "oslobysykkel" },
+                { "id": "YOS:Station:599", "name": "Paléhaven", "lat": 59.91, "lon": 10.75, "vehicles_available": 33, "operator": "UIP Bauer Media Outdoor Norge AS", "system_id": "oslobysykkel" }
+            ]
+            """);
+
+        var lag = MobilitetLag.Samle([], stasjoner);
+
+        var p = Assert.Single(lag.Features);
+        Assert.Equal(33, p.Properties["ledige sykler"]);
+    }
+
+    [Fact]
+    public void Samle_gir_ett_punkt_per_kjøretøy_og_per_bysykkelstasjon()
     {
         var kjøretøy = Liste("""
             [
@@ -164,7 +253,8 @@ public class MobilitetLagTester
 
         var lag = MobilitetLag.Samle(kjøretøy, stasjoner);
 
-        Assert.Equal(3, lag.Features.Count);
+        // Én sparkesykkel og én stasjon med ledige sykler; den tomme stasjonen gir ingenting.
+        Assert.Equal(2, lag.Features.Count);
     }
 
     [Fact]
