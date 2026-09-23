@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T21:43:54",
+  "oppdatert": "2026-09-23T21:44:39",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -724,7 +724,7 @@
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
     "pr": null,
-    "kjoeringer": 69
+    "kjoeringer": 70
   },
   "produkt": {
     "testerBestatt": 21,
