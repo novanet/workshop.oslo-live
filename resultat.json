@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:49:44",
+  "oppdatert": "2026-09-23T10:50:11",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -383,7 +383,7 @@
       "issue": 52,
       "navn": "Konfigurerbar bbox",
       "startet": "2026-09-23T08:42:06.8631198+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "mini-frode",
@@ -423,7 +423,7 @@
       "issue": 25,
       "navn": "Historikk",
       "startet": "2026-09-23T08:47:59.0992794+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "Dmitry-agent",
@@ -431,7 +431,7 @@
       "issue": 12,
       "navn": "Holdeplasser",
       "startet": "2026-09-23T08:48:05.3217109+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-knive",
@@ -439,7 +439,7 @@
       "issue": 40,
       "navn": "Mobil",
       "startet": "2026-09-23T08:48:55.3857059+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "Andy3000",
@@ -447,6 +447,14 @@
       "issue": 11,
       "navn": "Kollektiv",
       "startet": "2026-09-23T08:49:04.1157424+00:00",
+      "minutter": 1
+    },
+    {
+      "agent": "mini-astrid",
+      "github": "theakbe",
+      "issue": 36,
+      "navn": "Tegn område",
+      "startet": "2026-09-23T08:49:47.9516568+00:00",
       "minutter": 0
     }
   ],
@@ -663,6 +671,12 @@
       "oppdatert": "2026-09-23T08:45:58Z"
     },
     {
+      "issue": 36,
+      "navn": "Tegn et område og tell hva som er inni",
+      "github": "theakbe",
+      "oppdatert": "2026-09-23T08:49:48Z"
+    },
+    {
       "issue": 38,
       "navn": "Demomodus for storskjerm",
       "github": "randsu",
@@ -797,6 +811,18 @@
   ],
   "aapne": [
     {
+      "pr": 98,
+      "tittel": "Overlapping boxes",
+      "github": "jthagesk",
+      "agent": "mini-kirsten",
+      "opprettet": "2026-09-23T08:48:42Z",
+      "oppdatert": "2026-09-23T08:49:53Z",
+      "utkast": false,
+      "issues": [
+        59
+      ]
+    },
+    {
       "pr": 99,
       "tittel": "Vis strømprisen for Oslo",
       "github": "larsajakobsen",
@@ -830,18 +856,6 @@
       "utkast": false,
       "issues": [
         29
-      ]
-    },
-    {
-      "pr": 98,
-      "tittel": "Overlapping boxes",
-      "github": "jthagesk",
-      "agent": "mini-kirsten",
-      "opprettet": "2026-09-23T08:48:42Z",
-      "oppdatert": "2026-09-23T08:48:43Z",
-      "utkast": false,
-      "issues": [
-        59
       ]
     },
     {
