@@ -11,6 +11,17 @@ public class MobilitetLagTester
         JsonDocument.Parse(json).RootElement.EnumerateArray().ToList();
 
     [Theory]
+    [InlineData("sykkel", "🚲")]
+    [InlineData("elsparkesykkel", "🛴")]
+    [InlineData("bil", "🚗")]
+    [InlineData("moped", "🛴")]
+    [InlineData("annet", "🛴")]
+    public void IkonForType_gir_riktig_ikon(string type, string forventetIkon)
+    {
+        Assert.Equal(forventetIkon, MobilitetLag.IkonForType(type));
+    }
+
+    [Theory]
     [InlineData("SCOOTER_STANDING", "elsparkesykkel")]
     [InlineData("SCOOTER_SEATED", "elsparkesykkel")]
     [InlineData("BICYCLE", "sykkel")]

@@ -28,6 +28,15 @@ public sealed class MobilitetLag(Allemannsdata data) : ILag
     private static readonly string[] Formfaktorer =
         ["SCOOTER_STANDING", "SCOOTER_SEATED", "BICYCLE", "CARGO_BICYCLE", "CAR"];
 
+    /// <summary>Oversetter type til ikonet som vises på kartet.</summary>
+    public static string IkonForType(string type) => type switch
+    {
+        "sykkel" => "🚲",
+        "elsparkesykkel" => "🛴",
+        "bil" => "🚗",
+        _ => "🛴",
+    };
+
     /// <summary>Oversetter kildens formfaktor til teksten popupen skal vise.</summary>
     public static string Type(string? formFactor) => formFactor switch
     {
@@ -85,6 +94,7 @@ public sealed class MobilitetLag(Allemannsdata data) : ILag
         {
             ["operatør"] = operatør,
             ["type"] = type,
+            ["ikon"] = IkonForType(type),
         };
 
         if (rad.TryGetProperty("propulsion", out var drivstoff) && drivstoff.ValueKind == JsonValueKind.String)
@@ -141,6 +151,7 @@ public sealed class MobilitetLag(Allemannsdata data) : ILag
             {
                 ["operatør"] = "Oslo Bysykkel",
                 ["type"] = "sykkel",
+                ["ikon"] = IkonForType("sykkel"),
                 ["stasjon"] = stasjonNavn,
             }));
     }
