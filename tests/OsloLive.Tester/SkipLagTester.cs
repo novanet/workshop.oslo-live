@@ -18,7 +18,7 @@ public class SkipLagTester
         Assert.NotNull(punkt);
         Assert.Equal("Tåkeheimen", punkt!.Properties["navn"]);
         Assert.Equal("BarentsWatch AIS", punkt.Properties["kilde"]);
-        Assert.Equal(12.3, punkt.Properties["fart"]);
+        Assert.Equal("12,3 knop", punkt.Properties["fart"]);
         Assert.Equal("NESODDTANGEN", punkt.Properties["destinasjon"]);
     }
 
@@ -55,14 +55,65 @@ public class SkipLagTester
     }
 
     [Fact]
-    public void Fartoey_som_ligger_stille_har_fart_null_knop()
+    public void Fartoey_med_fart_null_ligger_stille()
     {
         var punkt = SkipLag.TilPunkt(Rad("""
             { "vessel_id": 257852500, "navn": "Vision of the Fjords", "lat": 59.9073, "lon": 10.7481, "fart_knop": 0, "destinasjon": "N/A" }
             """));
 
         Assert.NotNull(punkt);
-        Assert.Equal(0.0, punkt!.Properties["fart"]);
+        Assert.Equal("ligger stille", punkt!.Properties["fart"]);
+    }
+
+    [Fact]
+    public void Fart_vises_med_en_desimal_norsk_komma_og_knop()
+    {
+        var punkt = SkipLag.TilPunkt(Rad("""
+            { "vessel_id": 258219000, "navn": "Tåkeheimen", "lat": 59.905, "lon": 10.72, "fart_knop": 12.34, "destinasjon": "NESODDTANGEN" }
+            """));
+
+        Assert.NotNull(punkt);
+        Assert.Equal("12,3 knop", punkt!.Properties["fart"]);
+    }
+
+    [Theory]
+    [InlineData("N/A")]
+    [InlineData(" n/a ")]
+    [InlineData("NA")]
+    [InlineData("none")]
+    [InlineData("-")]
+    [InlineData(".")]
+    [InlineData("Unknown")]
+    public void Destinasjon_som_betyr_mangler_utelates(string destinasjon)
+    {
+        var punkt = SkipLag.TilPunkt(Rad($$"""
+            { "vessel_id": 257852500, "navn": "Vision of the Fjords", "lat": 59.9073, "lon": 10.7481, "fart_knop": 0, "destinasjon": "{{destinasjon}}" }
+            """));
+
+        Assert.NotNull(punkt);
+        Assert.False(punkt!.Properties.ContainsKey("destinasjon"));
+    }
+
+    [Fact]
+    public void Navn_i_versaler_faar_stor_forbokstav_per_ord()
+    {
+        var punkt = SkipLag.TilPunkt(Rad("""
+            { "vessel_id": 257852500, "navn": "VISION OF THE FJORDS", "lat": 59.9073, "lon": 10.7481, "fart_knop": 0, "destinasjon": "N/A" }
+            """));
+
+        Assert.NotNull(punkt);
+        Assert.Equal("Vision Of The Fjords", punkt!.Properties["navn"]);
+    }
+
+    [Fact]
+    public void Navn_med_smaa_bokstaver_roeres_ikke()
+    {
+        var punkt = SkipLag.TilPunkt(Rad("""
+            { "vessel_id": 258219000, "navn": "MS Tåkeheimen", "lat": 59.905, "lon": 10.72, "fart_knop": 12.3, "destinasjon": "NESODDTANGEN" }
+            """));
+
+        Assert.NotNull(punkt);
+        Assert.Equal("MS Tåkeheimen", punkt!.Properties["navn"]);
     }
 
     [Fact]

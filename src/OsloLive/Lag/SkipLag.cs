@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Text.Json;
 using OsloLive.Kart;
 
@@ -34,7 +35,7 @@ public sealed class SkipLag(Allemannsdata data) : ILag
             : null;
 
         var navn = rad.TryGetProperty("navn", out var n) && n.ValueKind == JsonValueKind.String
-            ? n.GetString()!.Trim()
+            ? LesbartNavn(n.GetString()!.Trim())
             : "";
         if (navn.Length == 0)
         {
@@ -45,13 +46,13 @@ public sealed class SkipLag(Allemannsdata data) : ILag
 
         if (rad.TryGetProperty("fart_knop", out var fart) && fart.ValueKind == JsonValueKind.Number)
         {
-            detaljer["fart"] = Math.Round(fart.GetDouble(), 1);
+            detaljer["fart"] = FormaterFart(fart.GetDouble());
         }
 
         if (rad.TryGetProperty("destinasjon", out var d) && d.ValueKind == JsonValueKind.String)
         {
             var destinasjon = d.GetString()!.Trim();
-            if (destinasjon.Length > 0)
+            if (ErEkteDestinasjon(destinasjon))
             {
                 detaljer["destinasjon"] = destinasjon;
             }
@@ -64,6 +65,42 @@ public sealed class SkipLag(Allemannsdata data) : ILag
             navn: navn,
             kilde: "BarentsWatch AIS",
             detaljer: detaljer);
+    }
+
+    /// <summary>Tekst i popupen formateres alltid på norsk, uavhengig av trådens kultur.</summary>
+    private static readonly CultureInfo Norsk = CultureInfo.GetCultureInfo("nb-NO");
+
+    /// <summary>
+    /// AIS-destinasjonen er fritekst fra mannskapet, og disse verdiene betyr at den mangler.
+    /// Sammenlignes uten mellomrom rundt og uavhengig av store og små bokstaver.
+    /// </summary>
+    private static readonly string[] TommeDestinasjoner = ["N/A", "NA", "NONE", "-", ".", "UNKNOWN"];
+
+    /// <summary>Tom tekst og verdiene i <see cref="TommeDestinasjoner"/> er ikke ekte destinasjoner og utelates.</summary>
+    private static bool ErEkteDestinasjon(string destinasjon)
+    {
+        var verdi = destinasjon.Trim();
+        return verdi.Length > 0 && !TommeDestinasjoner.Contains(verdi, StringComparer.OrdinalIgnoreCase);
+    }
+
+    /// <summary>
+    /// Fart som tekst med én desimal, norsk komma og enhet, for eksempel «12,3 knop».
+    /// Er farten 0 etter avrunding, står det «ligger stille».
+    /// </summary>
+    private static string FormaterFart(double knop)
+    {
+        var avrundet = Math.Round(knop, 1);
+        return avrundet == 0 ? "ligger stille" : $"{avrundet.ToString("0.0", Norsk)} knop";
+    }
+
+    /// <summary>
+    /// AIS sender navn i versaler. Navn i bare versaler får stor forbokstav per ord
+    /// («VISION OF THE FJORDS» blir «Vision Of The Fjords»). Navn med små bokstaver røres ikke.
+    /// </summary>
+    private static string LesbartNavn(string navn)
+    {
+        var bareVersaler = navn.Any(char.IsLetter) && !navn.Any(char.IsLower);
+        return bareVersaler ? Norsk.TextInfo.ToTitleCase(navn.ToLower(Norsk)) : navn;
     }
 
     public async Task<Kartlag> Hent(CancellationToken stopp = default)
