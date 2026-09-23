@@ -917,7 +917,10 @@ async function hent(id) {
   try {
     const url = '/api/lag/' + id + (valgtTid ? '?tid=' + encodeURIComponent(valgtTid.toISOString()) : '');
     const svar = await fetch(url);
-    if (!svar.ok) throw new Error('HTTP ' + svar.status);
+    if (!svar.ok) {
+      const kropp = await svar.json().catch(() => null);
+      throw new Error(kropp?.feil ?? 'HTTP ' + svar.status);
+    }
     const geo = await svar.json();
     if (gen !== tidGenerasjon) return;   // et tregt svar fra en annen tid enn den valgte nå
 
@@ -948,6 +951,7 @@ async function hent(id) {
     if (levende) oppf.sistOk = new Date();
     teller.textContent = oppf.antall;
     teller.className = 'antall ' + (oppf.antall ? 'ok' : '');
+    teller.title = '';
   } catch (e) {
     if (gen !== tidGenerasjon) return;
     // Ta bort punktene fra forrige henting, ellers blir de stående i kartet
@@ -960,6 +964,7 @@ async function hent(id) {
     oppf.feil = true;
     teller.textContent = 'feil';
     teller.className = 'antall feil';
+    teller.title = e.message;
   }
   oppdaterBunn();
   if (valgtSted) visNaermest();

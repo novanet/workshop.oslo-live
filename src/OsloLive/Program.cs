@@ -121,7 +121,7 @@ app.MapGet("/api/lag/{id}", async (string id, string? tid, IEnumerable<ILag> lag
         }
 
         app.Logger.LogError(ex, "Laget {Id} feilet", id);
-        return Results.Json(new { feil = ex.Message }, statusCode: 502);
+        return Results.Json(new { feil = Feiltekst.Fra(ex) }, statusCode: 502);
     }
 });
 
@@ -173,7 +173,7 @@ app.MapGet("/api/lag/{id}/bydeler", async (string id, string? tid, IEnumerable<I
     catch (Exception ex)
     {
         app.Logger.LogError(ex, "Bydelstelling for laget {Id} feilet", id);
-        return Results.Json(new { feil = ex.Message }, statusCode: 502);
+        return Results.Json(new { feil = Feiltekst.Fra(ex) }, statusCode: 502);
     }
 });
 
@@ -200,7 +200,7 @@ app.MapGet("/api/stroempris", async (Allemannsdata data, CancellationToken stopp
     catch (Exception ex)
     {
         app.Logger.LogError(ex, "Strømprisen feilet");
-        return Results.Json(new { feil = ex.Message }, statusCode: 502);
+        return Results.Json(new { feil = Feiltekst.Fra(ex) }, statusCode: 502);
     }
 });
 
@@ -234,7 +234,7 @@ app.MapGet("/api/vannstand", async (Allemannsdata data, CancellationToken stopp)
     catch (Exception ex)
     {
         app.Logger.LogError(ex, "Vannstand feilet");
-        return Results.Json(new { feil = ex.Message }, statusCode: 502);
+        return Results.Json(new { feil = Feiltekst.Fra(ex) }, statusCode: 502);
     }
 });
 
