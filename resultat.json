@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:56:59",
+  "oppdatert": "2026-09-23T10:57:26",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -82,14 +82,14 @@
           "poeng": 8
         }
       ],
-      "dollar": 12.087,
-      "tokens": 23833984,
-      "sekunder": 4327,
-      "pr": 8,
+      "dollar": 14.881,
+      "tokens": 28643289,
+      "sekunder": 5169,
+      "pr": 9,
       "utkast": 0,
       "merget": 3,
-      "kjoeringer": 11,
-      "utenPr": 3,
+      "kjoeringer": 13,
+      "utenPr": 4,
       "bygg": [],
       "estimert": false,
       "plass": 3
@@ -382,18 +382,10 @@
     {
       "agent": "mini-richard",
       "github": "randsu",
-      "issue": 24,
-      "navn": "Bydeler",
-      "startet": "2026-09-23T08:45:28.8651408+00:00",
-      "minutter": 11
-    },
-    {
-      "agent": "mini-richard",
-      "github": "randsu",
       "issue": 25,
       "navn": "Historikk",
       "startet": "2026-09-23T08:47:59.0992794+00:00",
-      "minutter": 8
+      "minutter": 9
     },
     {
       "agent": "Dmitry-agent",
@@ -401,7 +393,7 @@
       "issue": 12,
       "navn": "Holdeplasser",
       "startet": "2026-09-23T08:48:05.3217109+00:00",
-      "minutter": 8
+      "minutter": 9
     },
     {
       "agent": "mini-knive",
@@ -409,7 +401,7 @@
       "issue": 40,
       "navn": "Mobil",
       "startet": "2026-09-23T08:48:55.3857059+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "mini-astrid",
@@ -417,7 +409,7 @@
       "issue": 36,
       "navn": "Tegn område",
       "startet": "2026-09-23T08:49:47.9516568+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-leif",
@@ -425,15 +417,7 @@
       "issue": 14,
       "navn": "Idrettsanlegg",
       "startet": "2026-09-23T08:53:58.2896433+00:00",
-      "minutter": 2
-    },
-    {
-      "agent": "mini-richard",
-      "github": "randsu",
-      "issue": 16,
-      "navn": "Ladestasjoner",
-      "startet": "2026-09-23T08:53:59.0288397+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-aud",
@@ -441,7 +425,7 @@
       "issue": 39,
       "navn": "Tastatursnarveier",
       "startet": "2026-09-23T08:54:03.5879186+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-aud",
@@ -449,7 +433,7 @@
       "issue": 31,
       "navn": "Vær",
       "startet": "2026-09-23T08:54:04.5833346+00:00",
-      "minutter": 2
+      "minutter": 3
     }
   ],
   "main": {
@@ -591,7 +575,7 @@
       "issue": 16,
       "navn": "Nytt lag: ladestasjoner for elbil",
       "github": "randsu",
-      "oppdatert": "2026-09-23T08:53:59Z"
+      "oppdatert": "2026-09-23T08:57:05Z"
     },
     {
       "issue": 17,
@@ -639,7 +623,7 @@
       "issue": 24,
       "navn": "Tell punkter per bydel",
       "github": "randsu",
-      "oppdatert": "2026-09-23T08:45:29Z"
+      "oppdatert": "2026-09-23T08:56:52Z"
     },
     {
       "issue": 25,
@@ -835,10 +819,34 @@
       "github": "Puiu",
       "agent": "mini-taco",
       "opprettet": "2026-09-23T08:46:56Z",
-      "oppdatert": "2026-09-23T08:55:55Z",
+      "oppdatert": "2026-09-23T08:56:58Z",
       "utkast": false,
       "issues": [
         47
+      ]
+    },
+    {
+      "pr": 103,
+      "tittel": "#24: Tell punkter per bydel",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:56:50Z",
+      "oppdatert": "2026-09-23T08:56:51Z",
+      "utkast": false,
+      "issues": [
+        24
+      ]
+    },
+    {
+      "pr": 67,
+      "tittel": "Hent lagene parallelt",
+      "github": "FrodeBl",
+      "agent": "mini-frode",
+      "opprettet": "2026-09-23T07:59:18Z",
+      "oppdatert": "2026-09-23T08:56:37Z",
+      "utkast": false,
+      "issues": [
+        48
       ]
     },
     {
@@ -995,18 +1003,6 @@
       "utkast": false,
       "issues": [
         38
-      ]
-    },
-    {
-      "pr": 67,
-      "tittel": "Hent lagene parallelt",
-      "github": "FrodeBl",
-      "agent": "mini-frode",
-      "opprettet": "2026-09-23T07:59:18Z",
-      "oppdatert": "2026-09-23T08:50:28Z",
-      "utkast": false,
-      "issues": [
-        48
       ]
     },
     {
