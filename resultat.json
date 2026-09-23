@@ -1,7 +1,38 @@
 {
-  "oppdatert": "2026-09-23T10:28:57",
+  "oppdatert": "2026-09-23T10:29:33",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
+    {
+      "navn": "mini-richard",
+      "github": "randsu",
+      "poeng": 9,
+      "feil": [
+        {
+          "issue": 3,
+          "navn": "Mellomlageret",
+          "poeng": 1
+        }
+      ],
+      "lag": [],
+      "levert": [
+        {
+          "issue": 56,
+          "navn": "Flytrafikk",
+          "poeng": 8
+        }
+      ],
+      "dollar": 3.954,
+      "tokens": 7238547,
+      "sekunder": 1471,
+      "pr": 2,
+      "utkast": 0,
+      "merget": 2,
+      "kjoeringer": 4,
+      "utenPr": 2,
+      "bygg": [],
+      "estimert": false,
+      "plass": 1
+    },
     {
       "navn": "mini-gir",
       "github": "GIR75",
@@ -25,7 +56,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 1
+      "plass": 2
     },
     {
       "navn": "mini-wilma",
@@ -50,7 +81,7 @@
       "utenPr": 3,
       "bygg": [],
       "estimert": false,
-      "plass": 2
+      "plass": 3
     },
     {
       "navn": "mini-ingve",
@@ -75,7 +106,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 3
+      "plass": 4
     },
     {
       "navn": "mini-leif",
@@ -98,31 +129,6 @@
       "merget": 1,
       "kjoeringer": 3,
       "utenPr": 0,
-      "bygg": [],
-      "estimert": false,
-      "plass": 4
-    },
-    {
-      "navn": "mini-richard",
-      "github": "randsu",
-      "poeng": 1,
-      "feil": [
-        {
-          "issue": 3,
-          "navn": "Mellomlageret",
-          "poeng": 1
-        }
-      ],
-      "lag": [],
-      "levert": [],
-      "dollar": 3.954,
-      "tokens": 7238547,
-      "sekunder": 1471,
-      "pr": 2,
-      "utkast": 0,
-      "merget": 1,
-      "kjoeringer": 4,
-      "utenPr": 2,
       "bygg": [],
       "estimert": false,
       "plass": 5
@@ -257,7 +263,7 @@
       "issue": 20,
       "navn": "Luftvarsel",
       "startet": "2026-09-23T08:22:06.0655338+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-kirsten",
@@ -265,7 +271,7 @@
       "issue": 45,
       "navn": "Varsler",
       "startet": "2026-09-23T08:22:20.0747631+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-wilma",
@@ -281,7 +287,7 @@
       "issue": 29,
       "navn": "Museer",
       "startet": "2026-09-23T08:23:16.9053574+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-sindre",
@@ -289,7 +295,7 @@
       "issue": 55,
       "navn": "Ytelse",
       "startet": "2026-09-23T08:24:11.6549987+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-astrid",
@@ -337,7 +343,7 @@
       "issue": 19,
       "navn": "Artsobservasjoner",
       "startet": "2026-09-23T08:28:01.690939+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "helstein",
@@ -345,7 +351,7 @@
       "issue": 41,
       "navn": "Fargeblindhet",
       "startet": "2026-09-23T08:28:15.5659433+00:00",
-      "minutter": 0
+      "minutter": 1
     }
   ],
   "main": {
@@ -355,8 +361,8 @@
     "kjoeringer": 18
   },
   "produkt": {
-    "testerBestatt": 12,
-    "testerFeilet": 14,
+    "testerBestatt": 11,
+    "testerFeilet": 15,
     "issuerLost": [
       1,
       2,
@@ -590,18 +596,6 @@
       "utkast": false,
       "issues": [
         17
-      ]
-    },
-    {
-      "pr": 69,
-      "tittel": "#56: Nytt lag: fly i lufta over Oslo",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:10:46Z",
-      "oppdatert": "2026-09-23T08:28:08Z",
-      "utkast": false,
-      "issues": [
-        56
       ]
     },
     {
