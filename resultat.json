@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:10:14",
+  "oppdatert": "2026-09-23T11:10:41",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -878,12 +878,24 @@
   ],
   "aapne": [
     {
+      "pr": 88,
+      "tittel": "#38: Demomodus for storskjerm",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:37:47Z",
+      "oppdatert": "2026-09-23T09:10:11Z",
+      "utkast": false,
+      "issues": [
+        38
+      ]
+    },
+    {
       "pr": 96,
       "tittel": "#22: Slå sammen punkter som ligger oppå hverandre",
       "github": "randsu",
       "agent": "mini-richard",
       "opprettet": "2026-09-23T08:46:40Z",
-      "oppdatert": "2026-09-23T09:09:46Z",
+      "oppdatert": "2026-09-23T09:10:09Z",
       "utkast": false,
       "issues": [
         22
@@ -1151,18 +1163,6 @@
       "utkast": false,
       "issues": [
         43
-      ]
-    },
-    {
-      "pr": 88,
-      "tittel": "#38: Demomodus for storskjerm",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:37:47Z",
-      "oppdatert": "2026-09-23T08:50:47Z",
-      "utkast": false,
-      "issues": [
-        38
       ]
     },
     {
