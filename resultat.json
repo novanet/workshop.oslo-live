@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:37:26",
+  "oppdatert": "2026-09-23T14:38:06",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -97,13 +97,13 @@
           "poeng": 3
         }
       ],
-      "dollar": 4.154,
-      "tokens": 8557398,
-      "sekunder": 1535,
-      "pr": 3,
+      "dollar": 6.491,
+      "tokens": 13478094,
+      "sekunder": 2346,
+      "pr": 4,
       "utkast": 0,
       "merget": 3,
-      "kjoeringer": 3,
+      "kjoeringer": 4,
       "utenPr": 0,
       "bygg": [],
       "estimert": false,
@@ -602,20 +602,12 @@
   ],
   "kjoerer": [
     {
-      "agent": "mini-astrid",
-      "github": "theakbe",
-      "issue": 188,
-      "navn": "Vinden som strømmer over byen",
-      "startet": "2026-09-23T12:23:41.4076789+00:00",
-      "minutter": 13
-    },
-    {
       "agent": "mini-wilma",
       "github": "larsajakobsen",
       "issue": 26,
       "navn": "Skoler",
       "startet": "2026-09-23T12:28:26.4775068+00:00",
-      "minutter": 8
+      "minutter": 9
     },
     {
       "agent": "mini-wilma",
@@ -631,7 +623,7 @@
       "issue": 114,
       "navn": "Nytt lag: Kristiania i 1910",
       "startet": "2026-09-23T12:32:02.4130394+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-wilma",
@@ -647,7 +639,7 @@
       "issue": 114,
       "navn": "Nytt lag: Kristiania i 1910",
       "startet": "2026-09-23T12:33:37.8320639+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-knive",
@@ -671,7 +663,7 @@
       "issue": 118,
       "navn": "Nyhetslinje nederst på skjermen",
       "startet": "2026-09-23T12:34:25.9928919+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-richard",
@@ -679,7 +671,7 @@
       "issue": 116,
       "navn": "Nytt lag: værstasjoner",
       "startet": "2026-09-23T12:34:27.1286355+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-jon",
@@ -687,7 +679,7 @@
       "issue": 189,
       "navn": "Travlere enn vanlig på veiene",
       "startet": "2026-09-23T12:34:43.2826697+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-gir",
@@ -695,7 +687,7 @@
       "issue": 18,
       "navn": "Kulturminner",
       "startet": "2026-09-23T12:35:26.9487115+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-gir",
@@ -703,7 +695,7 @@
       "issue": 13,
       "navn": "Veiarbeid",
       "startet": "2026-09-23T12:35:36.9770034+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-gir",
@@ -711,7 +703,7 @@
       "issue": 51,
       "navn": "Logging",
       "startet": "2026-09-23T12:35:46.639797+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-gir",
@@ -719,7 +711,7 @@
       "issue": 33,
       "navn": "Sykkelparkering",
       "startet": "2026-09-23T12:35:47.0074899+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "helstein",
@@ -727,6 +719,14 @@
       "issue": 194,
       "navn": "Nytt lag: bomstasjoner",
       "startet": "2026-09-23T12:36:39.65381+00:00",
+      "minutter": 1
+    },
+    {
+      "agent": "mini-richard",
+      "github": "randsu",
+      "issue": 118,
+      "navn": "Nyhetslinje nederst på skjermen",
+      "startet": "2026-09-23T12:37:27.3384308+00:00",
       "minutter": 0
     }
   ],
@@ -935,7 +935,13 @@
       "issue": 118,
       "navn": "Nyhetslinje nederst på skjermen",
       "github": "leif-larsen",
-      "oppdatert": "2026-09-23T12:34:27Z"
+      "oppdatert": "2026-09-23T12:37:28Z"
+    },
+    {
+      "issue": 118,
+      "navn": "Nyhetslinje nederst på skjermen",
+      "github": "randsu",
+      "oppdatert": "2026-09-23T12:37:28Z"
     },
     {
       "issue": 119,
@@ -1073,7 +1079,7 @@
       "issue": 188,
       "navn": "Vinden som strømmer over byen",
       "github": "theakbe",
-      "oppdatert": "2026-09-23T12:23:42Z"
+      "oppdatert": "2026-09-23T12:37:39Z"
     },
     {
       "issue": 189,
@@ -1121,7 +1127,7 @@
       "issue": 205,
       "navn": "Strømprisen vises med desimalpunktum",
       "github": "martinrholth",
-      "oppdatert": "2026-09-23T12:32:26Z"
+      "oppdatert": "2026-09-23T12:37:47Z"
     },
     {
       "issue": 206,
@@ -1143,6 +1149,18 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 224,
+      "tittel": "Vinden som strømmer over byen",
+      "github": "theakbe",
+      "agent": "mini-astrid",
+      "opprettet": "2026-09-23T12:37:37Z",
+      "oppdatert": "2026-09-23T12:37:38Z",
+      "utkast": false,
+      "issues": [
+        188
+      ]
+    },
     {
       "pr": 91,
       "tittel": "Fargene må virke for alle",
