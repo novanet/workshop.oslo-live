@@ -1,7 +1,54 @@
 {
-  "oppdatert": "2026-09-23T11:11:08",
+  "oppdatert": "2026-09-23T11:11:53",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
+    {
+      "navn": "mini-richard",
+      "github": "randsu",
+      "poeng": 14,
+      "feil": [
+        {
+          "issue": 3,
+          "navn": "Mellomlageret",
+          "poeng": 1
+        }
+      ],
+      "lag": [
+        {
+          "issue": 6,
+          "navn": "Delt mobilitet",
+          "poeng": 2
+        },
+        {
+          "issue": 9,
+          "navn": "Badetemperatur",
+          "poeng": 1
+        }
+      ],
+      "levert": [
+        {
+          "issue": 38,
+          "navn": "Demomodus",
+          "poeng": 3
+        },
+        {
+          "issue": 56,
+          "navn": "Flytrafikk",
+          "poeng": 8
+        }
+      ],
+      "dollar": 16.757,
+      "tokens": 32622114,
+      "sekunder": 5772,
+      "pr": 10,
+      "utkast": 0,
+      "merget": 5,
+      "kjoeringer": 14,
+      "utenPr": 4,
+      "bygg": [],
+      "estimert": false,
+      "plass": 1
+    },
     {
       "navn": "mini-astrid",
       "github": "theakbe",
@@ -35,7 +82,7 @@
       "utenPr": 0,
       "bygg": [],
       "estimert": false,
-      "plass": 1
+      "plass": 2
     },
     {
       "navn": "mini-gir",
@@ -64,48 +111,6 @@
       "merget": 2,
       "kjoeringer": 7,
       "utenPr": 5,
-      "bygg": [],
-      "estimert": false,
-      "plass": 2
-    },
-    {
-      "navn": "mini-richard",
-      "github": "randsu",
-      "poeng": 11,
-      "feil": [
-        {
-          "issue": 3,
-          "navn": "Mellomlageret",
-          "poeng": 1
-        }
-      ],
-      "lag": [
-        {
-          "issue": 6,
-          "navn": "Delt mobilitet",
-          "poeng": 2
-        },
-        {
-          "issue": 9,
-          "navn": "Badetemperatur",
-          "poeng": 1
-        }
-      ],
-      "levert": [
-        {
-          "issue": 56,
-          "navn": "Flytrafikk",
-          "poeng": 8
-        }
-      ],
-      "dollar": 16.757,
-      "tokens": 32622114,
-      "sekunder": 5772,
-      "pr": 10,
-      "utkast": 0,
-      "merget": 4,
-      "kjoeringer": 14,
-      "utenPr": 4,
       "bygg": [],
       "estimert": false,
       "plass": 3
@@ -439,7 +444,7 @@
       "issue": 11,
       "navn": "Kollektiv",
       "startet": "2026-09-23T09:04:10.6494291+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-gir",
@@ -878,6 +883,30 @@
   ],
   "aapne": [
     {
+      "pr": 73,
+      "tittel": "Vær grei mot kildene (#54)",
+      "github": "Puiu",
+      "agent": "mini-taco",
+      "opprettet": "2026-09-23T08:15:23Z",
+      "oppdatert": "2026-09-23T09:11:28Z",
+      "utkast": false,
+      "issues": [
+        54
+      ]
+    },
+    {
+      "pr": 104,
+      "tittel": "#25: Ta vare på et øyeblikksbilde hver time",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:58:22Z",
+      "oppdatert": "2026-09-23T09:11:13Z",
+      "utkast": false,
+      "issues": [
+        25
+      ]
+    },
+    {
       "pr": 101,
       "tittel": "#34: Skru tiden tilbake med en tidslinje",
       "github": "randsu",
@@ -890,18 +919,6 @@
       ]
     },
     {
-      "pr": 88,
-      "tittel": "#38: Demomodus for storskjerm",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:37:47Z",
-      "oppdatert": "2026-09-23T09:10:31Z",
-      "utkast": false,
-      "issues": [
-        38
-      ]
-    },
-    {
       "pr": 96,
       "tittel": "#22: Slå sammen punkter som ligger oppå hverandre",
       "github": "randsu",
@@ -911,18 +928,6 @@
       "utkast": false,
       "issues": [
         22
-      ]
-    },
-    {
-      "pr": 104,
-      "tittel": "#25: Ta vare på et øyeblikksbilde hver time",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:58:22Z",
-      "oppdatert": "2026-09-23T09:09:10Z",
-      "utkast": false,
-      "issues": [
-        25
       ]
     },
     {
@@ -983,18 +988,6 @@
       "utkast": false,
       "issues": [
         23
-      ]
-    },
-    {
-      "pr": 73,
-      "tittel": "Vær grei mot kildene (#54)",
-      "github": "Puiu",
-      "agent": "mini-taco",
-      "opprettet": "2026-09-23T08:15:23Z",
-      "oppdatert": "2026-09-23T09:08:23Z",
-      "utkast": false,
-      "issues": [
-        54
       ]
     },
     {
