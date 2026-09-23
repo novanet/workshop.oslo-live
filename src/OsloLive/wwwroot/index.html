@@ -53,6 +53,25 @@
   .kamera button:hover { background: #111; color: #fff; }
   .kamera button[aria-pressed="true"] { background: #111; color: #fff; }
 
+  .tavle {
+    position: absolute; top: 16px; right: 16px; z-index: 10;
+    width: min(560px, calc(100% - 360px));
+    max-height: calc(100% - 32px); overflow-y: auto;
+    background: rgba(255,255,255,.95);
+    border: 1.5px solid var(--kant); border-radius: 10px;
+    padding: 16px; box-shadow: 0 6px 20px rgba(0,0,0,.14);
+    backdrop-filter: blur(8px);
+    display: none;
+  }
+  .tavle.apen { display: block; }
+  .tavle h2 { margin: 0 0 10px; font-size: 18px; letter-spacing: -.02em; }
+  .tavle h3 { margin: 14px 0 6px; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--dempet); }
+  .tavle table { width: 100%; border-collapse: collapse; font-size: 12px; font-variant-numeric: tabular-nums; }
+  .tavle th, .tavle td { padding: 4px 6px; text-align: left; border-bottom: 1px solid #e5e7eb; }
+  .tavle th { font-weight: 600; color: var(--dempet); }
+  .tavle tr.forsinket td { color: var(--feil); font-weight: 600; }
+  .tavle .melding { margin-top: 8px; font-size: 12px; color: var(--dempet); }
+
   /* Markører: farget skive med mørk ring, så punktene står fram
      mot det beige kartet. */
   .merke {
@@ -97,6 +116,22 @@
   <button id="snurr" type="button" aria-pressed="false">Snurr</button>
   <button id="flatt" type="button">2D</button>
   <button id="hjem" type="button">Sentrum</button>
+  <button id="avganger" type="button" aria-pressed="false">Avganger</button>
+</div>
+
+<div class="tavle" id="tavle" aria-hidden="true">
+  <h2>Gardermoen, neste time</h2>
+  <h3>Avganger</h3>
+  <table>
+    <thead><tr><th>Flynummer</th><th>Flyselskap</th><th>Sted</th><th>Planlagt</th><th>Status</th></tr></thead>
+    <tbody id="tavle-avganger"></tbody>
+  </table>
+  <h3>Ankomster</h3>
+  <table>
+    <thead><tr><th>Flynummer</th><th>Flyselskap</th><th>Sted</th><th>Planlagt</th><th>Status</th></tr></thead>
+    <tbody id="tavle-ankomster"></tbody>
+  </table>
+  <p class="melding" id="tavle-melding"></p>
 </div>
 
 <script>
@@ -398,6 +433,64 @@ kart.on('mousedown', () => {
     document.getElementById('snurr').setAttribute('aria-pressed', 'false');
   }
 });
+
+// ---------------------------------------------------------------------------
+// Avgangstavle for Gardermoen
+// ---------------------------------------------------------------------------
+const TAVLE_LAGRET = 'oslo-live-tavle-apen';
+let tavleTimer = null;
+
+function tavleRad(fly) {
+  const tid = new Date(fly.planlagt).toLocaleTimeString('no-NO', { hour: '2-digit', minute: '2-digit' });
+  const rad = document.createElement('tr');
+  if (fly.forsinket) rad.classList.add('forsinket');
+  for (const tekst of [fly.flynummer, fly.flyselskap, fly.sted, tid, fly.status]) {
+    const celle = document.createElement('td');
+    celle.textContent = tekst;
+    rad.appendChild(celle);
+  }
+  return rad;
+}
+
+async function hentTavle() {
+  const melding = document.getElementById('tavle-melding');
+  try {
+    const svar = await fetch('/api/avganger');
+    if (!svar.ok) throw new Error('HTTP ' + svar.status);
+    const data = await svar.json();
+
+    const avg = document.getElementById('tavle-avganger');
+    const ank = document.getElementById('tavle-ankomster');
+    avg.innerHTML = '';
+    ank.innerHTML = '';
+    for (const fly of data.avganger ?? []) avg.appendChild(tavleRad(fly));
+    for (const fly of data.ankomster ?? []) ank.appendChild(tavleRad(fly));
+    melding.textContent = '';
+  } catch (e) {
+    melding.textContent = 'utilgjengelig';
+  }
+}
+
+document.getElementById('avganger').addEventListener('click', (ev) => {
+  const panel = document.getElementById('tavle');
+  const åpen = !panel.classList.contains('apen');
+  panel.classList.toggle('apen', åpen);
+  panel.setAttribute('aria-hidden', String(!åpen));
+  ev.currentTarget.setAttribute('aria-pressed', String(åpen));
+  localStorage.setItem(TAVLE_LAGRET, åpen ? '1' : '0');
+
+  if (åpen) {
+    hentTavle();
+    tavleTimer = setInterval(hentTavle, 60000);
+  } else if (tavleTimer) {
+    clearInterval(tavleTimer);
+    tavleTimer = null;
+  }
+});
+
+if (localStorage.getItem(TAVLE_LAGRET) === '1') {
+  document.getElementById('avganger').click();
+}
 </script>
 </body>
 </html>
