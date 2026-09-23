@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:31:00",
+  "oppdatert": "2026-09-23T11:31:28",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -442,7 +442,7 @@
       "issue": 11,
       "navn": "Kollektiv",
       "startet": "2026-09-23T09:22:13.4670027+00:00",
-      "minutter": 8
+      "minutter": 9
     },
     {
       "agent": "mini-kirsten",
@@ -458,7 +458,7 @@
       "issue": 55,
       "navn": "Ytelse",
       "startet": "2026-09-23T09:26:04.1878556+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-knive",
@@ -466,7 +466,7 @@
       "issue": 28,
       "navn": "Tog",
       "startet": "2026-09-23T09:29:24.4557136+00:00",
-      "minutter": 1
+      "minutter": 2
     }
   ],
   "main": {
@@ -598,7 +598,7 @@
       "issue": 11,
       "navn": "Nytt lag: kollektivtrafikk som beveger seg",
       "github": "coffeelyfe",
-      "oppdatert": "2026-09-23T09:29:35Z"
+      "oppdatert": "2026-09-23T09:31:12Z"
     },
     {
       "issue": 13,
@@ -903,6 +903,18 @@
   ],
   "aapne": [
     {
+      "pr": 101,
+      "tittel": "#34: Skru tiden tilbake med en tidslinje",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:51:10Z",
+      "oppdatert": "2026-09-23T09:31:09Z",
+      "utkast": false,
+      "issues": [
+        34
+      ]
+    },
+    {
       "pr": 107,
       "tittel": "Tastatursnarveier",
       "github": "audmaha",
@@ -960,18 +972,6 @@
       "utkast": false,
       "issues": [
         41
-      ]
-    },
-    {
-      "pr": 101,
-      "tittel": "#34: Skru tiden tilbake med en tidslinje",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:51:10Z",
-      "oppdatert": "2026-09-23T09:22:09Z",
-      "utkast": false,
-      "issues": [
-        34
       ]
     },
     {
