@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:29:33",
+  "oppdatert": "2026-09-23T10:29:59",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -21,14 +21,14 @@
           "poeng": 8
         }
       ],
-      "dollar": 3.954,
-      "tokens": 7238547,
-      "sekunder": 1471,
+      "dollar": 4.364,
+      "tokens": 7657071,
+      "sekunder": 1631,
       "pr": 2,
       "utkast": 0,
       "merget": 2,
-      "kjoeringer": 4,
-      "utenPr": 2,
+      "kjoeringer": 5,
+      "utenPr": 3,
       "bygg": [],
       "estimert": false,
       "plass": 1
@@ -255,7 +255,7 @@
       "issue": 57,
       "navn": "Avgangstavle",
       "startet": "2026-09-23T08:16:36.122853+00:00",
-      "minutter": 12
+      "minutter": 13
     },
     {
       "agent": "mini-jon",
@@ -279,7 +279,7 @@
       "issue": 8,
       "navn": "Hendelser",
       "startet": "2026-09-23T08:22:51.9896553+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-kirsten",
@@ -303,7 +303,7 @@
       "issue": 42,
       "navn": "Nærmeste punkt",
       "startet": "2026-09-23T08:25:30.8766176+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-frode",
@@ -311,15 +311,7 @@
       "issue": 48,
       "navn": "Parallell henting",
       "startet": "2026-09-23T08:26:31.7269134+00:00",
-      "minutter": 2
-    },
-    {
-      "agent": "mini-richard",
-      "github": "randsu",
-      "issue": 6,
-      "navn": "Delt mobilitet",
-      "startet": "2026-09-23T08:26:52.0303298+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-aud",
@@ -327,7 +319,7 @@
       "issue": 4,
       "navn": "Duplikatfjerning",
       "startet": "2026-09-23T08:27:45.2786784+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-frode",
@@ -335,7 +327,7 @@
       "issue": 50,
       "navn": "Metrikker",
       "startet": "2026-09-23T08:27:51.3617499+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-frode",
@@ -450,7 +442,7 @@
       "issue": 6,
       "navn": "Nytt lag: elsparkesykler og bysykler",
       "github": "randsu",
-      "oppdatert": "2026-09-23T08:26:52Z"
+      "oppdatert": "2026-09-23T08:29:38Z"
     },
     {
       "issue": 7,
