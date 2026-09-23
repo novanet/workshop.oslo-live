@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:29:59",
+  "oppdatert": "2026-09-23T10:30:25",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -153,6 +153,25 @@
       "plass": 6
     },
     {
+      "navn": "mini-aud",
+      "github": "audmaha",
+      "poeng": 0,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 0.36,
+      "tokens": 645238,
+      "sekunder": 132,
+      "pr": 0,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 1,
+      "utenPr": 1,
+      "bygg": [],
+      "estimert": false,
+      "plass": 7
+    },
+    {
       "navn": "mini-jon",
       "github": "yonzo",
       "poeng": 0,
@@ -166,25 +185,6 @@
       "utkast": 0,
       "merget": 0,
       "kjoeringer": 1,
-      "utenPr": 1,
-      "bygg": [],
-      "estimert": false,
-      "plass": 7
-    },
-    {
-      "navn": "mini-sindre",
-      "github": "sin-rha",
-      "poeng": 0,
-      "feil": [],
-      "lag": [],
-      "levert": [],
-      "dollar": 1.061,
-      "tokens": 1938133,
-      "sekunder": 387,
-      "pr": 1,
-      "utkast": 0,
-      "merget": 0,
-      "kjoeringer": 2,
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
@@ -210,6 +210,25 @@
       "plass": 9
     },
     {
+      "navn": "mini-sindre",
+      "github": "sin-rha",
+      "poeng": 0,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 1.904,
+      "tokens": 3482044,
+      "sekunder": 718,
+      "pr": 2,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 3,
+      "utenPr": 1,
+      "bygg": [],
+      "estimert": false,
+      "plass": 10
+    },
+    {
       "navn": "Andy3000",
       "github": "coffeelyfe",
       "poeng": 0,
@@ -226,7 +245,7 @@
       "utenPr": 0,
       "bygg": [],
       "estimert": false,
-      "plass": 10
+      "plass": 11
     },
     {
       "navn": "mini-frode",
@@ -245,7 +264,7 @@
       "utenPr": 2,
       "bygg": [],
       "estimert": false,
-      "plass": 11
+      "plass": 12
     }
   ],
   "kjoerer": [
@@ -263,7 +282,7 @@
       "issue": 20,
       "navn": "Luftvarsel",
       "startet": "2026-09-23T08:22:06.0655338+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "mini-kirsten",
@@ -271,7 +290,7 @@
       "issue": 45,
       "navn": "Varsler",
       "startet": "2026-09-23T08:22:20.0747631+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "mini-wilma",
@@ -287,15 +306,7 @@
       "issue": 29,
       "navn": "Museer",
       "startet": "2026-09-23T08:23:16.9053574+00:00",
-      "minutter": 6
-    },
-    {
-      "agent": "mini-sindre",
-      "github": "sin-rha",
-      "issue": 55,
-      "navn": "Ytelse",
-      "startet": "2026-09-23T08:24:11.6549987+00:00",
-      "minutter": 5
+      "minutter": 7
     },
     {
       "agent": "mini-astrid",
@@ -314,14 +325,6 @@
       "minutter": 3
     },
     {
-      "agent": "mini-aud",
-      "github": "audmaha",
-      "issue": 4,
-      "navn": "Duplikatfjerning",
-      "startet": "2026-09-23T08:27:45.2786784+00:00",
-      "minutter": 2
-    },
-    {
       "agent": "mini-frode",
       "github": "FrodeBl",
       "issue": 50,
@@ -335,7 +338,7 @@
       "issue": 19,
       "navn": "Artsobservasjoner",
       "startet": "2026-09-23T08:28:01.690939+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "helstein",
@@ -343,7 +346,7 @@
       "issue": 41,
       "navn": "Fargeblindhet",
       "startet": "2026-09-23T08:28:15.5659433+00:00",
-      "minutter": 1
+      "minutter": 2
     }
   ],
   "main": {
@@ -412,19 +415,19 @@
       "issue": 4,
       "navn": "Hvert lag viser bare ett eneste punkt",
       "github": "audmaha",
-      "oppdatert": "2026-09-23T08:27:46Z"
+      "oppdatert": "2026-09-23T08:30:07Z"
     },
     {
       "issue": 4,
       "navn": "Hvert lag viser bare ett eneste punkt",
       "github": "ingvevs",
-      "oppdatert": "2026-09-23T08:27:46Z"
+      "oppdatert": "2026-09-23T08:30:07Z"
     },
     {
       "issue": 4,
       "navn": "Hvert lag viser bare ett eneste punkt",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T08:27:46Z"
+      "oppdatert": "2026-09-23T08:30:07Z"
     },
     {
       "issue": 5,
@@ -493,6 +496,12 @@
       "oppdatert": "2026-09-23T08:23:18Z"
     },
     {
+      "issue": 38,
+      "navn": "Demomodus for storskjerm",
+      "github": "randsu",
+      "oppdatert": "2026-09-23T08:30:20Z"
+    },
+    {
       "issue": 41,
       "navn": "Fargene må virke for alle",
       "github": "nilsgs",
@@ -550,7 +559,7 @@
       "issue": 55,
       "navn": "Kartet blir tregt med mange punkter",
       "github": "sin-rha",
-      "oppdatert": "2026-09-23T08:24:12Z"
+      "oppdatert": "2026-09-23T08:30:04Z"
     },
     {
       "issue": 56,
@@ -584,10 +593,22 @@
       "github": "GIR75",
       "agent": "mini-gir",
       "opprettet": "2026-09-23T08:28:36Z",
-      "oppdatert": "2026-09-23T08:28:36Z",
+      "oppdatert": "2026-09-23T08:30:07Z",
       "utkast": false,
       "issues": [
         17
+      ]
+    },
+    {
+      "pr": 79,
+      "tittel": "Kartet blir tregt med mange punkter",
+      "github": "sin-rha",
+      "agent": "mini-sindre",
+      "opprettet": "2026-09-23T08:30:02Z",
+      "oppdatert": "2026-09-23T08:30:03Z",
+      "utkast": false,
+      "issues": [
+        55
       ]
     },
     {
