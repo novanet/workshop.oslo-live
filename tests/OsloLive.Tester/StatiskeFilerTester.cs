@@ -63,6 +63,9 @@ public class StatiskeFilerTester : IClassFixture<VertUtenBakgrunnssjekk>
 
         Assert.Contains("Ingen historikk ennå", innhold);
         Assert.Contains("bilder.length < 2", innhold);
+    }
+
+    [Fact]
     public async Task Forsiden_formaterer_stroempris_med_norsk_tallformat()
     {
         var innhold = await vert.CreateClient().GetStringAsync("/index.html");
