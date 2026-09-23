@@ -73,6 +73,30 @@ public class ApiTester(VertUtenBakgrunnssjekk vert) : IClassFixture<VertUtenBakg
     }
 
     [Fact]
+    public async Task Ukjent_lag_gir_404_ogsaa_for_bydeler()
+    {
+        var svar = await Klient.GetAsync("/api/lag/finnes-ikke/bydeler");
+
+        Assert.Equal(HttpStatusCode.NotFound, svar.StatusCode);
+    }
+
+    [Fact]
+    public async Task Svikt_i_kilden_gir_502_for_bydeler()
+    {
+        Allemannsdata.TømMellomlager();
+
+        using var vertMedSvikt = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient<Allemannsdata>().ConfigurePrimaryHttpMessageHandler(() => new SviktHandler())));
+        var klient = vertMedSvikt.CreateClient();
+
+        var bydeler = await klient.GetAsync("/api/lag/luftkvalitet/bydeler");
+        var helse = await klient.GetAsync("/api/helse");
+
+        Assert.Equal(HttpStatusCode.BadGateway, bydeler.StatusCode);
+        Assert.Equal(HttpStatusCode.OK, helse.StatusCode);
+    }
+
+    [Fact]
     public async Task Lagoversikten_har_badetemperaturlaget()
     {
         var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
