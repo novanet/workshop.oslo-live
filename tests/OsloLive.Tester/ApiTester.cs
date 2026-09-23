@@ -2,6 +2,7 @@ using System.Net;
 using System.Net.Http.Json;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
+using OsloLive.Kart;
 
 namespace OsloLive.Tester;
 
@@ -56,6 +57,30 @@ public class ApiTester(WebApplicationFactory<Program> vert) : IClassFixture<WebA
         Assert.Equal("Flytrafikk", fly.Navn);
         Assert.False(string.IsNullOrWhiteSpace(fly.Beskrivelse));
         Assert.False(string.IsNullOrWhiteSpace(fly.Ikon));
+    }
+
+    [Fact]
+    public async Task Ukjent_lag_gir_404_ogsaa_for_bydeler()
+    {
+        var svar = await Klient.GetAsync("/api/lag/finnes-ikke/bydeler");
+
+        Assert.Equal(HttpStatusCode.NotFound, svar.StatusCode);
+    }
+
+    [Fact]
+    public async Task Svikt_i_kilden_gir_502_for_bydeler()
+    {
+        Allemannsdata.TømMellomlager();
+
+        using var vertMedSvikt = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient<Allemannsdata>().ConfigurePrimaryHttpMessageHandler(() => new SviktHandler())));
+        var klient = vertMedSvikt.CreateClient();
+
+        var bydeler = await klient.GetAsync("/api/lag/luftkvalitet/bydeler");
+        var helse = await klient.GetAsync("/api/helse");
+
+        Assert.Equal(HttpStatusCode.BadGateway, bydeler.StatusCode);
+        Assert.Equal(HttpStatusCode.OK, helse.StatusCode);
     }
 
     [Fact]

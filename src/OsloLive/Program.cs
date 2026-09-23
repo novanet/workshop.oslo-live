@@ -62,6 +62,29 @@ app.MapGet("/api/lag/{id}", async (string id, IEnumerable<ILag> lag, Cancellatio
     }
 });
 
+// Antall punkter per bydel for ett lag. Tilstandsløs; bydelssentrene hentes
+// via Allemannsdata (mellomlagret 30 s der, som resten av kallene).
+app.MapGet("/api/lag/{id}/bydeler", async (string id, IEnumerable<ILag> lag, Allemannsdata data, CancellationToken stopp) =>
+{
+    var valgt = lag.FirstOrDefault(l => string.Equals(l.Id, id, StringComparison.OrdinalIgnoreCase));
+    if (valgt is null)
+    {
+        return Results.NotFound(new { feil = $"Fant ingen lag med id «{id}»." });
+    }
+
+    try
+    {
+        var punkter = await valgt.Hent(stopp);
+        var sentre = await Bydeler.Hent(data, stopp);
+        return Results.Ok(Bydeler.Tell(punkter, sentre));
+    }
+    catch (Exception ex)
+    {
+        app.Logger.LogError(ex, "Bydelstelling for laget {Id} feilet", id);
+        return Results.Json(new { feil = ex.Message }, statusCode: 502);
+    }
+});
+
 app.MapGet("/api/helse", () => new { status = "ok", tid = DateTimeOffset.Now });
 
 app.Run();

@@ -89,6 +89,14 @@
   .innslag .tekst { flex: 1; font-size: 13px; line-height: 1.35; min-width: 0; }
   .innslag .tekst small { display: block; color: var(--dempet); }
   .innslag .meter { font-size: 12px; font-variant-numeric: tabular-nums; }
+
+  .bydeler { margin-top: 12px; padding-top: 12px; border-top: 1px solid #e5e7eb; }
+  .bydeler .topp { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .bydeler h2 { margin: 0; font-size: 16px; }
+  .bydeler select { font: inherit; font-size: 12px; border: 1.5px solid var(--kant); border-radius: 6px; padding: 3px 5px; max-width: 110px; }
+  .bydeler ol { list-style: none; margin: 0; padding: 0; }
+  .bydeler li { display: flex; justify-content: space-between; padding: 4px 2px; font-size: 13px; }
+  .bydeler li .antall { font-variant-numeric: tabular-nums; color: var(--dempet); }
 </style>
 </head>
 <body>
@@ -98,6 +106,10 @@
   <h1>Oslo Live</h1>
   <p class="under">Levende data fra Allemannsdata</p>
   <div id="lagliste"><p class="tom">Laster lag …</p></div>
+  <div class="bydeler">
+    <div class="topp"><h2>Flest punkter per bydel</h2><select id="bydel-lag" aria-label="Velg lag"></select></div>
+    <ol id="bydel-liste"><li class="tom">Laster …</li></ol>
+  </div>
   <div class="bunn">
     <span id="oppdatert">–</span>
     <span id="sum">–</span>
@@ -362,6 +374,7 @@ async function start() {
   }
 
   liste.innerHTML = '';
+  const bydelSelect = document.getElementById('bydel-lag');
   lag.forEach((l, nr) => {
     const farge = fargeFor(l.id, nr);
     lagene.set(l.id, { ikon: l.ikon || '📍', navn: l.navn, farge, markorer: [], punkter: [], antall: 0, på: true });
@@ -386,10 +399,53 @@ async function start() {
     });
     liste.appendChild(rad);
 
+    const valg = document.createElement('option');
+    valg.value = l.id;
+    valg.textContent = l.navn;
+    bydelSelect.appendChild(valg);
+
     hent(l.id);
   });
 
-  setInterval(() => lagene.forEach((_, id) => hent(id)), 15000);
+  bydelSelect.addEventListener('change', hentBydeler);
+  hentBydeler();
+
+  setInterval(() => { lagene.forEach((_, id) => hent(id)); hentBydeler(); }, 15000);
+}
+
+/** Henter og viser de fem bydelene med flest punkter for laget som er valgt i bydel-panelet. */
+async function hentBydeler() {
+  const select = document.getElementById('bydel-lag');
+  const liste = document.getElementById('bydel-liste');
+  const id = select.value;
+  if (!id) return;
+
+  try {
+    const svar = await fetch('/api/lag/' + encodeURIComponent(id) + '/bydeler');
+    if (select.value !== id) return;   // laget ble byttet mens kallet var underveis
+    if (!svar.ok) throw new Error('HTTP ' + svar.status);
+    const tellinger = await svar.json();
+
+    tellinger.sort((a, b) => b.antall - a.antall);
+    liste.innerHTML = '';
+    if (!tellinger.length) {
+      liste.innerHTML = '<li class="tom">Ingen punkter i bydelene</li>';
+      return;
+    }
+    for (const t of tellinger.slice(0, 5)) {
+      const rad = document.createElement('li');
+      const navn = document.createElement('span');
+      navn.textContent = t.bydel;               // bydelsnavn kommer fra en ekstern kilde
+      const antall = document.createElement('span');
+      antall.className = 'antall';
+      antall.textContent = t.antall;
+      rad.append(navn, antall);
+      liste.appendChild(rad);
+    }
+  } catch (e) {
+    if (select.value !== id) return;
+    liste.innerHTML = '<li class="tom">Kunne ikke telle bydeler</li>';
+  }
 }
 
 // ---------------------------------------------------------------------------
