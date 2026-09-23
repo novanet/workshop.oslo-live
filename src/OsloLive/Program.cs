@@ -53,6 +53,7 @@ builder.Services.AddSingleton<ILag, MobilitetLag>();
 builder.Services.AddSingleton<ILag, SpisestederLag>();
 builder.Services.AddSingleton<ILag, HoldeplasserLag>();
 builder.Services.AddSingleton<ILag, SkipLag>();
+builder.Services.AddSingleton<ILag, VannmaalereLag>();
 
 // Bakgrunnssjekk av kildehelse, se Helse/HelseSjekker.cs.
 builder.Services.Configure<HelseValg>(builder.Configuration.GetSection("Helse"));
