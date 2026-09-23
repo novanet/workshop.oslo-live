@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:54:47",
+  "oppdatert": "2026-09-23T10:55:14",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -401,7 +401,7 @@
       "issue": 25,
       "navn": "Historikk",
       "startet": "2026-09-23T08:47:59.0992794+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "Dmitry-agent",
@@ -409,7 +409,7 @@
       "issue": 12,
       "navn": "Holdeplasser",
       "startet": "2026-09-23T08:48:05.3217109+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-knive",
@@ -417,7 +417,7 @@
       "issue": 40,
       "navn": "Mobil",
       "startet": "2026-09-23T08:48:55.3857059+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-astrid",
@@ -425,7 +425,7 @@
       "issue": 36,
       "navn": "Tegn område",
       "startet": "2026-09-23T08:49:47.9516568+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-jon",
@@ -441,7 +441,7 @@
       "issue": 14,
       "navn": "Idrettsanlegg",
       "startet": "2026-09-23T08:53:58.2896433+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-richard",
@@ -449,7 +449,7 @@
       "issue": 16,
       "navn": "Ladestasjoner",
       "startet": "2026-09-23T08:53:59.0288397+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-aud",
@@ -457,7 +457,7 @@
       "issue": 39,
       "navn": "Tastatursnarveier",
       "startet": "2026-09-23T08:54:03.5879186+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-aud",
@@ -465,7 +465,7 @@
       "issue": 7,
       "navn": "Skipstrafikk",
       "startet": "2026-09-23T08:54:03.6650491+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-aud",
@@ -473,7 +473,7 @@
       "issue": 31,
       "navn": "Vær",
       "startet": "2026-09-23T08:54:04.5833346+00:00",
-      "minutter": 0
+      "minutter": 1
     }
   ],
   "main": {
@@ -854,6 +854,30 @@
   ],
   "aapne": [
     {
+      "pr": 73,
+      "tittel": "Vær grei mot kildene (#54)",
+      "github": "Puiu",
+      "agent": "mini-taco",
+      "opprettet": "2026-09-23T08:15:23Z",
+      "oppdatert": "2026-09-23T08:54:57Z",
+      "utkast": false,
+      "issues": [
+        54
+      ]
+    },
+    {
+      "pr": 99,
+      "tittel": "Vis strømprisen for Oslo",
+      "github": "larsajakobsen",
+      "agent": "mini-wilma",
+      "opprettet": "2026-09-23T08:49:18Z",
+      "oppdatert": "2026-09-23T08:54:47Z",
+      "utkast": false,
+      "issues": [
+        32
+      ]
+    },
+    {
       "pr": 100,
       "tittel": "Vis vannstanden i fjorden",
       "github": "nilsgs",
@@ -1022,18 +1046,6 @@
       ]
     },
     {
-      "pr": 99,
-      "tittel": "Vis strømprisen for Oslo",
-      "github": "larsajakobsen",
-      "agent": "mini-wilma",
-      "opprettet": "2026-09-23T08:49:18Z",
-      "oppdatert": "2026-09-23T08:49:23Z",
-      "utkast": false,
-      "issues": [
-        32
-      ]
-    },
-    {
       "pr": 84,
       "tittel": "Varsle når noe skjer",
       "github": "jthagesk",
@@ -1163,18 +1175,6 @@
       "utkast": false,
       "issues": [
         11
-      ]
-    },
-    {
-      "pr": 73,
-      "tittel": "Vær grei mot kildene (#54)",
-      "github": "Puiu",
-      "agent": "mini-taco",
-      "opprettet": "2026-09-23T08:15:23Z",
-      "oppdatert": "2026-09-23T08:15:24Z",
-      "utkast": false,
-      "issues": [
-        54
       ]
     },
     {
