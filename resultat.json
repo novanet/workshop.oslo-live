@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:06:36",
+  "oppdatert": "2026-09-23T11:07:03",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -431,7 +431,7 @@
       "issue": 27,
       "navn": "Verneområder",
       "startet": "2026-09-23T09:03:41.4652664+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-wilma",
@@ -439,7 +439,7 @@
       "issue": 26,
       "navn": "Skoler",
       "startet": "2026-09-23T09:03:43.3920206+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "Andy3000",
@@ -472,6 +472,22 @@
       "navn": "Spisesteder",
       "startet": "2026-09-23T09:05:32.6022247+00:00",
       "minutter": 1
+    },
+    {
+      "agent": "mini-gir",
+      "github": "GIR75",
+      "issue": 51,
+      "navn": "Logging",
+      "startet": "2026-09-23T09:06:55.8322066+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-gir",
+      "github": "GIR75",
+      "issue": 33,
+      "navn": "Sykkelparkering",
+      "startet": "2026-09-23T09:06:56.2114677+00:00",
+      "minutter": 0
     }
   ],
   "main": {
@@ -732,6 +748,12 @@
       "oppdatert": "2026-09-23T08:49:20Z"
     },
     {
+      "issue": 33,
+      "navn": "Nytt lag: sykkelparkering",
+      "github": "GIR75",
+      "oppdatert": "2026-09-23T09:06:56Z"
+    },
+    {
       "issue": 34,
       "navn": "Skru tiden tilbake med en tidslinje",
       "github": "randsu",
@@ -834,6 +856,12 @@
       "oppdatert": "2026-09-23T08:56:02Z"
     },
     {
+      "issue": 51,
+      "navn": "Strukturert logging",
+      "github": "GIR75",
+      "oppdatert": "2026-09-23T09:06:56Z"
+    },
+    {
       "issue": 52,
       "navn": "Gjør kartutsnittet konfigurerbart",
       "github": "jthagesk",
@@ -890,6 +918,30 @@
   ],
   "aapne": [
     {
+      "pr": 103,
+      "tittel": "#24: Tell punkter per bydel",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:56:50Z",
+      "oppdatert": "2026-09-23T09:06:53Z",
+      "utkast": false,
+      "issues": [
+        24
+      ]
+    },
+    {
+      "pr": 73,
+      "tittel": "Vær grei mot kildene (#54)",
+      "github": "Puiu",
+      "agent": "mini-taco",
+      "opprettet": "2026-09-23T08:15:23Z",
+      "oppdatert": "2026-09-23T09:06:47Z",
+      "utkast": false,
+      "issues": [
+        54
+      ]
+    },
+    {
       "pr": 79,
       "tittel": "Kartet blir tregt med mange punkter",
       "github": "sin-rha",
@@ -926,18 +978,6 @@
       ]
     },
     {
-      "pr": 73,
-      "tittel": "Vær grei mot kildene (#54)",
-      "github": "Puiu",
-      "agent": "mini-taco",
-      "opprettet": "2026-09-23T08:15:23Z",
-      "oppdatert": "2026-09-23T09:01:28Z",
-      "utkast": false,
-      "issues": [
-        54
-      ]
-    },
-    {
       "pr": 97,
       "tittel": "Søk på tvers av alle lag (#47)",
       "github": "Puiu",
@@ -959,18 +999,6 @@
       "utkast": false,
       "issues": [
         39
-      ]
-    },
-    {
-      "pr": 103,
-      "tittel": "#24: Tell punkter per bydel",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:56:50Z",
-      "oppdatert": "2026-09-23T08:59:53Z",
-      "utkast": false,
-      "issues": [
-        24
       ]
     },
     {
