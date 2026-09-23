@@ -1,4 +1,5 @@
 using System.Globalization;
+using OsloLive;
 using OsloLive.Helse;
 using OsloLive.Kart;
 using OsloLive.Lag;
@@ -67,6 +68,33 @@ app.MapGet("/api/lag/{id}", async (string id, IEnumerable<ILag> lag, Cancellatio
     {
         // Et lag som feiler skal ikke ta ned kartet.
         app.Logger.LogError(ex, "Laget {Id} feilet", id);
+        return Results.Json(new { feil = ex.Message }, statusCode: 502);
+    }
+});
+
+// Strømprisen i Oslo (prisområde NO1) i dag. Ikke et kartlag, ingen tilstand.
+app.MapGet("/api/stroempris", async (Allemannsdata data, CancellationToken stopp) =>
+{
+    try
+    {
+        var nå = DateTimeOffset.UtcNow;
+        var iDag = TimeZoneInfo.ConvertTime(nå, Stroempris.Oslo).ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
+
+        var rader = await data.HentListe(
+            Stroempris.Kilde,
+            Stroempris.Operasjon,
+            new Dictionary<string, object> { ["date"] = iDag, ["area"] = Stroempris.Område },
+            liste: "prices",
+            stopp);
+
+        var svar = Stroempris.Tolk(rader, nå)
+            ?? throw new InvalidOperationException("Fant ingen strømpris for i dag i prisområde NO1.");
+
+        return Results.Ok(svar);
+    }
+    catch (Exception ex)
+    {
+        app.Logger.LogError(ex, "Strømprisen feilet");
         return Results.Json(new { feil = ex.Message }, statusCode: 502);
     }
 });
