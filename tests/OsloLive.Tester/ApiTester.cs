@@ -1,12 +1,14 @@
 using System.Net;
 using System.Net.Http.Json;
-using Microsoft.AspNetCore.Mvc.Testing;
+using System.Text.Json;
 using Microsoft.Extensions.DependencyInjection;
+using OsloLive.Historikk;
+using OsloLive.Kart;
 
 namespace OsloLive.Tester;
 
 /// <summary>Tester at kart-API-et svarer slik frontenden forventer.</summary>
-public class ApiTester(WebApplicationFactory<Program> vert) : IClassFixture<WebApplicationFactory<Program>>
+public class ApiTester(TestVert vert) : IClassFixture<TestVert>
 {
     private HttpClient Klient => vert.CreateClient();
 
@@ -73,6 +75,48 @@ public class ApiTester(WebApplicationFactory<Program> vert) : IClassFixture<WebA
         Assert.Equal(HttpStatusCode.BadGateway, fly.StatusCode);
         Assert.Equal(HttpStatusCode.OK, lag.StatusCode);
         Assert.Equal(HttpStatusCode.OK, helse.StatusCode);
+    }
+
+    [Fact]
+    public async Task Ugyldig_tid_gir_400()
+    {
+        var svar = await Klient.GetAsync("/api/lag/luftkvalitet?tid=ikke-en-tid");
+
+        Assert.Equal(HttpStatusCode.BadRequest, svar.StatusCode);
+    }
+
+    [Fact]
+    public async Task Tid_uten_lagrede_bilder_gir_tom_featurecollection()
+    {
+        var svar = await Klient.GetAsync("/api/lag/fly?tid=2026-09-18T08:00:00Z");
+        var lag = JsonDocument.Parse(await svar.Content.ReadAsStringAsync()).RootElement;
+
+        Assert.Equal(HttpStatusCode.OK, svar.StatusCode);
+        Assert.Equal("FeatureCollection", lag.GetProperty("type").GetString());
+        Assert.Empty(lag.GetProperty("features").EnumerateArray());
+    }
+
+    [Fact]
+    public async Task Tid_gir_bildet_som_er_lagret_naermest()
+    {
+        var tid = DateTimeOffset.Parse("2026-09-18T08:00:00Z");
+        var punkt = Geo.Lag("stasjon-a", 59.9139, 10.7522, "Stasjon A", "Test");
+        var bilder = vert.Services.GetRequiredService<Bildelager>();
+        await bilder.Lagre("luftkvalitet", Geo.Samle([punkt]), tid.AddMinutes(-30));
+
+        var svar = await Klient.GetAsync("/api/lag/luftkvalitet?tid=" + Uri.EscapeDataString(tid.ToString("O")));
+        var lag = JsonDocument.Parse(await svar.Content.ReadAsStringAsync()).RootElement;
+
+        Assert.Equal(HttpStatusCode.OK, svar.StatusCode);
+        Assert.Single(lag.GetProperty("features").EnumerateArray());
+    }
+
+    [Fact]
+    public async Task Ukjent_lag_med_tid_gir_404()
+    {
+        var svar = await Klient.GetAsync("/api/lag/finnes-ikke?tid=2026-09-18T08:00:00Z");
+
+        Assert.Equal(HttpStatusCode.NotFound, svar.StatusCode);
     }
 
     private sealed class SviktHandler : HttpMessageHandler

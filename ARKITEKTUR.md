@@ -26,7 +26,7 @@ Prinsipp: kartet er en liste med lag. `ILag → Kartlag (GeoJSON) → MapLibre`.
 | Rute | Svar |
 |---|---|
 | `GET /api/lag` | `[{ id, navn, beskrivelse, ikon }]` |
-| `GET /api/lag/{id}` | `Kartlag` som GeoJSON `FeatureCollection`. 404 ved ukjent id. 502 `{ feil }` hvis laget kaster; de andre lagene påvirkes ikke. |
+| `GET /api/lag/{id}` | `Kartlag` som GeoJSON `FeatureCollection`. 404 ved ukjent id. 502 `{ feil }` hvis laget kaster; de andre lagene påvirkes ikke. Med `?tid=` (ISO 8601) svares det med bildet lagret nærmest det tidspunktet i stedet for levende data; tom `FeatureCollection` hvis ingen bilde er innenfor to timer, 400 ved ugyldig `tid`. Se `Historikk/`. |
 | `GET /api/helse` | `{ status: "ok", tid }` |
 
 Frontenden henter `/api/lag` ved oppstart og hvert lag hvert 15. sekund. Et lag som svarer 502 markeres rødt i lagvelgeren.

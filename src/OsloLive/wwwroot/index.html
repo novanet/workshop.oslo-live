@@ -89,6 +89,10 @@
   .innslag .tekst { flex: 1; font-size: 13px; line-height: 1.35; min-width: 0; }
   .innslag .tekst small { display: block; color: var(--dempet); }
   .innslag .meter { font-size: 12px; font-variant-numeric: tabular-nums; }
+
+  .tidslinje { position:absolute; bottom:24px; left:50%; transform:translateX(-50%); z-index:10; width:min(520px, calc(100% - 220px)); display:flex; align-items:center; gap:10px; background:rgba(255,255,255,.95); border:1.5px solid var(--kant); border-radius:10px; padding:8px 12px; box-shadow:0 6px 20px rgba(0,0,0,.14); font-size:12px; }
+  .tidslinje input { flex:1; accent-color:#111; }
+  .tidslinje #tid-tekst { min-width:110px; text-align:right; font-variant-numeric:tabular-nums; font-weight:600; }
 </style>
 </head>
 <body>
@@ -108,6 +112,12 @@
   <button id="snurr" type="button" aria-pressed="false">Snurr</button>
   <button id="flatt" type="button">2D</button>
   <button id="hjem" type="button">Sentrum</button>
+</div>
+
+<div class="tidslinje">
+  <span>−24 t</span>
+  <input id="tid" type="range" min="-1440" max="0" step="15" value="0" aria-label="Tidslinje, siste døgn">
+  <span id="tid-tekst">Nå</span>
 </div>
 
 <div class="panel naermest" id="naermest" hidden>
@@ -297,13 +307,24 @@ function popup(e) {
   return `<b>${esc(e.navn ?? 'Uten navn')}</b>${rader}<div class="rad" style="margin-top:6px;opacity:.7">${esc(e.kilde ?? '')}</div>`;
 }
 
+let valgtTid = null;   // null = nå, ellers Date
+let tidGenerasjon = 0;
+let tidTimer = null;
+
+function tidTekst(d) {
+  return d ? d.toLocaleString('no-NO', { weekday: 'short', hour: '2-digit', minute: '2-digit' }) : 'Nå';
+}
+
 async function hent(id) {
   const oppf = lagene.get(id);
   const teller = document.getElementById('antall-' + id);
+  const gen = tidGenerasjon;
   try {
-    const svar = await fetch('/api/lag/' + id);
+    const url = '/api/lag/' + id + (valgtTid ? '?tid=' + encodeURIComponent(valgtTid.toISOString()) : '');
+    const svar = await fetch(url);
     if (!svar.ok) throw new Error('HTTP ' + svar.status);
     const geo = await svar.json();
+    if (gen !== tidGenerasjon) return;   // et tregt svar fra en annen tid enn den valgte nå
 
     for (const m of oppf.markorer) m.remove();
     oppf.markorer = [];
@@ -333,6 +354,7 @@ async function hent(id) {
     teller.textContent = oppf.antall;
     teller.className = 'antall ' + (oppf.antall ? 'ok' : '');
   } catch (e) {
+    if (gen !== tidGenerasjon) return;
     oppf.antall = 0;
     teller.textContent = 'feil';
     teller.className = 'antall feil';
@@ -345,8 +367,21 @@ function oppdaterBunn() {
   let sum = 0;
   for (const l of lagene.values()) if (l.på) sum += l.antall;
   document.getElementById('sum').textContent = sum + ' punkter';
-  document.getElementById('oppdatert').textContent = new Date().toLocaleTimeString('no-NO');
+  document.getElementById('oppdatert').textContent = valgtTid ? 'Viser ' + tidTekst(valgtTid) : new Date().toLocaleTimeString('no-NO');
 }
+
+document.getElementById('tid').addEventListener('input', (ev) => {
+  const min = Number(ev.target.value);
+  const d = min === 0 ? null : new Date(Date.now() + min * 60000);
+  document.getElementById('tid-tekst').textContent = tidTekst(d);
+
+  clearTimeout(tidTimer);
+  tidTimer = setTimeout(() => {
+    valgtTid = d;
+    tidGenerasjon++;
+    lagene.forEach((_, id) => hent(id));
+  }, 250);
+});
 
 async function start() {
   let lag = [];
@@ -389,7 +424,7 @@ async function start() {
     hent(l.id);
   });
 
-  setInterval(() => lagene.forEach((_, id) => hent(id)), 15000);
+  setInterval(() => { if (valgtTid) return; lagene.forEach((_, id) => hent(id)); }, 15000);
 }
 
 // ---------------------------------------------------------------------------

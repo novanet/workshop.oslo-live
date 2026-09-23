@@ -1,4 +1,5 @@
 using System.Globalization;
+using OsloLive.Historikk;
 using OsloLive.Kart;
 using OsloLive.Lag;
 
@@ -26,6 +27,14 @@ builder.Services.AddHttpClient("fly", klient =>
 });
 builder.Services.AddMemoryCache();
 
+// Øyeblikksbilder av hvert lag hver time, slik at tidslinjen kan vise hvordan kartet så ut. Se Historikk/.
+builder.Services.AddSingleton(tjenester =>
+{
+    var mappe = tjenester.GetRequiredService<IConfiguration>()["Historikk:Mappe"];
+    return new Bildelager(string.IsNullOrWhiteSpace(mappe) ? Path.Combine(Path.GetTempPath(), "oslolive-historikk") : mappe);
+});
+builder.Services.AddHostedService<Øyeblikksjobb>();
+
 // ---------------------------------------------------------------------------
 // Lagene på kartet. Nytt lag? Legg til én linje her.
 // ---------------------------------------------------------------------------
@@ -41,13 +50,23 @@ app.UseStaticFiles();
 app.MapGet("/api/lag", (IEnumerable<ILag> lag) =>
     lag.Select(l => new { id = l.Id, navn = l.Navn, beskrivelse = l.Beskrivelse, ikon = l.Ikon }));
 
-// Punktene i ett lag, som GeoJSON.
-app.MapGet("/api/lag/{id}", async (string id, IEnumerable<ILag> lag, CancellationToken stopp) =>
+// Punktene i ett lag, som GeoJSON. Med ?tid= hentes bildet lagret nærmest det tidspunktet, se Historikk/.
+app.MapGet("/api/lag/{id}", async (string id, string? tid, IEnumerable<ILag> lag, Bildelager bilder, CancellationToken stopp) =>
 {
     var valgt = lag.FirstOrDefault(l => string.Equals(l.Id, id, StringComparison.OrdinalIgnoreCase));
     if (valgt is null)
     {
         return Results.NotFound(new { feil = $"Fant ingen lag med id «{id}»." });
+    }
+
+    if (tid is not null)
+    {
+        if (!DateTimeOffset.TryParse(tid, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal, out var tidspunkt))
+        {
+            return Results.BadRequest(new { feil = $"«{tid}» er ikke et gyldig tidspunkt. Bruk ISO 8601, for eksempel 2026-09-18T08:00:00Z." });
+        }
+
+        return Results.Ok(await bilder.HentNærmest(valgt.Id, tidspunkt, stopp) ?? new Kartlag("FeatureCollection", []));
     }
 
     try
