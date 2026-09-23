@@ -45,6 +45,36 @@ public class FlyLagTester
     }
 
     [Fact]
+    public void Fly_med_null_posisjon_blir_forkastet()
+    {
+        var punkt = FlyLag.TilPunkt(Rad("""
+            { "hex": "4601b1", "flight": "SAS117", "lat": null, "lon": null }
+            """));
+
+        Assert.Null(punkt);
+    }
+
+    [Fact]
+    public void Fly_uten_hex_blir_forkastet()
+    {
+        var punkt = FlyLag.TilPunkt(Rad("""
+            { "flight": "SAS117", "lat": 59.95, "lon": 10.75 }
+            """));
+
+        Assert.Null(punkt);
+    }
+
+    [Fact]
+    public void Fly_med_tekst_som_kallesignal_av_feil_type_bruker_hex()
+    {
+        var punkt = FlyLag.TilPunkt(Rad("""
+            { "hex": "4601b1", "flight": 12345, "lat": 59.95, "lon": 10.75 }
+            """));
+
+        Assert.Equal("4601B1", punkt!.Properties["navn"]);
+    }
+
+    [Fact]
     public void Fly_uten_kallesignal_bruker_hex()
     {
         var punkt = FlyLag.TilPunkt(Rad("""

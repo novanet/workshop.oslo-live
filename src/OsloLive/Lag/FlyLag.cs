@@ -67,16 +67,25 @@ public sealed class FlyLag(IHttpClientFactory httpFactory, IMemoryCache mellomla
         Geo.OsloLon,
         RadiusNautiskeMil);
 
-    /// <summary>Oversetter én rad fra «ac»-lista til et kartpunkt, eller null uten kjent posisjon.</summary>
+    /// <summary>
+    /// Oversetter én rad fra «ac»-lista til et kartpunkt. Rader uten kjent
+    /// posisjon (manglende eller null lat/lon) eller uten «hex» gir null, slik
+    /// at én dårlig rad fra kilden aldri feller hele laget.
+    /// </summary>
     public static Kartpunkt? TilPunkt(JsonElement rad)
     {
-        if (!rad.TryGetProperty("lat", out var latFelt) || !rad.TryGetProperty("lon", out var lonFelt))
+        if (rad.ValueKind != JsonValueKind.Object
+            || !rad.TryGetProperty("lat", out var latFelt) || latFelt.ValueKind != JsonValueKind.Number
+            || !rad.TryGetProperty("lon", out var lonFelt) || lonFelt.ValueKind != JsonValueKind.Number
+            || !rad.TryGetProperty("hex", out var hexFelt) || hexFelt.ValueKind != JsonValueKind.String)
         {
             return null;
         }
 
-        var hex = rad.GetProperty("hex").GetString() ?? "ukjent";
-        var kallesignal = rad.TryGetProperty("flight", out var f) ? f.GetString()?.Trim() : null;
+        var hex = hexFelt.GetString()!;
+        var kallesignal = rad.TryGetProperty("flight", out var f) && f.ValueKind == JsonValueKind.String
+            ? f.GetString()?.Trim()
+            : null;
         var navn = string.IsNullOrEmpty(kallesignal) ? hex.ToUpperInvariant() : kallesignal;
 
         var (høyde, påBakken) = TolkHøyde(rad);
