@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:52:11",
+  "oppdatert": "2026-09-23T10:52:38",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -328,25 +328,6 @@
       "plass": 14
     },
     {
-      "navn": "mini-kirsten",
-      "github": "jthagesk",
-      "poeng": 0,
-      "feil": [],
-      "lag": [],
-      "levert": [],
-      "dollar": 6.736,
-      "tokens": 15037763,
-      "sekunder": 2195,
-      "pr": 3,
-      "utkast": 0,
-      "merget": 0,
-      "kjoeringer": 4,
-      "utenPr": 0,
-      "bygg": [],
-      "estimert": false,
-      "plass": 15
-    },
-    {
       "navn": "mini-frode",
       "github": "FrodeBl",
       "poeng": 0,
@@ -363,25 +344,36 @@
       "utenPr": 5,
       "bygg": [],
       "estimert": false,
+      "plass": 15
+    },
+    {
+      "navn": "mini-kirsten",
+      "github": "jthagesk",
+      "poeng": 0,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 8.425,
+      "tokens": 18984626,
+      "sekunder": 2785,
+      "pr": 4,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 5,
+      "utenPr": 0,
+      "bygg": [],
+      "estimert": false,
       "plass": 16
     }
   ],
   "kjoerer": [
-    {
-      "agent": "mini-kirsten",
-      "github": "jthagesk",
-      "issue": 52,
-      "navn": "Konfigurerbar bbox",
-      "startet": "2026-09-23T08:42:06.8631198+00:00",
-      "minutter": 10
-    },
     {
       "agent": "mini-richard",
       "github": "randsu",
       "issue": 24,
       "navn": "Bydeler",
       "startet": "2026-09-23T08:45:28.8651408+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-frode",
@@ -389,7 +381,7 @@
       "issue": 19,
       "navn": "Artsobservasjoner",
       "startet": "2026-09-23T08:46:29.0268417+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-frode",
@@ -397,7 +389,7 @@
       "issue": 50,
       "navn": "Metrikker",
       "startet": "2026-09-23T08:47:21.1306878+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-richard",
@@ -445,7 +437,7 @@
       "issue": 44,
       "navn": "Sammenlign tid",
       "startet": "2026-09-23T08:51:36.6212576+00:00",
-      "minutter": 0
+      "minutter": 1
     }
   ],
   "main": {
@@ -568,7 +560,7 @@
       "issue": 11,
       "navn": "Nytt lag: kollektivtrafikk som beveger seg",
       "github": "coffeelyfe",
-      "oppdatert": "2026-09-23T08:49:05Z"
+      "oppdatert": "2026-09-23T08:52:09Z"
     },
     {
       "issue": 14,
@@ -748,7 +740,7 @@
       "issue": 52,
       "navn": "Gjør kartutsnittet konfigurerbart",
       "github": "jthagesk",
-      "oppdatert": "2026-09-23T08:42:08Z"
+      "oppdatert": "2026-09-23T08:52:17Z"
     },
     {
       "issue": 53,
@@ -800,6 +792,42 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 81,
+      "tittel": "Avgangstavle for Gardermoen (#57)",
+      "github": "Buggz",
+      "agent": "mini-knive",
+      "opprettet": "2026-09-23T08:31:34Z",
+      "oppdatert": "2026-09-23T08:52:20Z",
+      "utkast": false,
+      "issues": [
+        57
+      ]
+    },
+    {
+      "pr": 102,
+      "tittel": "Gjør kartutsnittet konfigurerbart",
+      "github": "jthagesk",
+      "agent": "mini-kirsten",
+      "opprettet": "2026-09-23T08:52:16Z",
+      "oppdatert": "2026-09-23T08:52:17Z",
+      "utkast": false,
+      "issues": [
+        52
+      ]
+    },
+    {
+      "pr": 96,
+      "tittel": "#22: Slå sammen punkter som ligger oppå hverandre",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:46:40Z",
+      "oppdatert": "2026-09-23T08:52:01Z",
+      "utkast": false,
+      "issues": [
+        22
+      ]
+    },
     {
       "pr": 83,
       "tittel": "Nytt lag: museer og samlinger",
@@ -945,18 +973,6 @@
       ]
     },
     {
-      "pr": 96,
-      "tittel": "#22: Slå sammen punkter som ligger oppå hverandre",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:46:40Z",
-      "oppdatert": "2026-09-23T08:47:37Z",
-      "utkast": false,
-      "issues": [
-        22
-      ]
-    },
-    {
       "pr": 80,
       "tittel": "Nytt lag: politilogg og nyhetshendelser",
       "github": "larsajakobsen",
@@ -1050,18 +1066,6 @@
       "utkast": false,
       "issues": [
         50
-      ]
-    },
-    {
-      "pr": 81,
-      "tittel": "Avgangstavle for Gardermoen (#57)",
-      "github": "Buggz",
-      "agent": "mini-knive",
-      "opprettet": "2026-09-23T08:31:34Z",
-      "oppdatert": "2026-09-23T08:31:35Z",
-      "utkast": false,
-      "issues": [
-        57
       ]
     },
     {
