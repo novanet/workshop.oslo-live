@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:10:23",
+  "oppdatert": "2026-09-23T14:11:33",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -427,12 +427,12 @@
       ],
       "dollar": 7.161,
       "tokens": 12696205,
-      "sekunder": 2728,
+      "sekunder": 2729,
       "pr": 3,
       "utkast": 0,
       "merget": 1,
-      "kjoeringer": 9,
-      "utenPr": 5,
+      "kjoeringer": 10,
+      "utenPr": 6,
       "bygg": [],
       "estimert": false,
       "plass": 14
@@ -484,12 +484,12 @@
       "levert": [],
       "dollar": 1.126,
       "tokens": 841316,
-      "sekunder": 235,
+      "sekunder": 236,
       "pr": 0,
       "utkast": 0,
       "merget": 0,
-      "kjoeringer": 5,
-      "utenPr": 5,
+      "kjoeringer": 6,
+      "utenPr": 6,
       "bygg": [],
       "estimert": false,
       "plass": 17
@@ -578,7 +578,7 @@
       "issue": 26,
       "navn": "Skoler",
       "startet": "2026-09-23T12:00:11.8740211+00:00",
-      "minutter": 9
+      "minutter": 11
     },
     {
       "agent": "mini-aud",
@@ -586,7 +586,15 @@
       "issue": 132,
       "navn": "Ekte sollys på 3D-byggene",
       "startet": "2026-09-23T12:07:36.4342939+00:00",
-      "minutter": 2
+      "minutter": 3
+    },
+    {
+      "agent": "mini-wilma",
+      "github": "larsajakobsen",
+      "issue": 8,
+      "navn": "Hendelser",
+      "startet": "2026-09-23T12:10:34.6234355+00:00",
+      "minutter": 0
     }
   ],
   "main": {
@@ -619,13 +627,13 @@
       "issue": 8,
       "navn": "Nytt lag: politilogg og nyhetshendelser",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T12:08:31Z"
+      "oppdatert": "2026-09-23T12:10:35Z"
     },
     {
       "issue": 10,
       "navn": "Nytt lag: trafikkregistreringspunkt",
       "github": "pr0nin",
-      "oppdatert": "2026-09-23T12:09:32Z"
+      "oppdatert": "2026-09-23T12:10:45Z"
     },
     {
       "issue": 11,
@@ -984,6 +992,18 @@
   ],
   "aapne": [
     {
+      "pr": 145,
+      "tittel": "#142: Kurs på skipene",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T12:03:14Z",
+      "oppdatert": "2026-09-23T12:10:38Z",
+      "utkast": false,
+      "issues": [
+        142
+      ]
+    },
+    {
       "pr": 73,
       "tittel": "Vær grei mot kildene (#54)",
       "github": "Puiu",
@@ -1017,18 +1037,6 @@
       "utkast": false,
       "issues": [
         141
-      ]
-    },
-    {
-      "pr": 145,
-      "tittel": "#142: Kurs på skipene",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T12:03:14Z",
-      "oppdatert": "2026-09-23T12:06:17Z",
-      "utkast": false,
-      "issues": [
-        142
       ]
     },
     {
