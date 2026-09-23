@@ -102,17 +102,62 @@
 <script>
 const SENTRUM = [10.7522, 59.9139];
 
+// Utsnittet i adressen: #lat=..&lon=..&zoom=..&pitch=..&bearing=..&lag=a,b
+// Gir null hvis adressen er tom eller ugyldig; da starter kartet som før.
+function lesUtsnitt() {
+  try {
+    const p = new URLSearchParams(location.hash.slice(1));
+    const tall = (navn, min, maks) => {
+      if (!p.has(navn)) return NaN;
+      const v = Number(p.get(navn));
+      return Number.isFinite(v) && v >= min && v <= maks ? v : NaN;
+    };
+    const lat = tall('lat', -85, 85), lon = tall('lon', -180, 180), zoom = tall('zoom', 0, 22);
+    if ([lat, lon, zoom].some(Number.isNaN)) return null;
+    const pitch = p.has('pitch') ? tall('pitch', 0, 85) : 55;
+    const bearing = p.has('bearing') ? tall('bearing', -360, 360) : -20;
+    if (Number.isNaN(pitch) || Number.isNaN(bearing)) return null;
+    const lag = p.has('lag') ? new Set(p.get('lag').split(',').map(s => s.trim()).filter(Boolean)) : null;
+    return { senter: [lon, lat], zoom, pitch, bearing, lag };
+  } catch (e) {
+    return null;
+  }
+}
+const utsnitt = lesUtsnitt();
+
+let skrivId = null;
+function skrivUtsnitt() {
+  clearTimeout(skrivId);
+  skrivId = setTimeout(() => {
+    try {
+      const c = kart.getCenter();
+      const lag = lagene.size
+        ? [...lagene].filter(([, l]) => l.på).map(([id]) => id)
+        : [...(utsnitt?.lag ?? [])];
+      let hash = `#lat=${c.lat.toFixed(4)}&lon=${c.lng.toFixed(4)}` +
+        `&zoom=${kart.getZoom().toFixed(2)}&pitch=${kart.getPitch().toFixed(1)}` +
+        `&bearing=${kart.getBearing().toFixed(1)}`;
+      if (lagene.size || utsnitt?.lag) hash += '&lag=' + lag.map(encodeURIComponent).join(',');
+      history.replaceState(null, '', location.pathname + location.search + hash);
+    } catch (e) {
+      // Stille: Safari kan kaste SecurityError ved for hyppig replaceState.
+    }
+  }, 250);
+}
+
 const kart = new maplibregl.Map({
   container: 'kart',
   style: 'https://tiles.openfreemap.org/styles/liberty',
-  center: SENTRUM,
-  zoom: 14.2,
-  pitch: 55,
-  bearing: -20,
+  center: utsnitt?.senter ?? SENTRUM,
+  zoom: utsnitt?.zoom ?? 14.2,
+  pitch: utsnitt?.pitch ?? 55,
+  bearing: utsnitt?.bearing ?? -20,
   antialias: true,
   preserveDrawingBuffer: true,
   attributionControl: { compact: true }
 });
+
+kart.on('moveend', skrivUtsnitt);
 
 kart.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), 'bottom-right');
 
@@ -342,15 +387,17 @@ async function start() {
   }
 
   liste.innerHTML = '';
+  const onsket = utsnitt?.lag ?? null;
   lag.forEach((l, nr) => {
     const farge = fargeFor(l.id, nr);
-    lagene.set(l.id, { ikon: l.ikon || '📍', farge, markorer: [], antall: 0, på: true });
+    const på = onsket ? onsket.has(l.id) : true;
+    lagene.set(l.id, { ikon: l.ikon || '📍', farge, markorer: [], antall: 0, på });
 
     const rad = document.createElement('label');
     rad.className = 'lag';
     rad.title = l.beskrivelse ?? '';
     rad.innerHTML =
-      `<input type="checkbox" checked>` +
+      `<input type="checkbox"${på ? ' checked' : ''}>` +
       `<span class="prikk" style="background:${farge}"></span>` +
       `<span class="navn">${l.navn}</span>` +
       `<span class="antall" id="antall-${l.id}">…</span>`;
@@ -362,6 +409,7 @@ async function start() {
         if (oppf.på) { m.addTo(kart); } else { m.remove(); }
       }
       oppdaterBunn();
+      skrivUtsnitt();
     });
     liste.appendChild(rad);
 
@@ -369,6 +417,7 @@ async function start() {
   });
 
   setInterval(() => lagene.forEach((_, id) => hent(id)), 15000);
+  skrivUtsnitt();
 }
 
 // ---------------------------------------------------------------------------
