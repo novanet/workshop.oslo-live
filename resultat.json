@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:24:38",
+  "oppdatert": "2026-09-23T11:25:06",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -345,13 +345,13 @@
       "feil": [],
       "lag": [],
       "levert": [],
-      "dollar": 3.959,
-      "tokens": 8144568,
-      "sekunder": 1452,
-      "pr": 2,
+      "dollar": 5.49,
+      "tokens": 11490983,
+      "sekunder": 1897,
+      "pr": 3,
       "utkast": 0,
       "merget": 0,
-      "kjoeringer": 3,
+      "kjoeringer": 4,
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
@@ -435,14 +435,6 @@
     }
   ],
   "kjoerer": [
-    {
-      "agent": "helstein",
-      "github": "nilsgs",
-      "issue": 15,
-      "navn": "Spisesteder",
-      "startet": "2026-09-23T09:16:56.867472+00:00",
-      "minutter": 7
-    },
     {
       "agent": "Andy3000",
       "github": "coffeelyfe",
@@ -589,7 +581,7 @@
       "issue": 11,
       "navn": "Nytt lag: kollektivtrafikk som beveger seg",
       "github": "coffeelyfe",
-      "oppdatert": "2026-09-23T09:22:14Z"
+      "oppdatert": "2026-09-23T09:24:47Z"
     },
     {
       "issue": 13,
@@ -607,13 +599,13 @@
       "issue": 15,
       "navn": "Nytt lag: spisesteder",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T09:16:57Z"
+      "oppdatert": "2026-09-23T09:24:46Z"
     },
     {
       "issue": 15,
       "navn": "Nytt lag: spisesteder",
       "github": "nilsgs",
-      "oppdatert": "2026-09-23T09:16:57Z"
+      "oppdatert": "2026-09-23T09:24:46Z"
     },
     {
       "issue": 16,
@@ -894,6 +886,42 @@
   ],
   "aapne": [
     {
+      "pr": 107,
+      "tittel": "Tastatursnarveier",
+      "github": "audmaha",
+      "agent": "mini-aud",
+      "opprettet": "2026-09-23T09:00:42Z",
+      "oppdatert": "2026-09-23T09:24:55Z",
+      "utkast": false,
+      "issues": [
+        39
+      ]
+    },
+    {
+      "pr": 110,
+      "tittel": "Nytt lag: spisesteder",
+      "github": "nilsgs",
+      "agent": "helstein",
+      "opprettet": "2026-09-23T09:24:45Z",
+      "oppdatert": "2026-09-23T09:24:45Z",
+      "utkast": false,
+      "issues": [
+        15
+      ]
+    },
+    {
+      "pr": 92,
+      "tittel": "Et statistikkpanel",
+      "github": "audmaha",
+      "agent": "mini-aud",
+      "opprettet": "2026-09-23T08:42:17Z",
+      "oppdatert": "2026-09-23T09:24:27Z",
+      "utkast": false,
+      "issues": [
+        43
+      ]
+    },
+    {
       "pr": 109,
       "tittel": "Nytt lag: skoler og barnehager",
       "github": "larsajakobsen",
@@ -915,18 +943,6 @@
       "utkast": false,
       "issues": [
         25
-      ]
-    },
-    {
-      "pr": 92,
-      "tittel": "Et statistikkpanel",
-      "github": "audmaha",
-      "agent": "mini-aud",
-      "opprettet": "2026-09-23T08:42:17Z",
-      "oppdatert": "2026-09-23T09:23:20Z",
-      "utkast": false,
-      "issues": [
-        43
       ]
     },
     {
@@ -1035,18 +1051,6 @@
       "utkast": false,
       "issues": [
         54
-      ]
-    },
-    {
-      "pr": 107,
-      "tittel": "Tastatursnarveier",
-      "github": "audmaha",
-      "agent": "mini-aud",
-      "opprettet": "2026-09-23T09:00:42Z",
-      "oppdatert": "2026-09-23T09:09:02Z",
-      "utkast": false,
-      "issues": [
-        39
       ]
     },
     {
