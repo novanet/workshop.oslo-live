@@ -40,6 +40,14 @@ builder.Services.AddHttpClient("bomstasjoner", klient =>
     klient.DefaultRequestHeaders.Add("X-Client", "OsloLive");
     klient.DefaultRequestHeaders.Accept.ParseAdd("application/json");
 });
+
+// Hjertestarterne hentes fra Overpass API (OpenStreetMap), som heller ikke er en Allemannsdata-kilde.
+// Overpass er delt og gratis; laget mellomlagrer i én time. Se HjertestartereLag.cs.
+builder.Services.AddHttpClient(HjertestartereLag.KlientNavn, klient =>
+{
+    klient.Timeout = TimeSpan.FromSeconds(30);
+    klient.DefaultRequestHeaders.UserAgent.ParseAdd("OsloLive/1.0 (kurs; hjertestartere fra OpenStreetMap)");
+});
 builder.Services.AddMemoryCache();
 builder.Services.AddSingleton<Lagstatistikk>();
 
@@ -75,6 +83,7 @@ builder.Services.AddSingleton<ILag, BomstasjonerLag>();
 builder.Services.AddSingleton<ILag, VaerstasjonerLag>();
 builder.Services.AddSingleton<ILag, IdrettsanleggLag>();
 builder.Services.AddSingleton<ILag, VeiarbeidLag>();
+builder.Services.AddSingleton<ILag, HjertestartereLag>();
 
 // Bakgrunnssjekk av kildehelse, se Helse/HelseSjekker.cs.
 builder.Services.Configure<HelseValg>(builder.Configuration.GetSection("Helse"));
