@@ -14,6 +14,9 @@ src/OsloLive/
   Lag/
     LuftkvalitetLag.cs    mal for nye lag
     FlyLag.cs             unntak: egen kilde (airplanes.live), se «Unntak: flylaget»
+  Historikk/
+    Bildelager.cs         øyeblikksbilder på disk, nærmeste bilde, sletting etter sju dager
+    Øyeblikksjobb.cs      bakgrunnsjobb: bilde av hvert lag hver time, se «Historikk og tidslinjen»
   wwwroot/index.html      hele frontenden, én fil, ingen byggesteg
 tests/OsloLive.Tester/    xUnit. ApiTester.cs (WebApplicationFactory), KartTester.cs (Geo, Allemannsdata)
 issues/                   issuetekstene. Ikke rør.
@@ -26,8 +29,8 @@ Prinsipp: kartet er en liste med lag. `ILag → Kartlag (GeoJSON) → MapLibre`.
 | Rute | Svar |
 |---|---|
 | `GET /api/lag` | `[{ id, navn, beskrivelse, ikon }]` |
-| `GET /api/lag/{id}` | `Kartlag` som GeoJSON `FeatureCollection`. 404 ved ukjent id. 502 `{ feil }` hvis laget kaster; de andre lagene påvirkes ikke. |
-| `GET /api/lag/{id}/bydeler` | `[{ bydel, antall }]`, antall punkter i laget per bydel, sortert synkende. Bydel = nærmeste bydelssenter fra Kartverket; punkter lenger enn 5 km fra alle sentre utelates. 404 ved ukjent id, 502 `{ feil }` hvis laget eller oppslaget svikter. Én oppdatering gjør 9 kall mot Allemannsdata (ett per forbokstav i `Bydeler.Prefikser`), uavhengig av antall punkter, aldri ett kall per punkt. Svarene mellomlagres 30 s som alt annet. |
+| `GET /api/lag/{id}` | `Kartlag` som GeoJSON `FeatureCollection`. 404 ved ukjent id. 502 `{ feil }` hvis laget kaster; de andre lagene påvirkes ikke. Med `?tid=` (ISO 8601) svares det med bildet lagret nærmest det tidspunktet i stedet for levende data; tom `FeatureCollection` hvis ingen bilde er innenfor to timer, 400 ved ugyldig `tid`. Se `Historikk/`. |
+| `GET /api/lag/{id}/bydeler` | `[{ bydel, antall }]`, antall punkter i laget per bydel, sortert synkende. Bydel = nærmeste bydelssenter fra Kartverket; punkter lenger enn 5 km fra alle sentre utelates. 404 ved ukjent id, 502 `{ feil }` hvis laget eller oppslaget svikter. Én oppdatering gjør 9 kall mot Allemannsdata (ett per forbokstav i `Bydeler.Prefikser`), uavhengig av antall punkter, aldri ett kall per punkt. Svarene mellomlagres 30 s som alt annet. Med `?tid=` telles bildet lagret nærmest tidspunktet, som for `/api/lag/{id}`, så tellingen følger tidslinjen. |
 | `GET /api/stroempris` | Strømprisen i Oslo (NO1) i dag: `{ naa, billigst: { time, pris }, dyrest: { time, pris }, timer: [{ time, pris }, …] }`, øre/kWh inkl. mva. 502 `{ feil }` hvis kilden svikter. |
 | `GET /api/helse` | `{ status: "ok", tid }` |
 | `GET /api/helse` | `{ status: "ok", tid }`. Lever prosessen? Ingen kall til kildene, svarer alltid umiddelbart. |
@@ -115,6 +118,26 @@ HttpClient med en som alltid feiler og bekrefter dette. Rader uten posisjon elle
 Bruddet er isolert: `FlyLag` har egen navngitt `HttpClient` («fly») og eget mellomlager,
 og rører verken `Allemannsdata` eller de andre lagene. Kartutsnittet i `Geo` er ikke
 utvidet til Gardermoen; det er en egen beslutning om hva «Oslo Live» skal dekke.
+
+## Historikk og tidslinjen
+
+**Sammenheng med historikk-issuen (#25, «Ta vare på et øyeblikksbilde hver time»).**
+Tidslinjen (#34) bygger på øyeblikksbildene fra #25: samme idé, samme lagring, ett
+JSON-bilde per lag per time på disk under `Historikk:Mappe`, valgt etter nærmeste
+tidspunkt. Denne PR-en tar med sin egen jobb, `Historikk/Øyeblikksjobb`, slik at
+tidslinjen kan merges uten å vente på #25. Når PR-en for #25 (jobben `Bildejobb` med
+samme `Bildelager`) er inne, er det én timesjobb og ett lager: `Øyeblikksjobb` og
+`Bildejobb` gjør det samme, og den som merges sist fjernes til fordel for den andre,
+uten endring i `?tid=`-kontrakten, i `Bildelager` eller i tidslinjen.
+
+`Historikk/Øyeblikksjobb` tar et bilde (`Kartlag` som JSON) av hvert registrerte lag én gang i timen, første gang ved oppstart, og legger det i `Historikk:Mappe/<lagId>/<yyyyMMddTHHmmssZ>.json`. `Bildelager` velger bildet nærmest `?tid=` (maks to timer unna) og sletter bilder eldre enn sju dager. Et lag som svikter, eller et tidsavbrudd mot kilden, logges og hoppes over; jobben stopper bare når verten selv stopper.
+
+Konfigurasjon i `appsettings.json`:
+
+- `Historikk:Mappe`: hvor bildene ligger. Tom verdi betyr `App_Data/historikk` under appens rotmappe (`/app/App_Data/historikk` i containeren). Mappa er ikke i git.
+- `Historikk:Jobb`: `false` skrur jobben av. Testene gjør det via `TestVert`.
+
+Standardmappa ligger i containerens eget filsystem. Den overlever en omstart av prosessen, men i Container Apps hører filsystemet til replikaen, så etter en ny revisjon starter tidslinjen tom til jobben har tatt nye bilder. Skal historikken overleve en utrulling, monter et volum (for eksempel Azure Files) på `/app/App_Data/historikk`, eller pek `Historikk:Mappe` (miljøvariabelen `Historikk__Mappe`) på volumet. `infra/kart.bicep` monterer ikke noe volum i dag. Dockerfile lager mappa med rettigheter for brukeren `app`, som kjørebildet kjører som.
 
 ## Frontend
 
