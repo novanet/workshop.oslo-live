@@ -62,8 +62,23 @@
     border-radius: 8px; padding: 8px 12px; font-size: 12px; cursor: pointer;
     backdrop-filter: blur(8px); font-family: inherit; font-weight: 500;
   }
-  .kamera button:hover { background: #111; color: #fff; }
+  .kamera button:hover:not(:disabled) { background: #111; color: #fff; }
   .kamera button[aria-pressed="true"] { background: #111; color: #fff; }
+  .kamera button:disabled { opacity: .45; cursor: default; }
+
+  #demotekst {
+    position: fixed; inset: 0; z-index: 20; pointer-events: none;
+    display: grid; place-content: center; justify-items: center; gap: 12px;
+    transition: opacity 1.2s ease;
+  }
+  #demotekst[hidden] { display: grid; opacity: 0; }
+  #demotekst .ikon { font-size: clamp(96px, 12vw, 200px); line-height: 1; }
+  #demotekst .navn {
+    font-size: clamp(56px, 7vw, 140px); font-weight: 700; letter-spacing: -.02em;
+    background: rgba(255,255,255,.92); border: 2px solid var(--kant); border-radius: 18px;
+    padding: 12px 36px; box-shadow: 0 10px 40px rgba(0,0,0,.2);
+  }
+  body.demo .panel { opacity: 0; pointer-events: none; transition: opacity 1s ease; }
 
   /* Markører: farget skive med mørk ring, så punktene står fram
      mot det beige kartet. */
@@ -161,11 +176,16 @@
 </div>
 
 <div class="kamera">
+  <button id="demo" type="button" aria-pressed="false" disabled>Demo</button>
   <button id="tegn-omrade" type="button" aria-pressed="false">Tegn område</button>
   <button id="fjern-omrade" type="button" hidden>Fjern område</button>
   <button id="snurr" type="button" aria-pressed="false">Snurr</button>
   <button id="flatt" type="button">2D</button>
   <button id="hjem" type="button">Sentrum</button>
+</div>
+
+<div id="demotekst" aria-live="polite" hidden>
+  <span class="ikon"></span><span class="navn"></span>
 </div>
 
 <div class="panel naermest" id="naermest" hidden>
@@ -451,13 +471,31 @@ async function hent(id) {
     visLag(id);
 
     oppf.antall = oppf.markorer.length;
+    oppf.feil = false;
     teller.textContent = oppf.antall;
     teller.className = 'antall ' + (oppf.antall ? 'ok' : '');
   } catch (e) {
+    // Ta bort punktene fra forrige henting, ellers blir de stående i kartet
+    // selv om laget er markert som feilende og demoen hopper over det.
+    for (const m of oppf.markorer) m.remove();
+    oppf.markorer = [];
+    oppf.punkter = [];
+    varmekart(id, []);
     oppf.antall = 0;
+    oppf.feil = true;
     teller.textContent = 'feil';
     teller.className = 'antall feil';
   }
+  oppdaterBunn();
+  if (valgtSted) visNaermest();
+  if (omradeLukket) visOmrade();
+}
+
+function settPå(id, på) {
+  const oppf = lagene.get(id);
+  oppf.på = på;
+  if (oppf.boks) oppf.boks.checked = på;
+  visLag(id);
   oppdaterBunn();
   if (valgtSted) visNaermest();
   if (omradeLukket) visOmrade();
@@ -487,7 +525,7 @@ async function start() {
   const varmevalg = lesVarmevalg();
   lag.forEach((l, nr) => {
     const farge = fargeFor(l.id, nr);
-    lagene.set(l.id, { ikon: l.ikon || '📍', navn: l.navn, farge, markorer: [], punkter: [], antall: 0, på: true, varme: !!varmevalg[l.id] });
+    lagene.set(l.id, { ikon: l.ikon || '📍', navn: l.navn, farge, markorer: [], punkter: [], antall: 0, på: true, feil: false, boks: null, varme: !!varmevalg[l.id] });
 
     const rad = document.createElement('label');
     rad.className = 'lag';
@@ -499,14 +537,8 @@ async function start() {
       `<span class="antall" id="antall-${l.id}">…</span>` +
       `<button type="button" class="visning" aria-pressed="${!!varmevalg[l.id]}" title="Bytt mellom punkter og varmekart">${varmevalg[l.id] ? 'Varme' : 'Punkter'}</button>`;
 
-    rad.querySelector('input').addEventListener('change', (ev) => {
-      const oppf = lagene.get(l.id);
-      oppf.på = ev.target.checked;
-      visLag(l.id);
-      oppdaterBunn();
-      if (valgtSted) visNaermest();
-      if (omradeLukket) visOmrade();
-    });
+    lagene.get(l.id).boks = rad.querySelector('input');
+    rad.querySelector('input').addEventListener('change', (ev) => settPå(l.id, ev.target.checked));
     rad.querySelector('.visning').addEventListener('click', (ev) => {
       ev.preventDefault(); ev.stopPropagation();
       const oppf = lagene.get(l.id);
@@ -522,6 +554,9 @@ async function start() {
   });
 
   setInterval(() => lagene.forEach((_, id) => hent(id)), 15000);
+
+  // Først nå finnes lagene, så demoen har noe å vise og noe å sette tilbake etterpå.
+  document.getElementById('demo').disabled = false;
 }
 
 // ---------------------------------------------------------------------------
@@ -913,6 +948,107 @@ kart.on('dblclick', (e) => {
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && tegnemodus) avbrytTegning();
 });
+
+// ---------------------------------------------------------------------------
+// Demomodus
+// ---------------------------------------------------------------------------
+const DEMO_STEDER = [
+  { navn: 'Rådhuset',      center: [10.7336, 59.9116], zoom: 15.2, pitch: 60, bearing: -20 },
+  { navn: 'Grünerløkka',   center: [10.7590, 59.9230], zoom: 15.0, pitch: 55, bearing: 30 },
+  { navn: 'Bjørvika',      center: [10.7530, 59.9075], zoom: 15.3, pitch: 62, bearing: 160 },
+  { navn: 'Frognerparken', center: [10.7003, 59.9270], zoom: 14.8, pitch: 50, bearing: -60 }
+];
+const DEMO_FLYTID = 9000;  // krav: minst 8 s
+const DEMO_HVILE = 12000;  // krav: minst 10 s
+
+const demo = { på: false, sted: 0, lagNr: 0, tidtaker: null, før: null };
+const demoKnapp = document.getElementById('demo');
+const demotekst = document.getElementById('demotekst');
+const demoIkon = demotekst.querySelector('.ikon');
+const demoNavn = demotekst.querySelector('.navn');
+
+const DEMO_HENDELSER = ['pointerdown', 'touchstart', 'keydown'];
+
+function nesteLag() {
+  const ider = [...lagene.keys()];
+  for (let i = 0; i < ider.length; i++) {
+    const indeks = (demo.lagNr + i) % ider.length;
+    const id = ider[indeks];
+    const oppf = lagene.get(id);
+    if (!oppf.feil && oppf.antall > 0) {
+      demo.lagNr = indeks + 1;
+      return id;
+    }
+  }
+  return null;
+}
+
+function framme() {
+  if (!demo.på) return;
+  const id = nesteLag();
+  if (id) {
+    for (const x of lagene.keys()) settPå(x, x === id);
+    const oppf = lagene.get(id);
+    demoIkon.textContent = oppf.ikon;
+    demoNavn.textContent = oppf.navn;
+    demotekst.hidden = false;
+  }
+  demo.sted++;
+  demo.tidtaker = setTimeout(fly, DEMO_HVILE);
+}
+
+function fly() {
+  demotekst.hidden = true;
+  const s = DEMO_STEDER[demo.sted % DEMO_STEDER.length];
+  kart.flyTo({ center: s.center, zoom: s.zoom, pitch: s.pitch, bearing: s.bearing, duration: DEMO_FLYTID, essential: true });
+  demo.tidtaker = setTimeout(framme, DEMO_FLYTID);
+}
+
+function avbryt(ev) {
+  const erDemoKnapp = ev.target.closest?.('#demo');
+  if (erDemoKnapp && (ev.type === 'pointerdown' || ev.type === 'touchstart' ||
+      (ev.type === 'keydown' && (ev.key === 'Enter' || ev.key === ' ')))) {
+    return;
+  }
+  stoppDemo();
+}
+
+function startDemo() {
+  if (!lagene.size) return;   // start() har ikke bygget lagene ennå; knappen er også slått av til da
+  snurrer = false;
+  document.getElementById('snurr').setAttribute('aria-pressed', 'false');
+  if (snurrId) cancelAnimationFrame(snurrId);
+
+  demo.før = new Map([...lagene].map(([id, l]) => [id, l.på]));
+  demo.på = true;
+  demo.sted = 0;
+  demo.lagNr = 0;
+  demoKnapp.setAttribute('aria-pressed', 'true');
+  document.body.classList.add('demo');
+
+  setTimeout(() => {
+    for (const t of DEMO_HENDELSER) window.addEventListener(t, avbryt, true);
+  }, 0);
+
+  fly();
+}
+
+function stoppDemo() {
+  if (!demo.på) return;
+  demo.på = false;
+  clearTimeout(demo.tidtaker);
+  kart.stop();
+
+  for (const t of DEMO_HENDELSER) window.removeEventListener(t, avbryt, true);
+
+  for (const [id, på] of demo.før) settPå(id, på);
+
+  demotekst.hidden = true;
+  document.body.classList.remove('demo');
+  demoKnapp.setAttribute('aria-pressed', 'false');
+}
+
+demoKnapp.addEventListener('click', () => { demo.på ? stoppDemo() : startDemo(); });
 </script>
 </body>
 </html>
