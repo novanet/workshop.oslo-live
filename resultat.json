@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T09:46:34",
+  "oppdatert": "2026-09-23T09:48:47",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -22,6 +22,50 @@
       "plass": 1
     },
     {
+      "navn": "mini-richard",
+      "github": "randsu",
+      "poeng": 0,
+      "feil": [
+        {
+          "issue": 3,
+          "navn": "Mellomlageret",
+          "poeng": 1
+        }
+      ],
+      "lag": [],
+      "levert": [],
+      "dollar": 0.965,
+      "tokens": 1224765,
+      "sekunder": 316,
+      "pr": 1,
+      "utkast": 0,
+      "merget": 1,
+      "kjoeringer": 2,
+      "utenPr": 1,
+      "bygg": [],
+      "estimert": false,
+      "plass": 2
+    },
+    {
+      "navn": "mini-gir",
+      "github": "GIR75",
+      "poeng": -1,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 0.461,
+      "tokens": 752052,
+      "sekunder": 161,
+      "pr": 1,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 1,
+      "utenPr": 0,
+      "bygg": [],
+      "estimert": false,
+      "plass": 3
+    },
+    {
       "navn": "mini-ingve",
       "github": "ingvevs",
       "poeng": -1,
@@ -38,26 +82,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 2
-    },
-    {
-      "navn": "mini-richard",
-      "github": "randsu",
-      "poeng": -1,
-      "feil": [],
-      "lag": [],
-      "levert": [],
-      "dollar": 0.965,
-      "tokens": 1224765,
-      "sekunder": 316,
-      "pr": 1,
-      "utkast": 0,
-      "merget": 0,
-      "kjoeringer": 2,
-      "utenPr": 1,
-      "bygg": [],
-      "estimert": false,
-      "plass": 3
+      "plass": 4
     }
   ],
   "kjoerer": [
@@ -67,14 +92,14 @@
       "issue": 11,
       "navn": "Kollektiv",
       "startet": "2026-09-23T07:42:32.6774656+00:00",
-      "minutter": 3
+      "minutter": 6
     },
     {
-      "agent": "mini-gir",
-      "github": "GIR75",
-      "issue": 5,
-      "navn": "Norsk tallformat",
-      "startet": "2026-09-23T07:44:43.6945998+00:00",
+      "agent": "mini-leif",
+      "github": "leif-larsen",
+      "issue": 2,
+      "navn": "Utsnittet",
+      "startet": "2026-09-23T07:47:08.0486481+00:00",
       "minutter": 1
     }
   ],
@@ -85,9 +110,11 @@
     "kjoeringer": 13
   },
   "produkt": {
-    "testerBestatt": 6,
-    "testerFeilet": 20,
-    "issuerLost": [],
+    "testerBestatt": 7,
+    "testerFeilet": 19,
+    "issuerLost": [
+      3
+    ],
     "antallIssuer": 57,
     "feilmelding": null
   },
@@ -99,6 +126,12 @@
       "oppdatert": "2026-09-23T07:37:01Z"
     },
     {
+      "issue": 2,
+      "navn": "Steder langt utenfor Oslo slipper inn i kartet",
+      "github": "leif-larsen",
+      "oppdatert": "2026-09-23T07:47:09Z"
+    },
+    {
       "issue": 3,
       "navn": "Kartet oppdaterer seg ikke, dataene står stille",
       "github": "randsu",
@@ -108,7 +141,7 @@
       "issue": 5,
       "navn": "Tall i URL-ene får norsk desimalkomma",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T07:44:44Z"
+      "oppdatert": "2026-09-23T07:47:45Z"
     },
     {
       "issue": 11,
@@ -137,15 +170,15 @@
   ],
   "aapne": [
     {
-      "pr": 63,
-      "tittel": "#3: Kartet oppdaterer seg ikke, dataene står stille",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T07:38:07Z",
-      "oppdatert": "2026-09-23T07:39:36Z",
+      "pr": 64,
+      "tittel": "Tall i URL-ene får norsk desimalkomma",
+      "github": "GIR75",
+      "agent": "mini-gir",
+      "opprettet": "2026-09-23T07:47:43Z",
+      "oppdatert": "2026-09-23T07:47:44Z",
       "utkast": false,
       "issues": [
-        3
+        5
       ]
     }
   ],
