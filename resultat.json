@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:02:01",
+  "oppdatert": "2026-09-23T14:02:41",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -123,14 +123,14 @@
         }
       ],
       "levert": [],
-      "dollar": 6.227,
-      "tokens": 10706439,
-      "sekunder": 2285,
+      "dollar": 7.155,
+      "tokens": 12044475,
+      "sekunder": 2494,
       "pr": 2,
       "utkast": 0,
       "merget": 2,
-      "kjoeringer": 16,
-      "utenPr": 14,
+      "kjoeringer": 17,
+      "utenPr": 15,
       "bygg": [],
       "estimert": false,
       "plass": 3
@@ -333,31 +333,6 @@
       "plass": 10
     },
     {
-      "navn": "helstein",
-      "github": "nilsgs",
-      "poeng": 2,
-      "feil": [],
-      "lag": [
-        {
-          "issue": 15,
-          "navn": "Spisesteder",
-          "poeng": 2
-        }
-      ],
-      "levert": [],
-      "dollar": 5.824,
-      "tokens": 11651808,
-      "sekunder": 2001,
-      "pr": 3,
-      "utkast": 0,
-      "merget": 1,
-      "kjoeringer": 9,
-      "utenPr": 6,
-      "bygg": [],
-      "estimert": false,
-      "plass": 11
-    },
-    {
       "navn": "mini-aud",
       "github": "audmaha",
       "poeng": 2,
@@ -378,6 +353,31 @@
       "merget": 1,
       "kjoeringer": 9,
       "utenPr": 5,
+      "bygg": [],
+      "estimert": false,
+      "plass": 11
+    },
+    {
+      "navn": "helstein",
+      "github": "nilsgs",
+      "poeng": 2,
+      "feil": [],
+      "lag": [
+        {
+          "issue": 15,
+          "navn": "Spisesteder",
+          "poeng": 2
+        }
+      ],
+      "levert": [],
+      "dollar": 6.25,
+      "tokens": 12072609,
+      "sekunder": 2097,
+      "pr": 3,
+      "utkast": 0,
+      "merget": 1,
+      "kjoeringer": 10,
+      "utenPr": 7,
       "bygg": [],
       "estimert": false,
       "plass": 12
@@ -554,7 +554,7 @@
       "issue": 44,
       "navn": "Sammenlign tid",
       "startet": "2026-09-23T11:57:22.3942011+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-richard",
@@ -562,15 +562,7 @@
       "issue": 142,
       "navn": "Kurs på skipene",
       "startet": "2026-09-23T11:58:03.6775072+00:00",
-      "minutter": 3
-    },
-    {
-      "agent": "mini-gir",
-      "github": "GIR75",
-      "issue": 18,
-      "navn": "Kulturminner",
-      "startet": "2026-09-23T11:59:00.1192606+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-gir",
@@ -586,7 +578,7 @@
       "issue": 51,
       "navn": "Logging",
       "startet": "2026-09-23T11:59:02.268638+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-wilma",
@@ -594,7 +586,7 @@
       "issue": 26,
       "navn": "Skoler",
       "startet": "2026-09-23T12:00:11.8740211+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-leif",
@@ -602,15 +594,7 @@
       "issue": 21,
       "navn": "Adressesøk",
       "startet": "2026-09-23T12:00:22.8365202+00:00",
-      "minutter": 1
-    },
-    {
-      "agent": "helstein",
-      "github": "nilsgs",
-      "issue": 116,
-      "navn": "Nytt lag: værstasjoner",
-      "startet": "2026-09-23T12:00:52.2811185+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-gir",
@@ -626,7 +610,7 @@
       "issue": 8,
       "navn": "Hendelser",
       "startet": "2026-09-23T12:01:11.9782453+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-taco",
@@ -634,7 +618,7 @@
       "issue": 54,
       "navn": "Rate limit",
       "startet": "2026-09-23T12:01:39.5119902+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-ingve",
@@ -642,6 +626,14 @@
       "issue": 11,
       "navn": "Kollektiv",
       "startet": "2026-09-23T12:01:44.272017+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-kirsten",
+      "github": "jthagesk",
+      "issue": 29,
+      "navn": "Museer",
+      "startet": "2026-09-23T12:01:56.5636433+00:00",
       "minutter": 0
     }
   ],
@@ -716,7 +708,7 @@
       "issue": 18,
       "navn": "Nytt lag: kulturminner",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T11:59:01Z"
+      "oppdatert": "2026-09-23T12:02:36Z"
     },
     {
       "issue": 19,
@@ -908,13 +900,13 @@
       "issue": 116,
       "navn": "Nytt lag: værstasjoner",
       "github": "monet820",
-      "oppdatert": "2026-09-23T12:00:53Z"
+      "oppdatert": "2026-09-23T12:02:17Z"
     },
     {
       "issue": 116,
       "navn": "Nytt lag: værstasjoner",
       "github": "nilsgs",
-      "oppdatert": "2026-09-23T12:00:53Z"
+      "oppdatert": "2026-09-23T12:02:17Z"
     },
     {
       "issue": 117,
