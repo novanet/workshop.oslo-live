@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:57:52",
+  "oppdatert": "2026-09-23T10:58:19",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -385,7 +385,7 @@
       "issue": 25,
       "navn": "Historikk",
       "startet": "2026-09-23T08:47:59.0992794+00:00",
-      "minutter": 9
+      "minutter": 10
     },
     {
       "agent": "Dmitry-agent",
@@ -393,7 +393,7 @@
       "issue": 12,
       "navn": "Holdeplasser",
       "startet": "2026-09-23T08:48:05.3217109+00:00",
-      "minutter": 9
+      "minutter": 10
     },
     {
       "agent": "mini-knive",
@@ -401,7 +401,7 @@
       "issue": 40,
       "navn": "Mobil",
       "startet": "2026-09-23T08:48:55.3857059+00:00",
-      "minutter": 8
+      "minutter": 9
     },
     {
       "agent": "mini-astrid",
@@ -417,7 +417,7 @@
       "issue": 14,
       "navn": "Idrettsanlegg",
       "startet": "2026-09-23T08:53:58.2896433+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-aud",
@@ -425,14 +425,14 @@
       "issue": 39,
       "navn": "Tastatursnarveier",
       "startet": "2026-09-23T08:54:03.5879186+00:00",
-      "minutter": 3
+      "minutter": 4
     }
   ],
   "main": {
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
     "pr": null,
-    "kjoeringer": 24
+    "kjoeringer": 25
   },
   "produkt": {
     "testerBestatt": 12,
@@ -806,6 +806,18 @@
   ],
   "aapne": [
     {
+      "pr": 85,
+      "tittel": "#9: Nytt lag: badetemperaturer",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:35:02Z",
+      "oppdatert": "2026-09-23T08:58:09Z",
+      "utkast": false,
+      "issues": [
+        9
+      ]
+    },
+    {
       "pr": 101,
       "tittel": "#34: Skru tiden tilbake med en tidslinje",
       "github": "randsu",
@@ -959,18 +971,6 @@
       "utkast": false,
       "issues": [
         29
-      ]
-    },
-    {
-      "pr": 85,
-      "tittel": "#9: Nytt lag: badetemperaturer",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:35:02Z",
-      "oppdatert": "2026-09-23T08:51:21Z",
-      "utkast": false,
-      "issues": [
-        9
       ]
     },
     {
