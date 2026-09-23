@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T15:13:15",
+  "oppdatert": "2026-09-23T15:13:57",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -154,14 +154,14 @@
           "poeng": 3
         }
       ],
-      "dollar": 13.372,
-      "tokens": 29131791,
-      "sekunder": 4771,
+      "dollar": 13.607,
+      "tokens": 29876219,
+      "sekunder": 4920,
       "pr": 5,
       "utkast": 0,
       "merget": 5,
-      "kjoeringer": 24,
-      "utenPr": 10,
+      "kjoeringer": 25,
+      "utenPr": 11,
       "bygg": [],
       "estimert": false,
       "plass": 3
@@ -415,13 +415,13 @@
           "poeng": 3
         }
       ],
-      "dollar": 12.712,
-      "tokens": 22912342,
-      "sekunder": 4510,
-      "pr": 5,
+      "dollar": 14.018,
+      "tokens": 25157976,
+      "sekunder": 5018,
+      "pr": 6,
       "utkast": 0,
       "merget": 2,
-      "kjoeringer": 12,
+      "kjoeringer": 13,
       "utenPr": 7,
       "bygg": [],
       "estimert": false,
@@ -646,13 +646,13 @@
       "feil": [],
       "lag": [],
       "levert": [],
-      "dollar": 5.671,
-      "tokens": 10267575,
-      "sekunder": 1390,
-      "pr": 2,
+      "dollar": 7.749,
+      "tokens": 14547577,
+      "sekunder": 2015,
+      "pr": 3,
       "utkast": 0,
       "merget": 0,
-      "kjoeringer": 11,
+      "kjoeringer": 12,
       "utenPr": 9,
       "bygg": [],
       "estimert": false,
@@ -680,28 +680,12 @@
   ],
   "kjoerer": [
     {
-      "agent": "mini-johan",
-      "github": "pr0nin",
-      "issue": 13,
-      "navn": "Veiarbeid",
-      "startet": "2026-09-23T13:02:49.243038+00:00",
-      "minutter": 9
-    },
-    {
-      "agent": "mini-knive",
-      "github": "Buggz",
-      "issue": 195,
-      "navn": "Nytt lag: avvik i kollektivtrafikken",
-      "startet": "2026-09-23T13:04:43.4543256+00:00",
-      "minutter": 7
-    },
-    {
       "agent": "mini-ingve",
       "github": "ingvevs",
       "issue": 11,
       "navn": "Kollektiv",
       "startet": "2026-09-23T13:05:41.9082982+00:00",
-      "minutter": 6
+      "minutter": 8
     },
     {
       "agent": "mini-frode",
@@ -709,7 +693,7 @@
       "issue": 50,
       "navn": "Metrikker",
       "startet": "2026-09-23T13:07:05.7797026+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-gir",
@@ -717,7 +701,7 @@
       "issue": 18,
       "navn": "Kulturminner",
       "startet": "2026-09-23T13:08:06.7329467+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-jon",
@@ -725,7 +709,7 @@
       "issue": 189,
       "navn": "Travlere enn vanlig på veiene",
       "startet": "2026-09-23T13:08:36.0345655+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-frode",
@@ -733,15 +717,7 @@
       "issue": 186,
       "navn": "Nytt lag: bysykkelstasjoner som fyllingsringer",
       "startet": "2026-09-23T13:09:04.334225+00:00",
-      "minutter": 3
-    },
-    {
-      "agent": "mini-leif",
-      "github": "leif-larsen",
-      "issue": 21,
-      "navn": "Adressesøk",
-      "startet": "2026-09-23T13:09:40.703571+00:00",
-      "minutter": 2
+      "minutter": 4
     },
     {
       "agent": "mini-frode",
@@ -749,7 +725,7 @@
       "issue": 192,
       "navn": "Nytt lag: Wikipedia-artikler rundt deg",
       "startet": "2026-09-23T13:11:25.786562+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-aud",
@@ -757,14 +733,22 @@
       "issue": 211,
       "navn": "Statistikken viser ikke «Nyeste» for vannmålere og smilefjes",
       "startet": "2026-09-23T13:11:37.8328465+00:00",
-      "minutter": 1
+      "minutter": 2
+    },
+    {
+      "agent": "mini-wilma",
+      "github": "larsajakobsen",
+      "issue": 206,
+      "navn": "Popupene viser rådata: ISO-tider, «ikon: 😊» og tall uten enhet",
+      "startet": "2026-09-23T13:13:02.1051821+00:00",
+      "minutter": 0
     }
   ],
   "main": {
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
     "pr": null,
-    "kjoeringer": 60
+    "kjoeringer": 61
   },
   "produkt": {
     "testerBestatt": 20,
@@ -811,13 +795,13 @@
       "issue": 13,
       "navn": "Nytt lag: veiarbeid og stengte veier",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T13:12:17Z"
+      "oppdatert": "2026-09-23T13:13:48Z"
     },
     {
       "issue": 13,
       "navn": "Nytt lag: veiarbeid og stengte veier",
       "github": "pr0nin",
-      "oppdatert": "2026-09-23T13:12:17Z"
+      "oppdatert": "2026-09-23T13:13:48Z"
     },
     {
       "issue": 16,
@@ -838,16 +822,16 @@
       "oppdatert": "2026-09-23T13:08:07Z"
     },
     {
-      "issue": 26,
-      "navn": "Nytt lag: skoler og barnehager",
+      "issue": 27,
+      "navn": "Nytt lag: verneområder og naturtyper",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T12:42:16Z"
+      "oppdatert": "2026-09-23T13:13:53Z"
     },
     {
       "issue": 27,
       "navn": "Nytt lag: verneområder og naturtyper",
-      "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T09:47:36Z"
+      "github": "pr0nin",
+      "oppdatert": "2026-09-23T13:13:53Z"
     },
     {
       "issue": 28,
@@ -985,13 +969,19 @@
       "issue": 115,
       "navn": "Nytt lag: parker og torg",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T12:35:38Z"
+      "oppdatert": "2026-09-23T13:13:51Z"
     },
     {
       "issue": 115,
       "navn": "Nytt lag: parker og torg",
       "github": "novanettor",
-      "oppdatert": "2026-09-23T12:35:38Z"
+      "oppdatert": "2026-09-23T13:13:51Z"
+    },
+    {
+      "issue": 115,
+      "navn": "Nytt lag: parker og torg",
+      "github": "pr0nin",
+      "oppdatert": "2026-09-23T13:13:51Z"
     },
     {
       "issue": 117,
@@ -1183,7 +1173,7 @@
       "issue": 195,
       "navn": "Nytt lag: avvik i kollektivtrafikken",
       "github": "Buggz",
-      "oppdatert": "2026-09-23T13:04:44Z"
+      "oppdatert": "2026-09-23T13:13:43Z"
     },
     {
       "issue": 196,
@@ -1219,7 +1209,7 @@
       "issue": 206,
       "navn": "Popupene viser rådata: ISO-tider, «ikon: 😊» og tall uten enhet",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T13:12:06Z"
+      "oppdatert": "2026-09-23T13:13:02Z"
     },
     {
       "issue": 208,
@@ -1253,6 +1243,54 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 251,
+      "tittel": "Nytt lag: veiarbeid og stengte veier",
+      "github": "pr0nin",
+      "agent": "mini-johan",
+      "opprettet": "2026-09-23T13:13:46Z",
+      "oppdatert": "2026-09-23T13:13:47Z",
+      "utkast": false,
+      "issues": [
+        13
+      ]
+    },
+    {
+      "pr": 250,
+      "tittel": "Nytt lag: avvik i kollektivtrafikken (#195)",
+      "github": "Buggz",
+      "agent": "mini-knive",
+      "opprettet": "2026-09-23T13:13:41Z",
+      "oppdatert": "2026-09-23T13:13:42Z",
+      "utkast": false,
+      "issues": [
+        195
+      ]
+    },
+    {
+      "pr": 233,
+      "tittel": "Lagvelgeren er for høy: historikkgrafen tar en egen rad per lag",
+      "github": "larsajakobsen",
+      "agent": "mini-wilma",
+      "opprettet": "2026-09-23T12:45:56Z",
+      "oppdatert": "2026-09-23T13:13:41Z",
+      "utkast": true,
+      "issues": [
+        214
+      ]
+    },
+    {
+      "pr": 248,
+      "tittel": "Nytt lag: ladestasjoner for elbil",
+      "github": "pr0nin",
+      "agent": "mini-johan",
+      "opprettet": "2026-09-23T13:09:50Z",
+      "oppdatert": "2026-09-23T13:12:28Z",
+      "utkast": false,
+      "issues": [
+        16
+      ]
+    },
     {
       "pr": 67,
       "tittel": "Hent lagene parallelt",
@@ -1314,18 +1352,6 @@
       ]
     },
     {
-      "pr": 248,
-      "tittel": "Nytt lag: ladestasjoner for elbil",
-      "github": "pr0nin",
-      "agent": "mini-johan",
-      "opprettet": "2026-09-23T13:09:50Z",
-      "oppdatert": "2026-09-23T13:09:51Z",
-      "utkast": false,
-      "issues": [
-        16
-      ]
-    },
-    {
       "pr": 222,
       "tittel": "Havet stiger: hva havner under vann? (#133)",
       "github": "Puiu",
@@ -1371,18 +1397,6 @@
       "utkast": false,
       "issues": [
         47
-      ]
-    },
-    {
-      "pr": 233,
-      "tittel": "Lagvelgeren er for høy: historikkgrafen tar en egen rad per lag",
-      "github": "larsajakobsen",
-      "agent": "mini-wilma",
-      "opprettet": "2026-09-23T12:45:56Z",
-      "oppdatert": "2026-09-23T12:59:09Z",
-      "utkast": true,
-      "issues": [
-        214
       ]
     },
     {
