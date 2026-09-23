@@ -23,7 +23,7 @@ public static class Geo
 
     /// <summary>Punktet slik GeoJSON skal ha det.</summary>
     public static Geometri Punkt(double lat, double lon) =>
-        new("Point", [lat, lon]);
+        new("Point", [lon, lat]);
 
     /// <summary>Ligger punktet innenfor kartutsnittet vårt?</summary>
     public static bool IOslo(double lat, double lon) =>
@@ -74,7 +74,7 @@ public static class Geo
         var rene = punkter
             .Where(p => p is not null)
             .Select(p => p!)
-            .DistinctBy(p => p.Properties["kilde"])
+            .DistinctBy(p => p.Properties["id"])
             .ToList();
 
         return new Kartlag("FeatureCollection", rene);

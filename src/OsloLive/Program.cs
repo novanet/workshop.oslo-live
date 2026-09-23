@@ -17,10 +17,20 @@ builder.Services.AddHttpClient<Allemannsdata>(klient =>
     klient.DefaultRequestHeaders.UserAgent.ParseAdd("OsloLive/1.0 (kurs)");
 });
 
+// Flylaget bruker ikke Allemannsdata (ingen kilde der har flyposisjoner),
+// og trenger derfor sin egen navngitte HttpClient og eget mellomlager. Se FlyLag.cs.
+builder.Services.AddHttpClient("fly", klient =>
+{
+    klient.Timeout = TimeSpan.FromSeconds(10);
+    klient.DefaultRequestHeaders.UserAgent.ParseAdd("OsloLive/1.0 (kurs)");
+});
+builder.Services.AddMemoryCache();
+
 // ---------------------------------------------------------------------------
 // Lagene på kartet. Nytt lag? Legg til én linje her.
 // ---------------------------------------------------------------------------
 builder.Services.AddSingleton<ILag, LuftkvalitetLag>();
+builder.Services.AddSingleton<ILag, FlyLag>();
 
 var app = builder.Build();
 

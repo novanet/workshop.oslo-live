@@ -46,5 +46,16 @@ public class ApiTester(WebApplicationFactory<Program> vert) : IClassFixture<WebA
         Assert.Equal(HttpStatusCode.NotFound, svar.StatusCode);
     }
 
+    [Fact]
+    public async Task Lagoversikten_har_flylaget()
+    {
+        var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
+
+        var fly = lag!.Single(l => l.Id == "fly");
+        Assert.Equal("Flytrafikk", fly.Navn);
+        Assert.False(string.IsNullOrWhiteSpace(fly.Beskrivelse));
+        Assert.False(string.IsNullOrWhiteSpace(fly.Ikon));
+    }
+
     private sealed record Lagoppforing(string Id, string Navn, string Beskrivelse, string Ikon);
 }
