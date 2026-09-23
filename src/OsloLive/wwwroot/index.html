@@ -32,21 +32,21 @@
   .panel h1 { margin: 0 0 2px; font-size: 20px; letter-spacing: -.02em; }
   .panel .under { margin: 0 0 14px; font-size: 12px; color: var(--dempet); }
 
-  .lag { display: flex; align-items: center; gap: 9px; padding: 7px 8px; border-radius: 7px; cursor: pointer; }
+  .lag { display: flex; align-items: center; gap: 6px; padding: 7px 8px; border-radius: 7px; cursor: pointer; }
   .lag:hover { background: #f3f4f6; }
-  .lag input { accent-color: #111; width: 15px; height: 15px; cursor: pointer; flex: none; }
+  .lag input { accent-color: #111; width: 15px; height: 15px; cursor: pointer; flex: none; margin: 0; }
   .lag .prikk {
     flex: none; display: grid; place-items: center;
     width: 24px; height: 24px;
   }
   .lag .prikk img { width: 24px; height: 24px; display: block; }
-  .lag .navn { flex: 1; font-size: 14px; }
-  .lag .antall { font-size: 12px; color: var(--dempet); font-variant-numeric: tabular-nums; }
+  .lag .navn { flex: 1; min-width: 0; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .lag .antall { flex: none; width: 2.8em; text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 12px; color: var(--dempet); font-variant-numeric: tabular-nums; }
   .lag .antall.feil { color: var(--feil); }
   .lag .antall.ok { color: var(--ok); font-weight: 600; }
-  .lag .alder { flex: none; font-size: 11px; color: var(--dempet); font-variant-numeric: tabular-nums; cursor: default; }
+  .lag .alder { flex: none; width: 3.1em; text-align: right; white-space: nowrap; overflow: hidden; font-size: 11px; color: var(--dempet); font-variant-numeric: tabular-nums; cursor: default; }
   .lag .alder.gammel { color: var(--feil); }
-  .lag .visning { flex: none; font: inherit; font-size: 11px; padding: 2px 7px; border: 1.5px solid var(--kant); border-radius: 6px; background: #fff; cursor: pointer; }
+  .lag .visning { flex: none; font: inherit; font-size: 11px; width: 4.8em; padding: 2px 0; text-align: center; white-space: nowrap; overflow: hidden; border: 1.5px solid var(--kant); border-radius: 6px; background: #fff; cursor: pointer; }
   .lag .visning[aria-pressed="true"] { background: #111; color: #fff; }
   .tom { font-size: 13px; color: var(--dempet); line-height: 1.5; padding: 4px 2px; }
   .graf { display: block; width: 100%; height: 26px; margin: 0 0 4px; padding: 0 8px; }
@@ -1191,7 +1191,7 @@ async function start() {
 
     const rad = document.createElement('label');
     rad.className = 'lag';
-    rad.title = l.beskrivelse ?? '';
+    rad.title = l.beskrivelse ? l.navn + '\n' + l.beskrivelse : l.navn;
     rad.innerHTML =
       `<input type="checkbox"${på ? ' checked' : ''}>` +
       `<span class="prikk" aria-hidden="true"><img src="${prikkBilde(l.id, oppf)}" alt=""></span>` +
