@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:48:38",
+  "oppdatert": "2026-09-23T14:49:52",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -141,6 +141,37 @@
       "plass": 3
     },
     {
+      "navn": "mini-frode",
+      "github": "FrodeBl",
+      "poeng": 7,
+      "feil": [],
+      "lag": [
+        {
+          "issue": 19,
+          "navn": "Artsobservasjoner",
+          "poeng": 5
+        }
+      ],
+      "levert": [
+        {
+          "issue": 128,
+          "navn": "Simulering: tsunami i Oslofjorden",
+          "poeng": 3
+        }
+      ],
+      "dollar": 15.408,
+      "tokens": 27505553,
+      "sekunder": 5315,
+      "pr": 5,
+      "utkast": 0,
+      "merget": 2,
+      "kjoeringer": 23,
+      "utenPr": 17,
+      "bygg": [],
+      "estimert": false,
+      "plass": 4
+    },
+    {
       "navn": "mini-aud",
       "github": "audmaha",
       "poeng": 6,
@@ -173,7 +204,7 @@
       "utenPr": 5,
       "bygg": [],
       "estimert": false,
-      "plass": 4
+      "plass": 5
     },
     {
       "navn": "mini-leif",
@@ -210,7 +241,7 @@
       "utenPr": 8,
       "bygg": [],
       "estimert": false,
-      "plass": 5
+      "plass": 6
     },
     {
       "navn": "mini-ingve",
@@ -241,7 +272,7 @@
       "utenPr": 6,
       "bygg": [],
       "estimert": false,
-      "plass": 6
+      "plass": 7
     },
     {
       "navn": "mini-knive",
@@ -271,7 +302,7 @@
       "utenPr": 6,
       "bygg": [],
       "estimert": false,
-      "plass": 7
+      "plass": 8
     },
     {
       "navn": "helstein",
@@ -302,7 +333,7 @@
       "utenPr": 11,
       "bygg": [],
       "estimert": false,
-      "plass": 8
+      "plass": 9
     },
     {
       "navn": "mini-kirsten",
@@ -327,7 +358,7 @@
       "utenPr": 8,
       "bygg": [],
       "estimert": false,
-      "plass": 9
+      "plass": 10
     },
     {
       "navn": "mini-wilma",
@@ -374,7 +405,7 @@
       "utenPr": 14,
       "bygg": [],
       "estimert": false,
-      "plass": 10
+      "plass": 11
     },
     {
       "navn": "mini-jon",
@@ -399,7 +430,7 @@
       "utenPr": 7,
       "bygg": [],
       "estimert": false,
-      "plass": 11
+      "plass": 12
     },
     {
       "navn": "martin-holth",
@@ -429,7 +460,7 @@
       "utenPr": 6,
       "bygg": [],
       "estimert": false,
-      "plass": 12
+      "plass": 13
     },
     {
       "navn": "Dmitry-agent",
@@ -454,7 +485,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 13
+      "plass": 14
     },
     {
       "navn": "henrik",
@@ -477,31 +508,6 @@
       "merget": 1,
       "kjoeringer": 8,
       "utenPr": 6,
-      "bygg": [],
-      "estimert": false,
-      "plass": 14
-    },
-    {
-      "navn": "mini-frode",
-      "github": "FrodeBl",
-      "poeng": 2,
-      "feil": [],
-      "lag": [],
-      "levert": [
-        {
-          "issue": 128,
-          "navn": "Simulering: tsunami i Oslofjorden",
-          "poeng": 3
-        }
-      ],
-      "dollar": 15.408,
-      "tokens": 27505553,
-      "sekunder": 5315,
-      "pr": 5,
-      "utkast": 0,
-      "merget": 1,
-      "kjoeringer": 23,
-      "utenPr": 17,
       "bygg": [],
       "estimert": false,
       "plass": 15
@@ -634,7 +640,7 @@
       "issue": 215,
       "navn": "Svarte klynger dekker sentrum og skjuler hvilke lag som er der",
       "startet": "2026-09-23T12:34:13.5766398+00:00",
-      "minutter": 14
+      "minutter": 15
     },
     {
       "agent": "mini-jon",
@@ -642,7 +648,7 @@
       "issue": 189,
       "navn": "Travlere enn vanlig på veiene",
       "startet": "2026-09-23T12:34:43.2826697+00:00",
-      "minutter": 13
+      "minutter": 14
     },
     {
       "agent": "mini-gir",
@@ -650,7 +656,7 @@
       "issue": 51,
       "navn": "Logging",
       "startet": "2026-09-23T12:35:46.639797+00:00",
-      "minutter": 12
+      "minutter": 13
     },
     {
       "agent": "mini-johan",
@@ -666,7 +672,7 @@
       "issue": 188,
       "navn": "Vinden som strømmer over byen",
       "startet": "2026-09-23T12:42:40.4886016+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "helstein",
@@ -690,7 +696,7 @@
       "issue": 55,
       "navn": "Ytelse",
       "startet": "2026-09-23T12:44:17.4643227+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-frode",
@@ -698,7 +704,7 @@
       "issue": 19,
       "navn": "Artsobservasjoner",
       "startet": "2026-09-23T12:45:18.4146535+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-richard",
@@ -714,7 +720,7 @@
       "issue": 118,
       "navn": "Nyhetslinje nederst på skjermen",
       "startet": "2026-09-23T12:46:07.5484764+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-aud",
@@ -722,7 +728,7 @@
       "issue": 211,
       "navn": "Statistikken viser ikke «Nyeste» for vannmålere og smilefjes",
       "startet": "2026-09-23T12:48:04.2901179+00:00",
-      "minutter": 0
+      "minutter": 1
     }
   ],
   "main": {
@@ -732,8 +738,8 @@
     "kjoeringer": 53
   },
   "produkt": {
-    "testerBestatt": 18,
-    "testerFeilet": 8,
+    "testerBestatt": 19,
+    "testerFeilet": 7,
     "issuerLost": [
       1,
       2,
@@ -746,7 +752,8 @@
       12,
       14,
       15,
-      17
+      17,
+      19
     ],
     "antallIssuer": 147,
     "feilmelding": null
@@ -1026,7 +1033,7 @@
       "issue": 133,
       "navn": "Havet stiger: hva havner under vann?",
       "github": "Puiu",
-      "oppdatert": "2026-09-23T12:30:29Z"
+      "oppdatert": "2026-09-23T12:48:55Z"
     },
     {
       "issue": 142,
@@ -1053,22 +1060,10 @@
       "oppdatert": "2026-09-23T12:33:20Z"
     },
     {
-      "issue": 158,
-      "navn": "Strøm av endringer i stedet for å spørre hvert 15. sekund",
-      "github": "randsu",
-      "oppdatert": "2026-09-23T12:30:28Z"
-    },
-    {
       "issue": 169,
       "navn": "Filtrer punktene i et lag",
       "github": "randsu",
       "oppdatert": "2026-09-23T12:33:26Z"
-    },
-    {
-      "issue": 170,
-      "navn": "Fortell en historie med kartet, styrt med presentasjonsklikker",
-      "github": "randsu",
-      "oppdatert": "2026-09-23T12:30:31Z"
     },
     {
       "issue": 188,
@@ -1169,6 +1164,78 @@
   ],
   "aapne": [
     {
+      "pr": 71,
+      "tittel": "Mål hva som skjer",
+      "github": "FrodeBl",
+      "agent": "mini-frode",
+      "opprettet": "2026-09-23T08:12:09Z",
+      "oppdatert": "2026-09-23T12:48:57Z",
+      "utkast": false,
+      "issues": [
+        50
+      ]
+    },
+    {
+      "pr": 234,
+      "tittel": "Nytt lag: bomstasjoner",
+      "github": "nilsgs",
+      "agent": "helstein",
+      "opprettet": "2026-09-23T12:46:04Z",
+      "oppdatert": "2026-09-23T12:48:45Z",
+      "utkast": false,
+      "issues": [
+        194
+      ]
+    },
+    {
+      "pr": 233,
+      "tittel": "Lagvelgeren er for høy: historikkgrafen tar en egen rad per lag",
+      "github": "larsajakobsen",
+      "agent": "mini-wilma",
+      "opprettet": "2026-09-23T12:45:56Z",
+      "oppdatert": "2026-09-23T12:48:43Z",
+      "utkast": true,
+      "issues": [
+        214
+      ]
+    },
+    {
+      "pr": 83,
+      "tittel": "Nytt lag: museer og samlinger",
+      "github": "jthagesk",
+      "agent": "mini-kirsten",
+      "opprettet": "2026-09-23T08:34:12Z",
+      "oppdatert": "2026-09-23T12:48:36Z",
+      "utkast": false,
+      "issues": [
+        29
+      ]
+    },
+    {
+      "pr": 221,
+      "tittel": "#191: Et døgn med bysykkelturer på 90 sekunder",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T12:29:48Z",
+      "oppdatert": "2026-09-23T12:48:35Z",
+      "utkast": false,
+      "issues": [
+        191
+      ]
+    },
+    {
+      "pr": 67,
+      "tittel": "Hent lagene parallelt",
+      "github": "FrodeBl",
+      "agent": "mini-frode",
+      "opprettet": "2026-09-23T07:59:18Z",
+      "oppdatert": "2026-09-23T12:48:33Z",
+      "utkast": false,
+      "issues": [
+        48
+      ]
+    },
+    {
       "pr": 146,
       "tittel": "Nytt lag: sykkelparkering",
       "github": "GIR75",
@@ -1205,18 +1272,6 @@
       ]
     },
     {
-      "pr": 76,
-      "tittel": "Nytt lag: artsobservasjoner",
-      "github": "FrodeBl",
-      "agent": "mini-frode",
-      "opprettet": "2026-09-23T08:24:27Z",
-      "oppdatert": "2026-09-23T12:48:10Z",
-      "utkast": false,
-      "issues": [
-        19
-      ]
-    },
-    {
       "pr": 237,
       "tittel": "#124: Punkter som flytter seg, glir til ny posisjon",
       "github": "randsu",
@@ -1238,18 +1293,6 @@
       "utkast": false,
       "issues": [
         118
-      ]
-    },
-    {
-      "pr": 67,
-      "tittel": "Hent lagene parallelt",
-      "github": "FrodeBl",
-      "agent": "mini-frode",
-      "opprettet": "2026-09-23T07:59:18Z",
-      "oppdatert": "2026-09-23T12:47:13Z",
-      "utkast": false,
-      "issues": [
-        48
       ]
     },
     {
@@ -1277,18 +1320,6 @@
       ]
     },
     {
-      "pr": 83,
-      "tittel": "Nytt lag: museer og samlinger",
-      "github": "jthagesk",
-      "agent": "mini-kirsten",
-      "opprettet": "2026-09-23T08:34:12Z",
-      "oppdatert": "2026-09-23T12:46:50Z",
-      "utkast": false,
-      "issues": [
-        29
-      ]
-    },
-    {
       "pr": 222,
       "tittel": "Havet stiger: hva havner under vann? (#133)",
       "github": "Puiu",
@@ -1298,42 +1329,6 @@
       "utkast": false,
       "issues": [
         133
-      ]
-    },
-    {
-      "pr": 221,
-      "tittel": "#191: Et døgn med bysykkelturer på 90 sekunder",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T12:29:48Z",
-      "oppdatert": "2026-09-23T12:46:24Z",
-      "utkast": false,
-      "issues": [
-        191
-      ]
-    },
-    {
-      "pr": 234,
-      "tittel": "Nytt lag: bomstasjoner",
-      "github": "nilsgs",
-      "agent": "helstein",
-      "opprettet": "2026-09-23T12:46:04Z",
-      "oppdatert": "2026-09-23T12:46:05Z",
-      "utkast": false,
-      "issues": [
-        194
-      ]
-    },
-    {
-      "pr": 233,
-      "tittel": "Lagvelgeren er for høy: historikkgrafen tar en egen rad per lag",
-      "github": "larsajakobsen",
-      "agent": "mini-wilma",
-      "opprettet": "2026-09-23T12:45:56Z",
-      "oppdatert": "2026-09-23T12:45:56Z",
-      "utkast": true,
-      "issues": [
-        214
       ]
     },
     {
@@ -1418,18 +1413,6 @@
       "utkast": false,
       "issues": [
         142
-      ]
-    },
-    {
-      "pr": 71,
-      "tittel": "Mål hva som skjer",
-      "github": "FrodeBl",
-      "agent": "mini-frode",
-      "opprettet": "2026-09-23T08:12:09Z",
-      "oppdatert": "2026-09-23T12:39:07Z",
-      "utkast": false,
-      "issues": [
-        50
       ]
     },
     {
