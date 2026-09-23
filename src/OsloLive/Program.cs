@@ -110,6 +110,9 @@ app.MapGet("/api/lag/{id}", async (string id, string? tid, IEnumerable<ILag> lag
 });
 
 // Antall punkter per time i ett lag, siste døgn, eldste først.
+// Antall punkter per lagret bilde siste 24 timer (#25). Bildene ligger i App_Data/historikk i
+// containerens filsystem: de overlever omstart av prosessen, men en ny revisjon uten volum
+// starter med tom historikk som fylles igjen time for time. Se ARKITEKTUR.md.
 app.MapGet("/api/lag/{id}/historikk", (string id, IEnumerable<ILag> lag, Bildelager lager) =>
 {
     var valgt = lag.FirstOrDefault(l => string.Equals(l.Id, id, StringComparison.OrdinalIgnoreCase));

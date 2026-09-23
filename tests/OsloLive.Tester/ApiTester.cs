@@ -4,6 +4,7 @@ using System.Text;
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using OsloLive.Historikk;
 using OsloLive.Kart;
 
@@ -458,6 +459,19 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
         Assert.Equal(HttpStatusCode.BadGateway, fly.StatusCode);
         Assert.Equal(HttpStatusCode.OK, lag.StatusCode);
         Assert.Equal(HttpStatusCode.OK, helse.StatusCode);
+    }
+
+    [Fact]
+    public async Task Testverten_kjoerer_ingen_bakgrunnsjobb_og_lagrer_bare_i_sin_egen_mappe()
+    {
+        // Øyeblikksjobb og helsesjekken er fjernet fra testverten, og Historikk:Mappe peker på
+        // en midlertidig mappe som slettes etter testene. Ingen filer havner i App_Data/historikk.
+        Assert.Empty(vert.Services.GetServices<IHostedService>());
+
+        var lager = vert.Services.GetRequiredService<Bildelager>();
+        await lager.Lagre("testlag", Geo.Samle([Geo.Lag("a", 59.91, 10.75, "A", "Test")]), DateTimeOffset.UtcNow);
+
+        Assert.NotEmpty(Directory.GetFiles(Path.Combine(vert.Mappe, "testlag"), "*.json"));
     }
 
     [Fact]

@@ -128,6 +128,14 @@ og legger det under `Historikk:Mappe`, og `Bildelager` leser dem. Tidslinjen bru
 `?tid=` (bildet nærmest tidspunktet), historikken bruker `GET /api/lag/{id}/historikk`
 (antall punkter per bilde de siste 24 timene). Én jobb, ett lager, ingen egen jobb for #25.
 
+**Hva skjer med historikken når containeren startes på nytt?** Bildene ligger i
+`App_Data/historikk` i containerens eget filsystem. En omstart av prosessen beholder dem;
+en ny revisjon i Container Apps får nytt filsystem, så da starter `/api/lag/{id}/historikk`
+med tom liste og fylles igjen time for time (første bilde tas ved oppstart). Skal historikken
+overleve utrullinger, monteres et volum (for eksempel Azure Files) på `/app/App_Data/historikk`,
+eller `Historikk:Mappe` pekes på volumet. Ingen data går tapt utenom bildene: levende data
+hentes som før.
+
 `Historikk/Øyeblikksjobb` tar et bilde (`Kartlag` som JSON) av hvert registrerte lag én gang i timen, første gang ved oppstart, og legger det i `Historikk:Mappe/<lagId>/<yyyyMMddTHHmmssZ>.json`. `Bildelager` velger bildet nærmest `?tid=` (maks to timer unna) og sletter bilder eldre enn sju dager. Et lag som svikter, eller et tidsavbrudd mot kilden, logges og hoppes over; jobben stopper bare når verten selv stopper.
 
 Konfigurasjon i `appsettings.json`:
