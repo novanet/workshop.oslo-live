@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:50:38",
+  "oppdatert": "2026-09-23T10:51:05",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -227,25 +227,6 @@
       "plass": 9
     },
     {
-      "navn": "helstein",
-      "github": "nilsgs",
-      "poeng": 0,
-      "feil": [],
-      "lag": [],
-      "levert": [],
-      "dollar": 1.955,
-      "tokens": 3251019,
-      "sekunder": 808,
-      "pr": 1,
-      "utkast": 0,
-      "merget": 0,
-      "kjoeringer": 2,
-      "utenPr": 1,
-      "bygg": [],
-      "estimert": false,
-      "plass": 10
-    },
-    {
       "navn": "mini-taco",
       "github": "Puiu",
       "poeng": 0,
@@ -262,7 +243,7 @@
       "utenPr": 0,
       "bygg": [],
       "estimert": false,
-      "plass": 11
+      "plass": 10
     },
     {
       "navn": "mini-knive",
@@ -279,6 +260,25 @@
       "merget": 0,
       "kjoeringer": 2,
       "utenPr": 0,
+      "bygg": [],
+      "estimert": false,
+      "plass": 11
+    },
+    {
+      "navn": "helstein",
+      "github": "nilsgs",
+      "poeng": 0,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 3.959,
+      "tokens": 8144568,
+      "sekunder": 1452,
+      "pr": 2,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 3,
+      "utenPr": 1,
       "bygg": [],
       "estimert": false,
       "plass": 12
@@ -370,14 +370,6 @@
       "minutter": 11
     },
     {
-      "agent": "helstein",
-      "github": "nilsgs",
-      "issue": 30,
-      "navn": "Vannstand",
-      "startet": "2026-09-23T08:39:37.818134+00:00",
-      "minutter": 11
-    },
-    {
       "agent": "mini-kirsten",
       "github": "jthagesk",
       "issue": 52,
@@ -415,7 +407,7 @@
       "issue": 25,
       "navn": "Historikk",
       "startet": "2026-09-23T08:47:59.0992794+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "Dmitry-agent",
@@ -431,7 +423,7 @@
       "issue": 40,
       "navn": "Mobil",
       "startet": "2026-09-23T08:48:55.3857059+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "Andy3000",
@@ -439,7 +431,7 @@
       "issue": 11,
       "navn": "Kollektiv",
       "startet": "2026-09-23T08:49:04.1157424+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-astrid",
@@ -447,7 +439,7 @@
       "issue": 36,
       "navn": "Tegn område",
       "startet": "2026-09-23T08:49:47.9516568+00:00",
-      "minutter": 0
+      "minutter": 1
     }
   ],
   "main": {
@@ -642,7 +634,7 @@
       "issue": 30,
       "navn": "Vis vannstanden i fjorden",
       "github": "nilsgs",
-      "oppdatert": "2026-09-23T08:39:39Z"
+      "oppdatert": "2026-09-23T08:50:43Z"
     },
     {
       "issue": 32,
@@ -708,7 +700,7 @@
       "issue": 44,
       "navn": "Sammenlign to tidspunkt",
       "github": "yonzo",
-      "oppdatert": "2026-09-23T08:43:27Z"
+      "oppdatert": "2026-09-23T08:50:44Z"
     },
     {
       "issue": 45,
@@ -802,6 +794,42 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 92,
+      "tittel": "Et statistikkpanel",
+      "github": "audmaha",
+      "agent": "mini-aud",
+      "opprettet": "2026-09-23T08:42:17Z",
+      "oppdatert": "2026-09-23T08:50:50Z",
+      "utkast": false,
+      "issues": [
+        43
+      ]
+    },
+    {
+      "pr": 88,
+      "tittel": "#38: Demomodus for storskjerm",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:37:47Z",
+      "oppdatert": "2026-09-23T08:50:47Z",
+      "utkast": false,
+      "issues": [
+        38
+      ]
+    },
+    {
+      "pr": 100,
+      "tittel": "Vis vannstanden i fjorden",
+      "github": "nilsgs",
+      "agent": "helstein",
+      "opprettet": "2026-09-23T08:50:41Z",
+      "oppdatert": "2026-09-23T08:50:42Z",
+      "utkast": false,
+      "issues": [
+        30
+      ]
+    },
     {
       "pr": 67,
       "tittel": "Hent lagene parallelt",
@@ -947,18 +975,6 @@
       ]
     },
     {
-      "pr": 92,
-      "tittel": "Et statistikkpanel",
-      "github": "audmaha",
-      "agent": "mini-aud",
-      "opprettet": "2026-09-23T08:42:17Z",
-      "oppdatert": "2026-09-23T08:43:19Z",
-      "utkast": false,
-      "issues": [
-        43
-      ]
-    },
-    {
       "pr": 91,
       "tittel": "Fargene må virke for alle",
       "github": "audmaha",
@@ -968,18 +984,6 @@
       "utkast": false,
       "issues": [
         41
-      ]
-    },
-    {
-      "pr": 88,
-      "tittel": "#38: Demomodus for storskjerm",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:37:47Z",
-      "oppdatert": "2026-09-23T08:41:31Z",
-      "utkast": false,
-      "issues": [
-        38
       ]
     },
     {
