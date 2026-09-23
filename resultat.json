@@ -1,38 +1,7 @@
 {
-  "oppdatert": "2026-09-23T10:51:05",
+  "oppdatert": "2026-09-23T10:51:44",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
-    {
-      "navn": "mini-richard",
-      "github": "randsu",
-      "poeng": 9,
-      "feil": [
-        {
-          "issue": 3,
-          "navn": "Mellomlageret",
-          "poeng": 1
-        }
-      ],
-      "lag": [],
-      "levert": [
-        {
-          "issue": 56,
-          "navn": "Flytrafikk",
-          "poeng": 8
-        }
-      ],
-      "dollar": 9.884,
-      "tokens": 18505168,
-      "sekunder": 3645,
-      "pr": 7,
-      "utkast": 0,
-      "merget": 2,
-      "kjoeringer": 10,
-      "utenPr": 3,
-      "bygg": [],
-      "estimert": false,
-      "plass": 1
-    },
     {
       "navn": "mini-astrid",
       "github": "theakbe",
@@ -59,6 +28,37 @@
       "merget": 2,
       "kjoeringer": 2,
       "utenPr": 0,
+      "bygg": [],
+      "estimert": false,
+      "plass": 1
+    },
+    {
+      "navn": "mini-richard",
+      "github": "randsu",
+      "poeng": 8,
+      "feil": [
+        {
+          "issue": 3,
+          "navn": "Mellomlageret",
+          "poeng": 1
+        }
+      ],
+      "lag": [],
+      "levert": [
+        {
+          "issue": 56,
+          "navn": "Flytrafikk",
+          "poeng": 8
+        }
+      ],
+      "dollar": 12.087,
+      "tokens": 23833984,
+      "sekunder": 4327,
+      "pr": 8,
+      "utkast": 0,
+      "merget": 2,
+      "kjoeringer": 11,
+      "utenPr": 3,
       "bygg": [],
       "estimert": false,
       "plass": 2
@@ -114,6 +114,31 @@
       "plass": 4
     },
     {
+      "navn": "mini-knive",
+      "github": "Buggz",
+      "poeng": 3,
+      "feil": [],
+      "lag": [],
+      "levert": [
+        {
+          "issue": 53,
+          "navn": "Dyp helsesjekk",
+          "poeng": 3
+        }
+      ],
+      "dollar": 3.947,
+      "tokens": 8497427,
+      "sekunder": 1398,
+      "pr": 2,
+      "utkast": 0,
+      "merget": 1,
+      "kjoeringer": 2,
+      "utenPr": 0,
+      "bygg": [],
+      "estimert": false,
+      "plass": 5
+    },
+    {
       "navn": "mini-ingve",
       "github": "ingvevs",
       "poeng": 2,
@@ -136,7 +161,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 5
+      "plass": 6
     },
     {
       "navn": "mini-leif",
@@ -161,7 +186,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 6
+      "plass": 7
     },
     {
       "navn": "mini-wilma",
@@ -186,7 +211,7 @@
       "utenPr": 3,
       "bygg": [],
       "estimert": false,
-      "plass": 7
+      "plass": 8
     },
     {
       "navn": "henrik",
@@ -205,7 +230,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 8
+      "plass": 9
     },
     {
       "navn": "mini-sindre",
@@ -224,7 +249,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 9
+      "plass": 10
     },
     {
       "navn": "mini-taco",
@@ -236,25 +261,6 @@
       "dollar": 2.719,
       "tokens": 5585224,
       "sekunder": 1114,
-      "pr": 2,
-      "utkast": 0,
-      "merget": 0,
-      "kjoeringer": 2,
-      "utenPr": 0,
-      "bygg": [],
-      "estimert": false,
-      "plass": 10
-    },
-    {
-      "navn": "mini-knive",
-      "github": "Buggz",
-      "poeng": 0,
-      "feil": [],
-      "lag": [],
-      "levert": [],
-      "dollar": 3.947,
-      "tokens": 8497427,
-      "sekunder": 1398,
       "pr": 2,
       "utkast": 0,
       "merget": 0,
@@ -362,20 +368,12 @@
   ],
   "kjoerer": [
     {
-      "agent": "mini-richard",
-      "github": "randsu",
-      "issue": 34,
-      "navn": "Tidslinje",
-      "startet": "2026-09-23T08:39:29.3560815+00:00",
-      "minutter": 11
-    },
-    {
       "agent": "mini-kirsten",
       "github": "jthagesk",
       "issue": 52,
       "navn": "Konfigurerbar bbox",
       "startet": "2026-09-23T08:42:06.8631198+00:00",
-      "minutter": 8
+      "minutter": 9
     },
     {
       "agent": "mini-richard",
@@ -383,7 +381,7 @@
       "issue": 24,
       "navn": "Bydeler",
       "startet": "2026-09-23T08:45:28.8651408+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-frode",
@@ -391,7 +389,7 @@
       "issue": 19,
       "navn": "Artsobservasjoner",
       "startet": "2026-09-23T08:46:29.0268417+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-frode",
@@ -399,7 +397,7 @@
       "issue": 50,
       "navn": "Metrikker",
       "startet": "2026-09-23T08:47:21.1306878+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-richard",
@@ -415,7 +413,7 @@
       "issue": 12,
       "navn": "Holdeplasser",
       "startet": "2026-09-23T08:48:05.3217109+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-knive",
@@ -646,7 +644,7 @@
       "issue": 34,
       "navn": "Skru tiden tilbake med en tidslinje",
       "github": "randsu",
-      "oppdatert": "2026-09-23T08:39:30Z"
+      "oppdatert": "2026-09-23T08:51:12Z"
     },
     {
       "issue": 35,
@@ -795,6 +793,18 @@
   ],
   "aapne": [
     {
+      "pr": 101,
+      "tittel": "#34: Skru tiden tilbake med en tidslinje",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:51:10Z",
+      "oppdatert": "2026-09-23T08:51:11Z",
+      "utkast": false,
+      "issues": [
+        34
+      ]
+    },
+    {
       "pr": 92,
       "tittel": "Et statistikkpanel",
       "github": "audmaha",
@@ -840,18 +850,6 @@
       "utkast": false,
       "issues": [
         48
-      ]
-    },
-    {
-      "pr": 93,
-      "tittel": "En helsesjekk som betyr noe (#53)",
-      "github": "Buggz",
-      "agent": "mini-knive",
-      "opprettet": "2026-09-23T08:42:24Z",
-      "oppdatert": "2026-09-23T08:50:20Z",
-      "utkast": false,
-      "issues": [
-        53
       ]
     },
     {
