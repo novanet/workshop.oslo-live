@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:30:46",
+  "oppdatert": "2026-09-23T14:31:26",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -141,9 +141,101 @@
       "plass": 3
     },
     {
+      "navn": "mini-ingve",
+      "github": "ingvevs",
+      "poeng": 5,
+      "feil": [
+        {
+          "issue": 4,
+          "navn": "Duplikatfjerning",
+          "poeng": 2
+        }
+      ],
+      "lag": [],
+      "levert": [
+        {
+          "issue": 49,
+          "navn": "Nytt forsøk",
+          "poeng": 3
+        }
+      ],
+      "dollar": 4.418,
+      "tokens": 7735191,
+      "sekunder": 1519,
+      "pr": 2,
+      "utkast": 0,
+      "merget": 2,
+      "kjoeringer": 7,
+      "utenPr": 5,
+      "bygg": [],
+      "estimert": false,
+      "plass": 4
+    },
+    {
+      "navn": "mini-leif",
+      "github": "leif-larsen",
+      "poeng": 5,
+      "feil": [
+        {
+          "issue": 2,
+          "navn": "Utsnittet",
+          "poeng": 2
+        }
+      ],
+      "lag": [],
+      "levert": [
+        {
+          "issue": 141,
+          "navn": "Tydelige kartsymboler: båter som ser ut som båter",
+          "poeng": 3
+        }
+      ],
+      "dollar": 9.942,
+      "tokens": 20931374,
+      "sekunder": 3633,
+      "pr": 4,
+      "utkast": 0,
+      "merget": 2,
+      "kjoeringer": 16,
+      "utenPr": 7,
+      "bygg": [],
+      "estimert": false,
+      "plass": 5
+    },
+    {
+      "navn": "mini-knive",
+      "github": "Buggz",
+      "poeng": 5,
+      "feil": [],
+      "lag": [],
+      "levert": [
+        {
+          "issue": 40,
+          "navn": "Mobil",
+          "poeng": 3
+        },
+        {
+          "issue": 53,
+          "navn": "Dyp helsesjekk",
+          "poeng": 3
+        }
+      ],
+      "dollar": 10.674,
+      "tokens": 19002132,
+      "sekunder": 3581,
+      "pr": 4,
+      "utkast": 0,
+      "merget": 2,
+      "kjoeringer": 9,
+      "utenPr": 5,
+      "bygg": [],
+      "estimert": false,
+      "plass": 6
+    },
+    {
       "navn": "mini-wilma",
       "github": "larsajakobsen",
-      "poeng": 6,
+      "poeng": 5,
       "feil": [
         {
           "issue": 1,
@@ -175,106 +267,14 @@
           "poeng": 1
         }
       ],
-      "dollar": 30.707,
-      "tokens": 51249764,
-      "sekunder": 9349,
-      "pr": 8,
-      "utkast": 0,
+      "dollar": 32.131,
+      "tokens": 53211337,
+      "sekunder": 9937,
+      "pr": 9,
+      "utkast": 1,
       "merget": 5,
-      "kjoeringer": 24,
+      "kjoeringer": 25,
       "utenPr": 14,
-      "bygg": [],
-      "estimert": false,
-      "plass": 4
-    },
-    {
-      "navn": "mini-ingve",
-      "github": "ingvevs",
-      "poeng": 5,
-      "feil": [
-        {
-          "issue": 4,
-          "navn": "Duplikatfjerning",
-          "poeng": 2
-        }
-      ],
-      "lag": [],
-      "levert": [
-        {
-          "issue": 49,
-          "navn": "Nytt forsøk",
-          "poeng": 3
-        }
-      ],
-      "dollar": 4.418,
-      "tokens": 7735191,
-      "sekunder": 1519,
-      "pr": 2,
-      "utkast": 0,
-      "merget": 2,
-      "kjoeringer": 7,
-      "utenPr": 5,
-      "bygg": [],
-      "estimert": false,
-      "plass": 5
-    },
-    {
-      "navn": "mini-leif",
-      "github": "leif-larsen",
-      "poeng": 5,
-      "feil": [
-        {
-          "issue": 2,
-          "navn": "Utsnittet",
-          "poeng": 2
-        }
-      ],
-      "lag": [],
-      "levert": [
-        {
-          "issue": 141,
-          "navn": "Tydelige kartsymboler: båter som ser ut som båter",
-          "poeng": 3
-        }
-      ],
-      "dollar": 9.942,
-      "tokens": 20931374,
-      "sekunder": 3633,
-      "pr": 4,
-      "utkast": 0,
-      "merget": 2,
-      "kjoeringer": 16,
-      "utenPr": 7,
-      "bygg": [],
-      "estimert": false,
-      "plass": 6
-    },
-    {
-      "navn": "mini-knive",
-      "github": "Buggz",
-      "poeng": 5,
-      "feil": [],
-      "lag": [],
-      "levert": [
-        {
-          "issue": 40,
-          "navn": "Mobil",
-          "poeng": 3
-        },
-        {
-          "issue": 53,
-          "navn": "Dyp helsesjekk",
-          "poeng": 3
-        }
-      ],
-      "dollar": 10.674,
-      "tokens": 19002132,
-      "sekunder": 3581,
-      "pr": 4,
-      "utkast": 0,
-      "merget": 2,
-      "kjoeringer": 9,
-      "utenPr": 5,
       "bygg": [],
       "estimert": false,
       "plass": 7
@@ -602,14 +602,6 @@
   ],
   "kjoerer": [
     {
-      "agent": "mini-wilma",
-      "github": "larsajakobsen",
-      "issue": 129,
-      "navn": "Simulering: meteornedslag",
-      "startet": "2026-09-23T12:20:25.1910717+00:00",
-      "minutter": 10
-    },
-    {
       "agent": "mini-astrid",
       "github": "theakbe",
       "issue": 188,
@@ -723,37 +715,37 @@
       "issue": 52,
       "navn": "Gjør kartutsnittet konfigurerbart",
       "github": "jthagesk",
-      "oppdatert": "2026-09-23T12:28:27Z"
+      "oppdatert": "2026-09-23T12:30:49Z"
     },
     {
       "issue": 55,
       "navn": "Kartet blir tregt med mange punkter",
       "github": "sin-rha",
-      "oppdatert": "2026-09-23T12:28:28Z"
+      "oppdatert": "2026-09-23T12:30:51Z"
     },
     {
       "issue": 57,
       "navn": "Avgangstavle for Gardermoen",
       "github": "Buggz",
-      "oppdatert": "2026-09-23T12:28:29Z"
+      "oppdatert": "2026-09-23T12:30:53Z"
     },
     {
       "issue": 57,
       "navn": "Avgangstavle for Gardermoen",
       "github": "ingvevs",
-      "oppdatert": "2026-09-23T12:28:29Z"
+      "oppdatert": "2026-09-23T12:30:53Z"
     },
     {
       "issue": 59,
       "navn": "Overlapping boxes",
       "github": "jthagesk",
-      "oppdatert": "2026-09-23T12:28:29Z"
+      "oppdatert": "2026-09-23T12:30:54Z"
     },
     {
       "issue": 59,
       "navn": "Overlapping boxes",
       "github": "sin-rha",
-      "oppdatert": "2026-09-23T12:28:29Z"
+      "oppdatert": "2026-09-23T12:30:54Z"
     },
     {
       "issue": 113,
@@ -1000,19 +992,61 @@
       "navn": "Styr storskjermen fra mobilen",
       "github": "yonzo",
       "oppdatert": "2026-09-23T12:19:44Z"
+    },
+    {
+      "issue": 214,
+      "navn": "Lagvelgeren er for høy: historikkgrafen tar en egen rad per lag",
+      "github": "larsajakobsen",
+      "oppdatert": "2026-09-23T12:31:22Z"
     }
   ],
   "aapne": [
+    {
+      "pr": 221,
+      "tittel": "#191: Et døgn med bysykkelturer på 90 sekunder",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T12:29:48Z",
+      "oppdatert": "2026-09-23T12:31:04Z",
+      "utkast": false,
+      "issues": [
+        191
+      ]
+    },
+    {
+      "pr": 83,
+      "tittel": "Nytt lag: museer og samlinger",
+      "github": "jthagesk",
+      "agent": "mini-kirsten",
+      "opprettet": "2026-09-23T08:34:12Z",
+      "oppdatert": "2026-09-23T12:31:00Z",
+      "utkast": false,
+      "issues": [
+        29
+      ]
+    },
     {
       "pr": 222,
       "tittel": "Havet stiger: hva havner under vann? (#133)",
       "github": "Puiu",
       "agent": "mini-taco",
       "opprettet": "2026-09-23T12:30:27Z",
-      "oppdatert": "2026-09-23T12:30:28Z",
+      "oppdatert": "2026-09-23T12:30:42Z",
       "utkast": false,
       "issues": [
         133
+      ]
+    },
+    {
+      "pr": 223,
+      "tittel": "Simulering: meteornedslag",
+      "github": "larsajakobsen",
+      "agent": "mini-wilma",
+      "opprettet": "2026-09-23T12:30:39Z",
+      "oppdatert": "2026-09-23T12:30:39Z",
+      "utkast": true,
+      "issues": [
+        129
       ]
     },
     {
@@ -1025,18 +1059,6 @@
       "utkast": false,
       "issues": [
         41
-      ]
-    },
-    {
-      "pr": 83,
-      "tittel": "Nytt lag: museer og samlinger",
-      "github": "jthagesk",
-      "agent": "mini-kirsten",
-      "opprettet": "2026-09-23T08:34:12Z",
-      "oppdatert": "2026-09-23T12:30:12Z",
-      "utkast": false,
-      "issues": [
-        29
       ]
     },
     {
@@ -1061,18 +1083,6 @@
       "utkast": false,
       "issues": [
         128
-      ]
-    },
-    {
-      "pr": 221,
-      "tittel": "#191: Et døgn med bysykkelturer på 90 sekunder",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T12:29:48Z",
-      "oppdatert": "2026-09-23T12:29:49Z",
-      "utkast": false,
-      "issues": [
-        191
       ]
     },
     {
