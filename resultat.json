@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:19:35",
+  "oppdatert": "2026-09-23T11:20:02",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -441,7 +441,7 @@
       "issue": 26,
       "navn": "Skoler",
       "startet": "2026-09-23T09:03:43.3920206+00:00",
-      "minutter": 15
+      "minutter": 16
     },
     {
       "agent": "helstein",
@@ -449,7 +449,7 @@
       "issue": 15,
       "navn": "Spisesteder",
       "startet": "2026-09-23T09:16:56.867472+00:00",
-      "minutter": 2
+      "minutter": 3
     }
   ],
   "main": {
@@ -891,10 +891,22 @@
       "github": "randsu",
       "agent": "mini-richard",
       "opprettet": "2026-09-23T08:58:22Z",
-      "oppdatert": "2026-09-23T09:18:59Z",
+      "oppdatert": "2026-09-23T09:19:24Z",
       "utkast": false,
       "issues": [
         25
+      ]
+    },
+    {
+      "pr": 96,
+      "tittel": "#22: Slå sammen punkter som ligger oppå hverandre",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:46:40Z",
+      "oppdatert": "2026-09-23T09:19:22Z",
+      "utkast": false,
+      "issues": [
+        22
       ]
     },
     {
@@ -919,18 +931,6 @@
       "utkast": false,
       "issues": [
         14
-      ]
-    },
-    {
-      "pr": 96,
-      "tittel": "#22: Slå sammen punkter som ligger oppå hverandre",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:46:40Z",
-      "oppdatert": "2026-09-23T09:17:58Z",
-      "utkast": false,
-      "issues": [
-        22
       ]
     },
     {
