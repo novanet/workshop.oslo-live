@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:22:42",
+  "oppdatert": "2026-09-23T10:23:09",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -243,7 +243,7 @@
       "issue": 17,
       "navn": "Smilefjes",
       "startet": "2026-09-23T08:10:01.588657+00:00",
-      "minutter": 12
+      "minutter": 13
     },
     {
       "agent": "mini-frode",
@@ -251,7 +251,7 @@
       "issue": 19,
       "navn": "Artsobservasjoner",
       "startet": "2026-09-23T08:14:02.4941234+00:00",
-      "minutter": 8
+      "minutter": 9
     },
     {
       "agent": "mini-ingve",
@@ -283,7 +283,7 @@
       "issue": 1,
       "navn": "Koordinatrekkefølge",
       "startet": "2026-09-23T08:20:01.4612094+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-wilma",
@@ -299,7 +299,7 @@
       "issue": 20,
       "navn": "Luftvarsel",
       "startet": "2026-09-23T08:22:06.0655338+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-kirsten",
@@ -307,6 +307,14 @@
       "issue": 45,
       "navn": "Varsler",
       "startet": "2026-09-23T08:22:20.0747631+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-wilma",
+      "github": "larsajakobsen",
+      "issue": 8,
+      "navn": "Hendelser",
+      "startet": "2026-09-23T08:22:51.9896553+00:00",
       "minutter": 0
     }
   ],
@@ -394,6 +402,12 @@
       "navn": "Nytt lag: skip i Oslofjorden",
       "github": "monet820",
       "oppdatert": "2026-09-23T08:11:15Z"
+    },
+    {
+      "issue": 8,
+      "navn": "Nytt lag: politilogg og nyhetshendelser",
+      "github": "larsajakobsen",
+      "oppdatert": "2026-09-23T08:22:52Z"
     },
     {
       "issue": 11,
@@ -494,6 +508,18 @@
   ],
   "aapne": [
     {
+      "pr": 69,
+      "tittel": "#56: Nytt lag: fly i lufta over Oslo",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:10:46Z",
+      "oppdatert": "2026-09-23T08:23:02Z",
+      "utkast": false,
+      "issues": [
+        56
+      ]
+    },
+    {
       "pr": 74,
       "tittel": "Overlapping boxes",
       "github": "sin-rha",
@@ -515,18 +541,6 @@
       "utkast": false,
       "issues": [
         11
-      ]
-    },
-    {
-      "pr": 69,
-      "tittel": "#56: Nytt lag: fly i lufta over Oslo",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:10:46Z",
-      "oppdatert": "2026-09-23T08:15:29Z",
-      "utkast": false,
-      "issues": [
-        56
       ]
     },
     {
