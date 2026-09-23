@@ -114,6 +114,7 @@
   .kant-solid  { border-style: solid; }
   .kant-double { border-style: double; border-width: 4px; }
   .kant-dashed { border-style: dashed; }
+  .kant-dotted { border-style: dotted; border-width: 3px; }
 
   .ikon { font-size: 14px; line-height: 1; transform: var(--mot, none); }
 
@@ -410,10 +411,11 @@ function fargeFor(id, nr) {
 }
 
 // Form og kantstil skiller lagene fra hverandre uavhengig av farge.
+// 4 former x 4 kantstiler gir 16 unike kombinasjoner, like mange som lagene i FARGER.
 const FORMER = ['sirkel', 'firkant', 'ruter', 'draape'];
-const KANTER = ['solid', 'double', 'dashed'];
+const KANTER = ['solid', 'double', 'dashed', 'dotted'];
 function stilFor(nr) {
-  return { form: FORMER[nr % 4], kant: KANTER[Math.floor(nr / 4) % 3] };
+  return { form: FORMER[nr % FORMER.length], kant: KANTER[Math.floor(nr / FORMER.length) % KANTER.length] };
 }
 
 // Relativ luminans etter WCAG, brukt til å velge lys eller moerk kant/ikon
