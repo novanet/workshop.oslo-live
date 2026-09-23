@@ -1,11 +1,11 @@
 {
-  "oppdatert": "2026-09-23T15:19:48",
+  "oppdatert": "2026-09-23T15:21:02",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
       "navn": "mini-richard",
       "github": "randsu",
-      "poeng": 40,
+      "poeng": 38,
       "feil": [
         {
           "issue": 3,
@@ -14,11 +14,6 @@
         }
       ],
       "lag": [
-        {
-          "issue": 6,
-          "navn": "Delt mobilitet",
-          "poeng": 2
-        },
         {
           "issue": 9,
           "navn": "Badetemperatur",
@@ -120,6 +115,52 @@
       "plass": 2
     },
     {
+      "navn": "mini-frode",
+      "github": "FrodeBl",
+      "poeng": 12,
+      "feil": [],
+      "lag": [
+        {
+          "issue": 19,
+          "navn": "Artsobservasjoner",
+          "poeng": 5
+        }
+      ],
+      "levert": [
+        {
+          "issue": 50,
+          "navn": "Metrikker",
+          "poeng": 3
+        },
+        {
+          "issue": 128,
+          "navn": "Simulering: tsunami i Oslofjorden",
+          "poeng": 3
+        },
+        {
+          "issue": 192,
+          "navn": "Nytt lag: Wikipedia-artikler rundt deg",
+          "poeng": 1
+        },
+        {
+          "issue": 209,
+          "navn": "Bysykkelstasjoner blir 33 punkter oppå hverandre",
+          "poeng": 2
+        }
+      ],
+      "dollar": 22.839,
+      "tokens": 35600006,
+      "sekunder": 7310,
+      "pr": 7,
+      "utkast": 0,
+      "merget": 5,
+      "kjoeringer": 29,
+      "utenPr": 19,
+      "bygg": [],
+      "estimert": false,
+      "plass": 3
+    },
+    {
       "navn": "mini-leif",
       "github": "leif-larsen",
       "poeng": 11,
@@ -164,7 +205,7 @@
       "utenPr": 12,
       "bygg": [],
       "estimert": false,
-      "plass": 3
+      "plass": 4
     },
     {
       "navn": "mini-gir",
@@ -195,7 +236,7 @@
       "utenPr": 29,
       "bygg": [],
       "estimert": false,
-      "plass": 4
+      "plass": 5
     },
     {
       "navn": "mini-wilma",
@@ -255,42 +296,6 @@
       "merget": 8,
       "kjoeringer": 31,
       "utenPr": 14,
-      "bygg": [],
-      "estimert": false,
-      "plass": 5
-    },
-    {
-      "navn": "mini-frode",
-      "github": "FrodeBl",
-      "poeng": 8,
-      "feil": [],
-      "lag": [
-        {
-          "issue": 19,
-          "navn": "Artsobservasjoner",
-          "poeng": 5
-        }
-      ],
-      "levert": [
-        {
-          "issue": 128,
-          "navn": "Simulering: tsunami i Oslofjorden",
-          "poeng": 3
-        },
-        {
-          "issue": 209,
-          "navn": "Bysykkelstasjoner blir 33 punkter oppå hverandre",
-          "poeng": 2
-        }
-      ],
-      "dollar": 22.839,
-      "tokens": 35600006,
-      "sekunder": 7310,
-      "pr": 7,
-      "utkast": 0,
-      "merget": 3,
-      "kjoeringer": 29,
-      "utenPr": 19,
       "bygg": [],
       "estimert": false,
       "plass": 6
@@ -696,6 +701,14 @@
       "issue": 210,
       "navn": "Historikkgrafen blinker fordi appen kjører på tre replikaer",
       "startet": "2026-09-23T13:19:01.0373888+00:00",
+      "minutter": 1
+    },
+    {
+      "agent": "mini-wilma",
+      "github": "larsajakobsen",
+      "issue": 193,
+      "navn": "Nytt lag: hjertestartere",
+      "startet": "2026-09-23T13:20:02.3717642+00:00",
       "minutter": 0
     }
   ],
@@ -703,18 +716,17 @@
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
     "pr": null,
-    "kjoeringer": 63
+    "kjoeringer": 64
   },
   "produkt": {
-    "testerBestatt": 21,
-    "testerFeilet": 5,
+    "testerBestatt": 20,
+    "testerFeilet": 6,
     "issuerLost": [
       1,
       2,
       3,
       4,
       5,
-      6,
       7,
       8,
       9,
@@ -836,12 +848,6 @@
       "navn": "Hent lagene parallelt",
       "github": "FrodeBl",
       "oppdatert": "2026-09-23T12:56:33Z"
-    },
-    {
-      "issue": 50,
-      "navn": "Mål hva som skjer",
-      "github": "FrodeBl",
-      "oppdatert": "2026-09-23T13:14:37Z"
     },
     {
       "issue": 51,
@@ -1108,16 +1114,16 @@
       "oppdatert": "2026-09-23T12:31:29Z"
     },
     {
-      "issue": 192,
-      "navn": "Nytt lag: Wikipedia-artikler rundt deg",
-      "github": "FrodeBl",
-      "oppdatert": "2026-09-23T13:16:05Z"
+      "issue": 193,
+      "navn": "Nytt lag: hjertestartere",
+      "github": "SasaRad",
+      "oppdatert": "2026-09-23T13:20:03Z"
     },
     {
       "issue": 193,
       "navn": "Nytt lag: hjertestartere",
-      "github": "SasaRad",
-      "oppdatert": "2026-09-23T13:19:09Z"
+      "github": "larsajakobsen",
+      "oppdatert": "2026-09-23T13:20:03Z"
     },
     {
       "issue": 195,
@@ -1162,12 +1168,6 @@
       "oppdatert": "2026-09-23T13:11:27Z"
     },
     {
-      "issue": 206,
-      "navn": "Popupene viser rådata: ISO-tider, «ikon: 😊» og tall uten enhet",
-      "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T13:18:12Z"
-    },
-    {
       "issue": 208,
       "navn": "Skipslaget viser «destinasjon: N/A» og fart uten enhet",
       "github": "randsu",
@@ -1206,6 +1206,18 @@
   ],
   "aapne": [
     {
+      "pr": 252,
+      "tittel": "Nytt lag: bysykkelstasjoner som fyllingsringer",
+      "github": "FrodeBl",
+      "agent": "mini-frode",
+      "opprettet": "2026-09-23T13:15:46Z",
+      "oppdatert": "2026-09-23T13:20:08Z",
+      "utkast": false,
+      "issues": [
+        186
+      ]
+    },
+    {
       "pr": 67,
       "tittel": "Hent lagene parallelt",
       "github": "FrodeBl",
@@ -1227,42 +1239,6 @@
       "utkast": false,
       "issues": [
         29
-      ]
-    },
-    {
-      "pr": 253,
-      "tittel": "Nytt lag: Wikipedia-artikler rundt deg",
-      "github": "FrodeBl",
-      "agent": "mini-frode",
-      "opprettet": "2026-09-23T13:16:03Z",
-      "oppdatert": "2026-09-23T13:18:27Z",
-      "utkast": false,
-      "issues": [
-        192
-      ]
-    },
-    {
-      "pr": 252,
-      "tittel": "Nytt lag: bysykkelstasjoner som fyllingsringer",
-      "github": "FrodeBl",
-      "agent": "mini-frode",
-      "opprettet": "2026-09-23T13:15:46Z",
-      "oppdatert": "2026-09-23T13:18:24Z",
-      "utkast": false,
-      "issues": [
-        186
-      ]
-    },
-    {
-      "pr": 71,
-      "tittel": "Mål hva som skjer",
-      "github": "FrodeBl",
-      "agent": "mini-frode",
-      "opprettet": "2026-09-23T08:12:09Z",
-      "oppdatert": "2026-09-23T13:16:51Z",
-      "utkast": false,
-      "issues": [
-        50
       ]
     },
     {
