@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:33:26",
+  "oppdatert": "2026-09-23T14:34:06",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -607,7 +607,7 @@
       "issue": 188,
       "navn": "Vinden som strømmer over byen",
       "startet": "2026-09-23T12:23:41.4076789+00:00",
-      "minutter": 9
+      "minutter": 10
     },
     {
       "agent": "mini-wilma",
@@ -615,7 +615,7 @@
       "issue": 26,
       "navn": "Skoler",
       "startet": "2026-09-23T12:28:26.4775068+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-wilma",
@@ -631,7 +631,7 @@
       "issue": 114,
       "navn": "Nytt lag: Kristiania i 1910",
       "startet": "2026-09-23T12:32:02.4130394+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-wilma",
@@ -640,6 +640,22 @@
       "navn": "Popupene viser rådata: ISO-tider, «ikon: 😊» og tall uten enhet",
       "startet": "2026-09-23T12:32:25.3380267+00:00",
       "minutter": 1
+    },
+    {
+      "agent": "mini-richard",
+      "github": "randsu",
+      "issue": 115,
+      "navn": "Nytt lag: parker og torg",
+      "startet": "2026-09-23T12:33:36.8322183+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-richard",
+      "github": "randsu",
+      "issue": 114,
+      "navn": "Nytt lag: Kristiania i 1910",
+      "startet": "2026-09-23T12:33:37.8320639+00:00",
+      "minutter": 0
     }
   ],
   "main": {
@@ -745,7 +761,7 @@
       "issue": 55,
       "navn": "Kartet blir tregt med mange punkter",
       "github": "sin-rha",
-      "oppdatert": "2026-09-23T12:31:30Z"
+      "oppdatert": "2026-09-23T12:33:51Z"
     },
     {
       "issue": 57,
@@ -775,31 +791,43 @@
       "issue": 113,
       "navn": "Nytt lag: store arbeidsplasser i sentrum",
       "github": "Copilot",
-      "oppdatert": "2026-09-23T12:29:51Z"
+      "oppdatert": "2026-09-23T12:33:33Z"
     },
     {
       "issue": 113,
       "navn": "Nytt lag: store arbeidsplasser i sentrum",
       "github": "SasaRad",
-      "oppdatert": "2026-09-23T12:29:51Z"
+      "oppdatert": "2026-09-23T12:33:33Z"
     },
     {
       "issue": 114,
       "navn": "Nytt lag: Kristiania i 1910",
       "github": "monet820",
-      "oppdatert": "2026-09-23T12:32:03Z"
+      "oppdatert": "2026-09-23T12:33:38Z"
+    },
+    {
+      "issue": 114,
+      "navn": "Nytt lag: Kristiania i 1910",
+      "github": "randsu",
+      "oppdatert": "2026-09-23T12:33:38Z"
     },
     {
       "issue": 115,
       "navn": "Nytt lag: parker og torg",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T12:29:53Z"
+      "oppdatert": "2026-09-23T12:33:37Z"
     },
     {
       "issue": 115,
       "navn": "Nytt lag: parker og torg",
       "github": "novanettor",
-      "oppdatert": "2026-09-23T12:29:53Z"
+      "oppdatert": "2026-09-23T12:33:37Z"
+    },
+    {
+      "issue": 115,
+      "navn": "Nytt lag: parker og torg",
+      "github": "randsu",
+      "oppdatert": "2026-09-23T12:33:37Z"
     },
     {
       "issue": 116,
@@ -829,7 +857,7 @@
       "issue": 118,
       "navn": "Nyhetslinje nederst på skjermen",
       "github": "leif-larsen",
-      "oppdatert": "2026-09-23T12:32:31Z"
+      "oppdatert": "2026-09-23T12:33:33Z"
     },
     {
       "issue": 119,
@@ -949,7 +977,7 @@
       "issue": 169,
       "navn": "Filtrer punktene i et lag",
       "github": "randsu",
-      "oppdatert": "2026-09-23T12:30:05Z"
+      "oppdatert": "2026-09-23T12:33:26Z"
     },
     {
       "issue": 170,
@@ -973,7 +1001,7 @@
       "issue": 189,
       "navn": "Travlere enn vanlig på veiene",
       "github": "yonzo",
-      "oppdatert": "2026-09-23T12:30:24Z"
+      "oppdatert": "2026-09-23T12:33:54Z"
     },
     {
       "issue": 190,
@@ -1039,10 +1067,22 @@
       "issue": 215,
       "navn": "Svarte klynger dekker sentrum og skjuler hvilke lag som er der",
       "github": "Buggz",
-      "oppdatert": "2026-09-23T12:33:21Z"
+      "oppdatert": "2026-09-23T12:33:35Z"
     }
   ],
   "aapne": [
+    {
+      "pr": 221,
+      "tittel": "#191: Et døgn med bysykkelturer på 90 sekunder",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T12:29:48Z",
+      "oppdatert": "2026-09-23T12:33:46Z",
+      "utkast": false,
+      "issues": [
+        191
+      ]
+    },
     {
       "pr": 219,
       "tittel": "Simulering: tsunami i Oslofjorden",
@@ -1077,18 +1117,6 @@
       "utkast": false,
       "issues": [
         47
-      ]
-    },
-    {
-      "pr": 221,
-      "tittel": "#191: Et døgn med bysykkelturer på 90 sekunder",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T12:29:48Z",
-      "oppdatert": "2026-09-23T12:31:26Z",
-      "utkast": false,
-      "issues": [
-        191
       ]
     },
     {
