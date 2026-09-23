@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:19:47",
+  "oppdatert": "2026-09-23T14:20:45",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -578,7 +578,7 @@
       "issue": 198,
       "navn": "",
       "startet": "2026-09-23T12:16:25.0295863+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-richard",
@@ -586,7 +586,7 @@
       "issue": 157,
       "navn": "",
       "startet": "2026-09-23T12:19:02.3675258+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-richard",
@@ -594,7 +594,7 @@
       "issue": 191,
       "navn": "",
       "startet": "2026-09-23T12:19:02.7888497+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-leif",
@@ -626,6 +626,30 @@
       "issue": 128,
       "navn": "Simulering: tsunami i Oslofjorden",
       "startet": "2026-09-23T12:19:38.2554331+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-kirsten",
+      "github": "jthagesk",
+      "issue": 29,
+      "navn": "Museer",
+      "startet": "2026-09-23T12:19:47.6786683+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-ingve",
+      "github": "ingvevs",
+      "issue": 11,
+      "navn": "Kollektiv",
+      "startet": "2026-09-23T12:20:06.5087944+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "helstein",
+      "github": "nilsgs",
+      "issue": 116,
+      "navn": "Nytt lag: værstasjoner",
+      "startet": "2026-09-23T12:20:17.4874427+00:00",
       "minutter": 0
     }
   ],
@@ -713,7 +737,7 @@
       "issue": 29,
       "navn": "Nytt lag: museer og samlinger",
       "github": "jthagesk",
-      "oppdatert": "2026-09-23T12:19:01Z"
+      "oppdatert": "2026-09-23T12:19:49Z"
     },
     {
       "issue": 30,
@@ -833,7 +857,7 @@
       "issue": 111,
       "navn": "Nytt lag: kaier og ferjekaier",
       "github": "martinrholth",
-      "oppdatert": "2026-09-23T12:15:03Z"
+      "oppdatert": "2026-09-23T12:20:00Z"
     },
     {
       "issue": 113,
@@ -869,13 +893,13 @@
       "issue": 116,
       "navn": "Nytt lag: værstasjoner",
       "github": "monet820",
-      "oppdatert": "2026-09-23T12:19:13Z"
+      "oppdatert": "2026-09-23T12:20:18Z"
     },
     {
       "issue": 116,
       "navn": "Nytt lag: værstasjoner",
       "github": "nilsgs",
-      "oppdatert": "2026-09-23T12:19:13Z"
+      "oppdatert": "2026-09-23T12:20:18Z"
     },
     {
       "issue": 117,
@@ -1053,6 +1077,18 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 100,
+      "tittel": "Vis vannstanden i fjorden",
+      "github": "nilsgs",
+      "agent": "helstein",
+      "opprettet": "2026-09-23T08:50:41Z",
+      "oppdatert": "2026-09-23T12:20:16Z",
+      "utkast": false,
+      "issues": [
+        30
+      ]
+    },
     {
       "pr": 144,
       "tittel": "Tydelige kartsymboler: båter som ser ut som båter (#141)",
@@ -1315,18 +1351,6 @@
       "utkast": false,
       "issues": [
         41
-      ]
-    },
-    {
-      "pr": 100,
-      "tittel": "Vis vannstanden i fjorden",
-      "github": "nilsgs",
-      "agent": "helstein",
-      "opprettet": "2026-09-23T08:50:41Z",
-      "oppdatert": "2026-09-23T08:54:19Z",
-      "utkast": false,
-      "issues": [
-        30
       ]
     },
     {
