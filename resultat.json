@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:08:19",
+  "oppdatert": "2026-09-23T14:08:58",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -184,22 +184,47 @@
           "poeng": 3
         }
       ],
-      "dollar": 2.463,
-      "tokens": 4229842,
-      "sekunder": 985,
+      "dollar": 3.981,
+      "tokens": 7410019,
+      "sekunder": 1401,
       "pr": 2,
       "utkast": 0,
       "merget": 2,
-      "kjoeringer": 4,
-      "utenPr": 2,
+      "kjoeringer": 5,
+      "utenPr": 3,
       "bygg": [],
       "estimert": false,
       "plass": 5
     },
     {
+      "navn": "mini-kirsten",
+      "github": "jthagesk",
+      "poeng": 4,
+      "feil": [],
+      "lag": [],
+      "levert": [
+        {
+          "issue": 45,
+          "navn": "Varsler",
+          "poeng": 5
+        }
+      ],
+      "dollar": 16.019,
+      "tokens": 35559273,
+      "sekunder": 5131,
+      "pr": 4,
+      "utkast": 0,
+      "merget": 1,
+      "kjoeringer": 13,
+      "utenPr": 6,
+      "bygg": [],
+      "estimert": false,
+      "plass": 6
+    },
+    {
       "navn": "mini-wilma",
       "github": "larsajakobsen",
-      "poeng": 5,
+      "poeng": 4,
       "feil": [
         {
           "issue": 1,
@@ -220,39 +245,14 @@
           "poeng": 2
         }
       ],
-      "dollar": 19.451,
-      "tokens": 33569390,
-      "sekunder": 6072,
+      "dollar": 20.885,
+      "tokens": 35778462,
+      "sekunder": 6504,
       "pr": 7,
       "utkast": 0,
       "merget": 3,
-      "kjoeringer": 19,
-      "utenPr": 12,
-      "bygg": [],
-      "estimert": false,
-      "plass": 6
-    },
-    {
-      "navn": "mini-kirsten",
-      "github": "jthagesk",
-      "poeng": 4,
-      "feil": [],
-      "lag": [],
-      "levert": [
-        {
-          "issue": 45,
-          "navn": "Varsler",
-          "poeng": 5
-        }
-      ],
-      "dollar": 14.353,
-      "tokens": 32087988,
-      "sekunder": 4730,
-      "pr": 4,
-      "utkast": 0,
-      "merget": 1,
-      "kjoeringer": 12,
-      "utenPr": 5,
+      "kjoeringer": 20,
+      "utenPr": 13,
       "bygg": [],
       "estimert": false,
       "plass": 7
@@ -270,14 +270,14 @@
           "poeng": 3
         }
       ],
-      "dollar": 6.168,
-      "tokens": 12536686,
-      "sekunder": 1966,
+      "dollar": 8.364,
+      "tokens": 18349601,
+      "sekunder": 2648,
       "pr": 1,
       "utkast": 0,
       "merget": 1,
-      "kjoeringer": 5,
-      "utenPr": 4,
+      "kjoeringer": 6,
+      "utenPr": 5,
       "bygg": [],
       "estimert": false,
       "plass": 8
@@ -395,14 +395,14 @@
       ],
       "lag": [],
       "levert": [],
-      "dollar": 8.821,
-      "tokens": 19033061,
-      "sekunder": 3078,
+      "dollar": 8.912,
+      "tokens": 19227973,
+      "sekunder": 3163,
       "pr": 4,
       "utkast": 0,
       "merget": 1,
-      "kjoeringer": 12,
-      "utenPr": 4,
+      "kjoeringer": 13,
+      "utenPr": 5,
       "bygg": [],
       "estimert": false,
       "plass": 13
@@ -553,28 +553,20 @@
       "feil": [],
       "lag": [],
       "levert": [],
-      "dollar": 11.773,
-      "tokens": 24325634,
-      "sekunder": 4102,
+      "dollar": 13.115,
+      "tokens": 25524857,
+      "sekunder": 4548,
       "pr": 3,
       "utkast": 0,
       "merget": 0,
-      "kjoeringer": 17,
-      "utenPr": 13,
+      "kjoeringer": 19,
+      "utenPr": 15,
       "bygg": [],
       "estimert": false,
       "plass": 21
     }
   ],
   "kjoerer": [
-    {
-      "agent": "mini-jon",
-      "github": "yonzo",
-      "issue": 44,
-      "navn": "Sammenlign tid",
-      "startet": "2026-09-23T11:57:22.3942011+00:00",
-      "minutter": 10
-    },
     {
       "agent": "mini-wilma",
       "github": "larsajakobsen",
@@ -584,60 +576,12 @@
       "minutter": 8
     },
     {
-      "agent": "mini-wilma",
-      "github": "larsajakobsen",
-      "issue": 8,
-      "navn": "Hendelser",
-      "startet": "2026-09-23T12:01:11.9782453+00:00",
-      "minutter": 7
-    },
-    {
       "agent": "mini-taco",
       "github": "Puiu",
       "issue": 54,
       "navn": "Rate limit",
       "startet": "2026-09-23T12:01:39.5119902+00:00",
-      "minutter": 6
-    },
-    {
-      "agent": "mini-ingve",
-      "github": "ingvevs",
-      "issue": 11,
-      "navn": "Kollektiv",
-      "startet": "2026-09-23T12:01:44.272017+00:00",
-      "minutter": 6
-    },
-    {
-      "agent": "mini-kirsten",
-      "github": "jthagesk",
-      "issue": 29,
-      "navn": "Museer",
-      "startet": "2026-09-23T12:01:56.5636433+00:00",
-      "minutter": 6
-    },
-    {
-      "agent": "mini-frode",
-      "github": "FrodeBl",
-      "issue": 50,
-      "navn": "Metrikker",
-      "startet": "2026-09-23T12:04:40.5122615+00:00",
-      "minutter": 3
-    },
-    {
-      "agent": "mini-frode",
-      "github": "FrodeBl",
-      "issue": 48,
-      "navn": "Parallell henting",
-      "startet": "2026-09-23T12:05:19.7031269+00:00",
-      "minutter": 2
-    },
-    {
-      "agent": "mini-leif",
-      "github": "leif-larsen",
-      "issue": 141,
-      "navn": "Tydelige kartsymboler: båter som ser ut som båter",
-      "startet": "2026-09-23T12:07:21.8184109+00:00",
-      "minutter": 0
+      "minutter": 7
     },
     {
       "agent": "mini-aud",
@@ -645,7 +589,7 @@
       "issue": 132,
       "navn": "Ekte sollys på 3D-byggene",
       "startet": "2026-09-23T12:07:36.4342939+00:00",
-      "minutter": 0
+      "minutter": 1
     }
   ],
   "main": {
@@ -677,7 +621,7 @@
       "issue": 8,
       "navn": "Nytt lag: politilogg og nyhetshendelser",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T12:01:13Z"
+      "oppdatert": "2026-09-23T12:08:31Z"
     },
     {
       "issue": 10,
@@ -689,13 +633,13 @@
       "issue": 11,
       "navn": "Nytt lag: kollektivtrafikk som beveger seg",
       "github": "coffeelyfe",
-      "oppdatert": "2026-09-23T12:01:45Z"
+      "oppdatert": "2026-09-23T12:08:47Z"
     },
     {
       "issue": 11,
       "navn": "Nytt lag: kollektivtrafikk som beveger seg",
       "github": "ingvevs",
-      "oppdatert": "2026-09-23T12:01:45Z"
+      "oppdatert": "2026-09-23T12:08:47Z"
     },
     {
       "issue": 13,
@@ -755,7 +699,7 @@
       "issue": 29,
       "navn": "Nytt lag: museer og samlinger",
       "github": "jthagesk",
-      "oppdatert": "2026-09-23T12:01:57Z"
+      "oppdatert": "2026-09-23T12:08:46Z"
     },
     {
       "issue": 30,
@@ -803,7 +747,7 @@
       "issue": 44,
       "navn": "Sammenlign to tidspunkt",
       "github": "yonzo",
-      "oppdatert": "2026-09-23T11:57:23Z"
+      "oppdatert": "2026-09-23T12:08:53Z"
     },
     {
       "issue": 46,
@@ -821,13 +765,13 @@
       "issue": 48,
       "navn": "Hent lagene parallelt",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T12:05:20Z"
+      "oppdatert": "2026-09-23T12:08:52Z"
     },
     {
       "issue": 50,
       "navn": "Mål hva som skjer",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T12:04:41Z"
+      "oppdatert": "2026-09-23T12:08:47Z"
     },
     {
       "issue": 51,
@@ -1037,7 +981,7 @@
       "issue": 141,
       "navn": "Tydelige kartsymboler: båter som ser ut som båter",
       "github": "leif-larsen",
-      "oppdatert": "2026-09-23T12:07:22Z"
+      "oppdatert": "2026-09-23T12:08:52Z"
     },
     {
       "issue": 142,
