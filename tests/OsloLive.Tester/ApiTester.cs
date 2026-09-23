@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace OsloLive.Tester;
 
 /// <summary>Tester at kart-API-et svarer slik frontenden forventer.</summary>
-public class ApiTester(WebApplicationFactory<Program> vert) : IClassFixture<WebApplicationFactory<Program>>
+public class ApiTester(VertUtenBakgrunnssjekk vert) : IClassFixture<VertUtenBakgrunnssjekk>
 {
     private HttpClient Klient => vert.CreateClient();
 
