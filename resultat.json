@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:56:08",
+  "oppdatert": "2026-09-23T10:56:59",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -87,7 +87,7 @@
       "sekunder": 4327,
       "pr": 8,
       "utkast": 0,
-      "merget": 2,
+      "merget": 3,
       "kjoeringer": 11,
       "utenPr": 3,
       "bygg": [],
@@ -308,14 +308,14 @@
       "feil": [],
       "lag": [],
       "levert": [],
-      "dollar": 4.043,
-      "tokens": 8068940,
-      "sekunder": 1536,
+      "dollar": 4.482,
+      "tokens": 8414570,
+      "sekunder": 1667,
       "pr": 3,
       "utkast": 0,
       "merget": 0,
-      "kjoeringer": 4,
-      "utenPr": 1,
+      "kjoeringer": 5,
+      "utenPr": 2,
       "bygg": [],
       "estimert": false,
       "plass": 13
@@ -385,7 +385,7 @@
       "issue": 24,
       "navn": "Bydeler",
       "startet": "2026-09-23T08:45:28.8651408+00:00",
-      "minutter": 10
+      "minutter": 11
     },
     {
       "agent": "mini-richard",
@@ -441,14 +441,6 @@
       "issue": 39,
       "navn": "Tastatursnarveier",
       "startet": "2026-09-23T08:54:03.5879186+00:00",
-      "minutter": 2
-    },
-    {
-      "agent": "mini-aud",
-      "github": "audmaha",
-      "issue": 7,
-      "navn": "Skipstrafikk",
-      "startet": "2026-09-23T08:54:03.6650491+00:00",
       "minutter": 2
     },
     {
@@ -563,13 +555,13 @@
       "issue": 7,
       "navn": "Nytt lag: skip i Oslofjorden",
       "github": "audmaha",
-      "oppdatert": "2026-09-23T08:54:04Z"
+      "oppdatert": "2026-09-23T08:56:21Z"
     },
     {
       "issue": 7,
       "navn": "Nytt lag: skip i Oslofjorden",
       "github": "monet820",
-      "oppdatert": "2026-09-23T08:54:04Z"
+      "oppdatert": "2026-09-23T08:56:21Z"
     },
     {
       "issue": 8,
@@ -907,18 +899,6 @@
       "utkast": false,
       "issues": [
         59
-      ]
-    },
-    {
-      "pr": 94,
-      "tittel": "#6: Nytt lag: elsparkesykler og bysykler",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:44:44Z",
-      "oppdatert": "2026-09-23T08:53:15Z",
-      "utkast": false,
-      "issues": [
-        6
       ]
     },
     {
