@@ -499,6 +499,56 @@ public class AllemannsdataForsøkTester
         Assert.Equal(1, håndterer.Forsøk);
     }
 
+    [Fact]
+    public async Task Svar_gjenbrukes_innenfor_levetiden()
+    {
+        Allemannsdata.TømMellomlager();
+        var håndterer = new FalskHandler(_ => LagJsonSvar(8));
+        var logg = new OpptakLogg();
+        var tid = new FlyttbarTid();
+        var data = new Allemannsdata(new HttpClient(håndterer), logg, tid);
+
+        await data.Hent("test-levetid-1", "operasjon", Parametre);
+        tid.Flytt(TimeSpan.FromSeconds(29));
+        await data.Hent("test-levetid-1", "operasjon", Parametre);
+
+        Assert.Equal(1, håndterer.Forsøk);
+        Assert.Single(logg.Oppføringer, o => o.Melding.Contains("Henter test-levetid-1/"));
+    }
+
+    [Fact]
+    public async Task Svar_hentes_paa_nytt_etter_levetiden()
+    {
+        Allemannsdata.TømMellomlager();
+        var håndterer = new FalskHandler(_ => LagJsonSvar(9));
+        var logg = new OpptakLogg();
+        var tid = new FlyttbarTid();
+        var data = new Allemannsdata(new HttpClient(håndterer), logg, tid);
+
+        await data.Hent("test-levetid-2", "operasjon", Parametre);
+        tid.Flytt(TimeSpan.FromSeconds(31));
+        await data.Hent("test-levetid-2", "operasjon", Parametre);
+
+        Assert.Equal(2, håndterer.Forsøk);
+        Assert.Equal(2, logg.Oppføringer.Count(o => o.Melding.Contains("Henter test-levetid-2/")));
+    }
+
+    [Fact]
+    public async Task Svar_hentes_paa_nytt_naar_levetiden_er_akkurat_ute()
+    {
+        Allemannsdata.TømMellomlager();
+        var håndterer = new FalskHandler(_ => LagJsonSvar(10));
+        var logg = new OpptakLogg();
+        var tid = new FlyttbarTid();
+        var data = new Allemannsdata(new HttpClient(håndterer), logg, tid);
+
+        await data.Hent("test-levetid-3", "operasjon", Parametre);
+        tid.Flytt(Allemannsdata.Levetid);
+        await data.Hent("test-levetid-3", "operasjon", Parametre);
+
+        Assert.Equal(2, håndterer.Forsøk);
+    }
+
     private static HttpResponseMessage LagJsonSvar(int verdi)
     {
         var json = JsonSerializer.Serialize(new { data = new { verdi } });
@@ -567,4 +617,14 @@ internal sealed class StraksTid : TimeProvider
 
         public ValueTask DisposeAsync() => ValueTask.CompletedTask;
     }
+}
+
+/// <summary>TimeProvider med en klokke testen selv styrer, slik at levetid kan testes uten å vente i sanntid.</summary>
+internal sealed class FlyttbarTid : TimeProvider
+{
+    private DateTimeOffset nå = new(2026, 1, 1, 12, 0, 0, TimeSpan.Zero);
+
+    public override DateTimeOffset GetUtcNow() => nå;
+
+    public void Flytt(TimeSpan tid) => nå += tid;
 }
