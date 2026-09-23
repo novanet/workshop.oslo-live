@@ -1,11 +1,11 @@
 {
-  "oppdatert": "2026-09-23T14:08:58",
+  "oppdatert": "2026-09-23T14:10:23",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
       "navn": "mini-richard",
       "github": "randsu",
-      "poeng": 37,
+      "poeng": 39,
       "feil": [
         {
           "issue": 3,
@@ -14,6 +14,11 @@
         }
       ],
       "lag": [
+        {
+          "issue": 6,
+          "navn": "Delt mobilitet",
+          "poeng": 2
+        },
         {
           "issue": 9,
           "navn": "Badetemperatur",
@@ -420,14 +425,14 @@
           "poeng": 1
         }
       ],
-      "dollar": 4.751,
-      "tokens": 8374642,
-      "sekunder": 1764,
+      "dollar": 7.161,
+      "tokens": 12696205,
+      "sekunder": 2728,
       "pr": 3,
       "utkast": 0,
       "merget": 1,
-      "kjoeringer": 7,
-      "utenPr": 4,
+      "kjoeringer": 9,
+      "utenPr": 5,
       "bygg": [],
       "estimert": false,
       "plass": 14
@@ -573,15 +578,7 @@
       "issue": 26,
       "navn": "Skoler",
       "startet": "2026-09-23T12:00:11.8740211+00:00",
-      "minutter": 8
-    },
-    {
-      "agent": "mini-taco",
-      "github": "Puiu",
-      "issue": 54,
-      "navn": "Rate limit",
-      "startet": "2026-09-23T12:01:39.5119902+00:00",
-      "minutter": 7
+      "minutter": 9
     },
     {
       "agent": "mini-aud",
@@ -589,7 +586,7 @@
       "issue": 132,
       "navn": "Ekte sollys på 3D-byggene",
       "startet": "2026-09-23T12:07:36.4342939+00:00",
-      "minutter": 1
+      "minutter": 2
     }
   ],
   "main": {
@@ -599,14 +596,15 @@
     "kjoeringer": 43
   },
   "produkt": {
-    "testerBestatt": 16,
-    "testerFeilet": 10,
+    "testerBestatt": 17,
+    "testerFeilet": 9,
     "issuerLost": [
       1,
       2,
       3,
       4,
       5,
+      6,
       7,
       9,
       12,
@@ -627,7 +625,7 @@
       "issue": 10,
       "navn": "Nytt lag: trafikkregistreringspunkt",
       "github": "pr0nin",
-      "oppdatert": "2026-09-23T12:00:49Z"
+      "oppdatert": "2026-09-23T12:09:32Z"
     },
     {
       "issue": 11,
@@ -784,12 +782,6 @@
       "navn": "Gjør kartutsnittet konfigurerbart",
       "github": "jthagesk",
       "oppdatert": "2026-09-23T09:47:34Z"
-    },
-    {
-      "issue": 54,
-      "navn": "Vær grei mot kildene",
-      "github": "Puiu",
-      "oppdatert": "2026-09-23T12:01:40Z"
     },
     {
       "issue": 55,
@@ -992,6 +984,30 @@
   ],
   "aapne": [
     {
+      "pr": 73,
+      "tittel": "Vær grei mot kildene (#54)",
+      "github": "Puiu",
+      "agent": "mini-taco",
+      "opprettet": "2026-09-23T08:15:23Z",
+      "oppdatert": "2026-09-23T12:09:02Z",
+      "utkast": false,
+      "issues": [
+        54
+      ]
+    },
+    {
+      "pr": 146,
+      "tittel": "Nytt lag: sykkelparkering",
+      "github": "GIR75",
+      "agent": "mini-gir",
+      "opprettet": "2026-09-23T12:07:10Z",
+      "oppdatert": "2026-09-23T12:08:45Z",
+      "utkast": false,
+      "issues": [
+        33
+      ]
+    },
+    {
       "pr": 144,
       "tittel": "Tydelige kartsymboler: båter som ser ut som båter (#141)",
       "github": "leif-larsen",
@@ -1001,18 +1017,6 @@
       "utkast": false,
       "issues": [
         141
-      ]
-    },
-    {
-      "pr": 146,
-      "tittel": "Nytt lag: sykkelparkering",
-      "github": "GIR75",
-      "agent": "mini-gir",
-      "opprettet": "2026-09-23T12:07:10Z",
-      "oppdatert": "2026-09-23T12:07:11Z",
-      "utkast": false,
-      "issues": [
-        33
       ]
     },
     {
@@ -1085,18 +1089,6 @@
       "utkast": false,
       "issues": [
         47
-      ]
-    },
-    {
-      "pr": 73,
-      "tittel": "Vær grei mot kildene (#54)",
-      "github": "Puiu",
-      "agent": "mini-taco",
-      "opprettet": "2026-09-23T08:15:23Z",
-      "oppdatert": "2026-09-23T10:00:18Z",
-      "utkast": false,
-      "issues": [
-        54
       ]
     },
     {
