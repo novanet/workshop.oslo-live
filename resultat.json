@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:52:46",
+  "oppdatert": "2026-09-23T14:53:26",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -133,13 +133,13 @@
         }
       ],
       "levert": [],
-      "dollar": 16.117,
-      "tokens": 28507135,
-      "sekunder": 4936,
-      "pr": 3,
+      "dollar": 18.757,
+      "tokens": 34202417,
+      "sekunder": 5942,
+      "pr": 4,
       "utkast": 0,
       "merget": 2,
-      "kjoeringer": 31,
+      "kjoeringer": 32,
       "utenPr": 27,
       "bygg": [],
       "estimert": false,
@@ -169,14 +169,14 @@
           "poeng": 2
         }
       ],
-      "dollar": 15.408,
-      "tokens": 27505553,
-      "sekunder": 5315,
+      "dollar": 17.052,
+      "tokens": 29837546,
+      "sekunder": 5722,
       "pr": 5,
       "utkast": 0,
       "merget": 3,
-      "kjoeringer": 23,
-      "utenPr": 17,
+      "kjoeringer": 24,
+      "utenPr": 18,
       "bygg": [],
       "estimert": false,
       "plass": 4
@@ -245,13 +245,13 @@
           "poeng": 2
         }
       ],
-      "dollar": 7.352,
-      "tokens": 13387850,
-      "sekunder": 2912,
-      "pr": 5,
+      "dollar": 7.948,
+      "tokens": 14778574,
+      "sekunder": 3152,
+      "pr": 6,
       "utkast": 0,
       "merget": 3,
-      "kjoeringer": 10,
+      "kjoeringer": 11,
       "utenPr": 5,
       "bygg": [],
       "estimert": false,
@@ -313,14 +313,14 @@
           "poeng": 3
         }
       ],
-      "dollar": 5.126,
-      "tokens": 8659113,
-      "sekunder": 1695,
+      "dollar": 5.684,
+      "tokens": 9554037,
+      "sekunder": 1852,
       "pr": 2,
       "utkast": 0,
       "merget": 2,
-      "kjoeringer": 8,
-      "utenPr": 6,
+      "kjoeringer": 9,
+      "utenPr": 7,
       "bygg": [],
       "estimert": false,
       "plass": 8
@@ -649,36 +649,12 @@
   ],
   "kjoerer": [
     {
-      "agent": "mini-gir",
-      "github": "GIR75",
-      "issue": 51,
-      "navn": "Logging",
-      "startet": "2026-09-23T12:35:46.639797+00:00",
-      "minutter": 16
-    },
-    {
       "agent": "mini-astrid",
       "github": "theakbe",
       "issue": 188,
       "navn": "Vinden som strømmer over byen",
       "startet": "2026-09-23T12:42:40.4886016+00:00",
-      "minutter": 9
-    },
-    {
-      "agent": "mini-frode",
-      "github": "FrodeBl",
-      "issue": 19,
-      "navn": "Artsobservasjoner",
-      "startet": "2026-09-23T12:45:18.4146535+00:00",
-      "minutter": 7
-    },
-    {
-      "agent": "mini-aud",
-      "github": "audmaha",
-      "issue": 211,
-      "navn": "Statistikken viser ikke «Nyeste» for vannmålere og smilefjes",
-      "startet": "2026-09-23T12:48:04.2901179+00:00",
-      "minutter": 4
+      "minutter": 10
     },
     {
       "agent": "henrik",
@@ -686,7 +662,7 @@
       "issue": 203,
       "navn": "Popupen havner bak lagpanelet på PC",
       "startet": "2026-09-23T12:49:33.0669163+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-richard",
@@ -694,7 +670,7 @@
       "issue": 180,
       "navn": "Simulering: strømstans i en bydel",
       "startet": "2026-09-23T12:49:58.0271137+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-richard",
@@ -702,7 +678,7 @@
       "issue": 196,
       "navn": "Nytt lag: forsinkelser på knutepunktene",
       "startet": "2026-09-23T12:50:57.3337676+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-leif",
@@ -710,7 +686,7 @@
       "issue": 21,
       "navn": "Adressesøk",
       "startet": "2026-09-23T12:50:58.0553123+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-frode",
@@ -718,7 +694,23 @@
       "issue": 48,
       "navn": "Parallell henting",
       "startet": "2026-09-23T12:51:10.1948683+00:00",
-      "minutter": 1
+      "minutter": 2
+    },
+    {
+      "agent": "mini-richard",
+      "github": "randsu",
+      "issue": 155,
+      "navn": "Vis siste gode svar når kilden svikter",
+      "startet": "2026-09-23T12:52:27.6280109+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-frode",
+      "github": "FrodeBl",
+      "issue": 50,
+      "navn": "Metrikker",
+      "startet": "2026-09-23T12:52:40.434133+00:00",
+      "minutter": 0
     }
   ],
   "main": {
@@ -749,6 +741,12 @@
     "feilmelding": null
   },
   "tildelt": [
+    {
+      "issue": 16,
+      "navn": "Nytt lag: ladestasjoner for elbil",
+      "github": "randsu",
+      "oppdatert": "2026-09-23T12:30:45Z"
+    },
     {
       "issue": 18,
       "navn": "Nytt lag: kulturminner",
@@ -783,7 +781,7 @@
       "issue": 29,
       "navn": "Nytt lag: museer og samlinger",
       "github": "jthagesk",
-      "oppdatert": "2026-09-23T12:46:15Z"
+      "oppdatert": "2026-09-23T12:53:06Z"
     },
     {
       "issue": 31,
@@ -837,13 +835,13 @@
       "issue": 50,
       "navn": "Mål hva som skjer",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T12:51:56Z"
+      "oppdatert": "2026-09-23T12:52:41Z"
     },
     {
       "issue": 51,
       "navn": "Strukturert logging",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T12:35:47Z"
+      "oppdatert": "2026-09-23T12:53:01Z"
     },
     {
       "issue": 52,
@@ -1056,6 +1054,12 @@
       "oppdatert": "2026-09-23T12:38:17Z"
     },
     {
+      "issue": 155,
+      "navn": "Vis siste gode svar når kilden svikter",
+      "github": "randsu",
+      "oppdatert": "2026-09-23T12:52:28Z"
+    },
+    {
       "issue": 157,
       "navn": "Kontrakttester for alle lag",
       "github": "randsu",
@@ -1149,13 +1153,7 @@
       "issue": 211,
       "navn": "Statistikken viser ikke «Nyeste» for vannmålere og smilefjes",
       "github": "audmaha",
-      "oppdatert": "2026-09-23T12:48:29Z"
-    },
-    {
-      "issue": 212,
-      "navn": "Feilmeldingene fra API-et er engelske unntakstekster",
-      "github": "nilsgs",
-      "oppdatert": "2026-09-23T12:50:02Z"
+      "oppdatert": "2026-09-23T12:52:35Z"
     },
     {
       "issue": 214,
@@ -1171,6 +1169,54 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 245,
+      "tittel": "Strukturert logging",
+      "github": "GIR75",
+      "agent": "mini-gir",
+      "opprettet": "2026-09-23T12:52:59Z",
+      "oppdatert": "2026-09-23T12:53:00Z",
+      "utkast": false,
+      "issues": [
+        51
+      ]
+    },
+    {
+      "pr": 244,
+      "tittel": "Statistikken viser ikke «Nyeste» for vannmålere og smilefjes",
+      "github": "audmaha",
+      "agent": "mini-aud",
+      "opprettet": "2026-09-23T12:52:34Z",
+      "oppdatert": "2026-09-23T12:52:35Z",
+      "utkast": false,
+      "issues": [
+        211
+      ]
+    },
+    {
+      "pr": 238,
+      "tittel": "#119: Mørkt kart når sola går ned i Oslo",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T12:48:17Z",
+      "oppdatert": "2026-09-23T12:52:29Z",
+      "utkast": false,
+      "issues": [
+        119
+      ]
+    },
+    {
+      "pr": 230,
+      "tittel": "#118: Nyhetslinje nederst på skjermen",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T12:42:40Z",
+      "oppdatert": "2026-09-23T12:52:25Z",
+      "utkast": false,
+      "issues": [
+        118
+      ]
+    },
     {
       "pr": 225,
       "tittel": "#114: Nytt lag: Kristiania i 1910",
@@ -1217,18 +1263,6 @@
       "utkast": false,
       "issues": [
         124
-      ]
-    },
-    {
-      "pr": 238,
-      "tittel": "#119: Mørkt kart når sola går ned i Oslo",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T12:48:17Z",
-      "oppdatert": "2026-09-23T12:51:25Z",
-      "utkast": false,
-      "issues": [
-        119
       ]
     },
     {
@@ -1301,30 +1335,6 @@
       "utkast": false,
       "issues": [
         142
-      ]
-    },
-    {
-      "pr": 239,
-      "tittel": "#211: Statistikken viser ikke «Nyeste» for vannmålere og smilefjes",
-      "github": "randsu",
-      "agent": "randsu",
-      "opprettet": "2026-09-23T12:48:17Z",
-      "oppdatert": "2026-09-23T12:50:17Z",
-      "utkast": false,
-      "issues": [
-        211
-      ]
-    },
-    {
-      "pr": 230,
-      "tittel": "#118: Nyhetslinje nederst på skjermen",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T12:42:40Z",
-      "oppdatert": "2026-09-23T12:50:15Z",
-      "utkast": false,
-      "issues": [
-        118
       ]
     },
     {
