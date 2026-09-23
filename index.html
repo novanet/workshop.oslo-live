@@ -78,26 +78,27 @@
   tbody tr { background: var(--surface); }
   tbody td {
     border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
-    padding: 11px 12px 11px 0; vertical-align: middle;
+    padding: 6px 14px 6px 0; vertical-align: middle;
   }
   tbody td:first-child { border-left: 1px solid var(--line); border-radius: 10px 0 0 10px; padding-left: 13px; }
   tbody td:last-child { border-right: 1px solid var(--line); border-radius: 0 10px 10px 0; padding-right: 13px; text-align: right; }
-  tbody tr.mellom td { border: 0; padding: 0; height: 10px; background: transparent; }
+  tbody tr.mellom { background: transparent; }
+  tbody tr.mellom td { border: 0; padding: 0; height: 4px; background: transparent; }
 
   .plass {
     font-family: "Bricolage Grotesque", system-ui, sans-serif; font-weight: 700;
-    font-size: clamp(20px, 2.2vw, 28px); color: var(--muted);
+    font-size: clamp(18px, 1.8vw, 24px); color: var(--muted);
     font-variant-numeric: tabular-nums; width: 1%; white-space: nowrap;
   }
   tr.topp .plass { color: var(--gull); }
   tr.topp td:first-child { box-shadow: inset 3px 0 0 var(--gull); }
 
-  .navn { font-weight: 600; font-size: clamp(16px, 1.5vw, 19px); }
-  .repo { font-family: "IBM Plex Mono", monospace; font-size: 12.5px; color: var(--muted); }
+  .navn { font-weight: 600; font-size: clamp(16px, 1.5vw, 19px); display: inline; margin-right: 10px; }
+  .repo { font-family: "IBM Plex Mono", monospace; font-size: 12.5px; color: var(--muted); display: inline; white-space: nowrap; }
 
   .poeng {
     font-family: "Bricolage Grotesque", system-ui, sans-serif; font-weight: 700;
-    font-size: clamp(24px, 2.8vw, 36px); line-height: 1; color: var(--accent);
+    font-size: clamp(22px, 2.2vw, 30px); line-height: 1; color: var(--accent);
     font-variant-numeric: tabular-nums;
   }
   .poeng.negativ { color: var(--warn); }
@@ -116,7 +117,7 @@
 
   .tall { font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums; font-size: 15px; }
   .tall.dyrt { color: var(--warn); }
-  .under { display: block; font-size: 12px; color: var(--muted); font-family: "IBM Plex Sans", sans-serif; }
+  .under { display: inline; margin-left: 8px; font-size: 12px; color: var(--muted); font-family: "IBM Plex Sans", sans-serif; white-space: nowrap; }
 
   .pille {
     display: inline-flex; align-items: center; gap: 6px;
@@ -204,6 +205,17 @@
     .live-grid { grid-template-columns: 1fr; }
   }
 
+  /* Storskjerm: ?poeng viser bare framdrift og poengtavla, med større rader. */
+  body.bare-poeng .live-grid, body.bare-poeng #kjoerer, body.bare-poeng .navigasjon { display: none; }
+  body.bare-poeng header h1 { font-size: clamp(26px, 3vw, 40px); }
+  body.bare-poeng tbody tr:not(.mellom) td { padding-top: 5px; padding-bottom: 5px; }
+  body.bare-poeng tbody tr.mellom td { height: 3px; }
+  body.bare-poeng header { margin-bottom: 8px; }
+  body.bare-poeng .merkelapp { display: none; }
+  body.bare-poeng .navn { font-size: clamp(17px, 1.4vw, 21px); }
+  body.bare-poeng .poeng { font-size: clamp(20px, 1.9vw, 26px); }
+  body.bare-poeng .plass { font-size: clamp(17px, 1.5vw, 21px); }
+
   .score-topp {
     display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
     margin: 6px 0 9px;
@@ -260,6 +272,10 @@
 </div>
 
 <script>
+  try {
+    if (/(^|[?&])poeng(=|&|$)/.test(location.search.slice(1))) document.body.classList.add('bare-poeng');
+  } catch (e) { /* vis full side */ }
+
 (function () {
   var HENT_HVERT = 15000;
 
@@ -296,6 +312,7 @@
       merker.push('<span class="merke ' + b.type + '">' + (b.type === 'brakk' ? 'brakk main' : 'fikset main') +
         (b.pr ? ' #' + b.pr : '') + ' <b>' + (b.poeng > 0 ? '+' : '') + b.poeng + '</b></span>');
     });
+    if (d.utkast) merker.push('<span class="merke brakk">' + d.utkast + ' PR bygger ikke</span>');
     if (!merker.length) merker.push('<span class="merke ingen">ingenting ennå</span>');
 
     var dyrt = (d.dollar || 0) >= 5 ? ' dyrt' : '';
@@ -306,15 +323,12 @@
         '<td><div class="navn">' + esc(d.navn) + '</div>' +
             '<div class="repo">' + (d.github && d.github !== d.navn ? esc(d.github) + ' · ' : '') + (d.merget || 0) + ' merget av ' + (d.pr || 0) + ' PR</div></td>' +
         '<td><div class="merker">' + merker.join('') + '</div></td>' +
-        '<td>' + (d.utkast
-            ? '<span class="pille roed"><span class="prikk"></span>' + d.utkast + ' utkast</span>'
-            : '<span class="pille groenn"><span class="prikk"></span>alle bygger</span>') + '</td>' +
         '<td><span class="tall' + dyrt + '"' + (d.estimert ? ' title="Deler av kostnaden er beregnet fra tokens og listepris"' : '') + '>' + (d.estimert ? '~' : '') + '$' + (d.dollar || 0).toFixed(2) + '</span>' +
             '<span class="under">' + Math.round((d.tokens || 0) / 1000) + 'k tokens' +
             (d.utenPr ? ' · ' + d.utenPr + ' uten PR' : '') + '</span></td>' +
         '<td><span class="poeng' + (d.poeng < 0 ? ' negativ' : '') + '">' + d.poeng + '</span></td>' +
       '</tr>' +
-      '<tr class="mellom"><td colspan="6"></td></tr>';
+      '<tr class="mellom"><td colspan="5"></td></tr>';
   }
 
   function tegnFramdrift(data) {
@@ -412,7 +426,7 @@
         '<div class="score-topp"><h2>Poengtavle</h2><span>Poeng og kostnad per deltaker</span></div>' +
         '<div class="rull"><table>' +
           '<thead><tr>' +
-            '<th>#</th><th>Agent</th><th>Løst</th><th>Bygg</th>' +
+            '<th>#</th><th>Agent</th><th>Løst</th>' +
             '<th>Kostnad</th><th class="h">Poeng</th>' +
           '</tr></thead><tbody>' + folk.map(rad).join('') + '</tbody>' +
         '</table></div>';
