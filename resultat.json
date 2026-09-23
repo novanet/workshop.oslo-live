@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:32:45",
+  "oppdatert": "2026-09-23T11:33:35",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -143,14 +143,14 @@
           "poeng": 3
         }
       ],
-      "dollar": 6.025,
-      "tokens": 12052609,
-      "sekunder": 2188,
+      "dollar": 6.585,
+      "tokens": 12576183,
+      "sekunder": 2364,
       "pr": 3,
       "utkast": 0,
       "merget": 2,
-      "kjoeringer": 4,
-      "utenPr": 1,
+      "kjoeringer": 5,
+      "utenPr": 2,
       "bygg": [],
       "estimert": false,
       "plass": 4
@@ -187,6 +187,31 @@
       "plass": 5
     },
     {
+      "navn": "mini-kirsten",
+      "github": "jthagesk",
+      "poeng": 4,
+      "feil": [],
+      "lag": [],
+      "levert": [
+        {
+          "issue": 45,
+          "navn": "Varsler",
+          "poeng": 5
+        }
+      ],
+      "dollar": 10.315,
+      "tokens": 22223515,
+      "sekunder": 3473,
+      "pr": 4,
+      "utkast": 0,
+      "merget": 1,
+      "kjoeringer": 7,
+      "utenPr": 1,
+      "bygg": [],
+      "estimert": false,
+      "plass": 6
+    },
+    {
       "navn": "mini-jon",
       "github": "yonzo",
       "poeng": 3,
@@ -209,7 +234,7 @@
       "utenPr": 3,
       "bygg": [],
       "estimert": false,
-      "plass": 6
+      "plass": 7
     },
     {
       "navn": "mini-wilma",
@@ -240,7 +265,7 @@
       "utenPr": 5,
       "bygg": [],
       "estimert": false,
-      "plass": 7
+      "plass": 8
     },
     {
       "navn": "helstein",
@@ -265,7 +290,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 8
+      "plass": 9
     },
     {
       "navn": "mini-leif",
@@ -290,7 +315,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 9
+      "plass": 10
     },
     {
       "navn": "henrik",
@@ -309,7 +334,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 10
+      "plass": 11
     },
     {
       "navn": "mini-sindre",
@@ -328,7 +353,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 11
+      "plass": 12
     },
     {
       "navn": "Dmitry-agent",
@@ -347,7 +372,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 12
+      "plass": 13
     },
     {
       "navn": "mini-taco",
@@ -366,7 +391,7 @@
       "utenPr": 0,
       "bygg": [],
       "estimert": false,
-      "plass": 13
+      "plass": 14
     },
     {
       "navn": "mini-aud",
@@ -385,7 +410,7 @@
       "utenPr": 3,
       "bygg": [],
       "estimert": false,
-      "plass": 14
+      "plass": 15
     },
     {
       "navn": "Andy3000",
@@ -402,25 +427,6 @@
       "merget": 0,
       "kjoeringer": 6,
       "utenPr": 2,
-      "bygg": [],
-      "estimert": false,
-      "plass": 15
-    },
-    {
-      "navn": "mini-kirsten",
-      "github": "jthagesk",
-      "poeng": -1,
-      "feil": [],
-      "lag": [],
-      "levert": [],
-      "dollar": 10.315,
-      "tokens": 22223515,
-      "sekunder": 3473,
-      "pr": 4,
-      "utkast": 0,
-      "merget": 0,
-      "kjoeringer": 7,
-      "utenPr": 1,
       "bygg": [],
       "estimert": false,
       "plass": 16
@@ -452,15 +458,7 @@
       "issue": 55,
       "navn": "Ytelse",
       "startet": "2026-09-23T09:26:04.1878556+00:00",
-      "minutter": 6
-    },
-    {
-      "agent": "mini-knive",
-      "github": "Buggz",
-      "issue": 28,
-      "navn": "Tog",
-      "startet": "2026-09-23T09:29:24.4557136+00:00",
-      "minutter": 2
+      "minutter": 7
     }
   ],
   "main": {
@@ -701,13 +699,13 @@
       "issue": 28,
       "navn": "Nytt lag: togtrafikk",
       "github": "Buggz",
-      "oppdatert": "2026-09-23T09:29:25Z"
+      "oppdatert": "2026-09-23T09:32:26Z"
     },
     {
       "issue": 29,
       "navn": "Nytt lag: museer og samlinger",
       "github": "jthagesk",
-      "oppdatert": "2026-09-23T08:48:46Z"
+      "oppdatert": "2026-09-23T09:33:05Z"
     },
     {
       "issue": 30,
@@ -907,18 +905,6 @@
       "utkast": false,
       "issues": [
         11
-      ]
-    },
-    {
-      "pr": 84,
-      "tittel": "Varsle når noe skjer",
-      "github": "jthagesk",
-      "agent": "mini-kirsten",
-      "opprettet": "2026-09-23T08:34:32Z",
-      "oppdatert": "2026-09-23T09:31:38Z",
-      "utkast": false,
-      "issues": [
-        45
       ]
     },
     {
