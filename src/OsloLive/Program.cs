@@ -30,10 +30,14 @@ builder.Services.AddHttpClient("fly", klient =>
 builder.Services.AddMemoryCache();
 
 // Øyeblikksbilder av hvert lag hver time, slik at tidslinjen kan vise hvordan kartet så ut. Se Historikk/.
+// Standardmappa ligger under appens rotmappe (App_Data/historikk, ikke i git), ikke i temp, slik at
+// den er forutsigbar og kan monteres som volum i containeren. Overstyres med Historikk:Mappe.
 builder.Services.AddSingleton(tjenester =>
 {
     var mappe = tjenester.GetRequiredService<IConfiguration>()["Historikk:Mappe"];
-    return new Bildelager(string.IsNullOrWhiteSpace(mappe) ? Path.Combine(Path.GetTempPath(), "oslolive-historikk") : mappe);
+    return new Bildelager(string.IsNullOrWhiteSpace(mappe)
+        ? Path.Combine(tjenester.GetRequiredService<IHostEnvironment>().ContentRootPath, "App_Data", "historikk")
+        : mappe);
 });
 builder.Services.AddHostedService<Øyeblikksjobb>();
 

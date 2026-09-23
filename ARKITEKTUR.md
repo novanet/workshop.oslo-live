@@ -124,10 +124,10 @@ utvidet til Gardermoen; det er en egen beslutning om hva «Oslo Live» skal dekk
 
 Konfigurasjon i `appsettings.json`:
 
-- `Historikk:Mappe`: hvor bildene ligger. Tom verdi betyr `<temp>/oslolive-historikk`.
+- `Historikk:Mappe`: hvor bildene ligger. Tom verdi betyr `App_Data/historikk` under appens rotmappe (`/app/App_Data/historikk` i containeren). Mappa er ikke i git.
 - `Historikk:Jobb`: `false` skrur jobben av. Testene gjør det via `TestVert`.
 
-Standardmappa er flyktig. I Container Apps forsvinner den ved ny revisjon eller omstart, så tidslinjen er tom til jobben har tatt nye bilder. Skal historikken overleve en utrulling, monter et volum (for eksempel Azure Files) i appen og pek `Historikk:Mappe` dit med miljøvariabelen `Historikk__Mappe`.
+Standardmappa ligger i containerens eget filsystem. Den overlever en omstart av prosessen, men i Container Apps hører filsystemet til replikaen, så etter en ny revisjon starter tidslinjen tom til jobben har tatt nye bilder. Skal historikken overleve en utrulling, monter et volum (for eksempel Azure Files) på `/app/App_Data/historikk`, eller pek `Historikk:Mappe` (miljøvariabelen `Historikk__Mappe`) på volumet. `infra/kart.bicep` monterer ikke noe volum i dag. Dockerfile lager mappa med rettigheter for brukeren `app`, som kjørebildet kjører som.
 
 ## Frontend
 
