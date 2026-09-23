@@ -191,6 +191,31 @@ public class GeoTester
         Assert.InRange(c[0], Geo.MinLon, Geo.MaksLon);
         Assert.InRange(c[1], Geo.MinLat, Geo.MaksLat);
     }
+
+    [Fact]
+    public void Avstand_fra_raadhuset_til_sofienbergparken_er_mellom_1200_og_1300_meter()
+    {
+        var meter = Geo.Avstand(Geo.OsloLat, Geo.OsloLon, 59.9228, 10.7660);
+
+        Assert.InRange(meter, 1200, 1300);
+    }
+
+    [Fact]
+    public void Avstand_til_samme_punkt_er_null()
+    {
+        var meter = Geo.Avstand(59.9139, 10.7522, 59.9139, 10.7522);
+
+        Assert.Equal(0, meter);
+    }
+
+    [Fact]
+    public void Avstand_er_lik_begge_veier()
+    {
+        var frem = Geo.Avstand(59.9139, 10.7522, 59.9228, 10.7660);
+        var tilbake = Geo.Avstand(59.9228, 10.7660, 59.9139, 10.7522);
+
+        Assert.Equal(frem, tilbake, precision: 6);
+    }
 }
 
 public class AllemannsdataTester
