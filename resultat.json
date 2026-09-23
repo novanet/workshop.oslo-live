@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:06:09",
+  "oppdatert": "2026-09-23T11:06:36",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -447,7 +447,7 @@
       "issue": 11,
       "navn": "Kollektiv",
       "startet": "2026-09-23T09:04:10.6494291+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-gir",
@@ -455,7 +455,7 @@
       "issue": 13,
       "navn": "Veiarbeid",
       "startet": "2026-09-23T09:05:17.8039862+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-gir",
@@ -463,7 +463,7 @@
       "issue": 18,
       "navn": "Kulturminner",
       "startet": "2026-09-23T09:05:18.1410737+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-gir",
@@ -471,14 +471,14 @@
       "issue": 15,
       "navn": "Spisesteder",
       "startet": "2026-09-23T09:05:32.6022247+00:00",
-      "minutter": 0
+      "minutter": 1
     }
   ],
   "main": {
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
     "pr": null,
-    "kjoeringer": 29
+    "kjoeringer": 30
   },
   "produkt": {
     "testerBestatt": 14,
@@ -603,7 +603,7 @@
       "issue": 11,
       "navn": "Nytt lag: kollektivtrafikk som beveger seg",
       "github": "coffeelyfe",
-      "oppdatert": "2026-09-23T09:04:11Z"
+      "oppdatert": "2026-09-23T09:06:32Z"
     },
     {
       "issue": 13,
@@ -890,6 +890,18 @@
   ],
   "aapne": [
     {
+      "pr": 79,
+      "tittel": "Kartet blir tregt med mange punkter",
+      "github": "sin-rha",
+      "agent": "mini-sindre",
+      "opprettet": "2026-09-23T08:30:02Z",
+      "oppdatert": "2026-09-23T09:06:04Z",
+      "utkast": false,
+      "issues": [
+        55
+      ]
+    },
+    {
       "pr": 104,
       "tittel": "#25: Ta vare på et øyeblikksbilde hver time",
       "github": "randsu",
@@ -1115,18 +1127,6 @@
       "utkast": false,
       "issues": [
         8
-      ]
-    },
-    {
-      "pr": 79,
-      "tittel": "Kartet blir tregt med mange punkter",
-      "github": "sin-rha",
-      "agent": "mini-sindre",
-      "opprettet": "2026-09-23T08:30:02Z",
-      "oppdatert": "2026-09-23T08:43:58Z",
-      "utkast": false,
-      "issues": [
-        55
       ]
     },
     {
