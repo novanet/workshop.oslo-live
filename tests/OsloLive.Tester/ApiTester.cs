@@ -256,6 +256,54 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
     }
 
     [Fact]
+    public async Task Statistikken_svarer_200()
+    {
+        var svar = await Klient.GetAsync("/api/statistikk");
+
+        Assert.Equal(HttpStatusCode.OK, svar.StatusCode);
+    }
+
+    [Fact]
+    public async Task Statistikken_har_ett_element_per_lag()
+    {
+        var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
+        var statistikk = await Klient.GetFromJsonAsync<List<Statistikkoppforing>>("/api/statistikk");
+
+        Assert.Equal(
+            lag!.Select(l => l.Id).OrderBy(id => id),
+            statistikk!.Select(s => s.Id).OrderBy(id => id));
+    }
+
+    [Fact]
+    public async Task Lag_som_feiler_gir_feiler_true_og_antall_null_i_statistikken()
+    {
+        using var vertMedSvikt = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient("fly").ConfigurePrimaryHttpMessageHandler(() => new SviktHandler())));
+        var klient = vertMedSvikt.CreateClient();
+
+        await klient.GetAsync("/api/lag/fly");
+        var statistikk = await klient.GetFromJsonAsync<List<Statistikkoppforing>>("/api/statistikk");
+
+        var fly = statistikk!.Single(s => s.Id == "fly");
+        Assert.True(fly.Feiler);
+        Assert.Null(fly.Antall);
+    }
+
+    [Fact]
+    public async Task Statistikken_henter_ikke_lagene()
+    {
+        using var vertMedSvikt = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient("fly").ConfigurePrimaryHttpMessageHandler(() => new SviktHandler())));
+        var klient = vertMedSvikt.CreateClient();
+
+        var statistikk = await klient.GetFromJsonAsync<List<Statistikkoppforing>>("/api/statistikk");
+
+        var fly = statistikk!.Single(s => s.Id == "fly");
+        Assert.False(fly.Feiler);
+        Assert.Null(fly.Hentet);
+    }
+
+    [Fact]
     public async Task Ugyldig_tid_gir_400()
     {
         var svar = await Klient.GetAsync("/api/lag/luftkvalitet?tid=ikke-en-tid");
@@ -402,4 +450,6 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
     }
 
     private sealed record Lagoppforing(string Id, string Navn, string Beskrivelse, string Ikon);
+
+    private sealed record Statistikkoppforing(string Id, string Navn, int? Antall, DateTimeOffset? Eldste, DateTimeOffset? Nyeste, DateTimeOffset? Hentet, bool Feiler);
 }

@@ -44,6 +44,11 @@
   .tom { font-size: 13px; color: var(--dempet); line-height: 1.5; padding: 4px 2px; }
   .bunn { margin-top: 12px; padding-top: 12px; border-top: 1px solid #e5e7eb; font-size: 11px; color: var(--dempet); display: flex; justify-content: space-between; }
 
+  .statistikk { margin-top: 12px; padding-top: 12px; border-top: 1px solid #e5e7eb; font-size: 12px; }
+  .statistikk summary { cursor: pointer; font-weight: 600; font-size: 13px; }
+  .statistikk table { width: 100%; border-collapse: collapse; margin-top: 6px; font-variant-numeric: tabular-nums; }
+  .statistikk td { padding: 2px 4px; color: var(--dempet); }
+  .statistikk .feiler { color: var(--feil); font-weight: 600; }
   .stroem { margin-top: 12px; padding-top: 12px; border-top: 1px solid #e5e7eb; }
   .stroem h2 { margin: 0 0 6px; font-size: 13px; }
   .stroem .naa { font-size: 22px; font-weight: 700; }
@@ -215,6 +220,7 @@
     <span id="oppdatert">–</span>
     <span id="sum">–</span>
   </div>
+  <details class="statistikk" id="statistikk"><summary>Statistikk</summary><div id="statistikkinnhold"><p class="tom">Laster …</p></div></details>
   <div class="stroem" id="stroem">
     <h2>Strømpris i Oslo (NO1)</h2>
     <p class="tom">Henter strømpris …</p>
@@ -648,6 +654,32 @@ function oppdaterBunn() {
   document.getElementById('oppdatert').textContent = valgtTid ? 'Viser ' + tidTekst(valgtTid) : new Date().toLocaleTimeString('no-NO');
 }
 
+const STATISTIKK_NØKKEL = 'oslolive.statistikk.åpen';
+const statistikkPanel = document.getElementById('statistikk');
+statistikkPanel.open = localStorage.getItem(STATISTIKK_NØKKEL) === '1';
+statistikkPanel.addEventListener('toggle', () => localStorage.setItem(STATISTIKK_NØKKEL, statistikkPanel.open ? '1' : '0'));
+
+function klokke(iso) {
+  return iso ? new Date(iso).toLocaleTimeString('no-NO') : '–';
+}
+
+async function hentStatistikk() {
+  const mål = document.getElementById('statistikkinnhold');
+  try {
+    const svar = await fetch('/api/statistikk');
+    if (!svar.ok) throw new Error('HTTP ' + svar.status);
+    const rader = await svar.json();
+
+    mål.innerHTML = '<table><tr><td>Lag</td><td>Punkter</td><td>Nyeste</td><td>Hentet</td></tr>' +
+      rader.map((r) => `<tr><td>${esc(r.navn)}</td>` +
+        `<td>${r.feiler ? '<span class="feiler">feiler</span>' : esc(r.antall ?? '–')}</td>` +
+        `<td title="Eldste: ${esc(klokke(r.eldste))}">${esc(klokke(r.nyeste))}</td>` +
+        `<td>${esc(klokke(r.hentet))}</td></tr>`).join('') + '</table>';
+  } catch (e) {
+    mål.innerHTML = '<p class="tom">Statistikken er utilgjengelig.</p>';
+  }
+}
+
 /** «4 s», «2 min» eller «1 t» siden siste vellykkede henting, eller «aldri». */
 function alderTekst(sistOk, nå) {
   if (!sistOk) return 'aldri';
@@ -740,14 +772,15 @@ async function start() {
     valg.textContent = l.navn;
     bydelSelect.appendChild(valg);
 
-    hent(l.id);
   });
 
   bydelSelect.addEventListener('change', hentBydeler);
   hentBydeler();
 
+  const oppdaterAlt = () => Promise.allSettled([...lagene.keys()].map(hent)).then(hentStatistikk);
+  oppdaterAlt();
   // Står tidslinjen på et annet tidspunkt enn nå, hentes ingen levende data før den settes tilbake.
-  setInterval(() => { if (valgtTid) return; lagene.forEach((_, id) => hent(id)); hentBydeler(); }, 15000);
+  setInterval(() => { if (valgtTid) return; oppdaterAlt(); hentBydeler(); }, 15000);
 
   // Først nå finnes lagene, så demoen har noe å vise og noe å sette tilbake etterpå.
   document.getElementById('demo').disabled = false;

@@ -28,6 +28,7 @@ builder.Services.AddHttpClient("fly", klient =>
     klient.DefaultRequestHeaders.UserAgent.ParseAdd("OsloLive/1.0 (kurs)");
 });
 builder.Services.AddMemoryCache();
+builder.Services.AddSingleton<Lagstatistikk>();
 
 // Øyeblikksbilder av hvert lag hver time, slik at tidslinjen kan vise hvordan kartet så ut. Se Historikk/.
 // Standardmappa ligger under appens rotmappe (App_Data/historikk, ikke i git), ikke i temp, slik at
@@ -66,7 +67,8 @@ app.MapGet("/api/lag", (IEnumerable<ILag> lag) =>
     lag.Select(l => new { id = l.Id, navn = l.Navn, beskrivelse = l.Beskrivelse, ikon = l.Ikon }));
 
 // Punktene i ett lag, som GeoJSON. Med ?tid= hentes bildet lagret nærmest det tidspunktet, se Historikk/.
-app.MapGet("/api/lag/{id}", async (string id, string? tid, IEnumerable<ILag> lag, Bildelager bilder, CancellationToken stopp) =>
+// Bare levende henting oppdaterer statistikken; historiske bilder gjør det ikke.
+app.MapGet("/api/lag/{id}", async (string id, string? tid, IEnumerable<ILag> lag, Bildelager bilder, Lagstatistikk statistikk, CancellationToken stopp) =>
 {
     var valgt = lag.FirstOrDefault(l => string.Equals(l.Id, id, StringComparison.OrdinalIgnoreCase));
     if (valgt is null)
@@ -86,11 +88,18 @@ app.MapGet("/api/lag/{id}", async (string id, string? tid, IEnumerable<ILag> lag
 
     try
     {
-        return Results.Ok(await valgt.Hent(stopp));
+        var kartlag = await valgt.Hent(stopp);
+        statistikk.Vellykket(valgt.Id, kartlag, DateTimeOffset.UtcNow);
+        return Results.Ok(kartlag);
     }
     catch (Exception ex)
     {
         // Et lag som feiler skal ikke ta ned kartet.
+        if (!stopp.IsCancellationRequested)
+        {
+            statistikk.Feilet(valgt.Id);
+        }
+
         app.Logger.LogError(ex, "Laget {Id} feilet", id);
         return Results.Json(new { feil = ex.Message }, statusCode: 502);
     }
@@ -162,6 +171,14 @@ app.MapGet("/api/stroempris", async (Allemannsdata data, CancellationToken stopp
 
 // Lever prosessen? Svarer alltid umiddelbart, uten å spørre kildene.
 app.MapGet("/api/helse", () => new { status = "ok", tid = DateTimeOffset.Now });
+
+// Tall om lagene, fra det /api/lag/{id} sist hentet. Henter ingenting selv.
+app.MapGet("/api/statistikk", (IEnumerable<ILag> lag, Lagstatistikk statistikk) =>
+    lag.Select(l =>
+    {
+        var s = statistikk.Hent(l.Id);
+        return new { id = l.Id, navn = l.Navn, antall = s.Antall, eldste = s.Eldste, nyeste = s.Nyeste, hentet = s.Hentet, feiler = s.Feiler };
+    }));
 
 // Virker tjenesten? Leser siste kjente resultat fra bakgrunnssjekken.
 app.MapGet("/api/helse/kilder", (HelseSjekker sjekker) =>
