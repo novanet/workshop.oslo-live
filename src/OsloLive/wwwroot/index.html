@@ -312,13 +312,33 @@ kart.on('moveend', skrivUtsnitt);
 
 kart.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), 'bottom-right');
 
+// Tema styres av sola over Oslo, med mindre ?tema=natt/dag overstyrer den.
+const temaOverstyring = new URLSearchParams(location.search).get('tema'); // 'natt' | 'dag' | null
+let nattemodusPaa = null; // ukjent til foerste sjekk
+
+function erNatt(naa) {
+  if (temaOverstyring === 'natt') return true;
+  if (temaOverstyring === 'dag') return false;
+  const { opp, ned } = solOppOgNed(naa);
+  return naa < opp || naa > ned;
+}
+
+function oppdaterTema() {
+  const skalVaereNatt = erNatt(new Date());
+  if (skalVaereNatt === nattemodusPaa) return;
+  nattemodusPaa = skalVaereNatt;
+  (nattemodusPaa ? nattTema : varmTema)(kart);
+  tegnOmMerker();
+}
+
 kart.on('style.load', () => {
-  varmTema(kart);
+  oppdaterTema();
   settOppOmrade();
   leggTilPunktlag();
   start();
   hentStroem();
   setInterval(hentStroem, 60000); // maks én gang i minuttet, ikke som lagene hvert 15. sekund
+  setInterval(oppdaterTema, 60000);
 });
 
 // Vannstanden er ikke knyttet til lagene og skal oppdateres selv om ingen lag finnes.
@@ -435,6 +455,123 @@ function varmTema(kart) {
   } catch (e) { /* eldre maplibre */ }
 }
 
+/**
+ * Soloppgang og solnedgang for Oslo sentrum (59,91 N, 10,75 Ø), etter den
+ * forenklede NOAA-formelen. Regner i minutter siden midnatt UTC for datoens
+ * kalenderdag, saa CET/CEST-forskyvningen kommer automatisk naar Date-en
+ * vises i Europe/Oslo-tid.
+ */
+function solOppOgNed(dato) {
+  const RAD = Math.PI / 180;
+  const LAT = 59.91, LON = 10.75;
+  const midnattUTC = Date.UTC(dato.getFullYear(), dato.getMonth(), dato.getDate());
+  const dagI = Math.round((midnattUTC - Date.UTC(dato.getFullYear(), 0, 1)) / 86400000) + 1;
+  const gamma = 2 * Math.PI / 365 * (dagI - 1);
+
+  const eqTid = 229.18 * (0.000075 + 0.001868 * Math.cos(gamma) - 0.032077 * Math.sin(gamma)
+              - 0.014615 * Math.cos(2 * gamma) - 0.040849 * Math.sin(2 * gamma));
+  const dekl = 0.006918 - 0.399912 * Math.cos(gamma) + 0.070257 * Math.sin(gamma)
+             - 0.006758 * Math.cos(2 * gamma) + 0.000907 * Math.sin(2 * gamma)
+             - 0.002697 * Math.cos(3 * gamma) + 0.00148 * Math.sin(3 * gamma);
+
+  const zenith = 90.833 * RAD;
+  const latRad = LAT * RAD;
+  const cosVinkel = Math.cos(zenith) / (Math.cos(latRad) * Math.cos(dekl)) - Math.tan(latRad) * Math.tan(dekl);
+  const vinkelGrader = Math.acos(Math.min(1, Math.max(-1, cosVinkel))) / RAD;
+
+  const soloppMin = 720 - 4 * (LON + vinkelGrader) - eqTid;
+  const solnedMin = 720 - 4 * (LON - vinkelGrader) - eqTid;
+  return {
+    opp: new Date(midnattUTC + soloppMin * 60000),
+    ned: new Date(midnattUTC + solnedMin * 60000)
+  };
+}
+
+/**
+ * Moerkt nattema: samme lag-id-er som varmTema, bare med en moerk palett saa
+ * kartet passer til en storskjerm som staar paa utover kvelden.
+ */
+function nattTema(kart) {
+  const S = (id, egenskap, verdi) => {
+    if (!kart.getLayer(id)) return;
+    try { kart.setPaintProperty(id, egenskap, verdi); } catch (e) { /* laget har ikke den egenskapen */ }
+  };
+  const skjul = (id) => { if (kart.getLayer(id)) kart.setLayoutProperty(id, 'visibility', 'none'); };
+
+  const TEKST = '#e8e3d6', GLORIE = '#12161b';
+
+  S('background', 'background-color', '#151c24');
+  skjul('natural_earth');
+
+  // Flater
+  ['landuse_residential', 'landuse_hospital', 'landuse_school', 'aeroway_fill', 'road_area_pattern']
+    .forEach((id) => S(id, 'fill-color', '#232b30'));
+  ['park', 'landcover_grass', 'landuse_pitch', 'landuse_track', 'landuse_cemetery']
+    .forEach((id) => S(id, 'fill-color', '#1f2e22'));
+  S('park', 'fill-opacity', 0.9);
+  S('landcover_wood', 'fill-color', '#16241a');
+  S('landcover_wood', 'fill-opacity', 0.8);
+  S('landcover_wetland', 'fill-opacity', 0.35);
+  S('landcover_sand', 'fill-color', '#2a2416');
+  S('landcover_ice', 'fill-color', '#2b3038');
+  S('park_outline', 'line-color', '#2c3b2c');
+
+  // Vann
+  S('water', 'fill-color', '#0d2430');
+  ['waterway_river', 'waterway_other', 'waterway_tunnel']
+    .forEach((id) => S(id, 'line-color', '#2f6b78'));
+
+  // Veier: moerke smaaveier, oransje hovedveier saa arteriene fortsatt leses som «lyst».
+  kart.getStyle().layers.forEach((lag) => {
+    if (lag.type !== 'line') return;
+    const id = lag.id;
+    const hoved = /motorway|trunk_primary|secondary_tertiary|_link/.test(id) && !/casing/.test(id);
+    if (/_casing$/.test(id)) {
+      S(id, 'line-color', /motorway|trunk_primary|secondary_tertiary|_link/.test(id) ? '#5c3a1a' : '#33302a');
+      S(id, 'line-opacity', 0.9);
+    } else if (hoved && /^(road|bridge|tunnel)_/.test(id)) {
+      S(id, 'line-color', '#e08a3c');
+    } else if (/^(road|bridge|tunnel)_/.test(id) && !/rail|hatching|path_pedestrian/.test(id)) {
+      S(id, 'line-color', '#2c2a24');
+    } else if (/rail/.test(id)) {
+      S(id, 'line-color', '#4a463c');
+    } else if (/path_pedestrian/.test(id)) {
+      S(id, 'line-color', '#3a362c');
+    } else if (/^boundary/.test(id)) {
+      S(id, 'line-color', '#4a463c');
+    }
+  });
+
+  // Bygninger
+  S('building', 'fill-color', '#2a2620');
+  S('building', 'fill-outline-color', '#3c352a');
+  S('building-3d', 'fill-extrusion-color', '#2f2a22');
+  S('building-3d', 'fill-extrusion-opacity', 1);
+  S('building-3d', 'fill-extrusion-vertical-gradient', true);
+
+  // Tekst
+  kart.getStyle().layers.forEach((lag) => {
+    if (lag.type !== 'symbol') return;
+    S(lag.id, 'text-color', TEKST);
+    S(lag.id, 'text-halo-color', GLORIE);
+    S(lag.id, 'text-halo-width', 1.4);
+    S(lag.id, 'icon-opacity', 0.5);
+  });
+
+  // Rydd bort det som konkurrerer med vaare egne punkter.
+  ['poi_r20', 'poi_r7', 'poi_r1', 'poi_transit',
+   'road_one_way_arrow', 'road_one_way_arrow_opposite',
+   'highway-shield-non-us', 'highway-shield-us-interstate', 'road_shield_us'
+  ].forEach(skjul);
+
+  try {
+    kart.setSky({
+      'sky-color': '#0a1622', 'horizon-color': '#16202b', 'fog-color': '#0d1620',
+      'sky-horizon-blend': 0.6, 'horizon-fog-blend': 0.7, 'fog-ground-blend': 0.5
+    });
+  } catch (e) { /* eldre maplibre */ }
+}
+
 // ---------------------------------------------------------------------------
 // Farger per lag. Paletten er Okabe-Ito: skilles ved deuteranopi og protanopi,
 // i motsetning til roed/groenn. Kjente lag har sin egen; resten faar en fra
@@ -536,8 +673,15 @@ function tegnMerke(s, farge, ikon, form, kant) {
   g.fillStyle = farge;
   g.fill();
 
-  // Mørk skygge rundt lyse kanter, så merket står fram mot det beige kartet.
-  if (lys) { g.lineWidth = 7; g.strokeStyle = 'rgba(17,17,17,.85)'; g.setLineDash([]); g.stroke(); }
+  // Glorie rundt kanten som ellers ville forsvinne mot bakgrunnen: mørk mot
+  // det lyse dagtemaet, lys mot det mørke nattemaet.
+  const trengerGlorie = nattemodusPaa ? !lys : lys;
+  if (trengerGlorie) {
+    g.lineWidth = 7;
+    g.strokeStyle = nattemodusPaa ? 'rgba(244,239,228,.9)' : 'rgba(17,17,17,.85)';
+    g.setLineDash([]);
+    g.stroke();
+  }
   g.strokeStyle = strek;
   g.lineCap = 'round';
   if (kant === 'double') {
@@ -618,10 +762,22 @@ function tidTekst(d) {
 }
 
 // Merket et lag tegnes med på kartet: lagets farge, form og kantstil, ikonet i midten.
+// Registeret husker parameterne slik at tegnOmMerker() kan tegne bildet på nytt
+// når temaet bytter, uten å røre punktene som allerede er lagt til kartet.
+const merkeRegister = new Map(); // navn -> { farge, ikon, form, kant }
+
 function lagMerkebilde(navn, farge, ikon, form = 'sirkel', kant = 'solid') {
+  merkeRegister.set(navn, { farge, ikon, form, kant });
   if (kart.hasImage(navn)) return;
   const s = 60, g = tegnMerke(s, farge, ikon, form, kant).getContext('2d');
   kart.addImage(navn, g.getImageData(0, 0, s, s), { pixelRatio: 2 });
+}
+
+function tegnOmMerker() {
+  for (const [navn, { farge, ikon, form, kant }] of merkeRegister) {
+    const s = 60, g = tegnMerke(s, farge, ikon, form, kant).getContext('2d');
+    kart.updateImage(navn, g.getImageData(0, 0, s, s));
+  }
 }
 
 // SVG-symboler fra effekter/symboler.js blir MapLibre-bilder. SVG-en må
