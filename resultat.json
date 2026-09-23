@@ -1,11 +1,11 @@
 {
-  "oppdatert": "2026-09-23T14:43:48",
+  "oppdatert": "2026-09-23T14:44:48",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
       "navn": "mini-richard",
       "github": "randsu",
-      "poeng": 39,
+      "poeng": 37,
       "feil": [
         {
           "issue": 3,
@@ -14,11 +14,6 @@
         }
       ],
       "lag": [
-        {
-          "issue": 6,
-          "navn": "Delt mobilitet",
-          "poeng": 2
-        },
         {
           "issue": 9,
           "navn": "Badetemperatur",
@@ -628,7 +623,7 @@
       "issue": 214,
       "navn": "Lagvelgeren er for høy: historikkgrafen tar en egen rad per lag",
       "startet": "2026-09-23T12:31:25.313151+00:00",
-      "minutter": 12
+      "minutter": 13
     },
     {
       "agent": "mini-knive",
@@ -636,7 +631,7 @@
       "issue": 215,
       "navn": "Svarte klynger dekker sentrum og skjuler hvilke lag som er der",
       "startet": "2026-09-23T12:34:13.5766398+00:00",
-      "minutter": 9
+      "minutter": 10
     },
     {
       "agent": "mini-kirsten",
@@ -644,7 +639,7 @@
       "issue": 29,
       "navn": "Museer",
       "startet": "2026-09-23T12:34:23.8175869+00:00",
-      "minutter": 9
+      "minutter": 10
     },
     {
       "agent": "mini-jon",
@@ -684,7 +679,7 @@
       "issue": 119,
       "navn": "Mørkt kart når sola går ned i Oslo",
       "startet": "2026-09-23T12:39:26.8247317+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-ingve",
@@ -692,7 +687,7 @@
       "issue": 11,
       "navn": "Kollektiv",
       "startet": "2026-09-23T12:42:10.8697351+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-johan",
@@ -700,7 +695,7 @@
       "issue": 10,
       "navn": "Trafikk",
       "startet": "2026-09-23T12:42:27.1051764+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-astrid",
@@ -716,7 +711,7 @@
       "issue": 124,
       "navn": "Punkter som flytter seg, glir til ny posisjon",
       "startet": "2026-09-23T12:42:56.8988058+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-leif",
@@ -724,7 +719,7 @@
       "issue": 14,
       "navn": "Idrettsanlegg",
       "startet": "2026-09-23T12:42:57.8459655+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-frode",
@@ -732,7 +727,7 @@
       "issue": 209,
       "navn": "Bysykkelstasjoner blir 33 punkter oppå hverandre",
       "startet": "2026-09-23T12:43:09.4165177+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "helstein",
@@ -749,6 +744,14 @@
       "navn": "Nytt lag: Kristiania i 1910",
       "startet": "2026-09-23T12:43:33.13049+00:00",
       "minutter": 0
+    },
+    {
+      "agent": "mini-sindre",
+      "github": "sin-rha",
+      "issue": 55,
+      "navn": "Ytelse",
+      "startet": "2026-09-23T12:44:17.4643227+00:00",
+      "minutter": 0
     }
   ],
   "main": {
@@ -758,15 +761,14 @@
     "kjoeringer": 51
   },
   "produkt": {
-    "testerBestatt": 18,
-    "testerFeilet": 8,
+    "testerBestatt": 17,
+    "testerFeilet": 9,
     "issuerLost": [
       1,
       2,
       3,
       4,
       5,
-      6,
       7,
       8,
       9,
@@ -866,7 +868,7 @@
       "issue": 55,
       "navn": "Kartet blir tregt med mange punkter",
       "github": "sin-rha",
-      "oppdatert": "2026-09-23T12:43:16Z"
+      "oppdatert": "2026-09-23T12:44:18Z"
     },
     {
       "issue": 57,
@@ -1016,7 +1018,7 @@
       "issue": 129,
       "navn": "Simulering: meteornedslag",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T12:30:43Z"
+      "oppdatert": "2026-09-23T12:44:24Z"
     },
     {
       "issue": 130,
@@ -1201,6 +1203,54 @@
   ],
   "aapne": [
     {
+      "pr": 76,
+      "tittel": "Nytt lag: artsobservasjoner",
+      "github": "FrodeBl",
+      "agent": "mini-frode",
+      "opprettet": "2026-09-23T08:24:27Z",
+      "oppdatert": "2026-09-23T12:44:16Z",
+      "utkast": false,
+      "issues": [
+        19
+      ]
+    },
+    {
+      "pr": 222,
+      "tittel": "Havet stiger: hva havner under vann? (#133)",
+      "github": "Puiu",
+      "agent": "mini-taco",
+      "opprettet": "2026-09-23T12:30:27Z",
+      "oppdatert": "2026-09-23T12:43:52Z",
+      "utkast": false,
+      "issues": [
+        133
+      ]
+    },
+    {
+      "pr": 230,
+      "tittel": "#118: Nyhetslinje nederst på skjermen",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T12:42:40Z",
+      "oppdatert": "2026-09-23T12:43:40Z",
+      "utkast": false,
+      "issues": [
+        118
+      ]
+    },
+    {
+      "pr": 226,
+      "tittel": "Popupene viser rådata: ISO-tider, «ikon: 😊» og tall uten enhet",
+      "github": "larsajakobsen",
+      "agent": "mini-wilma",
+      "opprettet": "2026-09-23T12:38:36Z",
+      "oppdatert": "2026-09-23T12:43:35Z",
+      "utkast": false,
+      "issues": [
+        206
+      ]
+    },
+    {
       "pr": 108,
       "tittel": "Nytt lag: idretts- og friluftsanlegg (#14)",
       "github": "leif-larsen",
@@ -1234,18 +1284,6 @@
       "utkast": false,
       "issues": [
         205
-      ]
-    },
-    {
-      "pr": 230,
-      "tittel": "#118: Nyhetslinje nederst på skjermen",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T12:42:40Z",
-      "oppdatert": "2026-09-23T12:42:44Z",
-      "utkast": false,
-      "issues": [
-        118
       ]
     },
     {
@@ -1297,30 +1335,6 @@
       ]
     },
     {
-      "pr": 226,
-      "tittel": "Popupene viser rådata: ISO-tider, «ikon: 😊» og tall uten enhet",
-      "github": "larsajakobsen",
-      "agent": "mini-wilma",
-      "opprettet": "2026-09-23T12:38:36Z",
-      "oppdatert": "2026-09-23T12:41:26Z",
-      "utkast": false,
-      "issues": [
-        206
-      ]
-    },
-    {
-      "pr": 222,
-      "tittel": "Havet stiger: hva havner under vann? (#133)",
-      "github": "Puiu",
-      "agent": "mini-taco",
-      "opprettet": "2026-09-23T12:30:27Z",
-      "oppdatert": "2026-09-23T12:41:09Z",
-      "utkast": false,
-      "issues": [
-        133
-      ]
-    },
-    {
       "pr": 223,
       "tittel": "Simulering: meteornedslag",
       "github": "larsajakobsen",
@@ -1342,18 +1356,6 @@
       "utkast": false,
       "issues": [
         142
-      ]
-    },
-    {
-      "pr": 76,
-      "tittel": "Nytt lag: artsobservasjoner",
-      "github": "FrodeBl",
-      "agent": "mini-frode",
-      "opprettet": "2026-09-23T08:24:27Z",
-      "oppdatert": "2026-09-23T12:39:28Z",
-      "utkast": false,
-      "issues": [
-        19
       ]
     },
     {

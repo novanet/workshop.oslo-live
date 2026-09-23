@@ -85,6 +85,13 @@
   tbody td:last-child { border-right: 1px solid var(--line); border-radius: 0 10px 10px 0; padding-right: 13px; text-align: right; }
   tbody tr.mellom { background: transparent; }
   tbody tr.mellom td { border: 0; padding: 0; height: 4px; background: transparent; }
+  tfoot td { padding: 8px 14px 0 0; vertical-align: top; border-top: 2px solid var(--line); }
+  tfoot td:first-child { padding-left: 13px; }
+  tfoot td.h, tfoot td:last-child { text-align: right; padding-right: 13px; }
+  tfoot .sum-tekst {
+    font-family: "IBM Plex Mono", monospace; font-size: 10.5px; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--muted); font-weight: 600;
+  }
 
   .plass {
     font-family: "Bricolage Grotesque", system-ui, sans-serif; font-weight: 700;
@@ -351,6 +358,23 @@
       '<tr class="mellom"><td colspan="6"></td></tr>';
   }
 
+  function sumRad(folk) {
+    var dollar = 0, tokens = 0, poeng = 0, estimert = false;
+    folk.forEach(function (d) {
+      dollar += d.dollar || 0;
+      tokens += d.tokens || 0;
+      poeng += d.poeng || 0;
+      estimert = estimert || !!d.estimert;
+    });
+    return '<tfoot><tr>' +
+      '<td></td><td colspan="2"><span class="sum-tekst">Sum for ' + folk.length + ' agenter</span></td>' +
+      '<td><span class="tall">' + (estimert ? '~' : '') + '$' + dollar.toFixed(2) + '</span>' +
+        '<span class="under">' + Math.round(tokens / 1000) + 'k tokens</span></td>' +
+      '<td class="h"><span class="tall">' + poeng + '</span></td>' +
+      '<td><span class="tall">' + (dollar > 0 ? (poeng / dollar).toFixed(1) : '0.0') + '</span></td>' +
+      '</tr></tfoot>';
+  }
+
   function tegnFramdrift(data) {
     var pr = data.produkt || {};
     var lost = (pr.issuerLost || []).length;
@@ -449,6 +473,7 @@
             '<th>#</th><th>Agent</th><th>Løst</th>' +
             '<th>Kostnad</th><th class="h">Poeng</th><th class="h">Poeng/$</th>' +
           '</tr></thead><tbody>' + sorterPerDollar(folk).map(rad).join('') + '</tbody>' +
+          sumRad(folk) +
         '</table></div>';
     }
 
