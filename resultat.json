@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:12:49",
+  "oppdatert": "2026-09-23T11:13:16",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -444,7 +444,7 @@
       "issue": 11,
       "navn": "Kollektiv",
       "startet": "2026-09-23T09:04:10.6494291+00:00",
-      "minutter": 8
+      "minutter": 9
     },
     {
       "agent": "mini-leif",
@@ -452,6 +452,14 @@
       "issue": 108,
       "navn": "",
       "startet": "2026-09-23T09:12:25.1252417+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-leif",
+      "github": "leif-larsen",
+      "issue": 72,
+      "navn": "",
+      "startet": "2026-09-23T09:12:59.4083914+00:00",
       "minutter": 0
     }
   ],
@@ -883,6 +891,18 @@
   ],
   "aapne": [
     {
+      "pr": 72,
+      "tittel": "Søk etter adresse og hopp dit på kartet (#21)",
+      "github": "leif-larsen",
+      "agent": "mini-leif",
+      "opprettet": "2026-09-23T08:12:16Z",
+      "oppdatert": "2026-09-23T09:13:00Z",
+      "utkast": false,
+      "issues": [
+        21
+      ]
+    },
+    {
       "pr": 108,
       "tittel": "Nytt lag: idretts- og friluftsanlegg (#14)",
       "github": "leif-larsen",
@@ -1168,18 +1188,6 @@
       "utkast": false,
       "issues": [
         59
-      ]
-    },
-    {
-      "pr": 72,
-      "tittel": "Søk etter adresse og hopp dit på kartet (#21)",
-      "github": "leif-larsen",
-      "agent": "mini-leif",
-      "opprettet": "2026-09-23T08:12:16Z",
-      "oppdatert": "2026-09-23T08:26:16Z",
-      "utkast": false,
-      "issues": [
-        21
       ]
     },
     {
