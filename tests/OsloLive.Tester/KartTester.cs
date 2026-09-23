@@ -509,6 +509,147 @@ public class AllemannsdataForsøkTester
     }
 }
 
+/// <summary>Tester den strukturerte loggingen i <see cref="Allemannsdata.Hent"/>: navngitte felter, riktig nivå og ingen url.</summary>
+public class AllemannsdataLoggTester
+{
+    private static readonly IReadOnlyDictionary<string, object> Parametre = new Dictionary<string, object> { ["limit"] = 1 };
+
+    [Fact]
+    public async Task Vellykket_kall_logger_informasjon_med_navngitte_felter()
+    {
+        var håndterer = new FalskHandler(_ => LagJsonSvar(1));
+        var logg = new OpptakLogg();
+        var data = new Allemannsdata(new HttpClient(håndterer), logg, new StraksTid());
+
+        await data.Hent("logg-kilde-1", "logg-operasjon", Parametre);
+
+        var oppføring = Assert.Single(logg.Oppføringer);
+        Assert.Equal(LogLevel.Information, oppføring.Nivå);
+        Assert.Equal("logg-kilde-1", oppføring.Felter["Kilde"]);
+        Assert.Equal("logg-operasjon", oppføring.Felter["Operasjon"]);
+        Assert.Equal(false, oppføring.Felter["Mellomlager"]);
+        Assert.Equal("ok", oppføring.Felter["Utfall"]);
+        Assert.True(oppføring.Felter.ContainsKey("VarighetMs"));
+    }
+
+    [Fact]
+    public async Task Kall_fra_mellomlager_logger_mellomlager_true()
+    {
+        var håndterer = new FalskHandler(_ => LagJsonSvar(2));
+        var logg = new OpptakLogg();
+        var data = new Allemannsdata(new HttpClient(håndterer), logg, new StraksTid());
+
+        await data.Hent("logg-kilde-2", "logg-operasjon", Parametre);
+        await data.Hent("logg-kilde-2", "logg-operasjon", Parametre);
+
+        Assert.Equal(2, logg.Oppføringer.Count);
+        Assert.Equal(false, logg.Oppføringer[0].Felter["Mellomlager"]);
+        Assert.Equal(true, logg.Oppføringer[1].Felter["Mellomlager"]);
+    }
+
+    [Fact]
+    public async Task Loggutskriften_inneholder_aldri_url_eller_parametre()
+    {
+        var håndterer = new FalskHandler(forsøk => forsøk == 1
+            ? new HttpResponseMessage(HttpStatusCode.ServiceUnavailable)
+            : LagJsonSvar(3));
+        var logg = new OpptakLogg();
+        var data = new Allemannsdata(new HttpClient(håndterer), logg, new StraksTid());
+
+        await data.Hent("logg-kilde-3", "logg-operasjon", Parametre);
+
+        Assert.NotEmpty(logg.Oppføringer);
+        Assert.All(logg.Oppføringer, o =>
+        {
+            Assert.DoesNotContain("?", o.Melding);
+            Assert.DoesNotContain("allemannsdata.com/wiki/api", o.Melding);
+        });
+    }
+
+    [Fact]
+    public async Task Feil_med_statuskode_fra_kilden_logges_som_advarsel()
+    {
+        var håndterer = new FalskHandler(_ => new HttpResponseMessage(HttpStatusCode.ServiceUnavailable));
+        var logg = new OpptakLogg();
+        var data = new Allemannsdata(new HttpClient(håndterer), logg, new StraksTid());
+
+        await Assert.ThrowsAsync<HttpRequestException>(
+            () => data.Hent("logg-kilde-4", "logg-operasjon", Parametre));
+
+        var siste = logg.Oppføringer[^1];
+        Assert.Equal(LogLevel.Warning, siste.Nivå);
+        Assert.Equal("503", siste.Felter["Utfall"]);
+    }
+
+    [Fact]
+    public async Task Tidsavbrudd_logges_som_advarsel()
+    {
+        var håndterer = new FalskHandler(_ => throw new TaskCanceledException("Tidsavbrudd", new TimeoutException()));
+        var logg = new OpptakLogg();
+        var data = new Allemannsdata(new HttpClient(håndterer), logg, new StraksTid());
+
+        await Assert.ThrowsAsync<TaskCanceledException>(
+            () => data.Hent("logg-kilde-5", "logg-operasjon", Parametre));
+
+        var siste = logg.Oppføringer[^1];
+        Assert.Equal(LogLevel.Warning, siste.Nivå);
+        Assert.Equal("tidsavbrudd", siste.Felter["Utfall"]);
+    }
+
+    [Fact]
+    public async Task Manglende_data_i_svaret_logges_som_feil()
+    {
+        var håndterer = new FalskHandler(_ => new HttpResponseMessage(HttpStatusCode.OK)
+        {
+            Content = new StringContent(JsonSerializer.Serialize(new { ikkeData = 1 }), Encoding.UTF8, "application/json"),
+        });
+        var logg = new OpptakLogg();
+        var data = new Allemannsdata(new HttpClient(håndterer), logg, new StraksTid());
+
+        await Assert.ThrowsAsync<InvalidOperationException>(
+            () => data.Hent("logg-kilde-6", "logg-operasjon", Parametre));
+
+        var siste = logg.Oppføringer[^1];
+        Assert.Equal(LogLevel.Error, siste.Nivå);
+        Assert.Equal("feil", siste.Felter["Utfall"]);
+        Assert.IsType<InvalidOperationException>(siste.Feil);
+    }
+
+    private static HttpResponseMessage LagJsonSvar(int verdi)
+    {
+        var json = JsonSerializer.Serialize(new { data = new { verdi } });
+        return new HttpResponseMessage(HttpStatusCode.OK)
+        {
+            Content = new StringContent(json, Encoding.UTF8, "application/json"),
+        };
+    }
+}
+
+/// <summary>Tester <see cref="Allemannsdata.ErKildefeil"/>, som skiller kildefeil fra feil i koden vår.</summary>
+public class ErKildefeilTester
+{
+    [Fact]
+    public void HttpRequestException_er_en_kildefeil() =>
+        Assert.True(Allemannsdata.ErKildefeil(new HttpRequestException("Feil"), CancellationToken.None));
+
+    [Fact]
+    public void Tidsavbrudd_er_en_kildefeil() =>
+        Assert.True(Allemannsdata.ErKildefeil(new TaskCanceledException(), CancellationToken.None));
+
+    [Fact]
+    public void Ekte_avbrudd_er_ikke_en_kildefeil()
+    {
+        using var kilde = new CancellationTokenSource();
+        kilde.Cancel();
+
+        Assert.False(Allemannsdata.ErKildefeil(new TaskCanceledException(), kilde.Token));
+    }
+
+    [Fact]
+    public void Manglende_data_er_ikke_en_kildefeil() =>
+        Assert.False(Allemannsdata.ErKildefeil(new InvalidOperationException("Ingen data"), CancellationToken.None));
+}
+
 /// <summary>Falsk <see cref="HttpMessageHandler"/> som svarer ut fra forsøksnummeret, uten nettverk.</summary>
 internal sealed class FalskHandler(Func<int, HttpResponseMessage> svar) : HttpMessageHandler
 {
@@ -521,10 +662,10 @@ internal sealed class FalskHandler(Func<int, HttpResponseMessage> svar) : HttpMe
     }
 }
 
-/// <summary>Fanger opp loggoppføringer slik at tester kan se etter varsler om nye forsøk.</summary>
+/// <summary>Fanger opp loggoppføringer slik at tester kan se etter varsler om nye forsøk og navngitte felter.</summary>
 internal sealed class OpptakLogg : ILogger<Allemannsdata>
 {
-    public List<(LogLevel Nivå, string Melding)> Oppføringer { get; } = [];
+    public List<(LogLevel Nivå, string Melding, Exception? Feil, IReadOnlyDictionary<string, object?> Felter)> Oppføringer { get; } = [];
 
     public IDisposable BeginScope<TState>(TState state) where TState : notnull => NullScope.Instans;
 
@@ -532,7 +673,8 @@ internal sealed class OpptakLogg : ILogger<Allemannsdata>
 
     public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
     {
-        Oppføringer.Add((logLevel, formatter(state, exception)));
+        var felter = state as IEnumerable<KeyValuePair<string, object?>> ?? [];
+        Oppføringer.Add((logLevel, formatter(state, exception), exception, felter.ToDictionary(p => p.Key, p => p.Value)));
     }
 
     private sealed class NullScope : IDisposable

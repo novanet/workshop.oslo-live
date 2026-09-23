@@ -15,11 +15,18 @@ CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("nb-NO");
 
 var builder = WebApplication.CreateBuilder(args);
 
+// I Azure skal loggen kunne søkes i felt for felt; lokalt (Development, se launchSettings.json)
+// er den fortsatt lesbar tekst.
+if (!builder.Environment.IsDevelopment())
+{
+    builder.Logging.AddJsonConsole();
+}
+
 builder.Services.AddHttpClient<Allemannsdata>(klient =>
 {
     klient.Timeout = TimeSpan.FromSeconds(30);
     klient.DefaultRequestHeaders.UserAgent.ParseAdd("OsloLive/1.0 (kurs)");
-});
+}).RemoveAllLoggers(); // Standardloggingen til HttpClient skriver hele url-en med parametre; Allemannsdata.Hent logger selv.
 
 // Flylaget bruker ikke Allemannsdata (ingen kilde der har flyposisjoner),
 // og trenger derfor sin egen navngitte HttpClient og eget mellomlager. Se FlyLag.cs.
@@ -27,7 +34,7 @@ builder.Services.AddHttpClient("fly", klient =>
 {
     klient.Timeout = TimeSpan.FromSeconds(10);
     klient.DefaultRequestHeaders.UserAgent.ParseAdd("OsloLive/1.0 (kurs)");
-});
+}).RemoveAllLoggers();
 builder.Services.AddMemoryCache();
 builder.Services.AddSingleton<Lagstatistikk>();
 
@@ -107,7 +114,15 @@ app.MapGet("/api/lag/{id}", async (string id, string? tid, IEnumerable<ILag> lag
             statistikk.Feilet(valgt.Id);
         }
 
-        app.Logger.LogError(ex, "Laget {Id} feilet", id);
+        if (Allemannsdata.ErKildefeil(ex, stopp))
+        {
+            app.Logger.LogWarning(ex, "Laget {Id} feilet mot kilden", id);
+        }
+        else
+        {
+            app.Logger.LogError(ex, "Laget {Id} feilet", id);
+        }
+
         return Results.Json(new { feil = ex.Message }, statusCode: 502);
     }
 });

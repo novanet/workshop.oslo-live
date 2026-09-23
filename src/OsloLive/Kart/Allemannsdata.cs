@@ -70,30 +70,66 @@ public sealed class Allemannsdata(HttpClient http, ILogger<Allemannsdata> logg, 
         CancellationToken stopp = default)
     {
         var url = ByggUrl(kilde, operasjon, parametre);
+        var start = (klokke ?? TimeProvider.System).GetTimestamp();
 
         if (Mellomlager.TryGetValue(url, out var lagret) && DateTimeOffset.UtcNow - lagret.Hentet < Levetid)
         {
+            LoggUtfall(LogLevel.Information, null, kilde, operasjon, start, mellomlager: true, "ok");
             return lagret.Svar;
         }
 
-        logg.LogInformation("Henter {Kilde}/{Operasjon}", kilde, operasjon);
-
-        using var svar = await HentMedNyeForsøk(kilde, operasjon, url, stopp);
-        svar.EnsureSuccessStatusCode();
-
-        var tekst = await svar.Content.ReadAsStringAsync(stopp);
-        var rot = JsonSerializer.Deserialize<JsonElement>(tekst, Valg);
-
-        if (!rot.TryGetProperty("data", out var data))
+        try
         {
-            throw new InvalidOperationException($"Svaret fra {kilde}/{operasjon} hadde ingen «data».");
-        }
+            using var svar = await HentMedNyeForsøk(kilde, operasjon, url, stopp);
+            svar.EnsureSuccessStatusCode();
 
-        // JsonElement peker inn i dokumentet sitt, så vi tar en kopi som overlever.
-        var kopi = data.Clone();
-        Mellomlager[url] = (DateTimeOffset.UtcNow, kopi);
-        return kopi;
+            var tekst = await svar.Content.ReadAsStringAsync(stopp);
+            var rot = JsonSerializer.Deserialize<JsonElement>(tekst, Valg);
+
+            if (!rot.TryGetProperty("data", out var data))
+            {
+                throw new InvalidOperationException($"Svaret fra {kilde}/{operasjon} hadde ingen «data».");
+            }
+
+            // JsonElement peker inn i dokumentet sitt, så vi tar en kopi som overlever.
+            var kopi = data.Clone();
+            Mellomlager[url] = (DateTimeOffset.UtcNow, kopi);
+            LoggUtfall(LogLevel.Information, null, kilde, operasjon, start, mellomlager: false, "ok");
+            return kopi;
+        }
+        catch (Exception feil)
+        {
+            var (nivå, utfall) = Klassifiser(feil, stopp);
+            LoggUtfall(nivå, feil, kilde, operasjon, start, mellomlager: false, utfall);
+            throw;
+        }
     }
+
+    /// <summary>
+    /// Skriver én logglinje per kall til <see cref="Hent"/>, med navngitte felter slik at loggen
+    /// kan filtreres i Azure. Aldri med url eller parametre; se <see cref="ByggUrl"/> for de.
+    /// </summary>
+    private void LoggUtfall(LogLevel nivå, Exception? feil, string kilde, string operasjon, long start, bool mellomlager, string utfall) =>
+        logg.Log(nivå, feil,
+            "Hentet {Kilde}/{Operasjon} på {VarighetMs} ms, mellomlager {Mellomlager}, utfall {Utfall}",
+            kilde, operasjon, (long)(klokke ?? TimeProvider.System).GetElapsedTime(start).TotalMilliseconds, mellomlager, utfall);
+
+    /// <summary>
+    /// Skiller feil kilden har skylden for (Warning) fra feil i vår egen tolkning av svaret (Error).
+    /// Et avbrudd via <paramref name="stopp"/> er verken/eller og logges informativt.
+    /// </summary>
+    private static (LogLevel Nivå, string Utfall) Klassifiser(Exception feil, CancellationToken stopp) => feil switch
+    {
+        HttpRequestException { StatusCode: { } status } => (LogLevel.Warning, ((int)status).ToString(CultureInfo.InvariantCulture)),
+        HttpRequestException => (LogLevel.Warning, "nettverksfeil"),
+        OperationCanceledException when stopp.IsCancellationRequested => (LogLevel.Information, "avbrutt"),
+        OperationCanceledException => (LogLevel.Warning, "tidsavbrudd"),
+        _ => (LogLevel.Error, "feil"),
+    };
+
+    /// <summary>Om <paramref name="feil"/> skyldes kilden (Warning), ikke koden vår (Error). Brukes av endepunktene i Program.cs.</summary>
+    public static bool ErKildefeil(Exception feil, CancellationToken stopp) =>
+        feil is HttpRequestException || (feil is OperationCanceledException && !stopp.IsCancellationRequested);
 
     /// <summary>
     /// Som <see cref="Hent"/>, men plukker ut listen når «data» er et objekt
