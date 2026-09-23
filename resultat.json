@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:09:19",
+  "oppdatert": "2026-09-23T11:09:46",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -431,7 +431,7 @@
       "issue": 26,
       "navn": "Skoler",
       "startet": "2026-09-23T09:03:43.3920206+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "Andy3000",
@@ -719,7 +719,7 @@
       "issue": 33,
       "navn": "Nytt lag: sykkelparkering",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T09:06:56Z"
+      "oppdatert": "2026-09-23T09:09:45Z"
     },
     {
       "issue": 34,
@@ -886,6 +886,18 @@
   ],
   "aapne": [
     {
+      "pr": 101,
+      "tittel": "#34: Skru tiden tilbake med en tidslinje",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:51:10Z",
+      "oppdatert": "2026-09-23T09:09:21Z",
+      "utkast": false,
+      "issues": [
+        34
+      ]
+    },
+    {
       "pr": 104,
       "tittel": "#25: Ta vare på et øyeblikksbilde hver time",
       "github": "randsu",
@@ -931,18 +943,6 @@
       "utkast": false,
       "issues": [
         22
-      ]
-    },
-    {
-      "pr": 101,
-      "tittel": "#34: Skru tiden tilbake med en tidslinje",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:51:10Z",
-      "oppdatert": "2026-09-23T09:08:32Z",
-      "utkast": false,
-      "issues": [
-        34
       ]
     },
     {
