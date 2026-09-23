@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:14:11",
+  "oppdatert": "2026-09-23T11:14:39",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -334,25 +334,6 @@
       "plass": 12
     },
     {
-      "navn": "helstein",
-      "github": "nilsgs",
-      "poeng": 0,
-      "feil": [],
-      "lag": [],
-      "levert": [],
-      "dollar": 3.959,
-      "tokens": 8144568,
-      "sekunder": 1452,
-      "pr": 2,
-      "utkast": 0,
-      "merget": 0,
-      "kjoeringer": 3,
-      "utenPr": 1,
-      "bygg": [],
-      "estimert": false,
-      "plass": 13
-    },
-    {
       "navn": "Andy3000",
       "github": "coffeelyfe",
       "poeng": 0,
@@ -367,6 +348,25 @@
       "merget": 0,
       "kjoeringer": 4,
       "utenPr": 2,
+      "bygg": [],
+      "estimert": false,
+      "plass": 13
+    },
+    {
+      "navn": "helstein",
+      "github": "nilsgs",
+      "poeng": 0,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 5.447,
+      "tokens": 11071938,
+      "sekunder": 2122,
+      "pr": 2,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 4,
+      "utenPr": 1,
       "bygg": [],
       "estimert": false,
       "plass": 14
@@ -452,7 +452,7 @@
       "issue": 108,
       "navn": "",
       "startet": "2026-09-23T09:12:25.1252417+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-leif",
@@ -592,7 +592,7 @@
       "issue": 11,
       "navn": "Nytt lag: kollektivtrafikk som beveger seg",
       "github": "coffeelyfe",
-      "oppdatert": "2026-09-23T09:12:33Z"
+      "oppdatert": "2026-09-23T09:14:36Z"
     },
     {
       "issue": 13,
@@ -688,7 +688,7 @@
       "issue": 27,
       "navn": "Nytt lag: verneområder og naturtyper",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T09:08:04Z"
+      "oppdatert": "2026-09-23T09:14:31Z"
     },
     {
       "issue": 28,
@@ -890,6 +890,18 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 65,
+      "tittel": "#11: Nytt lag: kollektivtrafikk som beveger seg",
+      "github": "coffeelyfe",
+      "agent": "Andy3000",
+      "opprettet": "2026-09-23T07:50:13Z",
+      "oppdatert": "2026-09-23T09:14:34Z",
+      "utkast": false,
+      "issues": [
+        11
+      ]
+    },
     {
       "pr": 103,
       "tittel": "#24: Tell punkter per bydel",
@@ -1200,18 +1212,6 @@
       "utkast": false,
       "issues": [
         19
-      ]
-    },
-    {
-      "pr": 65,
-      "tittel": "#11: Nytt lag: kollektivtrafikk som beveger seg",
-      "github": "coffeelyfe",
-      "agent": "Andy3000",
-      "opprettet": "2026-09-23T07:50:13Z",
-      "oppdatert": "2026-09-23T08:15:51Z",
-      "utkast": false,
-      "issues": [
-        11
       ]
     },
     {
