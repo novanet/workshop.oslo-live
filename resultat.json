@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:07:03",
+  "oppdatert": "2026-09-23T11:07:30",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -56,14 +56,14 @@
         }
       ],
       "levert": [],
-      "dollar": 3.63,
-      "tokens": 7126981,
-      "sekunder": 1434,
+      "dollar": 4.021,
+      "tokens": 7576468,
+      "sekunder": 1548,
       "pr": 2,
       "utkast": 0,
       "merget": 2,
-      "kjoeringer": 3,
-      "utenPr": 1,
+      "kjoeringer": 4,
+      "utenPr": 2,
       "bygg": [],
       "estimert": false,
       "plass": 2
@@ -447,7 +447,7 @@
       "issue": 11,
       "navn": "Kollektiv",
       "startet": "2026-09-23T09:04:10.6494291+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-gir",
@@ -455,15 +455,7 @@
       "issue": 13,
       "navn": "Veiarbeid",
       "startet": "2026-09-23T09:05:17.8039862+00:00",
-      "minutter": 1
-    },
-    {
-      "agent": "mini-gir",
-      "github": "GIR75",
-      "issue": 18,
-      "navn": "Kulturminner",
-      "startet": "2026-09-23T09:05:18.1410737+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-gir",
@@ -619,7 +611,7 @@
       "issue": 11,
       "navn": "Nytt lag: kollektivtrafikk som beveger seg",
       "github": "coffeelyfe",
-      "oppdatert": "2026-09-23T09:06:32Z"
+      "oppdatert": "2026-09-23T09:07:08Z"
     },
     {
       "issue": 13,
@@ -655,7 +647,7 @@
       "issue": 18,
       "navn": "Nytt lag: kulturminner",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T09:05:19Z"
+      "oppdatert": "2026-09-23T09:07:20Z"
     },
     {
       "issue": 19,
@@ -923,7 +915,7 @@
       "github": "randsu",
       "agent": "mini-richard",
       "opprettet": "2026-09-23T08:56:50Z",
-      "oppdatert": "2026-09-23T09:06:53Z",
+      "oppdatert": "2026-09-23T09:07:07Z",
       "utkast": false,
       "issues": [
         24
