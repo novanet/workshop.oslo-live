@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:08:18",
+  "oppdatert": "2026-09-23T10:08:44",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -155,7 +155,7 @@
       "issue": 56,
       "navn": "Flytrafikk",
       "startet": "2026-09-23T07:53:20.1148991+00:00",
-      "minutter": 14
+      "minutter": 15
     },
     {
       "agent": "mini-taco",
@@ -163,7 +163,7 @@
       "issue": 54,
       "navn": "Rate limit",
       "startet": "2026-09-23T08:03:17.9589775+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-frode",
@@ -171,7 +171,7 @@
       "issue": 50,
       "navn": "Metrikker",
       "startet": "2026-09-23T08:03:32.4223783+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "Andy3000",
@@ -248,6 +248,12 @@
       "navn": "Søk etter adresse og hopp dit på kartet",
       "github": "leif-larsen",
       "oppdatert": "2026-09-23T08:04:58Z"
+    },
+    {
+      "issue": 46,
+      "navn": "Tegn bydelsgrensene",
+      "github": "nilsgs",
+      "oppdatert": "2026-09-23T08:08:34Z"
     },
     {
       "issue": 48,
