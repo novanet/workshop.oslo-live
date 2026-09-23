@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:49:16",
+  "oppdatert": "2026-09-23T10:49:44",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -176,13 +176,13 @@
       ],
       "lag": [],
       "levert": [],
-      "dollar": 3.656,
-      "tokens": 7579266,
-      "sekunder": 1289,
-      "pr": 3,
+      "dollar": 5.906,
+      "tokens": 13222823,
+      "sekunder": 1956,
+      "pr": 4,
       "utkast": 0,
       "merget": 1,
-      "kjoeringer": 6,
+      "kjoeringer": 7,
       "utenPr": 3,
       "bygg": [],
       "estimert": false,
@@ -362,20 +362,12 @@
   ],
   "kjoerer": [
     {
-      "agent": "mini-wilma",
-      "github": "larsajakobsen",
-      "issue": 32,
-      "navn": "Strømpris",
-      "startet": "2026-09-23T08:37:51.7658572+00:00",
-      "minutter": 11
-    },
-    {
       "agent": "mini-richard",
       "github": "randsu",
       "issue": 34,
       "navn": "Tidslinje",
       "startet": "2026-09-23T08:39:29.3560815+00:00",
-      "minutter": 9
+      "minutter": 10
     },
     {
       "agent": "helstein",
@@ -383,7 +375,7 @@
       "issue": 30,
       "navn": "Vannstand",
       "startet": "2026-09-23T08:39:37.818134+00:00",
-      "minutter": 9
+      "minutter": 10
     },
     {
       "agent": "mini-kirsten",
@@ -399,7 +391,7 @@
       "issue": 48,
       "navn": "Parallell henting",
       "startet": "2026-09-23T08:45:28.6931293+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-richard",
@@ -407,7 +399,7 @@
       "issue": 24,
       "navn": "Bydeler",
       "startet": "2026-09-23T08:45:28.8651408+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-frode",
@@ -415,7 +407,7 @@
       "issue": 19,
       "navn": "Artsobservasjoner",
       "startet": "2026-09-23T08:46:29.0268417+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-frode",
@@ -423,7 +415,7 @@
       "issue": 50,
       "navn": "Metrikker",
       "startet": "2026-09-23T08:47:21.1306878+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-richard",
@@ -656,7 +648,7 @@
       "issue": 32,
       "navn": "Vis strømprisen for Oslo",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T08:37:52Z"
+      "oppdatert": "2026-09-23T08:49:20Z"
     },
     {
       "issue": 34,
@@ -804,6 +796,30 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 99,
+      "tittel": "Vis strømprisen for Oslo",
+      "github": "larsajakobsen",
+      "agent": "mini-wilma",
+      "opprettet": "2026-09-23T08:49:18Z",
+      "oppdatert": "2026-09-23T08:49:23Z",
+      "utkast": false,
+      "issues": [
+        32
+      ]
+    },
+    {
+      "pr": 84,
+      "tittel": "Varsle når noe skjer",
+      "github": "jthagesk",
+      "agent": "mini-kirsten",
+      "opprettet": "2026-09-23T08:34:32Z",
+      "oppdatert": "2026-09-23T08:49:20Z",
+      "utkast": false,
+      "issues": [
+        45
+      ]
+    },
     {
       "pr": 83,
       "tittel": "Nytt lag: museer og samlinger",
@@ -1006,18 +1022,6 @@
       "utkast": false,
       "issues": [
         50
-      ]
-    },
-    {
-      "pr": 84,
-      "tittel": "Varsle når noe skjer",
-      "github": "jthagesk",
-      "agent": "mini-kirsten",
-      "opprettet": "2026-09-23T08:34:32Z",
-      "oppdatert": "2026-09-23T08:34:33Z",
-      "utkast": false,
-      "issues": [
-        45
       ]
     },
     {
