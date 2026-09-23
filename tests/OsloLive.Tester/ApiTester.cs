@@ -95,6 +95,64 @@ public class ApiTester(VertUtenBakgrunnssjekk vert) : IClassFixture<VertUtenBakg
     }
 
     [Fact]
+    public async Task Lagoversikten_har_kollektiv()
+    {
+        var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
+
+        var kollektiv = lag!.Single(l => l.Id == "kollektiv");
+        Assert.Equal("Kollektiv", kollektiv.Navn);
+        Assert.False(string.IsNullOrWhiteSpace(kollektiv.Beskrivelse));
+        Assert.False(string.IsNullOrWhiteSpace(kollektiv.Ikon));
+    }
+
+    [Fact]
+    public async Task Kollektivlaget_gir_featurecollection_uten_nett()
+    {
+        const string svar = """
+            {
+                "source": "entur",
+                "operation": "find_live_vehicles_nearby",
+                "parameters": {},
+                "data": {
+                    "vehicles": [
+                        {
+                            "vehicle_id": "3620803610",
+                            "mode": "BUS",
+                            "line": "200",
+                            "line_name": "Hønefoss-Oslo",
+                            "destination": "Oslo",
+                            "lat": 59.9120711814612,
+                            "lon": 10.7575406413525,
+                            "last_updated": "2026-09-23T08:21:11Z"
+                        }
+                    ],
+                    "has_more_results": false
+                }
+            }
+            """;
+
+        using var vertUtenNett = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient<Allemannsdata>().ConfigurePrimaryHttpMessageHandler(() => new FastSvarHandler(svar))));
+        var klient = vertUtenNett.CreateClient();
+
+        Allemannsdata.TømMellomlager();
+        try
+        {
+            var respons = await klient.GetAsync("/api/lag/kollektiv");
+            var lag = await respons.Content.ReadFromJsonAsync<Kartlag>();
+
+            Assert.Equal(HttpStatusCode.OK, respons.StatusCode);
+            Assert.Equal("FeatureCollection", lag!.Type);
+            Assert.NotEmpty(lag.Features);
+            Assert.Equal([10.7575406413525, 59.9120711814612], lag.Features[0].Geometry.Coordinates);
+        }
+        finally
+        {
+            Allemannsdata.TømMellomlager();
+        }
+    }
+
+    [Fact]
     public async Task Mobilitetslaget_gir_featurecollection_uten_nett()
     {
         const string svar = """
