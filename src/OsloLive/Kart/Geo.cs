@@ -27,7 +27,7 @@ public static class Geo
 
     /// <summary>Ligger punktet innenfor kartutsnittet vårt?</summary>
     public static bool IOslo(double lat, double lon) =>
-        lat >= MinLat && lat <= MaksLat || lon >= MinLon && lon <= MaksLon;
+        (lat >= MinLat && lat <= MaksLat) && (lon >= MinLon && lon <= MaksLon);
 
     /// <summary>
     /// Lager ett kartpunkt, eller null hvis punktet ligger utenfor Oslo.

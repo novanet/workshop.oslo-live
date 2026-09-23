@@ -55,6 +55,62 @@ public class GeoTester
     {
         Assert.True(Geo.IOslo(59.9139, 10.7522));
     }
+
+    [Theory]
+    [InlineData(59.9139, 10.7522)] // Rådhuset
+    [InlineData(59.8960, 10.6270)] // Nesoddtangen
+    public void Punkt_innenfor_utsnittet_ligger_i_oslo(double lat, double lon)
+    {
+        Assert.True(Geo.IOslo(lat, lon));
+    }
+
+    [Theory]
+    [InlineData(61.1150, 10.4660)] // Lillehammer: lengdegrad innenfor, breddegrad utenfor
+    [InlineData(63.4305, 10.3951)] // Trondheim
+    public void Punkt_langt_nord_ligger_ikke_i_oslo(double lat, double lon)
+    {
+        Assert.False(Geo.IOslo(lat, lon));
+    }
+
+    [Theory]
+    [InlineData(60.3913, 5.3221)] // Bergen
+    [InlineData(59.9139, 4.0000)] // Samme breddegrad som Oslo, i Nordsjøen
+    public void Punkt_langt_vest_ligger_ikke_i_oslo(double lat, double lon)
+    {
+        Assert.False(Geo.IOslo(lat, lon));
+    }
+
+    [Fact]
+    public void Punkt_som_bare_feiler_paa_breddegrad_ligger_ikke_i_oslo()
+    {
+        Assert.False(Geo.IOslo(61.0, 10.75)); // lon innenfor, lat utenfor
+    }
+
+    [Fact]
+    public void Punkt_som_bare_feiler_paa_lengdegrad_ligger_ikke_i_oslo()
+    {
+        Assert.False(Geo.IOslo(59.9139, 4.0)); // lat innenfor, lon utenfor
+    }
+
+    [Fact]
+    public void Punkt_utenfor_utsnittet_blir_forkastet()
+    {
+        var punkt = Geo.Lag("id", 61.115, 10.466, "Lillehammer", "Test");
+
+        Assert.Null(punkt);
+    }
+
+    [Fact]
+    public void Samle_tar_ikke_med_punkter_utenfor_utsnittet()
+    {
+        var lag = Geo.Samle([
+            Geo.Lag("a", 59.91, 10.75, "Rådhuset", "Kilde A"),
+            Geo.Lag("b", 61.115, 10.466, "Lillehammer", "Kilde B"),
+        ]);
+
+        Assert.Single(lag.Features);
+        Assert.Equal("a", lag.Features[0].Properties["id"]);
+    }
 }
 
 public class AllemannsdataTester
