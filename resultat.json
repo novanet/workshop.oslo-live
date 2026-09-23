@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:21:54",
+  "oppdatert": "2026-09-23T14:22:34",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -226,14 +226,14 @@
           "poeng": 3
         }
       ],
-      "dollar": 3.981,
-      "tokens": 7410019,
-      "sekunder": 1402,
+      "dollar": 4.418,
+      "tokens": 7735191,
+      "sekunder": 1519,
       "pr": 2,
       "utkast": 0,
       "merget": 2,
-      "kjoeringer": 6,
-      "utenPr": 4,
+      "kjoeringer": 7,
+      "utenPr": 5,
       "bygg": [],
       "estimert": false,
       "plass": 6
@@ -351,14 +351,14 @@
         }
       ],
       "levert": [],
-      "dollar": 6.25,
-      "tokens": 12072609,
-      "sekunder": 2098,
+      "dollar": 6.637,
+      "tokens": 12434456,
+      "sekunder": 2218,
       "pr": 3,
       "utkast": 0,
       "merget": 1,
-      "kjoeringer": 11,
-      "utenPr": 8,
+      "kjoeringer": 12,
+      "utenPr": 9,
       "bygg": [],
       "estimert": false,
       "plass": 11
@@ -579,7 +579,7 @@
       "issue": 198,
       "navn": "",
       "startet": "2026-09-23T12:16:25.0295863+00:00",
-      "minutter": 4
+      "minutter": 6
     },
     {
       "agent": "mini-richard",
@@ -587,7 +587,7 @@
       "issue": 157,
       "navn": "",
       "startet": "2026-09-23T12:19:02.3675258+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-richard",
@@ -595,7 +595,7 @@
       "issue": 191,
       "navn": "",
       "startet": "2026-09-23T12:19:02.7888497+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-leif",
@@ -603,7 +603,7 @@
       "issue": 141,
       "navn": "Tydelige kartsymboler: båter som ser ut som båter",
       "startet": "2026-09-23T12:19:28.1326146+00:00",
-      "minutter": 1
+      "minutter": 3
     },
     {
       "agent": "mini-richard",
@@ -611,7 +611,7 @@
       "issue": 169,
       "navn": "",
       "startet": "2026-09-23T12:19:32.4225991+00:00",
-      "minutter": 1
+      "minutter": 3
     },
     {
       "agent": "mini-wilma",
@@ -619,7 +619,7 @@
       "issue": 190,
       "navn": "",
       "startet": "2026-09-23T12:19:34.8533908+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-frode",
@@ -627,7 +627,7 @@
       "issue": 128,
       "navn": "Simulering: tsunami i Oslofjorden",
       "startet": "2026-09-23T12:19:38.2554331+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-kirsten",
@@ -635,23 +635,7 @@
       "issue": 29,
       "navn": "Museer",
       "startet": "2026-09-23T12:19:47.6786683+00:00",
-      "minutter": 1
-    },
-    {
-      "agent": "mini-ingve",
-      "github": "ingvevs",
-      "issue": 11,
-      "navn": "Kollektiv",
-      "startet": "2026-09-23T12:20:06.5087944+00:00",
-      "minutter": 1
-    },
-    {
-      "agent": "helstein",
-      "github": "nilsgs",
-      "issue": 116,
-      "navn": "Nytt lag: værstasjoner",
-      "startet": "2026-09-23T12:20:17.4874427+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-wilma",
@@ -659,7 +643,7 @@
       "issue": 129,
       "navn": "Simulering: meteornedslag",
       "startet": "2026-09-23T12:20:25.1910717+00:00",
-      "minutter": 0
+      "minutter": 2
     },
     {
       "agent": "helstein",
@@ -667,7 +651,7 @@
       "issue": 46,
       "navn": "Bydelsgrenser",
       "startet": "2026-09-23T12:20:35.6518254+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-taco",
@@ -675,7 +659,7 @@
       "issue": 133,
       "navn": "Havet stiger: hva havner under vann?",
       "startet": "2026-09-23T12:20:40.4209313+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-jon",
@@ -683,7 +667,7 @@
       "issue": 197,
       "navn": "",
       "startet": "2026-09-23T12:20:43.3709734+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "martin-holth",
@@ -691,6 +675,14 @@
       "issue": 111,
       "navn": "Nytt lag: kaier og ferjekaier",
       "startet": "2026-09-23T12:20:50.7551895+00:00",
+      "minutter": 1
+    },
+    {
+      "agent": "mini-knive",
+      "github": "Buggz",
+      "issue": 28,
+      "navn": "Tog",
+      "startet": "2026-09-23T12:21:43.7886322+00:00",
       "minutter": 0
     }
   ],
@@ -772,7 +764,7 @@
       "issue": 28,
       "navn": "Nytt lag: togtrafikk",
       "github": "Buggz",
-      "oppdatert": "2026-09-23T12:21:17Z"
+      "oppdatert": "2026-09-23T12:21:44Z"
     },
     {
       "issue": 29,
@@ -934,13 +926,13 @@
       "issue": 116,
       "navn": "Nytt lag: værstasjoner",
       "github": "monet820",
-      "oppdatert": "2026-09-23T12:20:18Z"
+      "oppdatert": "2026-09-23T12:21:53Z"
     },
     {
       "issue": 116,
       "navn": "Nytt lag: værstasjoner",
       "github": "nilsgs",
-      "oppdatert": "2026-09-23T12:20:18Z"
+      "oppdatert": "2026-09-23T12:21:53Z"
     },
     {
       "issue": 117,
@@ -1078,7 +1070,7 @@
       "issue": 158,
       "navn": "Strøm av endringer i stedet for å spørre hvert 15. sekund",
       "github": "randsu",
-      "oppdatert": "2026-09-23T12:16:17Z"
+      "oppdatert": "2026-09-23T12:21:45Z"
     },
     {
       "issue": 169,
@@ -1090,13 +1082,13 @@
       "issue": 170,
       "navn": "Fortell en historie med kartet, styrt med presentasjonsklikker",
       "github": "randsu",
-      "oppdatert": "2026-09-23T12:16:40Z"
+      "oppdatert": "2026-09-23T12:21:51Z"
     },
     {
       "issue": 181,
       "navn": "Døgnet på ett minutt: reprise av byen",
       "github": "randsu",
-      "oppdatert": "2026-09-23T12:16:46Z"
+      "oppdatert": "2026-09-23T12:21:56Z"
     },
     {
       "issue": 190,
@@ -1131,6 +1123,18 @@
   ],
   "aapne": [
     {
+      "pr": 200,
+      "tittel": "Ekte sollys på 3D-byggene",
+      "github": "audmaha",
+      "agent": "mini-aud",
+      "opprettet": "2026-09-23T12:18:47Z",
+      "oppdatert": "2026-09-23T12:21:07Z",
+      "utkast": false,
+      "issues": [
+        132
+      ]
+    },
+    {
       "pr": 100,
       "tittel": "Vis vannstanden i fjorden",
       "github": "nilsgs",
@@ -1152,18 +1156,6 @@
       "utkast": false,
       "issues": [
         141
-      ]
-    },
-    {
-      "pr": 200,
-      "tittel": "Ekte sollys på 3D-byggene",
-      "github": "audmaha",
-      "agent": "mini-aud",
-      "opprettet": "2026-09-23T12:18:47Z",
-      "oppdatert": "2026-09-23T12:18:48Z",
-      "utkast": false,
-      "issues": [
-        132
       ]
     },
     {
