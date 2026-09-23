@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:36:06",
+  "oppdatert": "2026-09-23T14:36:46",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -607,7 +607,7 @@
       "issue": 188,
       "navn": "Vinden som strømmer over byen",
       "startet": "2026-09-23T12:23:41.4076789+00:00",
-      "minutter": 12
+      "minutter": 13
     },
     {
       "agent": "mini-wilma",
@@ -615,7 +615,7 @@
       "issue": 26,
       "navn": "Skoler",
       "startet": "2026-09-23T12:28:26.4775068+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "mini-wilma",
@@ -623,7 +623,7 @@
       "issue": 214,
       "navn": "Lagvelgeren er for høy: historikkgrafen tar en egen rad per lag",
       "startet": "2026-09-23T12:31:25.313151+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "henrik",
@@ -639,7 +639,7 @@
       "issue": 206,
       "navn": "Popupene viser rådata: ISO-tider, «ikon: 😊» og tall uten enhet",
       "startet": "2026-09-23T12:32:25.3380267+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-richard",
@@ -647,7 +647,7 @@
       "issue": 114,
       "navn": "Nytt lag: Kristiania i 1910",
       "startet": "2026-09-23T12:33:37.8320639+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-knive",
@@ -655,7 +655,7 @@
       "issue": 215,
       "navn": "Svarte klynger dekker sentrum og skjuler hvilke lag som er der",
       "startet": "2026-09-23T12:34:13.5766398+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-kirsten",
@@ -663,7 +663,7 @@
       "issue": 29,
       "navn": "Museer",
       "startet": "2026-09-23T12:34:23.8175869+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-leif",
@@ -671,7 +671,7 @@
       "issue": 118,
       "navn": "Nyhetslinje nederst på skjermen",
       "startet": "2026-09-23T12:34:25.9928919+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-richard",
@@ -679,7 +679,7 @@
       "issue": 116,
       "navn": "Nytt lag: værstasjoner",
       "startet": "2026-09-23T12:34:27.1286355+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-jon",
@@ -687,7 +687,7 @@
       "issue": 189,
       "navn": "Travlere enn vanlig på veiene",
       "startet": "2026-09-23T12:34:43.2826697+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-gir",
@@ -695,7 +695,7 @@
       "issue": 18,
       "navn": "Kulturminner",
       "startet": "2026-09-23T12:35:26.9487115+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-gir",
@@ -703,7 +703,7 @@
       "issue": 13,
       "navn": "Veiarbeid",
       "startet": "2026-09-23T12:35:36.9770034+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-gir",
@@ -719,6 +719,14 @@
       "issue": 33,
       "navn": "Sykkelparkering",
       "startet": "2026-09-23T12:35:47.0074899+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "helstein",
+      "github": "nilsgs",
+      "issue": 194,
+      "navn": "Nytt lag: bomstasjoner",
+      "startet": "2026-09-23T12:36:39.65381+00:00",
       "minutter": 0
     }
   ],
@@ -915,13 +923,13 @@
       "issue": 117,
       "navn": "Nye punkter pulserer når de dukker opp",
       "github": "Copilot",
-      "oppdatert": "2026-09-23T12:29:54Z"
+      "oppdatert": "2026-09-23T12:36:28Z"
     },
     {
       "issue": 117,
       "navn": "Nye punkter pulserer når de dukker opp",
       "github": "SasaRad",
-      "oppdatert": "2026-09-23T12:29:54Z"
+      "oppdatert": "2026-09-23T12:36:28Z"
     },
     {
       "issue": 118,
@@ -1095,7 +1103,7 @@
       "issue": 194,
       "navn": "Nytt lag: bomstasjoner",
       "github": "nilsgs",
-      "oppdatert": "2026-09-23T12:35:35Z"
+      "oppdatert": "2026-09-23T12:36:40Z"
     },
     {
       "issue": 197,
@@ -1136,6 +1144,30 @@
   ],
   "aapne": [
     {
+      "pr": 222,
+      "tittel": "Havet stiger: hva havner under vann? (#133)",
+      "github": "Puiu",
+      "agent": "mini-taco",
+      "opprettet": "2026-09-23T12:30:27Z",
+      "oppdatert": "2026-09-23T12:36:09Z",
+      "utkast": false,
+      "issues": [
+        133
+      ]
+    },
+    {
+      "pr": 221,
+      "tittel": "#191: Et døgn med bysykkelturer på 90 sekunder",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T12:29:48Z",
+      "oppdatert": "2026-09-23T12:36:00Z",
+      "utkast": false,
+      "issues": [
+        191
+      ]
+    },
+    {
       "pr": 145,
       "tittel": "#142: Kurs på skipene",
       "github": "randsu",
@@ -1145,18 +1177,6 @@
       "utkast": false,
       "issues": [
         142
-      ]
-    },
-    {
-      "pr": 221,
-      "tittel": "#191: Et døgn med bysykkelturer på 90 sekunder",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T12:29:48Z",
-      "oppdatert": "2026-09-23T12:33:46Z",
-      "utkast": false,
-      "issues": [
-        191
       ]
     },
     {
@@ -1193,18 +1213,6 @@
       "utkast": false,
       "issues": [
         29
-      ]
-    },
-    {
-      "pr": 222,
-      "tittel": "Havet stiger: hva havner under vann? (#133)",
-      "github": "Puiu",
-      "agent": "mini-taco",
-      "opprettet": "2026-09-23T12:30:27Z",
-      "oppdatert": "2026-09-23T12:30:42Z",
-      "utkast": false,
-      "issues": [
-        133
       ]
     },
     {
