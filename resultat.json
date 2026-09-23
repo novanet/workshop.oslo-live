@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:25:26",
+  "oppdatert": "2026-09-23T10:25:53",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -265,7 +265,7 @@
       "issue": 57,
       "navn": "Avgangstavle",
       "startet": "2026-09-23T08:16:36.122853+00:00",
-      "minutter": 8
+      "minutter": 9
     },
     {
       "agent": "mini-jon",
@@ -281,7 +281,7 @@
       "issue": 45,
       "navn": "Varsler",
       "startet": "2026-09-23T08:22:20.0747631+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-wilma",
@@ -289,7 +289,7 @@
       "issue": 8,
       "navn": "Hendelser",
       "startet": "2026-09-23T08:22:51.9896553+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-kirsten",
@@ -313,6 +313,14 @@
       "issue": 3,
       "navn": "Mellomlageret",
       "startet": "2026-09-23T08:24:21.5164398+00:00",
+      "minutter": 1
+    },
+    {
+      "agent": "mini-astrid",
+      "github": "theakbe",
+      "issue": 42,
+      "navn": "Nærmeste punkt",
+      "startet": "2026-09-23T08:25:30.8766176+00:00",
       "minutter": 0
     }
   ],
@@ -449,6 +457,12 @@
       "navn": "Nytt lag: museer og samlinger",
       "github": "jthagesk",
       "oppdatert": "2026-09-23T08:23:18Z"
+    },
+    {
+      "issue": 42,
+      "navn": "Hva er nærmest her?",
+      "github": "theakbe",
+      "oppdatert": "2026-09-23T08:25:31Z"
     },
     {
       "issue": 44,
