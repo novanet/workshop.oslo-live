@@ -630,6 +630,9 @@ function leggTilPunktlag() {
     filter: ['!', ['has', 'point_count']],
     layout: {
       'icon-image': ['get', 'bilde'],
+      // Bildene har pixelRatio 2 på et 64 px lerret, så icon-size 1 gir et
+      // 32 px symbol – over kravet om minst 28 px.
+      'icon-size': 1,
       'icon-allow-overlap': true, 'icon-ignore-placement': true
     } });
 

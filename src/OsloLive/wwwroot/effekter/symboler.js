@@ -72,11 +72,14 @@
     return svg(gruppe);
   }
 
-  // Båt sett ovenfra: spiss baug øverst (nord), symmetrisk om x=32.
-  const BAAT = 'M32 4 C37 13 40 22 40 31 L40 52 Q40 59 32 59 Q24 59 24 52 L24 31 C24 22 27 13 32 4 Z';
+  // Båt sett ovenfra: spiss baug øverst (nord), symmetrisk om x=32. Skroget
+  // strekker seg fra y=3 til y=60, som gir minst 28 px i høyden ved 32 px
+  // symbolstørrelse (kart-bildet har pixelRatio 2 på et 64 px lerret).
+  const BAAT = 'M32 3 C37 13 40 22 40 31 L40 52 Q40 60 32 60 Q24 60 24 52 L24 31 C24 22 27 13 32 3 Z';
 
-  // Fly sett ovenfra: spiss nese øverst, vinger og haleplan, symmetrisk om x=32.
-  const FLY = 'M32 3 C34 3 35 6 35 10 L35 22 L58 34 L58 39 L35 30 L35 46 L46 54 L46 59 L32 56 L18 59 L18 54 L29 46 L29 30 L6 39 L6 34 L29 22 L29 10 C29 6 30 3 32 3 Z';
+  // Fly sett ovenfra: spiss nese øverst, vinger og haleplan, symmetrisk om
+  // x=32. Silhuetten strekker seg fra y=2 til y=60, samme grunn som over.
+  const FLY = 'M32 2 C34 2 35 6 35 10 L35 22 L58 34 L58 39 L35 30 L35 46 L46 54 L46 60 L32 56 L18 60 L18 54 L29 46 L29 30 L6 39 L6 34 L29 22 L29 10 C29 6 30 2 32 2 Z';
 
   function sykkel(farge) {
     const gruppe = document.createElementNS(NS, 'g');
