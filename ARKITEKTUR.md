@@ -30,6 +30,7 @@ Prinsipp: kartet er en liste med lag. `ILag → Kartlag (GeoJSON) → MapLibre`.
 |---|---|
 | `GET /api/lag` | `[{ id, navn, beskrivelse, ikon }]` |
 | `GET /api/lag/{id}` | `Kartlag` som GeoJSON `FeatureCollection`. 404 ved ukjent id. 502 `{ feil }` hvis laget kaster; de andre lagene påvirkes ikke. Med `?tid=` (ISO 8601) svares det med bildet lagret nærmest det tidspunktet i stedet for levende data; tom `FeatureCollection` hvis ingen bilde er innenfor to timer, 400 ved ugyldig `tid`. Se `Historikk/`. |
+| `GET /api/lag/{id}/historikk` | `[{ tidspunkt, antall }]`, siste 24 timer, eldste først. 404 ved ukjent id, tom liste hvis laget ikke har bilder ennå. Bildene tas av `Historikk/Øyeblikksjobb`, samme jobb og samme lager som tidslinjen bruker; se «Historikk og tidslinjen». |
 | `GET /api/lag/{id}/bydeler` | `[{ bydel, antall }]`, antall punkter i laget per bydel, sortert synkende. Bydel = nærmeste bydelssenter fra Kartverket; punkter lenger enn 5 km fra alle sentre utelates. 404 ved ukjent id, 502 `{ feil }` hvis laget eller oppslaget svikter. Én oppdatering gjør 9 kall mot Allemannsdata (ett per forbokstav i `Bydeler.Prefikser`), uavhengig av antall punkter, aldri ett kall per punkt. Svarene mellomlagres 30 s som alt annet. Med `?tid=` telles bildet lagret nærmest tidspunktet, som for `/api/lag/{id}`, så tellingen følger tidslinjen. |
 | `GET /api/stroempris` | Strømprisen i Oslo (NO1) i dag: `{ naa, billigst: { time, pris }, dyrest: { time, pris }, timer: [{ time, pris }, …] }`, øre/kWh inkl. mva. 502 `{ feil }` hvis kilden svikter. |
 | `GET /api/helse` | `{ status: "ok", tid }` |
@@ -121,14 +122,19 @@ utvidet til Gardermoen; det er en egen beslutning om hva «Oslo Live» skal dekk
 
 ## Historikk og tidslinjen
 
-**Sammenheng med historikk-issuen (#25, «Ta vare på et øyeblikksbilde hver time»).**
-Tidslinjen (#34) bygger på øyeblikksbildene fra #25: samme idé, samme lagring, ett
-JSON-bilde per lag per time på disk under `Historikk:Mappe`, valgt etter nærmeste
-tidspunkt. Denne PR-en tar med sin egen jobb, `Historikk/Øyeblikksjobb`, slik at
-tidslinjen kan merges uten å vente på #25. Når PR-en for #25 (jobben `Bildejobb` med
-samme `Bildelager`) er inne, er det én timesjobb og ett lager: `Øyeblikksjobb` og
-`Bildejobb` gjør det samme, og den som merges sist fjernes til fordel for den andre,
-uten endring i `?tid=`-kontrakten, i `Bildelager` eller i tidslinjen.
+**Sammenheng mellom historikken (#25) og tidslinjen (#34).** Begge bygger på de
+samme øyeblikksbildene: `Historikk/Øyeblikksjobb` tar ett JSON-bilde per lag per time
+og legger det under `Historikk:Mappe`, og `Bildelager` leser dem. Tidslinjen bruker
+`?tid=` (bildet nærmest tidspunktet), historikken bruker `GET /api/lag/{id}/historikk`
+(antall punkter per bilde de siste 24 timene). Én jobb, ett lager, ingen egen jobb for #25.
+
+**Hva skjer med historikken når containeren startes på nytt?** Bildene ligger i
+`App_Data/historikk` i containerens eget filsystem. En omstart av prosessen beholder dem;
+en ny revisjon i Container Apps får nytt filsystem, så da starter `/api/lag/{id}/historikk`
+med tom liste og fylles igjen time for time (første bilde tas ved oppstart). Skal historikken
+overleve utrullinger, monteres et volum (for eksempel Azure Files) på `/app/App_Data/historikk`,
+eller `Historikk:Mappe` pekes på volumet. Ingen data går tapt utenom bildene: levende data
+hentes som før.
 
 `Historikk/Øyeblikksjobb` tar et bilde (`Kartlag` som JSON) av hvert registrerte lag én gang i timen, første gang ved oppstart, og legger det i `Historikk:Mappe/<lagId>/<yyyyMMddTHHmmssZ>.json`. `Bildelager` velger bildet nærmest `?tid=` (maks to timer unna) og sletter bilder eldre enn sju dager. Et lag som svikter, eller et tidsavbrudd mot kilden, logges og hoppes over; jobben stopper bare når verten selv stopper.
 

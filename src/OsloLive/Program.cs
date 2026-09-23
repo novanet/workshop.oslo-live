@@ -1,4 +1,5 @@
 using System.Globalization;
+using System.Text.Json;
 using OsloLive;
 using OsloLive.Helse;
 using OsloLive.Historikk;
@@ -27,6 +28,16 @@ builder.Services.AddHttpClient("fly", klient =>
     klient.Timeout = TimeSpan.FromSeconds(10);
     klient.DefaultRequestHeaders.UserAgent.ParseAdd("OsloLive/1.0 (kurs)");
 });
+
+// Bomstasjonene hentes fra NVDB (Statens vegvesen), som heller ikke er en Allemannsdata-kilde,
+// og krever headeren X-Client. Se BomstasjonerLag.cs.
+builder.Services.AddHttpClient("bomstasjoner", klient =>
+{
+    klient.Timeout = TimeSpan.FromSeconds(15);
+    klient.DefaultRequestHeaders.UserAgent.ParseAdd("OsloLive/1.0 (kurs)");
+    klient.DefaultRequestHeaders.Add("X-Client", "OsloLive");
+    klient.DefaultRequestHeaders.Accept.ParseAdd("application/json");
+});
 builder.Services.AddMemoryCache();
 builder.Services.AddSingleton<Lagstatistikk>();
 
@@ -46,12 +57,21 @@ builder.Services.AddHostedService<Øyeblikksjobb>();
 // Lagene på kartet. Nytt lag? Legg til én linje her.
 // ---------------------------------------------------------------------------
 builder.Services.AddSingleton<ILag, LuftkvalitetLag>();
+builder.Services.AddSingleton<ILag, ArterLag>();
+builder.Services.AddSingleton<ILag, HendelserLag>();
 builder.Services.AddSingleton<ILag, SmilefjesLag>();
 builder.Services.AddSingleton<ILag, FlyLag>();
 builder.Services.AddSingleton<ILag, BadetemperaturLag>();
 builder.Services.AddSingleton<ILag, MobilitetLag>();
 builder.Services.AddSingleton<ILag, SpisestederLag>();
+builder.Services.AddSingleton<ILag, HoldeplasserLag>();
 builder.Services.AddSingleton<ILag, SkipLag>();
+builder.Services.AddSingleton<ILag, VannmaalereLag>();
+builder.Services.AddSingleton<ILag, SkolerLag>();
+builder.Services.AddSingleton<ILag, KaierLag>();
+builder.Services.AddSingleton<ILag, BomstasjonerLag>();
+builder.Services.AddSingleton<ILag, VaerstasjonerLag>();
+builder.Services.AddSingleton<ILag, IdrettsanleggLag>();
 
 // Bakgrunnssjekk av kildehelse, se Helse/HelseSjekker.cs.
 builder.Services.Configure<HelseValg>(builder.Configuration.GetSection("Helse"));
@@ -102,8 +122,23 @@ app.MapGet("/api/lag/{id}", async (string id, string? tid, IEnumerable<ILag> lag
         }
 
         app.Logger.LogError(ex, "Laget {Id} feilet", id);
-        return Results.Json(new { feil = ex.Message }, statusCode: 502);
+        return Results.Json(new { feil = Feiltekst.Fra(ex) }, statusCode: 502);
     }
+});
+
+// Antall punkter per time i ett lag, siste døgn, eldste først.
+// Antall punkter per lagret bilde siste 24 timer (#25). Bildene ligger i App_Data/historikk i
+// containerens filsystem: de overlever omstart av prosessen, men en ny revisjon uten volum
+// starter med tom historikk som fylles igjen time for time. Se ARKITEKTUR.md.
+app.MapGet("/api/lag/{id}/historikk", (string id, IEnumerable<ILag> lag, Bildelager lager) =>
+{
+    var valgt = lag.FirstOrDefault(l => string.Equals(l.Id, id, StringComparison.OrdinalIgnoreCase));
+    if (valgt is null)
+    {
+        return Results.NotFound(new { feil = $"Fant ingen lag med id «{id}»." });
+    }
+
+    return Results.Ok(lager.Les(valgt.Id, DateTimeOffset.UtcNow));
 });
 
 // Antall punkter per bydel for ett lag. Tilstandsløs; bydelssentrene hentes
@@ -139,7 +174,7 @@ app.MapGet("/api/lag/{id}/bydeler", async (string id, string? tid, IEnumerable<I
     catch (Exception ex)
     {
         app.Logger.LogError(ex, "Bydelstelling for laget {Id} feilet", id);
-        return Results.Json(new { feil = ex.Message }, statusCode: 502);
+        return Results.Json(new { feil = Feiltekst.Fra(ex) }, statusCode: 502);
     }
 });
 
@@ -166,7 +201,7 @@ app.MapGet("/api/stroempris", async (Allemannsdata data, CancellationToken stopp
     catch (Exception ex)
     {
         app.Logger.LogError(ex, "Strømprisen feilet");
-        return Results.Json(new { feil = ex.Message }, statusCode: 502);
+        return Results.Json(new { feil = Feiltekst.Fra(ex) }, statusCode: 502);
     }
 });
 
@@ -188,7 +223,153 @@ app.MapGet("/api/helse/kilder", (HelseSjekker sjekker) =>
     return Results.Ok(new { status = HelseSjekker.SamletStatus(kilder), kilder });
 });
 
+// Vannstand og neste høy-/lavvann i Oslo havn. Ikke et kartlag med mange punkter, så eget endepunkt.
+app.MapGet("/api/vannstand", async (Allemannsdata data, CancellationToken stopp) =>
+{
+    try
+    {
+        var naaRader = await data.HentListe(Vannstand.Kilde, Vannstand.OperasjonNaa, Vannstand.Parametre(), liste: null, stopp);
+        var tabellRader = await data.HentListe(Vannstand.Kilde, Vannstand.OperasjonNeste, Vannstand.Parametre(), liste: null, stopp);
+        return Results.Ok(Vannstand.Tolk(naaRader, tabellRader, DateTimeOffset.UtcNow));
+    }
+    catch (Exception ex)
+    {
+        app.Logger.LogError(ex, "Vannstand feilet");
+        return Results.Json(new { feil = Feiltekst.Fra(ex) }, statusCode: 502);
+    }
+});
+
+// Adressesøk hos Kartverket (Geonorge). Ikke et lag, derfor eget endepunkt uten tilstand.
+app.MapGet("/api/sok", async (string? q, Allemannsdata data, CancellationToken stopp) =>
+{
+    if (string.IsNullOrWhiteSpace(q))
+    {
+        return Results.BadRequest(new { feil = "Skriv noe å søke etter i «q»." });
+    }
+
+    try
+    {
+        var rader = await data.HentListe(
+            "geonorge",
+            "search_address",
+            new Dictionary<string, object>
+            {
+                ["text"] = q.Trim(),
+                ["kommunenummer"] = "0301",
+                ["limit"] = 20,
+            },
+            liste: "addresses",
+            stopp);
+
+        var treff = rader
+            .Select(TilSøketreff)
+            .Where(t => t is not null && Geo.IOslo(t.Lat, t.Lon))
+            .Take(10)
+            .ToList();
+
+        return Results.Ok(treff);
+    }
+    catch (Exception ex)
+    {
+        app.Logger.LogError(ex, "Adressesøket feilet");
+        return Results.Json(new { feil = ex.Message }, statusCode: 502);
+    }
+});
+
 app.Run();
 
 /// <summary>Gjør Program synlig for testprosjektet.</summary>
-public partial class Program;
+public partial class Program
+{
+    /// <summary>Ett treff i adressesøket.</summary>
+    public sealed record Søketreff(string Navn, double Lat, double Lon);
+
+    /// <summary>Leser en rad fra Geonorges adressesøk. Null hvis navn eller koordinater mangler.</summary>
+    public static Søketreff? TilSøketreff(JsonElement rad)
+    {
+        var navn = rad.TryGetProperty("address", out var a) ? a.GetString() : null;
+        if (string.IsNullOrWhiteSpace(navn))
+        {
+            return null;
+        }
+
+        if (!rad.TryGetProperty("lat", out var lat) || !rad.TryGetProperty("lon", out var lon))
+        {
+            return null;
+        }
+
+        return new Søketreff(navn, lat.GetDouble(), lon.GetDouble());
+    }
+}
+
+/// <summary>
+/// Tolker tidevannssvaret fra Kartverket (via Allemannsdata, kilde «weather»).
+/// Ren funksjon, ingen tilstand.
+/// </summary>
+public static class Vannstand
+{
+    public const string Kilde = "weather";
+
+    /// <summary>Tidsserie med aktuell/nær sanntids sjøstand, brukt til «naa».</summary>
+    public const string OperasjonNaa = "get_tide_forecast";
+
+    /// <summary>Tabell over kommende høy- og lavvann, brukt til «neste».</summary>
+    public const string OperasjonNeste = "get_tide_table";
+
+    // Samme parametre til begge operasjonene, og ingen tidsstempel i dem,
+    // så adressen er lik fra kall til kall og mellomlageret i Allemannsdata treffer.
+    public static IReadOnlyDictionary<string, object> Parametre() => new Dictionary<string, object>
+    {
+        ["lat"] = Geo.OsloLat,
+        ["lon"] = Geo.OsloLon,
+    };
+
+    public sealed record Neste(string Type, DateTimeOffset Tidspunkt, double Verdi);
+
+    public sealed record Svar(double Naa, DateTimeOffset Maalt, Neste Neste);
+
+    /// <summary>
+    /// «naa»/«maalt»: raden i tidsserien med tidspunkt nærmest <paramref name="nå"/>.
+    /// «neste»: første rad i tidevannstabellen med tidspunkt etter <paramref name="nå"/>.
+    /// </summary>
+    public static Svar Tolk(IReadOnlyList<JsonElement> naaRader, IReadOnlyList<JsonElement> tabellRader, DateTimeOffset nå)
+    {
+        var naaKandidater = naaRader
+            .Select(rad => (
+                Tid: DateTimeOffset.Parse(rad.GetProperty("time").GetString()!, CultureInfo.InvariantCulture),
+                Verdi: rad.GetProperty("sea_level_cm").GetDouble()))
+            .OrderBy(p => Math.Abs((p.Tid - nå).Ticks))
+            .ToList();
+
+        if (naaKandidater.Count == 0)
+        {
+            throw new InvalidOperationException("Fant ingen vannstandsdata for Oslo havn.");
+        }
+
+        var naa = naaKandidater[0];
+
+        var nesteKandidater = tabellRader
+            .Select(rad => (
+                Tid: DateTimeOffset.Parse(rad.GetProperty("time").GetString()!, CultureInfo.InvariantCulture),
+                Verdi: rad.GetProperty("height_cm").GetDouble(),
+                Kind: rad.GetProperty("kind").GetString()))
+            .Where(p => p.Tid > nå)
+            .OrderBy(p => p.Tid)
+            .ToList();
+
+        if (nesteKandidater.Count == 0)
+        {
+            throw new InvalidOperationException("Fant ingen fremtidig høyvann eller lavvann for Oslo havn.");
+        }
+
+        var neste = nesteKandidater[0];
+        var type = neste.Kind switch
+        {
+            "high" => "høyvann",
+            "low" => "lavvann",
+            var ukjent => throw new InvalidOperationException($"Ukjent tidevannstype «{ukjent}»."),
+        };
+
+        return new Svar(naa.Verdi, naa.Tid, new Neste(type, neste.Tid, neste.Verdi));
+    }
+}
