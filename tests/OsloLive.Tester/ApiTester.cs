@@ -834,6 +834,37 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
     }
 
     [Fact]
+    public async Task Lagoversikten_har_ladestasjoner_med_navn_beskrivelse_og_ikon()
+    {
+        var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
+
+        var ladestasjoner = lag!.Single(l => l.Id == "ladestasjoner");
+        Assert.Equal("Ladestasjoner", ladestasjoner.Navn);
+        Assert.False(string.IsNullOrWhiteSpace(ladestasjoner.Beskrivelse));
+        Assert.False(string.IsNullOrWhiteSpace(ladestasjoner.Ikon));
+    }
+
+    [Fact]
+    public async Task Svikt_i_ladekilden_gir_502_bare_for_ladestasjonslaget()
+    {
+        Allemannsdata.TømMellomlager();
+        using var vertMedSvikt = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient<Allemannsdata>().ConfigurePrimaryHttpMessageHandler(() => new SviktHandler())));
+        var klient = vertMedSvikt.CreateClient();
+
+        var ladestasjoner = await klient.GetAsync("/api/lag/ladestasjoner");
+        var lag = await klient.GetAsync("/api/lag");
+        var helse = await klient.GetAsync("/api/helse");
+
+        Assert.Equal(HttpStatusCode.BadGateway, ladestasjoner.StatusCode);
+        var feilSvar = await ladestasjoner.Content.ReadFromJsonAsync<JsonElement>();
+        Assert.False(string.IsNullOrWhiteSpace(feilSvar.GetProperty("feil").GetString()));
+        Assert.Equal(HttpStatusCode.OK, lag.StatusCode);
+        Assert.Equal(HttpStatusCode.OK, helse.StatusCode);
+        Allemannsdata.TømMellomlager();
+    }
+
+    [Fact]
     public async Task Svikt_i_stroemkilden_gir_502_resten_av_api_et_svarer_200()
     {
         Allemannsdata.TømMellomlager();
