@@ -4,6 +4,7 @@ using System.Text;
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using OsloLive.Historikk;
 using OsloLive.Kart;
 
@@ -461,6 +462,27 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
     }
 
     [Fact]
+    public async Task Testverten_kjoerer_ingen_bakgrunnsjobb_og_lagrer_bare_i_sin_egen_mappe()
+    {
+        // Øyeblikksjobb og helsesjekken er fjernet fra testverten, og Historikk:Mappe peker på
+        // en midlertidig mappe som slettes etter testene. Ingen filer havner i App_Data/historikk.
+        // Testserveren har sin egen vertstjeneste; ingen av appens bakgrunnsjobber skal være der.
+        Assert.DoesNotContain(vert.Services.GetServices<IHostedService>(), t => t.GetType().Namespace?.StartsWith("OsloLive") == true);
+
+        var lager = vert.Services.GetRequiredService<Bildelager>();
+        await lager.Lagre("testlag", Geo.Samle([Geo.Lag("a", 59.91, 10.75, "A", "Test")]), DateTimeOffset.UtcNow);
+
+        Assert.NotEmpty(Directory.GetFiles(Path.Combine(vert.Mappe, "testlag"), "*.json"));
+    }
+
+    [Fact]
+    public async Task Historikk_for_ukjent_lag_gir_404()
+    {
+        var svar = await Klient.GetAsync("/api/lag/finnes-ikke/historikk");
+        Assert.Equal(HttpStatusCode.NotFound, svar.StatusCode);
+    }
+
+    [Fact]
     public async Task Statistikken_svarer_200()
     {
         var svar = await Klient.GetAsync("/api/statistikk");
@@ -548,6 +570,33 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
         var svar = await Klient.GetAsync("/api/lag/finnes-ikke?tid=2026-09-18T08:00:00Z");
 
         Assert.Equal(HttpStatusCode.NotFound, svar.StatusCode);
+    }
+
+    [Fact]
+    public async Task Historikk_for_lag_uten_bilder_gir_tom_liste()
+    {
+        var svar = await Klient.GetAsync("/api/lag/luftkvalitet/historikk");
+        var bilder = await svar.Content.ReadFromJsonAsync<List<Bilde>>();
+
+        Assert.Equal(HttpStatusCode.OK, svar.StatusCode);
+        Assert.NotNull(bilder);
+        Assert.Empty(bilder);
+    }
+
+    [Fact]
+    public async Task Historikk_viser_lagrede_bilder_med_tidspunkt_og_antall()
+    {
+        var lager = vert.Services.GetRequiredService<Bildelager>();
+        var punkt = Geo.Lag("a", 59.91, 10.75, "A", "Test");
+        await lager.Lagre("fly", Geo.Samle([punkt]), DateTimeOffset.UtcNow.AddHours(-1));
+
+        var svar = await Klient.GetAsync("/api/lag/fly/historikk");
+        var bilder = await svar.Content.ReadFromJsonAsync<List<Bilde>>();
+
+        Assert.Equal(HttpStatusCode.OK, svar.StatusCode);
+        Assert.NotNull(bilder);
+        var bilde = Assert.Single(bilder);
+        Assert.Equal(1, bilde.Antall);
     }
 
     [Fact]
