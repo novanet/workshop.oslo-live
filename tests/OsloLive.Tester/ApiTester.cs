@@ -203,10 +203,63 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
         Assert.Equal(1, bilde.Antall);
     }
 
+    [Fact]
+    public async Task Stroemprisen_har_naa_billigst_dyrest_og_timer()
+    {
+        Allemannsdata.TømMellomlager();
+        var iDag = TimeZoneInfo.ConvertTime(DateTimeOffset.UtcNow, Stroempris.Oslo).ToString("yyyy-MM-dd");
+        var prisrader = Enumerable.Range(0, 24)
+            .Select(t => new { time_start = $"{iDag}T{t:D2}:00:00+02:00", time_end = $"{iDag}T{(t + 1) % 24:D2}:00:00+02:00", NOK_per_kWh = 1.0 });
+        var svarFraKilden = JsonSerializer.Serialize(new { source = "strompris", operation = "get_prices", parameters = new { }, data = new { date = iDag, area = "NO1", prices = prisrader } });
+
+        using var vertMedStub = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient<Allemannsdata>().ConfigurePrimaryHttpMessageHandler(() => new StubHandler(svarFraKilden))));
+        var klient = vertMedStub.CreateClient();
+
+        var svar = await klient.GetAsync("/api/stroempris");
+
+        Assert.Equal(HttpStatusCode.OK, svar.StatusCode);
+        var innhold = await svar.Content.ReadFromJsonAsync<JsonElement>();
+        Assert.True(innhold.TryGetProperty("naa", out _));
+        Assert.True(innhold.TryGetProperty("billigst", out _));
+        Assert.True(innhold.TryGetProperty("dyrest", out _));
+        Assert.Equal(24, innhold.GetProperty("timer").GetArrayLength());
+        Allemannsdata.TømMellomlager();
+    }
+
+    [Fact]
+    public async Task Svikt_i_stroemkilden_gir_502_resten_av_api_et_svarer_200()
+    {
+        Allemannsdata.TømMellomlager();
+        using var vertMedSvikt = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient<Allemannsdata>().ConfigurePrimaryHttpMessageHandler(() => new SviktHandler())));
+        var klient = vertMedSvikt.CreateClient();
+
+        var stroem = await klient.GetAsync("/api/stroempris");
+        var lag = await klient.GetAsync("/api/lag");
+        var helse = await klient.GetAsync("/api/helse");
+
+        Assert.Equal(HttpStatusCode.BadGateway, stroem.StatusCode);
+        var feilSvar = await stroem.Content.ReadFromJsonAsync<JsonElement>();
+        Assert.False(string.IsNullOrWhiteSpace(feilSvar.GetProperty("feil").GetString()));
+        Assert.Equal(HttpStatusCode.OK, lag.StatusCode);
+        Assert.Equal(HttpStatusCode.OK, helse.StatusCode);
+        Allemannsdata.TømMellomlager();
+    }
+
     private sealed class SviktHandler : HttpMessageHandler
     {
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage forespørsel, CancellationToken stopp) =>
             throw new HttpRequestException("Kilden er nede.");
+    }
+
+    private sealed class StubHandler(string svar) : HttpMessageHandler
+    {
+        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage forespørsel, CancellationToken stopp) =>
+            Task.FromResult(new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(svar, System.Text.Encoding.UTF8, "application/json"),
+            });
     }
 
     private sealed record Lagoppforing(string Id, string Navn, string Beskrivelse, string Ikon);
