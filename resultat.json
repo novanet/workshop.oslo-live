@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:22:20",
+  "oppdatert": "2026-09-23T11:22:47",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -441,7 +441,7 @@
       "issue": 26,
       "navn": "Skoler",
       "startet": "2026-09-23T09:03:43.3920206+00:00",
-      "minutter": 18
+      "minutter": 19
     },
     {
       "agent": "helstein",
@@ -457,6 +457,14 @@
       "issue": 11,
       "navn": "Kollektiv",
       "startet": "2026-09-23T09:22:13.4670027+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-kirsten",
+      "github": "jthagesk",
+      "issue": 45,
+      "navn": "Varsler",
+      "startet": "2026-09-23T09:22:36.7039942+00:00",
       "minutter": 0
     }
   ],
@@ -799,7 +807,7 @@
       "issue": 45,
       "navn": "Varsle når noe skjer",
       "github": "jthagesk",
-      "oppdatert": "2026-09-23T09:21:55Z"
+      "oppdatert": "2026-09-23T09:22:37Z"
     },
     {
       "issue": 46,
@@ -894,6 +902,30 @@
   ],
   "aapne": [
     {
+      "pr": 104,
+      "tittel": "#25: Ta vare på et øyeblikksbilde hver time",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:58:22Z",
+      "oppdatert": "2026-09-23T09:22:20Z",
+      "utkast": false,
+      "issues": [
+        25
+      ]
+    },
+    {
+      "pr": 101,
+      "tittel": "#34: Skru tiden tilbake med en tidslinje",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:51:10Z",
+      "oppdatert": "2026-09-23T09:22:09Z",
+      "utkast": false,
+      "issues": [
+        34
+      ]
+    },
+    {
       "pr": 109,
       "tittel": "Nytt lag: skoler og barnehager",
       "github": "larsajakobsen",
@@ -903,18 +935,6 @@
       "utkast": false,
       "issues": [
         26
-      ]
-    },
-    {
-      "pr": 104,
-      "tittel": "#25: Ta vare på et øyeblikksbilde hver time",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:58:22Z",
-      "oppdatert": "2026-09-23T09:21:51Z",
-      "utkast": false,
-      "issues": [
-        25
       ]
     },
     {
@@ -939,18 +959,6 @@
       "utkast": false,
       "issues": [
         41
-      ]
-    },
-    {
-      "pr": 101,
-      "tittel": "#34: Skru tiden tilbake med en tidslinje",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:51:10Z",
-      "oppdatert": "2026-09-23T09:21:00Z",
-      "utkast": false,
-      "issues": [
-        34
       ]
     },
     {
