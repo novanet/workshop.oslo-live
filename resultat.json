@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:23:09",
+  "oppdatert": "2026-09-23T10:23:35",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -259,7 +259,7 @@
       "issue": 49,
       "navn": "Nytt forsøk",
       "startet": "2026-09-23T08:16:16.8577675+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-knive",
@@ -275,7 +275,7 @@
       "issue": 21,
       "navn": "Adressesøk",
       "startet": "2026-09-23T08:18:27.0600008+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-wilma",
@@ -291,7 +291,7 @@
       "issue": 2,
       "navn": "Utsnittet",
       "startet": "2026-09-23T08:21:26.6777013+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-jon",
@@ -307,7 +307,7 @@
       "issue": 45,
       "navn": "Varsler",
       "startet": "2026-09-23T08:22:20.0747631+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-wilma",
@@ -315,6 +315,14 @@
       "issue": 8,
       "navn": "Hendelser",
       "startet": "2026-09-23T08:22:51.9896553+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-kirsten",
+      "github": "jthagesk",
+      "issue": 29,
+      "navn": "Museer",
+      "startet": "2026-09-23T08:23:16.9053574+00:00",
       "minutter": 0
     }
   ],
@@ -438,6 +446,12 @@
       "navn": "Søk etter adresse og hopp dit på kartet",
       "github": "leif-larsen",
       "oppdatert": "2026-09-23T08:18:28Z"
+    },
+    {
+      "issue": 29,
+      "navn": "Nytt lag: museer og samlinger",
+      "github": "jthagesk",
+      "oppdatert": "2026-09-23T08:23:18Z"
     },
     {
       "issue": 44,
