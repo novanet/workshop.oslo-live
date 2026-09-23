@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:40:58",
+  "oppdatert": "2026-09-23T10:41:26",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -362,7 +362,7 @@
       "issue": 41,
       "navn": "Fargeblindhet",
       "startet": "2026-09-23T08:32:12.9324331+00:00",
-      "minutter": 8
+      "minutter": 9
     },
     {
       "agent": "mini-knive",
@@ -386,7 +386,7 @@
       "issue": 6,
       "navn": "Delt mobilitet",
       "startet": "2026-09-23T08:36:06.1007878+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-wilma",
@@ -581,7 +581,7 @@
       "issue": 11,
       "navn": "Nytt lag: kollektivtrafikk som beveger seg",
       "github": "coffeelyfe",
-      "oppdatert": "2026-09-23T08:39:30Z"
+      "oppdatert": "2026-09-23T08:41:07Z"
     },
     {
       "issue": 17,
@@ -772,6 +772,30 @@
   ],
   "aapne": [
     {
+      "pr": 80,
+      "tittel": "Nytt lag: politilogg og nyhetshendelser",
+      "github": "larsajakobsen",
+      "agent": "mini-wilma",
+      "opprettet": "2026-09-23T08:30:50Z",
+      "oppdatert": "2026-09-23T08:41:08Z",
+      "utkast": false,
+      "issues": [
+        8
+      ]
+    },
+    {
+      "pr": 88,
+      "tittel": "#38: Demomodus for storskjerm",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:37:47Z",
+      "oppdatert": "2026-09-23T08:41:00Z",
+      "utkast": false,
+      "issues": [
+        38
+      ]
+    },
+    {
       "pr": 90,
       "tittel": "Fargene må virke for alle",
       "github": "nilsgs",
@@ -793,18 +817,6 @@
       "utkast": false,
       "issues": [
         23
-      ]
-    },
-    {
-      "pr": 88,
-      "tittel": "#38: Demomodus for storskjerm",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:37:47Z",
-      "oppdatert": "2026-09-23T08:37:48Z",
-      "utkast": false,
-      "issues": [
-        38
       ]
     },
     {
@@ -889,18 +901,6 @@
       "utkast": false,
       "issues": [
         55
-      ]
-    },
-    {
-      "pr": 80,
-      "tittel": "Nytt lag: politilogg og nyhetshendelser",
-      "github": "larsajakobsen",
-      "agent": "mini-wilma",
-      "opprettet": "2026-09-23T08:30:50Z",
-      "oppdatert": "2026-09-23T08:30:51Z",
-      "utkast": false,
-      "issues": [
-        8
       ]
     },
     {
