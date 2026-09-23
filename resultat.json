@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T15:00:26",
+  "oppdatert": "2026-09-23T15:01:07",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -658,7 +658,16 @@
       "plass": 21
     }
   ],
-  "kjoerer": [],
+  "kjoerer": [
+    {
+      "agent": "mini-leif",
+      "github": "leif-larsen",
+      "issue": 118,
+      "navn": "Nyhetslinje nederst på skjermen",
+      "startet": "2026-09-23T13:00:59.4896158+00:00",
+      "minutter": 0
+    }
+  ],
   "main": {
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
@@ -896,7 +905,7 @@
       "issue": 118,
       "navn": "Nyhetslinje nederst på skjermen",
       "github": "leif-larsen",
-      "oppdatert": "2026-09-23T13:00:10Z"
+      "oppdatert": "2026-09-23T13:01:00Z"
     },
     {
       "issue": 119,
@@ -1135,6 +1144,30 @@
   ],
   "aapne": [
     {
+      "pr": 67,
+      "tittel": "Hent lagene parallelt",
+      "github": "FrodeBl",
+      "agent": "mini-frode",
+      "opprettet": "2026-09-23T07:59:18Z",
+      "oppdatert": "2026-09-23T13:00:57Z",
+      "utkast": false,
+      "issues": [
+        48
+      ]
+    },
+    {
+      "pr": 222,
+      "tittel": "Havet stiger: hva havner under vann? (#133)",
+      "github": "Puiu",
+      "agent": "mini-taco",
+      "opprettet": "2026-09-23T12:30:27Z",
+      "oppdatert": "2026-09-23T13:00:56Z",
+      "utkast": false,
+      "issues": [
+        133
+      ]
+    },
+    {
       "pr": 233,
       "tittel": "Lagvelgeren er for høy: historikkgrafen tar en egen rad per lag",
       "github": "larsajakobsen",
@@ -1207,18 +1240,6 @@
       ]
     },
     {
-      "pr": 222,
-      "tittel": "Havet stiger: hva havner under vann? (#133)",
-      "github": "Puiu",
-      "agent": "mini-taco",
-      "opprettet": "2026-09-23T12:30:27Z",
-      "oppdatert": "2026-09-23T12:56:43Z",
-      "utkast": false,
-      "issues": [
-        133
-      ]
-    },
-    {
       "pr": 221,
       "tittel": "#191: Et døgn med bysykkelturer på 90 sekunder",
       "github": "randsu",
@@ -1228,18 +1249,6 @@
       "utkast": false,
       "issues": [
         191
-      ]
-    },
-    {
-      "pr": 67,
-      "tittel": "Hent lagene parallelt",
-      "github": "FrodeBl",
-      "agent": "mini-frode",
-      "opprettet": "2026-09-23T07:59:18Z",
-      "oppdatert": "2026-09-23T12:56:31Z",
-      "utkast": false,
-      "issues": [
-        48
       ]
     },
     {
