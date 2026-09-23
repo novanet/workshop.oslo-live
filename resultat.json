@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:44:34",
+  "oppdatert": "2026-09-23T10:45:00",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -21,13 +21,13 @@
           "poeng": 8
         }
       ],
-      "dollar": 7.065,
-      "tokens": 12984113,
-      "sekunder": 2681,
-      "pr": 5,
+      "dollar": 8.604,
+      "tokens": 15649471,
+      "sekunder": 3181,
+      "pr": 6,
       "utkast": 0,
       "merget": 2,
-      "kjoeringer": 8,
+      "kjoeringer": 9,
       "utenPr": 3,
       "bygg": [],
       "estimert": false,
@@ -357,20 +357,12 @@
   ],
   "kjoerer": [
     {
-      "agent": "mini-richard",
-      "github": "randsu",
-      "issue": 6,
-      "navn": "Delt mobilitet",
-      "startet": "2026-09-23T08:36:06.1007878+00:00",
-      "minutter": 8
-    },
-    {
       "agent": "mini-wilma",
       "github": "larsajakobsen",
       "issue": 32,
       "navn": "Strømpris",
       "startet": "2026-09-23T08:37:51.7658572+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-kirsten",
@@ -378,7 +370,7 @@
       "issue": 29,
       "navn": "Museer",
       "startet": "2026-09-23T08:38:36.2729853+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-richard",
@@ -386,7 +378,7 @@
       "issue": 22,
       "navn": "Klynging",
       "startet": "2026-09-23T08:38:37.6037617+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-richard",
@@ -402,7 +394,7 @@
       "issue": 30,
       "navn": "Vannstand",
       "startet": "2026-09-23T08:39:37.818134+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-astrid",
@@ -410,7 +402,7 @@
       "issue": 35,
       "navn": "Varmekart",
       "startet": "2026-09-23T08:39:47.6963928+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-taco",
@@ -418,7 +410,7 @@
       "issue": 47,
       "navn": "Søk på tvers",
       "startet": "2026-09-23T08:39:51.4798178+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-kirsten",
@@ -533,7 +525,7 @@
       "issue": 6,
       "navn": "Nytt lag: elsparkesykler og bysykler",
       "github": "randsu",
-      "oppdatert": "2026-09-23T08:36:06Z"
+      "oppdatert": "2026-09-23T08:44:46Z"
     },
     {
       "issue": 7,
@@ -558,6 +550,12 @@
       "navn": "Nytt lag: kollektivtrafikk som beveger seg",
       "github": "coffeelyfe",
       "oppdatert": "2026-09-23T08:42:13Z"
+    },
+    {
+      "issue": 14,
+      "navn": "Nytt lag: idretts- og friluftsanlegg",
+      "github": "leif-larsen",
+      "oppdatert": "2026-09-23T08:44:56Z"
     },
     {
       "issue": 17,
@@ -689,7 +687,7 @@
       "issue": 48,
       "navn": "Hent lagene parallelt",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T08:31:46Z"
+      "oppdatert": "2026-09-23T08:44:50Z"
     },
     {
       "issue": 49,
@@ -759,6 +757,18 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 94,
+      "tittel": "#6: Nytt lag: elsparkesykler og bysykler",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:44:44Z",
+      "oppdatert": "2026-09-23T08:44:45Z",
+      "utkast": false,
+      "issues": [
+        6
+      ]
+    },
     {
       "pr": 80,
       "tittel": "Nytt lag: politilogg og nyhetshendelser",
