@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T13:52:03",
+  "oppdatert": "2026-09-23T13:53:08",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -298,6 +298,31 @@
       "plass": 9
     },
     {
+      "navn": "Dmitry-agent",
+      "github": "FilonenkoDmitry",
+      "poeng": 2,
+      "feil": [],
+      "lag": [
+        {
+          "issue": 12,
+          "navn": "Holdeplasser",
+          "poeng": 2
+        }
+      ],
+      "levert": [],
+      "dollar": 4.375,
+      "tokens": 10107992,
+      "sekunder": 1362,
+      "pr": 1,
+      "utkast": 0,
+      "merget": 1,
+      "kjoeringer": 2,
+      "utenPr": 1,
+      "bygg": [],
+      "estimert": false,
+      "plass": 10
+    },
+    {
       "navn": "helstein",
       "github": "nilsgs",
       "poeng": 2,
@@ -320,7 +345,7 @@
       "utenPr": 5,
       "bygg": [],
       "estimert": false,
-      "plass": 10
+      "plass": 11
     },
     {
       "navn": "mini-aud",
@@ -345,7 +370,7 @@
       "utenPr": 4,
       "bygg": [],
       "estimert": false,
-      "plass": 11
+      "plass": 12
     },
     {
       "navn": "mini-leif",
@@ -370,7 +395,7 @@
       "utenPr": 4,
       "bygg": [],
       "estimert": false,
-      "plass": 12
+      "plass": 13
     },
     {
       "navn": "mini-taco",
@@ -395,7 +420,7 @@
       "utenPr": 4,
       "bygg": [],
       "estimert": false,
-      "plass": 13
+      "plass": 14
     },
     {
       "navn": "mini-johan",
@@ -414,7 +439,7 @@
       "utenPr": 4,
       "bygg": [],
       "estimert": false,
-      "plass": 14
+      "plass": 15
     },
     {
       "navn": "martin-holth",
@@ -429,11 +454,11 @@
       "pr": 0,
       "utkast": 0,
       "merget": 0,
-      "kjoeringer": 3,
-      "utenPr": 3,
+      "kjoeringer": 4,
+      "utenPr": 4,
       "bygg": [],
       "estimert": false,
-      "plass": 15
+      "plass": 16
     },
     {
       "navn": "mini-sindre",
@@ -452,7 +477,7 @@
       "utenPr": 5,
       "bygg": [],
       "estimert": false,
-      "plass": 16
+      "plass": 17
     },
     {
       "navn": "mini-bug",
@@ -469,25 +494,6 @@
       "merget": 0,
       "kjoeringer": 5,
       "utenPr": 3,
-      "bygg": [],
-      "estimert": false,
-      "plass": 17
-    },
-    {
-      "navn": "Dmitry-agent",
-      "github": "FilonenkoDmitry",
-      "poeng": 0,
-      "feil": [],
-      "lag": [],
-      "levert": [],
-      "dollar": 4.375,
-      "tokens": 10107992,
-      "sekunder": 1362,
-      "pr": 1,
-      "utkast": 0,
-      "merget": 0,
-      "kjoeringer": 2,
-      "utenPr": 1,
       "bygg": [],
       "estimert": false,
       "plass": 18
@@ -538,14 +544,14 @@
       "issue": 132,
       "navn": "Ekte sollys på 3D-byggene",
       "startet": "2026-09-23T11:50:10.530436+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
-      "agent": "martin-holth",
-      "github": "martinrholth",
-      "issue": 111,
-      "navn": "Nytt lag: kaier og ferjekaier",
-      "startet": "2026-09-23T11:51:39.5025981+00:00",
+      "agent": "mini-leif",
+      "github": "leif-larsen",
+      "issue": 141,
+      "navn": "Tydelige kartsymboler: båter som ser ut som båter",
+      "startet": "2026-09-23T11:52:28.401471+00:00",
       "minutter": 0
     }
   ],
@@ -556,8 +562,8 @@
     "kjoeringer": 38
   },
   "produkt": {
-    "testerBestatt": 16,
-    "testerFeilet": 10,
+    "testerBestatt": 17,
+    "testerFeilet": 9,
     "issuerLost": [
       1,
       2,
@@ -567,6 +573,7 @@
       6,
       7,
       9,
+      12,
       15,
       17
     ],
@@ -597,12 +604,6 @@
       "navn": "Nytt lag: kollektivtrafikk som beveger seg",
       "github": "ingvevs",
       "oppdatert": "2026-09-23T11:48:05Z"
-    },
-    {
-      "issue": 12,
-      "navn": "Nytt lag: holdeplasser og stasjoner",
-      "github": "FilonenkoDmitry",
-      "oppdatert": "2026-09-23T09:46:55Z"
     },
     {
       "issue": 13,
@@ -639,12 +640,6 @@
       "navn": "Søk etter adresse og hopp dit på kartet",
       "github": "leif-larsen",
       "oppdatert": "2026-09-23T09:11:55Z"
-    },
-    {
-      "issue": 22,
-      "navn": "Slå sammen punkter som ligger oppå hverandre",
-      "github": "randsu",
-      "oppdatert": "2026-09-23T08:46:42Z"
     },
     {
       "issue": 23,
@@ -800,7 +795,7 @@
       "issue": 111,
       "navn": "Nytt lag: kaier og ferjekaier",
       "github": "martinrholth",
-      "oppdatert": "2026-09-23T11:51:40Z"
+      "oppdatert": "2026-09-23T11:52:03Z"
     },
     {
       "issue": 112,
@@ -956,7 +951,7 @@
       "issue": 141,
       "navn": "Tydelige kartsymboler: båter som ser ut som båter",
       "github": "leif-larsen",
-      "oppdatert": "2026-09-23T11:51:24Z"
+      "oppdatert": "2026-09-23T11:52:29Z"
     }
   ],
   "aapne": [
@@ -1042,18 +1037,6 @@
       "utkast": false,
       "issues": [
         47
-      ]
-    },
-    {
-      "pr": 139,
-      "tittel": "Nytt lag: holdeplasser og stasjoner",
-      "github": "FilonenkoDmitry",
-      "agent": "Dmitry-agent",
-      "opprettet": "2026-09-23T09:46:53Z",
-      "oppdatert": "2026-09-23T10:02:45Z",
-      "utkast": false,
-      "issues": [
-        12
       ]
     },
     {
