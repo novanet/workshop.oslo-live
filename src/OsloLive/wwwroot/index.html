@@ -37,6 +37,8 @@
   .lag .antall { font-size: 12px; color: var(--dempet); font-variant-numeric: tabular-nums; }
   .lag .antall.feil { color: var(--feil); }
   .lag .antall.ok { color: var(--ok); font-weight: 600; }
+  .lag .visning { flex: none; font: inherit; font-size: 11px; padding: 2px 7px; border: 1.5px solid var(--kant); border-radius: 6px; background: #fff; cursor: pointer; }
+  .lag .visning[aria-pressed="true"] { background: #111; color: #fff; }
   .tom { font-size: 13px; color: var(--dempet); line-height: 1.5; padding: 4px 2px; }
   .bunn { margin-top: 12px; padding-top: 12px; border-top: 1px solid #e5e7eb; font-size: 11px; color: var(--dempet); display: flex; justify-content: space-between; }
 
@@ -45,6 +47,15 @@
   .statistikk table { width: 100%; border-collapse: collapse; margin-top: 6px; font-variant-numeric: tabular-nums; }
   .statistikk td { padding: 2px 4px; color: var(--dempet); }
   .statistikk .feiler { color: var(--feil); font-weight: 600; }
+  .stroem { margin-top: 12px; padding-top: 12px; border-top: 1px solid #e5e7eb; }
+  .stroem h2 { margin: 0 0 6px; font-size: 13px; }
+  .stroem .naa { font-size: 22px; font-weight: 700; }
+  .stroem .naa .enhet { font-size: 12px; font-weight: 400; color: var(--dempet); }
+  .stroem .rad { font-size: 12px; margin: 3px 0; }
+  .stroem .rad b { font-variant-numeric: tabular-nums; }
+  .stroem .graf { display: flex; align-items: flex-end; gap: 1px; height: 34px; margin-top: 8px; }
+  .stroem .graf span { flex: 1; background: #d6cbb0; border-radius: 1px 1px 0 0; }
+  .stroem .graf span.naa-time { background: #111; }
 
   .kamera {
     position: absolute; bottom: 24px; right: 16px; z-index: 10;
@@ -56,8 +67,23 @@
     border-radius: 8px; padding: 8px 12px; font-size: 12px; cursor: pointer;
     backdrop-filter: blur(8px); font-family: inherit; font-weight: 500;
   }
-  .kamera button:hover { background: #111; color: #fff; }
+  .kamera button:hover:not(:disabled) { background: #111; color: #fff; }
   .kamera button[aria-pressed="true"] { background: #111; color: #fff; }
+  .kamera button:disabled { opacity: .45; cursor: default; }
+
+  #demotekst {
+    position: fixed; inset: 0; z-index: 20; pointer-events: none;
+    display: grid; place-content: center; justify-items: center; gap: 12px;
+    transition: opacity 1.2s ease;
+  }
+  #demotekst[hidden] { display: grid; opacity: 0; }
+  #demotekst .ikon { font-size: clamp(96px, 12vw, 200px); line-height: 1; }
+  #demotekst .navn {
+    font-size: clamp(56px, 7vw, 140px); font-weight: 700; letter-spacing: -.02em;
+    background: rgba(255,255,255,.92); border: 2px solid var(--kant); border-radius: 18px;
+    padding: 12px 36px; box-shadow: 0 10px 40px rgba(0,0,0,.2);
+  }
+  body.demo .panel { opacity: 0; pointer-events: none; transition: opacity 1s ease; }
 
   /* Markører: farget skive med mørk ring, så punktene står fram
      mot det beige kartet. */
@@ -84,26 +110,110 @@
   .maplibregl-popup-content .rad { color: var(--dempet); }
   .maplibregl-popup-content .rad span { color: var(--tekst); }
   .maplibregl-ctrl-group { border: 1.5px solid var(--kant) !important; box-shadow: none !important; }
+
+  /* Mobilvisning: panelet ligger nederst, sammenslått til én linje som kan dras eller trykkes opp. */
+  @media (max-width: 699.98px) {
+    #hovedpanel {
+      position: fixed; top: auto; left: 0; right: 0; bottom: 0; width: 100%;
+      border-radius: 14px 14px 0 0;
+      max-height: 20vh; max-height: 20dvh;
+      padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+      display: flex; flex-direction: column;
+      overflow: hidden;
+      transition: max-height .25s ease;
+    }
+    #hovedpanel.apen { max-height: 60vh; max-height: 60dvh; }
+
+    #hovedpanel .panel-header {
+      display: flex; align-items: center; gap: 10px; flex: none;
+      padding: 4px 0; cursor: pointer; touch-action: none;
+    }
+    #hovedpanel .handtak { width: 36px; height: 5px; border-radius: 3px; background: #d1d5db; flex: none; }
+    #hovedpanel h1 { font-size: 16px; margin: 0; }
+    #hovedpanel .under { display: none; }
+    #hovedpanel #lagliste { display: none; overflow-y: auto; flex: 1; min-height: 0; }
+    #hovedpanel .bunn { display: none; flex: none; }
+    #hovedpanel.apen .under { display: block; }
+    #hovedpanel.apen .bunn { display: flex; }
+    #hovedpanel.apen #lagliste { display: block; }
+
+    .kamera {
+      left: 12px; right: auto; bottom: calc(var(--panelhoyde, 20vh) + 12px);
+      flex-direction: row;
+    }
+  }
+
+  .panel.naermest { left: auto; right: 16px; width: 280px; }
+  .naermest .topp { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .naermest h2 { margin: 0; font-size: 16px; }
+  .naermest .lukk { border: 0; background: none; font-size: 18px; cursor: pointer; color: var(--dempet); }
+  .innslag { display: flex; gap: 9px; align-items: center; padding: 7px 8px; border-radius: 7px; cursor: pointer; }
+  .innslag:hover { background: #f3f4f6; }
+  .innslag .ikon { width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid #111; display: grid; place-items: center; font-size: 12px; flex: none; }
+  .innslag .tekst { flex: 1; font-size: 13px; line-height: 1.35; min-width: 0; }
+  .innslag .tekst small { display: block; color: var(--dempet); }
+  .innslag .meter { font-size: 12px; font-variant-numeric: tabular-nums; }
+
+  .bydeler { margin-top: 12px; padding-top: 12px; border-top: 1px solid #e5e7eb; }
+  .bydeler .topp { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .bydeler h2 { margin: 0; font-size: 16px; }
+  .bydeler select { font: inherit; font-size: 12px; border: 1.5px solid var(--kant); border-radius: 6px; padding: 3px 5px; max-width: 110px; }
+  .bydeler ol { list-style: none; margin: 0; padding: 0; }
+  .bydeler li { display: flex; justify-content: space-between; padding: 4px 2px; font-size: 13px; }
+  .bydeler li .antall { font-variant-numeric: tabular-nums; color: var(--dempet); }
+
+  .panel.omrade { top: auto; left: 16px; bottom: 24px; width: 240px; }
+  .omrade h2 { margin: 0 0 8px; font-size: 16px; }
+  .omrade .rad { display: flex; justify-content: space-between; font-size: 13px; padding: 3px 2px; }
+  .omrade .sum { display: flex; justify-content: space-between; margin-top: 8px; padding-top: 8px; border-top: 1px solid #e5e7eb; font-weight: 600; font-size: 13px; }
 </style>
 </head>
 <body>
 <div id="kart"></div>
 
-<div class="panel">
-  <h1>Oslo Live</h1>
+<div class="panel" id="hovedpanel">
+  <div class="panel-header" id="panel-header">
+    <span class="handtak" aria-hidden="true"></span>
+    <h1>Oslo Live</h1>
+  </div>
   <p class="under">Levende data fra Allemannsdata</p>
   <div id="lagliste"><p class="tom">Laster lag …</p></div>
+  <div class="bydeler">
+    <div class="topp"><h2>Flest punkter per bydel</h2><select id="bydel-lag" aria-label="Velg lag"></select></div>
+    <ol id="bydel-liste"><li class="tom">Laster …</li></ol>
+  </div>
   <div class="bunn">
     <span id="oppdatert">–</span>
     <span id="sum">–</span>
   </div>
   <details class="statistikk" id="statistikk"><summary>Statistikk</summary><div id="statistikkinnhold"><p class="tom">Laster …</p></div></details>
+  <div class="stroem" id="stroem">
+    <h2>Strømpris i Oslo (NO1)</h2>
+    <p class="tom">Henter strømpris …</p>
+  </div>
 </div>
 
 <div class="kamera">
+  <button id="demo" type="button" aria-pressed="false" disabled>Demo</button>
+  <button id="tegn-omrade" type="button" aria-pressed="false">Tegn område</button>
+  <button id="fjern-omrade" type="button" hidden>Fjern område</button>
   <button id="snurr" type="button" aria-pressed="false">Snurr</button>
   <button id="flatt" type="button">2D</button>
   <button id="hjem" type="button">Sentrum</button>
+</div>
+
+<div id="demotekst" aria-live="polite" hidden>
+  <span class="ikon"></span><span class="navn"></span>
+</div>
+
+<div class="panel naermest" id="naermest" hidden>
+  <div class="topp"><h2>Nærmest her</h2><button class="lukk" id="lukk-naermest" type="button" aria-label="Lukk">×</button></div>
+  <div id="naermest-liste"></div>
+</div>
+
+<div class="panel omrade" id="omrade-panel" hidden>
+  <h2>Område</h2>
+  <div id="omrade-liste"></div>
 </div>
 
 <script>
@@ -118,14 +228,19 @@ const kart = new maplibregl.Map({
   bearing: -20,
   antialias: true,
   preserveDrawingBuffer: true,
-  attributionControl: { compact: true }
+  attributionControl: { compact: true },
+  touchPitch: true,
+  touchZoomRotate: true
 });
 
 kart.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), 'bottom-right');
 
 kart.on('style.load', () => {
   varmTema(kart);
+  settOppOmrade();
   start();
+  hentStroem();
+  setInterval(hentStroem, 60000); // maks én gang i minuttet, ikke som lagene hvert 15. sekund
 });
 
 /**
@@ -267,6 +382,22 @@ function fargeFor(id, nr) {
   return FARGER[id] || RESERVE[nr % RESERVE.length];
 }
 
+// Punkter eller varmekart per lag, husket i localStorage.
+const VARME_NOKKEL = 'oslolive.varmekart';
+function lesVarmevalg() {
+  try { return JSON.parse(localStorage.getItem(VARME_NOKKEL)) ?? {}; } catch (e) { return {}; }
+}
+function lagreVarmevalg() {
+  const valg = {};
+  for (const [id, l] of lagene) if (l.varme) valg[id] = true;
+  try { localStorage.setItem(VARME_NOKKEL, JSON.stringify(valg)); } catch (e) { /* privat modus e.l. */ }
+}
+
+function rgba(hex, a) {
+  const n = parseInt(hex.slice(1), 16);
+  return `rgba(${n >> 16 & 255},${n >> 8 & 255},${n & 255},${a})`;
+}
+
 // ---------------------------------------------------------------------------
 // Lagene
 // ---------------------------------------------------------------------------
@@ -288,6 +419,36 @@ function popup(e) {
   return `<b>${esc(e.navn ?? 'Uten navn')}</b>${rader}<div class="rad" style="margin-top:6px;opacity:.7">${esc(e.kilde ?? '')}</div>`;
 }
 
+/** Viser markører eller varmekart for laget, ut fra på/av og valgt visning. */
+function visLag(id) {
+  const oppf = lagene.get(id);
+  const markorerSynlige = oppf.på && !oppf.varme;
+  for (const m of oppf.markorer) { if (markorerSynlige) { m.addTo(kart); } else { m.remove(); } }
+  if (kart.getLayer('varme-' + id)) {
+    kart.setLayoutProperty('varme-' + id, 'visibility', oppf.på && oppf.varme ? 'visible' : 'none');
+  }
+}
+
+function varmekart(id, features) {
+  const oppf = lagene.get(id);
+  const data = { type: 'FeatureCollection', features };
+  const kilde = kart.getSource('varme-' + id);
+  if (kilde) { kilde.setData(data); return; }
+  kart.addSource('varme-' + id, { type: 'geojson', data });
+  kart.addLayer({
+    id: 'varme-' + id, type: 'heatmap', source: 'varme-' + id,
+    layout: { visibility: 'none' },
+    paint: {
+      'heatmap-weight': 1,
+      'heatmap-intensity': ['interpolate', ['linear'], ['zoom'], 10, 1, 16, 3],
+      'heatmap-radius': ['interpolate', ['linear'], ['zoom'], 10, 15, 16, 35],
+      'heatmap-opacity': 0.8,
+      'heatmap-color': ['interpolate', ['linear'], ['heatmap-density'],
+        0, rgba(oppf.farge, 0), 0.2, rgba(oppf.farge, 0.25), 0.6, rgba(oppf.farge, 0.6), 1, rgba(oppf.farge, 0.95)]
+    }
+  });
+}
+
 async function hent(id) {
   const oppf = lagene.get(id);
   const teller = document.getElementById('antall-' + id);
@@ -298,7 +459,9 @@ async function hent(id) {
 
     for (const m of oppf.markorer) m.remove();
     oppf.markorer = [];
+    oppf.punkter = [];
 
+    const gyldige = [];
     for (const f of (geo.features ?? [])) {
       const c = f.geometry?.coordinates;
       if (!Array.isArray(c) || c.length < 2) continue;
@@ -307,26 +470,53 @@ async function hent(id) {
       const el = document.createElement('div');
       el.className = 'merke';
       el.style.background = p.advarsel ? '#b91c1c' : oppf.farge;
-      el.textContent = p.advarsel ? '⚠️' : oppf.ikon;
+      el.textContent = p.advarsel ? '⚠️' : (p.ikon ?? oppf.ikon);
+
+      const boble = new maplibregl.Popup({ offset: 18, closeButton: true }).setHTML(popup(p));
+      boble.on('open', () => sikreSynligPopup(boble));
 
       const m = new maplibregl.Marker({ element: el })
         .setLngLat([c[0], c[1]])
-        .setPopup(new maplibregl.Popup({ offset: 18, closeButton: true })
-          .setHTML(popup(p)));
+        .setPopup(boble);
 
-      if (oppf.på) m.addTo(kart);
+      if (oppf.på && !oppf.varme) m.addTo(kart);
       oppf.markorer.push(m);
+      oppf.punkter.push({ markor: m, navn: f.properties?.navn ?? 'Uten navn', lon: c[0], lat: c[1] });
+      gyldige.push({ type: 'Feature', geometry: { type: 'Point', coordinates: [c[0], c[1]] }, properties: {} });
     }
 
+    varmekart(id, gyldige);
+    visLag(id);
+
     oppf.antall = oppf.markorer.length;
+    oppf.feil = false;
     teller.textContent = oppf.antall;
     teller.className = 'antall ' + (oppf.antall ? 'ok' : '');
   } catch (e) {
+    // Ta bort punktene fra forrige henting, ellers blir de stående i kartet
+    // selv om laget er markert som feilende og demoen hopper over det.
+    for (const m of oppf.markorer) m.remove();
+    oppf.markorer = [];
+    oppf.punkter = [];
+    varmekart(id, []);
     oppf.antall = 0;
+    oppf.feil = true;
     teller.textContent = 'feil';
     teller.className = 'antall feil';
   }
   oppdaterBunn();
+  if (valgtSted) visNaermest();
+  if (omradeLukket) visOmrade();
+}
+
+function settPå(id, på) {
+  const oppf = lagene.get(id);
+  oppf.på = på;
+  if (oppf.boks) oppf.boks.checked = på;
+  visLag(id);
+  oppdaterBunn();
+  if (valgtSted) visNaermest();
+  if (omradeLukket) visOmrade();
 }
 
 function oppdaterBunn() {
@@ -376,9 +566,11 @@ async function start() {
   }
 
   liste.innerHTML = '';
+  const bydelSelect = document.getElementById('bydel-lag');
+  const varmevalg = lesVarmevalg();
   lag.forEach((l, nr) => {
     const farge = fargeFor(l.id, nr);
-    lagene.set(l.id, { ikon: l.ikon || '📍', farge, markorer: [], antall: 0, på: true });
+    lagene.set(l.id, { ikon: l.ikon || '📍', navn: l.navn, farge, markorer: [], punkter: [], antall: 0, på: true, feil: false, boks: null, varme: !!varmevalg[l.id] });
 
     const rad = document.createElement('label');
     rad.className = 'lag';
@@ -387,22 +579,265 @@ async function start() {
       `<input type="checkbox" checked>` +
       `<span class="prikk" style="background:${farge}"></span>` +
       `<span class="navn">${l.navn}</span>` +
-      `<span class="antall" id="antall-${l.id}">…</span>`;
+      `<span class="antall" id="antall-${l.id}">…</span>` +
+      `<button type="button" class="visning" aria-pressed="${!!varmevalg[l.id]}" title="Bytt mellom punkter og varmekart">${varmevalg[l.id] ? 'Varme' : 'Punkter'}</button>`;
 
-    rad.querySelector('input').addEventListener('change', (ev) => {
+    lagene.get(l.id).boks = rad.querySelector('input');
+    rad.querySelector('input').addEventListener('change', (ev) => settPå(l.id, ev.target.checked));
+    rad.querySelector('.visning').addEventListener('click', (ev) => {
+      ev.preventDefault(); ev.stopPropagation();
       const oppf = lagene.get(l.id);
-      oppf.på = ev.target.checked;
-      for (const m of oppf.markorer) {
-        if (oppf.på) { m.addTo(kart); } else { m.remove(); }
-      }
-      oppdaterBunn();
+      oppf.varme = !oppf.varme;
+      ev.currentTarget.setAttribute('aria-pressed', String(oppf.varme));
+      ev.currentTarget.textContent = oppf.varme ? 'Varme' : 'Punkter';
+      lagreVarmevalg();
+      visLag(l.id);
     });
     liste.appendChild(rad);
+
+    const valg = document.createElement('option');
+    valg.value = l.id;
+    valg.textContent = l.navn;
+    bydelSelect.appendChild(valg);
+
   });
+
+  bydelSelect.addEventListener('change', hentBydeler);
+  hentBydeler();
 
   const oppdaterAlt = () => Promise.allSettled([...lagene.keys()].map(hent)).then(hentStatistikk);
   oppdaterAlt();
-  setInterval(oppdaterAlt, 15000);
+  setInterval(() => { oppdaterAlt(); hentBydeler(); }, 15000);
+
+  // Først nå finnes lagene, så demoen har noe å vise og noe å sette tilbake etterpå.
+  document.getElementById('demo').disabled = false;
+}
+
+/** Løpenummer for siste bydelskall. Et tregt svar fra et eldre kall skal ikke overskrive et nyere. */
+let sisteBydelkall = 0;
+
+/** Henter og viser de fem bydelene med flest punkter for laget som er valgt i bydel-panelet. */
+async function hentBydeler() {
+  const select = document.getElementById('bydel-lag');
+  const liste = document.getElementById('bydel-liste');
+  const id = select.value;
+  if (!id) return;
+  const kall = ++sisteBydelkall;
+
+  try {
+    const svar = await fetch('/api/lag/' + encodeURIComponent(id) + '/bydeler');
+    if (kall !== sisteBydelkall) return;   // et nyere kall er sendt (byttet lag eller neste oppdatering)
+    if (!svar.ok) throw new Error('HTTP ' + svar.status);
+    const tellinger = await svar.json();
+    if (kall !== sisteBydelkall) return;
+
+    tellinger.sort((a, b) => b.antall - a.antall);
+    liste.innerHTML = '';
+    if (!tellinger.length) {
+      liste.innerHTML = '<li class="tom">Ingen punkter i bydelene</li>';
+      return;
+    }
+    for (const t of tellinger.slice(0, 5)) {
+      const rad = document.createElement('li');
+      const navn = document.createElement('span');
+      navn.textContent = t.bydel;               // bydelsnavn kommer fra en ekstern kilde
+      const antall = document.createElement('span');
+      antall.className = 'antall';
+      antall.textContent = t.antall;
+      rad.append(navn, antall);
+      liste.appendChild(rad);
+    }
+  } catch (e) {
+    if (kall !== sisteBydelkall) return;
+    liste.innerHTML = '<li class="tom">Kunne ikke telle bydeler</li>';
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Strømpris
+// ---------------------------------------------------------------------------
+function klokkeslett(time) {
+  return String(time).padStart(2, '0') + '–' + String((time + 1) % 24).padStart(2, '0');
+}
+
+// Klokka i Oslo, uansett hvor i verden nettleseren står.
+function osloTime() {
+  return Number(new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Oslo', hour: 'numeric', hour12: false }).format(new Date()));
+}
+
+async function hentStroem() {
+  const boks = document.getElementById('stroem');
+  try {
+    const svar = await fetch('/api/stroempris');
+    if (!svar.ok) throw new Error('HTTP ' + svar.status);
+    const p = await svar.json();
+
+    // Skalerer på min/maks, ikke bare maks: prisen kan være 0 eller negativ.
+    const priser = p.timer.map((t) => t.pris);
+    const min = Math.min(...priser);
+    const spenn = Math.max(...priser) - min || 1;
+    const naaTime = osloTime();
+    const graf = p.timer
+      .map((t) => `<span class="${t.time === naaTime ? 'naa-time' : ''}" style="height:${4 + ((t.pris - min) / spenn) * 96}%" title="kl. ${klokkeslett(t.time)}: ${esc(t.pris.toFixed(1))} øre"></span>`)
+      .join('');
+
+    boks.innerHTML =
+      `<h2>Strømpris i Oslo (NO1)</h2>` +
+      `<p class="naa">${esc(p.naa.toFixed(1))} <span class="enhet">øre/kWh inkl. mva</span></p>` +
+      `<p class="rad">Billigst kl. ${klokkeslett(p.billigst.time)}: <b>${esc(p.billigst.pris.toFixed(1))}</b> øre</p>` +
+      `<p class="rad">Dyrest kl. ${klokkeslett(p.dyrest.time)}: <b>${esc(p.dyrest.pris.toFixed(1))}</b> øre</p>` +
+      `<div class="graf">${graf}</div>`;
+  } catch (e) {
+    boks.innerHTML = `<h2>Strømpris i Oslo (NO1)</h2><p class="tom">Strømprisen er ikke tilgjengelig akkurat nå.</p>`;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Nærmest her: høyreklikk eller langt trykk
+// ---------------------------------------------------------------------------
+let valgtSted = null;   // { lng, lat }
+let stedMarkor = null;
+
+/** Samme haversine som Geo.Avstand i Kart/Geo.cs. Meter. */
+function avstand(lat1, lon1, lat2, lon2) {
+  const rad = (g) => g * Math.PI / 180;
+  const dLat = rad(lat2 - lat1), dLon = rad(lon2 - lon1);
+  const a = Math.sin(dLat / 2) ** 2 + Math.cos(rad(lat1)) * Math.cos(rad(lat2)) * Math.sin(dLon / 2) ** 2;
+  return 2 * 6371000 * Math.asin(Math.min(1, Math.sqrt(a)));
+}
+
+function velgSted(lngLat) {
+  valgtSted = { lng: lngLat.lng, lat: lngLat.lat };
+  if (!stedMarkor) stedMarkor = new maplibregl.Marker({ color: '#111' });
+  stedMarkor.setLngLat(lngLat).addTo(kart);
+  visNaermest();
+}
+
+function visNaermest() {
+  const innslag = [];
+  for (const oppf of lagene.values()) {
+    if (!oppf.på || !oppf.punkter.length) continue;          // lag uten punkter vises ikke
+    let best = null;
+    for (const p of oppf.punkter) {
+      const d = avstand(valgtSted.lat, valgtSted.lng, p.lat, p.lon);
+      if (!best || d < best.d) best = { ...p, d };
+    }
+    innslag.push({ oppf, best });
+  }
+  innslag.sort((a, b) => a.best.d - b.best.d);               // korteste øverst
+
+  const liste = document.getElementById('naermest-liste');
+  liste.innerHTML = '';
+  if (!innslag.length) liste.innerHTML = '<p class="tom">Ingen punkter i lagene som er på.</p>';
+  for (const { oppf, best } of innslag) {
+    const rad = document.createElement('div');
+    rad.className = 'innslag';
+    rad.innerHTML = '<span class="ikon"></span><span class="tekst"><span class="punkt"></span><small class="lagnavn"></small></span><span class="meter"></span>';
+    rad.querySelector('.ikon').textContent = oppf.ikon;
+    rad.querySelector('.ikon').style.background = oppf.farge;
+    rad.querySelector('.punkt').textContent = best.navn;      // textContent: navn kommer fra eksterne kilder
+    rad.querySelector('.lagnavn').textContent = oppf.navn;
+    rad.querySelector('.meter').textContent = Math.round(best.d) + ' m';
+    rad.addEventListener('click', () => {
+      kart.flyTo({ center: [best.lon, best.lat], zoom: Math.max(kart.getZoom(), 16), duration: 1200 });
+      const popup = best.markor.getPopup();
+      if (popup && !popup.isOpen()) {
+        if (oppf.på && !oppf.varme) { best.markor.togglePopup(); } else { popup.setLngLat([best.lon, best.lat]).addTo(kart); }
+      }
+    });
+    liste.appendChild(rad);
+  }
+  document.getElementById('naermest').hidden = false;
+}
+
+function lukkNaermest() {
+  valgtSted = null;
+  if (stedMarkor) stedMarkor.remove();
+  document.getElementById('naermest').hidden = true;
+}
+
+document.getElementById('lukk-naermest').addEventListener('click', lukkNaermest);
+
+kart.on('contextmenu', (e) => { e.preventDefault(); velgSted(e.lngLat); });
+
+// Langt trykk: MapLibre har ingen egen hendelse for dette, og iOS sender ikke contextmenu.
+let trykkTimer = null, trykkStart = null;
+kart.on('touchstart', (e) => {
+  clearTimeout(trykkTimer);
+  if (e.originalEvent.touches.length !== 1) return;          // ikke ved knip/zoom
+  trykkStart = e.point;
+  trykkTimer = setTimeout(() => velgSted(e.lngLat), 600);
+});
+kart.on('touchmove', (e) => {
+  if (trykkStart && (Math.abs(e.point.x - trykkStart.x) > 10 || Math.abs(e.point.y - trykkStart.y) > 10)) clearTimeout(trykkTimer);
+});
+['touchend', 'touchcancel', 'dragstart', 'zoomstart'].forEach((h) => kart.on(h, () => clearTimeout(trykkTimer)));
+
+// ---------------------------------------------------------------------------
+// Mobilpanel: under 700px ligger panelet nederst, sammenslått til én linje
+// som kan dras eller trykkes opp. --panelhoyde holder kameraknappene unna.
+// ---------------------------------------------------------------------------
+const hovedpanel = document.getElementById('hovedpanel');
+const panelHeader = document.getElementById('panel-header');
+
+function erMobil() {
+  return window.matchMedia('(max-width: 699.98px)').matches;
+}
+
+function oppdaterPanelhoyde() {
+  document.documentElement.style.setProperty('--panelhoyde', hovedpanel.offsetHeight + 'px');
+}
+
+function settPanelApen(apen) {
+  hovedpanel.classList.toggle('apen', apen);
+}
+
+new ResizeObserver(oppdaterPanelhoyde).observe(hovedpanel);
+window.addEventListener('resize', oppdaterPanelhoyde);
+oppdaterPanelhoyde();
+
+let panelDragY = null, panelDratt = false;
+
+panelHeader.addEventListener('touchstart', (e) => {
+  if (!erMobil() || e.touches.length !== 1) return;
+  panelDragY = e.touches[0].clientY;
+  panelDratt = false;
+}, { passive: true });
+
+panelHeader.addEventListener('touchmove', (e) => {
+  if (panelDragY === null) return;
+  if (Math.abs(panelDragY - e.touches[0].clientY) > 6) panelDratt = true;
+}, { passive: true });
+
+panelHeader.addEventListener('touchend', (e) => {
+  if (panelDragY === null) return;
+  const dy = panelDragY - (e.changedTouches[0]?.clientY ?? panelDragY);
+  panelDragY = null;
+  if (Math.abs(dy) > 30) { settPanelApen(dy > 0); e.preventDefault(); }
+  else if (!panelDratt) { settPanelApen(!hovedpanel.classList.contains('apen')); e.preventDefault(); }
+});
+
+panelHeader.addEventListener('click', () => {
+  if (!erMobil() || panelDratt) { panelDratt = false; return; }
+  settPanelApen(!hovedpanel.classList.contains('apen'));
+});
+
+/** Lukker panelet og flytter kartet slik at en nyåpnet popup ikke havner bak det, på mobil. */
+function sikreSynligPopup(boble) {
+  if (!erMobil()) return;
+  settPanelApen(false);
+  const flytt = () => {
+    requestAnimationFrame(() => {
+      if (!boble.isOpen()) return;
+      const el = boble.getElement();
+      if (!el) return;
+      const boks = el.getBoundingClientRect();
+      const grense = window.innerHeight - hovedpanel.offsetHeight - 12;
+      const overheng = boks.bottom - grense;
+      if (overheng > 0) kart.panBy([0, overheng], { duration: 300 });
+    });
+  };
+  if (kart.isMoving()) kart.once('moveend', flytt); else flytt();
 }
 
 // ---------------------------------------------------------------------------
@@ -439,6 +874,275 @@ kart.on('mousedown', () => {
     document.getElementById('snurr').setAttribute('aria-pressed', 'false');
   }
 });
+
+// ---------------------------------------------------------------------------
+// Tegn område: klikk for hvert hjørne, dobbeltklikk lukker, Escape avbryter.
+// ---------------------------------------------------------------------------
+const OMRADE_KILDE = 'omrade-tegning';
+let tegnemodus = false;
+let omradeLukket = false;
+let omradeHjørner = [];   // [{ lat, lon }], i tegneretning
+
+function settOppOmrade() {
+  if (kart.getSource(OMRADE_KILDE)) return;
+
+  kart.addSource(OMRADE_KILDE, { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
+  kart.addLayer({
+    id: 'omrade-fyll', type: 'fill', source: OMRADE_KILDE,
+    filter: ['==', ['geometry-type'], 'Polygon'],
+    paint: { 'fill-color': '#2563eb', 'fill-opacity': 0.15 }
+  });
+  kart.addLayer({
+    id: 'omrade-linje', type: 'line', source: OMRADE_KILDE,
+    filter: ['in', ['geometry-type'], ['literal', ['LineString', 'Polygon']]],
+    paint: { 'line-color': '#2563eb', 'line-width': 2, 'line-dasharray': [2, 2] }
+  });
+  kart.addLayer({
+    id: 'omrade-hjorner', type: 'circle', source: OMRADE_KILDE,
+    filter: ['==', ['geometry-type'], 'Point'],
+    paint: { 'circle-radius': 5, 'circle-color': '#2563eb', 'circle-stroke-width': 2, 'circle-stroke-color': '#fff' }
+  });
+}
+
+function tegnOppdater() {
+  const kilde = kart.getSource(OMRADE_KILDE);
+  if (!kilde) return;
+
+  const features = omradeHjørner.map((h) => (
+    { type: 'Feature', geometry: { type: 'Point', coordinates: [h.lon, h.lat] }, properties: {} }
+  ));
+
+  if (omradeHjørner.length >= 2) {
+    const koordinater = omradeHjørner.map((h) => [h.lon, h.lat]);
+    if (omradeLukket) {
+      koordinater.push(koordinater[0]);
+      features.push({ type: 'Feature', geometry: { type: 'Polygon', coordinates: [koordinater] }, properties: {} });
+    } else {
+      features.push({ type: 'Feature', geometry: { type: 'LineString', coordinates: koordinater }, properties: {} });
+    }
+  }
+
+  kilde.setData({ type: 'FeatureCollection', features });
+}
+
+/** Samme algoritme som Geo.IPolygon i Kart/Geo.cs: ray casting, punkt på kant regnes som innenfor. */
+function iPolygon(lat, lon, hjørner) {
+  if (hjørner.length < 3) return false;
+
+  const paaKant = (a, b) => {
+    const eps = 1e-9;
+    const kryssprodukt = (b.lon - a.lon) * (lat - a.lat) - (b.lat - a.lat) * (lon - a.lon);
+    if (Math.abs(kryssprodukt) > eps) return false;
+    return lon >= Math.min(a.lon, b.lon) - eps && lon <= Math.max(a.lon, b.lon) + eps
+        && lat >= Math.min(a.lat, b.lat) - eps && lat <= Math.max(a.lat, b.lat) + eps;
+  };
+  for (let i = 0; i < hjørner.length; i++) {
+    if (paaKant(hjørner[i], hjørner[(i + 1) % hjørner.length])) return true;
+  }
+
+  let innenfor = false;
+  for (let i = 0, j = hjørner.length - 1; i < hjørner.length; j = i++) {
+    const { lat: latI, lon: lonI } = hjørner[i];
+    const { lat: latJ, lon: lonJ } = hjørner[j];
+    if ((lonI > lon) !== (lonJ > lon) && lat < (latJ - latI) * (lon - lonI) / (lonJ - lonI) + latI) {
+      innenfor = !innenfor;
+    }
+  }
+  return innenfor;
+}
+
+function visOmrade() {
+  const panel = document.getElementById('omrade-panel');
+  if (!omradeLukket) { panel.hidden = true; return; }
+
+  const liste = document.getElementById('omrade-liste');
+  liste.innerHTML = '';
+  let sum = 0;
+  for (const oppf of lagene.values()) {
+    if (!oppf.på) continue;
+    const antall = oppf.punkter.filter((p) => iPolygon(p.lat, p.lon, omradeHjørner)).length;
+    sum += antall;
+
+    const rad = document.createElement('div');
+    rad.className = 'rad';
+    rad.innerHTML = `<span>${esc(oppf.navn)}</span><span>${antall}</span>`;
+    liste.appendChild(rad);
+  }
+
+  const sumRad = document.createElement('div');
+  sumRad.className = 'sum';
+  sumRad.innerHTML = `<span>Sum</span><span>${sum}</span>`;
+  liste.appendChild(sumRad);
+  panel.hidden = false;
+}
+
+const knappTegn = document.getElementById('tegn-omrade');
+const knappFjern = document.getElementById('fjern-omrade');
+
+function startTegning() {
+  tegnemodus = true;
+  omradeLukket = false;
+  omradeHjørner = [];
+  tegnOppdater();
+  knappTegn.setAttribute('aria-pressed', 'true');
+  kart.doubleClickZoom.disable();
+  kart.getCanvas().style.cursor = 'crosshair';
+}
+
+function avbrytTegning() {
+  tegnemodus = false;
+  omradeHjørner = [];
+  tegnOppdater();
+  knappTegn.setAttribute('aria-pressed', 'false');
+  kart.doubleClickZoom.enable();
+  kart.getCanvas().style.cursor = '';
+}
+
+function fullførTegning() {
+  tegnemodus = false;
+  omradeLukket = true;
+  tegnOppdater();
+  knappTegn.setAttribute('aria-pressed', 'false');
+  kart.doubleClickZoom.enable();
+  kart.getCanvas().style.cursor = '';
+  knappFjern.hidden = false;
+  visOmrade();
+}
+
+function fjernOmrade() {
+  omradeHjørner = [];
+  omradeLukket = false;
+  tegnOppdater();
+  knappFjern.hidden = true;
+  document.getElementById('omrade-panel').hidden = true;
+}
+
+knappTegn.addEventListener('click', () => {
+  if (tegnemodus) { avbrytTegning(); return; }
+  fjernOmrade();
+  startTegning();
+});
+knappFjern.addEventListener('click', fjernOmrade);
+
+kart.on('click', (e) => {
+  if (!tegnemodus) return;
+  omradeHjørner.push({ lat: e.lngLat.lat, lon: e.lngLat.lng });
+  tegnOppdater();
+});
+
+kart.on('dblclick', (e) => {
+  if (!tegnemodus) return;
+  e.preventDefault();
+  // Dobbeltklikket sender selv to «click»-hendelser før dette; de hører ikke
+  // med som egne hjørner, de er bare lukkesignalet.
+  omradeHjørner.splice(-2, 2);
+  if (omradeHjørner.length >= 3) fullførTegning(); else avbrytTegning();
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && tegnemodus) avbrytTegning();
+});
+
+// ---------------------------------------------------------------------------
+// Demomodus
+// ---------------------------------------------------------------------------
+const DEMO_STEDER = [
+  { navn: 'Rådhuset',      center: [10.7336, 59.9116], zoom: 15.2, pitch: 60, bearing: -20 },
+  { navn: 'Grünerløkka',   center: [10.7590, 59.9230], zoom: 15.0, pitch: 55, bearing: 30 },
+  { navn: 'Bjørvika',      center: [10.7530, 59.9075], zoom: 15.3, pitch: 62, bearing: 160 },
+  { navn: 'Frognerparken', center: [10.7003, 59.9270], zoom: 14.8, pitch: 50, bearing: -60 }
+];
+const DEMO_FLYTID = 9000;  // krav: minst 8 s
+const DEMO_HVILE = 12000;  // krav: minst 10 s
+
+const demo = { på: false, sted: 0, lagNr: 0, tidtaker: null, før: null };
+const demoKnapp = document.getElementById('demo');
+const demotekst = document.getElementById('demotekst');
+const demoIkon = demotekst.querySelector('.ikon');
+const demoNavn = demotekst.querySelector('.navn');
+
+const DEMO_HENDELSER = ['pointerdown', 'touchstart', 'keydown'];
+
+function nesteLag() {
+  const ider = [...lagene.keys()];
+  for (let i = 0; i < ider.length; i++) {
+    const indeks = (demo.lagNr + i) % ider.length;
+    const id = ider[indeks];
+    const oppf = lagene.get(id);
+    if (!oppf.feil && oppf.antall > 0) {
+      demo.lagNr = indeks + 1;
+      return id;
+    }
+  }
+  return null;
+}
+
+function framme() {
+  if (!demo.på) return;
+  const id = nesteLag();
+  if (id) {
+    for (const x of lagene.keys()) settPå(x, x === id);
+    const oppf = lagene.get(id);
+    demoIkon.textContent = oppf.ikon;
+    demoNavn.textContent = oppf.navn;
+    demotekst.hidden = false;
+  }
+  demo.sted++;
+  demo.tidtaker = setTimeout(fly, DEMO_HVILE);
+}
+
+function fly() {
+  demotekst.hidden = true;
+  const s = DEMO_STEDER[demo.sted % DEMO_STEDER.length];
+  kart.flyTo({ center: s.center, zoom: s.zoom, pitch: s.pitch, bearing: s.bearing, duration: DEMO_FLYTID, essential: true });
+  demo.tidtaker = setTimeout(framme, DEMO_FLYTID);
+}
+
+function avbryt(ev) {
+  const erDemoKnapp = ev.target.closest?.('#demo');
+  if (erDemoKnapp && (ev.type === 'pointerdown' || ev.type === 'touchstart' ||
+      (ev.type === 'keydown' && (ev.key === 'Enter' || ev.key === ' ')))) {
+    return;
+  }
+  stoppDemo();
+}
+
+function startDemo() {
+  if (!lagene.size) return;   // start() har ikke bygget lagene ennå; knappen er også slått av til da
+  snurrer = false;
+  document.getElementById('snurr').setAttribute('aria-pressed', 'false');
+  if (snurrId) cancelAnimationFrame(snurrId);
+
+  demo.før = new Map([...lagene].map(([id, l]) => [id, l.på]));
+  demo.på = true;
+  demo.sted = 0;
+  demo.lagNr = 0;
+  demoKnapp.setAttribute('aria-pressed', 'true');
+  document.body.classList.add('demo');
+
+  setTimeout(() => {
+    for (const t of DEMO_HENDELSER) window.addEventListener(t, avbryt, true);
+  }, 0);
+
+  fly();
+}
+
+function stoppDemo() {
+  if (!demo.på) return;
+  demo.på = false;
+  clearTimeout(demo.tidtaker);
+  kart.stop();
+
+  for (const t of DEMO_HENDELSER) window.removeEventListener(t, avbryt, true);
+
+  for (const [id, på] of demo.før) settPå(id, på);
+
+  demotekst.hidden = true;
+  document.body.classList.remove('demo');
+  demoKnapp.setAttribute('aria-pressed', 'false');
+}
+
+demoKnapp.addEventListener('click', () => { demo.på ? stoppDemo() : startDemo(); });
 </script>
 </body>
 </html>
