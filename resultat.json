@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:09:10",
+  "oppdatert": "2026-09-23T10:09:36",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -155,7 +155,7 @@
       "issue": 56,
       "navn": "Flytrafikk",
       "startet": "2026-09-23T07:53:20.1148991+00:00",
-      "minutter": 15
+      "minutter": 16
     },
     {
       "agent": "mini-taco",
@@ -163,7 +163,7 @@
       "issue": 54,
       "navn": "Rate limit",
       "startet": "2026-09-23T08:03:17.9589775+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-frode",
@@ -171,7 +171,7 @@
       "issue": 50,
       "navn": "Metrikker",
       "startet": "2026-09-23T08:03:32.4223783+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "Andy3000",
@@ -179,7 +179,7 @@
       "issue": 11,
       "navn": "Kollektiv",
       "startet": "2026-09-23T08:04:09.8675976+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-leif",
@@ -195,6 +195,14 @@
       "issue": 4,
       "navn": "Duplikatfjerning",
       "startet": "2026-09-23T08:09:04.172255+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "henrik",
+      "github": "monet820",
+      "issue": 7,
+      "navn": "Skipstrafikk",
+      "startet": "2026-09-23T08:09:09.002856+00:00",
       "minutter": 0
     }
   ],
@@ -255,7 +263,7 @@
       "issue": 7,
       "navn": "Nytt lag: skip i Oslofjorden",
       "github": "monet820",
-      "oppdatert": "2026-09-23T08:09:07Z"
+      "oppdatert": "2026-09-23T08:09:10Z"
     },
     {
       "issue": 11,
@@ -273,7 +281,7 @@
       "issue": 46,
       "navn": "Tegn bydelsgrensene",
       "github": "nilsgs",
-      "oppdatert": "2026-09-23T08:08:34Z"
+      "oppdatert": "2026-09-23T08:09:10Z"
     },
     {
       "issue": 48,
