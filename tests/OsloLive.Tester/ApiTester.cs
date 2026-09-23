@@ -175,6 +175,124 @@ public class ApiTester(VertUtenBakgrunnssjekk vert) : IClassFixture<VertUtenBakg
     }
 
     [Fact]
+    public async Task Lagoversikten_har_kollektivlaget()
+    {
+        var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
+
+        var kollektiv = lag!.Single(l => l.Id == "kollektiv");
+        Assert.Equal("Kollektiv", kollektiv.Navn);
+        Assert.False(string.IsNullOrWhiteSpace(kollektiv.Beskrivelse));
+        Assert.False(string.IsNullOrWhiteSpace(kollektiv.Ikon));
+    }
+
+    [Fact]
+    public async Task Kollektivlaget_gir_featurecollection_uten_nett()
+    {
+        const string svar = """
+            {
+                "source": "entur",
+                "operation": "find_live_vehicles_nearby",
+                "parameters": {},
+                "data": {
+                    "vehicles": [
+                        {
+                            "vehicle_id": "3620803606",
+                            "mode": "BUS",
+                            "line": "200",
+                            "line_name": "Hønefoss-Oslo",
+                            "destination": "Sollihøgda-Oslo",
+                            "lat": 59.9078292679042,
+                            "lon": 10.7547549996525,
+                            "codespace": "BRA"
+                        }
+                    ]
+                }
+            }
+            """;
+
+        using var vertUtenNett = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient<Allemannsdata>().ConfigurePrimaryHttpMessageHandler(() => new FastSvarHandler(svar))));
+        var klient = vertUtenNett.CreateClient();
+
+        Allemannsdata.TømMellomlager();
+        try
+        {
+            var respons = await klient.GetAsync("/api/lag/kollektiv");
+            var lag = await respons.Content.ReadFromJsonAsync<Kartlag>();
+
+            Assert.Equal(HttpStatusCode.OK, respons.StatusCode);
+            Assert.Equal("FeatureCollection", lag!.Type);
+            Assert.NotEmpty(lag.Features);
+            Assert.Equal([10.7547549996525, 59.9078292679042], lag.Features[0].Geometry.Coordinates);
+        }
+        finally
+        {
+            Allemannsdata.TømMellomlager();
+        }
+    }
+
+    [Fact]
+    public async Task Kollektivlaget_foelger_kilden_mellom_to_kall()
+    {
+        const string forsteSvar = """
+            {
+                "source": "entur",
+                "operation": "find_live_vehicles_nearby",
+                "parameters": {},
+                "data": { "vehicles": [ { "vehicle_id": "1", "mode": "BUS", "line": "31", "lat": 59.90, "lon": 10.70, "codespace": "RUT" } ] }
+            }
+            """;
+        const string andreSvar = """
+            {
+                "source": "entur",
+                "operation": "find_live_vehicles_nearby",
+                "parameters": {},
+                "data": { "vehicles": [ { "vehicle_id": "1", "mode": "BUS", "line": "31", "lat": 59.95, "lon": 10.80, "codespace": "RUT" } ] }
+            }
+            """;
+
+        using var vertUtenNett = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient<Allemannsdata>().ConfigurePrimaryHttpMessageHandler(() => new SekvensHandler(forsteSvar, andreSvar))));
+        var klient = vertUtenNett.CreateClient();
+
+        Allemannsdata.TømMellomlager();
+        try
+        {
+            var forsteRespons = await klient.GetAsync("/api/lag/kollektiv");
+            var forsteLag = await forsteRespons.Content.ReadFromJsonAsync<Kartlag>();
+
+            Allemannsdata.TømMellomlager();
+
+            var andreRespons = await klient.GetAsync("/api/lag/kollektiv");
+            var andreLag = await andreRespons.Content.ReadFromJsonAsync<Kartlag>();
+
+            var forsteId = ((JsonElement)forsteLag!.Features[0].Properties["id"]!).GetString();
+            var andreId = ((JsonElement)andreLag!.Features[0].Properties["id"]!).GetString();
+
+            Assert.Equal(forsteId, andreId);
+            Assert.NotEqual(forsteLag.Features[0].Geometry.Coordinates, andreLag.Features[0].Geometry.Coordinates);
+        }
+        finally
+        {
+            Allemannsdata.TømMellomlager();
+        }
+    }
+
+    private sealed class SekvensHandler(params string[] svar) : HttpMessageHandler
+    {
+        private int n;
+
+        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage forespørsel, CancellationToken stopp)
+        {
+            var indeks = Math.Min(Interlocked.Increment(ref n) - 1, svar.Length - 1);
+            return Task.FromResult(new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(svar[indeks], Encoding.UTF8, "application/json"),
+            });
+        }
+    }
+
+    [Fact]
     public async Task Svikt_i_flykilden_gir_502_bare_for_flylaget()
     {
         // Bytt ut flylagets HttpClient med en som alltid feiler, slik kilden gjør når den er nede.
