@@ -188,6 +188,17 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
     }
 
     [Fact]
+    public async Task Lagoversikten_har_vaerstasjoner()
+    {
+        var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
+
+        var vaerstasjoner = lag!.Single(l => l.Id == "vaerstasjoner");
+        Assert.Equal("Værstasjoner", vaerstasjoner.Navn);
+        Assert.False(string.IsNullOrWhiteSpace(vaerstasjoner.Beskrivelse));
+        Assert.False(string.IsNullOrWhiteSpace(vaerstasjoner.Ikon));
+    }
+
+    [Fact]
     public async Task Spisestederlaget_gir_featurecollection_uten_nett()
     {
         const string svar = """
@@ -791,8 +802,10 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
 
         Assert.Equal(HttpStatusCode.OK, svar.StatusCode);
         var innhold = await svar.Content.ReadFromJsonAsync<JsonElement>();
-        Assert.True(innhold.TryGetProperty("naa", out _));
-        Assert.True(innhold.TryGetProperty("billigst", out _));
+        Assert.True(innhold.TryGetProperty("naa", out var naa));
+        Assert.Equal(JsonValueKind.Number, naa.ValueKind);
+        Assert.True(innhold.TryGetProperty("billigst", out var billigst));
+        Assert.Equal(JsonValueKind.Number, billigst.GetProperty("pris").ValueKind);
         Assert.True(innhold.TryGetProperty("dyrest", out _));
         Assert.Equal(24, innhold.GetProperty("timer").GetArrayLength());
         Allemannsdata.TømMellomlager();

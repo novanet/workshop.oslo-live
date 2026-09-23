@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/maplibre-gl.js"></script>
 <script defer src="effekter/symboler.js"></script>
+<script src="effekter/tsunami.js" defer></script>
 <style>
   :root {
     --kant: #111111;
@@ -1274,6 +1275,12 @@ function osloTime() {
   return Number(new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Oslo', hour: 'numeric', hour12: false }).format(new Date()));
 }
 
+// Norsk desimalkomma og ekte minustegn (−), én desimal.
+const STROEM_TALL = new Intl.NumberFormat('nb-NO', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+function ore(pris) {
+  return STROEM_TALL.format(pris);
+}
+
 async function hentStroem() {
   const boks = document.getElementById('stroem');
   try {
@@ -1287,14 +1294,14 @@ async function hentStroem() {
     const spenn = Math.max(...priser) - min || 1;
     const naaTime = osloTime();
     const graf = p.timer
-      .map((t) => `<span class="${t.time === naaTime ? 'naa-time' : ''}" style="height:${4 + ((t.pris - min) / spenn) * 96}%" title="kl. ${klokkeslett(t.time)}: ${esc(t.pris.toFixed(1))} øre"></span>`)
+      .map((t) => `<span class="${t.time === naaTime ? 'naa-time' : ''}" style="height:${4 + ((t.pris - min) / spenn) * 96}%" title="kl. ${klokkeslett(t.time)}: ${esc(ore(t.pris))} øre"></span>`)
       .join('');
 
     boks.innerHTML =
       `<h2>Strømpris i Oslo (NO1)</h2>` +
-      `<p class="naa">${esc(p.naa.toFixed(1))} <span class="enhet">øre/kWh inkl. mva</span></p>` +
-      `<p class="rad">Billigst kl. ${klokkeslett(p.billigst.time)}: <b>${esc(p.billigst.pris.toFixed(1))}</b> øre</p>` +
-      `<p class="rad">Dyrest kl. ${klokkeslett(p.dyrest.time)}: <b>${esc(p.dyrest.pris.toFixed(1))}</b> øre</p>` +
+      `<p class="naa">${esc(ore(p.naa))} <span class="enhet">øre/kWh inkl. mva</span></p>` +
+      `<p class="rad">Billigst kl. ${klokkeslett(p.billigst.time)}: <b>${esc(ore(p.billigst.pris))}</b> øre</p>` +
+      `<p class="rad">Dyrest kl. ${klokkeslett(p.dyrest.time)}: <b>${esc(ore(p.dyrest.pris))}</b> øre</p>` +
       `<div class="graf">${graf}</div>`;
   } catch (e) {
     boks.innerHTML = `<h2>Strømpris i Oslo (NO1)</h2><p class="tom">Strømprisen er ikke tilgjengelig akkurat nå.</p>`;
@@ -1751,5 +1758,6 @@ function stoppDemo() {
 demoKnapp.addEventListener('click', () => { demo.på ? stoppDemo() : startDemo(); });
 </script>
 <script src="effekter/lyd.js" defer></script>
+<script src="effekter/sollys.js" defer></script>
 </body>
 </html>
