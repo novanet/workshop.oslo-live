@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:46:22",
+  "oppdatert": "2026-09-23T10:46:49",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -21,13 +21,13 @@
           "poeng": 8
         }
       ],
-      "dollar": 8.604,
-      "tokens": 15649471,
-      "sekunder": 3181,
-      "pr": 6,
+      "dollar": 9.884,
+      "tokens": 18505168,
+      "sekunder": 3645,
+      "pr": 7,
       "utkast": 0,
       "merget": 2,
-      "kjoeringer": 9,
+      "kjoeringer": 10,
       "utenPr": 3,
       "bygg": [],
       "estimert": false,
@@ -146,14 +146,14 @@
       ],
       "lag": [],
       "levert": [],
-      "dollar": 3.124,
-      "tokens": 7570986,
-      "sekunder": 944,
+      "dollar": 3.514,
+      "tokens": 8340906,
+      "sekunder": 1042,
       "pr": 2,
       "utkast": 0,
       "merget": 1,
-      "kjoeringer": 3,
-      "utenPr": 0,
+      "kjoeringer": 4,
+      "utenPr": 1,
       "bygg": [],
       "estimert": false,
       "plass": 6
@@ -370,15 +370,7 @@
       "issue": 29,
       "navn": "Museer",
       "startet": "2026-09-23T08:38:36.2729853+00:00",
-      "minutter": 7
-    },
-    {
-      "agent": "mini-richard",
-      "github": "randsu",
-      "issue": 22,
-      "navn": "Klynging",
-      "startet": "2026-09-23T08:38:37.6037617+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "mini-richard",
@@ -386,7 +378,7 @@
       "issue": 34,
       "navn": "Tidslinje",
       "startet": "2026-09-23T08:39:29.3560815+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "helstein",
@@ -394,7 +386,7 @@
       "issue": 30,
       "navn": "Vannstand",
       "startet": "2026-09-23T08:39:37.818134+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-taco",
@@ -421,20 +413,12 @@
       "minutter": 2
     },
     {
-      "agent": "mini-leif",
-      "github": "leif-larsen",
-      "issue": 14,
-      "navn": "Idrettsanlegg",
-      "startet": "2026-09-23T08:44:58.4935519+00:00",
-      "minutter": 1
-    },
-    {
       "agent": "mini-frode",
       "github": "FrodeBl",
       "issue": 48,
       "navn": "Parallell henting",
       "startet": "2026-09-23T08:45:28.6931293+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-richard",
@@ -442,6 +426,14 @@
       "issue": 24,
       "navn": "Bydeler",
       "startet": "2026-09-23T08:45:28.8651408+00:00",
+      "minutter": 1
+    },
+    {
+      "agent": "mini-frode",
+      "github": "FrodeBl",
+      "issue": 19,
+      "navn": "Artsobservasjoner",
+      "startet": "2026-09-23T08:46:29.0268417+00:00",
       "minutter": 0
     }
   ],
@@ -562,12 +554,6 @@
       "oppdatert": "2026-09-23T08:35:04Z"
     },
     {
-      "issue": 10,
-      "navn": "Nytt lag: trafikkregistreringspunkt",
-      "github": "renaa",
-      "oppdatert": "2026-09-23T08:46:17Z"
-    },
-    {
       "issue": 11,
       "navn": "Nytt lag: kollektivtrafikk som beveger seg",
       "github": "coffeelyfe",
@@ -577,7 +563,7 @@
       "issue": 14,
       "navn": "Nytt lag: idretts- og friluftsanlegg",
       "github": "leif-larsen",
-      "oppdatert": "2026-09-23T08:44:59Z"
+      "oppdatert": "2026-09-23T08:46:42Z"
     },
     {
       "issue": 17,
@@ -589,7 +575,7 @@
       "issue": 19,
       "navn": "Nytt lag: artsobservasjoner",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T08:45:46Z"
+      "oppdatert": "2026-09-23T08:46:29Z"
     },
     {
       "issue": 20,
@@ -607,7 +593,7 @@
       "issue": 22,
       "navn": "Slå sammen punkter som ligger oppå hverandre",
       "github": "randsu",
-      "oppdatert": "2026-09-23T08:38:38Z"
+      "oppdatert": "2026-09-23T08:46:42Z"
     },
     {
       "issue": 23,
@@ -727,7 +713,7 @@
       "issue": 50,
       "navn": "Mål hva som skjer",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T08:35:59Z"
+      "oppdatert": "2026-09-23T08:46:37Z"
     },
     {
       "issue": 52,
@@ -785,6 +771,18 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 96,
+      "tittel": "#22: Slå sammen punkter som ligger oppå hverandre",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:46:40Z",
+      "oppdatert": "2026-09-23T08:46:41Z",
+      "utkast": false,
+      "issues": [
+        22
+      ]
+    },
     {
       "pr": 94,
       "tittel": "#6: Nytt lag: elsparkesykler og bysykler",
