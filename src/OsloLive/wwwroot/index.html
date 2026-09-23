@@ -32,7 +32,13 @@
   .lag { display: flex; align-items: center; gap: 9px; padding: 7px 8px; border-radius: 7px; cursor: pointer; }
   .lag:hover { background: #f3f4f6; }
   .lag input { accent-color: #111; width: 15px; height: 15px; cursor: pointer; flex: none; }
-  .lag .prikk { width: 15px; height: 15px; border-radius: 50%; border: 1.5px solid #111; flex: none; }
+  .lag .prikk {
+    flex: none; display: grid; place-items: center;
+    width: 24px; height: 24px;
+  }
+  .lag .prikk .form { width: 20px; height: 20px; box-shadow: none; }
+  .lag .prikk .form-ruter { width: 16px; height: 16px; }
+  .lag .prikk .ikon { font-size: 11px; }
   .lag .navn { flex: 1; font-size: 14px; }
   .lag .antall { font-size: 12px; color: var(--dempet); font-variant-numeric: tabular-nums; }
   .lag .antall.feil { color: var(--feil); }
@@ -53,18 +59,42 @@
   .kamera button:hover { background: #111; color: #fff; }
   .kamera button[aria-pressed="true"] { background: #111; color: #fff; }
 
-  /* Markører: farget skive med mørk ring, så punktene står fram
-     mot det beige kartet. */
+  /* Markører: farge er ikke nok for rød-grønn fargeblindhet, så hvert lag
+     skiller seg også på form og kantstil, i tillegg til ikonet. */
   .merke {
-    width: 28px; height: 28px; border-radius: 50%;
-    border: 2px solid #111;
-    display: grid; place-items: center;
-    font-size: 14px; line-height: 1; cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0,0,0,.3);
-    transition: transform .12s ease;
-    text-shadow: 0 0 3px rgba(255,255,255,.95);
+    width: 30px; height: 30px; display: grid; place-items: center; cursor: pointer;
   }
-  .merke:hover { transform: scale(1.32); }
+
+  .form {
+    width: 26px; height: 26px; display: grid; place-items: center;
+    border: 2.5px solid; box-shadow: 0 2px 5px rgba(0,0,0,.3);
+    transition: transform .12s ease;
+  }
+
+  .merke:hover .form { transform: var(--rot, none) scale(1.32); }
+
+  .form-sirkel  { border-radius: 50%; }
+  .form-firkant { border-radius: 4px; }
+  .form-ruter   {
+    border-radius: 3px; width: 22px; height: 22px;
+    --rot: rotate(45deg); --mot: rotate(-45deg); transform: var(--rot);
+  }
+  .form-draape  {
+    border-radius: 50% 50% 50% 0;
+    --rot: rotate(-45deg); --mot: rotate(45deg); transform: var(--rot);
+  }
+
+  .kant-solid  { border-style: solid; }
+  .kant-double { border-style: double; border-width: 4px; }
+  .kant-dashed { border-style: dashed; }
+
+  .ikon { font-size: 14px; line-height: 1; transform: var(--mot, none); }
+
+  .ikon-moerk { border-color: #111; }
+  .ikon-moerk .ikon { filter: brightness(0); }
+
+  .ikon-lys { border-color: #fff; }
+  .ikon-lys .ikon { filter: brightness(0) invert(1); }
 
   .maplibregl-popup-content {
     background: #fff; color: var(--tekst);
@@ -232,32 +262,65 @@ function varmTema(kart) {
 }
 
 // ---------------------------------------------------------------------------
-// Farger per lag. Kjente lag har sin egen; resten faar en fra reservepaletten.
+// Farger per lag. Paletten er Okabe-Ito: skilles ved deuteranopi og protanopi,
+// i motsetning til roed/groenn. Kjente lag har sin egen; resten faar en fra
+// reservepaletten. Farge er likevel bare én av flere kilder til å skille lag,
+// se FORMER/KANTER under.
 // ---------------------------------------------------------------------------
 const FARGER = {
-  kollektiv: '#e11d48',       // roed: bussene skal ses foerst
-  fly: '#0f172a',             // naesten svart: flyene er hoeyt over alt annet
-  skip: '#1d4ed8',
-  mobilitet: '#16a34a',
-  hendelser: '#ea580c',
-  luftkvalitet: '#0d9488',
-  badetemperatur: '#0891b2',
-  trafikk: '#7c3aed',
-  holdeplasser: '#be123c',
-  veiarbeid: '#ca8a04',
-  idrettsanlegg: '#65a30d',
-  spisesteder: '#92400e',
-  ladestasjoner: '#047857',
-  smilefjes: '#f59e0b',
-  kulturminner: '#78350f',
-  arter: '#15803d'
+  kollektiv: '#D55E00',       // vermillion: bussene skal ses foerst
+  fly: '#000000',             // svart: flyene er hoeyt over alt annet
+  skip: '#0072B2',            // blaatt
+  mobilitet: '#56B4E9',       // lysblaatt
+  hendelser: '#E69F00',       // oransje
+  luftkvalitet: '#009E73',    // groent
+  badetemperatur: '#56B4E9',  // lysblaatt
+  trafikk: '#CC79A7',         // rosa
+  holdeplasser: '#D55E00',    // vermillion
+  veiarbeid: '#F0E442',       // gult
+  idrettsanlegg: '#009E73',   // groent
+  spisesteder: '#E69F00',     // oransje
+  ladestasjoner: '#0072B2',   // blaatt
+  smilefjes: '#F0E442',       // gult
+  kulturminner: '#CC79A7',    // rosa
+  arter: '#009E73'            // groent
 };
 
-const RESERVE = ['#dc2626', '#2563eb', '#059669', '#d97706',
-                 '#7c3aed', '#0891b2', '#be185d', '#4d7c0f'];
+const RESERVE = ['#0072B2', '#E69F00', '#56B4E9', '#D55E00',
+                 '#009E73', '#CC79A7', '#F0E442', '#000000'];
 
 function fargeFor(id, nr) {
   return FARGER[id] || RESERVE[nr % RESERVE.length];
+}
+
+// Form og kantstil skiller lagene fra hverandre uavhengig av farge.
+const FORMER = ['sirkel', 'firkant', 'ruter', 'draape'];
+const KANTER = ['solid', 'double', 'dashed'];
+function stilFor(nr) {
+  return { form: FORMER[nr % 4], kant: KANTER[Math.floor(nr / 4) % 3] };
+}
+
+// Relativ luminans etter WCAG, brukt til å velge lys eller moerk kant/ikon
+// slik at kontrasten mot bakgrunnsfargen blir minst 3:1.
+function luminans(hex) {
+  const r = parseInt(hex.slice(1, 3), 16) / 255;
+  const g = parseInt(hex.slice(3, 5), 16) / 255;
+  const b = parseInt(hex.slice(5, 7), 16) / 255;
+  const rs = r <= 0.03928 ? r / 12.92 : Math.pow((r + 0.055) / 1.055, 2.4);
+  const gs = g <= 0.03928 ? g / 12.92 : Math.pow((g + 0.055) / 1.055, 2.4);
+  const bs = b <= 0.03928 ? b / 12.92 : Math.pow((b + 0.055) / 1.055, 2.4);
+  return 0.2126 * rs + 0.7152 * gs + 0.0722 * bs;
+}
+
+function kontrastFor(bakgrunn) {
+  const L = luminans(bakgrunn);
+  const motSvart = (L + 0.05) / 0.05;
+  const motHvit = 1.05 / (L + 0.05);
+  return motSvart >= motHvit ? 'moerk' : 'lys';
+}
+
+function merkeHtml(oppf) {
+  return `<span class="form form-${oppf.form} kant-${oppf.kant} ikon-${oppf.kontrast}" style="background:${oppf.farge}"><span class="ikon">${oppf.ikon}</span></span>`;
 }
 
 // ---------------------------------------------------------------------------
@@ -298,8 +361,7 @@ async function hent(id) {
 
       const el = document.createElement('div');
       el.className = 'merke';
-      el.style.background = oppf.farge;
-      el.textContent = oppf.ikon;
+      el.innerHTML = merkeHtml(oppf);
 
       const m = new maplibregl.Marker({ element: el })
         .setLngLat([c[0], c[1]])
@@ -342,16 +404,30 @@ async function start() {
   }
 
   liste.innerHTML = '';
+  let forrige = null;
   lag.forEach((l, nr) => {
-    const farge = fargeFor(l.id, nr);
-    lagene.set(l.id, { ikon: l.ikon || '📍', farge, markorer: [], antall: 0, på: true });
+    let farge = fargeFor(l.id, nr);
+    // To lag ved siden av hverandre skal aldri faa samme farge, selv om
+    // reservepaletten er kortere enn antall lag.
+    if (farge === forrige) {
+      for (let k = 1; k < RESERVE.length; k++) {
+        const alt = RESERVE[(nr + k) % RESERVE.length];
+        if (alt !== forrige) { farge = alt; break; }
+      }
+    }
+    forrige = farge;
+
+    const { form, kant } = stilFor(nr);
+    const kontrast = kontrastFor(farge);
+    const oppf = { ikon: l.ikon || '📍', farge, form, kant, kontrast, markorer: [], antall: 0, på: true };
+    lagene.set(l.id, oppf);
 
     const rad = document.createElement('label');
     rad.className = 'lag';
     rad.title = l.beskrivelse ?? '';
     rad.innerHTML =
       `<input type="checkbox" checked>` +
-      `<span class="prikk" style="background:${farge}"></span>` +
+      `<span class="prikk" aria-hidden="true">${merkeHtml(oppf)}</span>` +
       `<span class="navn">${l.navn}</span>` +
       `<span class="antall" id="antall-${l.id}">…</span>`;
 
