@@ -188,6 +188,17 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
     }
 
     [Fact]
+    public async Task Lagoversikten_har_sykkelparkering()
+    {
+        var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
+
+        var sykkelparkering = lag!.Single(l => l.Id == "sykkelparkering");
+        Assert.Equal("Sykkelparkering", sykkelparkering.Navn);
+        Assert.False(string.IsNullOrWhiteSpace(sykkelparkering.Beskrivelse));
+        Assert.False(string.IsNullOrWhiteSpace(sykkelparkering.Ikon));
+    }
+
+    [Fact]
     public async Task Spisestederlaget_gir_featurecollection_uten_nett()
     {
         const string svar = """
@@ -232,6 +243,58 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
             Assert.Equal("FeatureCollection", lag!.Type);
             Assert.NotEmpty(lag.Features);
             Assert.Equal([10.745, 59.911], lag.Features[0].Geometry.Coordinates);
+        }
+        finally
+        {
+            Allemannsdata.TømMellomlager();
+        }
+    }
+
+    [Fact]
+    public async Task Sykkelparkeringslaget_gir_featurecollection_uten_nett()
+    {
+        const string svar = """
+            {
+                "source": "poi_norge",
+                "operation": "search_poi",
+                "parameters": {},
+                "data": {
+                    "matched": 431,
+                    "offset": 0,
+                    "count": 1,
+                    "items": [
+                        {
+                            "id": 5888766585,
+                            "lat": 59.9104713,
+                            "lon": 10.750642,
+                            "type": "amenity",
+                            "category": "bicycle_parking",
+                            "distance_km": 0.063
+                        }
+                    ],
+                    "limit": 200,
+                    "returned": 1,
+                    "has_more_results": true,
+                    "truncated": false
+                }
+            }
+            """;
+
+        using var vertUtenNett = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient<Allemannsdata>().ConfigurePrimaryHttpMessageHandler(() => new FastSvarHandler(svar))));
+        var klient = vertUtenNett.CreateClient();
+
+        Allemannsdata.TømMellomlager();
+        try
+        {
+            var respons = await klient.GetAsync("/api/lag/sykkelparkering");
+            var lag = await respons.Content.ReadFromJsonAsync<Kartlag>();
+
+            Assert.Equal(HttpStatusCode.OK, respons.StatusCode);
+            Assert.Equal("FeatureCollection", lag!.Type);
+            Assert.NotEmpty(lag.Features);
+            Assert.Equal([10.750642, 59.9104713], lag.Features[0].Geometry.Coordinates);
+            Assert.Equal("Sykkelparkering", lag.Features[0].Properties["navn"]!.ToString());
         }
         finally
         {
