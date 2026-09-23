@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T15:23:12",
+  "oppdatert": "2026-09-23T15:23:54",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -288,13 +288,13 @@
           "poeng": 1
         }
       ],
-      "dollar": 42.806,
-      "tokens": 69051426,
-      "sekunder": 13117,
+      "dollar": 42.877,
+      "tokens": 69287847,
+      "sekunder": 13172,
       "pr": 14,
       "utkast": 3,
       "merget": 8,
-      "kjoeringer": 31,
+      "kjoeringer": 32,
       "utenPr": 14,
       "bygg": [],
       "estimert": false,
@@ -698,14 +698,6 @@
     {
       "agent": "mini-wilma",
       "github": "larsajakobsen",
-      "issue": 210,
-      "navn": "Historikkgrafen blinker fordi appen kjører på tre replikaer",
-      "startet": "2026-09-23T13:19:01.0373888+00:00",
-      "minutter": 4
-    },
-    {
-      "agent": "mini-wilma",
-      "github": "larsajakobsen",
       "issue": 193,
       "navn": "Nytt lag: hjertestartere",
       "startet": "2026-09-23T13:20:02.3717642+00:00",
@@ -724,7 +716,7 @@
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
     "pr": null,
-    "kjoeringer": 65
+    "kjoeringer": 66
   },
   "produkt": {
     "testerBestatt": 20,
@@ -855,7 +847,7 @@
       "issue": 48,
       "navn": "Hent lagene parallelt",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T12:56:33Z"
+      "oppdatert": "2026-09-23T13:23:36Z"
     },
     {
       "issue": 51,
@@ -1185,7 +1177,7 @@
       "issue": 210,
       "navn": "Historikkgrafen blinker fordi appen kjører på tre replikaer",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T13:19:02Z"
+      "oppdatert": "2026-09-23T13:23:10Z"
     },
     {
       "issue": 211,
