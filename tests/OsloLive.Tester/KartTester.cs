@@ -52,6 +52,25 @@ public class GeoTester
     }
 
     [Fact]
+    public void Samle_beholder_flere_punkter_med_samme_kilde()
+    {
+        var lag = Geo.Samle([
+            Geo.Lag("a", 59.91, 10.75, "A", "Felles kilde"),
+            Geo.Lag("b", 59.92, 10.76, "B", "Felles kilde"),
+        ]);
+
+        Assert.Equal(2, lag.Features.Count);
+    }
+
+    [Fact]
+    public void Punkt_har_lengdegrad_foer_breddegrad()
+    {
+        var punkt = Geo.Punkt(59.9139, 10.7522);
+
+        Assert.Equal([10.7522, 59.9139], punkt.Coordinates);
+    }
+
+    [Fact]
     public void Rådhuset_ligger_i_oslo()
     {
         Assert.True(Geo.IOslo(59.9139, 10.7522));
