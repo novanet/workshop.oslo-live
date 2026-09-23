@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OsloLive.Historikk;
 using OsloLive.Kart;
+using OsloLive.Lag;
 
 namespace OsloLive.Tester;
 
@@ -185,6 +186,17 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
         Assert.Equal("Kaier", kaier.Navn);
         Assert.False(string.IsNullOrWhiteSpace(kaier.Beskrivelse));
         Assert.False(string.IsNullOrWhiteSpace(kaier.Ikon));
+    }
+
+    [Fact]
+    public async Task Lagoversikten_har_museum()
+    {
+        var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
+
+        var museum = lag!.Single(l => l.Id == "museum");
+        Assert.Equal("Museer", museum.Navn);
+        Assert.False(string.IsNullOrWhiteSpace(museum.Beskrivelse));
+        Assert.False(string.IsNullOrWhiteSpace(museum.Ikon));
     }
 
     [Fact]
@@ -515,6 +527,192 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
             {
                 Content = new StringContent(svar, Encoding.UTF8, "application/json"),
             });
+        }
+    }
+
+    [Fact]
+    public async Task Museumslaget_gir_featurecollection_uten_nett()
+    {
+        const string museumsSvar = """
+            {
+                "source": "kulturarv",
+                "operation": "search_heritage_sites",
+                "parameters": {},
+                "data": {
+                    "sites": [
+                        { "heritage_site_id": 1, "navn": "Kunstindustrimuseet", "lon_lat": [10.743, 59.918] },
+                        { "heritage_site_id": 1, "navn": "Tilbygg", "lon_lat": [10.744, 59.919] }
+                    ]
+                }
+            }
+            """;
+        const string objektSvar = """
+            {
+                "source": "kulturarv",
+                "operation": "search_museum_objects",
+                "parameters": {},
+                "data": { "objects": [ { "title": "En gammel vase" } ] }
+            }
+            """;
+
+        var handler = new RutendeHandler(url => new HttpResponseMessage(HttpStatusCode.OK)
+        {
+            Content = new StringContent(url.Contains("search_heritage_sites") ? museumsSvar : objektSvar, Encoding.UTF8, "application/json"),
+        });
+
+        using var vertUtenNett = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient<Allemannsdata>().ConfigurePrimaryHttpMessageHandler(() => handler)));
+        var klient = vertUtenNett.CreateClient();
+
+        Allemannsdata.TømMellomlager();
+        try
+        {
+            var respons = await klient.GetAsync("/api/lag/museum");
+            var lag = await respons.Content.ReadFromJsonAsync<Kartlag>();
+
+            Assert.Equal(HttpStatusCode.OK, respons.StatusCode);
+            Assert.Equal("FeatureCollection", lag!.Type);
+            Assert.Single(lag.Features);
+            Assert.Equal([10.743, 59.918], lag.Features[0].Geometry.Coordinates);
+            Assert.Equal("Kunstindustrimuseet", lag.Features[0].Properties["navn"]?.ToString());
+            Assert.Equal("Askeladden og DigitaltMuseum (Riksantikvaren)", lag.Features[0].Properties["kilde"]?.ToString());
+            Assert.Equal("En gammel vase", lag.Features[0].Properties["eksempel"]?.ToString());
+        }
+        finally
+        {
+            Allemannsdata.TømMellomlager();
+        }
+    }
+
+    [Fact]
+    public async Task Museum_vises_uten_eksempel_naar_objektkallet_svikter()
+    {
+        const string museumsSvar = """
+            {
+                "source": "kulturarv",
+                "operation": "search_heritage_sites",
+                "parameters": {},
+                "data": {
+                    "sites": [
+                        { "heritage_site_id": 1, "navn": "Kunstindustrimuseet", "lon_lat": [10.743, 59.918] }
+                    ]
+                }
+            }
+            """;
+
+        var handler = new RutendeHandler(url => url.Contains("search_heritage_sites")
+            ? new HttpResponseMessage(HttpStatusCode.OK) { Content = new StringContent(museumsSvar, Encoding.UTF8, "application/json") }
+            : new HttpResponseMessage(HttpStatusCode.NotFound));
+
+        using var vertUtenNett = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient<Allemannsdata>().ConfigurePrimaryHttpMessageHandler(() => handler)));
+        var klient = vertUtenNett.CreateClient();
+
+        Allemannsdata.TømMellomlager();
+        try
+        {
+            var respons = await klient.GetAsync("/api/lag/museum");
+            var lag = await respons.Content.ReadFromJsonAsync<Kartlag>();
+
+            Assert.Equal(HttpStatusCode.OK, respons.StatusCode);
+            Assert.Single(lag!.Features);
+            Assert.False(lag.Features[0].Properties.ContainsKey("eksempel"));
+        }
+        finally
+        {
+            Allemannsdata.TømMellomlager();
+        }
+    }
+
+    [Fact]
+    public async Task Museumslaget_begrenser_og_mellomlagrer_objektkallene()
+    {
+        var museer = Enumerable.Range(1, 30)
+            .Select(i => new
+            {
+                heritage_site_id = i,
+                navn = $"Museum {i}",
+                lon_lat = new[] { 10.70 + (i * 0.001), 59.90 + (i * 0.001) },
+            })
+            .ToArray();
+        var museumsSvar = JsonSerializer.Serialize(new
+        {
+            source = "kulturarv",
+            operation = "search_heritage_sites",
+            parameters = new { },
+            data = new { sites = museer },
+        });
+        var objektSvar = JsonSerializer.Serialize(new
+        {
+            source = "kulturarv",
+            operation = "search_museum_objects",
+            parameters = new { },
+            data = new { objects = new[] { new { title = "Et objekt" } } },
+        });
+
+        var handler = new RutendeHandler(url => new HttpResponseMessage(HttpStatusCode.OK)
+        {
+            Content = new StringContent(url.Contains("search_heritage_sites") ? museumsSvar : objektSvar, Encoding.UTF8, "application/json"),
+        });
+
+        using var vertUtenNett = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient<Allemannsdata>().ConfigurePrimaryHttpMessageHandler(() => handler)));
+        var klient = vertUtenNett.CreateClient();
+
+        Allemannsdata.TømMellomlager();
+        try
+        {
+            var forsteRespons = await klient.GetAsync("/api/lag/museum");
+            Assert.Equal(HttpStatusCode.OK, forsteRespons.StatusCode);
+            Assert.Equal(1, handler.MuseumsKall);
+            Assert.Equal(MuseumLag.MaksEksempelkall, handler.ObjektKall);
+
+            Allemannsdata.TømMellomlager();
+
+            var andreRespons = await klient.GetAsync("/api/lag/museum");
+            Assert.Equal(HttpStatusCode.OK, andreRespons.StatusCode);
+            Assert.Equal(1, handler.MuseumsKall);
+            Assert.Equal(30, handler.ObjektKall);
+
+            Allemannsdata.TømMellomlager();
+
+            var tredjeRespons = await klient.GetAsync("/api/lag/museum");
+            Assert.Equal(HttpStatusCode.OK, tredjeRespons.StatusCode);
+            Assert.Equal(1, handler.MuseumsKall);
+            Assert.Equal(30, handler.ObjektKall);
+        }
+        finally
+        {
+            Allemannsdata.TømMellomlager();
+        }
+    }
+
+    /// <summary>
+    /// Ruter svaret etter hvilken operasjon URL-en peker på, og teller kall
+    /// per operasjon. Museumslaget kaller to ulike operasjoner («search_heritage_sites»
+    /// og «search_museum_objects»), så <see cref="FastSvarHandler"/> holder ikke.
+    /// </summary>
+    private sealed class RutendeHandler(Func<string, HttpResponseMessage> svar) : HttpMessageHandler
+    {
+        private int museumsKall;
+        private int objektKall;
+
+        public int MuseumsKall => museumsKall;
+        public int ObjektKall => objektKall;
+
+        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage forespørsel, CancellationToken stopp)
+        {
+            var url = forespørsel.RequestUri!.ToString();
+            if (url.Contains("search_heritage_sites"))
+            {
+                Interlocked.Increment(ref museumsKall);
+            }
+            else if (url.Contains("search_museum_objects"))
+            {
+                Interlocked.Increment(ref objektKall);
+            }
+
+            return Task.FromResult(svar(url));
         }
     }
 
