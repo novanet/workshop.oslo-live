@@ -835,6 +835,26 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
             throw new HttpRequestException("Kilden er nede.");
     }
 
+    [Fact]
+    public async Task Flykilden_som_svarer_403_gir_feil_kilden_svarte_403()
+    {
+        using var vertMedForbud = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient("fly").ConfigurePrimaryHttpMessageHandler(() => new StatuskodeHandler(HttpStatusCode.Forbidden))));
+        var klient = vertMedForbud.CreateClient();
+
+        var svar = await klient.GetAsync("/api/lag/fly");
+        var kropp = await svar.Content.ReadFromJsonAsync<JsonElement>();
+
+        Assert.Equal(HttpStatusCode.BadGateway, svar.StatusCode);
+        Assert.Equal("Kilden svarte 403.", kropp.GetProperty("feil").GetString());
+    }
+
+    private sealed class StatuskodeHandler(HttpStatusCode kode) : HttpMessageHandler
+    {
+        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage forespørsel, CancellationToken stopp) =>
+            Task.FromResult(new HttpResponseMessage(kode));
+    }
+
     /// <summary>Svarer med tidsserien til «naa» eller tabellen til «neste», avhengig av hvilken operasjon adressen ber om.</summary>
     private sealed class VannstandHandler(string naaJson, string tabellJson) : HttpMessageHandler
     {
