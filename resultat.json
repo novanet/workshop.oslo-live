@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:26:05",
+  "oppdatert": "2026-09-23T11:26:50",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -436,7 +436,7 @@
       "issue": 11,
       "navn": "Kollektiv",
       "startet": "2026-09-23T09:22:13.4670027+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-kirsten",
@@ -444,7 +444,15 @@
       "issue": 45,
       "navn": "Varsler",
       "startet": "2026-09-23T09:22:36.7039942+00:00",
-      "minutter": 2
+      "minutter": 3
+    },
+    {
+      "agent": "mini-sindre",
+      "github": "sin-rha",
+      "issue": 55,
+      "navn": "Ytelse",
+      "startet": "2026-09-23T09:26:04.1878556+00:00",
+      "minutter": 0
     }
   ],
   "main": {
@@ -454,8 +462,8 @@
     "kjoeringer": 32
   },
   "produkt": {
-    "testerBestatt": 13,
-    "testerFeilet": 13,
+    "testerBestatt": 14,
+    "testerFeilet": 12,
     "issuerLost": [
       1,
       2,
@@ -463,6 +471,7 @@
       4,
       5,
       9,
+      15,
       17
     ],
     "antallIssuer": 57,
@@ -575,7 +584,7 @@
       "issue": 11,
       "navn": "Nytt lag: kollektivtrafikk som beveger seg",
       "github": "coffeelyfe",
-      "oppdatert": "2026-09-23T09:24:47Z"
+      "oppdatert": "2026-09-23T09:26:18Z"
     },
     {
       "issue": 13,
@@ -845,7 +854,7 @@
       "issue": 55,
       "navn": "Kartet blir tregt med mange punkter",
       "github": "sin-rha",
-      "oppdatert": "2026-09-23T09:25:19Z"
+      "oppdatert": "2026-09-23T09:26:05Z"
     },
     {
       "issue": 56,
@@ -885,7 +894,7 @@
       "github": "audmaha",
       "agent": "mini-aud",
       "opprettet": "2026-09-23T09:00:42Z",
-      "oppdatert": "2026-09-23T09:24:55Z",
+      "oppdatert": "2026-09-23T09:26:11Z",
       "utkast": false,
       "issues": [
         39
