@@ -15,6 +15,9 @@
   let rateBegrensetTil = 0;
   let grunnlagKlar = false;
   const kjenteNumre = new Set();
+  // Bare merger etter at siden ble lastet feires. En eldre merget PR som dukker opp blant de
+  // 20 sist oppdaterte (for eksempel etter en ny kommentar) er ikke ny, selv om nummeret er ukjent.
+  const lastetTidspunkt = Date.now();
   const kø = [];
   let køKjører = false;
   let aktivAvslutt = null;
@@ -160,7 +163,9 @@
     });
   }
 
-  document.addEventListener('click', () => { if (aktivAvslutt) aktivAvslutt(); });
+  // Fanges i capture-fasen, så et klikk som stopper propagering i UI-et (for eksempel «Varme»-knappen)
+  // også avbryter. Klikket tømmer køen: den som klikker vil ha ro, ikke neste feiring.
+  document.addEventListener('click', () => { kø.length = 0; if (aktivAvslutt) aktivAvslutt(); }, true);
 
   async function kjørKø() {
     if (køKjører) return;
@@ -217,6 +222,7 @@
     for (const pr of mergede) {
       if (kjenteNumre.has(pr.number)) continue;
       kjenteNumre.add(pr.number);
+      if (new Date(pr.merged_at).getTime() < lastetTidspunkt) continue;   // merget før siden ble åpnet
       kø.push(pr);
     }
     kjørKø();
