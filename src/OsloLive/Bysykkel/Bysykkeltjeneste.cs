@@ -57,6 +57,14 @@ public sealed class Bysykkeltjeneste(IHttpClientFactory klienter, IMemoryCache m
                     return new Tilstand.Feilet(feil);
                 }
 
+                // Et tidsavbrudd i HttpClient gir en kansellert Task, ikke en feilet; uten denne
+                // grenen ville hvert kall svart «forbereder» for alltid.
+                if (jobb.IsCanceled)
+                {
+                    jobb = null;
+                    return new Tilstand.Feilet("Nedlastingen av månedsfila ble avbrutt (tidsavbrudd).");
+                }
+
                 return new Tilstand.Forbereder();
             }
 

@@ -12,6 +12,17 @@
   const PRIKKRADIUS = 2.5;
   const ALFANIVÅER = [0.1, 0.25, 0.45, 0.7];
 
+  // Bildebudsjett: målet er minst 30 bilder i sekundet med over 5 000 turer. Tegningen er
+  // O(aktive turer) per bilde med ett beginPath/stroke per alfanivå, ikke per tur. Går
+  // gjennomsnittlig bildetid over BUDSJETT_MS i 30 bilder på rad, fjernes ett halenivå
+  // (færre linjer per tur); ligger den under halvparten i 120 bilder, legges det tilbake.
+  const BUDSJETT_MS = 1000 / 30;
+  let aktiveNivåer = ALFANIVÅER.length;
+  let forrigeBilde = 0;
+  let tregeBilder = 0;
+  let raskeBilder = 0;
+  let låsteKontroller = [];
+
   const lenke = document.createElement('link');
   lenke.rel = 'stylesheet';
   lenke.href = 'effekter/bysykkeldogn.css';
@@ -96,13 +107,24 @@
     før = new Map([...lagene].map(([id, o]) => [id, o.på]));
     for (const id of før.keys()) settPå(id, false);
 
+    // hent og hentBydeler er toppnivå-funksjonsdeklarasjoner i det klassiske skriptet i
+    // index.html, og dermed egenskaper på window. Kallene `hent(id)` i 15-sekunders-
+    // intervallet slår opp navnet på window ved hvert kall, så denne overstyringen gjør at
+    // ingen levende data hentes så lenge avspillingen går; visLageneIgjen setter dem tilbake.
     orgHent = window.hent;
     orgHentBydeler = window.hentBydeler;
     window.hent = async () => {};
     window.hentBydeler = async () => {};
+
+    // Lagvelgeren låses, ellers kunne et klikk under avspillingen vist et lag igjen.
+    låsteKontroller = [...document.querySelectorAll('#lagliste input, #lagliste button')].filter((el) => !el.disabled);
+    for (const el of låsteKontroller) el.disabled = true;
   }
 
   function visLageneIgjen() {
+    for (const el of låsteKontroller) el.disabled = false;
+    låsteKontroller = [];
+
     window.hent = orgHent;
     window.hentBydeler = orgHentBydeler;
 
@@ -167,6 +189,7 @@
       startStatiskModus();
     } else {
       t0 = performance.now();
+      forrigeBilde = 0; tregeBilder = 0; raskeBilder = 0; aktiveNivåer = ALFANIVÅER.length;
       animasjonsId = requestAnimationFrame(tegn);
     }
   }
@@ -265,6 +288,15 @@
   function tegn(nå) {
     if (!spiller) return;
 
+    // Tilpass halene til det maskinen rekker, se BUDSJETT_MS.
+    if (forrigeBilde) {
+      const bildetid = nå - forrigeBilde;
+      if (bildetid > BUDSJETT_MS) { tregeBilder++; raskeBilder = 0; } else { raskeBilder++; if (bildetid < BUDSJETT_MS / 2) tregeBilder = 0; }
+      if (tregeBilder >= 30 && aktiveNivåer > 1) { aktiveNivåer--; tregeBilder = 0; }
+      if (raskeBilder >= 120 && aktiveNivåer < ALFANIVÅER.length) { aktiveNivåer++; raskeBilder = 0; }
+    }
+    forrigeBilde = nå;
+
     const forløpt = (nå - t0) % VARIGHET_MS;
     const t = (forløpt / VARIGHET_MS) * DØGN;
 
@@ -286,9 +318,9 @@
       prikker.push(bezierPunkt(a, c, b, p));
 
       const haleStart = Math.max(tur.start, lokalT - HALE);
-      for (let i = 0; i < ALFANIVÅER.length; i++) {
-        const p0 = (haleStart + (lokalT - haleStart) * (i / ALFANIVÅER.length) - tur.start) / varighet;
-        const p1 = (haleStart + (lokalT - haleStart) * ((i + 1) / ALFANIVÅER.length) - tur.start) / varighet;
+      for (let i = 0; i < aktiveNivåer; i++) {
+        const p0 = (haleStart + (lokalT - haleStart) * (i / aktiveNivåer) - tur.start) / varighet;
+        const p1 = (haleStart + (lokalT - haleStart) * ((i + 1) / aktiveNivåer) - tur.start) / varighet;
         halePerNivå[i].push([bezierPunkt(a, c, b, p0), bezierPunkt(a, c, b, p1)]);
       }
     }
