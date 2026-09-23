@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T13:55:21",
+  "oppdatert": "2026-09-23T13:56:16",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -557,7 +557,7 @@
       "issue": 141,
       "navn": "Tydelige kartsymboler: båter som ser ut som båter",
       "startet": "2026-09-23T11:52:28.401471+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-knive",
@@ -565,6 +565,14 @@
       "issue": 28,
       "navn": "Tog",
       "startet": "2026-09-23T11:54:26.4054208+00:00",
+      "minutter": 1
+    },
+    {
+      "agent": "mini-frode",
+      "github": "FrodeBl",
+      "issue": 128,
+      "navn": "Simulering: tsunami i Oslofjorden",
+      "startet": "2026-09-23T11:55:48.9774309+00:00",
       "minutter": 0
     }
   ],
@@ -910,7 +918,7 @@
       "issue": 128,
       "navn": "Simulering: tsunami i Oslofjorden",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T11:55:05Z"
+      "oppdatert": "2026-09-23T11:55:49Z"
     },
     {
       "issue": 129,
@@ -946,19 +954,19 @@
       "issue": 132,
       "navn": "Ekte sollys på 3D-byggene",
       "github": "audmaha",
-      "oppdatert": "2026-09-23T11:50:11Z"
+      "oppdatert": "2026-09-23T11:55:33Z"
     },
     {
       "issue": 132,
       "navn": "Ekte sollys på 3D-byggene",
       "github": "nilsgs",
-      "oppdatert": "2026-09-23T11:50:11Z"
+      "oppdatert": "2026-09-23T11:55:33Z"
     },
     {
       "issue": 141,
       "navn": "Tydelige kartsymboler: båter som ser ut som båter",
       "github": "leif-larsen",
-      "oppdatert": "2026-09-23T11:52:29Z"
+      "oppdatert": "2026-09-23T11:55:58Z"
     }
   ],
   "aapne": [
