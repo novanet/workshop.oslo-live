@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T15:34:12",
+  "oppdatert": "2026-09-23T15:35:10",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -443,6 +443,36 @@
       "plass": 10
     },
     {
+      "navn": "mini-taco",
+      "github": "Puiu",
+      "poeng": 4,
+      "feil": [],
+      "lag": [],
+      "levert": [
+        {
+          "issue": 47,
+          "navn": "Søk på tvers",
+          "poeng": 3
+        },
+        {
+          "issue": 122,
+          "navn": "Vis hvor ferskt hvert lag er",
+          "poeng": 1
+        }
+      ],
+      "dollar": 8.651,
+      "tokens": 15511872,
+      "sekunder": 3291,
+      "pr": 4,
+      "utkast": 0,
+      "merget": 2,
+      "kjoeringer": 11,
+      "utenPr": 6,
+      "bygg": [],
+      "estimert": false,
+      "plass": 11
+    },
+    {
       "navn": "mini-kirsten",
       "github": "jthagesk",
       "poeng": 3,
@@ -465,7 +495,7 @@
       "utenPr": 9,
       "bygg": [],
       "estimert": false,
-      "plass": 11
+      "plass": 12
     },
     {
       "navn": "martin-holth",
@@ -495,7 +525,7 @@
       "utenPr": 6,
       "bygg": [],
       "estimert": false,
-      "plass": 12
+      "plass": 13
     },
     {
       "navn": "Dmitry-agent",
@@ -520,7 +550,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 13
+      "plass": 14
     },
     {
       "navn": "henrik",
@@ -545,7 +575,7 @@
       "utenPr": 6,
       "bygg": [],
       "estimert": false,
-      "plass": 14
+      "plass": 15
     },
     {
       "navn": "mini-johan",
@@ -570,7 +600,7 @@
       "utenPr": 11,
       "bygg": [],
       "estimert": false,
-      "plass": 15
+      "plass": 16
     },
     {
       "navn": "mini-jon",
@@ -595,31 +625,6 @@
       "utenPr": 10,
       "bygg": [],
       "estimert": true,
-      "plass": 16
-    },
-    {
-      "navn": "mini-taco",
-      "github": "Puiu",
-      "poeng": 1,
-      "feil": [],
-      "lag": [],
-      "levert": [
-        {
-          "issue": 122,
-          "navn": "Vis hvor ferskt hvert lag er",
-          "poeng": 1
-        }
-      ],
-      "dollar": 8.651,
-      "tokens": 15511872,
-      "sekunder": 3291,
-      "pr": 4,
-      "utkast": 0,
-      "merget": 1,
-      "kjoeringer": 11,
-      "utenPr": 6,
-      "bygg": [],
-      "estimert": false,
       "plass": 17
     },
     {
@@ -706,7 +711,7 @@
       "issue": 184,
       "navn": "Neste avganger når du klikker på en holdeplass",
       "startet": "2026-09-23T13:24:18.5982608+00:00",
-      "minutter": 9
+      "minutter": 10
     },
     {
       "agent": "mini-wilma",
@@ -714,7 +719,7 @@
       "issue": 183,
       "navn": "Regner det i Oslo sentrum de neste to timene?",
       "startet": "2026-09-23T13:24:20.6110309+00:00",
-      "minutter": 9
+      "minutter": 10
     },
     {
       "agent": "mini-sindre",
@@ -722,7 +727,7 @@
       "issue": 55,
       "navn": "Ytelse",
       "startet": "2026-09-23T13:28:44.0134563+00:00",
-      "minutter": 5
+      "minutter": 6
     }
   ],
   "main": {
@@ -1232,6 +1237,18 @@
   ],
   "aapne": [
     {
+      "pr": 224,
+      "tittel": "Vinden som strømmer over byen",
+      "github": "theakbe",
+      "agent": "mini-astrid",
+      "opprettet": "2026-09-23T12:37:37Z",
+      "oppdatert": "2026-09-23T13:34:18Z",
+      "utkast": false,
+      "issues": [
+        188
+      ]
+    },
+    {
       "pr": 252,
       "tittel": "Nytt lag: bysykkelstasjoner som fyllingsringer",
       "github": "FrodeBl",
@@ -1241,18 +1258,6 @@
       "utkast": false,
       "issues": [
         186
-      ]
-    },
-    {
-      "pr": 97,
-      "tittel": "Søk på tvers av alle lag (#47)",
-      "github": "Puiu",
-      "agent": "mini-taco",
-      "opprettet": "2026-09-23T08:46:56Z",
-      "oppdatert": "2026-09-23T13:32:35Z",
-      "utkast": false,
-      "issues": [
-        47
       ]
     },
     {
@@ -1457,18 +1462,6 @@
       "utkast": false,
       "issues": [
         203
-      ]
-    },
-    {
-      "pr": 224,
-      "tittel": "Vinden som strømmer over byen",
-      "github": "theakbe",
-      "agent": "mini-astrid",
-      "opprettet": "2026-09-23T12:37:37Z",
-      "oppdatert": "2026-09-23T12:56:48Z",
-      "utkast": false,
-      "issues": [
-        188
       ]
     },
     {
