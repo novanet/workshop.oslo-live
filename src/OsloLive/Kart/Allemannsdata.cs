@@ -39,6 +39,8 @@ public sealed class Allemannsdata(HttpClient http, ILogger<Allemannsdata> logg, 
 
     private static readonly JsonSerializerOptions Valg = new(JsonSerializerDefaults.Web);
 
+    private TimeProvider Klokke => klokke ?? TimeProvider.System;
+
     /// <summary>
     /// Bygger adressen til en operasjon. Parameterverdier må skrives på
     /// engelsk tallformat uansett hvilket språk maskinen kjører med.
@@ -71,7 +73,7 @@ public sealed class Allemannsdata(HttpClient http, ILogger<Allemannsdata> logg, 
     {
         var url = ByggUrl(kilde, operasjon, parametre);
 
-        if (Mellomlager.TryGetValue(url, out var lagret) && DateTimeOffset.UtcNow - lagret.Hentet < Levetid)
+        if (Mellomlager.TryGetValue(url, out var lagret) && Klokke.GetUtcNow() - lagret.Hentet < Levetid)
         {
             return lagret.Svar;
         }
@@ -91,7 +93,7 @@ public sealed class Allemannsdata(HttpClient http, ILogger<Allemannsdata> logg, 
 
         // JsonElement peker inn i dokumentet sitt, så vi tar en kopi som overlever.
         var kopi = data.Clone();
-        Mellomlager[url] = (DateTimeOffset.UtcNow, kopi);
+        Mellomlager[url] = (Klokke.GetUtcNow(), kopi);
         return kopi;
     }
 
@@ -159,7 +161,7 @@ public sealed class Allemannsdata(HttpClient http, ILogger<Allemannsdata> logg, 
                 "Prøver {Kilde}/{Operasjon} på nytt, forsøk {Forsøk} av {MaksForsøk}",
                 kilde, operasjon, forsøk + 1, MaksForsøk);
 
-            await Task.Delay(Ventetider[forsøk - 1], klokke ?? TimeProvider.System, stopp);
+            await Task.Delay(Ventetider[forsøk - 1], Klokke, stopp);
         }
     }
 }
