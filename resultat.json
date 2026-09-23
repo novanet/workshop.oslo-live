@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:16:07",
+  "oppdatert": "2026-09-23T10:16:33",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -252,6 +252,22 @@
       "navn": "Artsobservasjoner",
       "startet": "2026-09-23T08:14:02.4941234+00:00",
       "minutter": 2
+    },
+    {
+      "agent": "mini-ingve",
+      "github": "ingvevs",
+      "issue": 49,
+      "navn": "Nytt forsøk",
+      "startet": "2026-09-23T08:16:16.8577675+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-sindre",
+      "github": "sin-rha",
+      "issue": 59,
+      "navn": "",
+      "startet": "2026-09-23T08:16:21.5736896+00:00",
+      "minutter": 0
     }
   ],
   "main": {
@@ -358,6 +374,12 @@
       "oppdatert": "2026-09-23T07:59:20Z"
     },
     {
+      "issue": 49,
+      "navn": "Prøv én gang til når en kilde svarer dårlig",
+      "github": "ingvevs",
+      "oppdatert": "2026-09-23T08:16:17Z"
+    },
+    {
       "issue": 50,
       "navn": "Mål hva som skjer",
       "github": "FrodeBl",
@@ -385,7 +407,7 @@
       "issue": 59,
       "navn": "Overlapping boxes",
       "github": "sin-rha",
-      "oppdatert": "2026-09-23T08:15:46Z"
+      "oppdatert": "2026-09-23T08:16:22Z"
     }
   ],
   "aapne": [
