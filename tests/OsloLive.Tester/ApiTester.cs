@@ -46,6 +46,17 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
     }
 
     [Fact]
+    public async Task Lagoversikten_har_arter()
+    {
+        var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
+
+        var arter = lag!.Single(l => l.Id == "arter");
+        Assert.Equal("Artsobservasjoner", arter.Navn);
+        Assert.False(string.IsNullOrWhiteSpace(arter.Beskrivelse));
+        Assert.False(string.IsNullOrWhiteSpace(arter.Ikon));
+    }
+
+    [Fact]
     public async Task Lagoversikten_har_hendelser_med_navn_beskrivelse_og_ikon()
     {
         var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
@@ -65,6 +76,17 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
         Assert.Equal("Smilefjes", smilefjes.Navn);
         Assert.False(string.IsNullOrWhiteSpace(smilefjes.Beskrivelse));
         Assert.False(string.IsNullOrWhiteSpace(smilefjes.Ikon));
+    }
+
+    [Fact]
+    public async Task Lagoversikten_har_idrettsanlegg()
+    {
+        var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
+
+        var anlegg = lag!.Single(l => l.Id == "idrettsanlegg");
+        Assert.Equal("Idrettsanlegg", anlegg.Navn);
+        Assert.False(string.IsNullOrWhiteSpace(anlegg.Beskrivelse));
+        Assert.False(string.IsNullOrWhiteSpace(anlegg.Ikon));
     }
 
     [Fact]
@@ -185,6 +207,17 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
         Assert.Equal("Kaier", kaier.Navn);
         Assert.False(string.IsNullOrWhiteSpace(kaier.Beskrivelse));
         Assert.False(string.IsNullOrWhiteSpace(kaier.Ikon));
+    }
+
+    [Fact]
+    public async Task Lagoversikten_har_vaerstasjoner()
+    {
+        var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
+
+        var vaerstasjoner = lag!.Single(l => l.Id == "vaerstasjoner");
+        Assert.Equal("Værstasjoner", vaerstasjoner.Navn);
+        Assert.False(string.IsNullOrWhiteSpace(vaerstasjoner.Beskrivelse));
+        Assert.False(string.IsNullOrWhiteSpace(vaerstasjoner.Ikon));
     }
 
     [Fact]
@@ -791,8 +824,10 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
 
         Assert.Equal(HttpStatusCode.OK, svar.StatusCode);
         var innhold = await svar.Content.ReadFromJsonAsync<JsonElement>();
-        Assert.True(innhold.TryGetProperty("naa", out _));
-        Assert.True(innhold.TryGetProperty("billigst", out _));
+        Assert.True(innhold.TryGetProperty("naa", out var naa));
+        Assert.Equal(JsonValueKind.Number, naa.ValueKind);
+        Assert.True(innhold.TryGetProperty("billigst", out var billigst));
+        Assert.Equal(JsonValueKind.Number, billigst.GetProperty("pris").ValueKind);
         Assert.True(innhold.TryGetProperty("dyrest", out _));
         Assert.Equal(24, innhold.GetProperty("timer").GetArrayLength());
         Allemannsdata.TømMellomlager();

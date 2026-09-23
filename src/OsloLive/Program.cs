@@ -47,6 +47,7 @@ builder.Services.AddHostedService<Øyeblikksjobb>();
 // Lagene på kartet. Nytt lag? Legg til én linje her.
 // ---------------------------------------------------------------------------
 builder.Services.AddSingleton<ILag, LuftkvalitetLag>();
+builder.Services.AddSingleton<ILag, ArterLag>();
 builder.Services.AddSingleton<ILag, HendelserLag>();
 builder.Services.AddSingleton<ILag, SmilefjesLag>();
 builder.Services.AddSingleton<ILag, FlyLag>();
@@ -57,12 +58,13 @@ builder.Services.AddSingleton<ILag, HoldeplasserLag>();
 builder.Services.AddSingleton<ILag, SkipLag>();
 builder.Services.AddSingleton<ILag, VannmaalereLag>();
 builder.Services.AddSingleton<ILag, KaierLag>();
+builder.Services.AddSingleton<ILag, VaerstasjonerLag>();
+builder.Services.AddSingleton<ILag, IdrettsanleggLag>();
 
 // Bakgrunnssjekk av kildehelse, se Helse/HelseSjekker.cs.
 builder.Services.Configure<HelseValg>(builder.Configuration.GetSection("Helse"));
 builder.Services.AddSingleton<HelseSjekker>();
 builder.Services.AddHostedService(sp => sp.GetRequiredService<HelseSjekker>());
-
 
 var app = builder.Build();
 
