@@ -79,14 +79,20 @@
     return { type: 'FeatureCollection', features };
   }
 
+  /** Id-en til det foerste bygningslaget i stilen (uansett om «building» eller «building-3d» kommer foerst), slik at det blå laget legges under begge. */
+  function forsteBygningslag() {
+    const lag = (kart.getStyle().layers) || [];
+    const funnet = lag.find((l) => l.id === 'building' || l.id === 'building-3d');
+    return funnet ? funnet.id : undefined;
+  }
+
   function sikreKilde() {
     if (kart.getSource(KILDE)) return;
     kart.addSource(KILDE, { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
-    const forBygninger = kart.getLayer('building') ? 'building' : (kart.getLayer('building-3d') ? 'building-3d' : undefined);
     kart.addLayer({
       id: KILDE, type: 'fill', source: KILDE,
       paint: { 'fill-color': '#2563eb', 'fill-opacity': 0.5 }
-    }, forBygninger);
+    }, forsteBygningslag());
   }
 
   function tomLag() {
