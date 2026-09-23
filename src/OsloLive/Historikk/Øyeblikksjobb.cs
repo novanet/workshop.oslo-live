@@ -5,6 +5,12 @@ namespace OsloLive.Historikk;
 /// <summary>
 /// Tar et øyeblikksbilde av hvert registrerte lag én gang i timen, slik at
 /// tidslinjen på kartet har noe å vise tilbake i tid. Se <see cref="Bildelager"/>.
+///
+/// Dette er den samme timesjobben som historikk-issuen (#25) beskriver: ett
+/// JSON-bilde per lag per time på disk, valgt etter nærmeste tidspunkt. Jobben
+/// er med her for at tidslinjen (#34) skal kunne merges uten å vente på #25;
+/// når #25 sin jobb (<c>Bildejobb</c>) er inne, beholdes én av dem, og
+/// <see cref="Bildelager"/> og <c>?tid=</c> er felles for begge.
 /// </summary>
 public sealed class Øyeblikksjobb(IEnumerable<ILag> lag, Bildelager bilder, IConfiguration konfig, ILogger<Øyeblikksjobb> logg) : BackgroundService
 {

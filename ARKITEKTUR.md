@@ -121,6 +121,15 @@ utvidet til Gardermoen; det er en egen beslutning om hva «Oslo Live» skal dekk
 
 ## Historikk og tidslinjen
 
+**Sammenheng med historikk-issuen (#25, «Ta vare på et øyeblikksbilde hver time»).**
+Tidslinjen (#34) bygger på øyeblikksbildene fra #25: samme idé, samme lagring, ett
+JSON-bilde per lag per time på disk under `Historikk:Mappe`, valgt etter nærmeste
+tidspunkt. Denne PR-en tar med sin egen jobb, `Historikk/Øyeblikksjobb`, slik at
+tidslinjen kan merges uten å vente på #25. Når PR-en for #25 (jobben `Bildejobb` med
+samme `Bildelager`) er inne, er det én timesjobb og ett lager: `Øyeblikksjobb` og
+`Bildejobb` gjør det samme, og den som merges sist fjernes til fordel for den andre,
+uten endring i `?tid=`-kontrakten, i `Bildelager` eller i tidslinjen.
+
 `Historikk/Øyeblikksjobb` tar et bilde (`Kartlag` som JSON) av hvert registrerte lag én gang i timen, første gang ved oppstart, og legger det i `Historikk:Mappe/<lagId>/<yyyyMMddTHHmmssZ>.json`. `Bildelager` velger bildet nærmest `?tid=` (maks to timer unna) og sletter bilder eldre enn sju dager. Et lag som svikter, eller et tidsavbrudd mot kilden, logges og hoppes over; jobben stopper bare når verten selv stopper.
 
 Konfigurasjon i `appsettings.json`:
