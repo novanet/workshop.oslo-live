@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:01:24",
+  "oppdatert": "2026-09-23T11:02:16",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -71,7 +71,7 @@
     {
       "navn": "mini-richard",
       "github": "randsu",
-      "poeng": 11,
+      "poeng": 9,
       "feil": [
         {
           "issue": 3,
@@ -80,11 +80,6 @@
         }
       ],
       "lag": [
-        {
-          "issue": 6,
-          "navn": "Delt mobilitet",
-          "poeng": 2
-        },
         {
           "issue": 9,
           "navn": "Badetemperatur",
@@ -109,6 +104,36 @@
       "bygg": [],
       "estimert": false,
       "plass": 3
+    },
+    {
+      "navn": "mini-knive",
+      "github": "Buggz",
+      "poeng": 6,
+      "feil": [],
+      "lag": [],
+      "levert": [
+        {
+          "issue": 40,
+          "navn": "Mobil",
+          "poeng": 3
+        },
+        {
+          "issue": 53,
+          "navn": "Dyp helsesjekk",
+          "poeng": 3
+        }
+      ],
+      "dollar": 5.521,
+      "tokens": 11619713,
+      "sekunder": 2029,
+      "pr": 3,
+      "utkast": 0,
+      "merget": 2,
+      "kjoeringer": 3,
+      "utenPr": 0,
+      "bygg": [],
+      "estimert": false,
+      "plass": 4
     },
     {
       "navn": "mini-ingve",
@@ -139,7 +164,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 4
+      "plass": 5
     },
     {
       "navn": "mini-jon",
@@ -162,31 +187,6 @@
       "merget": 1,
       "kjoeringer": 4,
       "utenPr": 3,
-      "bygg": [],
-      "estimert": false,
-      "plass": 5
-    },
-    {
-      "navn": "mini-knive",
-      "github": "Buggz",
-      "poeng": 3,
-      "feil": [],
-      "lag": [],
-      "levert": [
-        {
-          "issue": 53,
-          "navn": "Dyp helsesjekk",
-          "poeng": 3
-        }
-      ],
-      "dollar": 5.521,
-      "tokens": 11619713,
-      "sekunder": 2029,
-      "pr": 3,
-      "utkast": 0,
-      "merget": 1,
-      "kjoeringer": 3,
-      "utenPr": 0,
       "bygg": [],
       "estimert": false,
       "plass": 6
@@ -280,6 +280,25 @@
       "plass": 10
     },
     {
+      "navn": "Dmitry-agent",
+      "github": "FilonenkoDmitry",
+      "poeng": 0,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 2.384,
+      "tokens": 5503761,
+      "sekunder": 771,
+      "pr": 0,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 1,
+      "utenPr": 1,
+      "bygg": [],
+      "estimert": false,
+      "plass": 11
+    },
+    {
       "navn": "mini-taco",
       "github": "Puiu",
       "poeng": 0,
@@ -296,7 +315,7 @@
       "utenPr": 0,
       "bygg": [],
       "estimert": false,
-      "plass": 11
+      "plass": 12
     },
     {
       "navn": "helstein",
@@ -315,7 +334,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 12
+      "plass": 13
     },
     {
       "navn": "Andy3000",
@@ -334,7 +353,7 @@
       "utenPr": 2,
       "bygg": [],
       "estimert": false,
-      "plass": 13
+      "plass": 14
     },
     {
       "navn": "mini-aud",
@@ -353,7 +372,7 @@
       "utenPr": 3,
       "bygg": [],
       "estimert": false,
-      "plass": 14
+      "plass": 15
     },
     {
       "navn": "mini-kirsten",
@@ -372,7 +391,7 @@
       "utenPr": 0,
       "bygg": [],
       "estimert": false,
-      "plass": 15
+      "plass": 16
     },
     {
       "navn": "mini-frode",
@@ -391,18 +410,10 @@
       "utenPr": 7,
       "bygg": [],
       "estimert": false,
-      "plass": 16
+      "plass": 17
     }
   ],
   "kjoerer": [
-    {
-      "agent": "Dmitry-agent",
-      "github": "FilonenkoDmitry",
-      "issue": 12,
-      "navn": "Holdeplasser",
-      "startet": "2026-09-23T08:48:05.3217109+00:00",
-      "minutter": 12
-    },
     {
       "agent": "mini-leif",
       "github": "leif-larsen",
@@ -417,7 +428,7 @@
       "issue": 45,
       "navn": "Varsler",
       "startet": "2026-09-23T08:59:36.7600891+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-knive",
@@ -432,18 +443,17 @@
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
     "pr": null,
-    "kjoeringer": 26
+    "kjoeringer": 27
   },
   "produkt": {
-    "testerBestatt": 14,
-    "testerFeilet": 12,
+    "testerBestatt": 13,
+    "testerFeilet": 13,
     "issuerLost": [
       1,
       2,
       3,
       4,
       5,
-      6,
       9,
       17
     ],
@@ -814,6 +824,42 @@
   ],
   "aapne": [
     {
+      "pr": 73,
+      "tittel": "Vær grei mot kildene (#54)",
+      "github": "Puiu",
+      "agent": "mini-taco",
+      "opprettet": "2026-09-23T08:15:23Z",
+      "oppdatert": "2026-09-23T09:01:28Z",
+      "utkast": false,
+      "issues": [
+        54
+      ]
+    },
+    {
+      "pr": 99,
+      "tittel": "Vis strømprisen for Oslo",
+      "github": "larsajakobsen",
+      "agent": "mini-wilma",
+      "opprettet": "2026-09-23T08:49:18Z",
+      "oppdatert": "2026-09-23T09:01:19Z",
+      "utkast": false,
+      "issues": [
+        32
+      ]
+    },
+    {
+      "pr": 97,
+      "tittel": "Søk på tvers av alle lag (#47)",
+      "github": "Puiu",
+      "agent": "mini-taco",
+      "opprettet": "2026-09-23T08:46:56Z",
+      "oppdatert": "2026-09-23T09:01:16Z",
+      "utkast": false,
+      "issues": [
+        47
+      ]
+    },
+    {
       "pr": 107,
       "tittel": "Tastatursnarveier",
       "github": "audmaha",
@@ -835,42 +881,6 @@
       "utkast": false,
       "issues": [
         24
-      ]
-    },
-    {
-      "pr": 106,
-      "tittel": "Kartet må virke på mobil (#40)",
-      "github": "Buggz",
-      "agent": "mini-knive",
-      "opprettet": "2026-09-23T08:59:44Z",
-      "oppdatert": "2026-09-23T08:59:44Z",
-      "utkast": false,
-      "issues": [
-        40
-      ]
-    },
-    {
-      "pr": 73,
-      "tittel": "Vær grei mot kildene (#54)",
-      "github": "Puiu",
-      "agent": "mini-taco",
-      "opprettet": "2026-09-23T08:15:23Z",
-      "oppdatert": "2026-09-23T08:59:31Z",
-      "utkast": false,
-      "issues": [
-        54
-      ]
-    },
-    {
-      "pr": 97,
-      "tittel": "Søk på tvers av alle lag (#47)",
-      "github": "Puiu",
-      "agent": "mini-taco",
-      "opprettet": "2026-09-23T08:46:56Z",
-      "oppdatert": "2026-09-23T08:59:28Z",
-      "utkast": false,
-      "issues": [
-        47
       ]
     },
     {
@@ -919,18 +929,6 @@
       "utkast": false,
       "issues": [
         45
-      ]
-    },
-    {
-      "pr": 99,
-      "tittel": "Vis strømprisen for Oslo",
-      "github": "larsajakobsen",
-      "agent": "mini-wilma",
-      "opprettet": "2026-09-23T08:49:18Z",
-      "oppdatert": "2026-09-23T08:54:47Z",
-      "utkast": false,
-      "issues": [
-        32
       ]
     },
     {
