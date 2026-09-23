@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:40:03",
+  "oppdatert": "2026-09-23T10:40:31",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -362,7 +362,7 @@
       "issue": 41,
       "navn": "Fargeblindhet",
       "startet": "2026-09-23T08:32:12.9324331+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "mini-knive",
@@ -370,7 +370,7 @@
       "issue": 53,
       "navn": "Dyp helsesjekk",
       "startet": "2026-09-23T08:33:27.9645236+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-aud",
@@ -386,7 +386,7 @@
       "issue": 6,
       "navn": "Delt mobilitet",
       "startet": "2026-09-23T08:36:06.1007878+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-wilma",
@@ -426,7 +426,7 @@
       "issue": 34,
       "navn": "Tidslinje",
       "startet": "2026-09-23T08:39:29.3560815+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "Andy3000",
@@ -434,7 +434,7 @@
       "issue": 11,
       "navn": "Kollektiv",
       "startet": "2026-09-23T08:39:29.9026946+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "helstein",
