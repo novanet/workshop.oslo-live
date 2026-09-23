@@ -2,6 +2,7 @@ using System.Globalization;
 using System.Net;
 using System.Text;
 using System.Text.Json;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using OsloLive.Kart;
 
@@ -502,6 +503,192 @@ public class AllemannsdataForsøkTester
     private static HttpResponseMessage LagJsonSvar(int verdi)
     {
         var json = JsonSerializer.Serialize(new { data = new { verdi } });
+        return new HttpResponseMessage(HttpStatusCode.OK)
+        {
+            Content = new StringContent(json, Encoding.UTF8, "application/json"),
+        };
+    }
+}
+
+/// <summary>Tester at <see cref="Kalltak"/> begrenser samtidige kall mot Allemannsdata, uten nettverk.</summary>
+public class AllemannsdataKalltakTester
+{
+    private static readonly TimeSpan Tidsavbrudd = TimeSpan.FromSeconds(5);
+
+    [Fact]
+    public async Task Tak_to_med_fem_samtidige_kall_slipper_bare_to_gjennom_og_alle_fullfoerer()
+    {
+        var kilde = $"kalltak-{Guid.NewGuid():N}";
+        var håndterer = new SperreHandler();
+        var data = new Allemannsdata(new HttpClient(håndterer), new OpptakLogg(), new StraksTid(), new Kalltak(2));
+
+        var kall = Enumerable.Range(0, 5)
+            .Select(i => data.Hent(kilde, "op", new Dictionary<string, object> { ["n"] = i }))
+            .ToArray();
+
+        await håndterer.Inngang.WaitAsync(Tidsavbrudd);
+        await håndterer.Inngang.WaitAsync(Tidsavbrudd);
+        Assert.Equal(2, håndterer.IGang);
+        Assert.False(await håndterer.Inngang.WaitAsync(TimeSpan.FromMilliseconds(200)));
+
+        // De tre resterende kallene venter i kø. Slipp ett i gang av gangen: hver
+        // slipp frigjør en plass, som lar nok ett kø-kall komme inn i håndtereren.
+        for (var i = 0; i < 3; i++)
+        {
+            håndterer.Slipp.Release();
+            await håndterer.Inngang.WaitAsync(Tidsavbrudd);
+        }
+
+        // De to siste sitter fortsatt inne og holder hver sin plass under taket.
+        håndterer.Slipp.Release();
+        håndterer.Slipp.Release();
+
+        await Task.WhenAll(kall);
+
+        Assert.Equal(2, håndterer.MaksSamtidig);
+        Assert.Equal(5, håndterer.Kall);
+        Assert.All(kall, t => Assert.Equal(TaskStatus.RanToCompletion, t.Status));
+        Assert.All(kall, t => Assert.Equal(JsonValueKind.Array, t.Result.ValueKind));
+    }
+
+    [Fact]
+    public async Task Kall_i_koe_forlater_koeen_naar_det_avbrytes()
+    {
+        var kilde = $"kalltak-{Guid.NewGuid():N}";
+        var håndterer = new SperreHandler();
+        var data = new Allemannsdata(new HttpClient(håndterer), new OpptakLogg(), new StraksTid(), new Kalltak(1));
+
+        var a = data.Hent(kilde, "op", new Dictionary<string, object> { ["n"] = 1 });
+        await håndterer.Inngang.WaitAsync(Tidsavbrudd);
+
+        using var kilde2 = new CancellationTokenSource();
+        var b = data.Hent(kilde, "op", new Dictionary<string, object> { ["n"] = 2 }, kilde2.Token);
+
+        kilde2.Cancel();
+
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(() => b);
+        Assert.Equal(1, håndterer.Kall);
+
+        håndterer.Slipp.Release();
+        await a;
+
+        var c = data.Hent(kilde, "op", new Dictionary<string, object> { ["n"] = 3 });
+        await håndterer.Inngang.WaitAsync(Tidsavbrudd);
+        håndterer.Slipp.Release();
+        await c;
+
+        Assert.Equal(2, håndterer.Kall);
+    }
+
+    [Fact]
+    public async Task Treff_i_mellomlageret_tar_ikke_plass_under_taket()
+    {
+        var kilde = $"kalltak-{Guid.NewGuid():N}";
+        var håndterer = new SperreHandler();
+        var data = new Allemannsdata(new HttpClient(håndterer), new OpptakLogg(), new StraksTid(), new Kalltak(1));
+
+        var første = data.Hent(kilde, "op", new Dictionary<string, object> { ["n"] = 1 });
+        await håndterer.Inngang.WaitAsync(Tidsavbrudd);
+        håndterer.Slipp.Release();
+        await første;
+
+        var toer = data.Hent(kilde, "op", new Dictionary<string, object> { ["n"] = 2 });
+        await håndterer.Inngang.WaitAsync(Tidsavbrudd);
+
+        var gjentatt = data.Hent(kilde, "op", new Dictionary<string, object> { ["n"] = 1 });
+        var fullført = await Task.WhenAny(gjentatt, Task.Delay(TimeSpan.FromSeconds(2)));
+        Assert.Same(gjentatt, fullført);
+        await gjentatt;
+
+        Assert.Equal(2, håndterer.Kall);
+
+        håndterer.Slipp.Release();
+        await toer;
+    }
+
+    [Fact]
+    public void Tak_leses_fra_konfigurasjonen()
+    {
+        var konfigurasjon = new ConfigurationBuilder()
+            .AddInMemoryCollection(new Dictionary<string, string?> { ["Allemannsdata:MaksSamtidigeKall"] = "3" })
+            .Build();
+
+        Assert.Equal(3, Kalltak.FraKonfigurasjon(konfigurasjon).Maks);
+    }
+
+    [Fact]
+    public void Tak_faar_standardverdi_naar_noekkelen_mangler()
+    {
+        var konfigurasjon = new ConfigurationBuilder().Build();
+
+        Assert.Equal(Kalltak.StandardMaks, Kalltak.FraKonfigurasjon(konfigurasjon).Maks);
+    }
+
+    [Theory]
+    [InlineData("0")]
+    [InlineData("-1")]
+    public void Ugyldig_tak_gir_standardverdi(string verdi)
+    {
+        var konfigurasjon = new ConfigurationBuilder()
+            .AddInMemoryCollection(new Dictionary<string, string?> { ["Allemannsdata:MaksSamtidigeKall"] = verdi })
+            .Build();
+
+        Assert.Equal(4, Kalltak.FraKonfigurasjon(konfigurasjon).Maks);
+    }
+}
+
+/// <summary>
+/// Falsk <see cref="HttpMessageHandler"/> som venter til testen slipper den, slik at testen kan
+/// telle hvor mange kall som er i gang samtidig.
+/// </summary>
+internal sealed class SperreHandler : HttpMessageHandler
+{
+    private int iGang;
+    private int maksSamtidig;
+    private int kall;
+
+    public int Kall => kall;
+
+    public int IGang => iGang;
+
+    public int MaksSamtidig => maksSamtidig;
+
+    public SemaphoreSlim Inngang { get; } = new(0);
+
+    public SemaphoreSlim Slipp { get; } = new(0);
+
+    protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+    {
+        var nå = Interlocked.Increment(ref iGang);
+        int gjeldendeMaks;
+        do
+        {
+            gjeldendeMaks = maksSamtidig;
+            if (nå <= gjeldendeMaks)
+            {
+                break;
+            }
+        }
+        while (Interlocked.CompareExchange(ref maksSamtidig, nå, gjeldendeMaks) != gjeldendeMaks);
+
+        Interlocked.Increment(ref kall);
+        Inngang.Release();
+
+        try
+        {
+            await Slipp.WaitAsync(cancellationToken);
+        }
+        finally
+        {
+            Interlocked.Decrement(ref iGang);
+        }
+
+        return LagJsonSvar();
+    }
+
+    private static HttpResponseMessage LagJsonSvar()
+    {
+        var json = JsonSerializer.Serialize(new { data = new[] { new { id = 1 } } });
         return new HttpResponseMessage(HttpStatusCode.OK)
         {
             Content = new StringContent(json, Encoding.UTF8, "application/json"),

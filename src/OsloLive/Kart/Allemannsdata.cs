@@ -20,8 +20,10 @@ namespace OsloLive.Kart;
 /// (for eksempel { "vehicles": [...] }). Bruk MCP-serveren til å finne ut
 /// hvilken form den kilden du jobber med har - se README.
 /// </summary>
-public sealed class Allemannsdata(HttpClient http, ILogger<Allemannsdata> logg, TimeProvider? klokke = null)
+public sealed class Allemannsdata(HttpClient http, ILogger<Allemannsdata> logg, TimeProvider? klokke = null, Kalltak? tak = null)
 {
+    private readonly Kalltak kalltak = tak ?? Kalltak.Felles;
+
     private const string Rot = "https://allemannsdata.com/wiki/api/v1/kilder";
 
     /// <summary>Hvor lenge et svar gjenbrukes før vi spør kilden på nytt.</summary>
@@ -134,6 +136,7 @@ public sealed class Allemannsdata(HttpClient http, ILogger<Allemannsdata> logg, 
         {
             HttpResponseMessage? svar = null;
 
+            await kalltak.Vent(stopp);
             try
             {
                 svar = await http.GetAsync(url, stopp);
@@ -143,6 +146,10 @@ public sealed class Allemannsdata(HttpClient http, ILogger<Allemannsdata> logg, 
             }
             catch (TaskCanceledException) when (forsøk < MaksForsøk && !stopp.IsCancellationRequested)
             {
+            }
+            finally
+            {
+                kalltak.Slipp();
             }
 
             if (svar is not null)
@@ -162,4 +169,35 @@ public sealed class Allemannsdata(HttpClient http, ILogger<Allemannsdata> logg, 
             await Task.Delay(Ventetider[forsøk - 1], klokke ?? TimeProvider.System, stopp);
         }
     }
+}
+
+/// <summary>
+/// Taket på samtidige kall mot Allemannsdata for hele appen. Kall over taket
+/// venter i kø til det blir ledig plass; de blir aldri avvist.
+/// </summary>
+public sealed class Kalltak
+{
+    /// <summary>Standard når «Allemannsdata:MaksSamtidigeKall» mangler eller er ugyldig.</summary>
+    public const int StandardMaks = 4;
+
+    /// <summary>Brukes når ingen tak er gitt inn, for eksempel i tester som lager klienten selv.</summary>
+    public static readonly Kalltak Felles = new(StandardMaks);
+
+    private readonly SemaphoreSlim plasser;
+
+    public Kalltak(int maks)
+    {
+        Maks = maks < 1 ? StandardMaks : maks;
+        plasser = new SemaphoreSlim(Maks, Maks);
+    }
+
+    public int Maks { get; }
+
+    public static Kalltak FraKonfigurasjon(IConfiguration konfigurasjon) =>
+        new(konfigurasjon.GetValue("Allemannsdata:MaksSamtidigeKall", StandardMaks));
+
+    /// <summary>Venter på ledig plass. Avbrytes <paramref name="stopp"/>, forlater kallet køen.</summary>
+    public Task Vent(CancellationToken stopp) => plasser.WaitAsync(stopp);
+
+    public void Slipp() => plasser.Release();
 }

@@ -14,6 +14,9 @@ CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("nb-NO");
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Ett felles tak på samtidige kall mot Allemannsdata for hele appen (se Kalltak).
+builder.Services.AddSingleton(tjenester => Kalltak.FraKonfigurasjon(tjenester.GetRequiredService<IConfiguration>()));
+
 builder.Services.AddHttpClient<Allemannsdata>(klient =>
 {
     klient.Timeout = TimeSpan.FromSeconds(30);
