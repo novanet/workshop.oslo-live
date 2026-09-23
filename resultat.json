@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T13:14:24",
+  "oppdatert": "2026-09-23T13:15:02",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -252,12 +252,12 @@
       ],
       "dollar": 15.08,
       "tokens": 27825920,
-      "sekunder": 4776,
+      "sekunder": 4777,
       "pr": 5,
       "utkast": 0,
       "merget": 2,
-      "kjoeringer": 14,
-      "utenPr": 9,
+      "kjoeringer": 15,
+      "utenPr": 10,
       "bygg": [],
       "estimert": false,
       "plass": 8
@@ -653,7 +653,7 @@
       "issue": 26,
       "navn": "Nytt lag: skoler og barnehager",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T11:13:42Z"
+      "oppdatert": "2026-09-23T11:14:31Z"
     },
     {
       "issue": 27,
