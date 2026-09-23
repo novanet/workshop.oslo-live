@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:12:22",
+  "oppdatert": "2026-09-23T14:13:04",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -216,12 +216,12 @@
       ],
       "dollar": 16.019,
       "tokens": 35559273,
-      "sekunder": 5131,
+      "sekunder": 5132,
       "pr": 4,
       "utkast": 0,
       "merget": 1,
-      "kjoeringer": 13,
-      "utenPr": 6,
+      "kjoeringer": 14,
+      "utenPr": 7,
       "bygg": [],
       "estimert": false,
       "plass": 6
@@ -586,7 +586,7 @@
       "issue": 132,
       "navn": "Ekte sollys på 3D-byggene",
       "startet": "2026-09-23T12:07:36.4342939+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-wilma",
@@ -594,7 +594,7 @@
       "issue": 8,
       "navn": "Hendelser",
       "startet": "2026-09-23T12:10:34.6234355+00:00",
-      "minutter": 1
+      "minutter": 2
     }
   ],
   "main": {
@@ -705,7 +705,7 @@
       "issue": 29,
       "navn": "Nytt lag: museer og samlinger",
       "github": "jthagesk",
-      "oppdatert": "2026-09-23T12:11:53Z"
+      "oppdatert": "2026-09-23T12:12:52Z"
     },
     {
       "issue": 30,
