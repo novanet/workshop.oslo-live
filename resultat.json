@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:15:10",
+  "oppdatert": "2026-09-23T14:15:48",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -578,7 +578,7 @@
       "issue": 26,
       "navn": "Skoler",
       "startet": "2026-09-23T12:00:11.8740211+00:00",
-      "minutter": 14
+      "minutter": 15
     },
     {
       "agent": "mini-aud",
@@ -586,7 +586,7 @@
       "issue": 132,
       "navn": "Ekte sollys på 3D-byggene",
       "startet": "2026-09-23T12:07:36.4342939+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "mini-wilma",
@@ -594,7 +594,7 @@
       "issue": 8,
       "navn": "Hendelser",
       "startet": "2026-09-23T12:10:34.6234355+00:00",
-      "minutter": 4
+      "minutter": 5
     }
   ],
   "main": {
@@ -627,7 +627,7 @@
       "issue": 13,
       "navn": "Nytt lag: veiarbeid og stengte veier",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T12:03:22Z"
+      "oppdatert": "2026-09-23T12:15:40Z"
     },
     {
       "issue": 14,
@@ -645,7 +645,7 @@
       "issue": 18,
       "navn": "Nytt lag: kulturminner",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T12:02:36Z"
+      "oppdatert": "2026-09-23T12:15:34Z"
     },
     {
       "issue": 19,
@@ -759,7 +759,7 @@
       "issue": 51,
       "navn": "Strukturert logging",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T12:02:58Z"
+      "oppdatert": "2026-09-23T12:15:46Z"
     },
     {
       "issue": 52,
@@ -957,7 +957,7 @@
       "issue": 141,
       "navn": "Tydelige kartsymboler: båter som ser ut som båter",
       "github": "leif-larsen",
-      "oppdatert": "2026-09-23T12:08:52Z"
+      "oppdatert": "2026-09-23T12:15:15Z"
     },
     {
       "issue": 142,
@@ -967,6 +967,18 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 109,
+      "tittel": "Nytt lag: skoler og barnehager",
+      "github": "larsajakobsen",
+      "agent": "mini-wilma",
+      "opprettet": "2026-09-23T09:21:55Z",
+      "oppdatert": "2026-09-23T12:15:38Z",
+      "utkast": false,
+      "issues": [
+        26
+      ]
+    },
     {
       "pr": 145,
       "tittel": "#142: Kurs på skipene",
@@ -1133,18 +1145,6 @@
       "utkast": false,
       "issues": [
         11
-      ]
-    },
-    {
-      "pr": 109,
-      "tittel": "Nytt lag: skoler og barnehager",
-      "github": "larsajakobsen",
-      "agent": "mini-wilma",
-      "opprettet": "2026-09-23T09:21:55Z",
-      "oppdatert": "2026-09-23T09:23:37Z",
-      "utkast": false,
-      "issues": [
-        26
       ]
     },
     {
