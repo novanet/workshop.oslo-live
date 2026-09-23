@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:47:58",
+  "oppdatert": "2026-09-23T14:48:38",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -62,13 +62,13 @@
           "poeng": 1
         }
       ],
-      "dollar": 24.119,
-      "tokens": 46643942,
-      "sekunder": 8830,
-      "pr": 17,
+      "dollar": 25.473,
+      "tokens": 49366374,
+      "sekunder": 9617,
+      "pr": 20,
       "utkast": 0,
       "merget": 11,
-      "kjoeringer": 29,
+      "kjoeringer": 31,
       "utenPr": 14,
       "bygg": [],
       "estimert": false,
@@ -634,7 +634,7 @@
       "issue": 215,
       "navn": "Svarte klynger dekker sentrum og skjuler hvilke lag som er der",
       "startet": "2026-09-23T12:34:13.5766398+00:00",
-      "minutter": 13
+      "minutter": 14
     },
     {
       "agent": "mini-jon",
@@ -653,20 +653,12 @@
       "minutter": 12
     },
     {
-      "agent": "mini-richard",
-      "github": "randsu",
-      "issue": 119,
-      "navn": "Mørkt kart når sola går ned i Oslo",
-      "startet": "2026-09-23T12:39:26.8247317+00:00",
-      "minutter": 8
-    },
-    {
       "agent": "mini-johan",
       "github": "pr0nin",
       "issue": 10,
       "navn": "Trafikk",
       "startet": "2026-09-23T12:42:27.1051764+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-astrid",
@@ -677,20 +669,12 @@
       "minutter": 5
     },
     {
-      "agent": "mini-richard",
-      "github": "randsu",
-      "issue": 124,
-      "navn": "Punkter som flytter seg, glir til ny posisjon",
-      "startet": "2026-09-23T12:42:56.8988058+00:00",
-      "minutter": 5
-    },
-    {
       "agent": "helstein",
       "github": "nilsgs",
       "issue": 212,
       "navn": "Feilmeldingene fra API-et er engelske unntakstekster",
       "startet": "2026-09-23T12:43:30.6513419+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "henrik",
@@ -698,7 +682,7 @@
       "issue": 114,
       "navn": "Nytt lag: Kristiania i 1910",
       "startet": "2026-09-23T12:43:33.13049+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-sindre",
@@ -706,7 +690,7 @@
       "issue": 55,
       "navn": "Ytelse",
       "startet": "2026-09-23T12:44:17.4643227+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-frode",
@@ -714,7 +698,7 @@
       "issue": 19,
       "navn": "Artsobservasjoner",
       "startet": "2026-09-23T12:45:18.4146535+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-richard",
@@ -722,7 +706,7 @@
       "issue": 130,
       "navn": "Fyrverkeri over Rådhuset når en PR blir merget",
       "startet": "2026-09-23T12:45:27.5284846+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-leif",
@@ -730,7 +714,15 @@
       "issue": 118,
       "navn": "Nyhetslinje nederst på skjermen",
       "startet": "2026-09-23T12:46:07.5484764+00:00",
-      "minutter": 1
+      "minutter": 2
+    },
+    {
+      "agent": "mini-aud",
+      "github": "audmaha",
+      "issue": 211,
+      "navn": "Statistikken viser ikke «Nyeste» for vannmålere og smilefjes",
+      "startet": "2026-09-23T12:48:04.2901179+00:00",
+      "minutter": 0
     }
   ],
   "main": {
@@ -917,12 +909,6 @@
       "oppdatert": "2026-09-23T12:35:38Z"
     },
     {
-      "issue": 115,
-      "navn": "Nytt lag: parker og torg",
-      "github": "randsu",
-      "oppdatert": "2026-09-23T12:35:38Z"
-    },
-    {
       "issue": 117,
       "navn": "Nye punkter pulserer når de dukker opp",
       "github": "Copilot",
@@ -950,13 +936,13 @@
       "issue": 119,
       "navn": "Mørkt kart når sola går ned i Oslo",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T12:39:27Z"
+      "oppdatert": "2026-09-23T12:48:18Z"
     },
     {
       "issue": 119,
       "navn": "Mørkt kart når sola går ned i Oslo",
       "github": "randsu",
-      "oppdatert": "2026-09-23T12:39:27Z"
+      "oppdatert": "2026-09-23T12:48:18Z"
     },
     {
       "issue": 120,
@@ -992,13 +978,13 @@
       "issue": 124,
       "navn": "Punkter som flytter seg, glir til ny posisjon",
       "github": "novanettor",
-      "oppdatert": "2026-09-23T12:42:57Z"
+      "oppdatert": "2026-09-23T12:48:06Z"
     },
     {
       "issue": 124,
       "navn": "Punkter som flytter seg, glir til ny posisjon",
       "github": "randsu",
-      "oppdatert": "2026-09-23T12:42:57Z"
+      "oppdatert": "2026-09-23T12:48:06Z"
     },
     {
       "issue": 129,
@@ -1085,12 +1071,6 @@
       "oppdatert": "2026-09-23T12:30:31Z"
     },
     {
-      "issue": 181,
-      "navn": "Døgnet på ett minutt: reprise av byen",
-      "github": "randsu",
-      "oppdatert": "2026-09-23T12:30:38Z"
-    },
-    {
       "issue": 188,
       "navn": "Vinden som strømmer over byen",
       "github": "theakbe",
@@ -1165,8 +1145,8 @@
     {
       "issue": 211,
       "navn": "Statistikken viser ikke «Nyeste» for vannmålere og smilefjes",
-      "github": "randsu",
-      "oppdatert": "2026-09-23T12:47:08Z"
+      "github": "audmaha",
+      "oppdatert": "2026-09-23T12:48:29Z"
     },
     {
       "issue": 212,
@@ -1188,6 +1168,66 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 146,
+      "tittel": "Nytt lag: sykkelparkering",
+      "github": "GIR75",
+      "agent": "mini-gir",
+      "opprettet": "2026-09-23T12:07:10Z",
+      "oppdatert": "2026-09-23T12:48:19Z",
+      "utkast": false,
+      "issues": [
+        33
+      ]
+    },
+    {
+      "pr": 239,
+      "tittel": "#211: Statistikken viser ikke «Nyeste» for vannmålere og smilefjes",
+      "github": "randsu",
+      "agent": "randsu",
+      "opprettet": "2026-09-23T12:48:17Z",
+      "oppdatert": "2026-09-23T12:48:18Z",
+      "utkast": false,
+      "issues": [
+        211
+      ]
+    },
+    {
+      "pr": 238,
+      "tittel": "#119: Mørkt kart når sola går ned i Oslo",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T12:48:17Z",
+      "oppdatert": "2026-09-23T12:48:18Z",
+      "utkast": false,
+      "issues": [
+        119
+      ]
+    },
+    {
+      "pr": 76,
+      "tittel": "Nytt lag: artsobservasjoner",
+      "github": "FrodeBl",
+      "agent": "mini-frode",
+      "opprettet": "2026-09-23T08:24:27Z",
+      "oppdatert": "2026-09-23T12:48:10Z",
+      "utkast": false,
+      "issues": [
+        19
+      ]
+    },
+    {
+      "pr": 237,
+      "tittel": "#124: Punkter som flytter seg, glir til ny posisjon",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T12:48:04Z",
+      "oppdatert": "2026-09-23T12:48:05Z",
+      "utkast": false,
+      "issues": [
+        124
+      ]
+    },
     {
       "pr": 230,
       "tittel": "#118: Nyhetslinje nederst på skjermen",
@@ -1213,18 +1253,6 @@
       ]
     },
     {
-      "pr": 232,
-      "tittel": "#207: Delt mobilitet viser «drivstoff: ELECTRIC» og «COMBUSTION»",
-      "github": "randsu",
-      "agent": "randsu",
-      "opprettet": "2026-09-23T12:45:02Z",
-      "oppdatert": "2026-09-23T12:47:10Z",
-      "utkast": false,
-      "issues": [
-        207
-      ]
-    },
-    {
       "pr": 236,
       "tittel": "Bysykkelstasjoner blir 33 punkter oppå hverandre",
       "github": "FrodeBl",
@@ -1246,18 +1274,6 @@
       "utkast": false,
       "issues": [
         118
-      ]
-    },
-    {
-      "pr": 235,
-      "tittel": "#208: Skipslaget viser «destinasjon: N/A» og fart uten enhet",
-      "github": "randsu",
-      "agent": "randsu",
-      "opprettet": "2026-09-23T12:46:32Z",
-      "oppdatert": "2026-09-23T12:46:52Z",
-      "utkast": false,
-      "issues": [
-        208
       ]
     },
     {
@@ -1297,18 +1313,6 @@
       ]
     },
     {
-      "pr": 146,
-      "tittel": "Nytt lag: sykkelparkering",
-      "github": "GIR75",
-      "agent": "mini-gir",
-      "opprettet": "2026-09-23T12:07:10Z",
-      "oppdatert": "2026-09-23T12:46:20Z",
-      "utkast": false,
-      "issues": [
-        33
-      ]
-    },
-    {
       "pr": 234,
       "tittel": "Nytt lag: bomstasjoner",
       "github": "nilsgs",
@@ -1330,18 +1334,6 @@
       "utkast": true,
       "issues": [
         214
-      ]
-    },
-    {
-      "pr": 76,
-      "tittel": "Nytt lag: artsobservasjoner",
-      "github": "FrodeBl",
-      "agent": "mini-frode",
-      "opprettet": "2026-09-23T08:24:27Z",
-      "oppdatert": "2026-09-23T12:44:16Z",
-      "utkast": false,
-      "issues": [
-        19
       ]
     },
     {
