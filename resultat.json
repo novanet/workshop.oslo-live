@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:45:28",
+  "oppdatert": "2026-09-23T10:45:55",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -362,7 +362,7 @@
       "issue": 32,
       "navn": "Strømpris",
       "startet": "2026-09-23T08:37:51.7658572+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "mini-kirsten",
@@ -370,7 +370,7 @@
       "issue": 29,
       "navn": "Museer",
       "startet": "2026-09-23T08:38:36.2729853+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-richard",
@@ -378,7 +378,7 @@
       "issue": 22,
       "navn": "Klynging",
       "startet": "2026-09-23T08:38:37.6037617+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-richard",
@@ -386,7 +386,7 @@
       "issue": 34,
       "navn": "Tidslinje",
       "startet": "2026-09-23T08:39:29.3560815+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "helstein",
@@ -394,7 +394,7 @@
       "issue": 30,
       "navn": "Vannstand",
       "startet": "2026-09-23T08:39:37.818134+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-astrid",
@@ -402,7 +402,7 @@
       "issue": 35,
       "navn": "Varmekart",
       "startet": "2026-09-23T08:39:47.6963928+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-taco",
@@ -410,7 +410,7 @@
       "issue": 47,
       "navn": "Søk på tvers",
       "startet": "2026-09-23T08:39:51.4798178+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-kirsten",
@@ -434,6 +434,22 @@
       "issue": 14,
       "navn": "Idrettsanlegg",
       "startet": "2026-09-23T08:44:58.4935519+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-frode",
+      "github": "FrodeBl",
+      "issue": 48,
+      "navn": "Parallell henting",
+      "startet": "2026-09-23T08:45:28.6931293+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-richard",
+      "github": "randsu",
+      "issue": 24,
+      "navn": "Bydeler",
+      "startet": "2026-09-23T08:45:28.8651408+00:00",
       "minutter": 0
     }
   ],
@@ -575,7 +591,7 @@
       "issue": 19,
       "navn": "Nytt lag: artsobservasjoner",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T08:36:49Z"
+      "oppdatert": "2026-09-23T08:45:46Z"
     },
     {
       "issue": 20,
@@ -606,6 +622,12 @@
       "navn": "Del kartutsnittet som en lenke",
       "github": "randsu",
       "oppdatert": "2026-09-23T08:38:27Z"
+    },
+    {
+      "issue": 24,
+      "navn": "Tell punkter per bydel",
+      "github": "randsu",
+      "oppdatert": "2026-09-23T08:45:29Z"
     },
     {
       "issue": 29,
@@ -695,7 +717,7 @@
       "issue": 48,
       "navn": "Hent lagene parallelt",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T08:44:50Z"
+      "oppdatert": "2026-09-23T08:45:29Z"
     },
     {
       "issue": 49,
