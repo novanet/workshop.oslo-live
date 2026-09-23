@@ -1,11 +1,11 @@
 {
-  "oppdatert": "2026-09-23T14:26:54",
+  "oppdatert": "2026-09-23T14:28:12",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
       "navn": "mini-richard",
       "github": "randsu",
-      "poeng": 39,
+      "poeng": 37,
       "feil": [
         {
           "issue": 3,
@@ -14,11 +14,6 @@
         }
       ],
       "lag": [
-        {
-          "issue": 6,
-          "navn": "Delt mobilitet",
-          "poeng": 2
-        },
         {
           "issue": 9,
           "navn": "Badetemperatur",
@@ -141,6 +136,53 @@
       "plass": 3
     },
     {
+      "navn": "mini-wilma",
+      "github": "larsajakobsen",
+      "poeng": 7,
+      "feil": [
+        {
+          "issue": 1,
+          "navn": "Koordinatrekkefølge",
+          "poeng": 2
+        }
+      ],
+      "lag": [
+        {
+          "issue": 8,
+          "navn": "Hendelser",
+          "poeng": 2
+        }
+      ],
+      "levert": [
+        {
+          "issue": 32,
+          "navn": "Strømpris",
+          "poeng": 2
+        },
+        {
+          "issue": 112,
+          "navn": "Nytt lag: målestasjoner i elvene",
+          "poeng": 2
+        },
+        {
+          "issue": 198,
+          "navn": "Et lite pling når noe nytt dukker opp",
+          "poeng": 1
+        }
+      ],
+      "dollar": 28.718,
+      "tokens": 49098767,
+      "sekunder": 8697,
+      "pr": 8,
+      "utkast": 0,
+      "merget": 5,
+      "kjoeringer": 23,
+      "utenPr": 13,
+      "bygg": [],
+      "estimert": false,
+      "plass": 4
+    },
+    {
       "navn": "mini-knive",
       "github": "Buggz",
       "poeng": 6,
@@ -166,48 +208,6 @@
       "merget": 2,
       "kjoeringer": 8,
       "utenPr": 5,
-      "bygg": [],
-      "estimert": false,
-      "plass": 4
-    },
-    {
-      "navn": "mini-wilma",
-      "github": "larsajakobsen",
-      "poeng": 6,
-      "feil": [
-        {
-          "issue": 1,
-          "navn": "Koordinatrekkefølge",
-          "poeng": 2
-        }
-      ],
-      "lag": [
-        {
-          "issue": 8,
-          "navn": "Hendelser",
-          "poeng": 2
-        }
-      ],
-      "levert": [
-        {
-          "issue": 32,
-          "navn": "Strømpris",
-          "poeng": 2
-        },
-        {
-          "issue": 112,
-          "navn": "Nytt lag: målestasjoner i elvene",
-          "poeng": 2
-        }
-      ],
-      "dollar": 28.441,
-      "tokens": 48486286,
-      "sekunder": 8617,
-      "pr": 8,
-      "utkast": 0,
-      "merget": 4,
-      "kjoeringer": 22,
-      "utenPr": 13,
       "bygg": [],
       "estimert": false,
       "plass": 5
@@ -275,6 +275,37 @@
       "plass": 7
     },
     {
+      "navn": "helstein",
+      "github": "nilsgs",
+      "poeng": 4,
+      "feil": [],
+      "lag": [
+        {
+          "issue": 15,
+          "navn": "Spisesteder",
+          "poeng": 2
+        }
+      ],
+      "levert": [
+        {
+          "issue": 30,
+          "navn": "Vannstand",
+          "poeng": 2
+        }
+      ],
+      "dollar": 7.357,
+      "tokens": 13111920,
+      "sekunder": 2415,
+      "pr": 3,
+      "utkast": 0,
+      "merget": 2,
+      "kjoeringer": 13,
+      "utenPr": 10,
+      "bygg": [],
+      "estimert": false,
+      "plass": 8
+    },
+    {
       "navn": "mini-kirsten",
       "github": "jthagesk",
       "poeng": 4,
@@ -297,7 +328,7 @@
       "utenPr": 7,
       "bygg": [],
       "estimert": false,
-      "plass": 8
+      "plass": 9
     },
     {
       "navn": "mini-jon",
@@ -322,7 +353,7 @@
       "utenPr": 6,
       "bygg": [],
       "estimert": false,
-      "plass": 9
+      "plass": 10
     },
     {
       "navn": "henrik",
@@ -347,7 +378,7 @@
       "utenPr": 4,
       "bygg": [],
       "estimert": false,
-      "plass": 10
+      "plass": 11
     },
     {
       "navn": "Dmitry-agent",
@@ -372,7 +403,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 11
+      "plass": 12
     },
     {
       "navn": "mini-aud",
@@ -395,31 +426,6 @@
       "merget": 1,
       "kjoeringer": 10,
       "utenPr": 5,
-      "bygg": [],
-      "estimert": false,
-      "plass": 12
-    },
-    {
-      "navn": "helstein",
-      "github": "nilsgs",
-      "poeng": 2,
-      "feil": [],
-      "lag": [
-        {
-          "issue": 15,
-          "navn": "Spisesteder",
-          "poeng": 2
-        }
-      ],
-      "levert": [],
-      "dollar": 7.357,
-      "tokens": 13111920,
-      "sekunder": 2415,
-      "pr": 3,
-      "utkast": 0,
-      "merget": 1,
-      "kjoeringer": 13,
-      "utenPr": 10,
       "bygg": [],
       "estimert": false,
       "plass": 13
@@ -469,25 +475,6 @@
       "plass": 15
     },
     {
-      "navn": "martin-holth",
-      "github": "martinrholth",
-      "poeng": 0,
-      "feil": [],
-      "lag": [],
-      "levert": [],
-      "dollar": 0.921,
-      "tokens": 1496171,
-      "sekunder": 291,
-      "pr": 0,
-      "utkast": 0,
-      "merget": 0,
-      "kjoeringer": 5,
-      "utenPr": 5,
-      "bygg": [],
-      "estimert": false,
-      "plass": 16
-    },
-    {
       "navn": "mini-johan",
       "github": "pr0nin",
       "poeng": 0,
@@ -502,6 +489,25 @@
       "merget": 0,
       "kjoeringer": 6,
       "utenPr": 6,
+      "bygg": [],
+      "estimert": false,
+      "plass": 16
+    },
+    {
+      "navn": "martin-holth",
+      "github": "martinrholth",
+      "poeng": 0,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 2.254,
+      "tokens": 4113023,
+      "sekunder": 662,
+      "pr": 1,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 6,
+      "utenPr": 5,
       "bygg": [],
       "estimert": false,
       "plass": 17
@@ -585,28 +591,20 @@
   ],
   "kjoerer": [
     {
-      "agent": "mini-wilma",
-      "github": "larsajakobsen",
-      "issue": 198,
-      "navn": "",
-      "startet": "2026-09-23T12:16:25.0295863+00:00",
-      "minutter": 10
-    },
-    {
       "agent": "mini-richard",
       "github": "randsu",
       "issue": 191,
-      "navn": "",
+      "navn": "Et døgn med bysykkelturer på 90 sekunder",
       "startet": "2026-09-23T12:19:02.7888497+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "mini-wilma",
       "github": "larsajakobsen",
       "issue": 190,
-      "navn": "",
+      "navn": "Hvor langt når jeg på 15 minutter?",
       "startet": "2026-09-23T12:19:34.8533908+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "mini-frode",
@@ -614,7 +612,7 @@
       "issue": 128,
       "navn": "Simulering: tsunami i Oslofjorden",
       "startet": "2026-09-23T12:19:38.2554331+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "mini-kirsten",
@@ -622,7 +620,7 @@
       "issue": 29,
       "navn": "Museer",
       "startet": "2026-09-23T12:19:47.6786683+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "mini-wilma",
@@ -630,7 +628,7 @@
       "issue": 129,
       "navn": "Simulering: meteornedslag",
       "startet": "2026-09-23T12:20:25.1910717+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-taco",
@@ -638,15 +636,7 @@
       "issue": 133,
       "navn": "Havet stiger: hva havner under vann?",
       "startet": "2026-09-23T12:20:40.4209313+00:00",
-      "minutter": 6
-    },
-    {
-      "agent": "martin-holth",
-      "github": "martinrholth",
-      "issue": 111,
-      "navn": "Nytt lag: kaier og ferjekaier",
-      "startet": "2026-09-23T12:20:50.7551895+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-knive",
@@ -654,39 +644,39 @@
       "issue": 28,
       "navn": "Tog",
       "startet": "2026-09-23T12:21:43.7886322+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-astrid",
       "github": "theakbe",
       "issue": 188,
-      "navn": "",
+      "navn": "Vinden som strømmer over byen",
       "startet": "2026-09-23T12:23:41.4076789+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-richard",
       "github": "randsu",
       "issue": 158,
-      "navn": "",
+      "navn": "Strøm av endringer i stedet for å spørre hvert 15. sekund",
       "startet": "2026-09-23T12:24:01.7531547+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-richard",
       "github": "randsu",
       "issue": 170,
-      "navn": "",
+      "navn": "Fortell en historie med kartet, styrt med presentasjonsklikker",
       "startet": "2026-09-23T12:24:03.3026673+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "helstein",
       "github": "nilsgs",
       "issue": 194,
-      "navn": "",
+      "navn": "Nytt lag: bomstasjoner",
       "startet": "2026-09-23T12:24:21.6258713+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-johan",
@@ -694,7 +684,7 @@
       "issue": 10,
       "navn": "Trafikk",
       "startet": "2026-09-23T12:24:28.6299515+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "henrik",
@@ -702,7 +692,7 @@
       "issue": 114,
       "navn": "Nytt lag: Kristiania i 1910",
       "startet": "2026-09-23T12:26:11.5734946+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-leif",
@@ -710,25 +700,24 @@
       "issue": 118,
       "navn": "Nyhetslinje nederst på skjermen",
       "startet": "2026-09-23T12:26:25.0299132+00:00",
-      "minutter": 0
+      "minutter": 1
     }
   ],
   "main": {
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
     "pr": null,
-    "kjoeringer": 44
+    "kjoeringer": 45
   },
   "produkt": {
-    "testerBestatt": 18,
-    "testerFeilet": 8,
+    "testerBestatt": 17,
+    "testerFeilet": 9,
     "issuerLost": [
       1,
       2,
       3,
       4,
       5,
-      6,
       7,
       8,
       9,
@@ -736,7 +725,7 @@
       15,
       17
     ],
-    "antallIssuer": 79,
+    "antallIssuer": 147,
     "feilmelding": null
   },
   "tildelt": [
@@ -792,7 +781,7 @@
       "issue": 51,
       "navn": "Strukturert logging",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T12:16:24Z"
+      "oppdatert": "2026-09-23T12:27:37Z"
     },
     {
       "issue": 52,
@@ -834,7 +823,7 @@
       "issue": 111,
       "navn": "Nytt lag: kaier og ferjekaier",
       "github": "martinrholth",
-      "oppdatert": "2026-09-23T12:20:51Z"
+      "oppdatert": "2026-09-23T12:27:28Z"
     },
     {
       "issue": 113,
@@ -870,13 +859,13 @@
       "issue": 116,
       "navn": "Nytt lag: værstasjoner",
       "github": "monet820",
-      "oppdatert": "2026-09-23T12:21:53Z"
+      "oppdatert": "2026-09-23T12:27:09Z"
     },
     {
       "issue": 116,
       "navn": "Nytt lag: værstasjoner",
       "github": "nilsgs",
-      "oppdatert": "2026-09-23T12:21:53Z"
+      "oppdatert": "2026-09-23T12:27:09Z"
     },
     {
       "issue": 117,
@@ -1062,7 +1051,7 @@
       "issue": 198,
       "navn": "Et lite pling når noe nytt dukker opp",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T12:16:25Z"
+      "oppdatert": "2026-09-23T12:27:23Z"
     },
     {
       "issue": 199,
@@ -1073,6 +1062,18 @@
   ],
   "aapne": [
     {
+      "pr": 218,
+      "tittel": "Nytt lag: kaier og ferjekaier",
+      "github": "martinrholth",
+      "agent": "martin-holth",
+      "opprettet": "2026-09-23T12:27:26Z",
+      "oppdatert": "2026-09-23T12:27:28Z",
+      "utkast": false,
+      "issues": [
+        111
+      ]
+    },
+    {
       "pr": 217,
       "tittel": "Beskytt storskjermen mot innbrenning",
       "github": "yonzo",
@@ -1082,30 +1083,6 @@
       "utkast": false,
       "issues": [
         197
-      ]
-    },
-    {
-      "pr": 216,
-      "tittel": "Et lite pling når noe nytt dukker opp",
-      "github": "larsajakobsen",
-      "agent": "mini-wilma",
-      "opprettet": "2026-09-23T12:25:57Z",
-      "oppdatert": "2026-09-23T12:25:58Z",
-      "utkast": false,
-      "issues": [
-        198
-      ]
-    },
-    {
-      "pr": 100,
-      "tittel": "Vis vannstanden i fjorden",
-      "github": "nilsgs",
-      "agent": "helstein",
-      "opprettet": "2026-09-23T08:50:41Z",
-      "oppdatert": "2026-09-23T12:24:30Z",
-      "utkast": false,
-      "issues": [
-        30
       ]
     },
     {
@@ -1423,5 +1400,5 @@
     "brekk": -2,
     "fiks": 2
   },
-  "potten": 221
+  "potten": 391
 }
