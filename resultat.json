@@ -1,7 +1,32 @@
 {
-  "oppdatert": "2026-09-23T09:53:48",
+  "oppdatert": "2026-09-23T09:58:36",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
+    {
+      "navn": "mini-leif",
+      "github": "leif-larsen",
+      "poeng": 1,
+      "feil": [
+        {
+          "issue": 2,
+          "navn": "Utsnittet",
+          "poeng": 2
+        }
+      ],
+      "lag": [],
+      "levert": [],
+      "dollar": 0.459,
+      "tokens": 830036,
+      "sekunder": 183,
+      "pr": 1,
+      "utkast": 0,
+      "merget": 1,
+      "kjoeringer": 1,
+      "utenPr": 0,
+      "bygg": [],
+      "estimert": false,
+      "plass": 1
+    },
     {
       "navn": "mini-frode",
       "github": "FrodeBl",
@@ -19,7 +44,7 @@
       "utenPr": 2,
       "bygg": [],
       "estimert": false,
-      "plass": 1
+      "plass": 2
     },
     {
       "navn": "mini-richard",
@@ -44,45 +69,7 @@
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
-      "plass": 2
-    },
-    {
-      "navn": "mini-leif",
-      "github": "leif-larsen",
-      "poeng": -1,
-      "feil": [],
-      "lag": [],
-      "levert": [],
-      "dollar": 0.459,
-      "tokens": 830036,
-      "sekunder": 183,
-      "pr": 1,
-      "utkast": 0,
-      "merget": 0,
-      "kjoeringer": 1,
-      "utenPr": 0,
-      "bygg": [],
-      "estimert": false,
       "plass": 3
-    },
-    {
-      "navn": "mini-gir",
-      "github": "GIR75",
-      "poeng": -1,
-      "feil": [],
-      "lag": [],
-      "levert": [],
-      "dollar": 0.461,
-      "tokens": 752052,
-      "sekunder": 161,
-      "pr": 1,
-      "utkast": 0,
-      "merget": 0,
-      "kjoeringer": 1,
-      "utenPr": 0,
-      "bygg": [],
-      "estimert": false,
-      "plass": 4
     },
     {
       "navn": "mini-ingve",
@@ -98,6 +85,25 @@
       "utkast": 0,
       "merget": 0,
       "kjoeringer": 1,
+      "utenPr": 1,
+      "bygg": [],
+      "estimert": false,
+      "plass": 4
+    },
+    {
+      "navn": "mini-gir",
+      "github": "GIR75",
+      "poeng": -1,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 1.026,
+      "tokens": 1809158,
+      "sekunder": 337,
+      "pr": 1,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 2,
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
@@ -130,6 +136,22 @@
       "issue": 56,
       "navn": "Flytrafikk",
       "startet": "2026-09-23T07:53:20.1148991+00:00",
+      "minutter": 5
+    },
+    {
+      "agent": "mini-frode",
+      "github": "FrodeBl",
+      "issue": 48,
+      "navn": "Parallell henting",
+      "startet": "2026-09-23T07:55:41.4156158+00:00",
+      "minutter": 2
+    },
+    {
+      "agent": "mini-sindre",
+      "github": "sin-rha",
+      "issue": 59,
+      "navn": "",
+      "startet": "2026-09-23T07:57:40.0451264+00:00",
       "minutter": 0
     }
   ],
@@ -137,12 +159,13 @@
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
     "pr": null,
-    "kjoeringer": 14
+    "kjoeringer": 15
   },
   "produkt": {
-    "testerBestatt": 7,
-    "testerFeilet": 19,
+    "testerBestatt": 9,
+    "testerFeilet": 17,
     "issuerLost": [
+      2,
       3
     ],
     "antallIssuer": 57,
@@ -171,7 +194,7 @@
       "issue": 5,
       "navn": "Tall i URL-ene får norsk desimalkomma",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T07:53:26Z"
+      "oppdatert": "2026-09-23T07:57:13Z"
     },
     {
       "issue": 11,
@@ -183,7 +206,7 @@
       "issue": 48,
       "navn": "Hent lagene parallelt",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T07:39:50Z"
+      "oppdatert": "2026-09-23T07:55:42Z"
     },
     {
       "issue": 56,
@@ -196,9 +219,27 @@
       "navn": "Avgangstavle for Gardermoen",
       "github": "ingvevs",
       "oppdatert": "2026-09-23T07:41:56Z"
+    },
+    {
+      "issue": 59,
+      "navn": "Overlapping boxes",
+      "github": "sin-rha",
+      "oppdatert": "2026-09-23T07:57:41Z"
     }
   ],
   "aapne": [
+    {
+      "pr": 64,
+      "tittel": "Tall i URL-ene får norsk desimalkomma",
+      "github": "GIR75",
+      "agent": "mini-gir",
+      "opprettet": "2026-09-23T07:47:43Z",
+      "oppdatert": "2026-09-23T07:57:12Z",
+      "utkast": false,
+      "issues": [
+        5
+      ]
+    },
     {
       "pr": 65,
       "tittel": "#11: Nytt lag: kollektivtrafikk som beveger seg",
@@ -209,30 +250,6 @@
       "utkast": false,
       "issues": [
         11
-      ]
-    },
-    {
-      "pr": 66,
-      "tittel": "Steder langt utenfor Oslo slipper inn i kartet (#2)",
-      "github": "leif-larsen",
-      "agent": "mini-leif",
-      "opprettet": "2026-09-23T07:50:31Z",
-      "oppdatert": "2026-09-23T07:50:32Z",
-      "utkast": false,
-      "issues": [
-        2
-      ]
-    },
-    {
-      "pr": 64,
-      "tittel": "Tall i URL-ene får norsk desimalkomma",
-      "github": "GIR75",
-      "agent": "mini-gir",
-      "opprettet": "2026-09-23T07:47:43Z",
-      "oppdatert": "2026-09-23T07:47:44Z",
-      "utkast": false,
-      "issues": [
-        5
       ]
     }
   ],
