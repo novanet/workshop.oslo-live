@@ -91,4 +91,18 @@ public class StatistikkTester
             CultureInfo.CurrentCulture = forrigeKultur;
         }
     }
+
+    [Fact]
+    public void Vannmaalere_og_smilefjes_gir_riktig_tidsrom()
+    {
+        var lag = Geo.Samle([
+            Geo.Lag("a", 59.91, 10.75, "A", "Test", new() { ["sist målt"] = "2026-09-23T10:00:00Z" }),
+            Geo.Lag("b", 59.92, 10.76, "B", "Test", new() { ["tilsyn"] = "2026-08-12" }),
+        ]);
+
+        var (eldste, nyeste) = Lagstatistikk.Tidsrom(lag);
+
+        Assert.Equal(DateTimeOffset.Parse("2026-08-11T22:00:00Z", CultureInfo.InvariantCulture), eldste);
+        Assert.Equal(DateTimeOffset.Parse("2026-09-23T10:00:00Z", CultureInfo.InvariantCulture), nyeste);
+    }
 }
