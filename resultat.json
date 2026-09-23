@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:43:28",
+  "oppdatert": "2026-09-23T11:44:05",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -199,13 +199,13 @@
           "poeng": 5
         }
       ],
-      "dollar": 10.315,
-      "tokens": 22223515,
-      "sekunder": 3473,
+      "dollar": 12.357,
+      "tokens": 26901314,
+      "sekunder": 4051,
       "pr": 4,
       "utkast": 0,
       "merget": 1,
-      "kjoeringer": 7,
+      "kjoeringer": 8,
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
@@ -495,25 +495,6 @@
       "plass": 19
     },
     {
-      "navn": "app/copilot-swe-agent",
-      "github": "app/copilot-swe-agent",
-      "poeng": -1,
-      "feil": [],
-      "lag": [],
-      "levert": [],
-      "dollar": 0.0,
-      "tokens": 0,
-      "sekunder": 0,
-      "pr": 1,
-      "utkast": 1,
-      "merget": 0,
-      "kjoeringer": 0,
-      "utenPr": 0,
-      "bygg": [],
-      "estimert": false,
-      "plass": 20
-    },
-    {
       "navn": "mini-frode",
       "github": "FrodeBl",
       "poeng": -1,
@@ -530,18 +511,29 @@
       "utenPr": 7,
       "bygg": [],
       "estimert": false,
+      "plass": 20
+    },
+    {
+      "navn": "app/copilot-swe-agent",
+      "github": "app/copilot-swe-agent",
+      "poeng": -2,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 0.0,
+      "tokens": 0,
+      "sekunder": 0,
+      "pr": 2,
+      "utkast": 2,
+      "merget": 0,
+      "kjoeringer": 0,
+      "utenPr": 0,
+      "bygg": [],
+      "estimert": false,
       "plass": 21
     }
   ],
   "kjoerer": [
-    {
-      "agent": "mini-kirsten",
-      "github": "jthagesk",
-      "issue": 29,
-      "navn": "Museer",
-      "startet": "2026-09-23T09:33:36.7988647+00:00",
-      "minutter": 9
-    },
     {
       "agent": "mini-kirsten",
       "github": "jthagesk",
@@ -556,7 +548,7 @@
       "issue": 12,
       "navn": "Holdeplasser",
       "startet": "2026-09-23T09:36:39.1423524+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "henrik",
@@ -564,7 +556,7 @@
       "issue": 7,
       "navn": "Skipstrafikk",
       "startet": "2026-09-23T09:37:38.7912096+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-jon",
@@ -572,7 +564,7 @@
       "issue": 44,
       "navn": "Sammenlign tid",
       "startet": "2026-09-23T09:38:36.2749004+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-knive",
@@ -588,7 +580,7 @@
       "issue": 112,
       "navn": "Nytt lag: målestasjoner i elvene",
       "startet": "2026-09-23T09:39:34.3255853+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-wilma",
@@ -596,7 +588,7 @@
       "issue": 119,
       "navn": "Mørkt kart når sola går ned i Oslo",
       "startet": "2026-09-23T09:39:34.4905216+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-bug",
@@ -604,7 +596,7 @@
       "issue": 113,
       "navn": "Nytt lag: store arbeidsplasser i sentrum",
       "startet": "2026-09-23T09:39:52.4461984+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-leif",
@@ -612,7 +604,7 @@
       "issue": 118,
       "navn": "Nyhetslinje nederst på skjermen",
       "startet": "2026-09-23T09:41:48.0096457+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-wilma",
@@ -628,6 +620,14 @@
       "issue": 117,
       "navn": "Nye punkter pulserer når de dukker opp",
       "startet": "2026-09-23T09:43:08.8955657+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-bug",
+      "github": "SasaRad",
+      "issue": 121,
+      "navn": "Følg et punkt som beveger seg",
+      "startet": "2026-09-23T09:43:37.9722137+00:00",
       "minutter": 0
     }
   ],
@@ -773,7 +773,7 @@
       "issue": 29,
       "navn": "Nytt lag: museer og samlinger",
       "github": "jthagesk",
-      "oppdatert": "2026-09-23T09:33:37Z"
+      "oppdatert": "2026-09-23T09:43:40Z"
     },
     {
       "issue": 30,
@@ -863,7 +863,7 @@
       "issue": 54,
       "navn": "Vær grei mot kildene",
       "github": "Puiu",
-      "oppdatert": "2026-09-23T08:15:25Z"
+      "oppdatert": "2026-09-23T09:43:32Z"
     },
     {
       "issue": 55,
@@ -942,43 +942,91 @@
       "navn": "Mørkt kart når sola går ned i Oslo",
       "github": "larsajakobsen",
       "oppdatert": "2026-09-23T09:39:35Z"
+    },
+    {
+      "issue": 121,
+      "navn": "Følg et punkt som beveger seg",
+      "github": "Copilot",
+      "oppdatert": "2026-09-23T09:43:39Z"
+    },
+    {
+      "issue": 121,
+      "navn": "Følg et punkt som beveger seg",
+      "github": "SasaRad",
+      "oppdatert": "2026-09-23T09:43:39Z"
+    },
+    {
+      "issue": 123,
+      "navn": "Riktig ikon for sykkel, elsparkesykkel og bil",
+      "github": "Copilot",
+      "oppdatert": "2026-09-23T09:43:29Z"
+    },
+    {
+      "issue": 123,
+      "navn": "Riktig ikon for sykkel, elsparkesykkel og bil",
+      "github": "SasaRad",
+      "oppdatert": "2026-09-23T09:43:29Z"
     }
   ],
   "aapne": [
-    {
-      "pr": 96,
-      "tittel": "#22: Slå sammen punkter som ligger oppå hverandre",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:46:40Z",
-      "oppdatert": "2026-09-23T09:43:11Z",
-      "utkast": false,
-      "issues": [
-        22
-      ]
-    },
-    {
-      "pr": 125,
-      "tittel": "[WIP] Add layer for major employers in city center",
-      "github": "app/copilot-swe-agent",
-      "agent": "app/copilot-swe-agent",
-      "opprettet": "2026-09-23T09:38:58Z",
-      "oppdatert": "2026-09-23T09:43:07Z",
-      "utkast": true,
-      "issues": [
-        113
-      ]
-    },
     {
       "pr": 87,
       "tittel": "Del kartutsnittet som en lenke",
       "github": "audmaha",
       "agent": "mini-aud",
       "opprettet": "2026-09-23T08:37:45Z",
-      "oppdatert": "2026-09-23T09:42:13Z",
+      "oppdatert": "2026-09-23T09:43:59Z",
       "utkast": false,
       "issues": [
         23
+      ]
+    },
+    {
+      "pr": 83,
+      "tittel": "Nytt lag: museer og samlinger",
+      "github": "jthagesk",
+      "agent": "mini-kirsten",
+      "opprettet": "2026-09-23T08:34:12Z",
+      "oppdatert": "2026-09-23T09:43:39Z",
+      "utkast": false,
+      "issues": [
+        29
+      ]
+    },
+    {
+      "pr": 125,
+      "tittel": "Nytt lag: Store arbeidsplasser (firmafakta)",
+      "github": "app/copilot-swe-agent",
+      "agent": "app/copilot-swe-agent",
+      "opprettet": "2026-09-23T09:38:58Z",
+      "oppdatert": "2026-09-23T09:43:37Z",
+      "utkast": true,
+      "issues": [
+        113
+      ]
+    },
+    {
+      "pr": 134,
+      "tittel": "[WIP] Fix icons for bike, e-scooter, and car in mobility section",
+      "github": "app/copilot-swe-agent",
+      "agent": "app/copilot-swe-agent",
+      "opprettet": "2026-09-23T09:43:34Z",
+      "oppdatert": "2026-09-23T09:43:34Z",
+      "utkast": true,
+      "issues": [
+        123
+      ]
+    },
+    {
+      "pr": 96,
+      "tittel": "#22: Slå sammen punkter som ligger oppå hverandre",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:46:40Z",
+      "oppdatert": "2026-09-23T09:43:17Z",
+      "utkast": false,
+      "issues": [
+        22
       ]
     },
     {
@@ -1231,18 +1279,6 @@
       "utkast": false,
       "issues": [
         57
-      ]
-    },
-    {
-      "pr": 83,
-      "tittel": "Nytt lag: museer og samlinger",
-      "github": "jthagesk",
-      "agent": "mini-kirsten",
-      "opprettet": "2026-09-23T08:34:12Z",
-      "oppdatert": "2026-09-23T08:51:54Z",
-      "utkast": false,
-      "issues": [
-        29
       ]
     },
     {
