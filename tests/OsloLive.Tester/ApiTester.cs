@@ -45,6 +45,17 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
     }
 
     [Fact]
+    public async Task Lagoversikten_har_hendelser_med_navn_beskrivelse_og_ikon()
+    {
+        var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
+
+        var hendelser = lag!.Single(l => l.Id == "hendelser");
+        Assert.Equal("Hendelser", hendelser.Navn);
+        Assert.False(string.IsNullOrWhiteSpace(hendelser.Beskrivelse));
+        Assert.False(string.IsNullOrWhiteSpace(hendelser.Ikon));
+    }
+
+    [Fact]
     public async Task Lagoversikten_har_smilefjes()
     {
         var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
