@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:00:42",
+  "oppdatert": "2026-09-23T14:01:21",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -433,25 +433,6 @@
       "plass": 14
     },
     {
-      "navn": "mini-johan",
-      "github": "pr0nin",
-      "poeng": 0,
-      "feil": [],
-      "lag": [],
-      "levert": [],
-      "dollar": 0.601,
-      "tokens": 434770,
-      "sekunder": 107,
-      "pr": 0,
-      "utkast": 0,
-      "merget": 0,
-      "kjoeringer": 4,
-      "utenPr": 4,
-      "bygg": [],
-      "estimert": false,
-      "plass": 15
-    },
-    {
       "navn": "martin-holth",
       "github": "martinrholth",
       "poeng": 0,
@@ -466,6 +447,25 @@
       "merget": 0,
       "kjoeringer": 4,
       "utenPr": 4,
+      "bygg": [],
+      "estimert": false,
+      "plass": 15
+    },
+    {
+      "navn": "mini-johan",
+      "github": "pr0nin",
+      "poeng": 0,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 1.126,
+      "tokens": 841316,
+      "sekunder": 235,
+      "pr": 0,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 5,
+      "utenPr": 5,
       "bygg": [],
       "estimert": false,
       "plass": 16
@@ -554,7 +554,7 @@
       "issue": 128,
       "navn": "Simulering: tsunami i Oslofjorden",
       "startet": "2026-09-23T11:55:48.9774309+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-jon",
@@ -570,15 +570,7 @@
       "issue": 142,
       "navn": "Kurs på skipene",
       "startet": "2026-09-23T11:58:03.6775072+00:00",
-      "minutter": 2
-    },
-    {
-      "agent": "mini-johan",
-      "github": "pr0nin",
-      "issue": 10,
-      "navn": "Trafikk",
-      "startet": "2026-09-23T11:58:33.8078294+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-gir",
@@ -586,7 +578,7 @@
       "issue": 18,
       "navn": "Kulturminner",
       "startet": "2026-09-23T11:59:00.1192606+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-gir",
@@ -594,7 +586,7 @@
       "issue": 13,
       "navn": "Veiarbeid",
       "startet": "2026-09-23T11:59:00.4345493+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-gir",
@@ -602,7 +594,7 @@
       "issue": 51,
       "navn": "Logging",
       "startet": "2026-09-23T11:59:02.268638+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-taco",
@@ -610,7 +602,7 @@
       "issue": 54,
       "navn": "Rate limit",
       "startet": "2026-09-23T11:59:17.602128+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-wilma",
@@ -618,7 +610,7 @@
       "issue": 26,
       "navn": "Skoler",
       "startet": "2026-09-23T12:00:11.8740211+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-leif",
@@ -627,13 +619,37 @@
       "navn": "Adressesøk",
       "startet": "2026-09-23T12:00:22.8365202+00:00",
       "minutter": 0
+    },
+    {
+      "agent": "helstein",
+      "github": "nilsgs",
+      "issue": 116,
+      "navn": "Nytt lag: værstasjoner",
+      "startet": "2026-09-23T12:00:52.2811185+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-gir",
+      "github": "GIR75",
+      "issue": 33,
+      "navn": "Sykkelparkering",
+      "startet": "2026-09-23T12:00:56.0494312+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-wilma",
+      "github": "larsajakobsen",
+      "issue": 8,
+      "navn": "Hendelser",
+      "startet": "2026-09-23T12:01:11.9782453+00:00",
+      "minutter": 0
     }
   ],
   "main": {
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
     "pr": null,
-    "kjoeringer": 42
+    "kjoeringer": 43
   },
   "produkt": {
     "testerBestatt": 16,
@@ -658,25 +674,25 @@
       "issue": 8,
       "navn": "Nytt lag: politilogg og nyhetshendelser",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T12:00:17Z"
+      "oppdatert": "2026-09-23T12:01:13Z"
     },
     {
       "issue": 10,
       "navn": "Nytt lag: trafikkregistreringspunkt",
       "github": "pr0nin",
-      "oppdatert": "2026-09-23T11:58:34Z"
+      "oppdatert": "2026-09-23T12:00:49Z"
     },
     {
       "issue": 11,
       "navn": "Nytt lag: kollektivtrafikk som beveger seg",
       "github": "coffeelyfe",
-      "oppdatert": "2026-09-23T12:00:38Z"
+      "oppdatert": "2026-09-23T12:00:43Z"
     },
     {
       "issue": 11,
       "navn": "Nytt lag: kollektivtrafikk som beveger seg",
       "github": "ingvevs",
-      "oppdatert": "2026-09-23T12:00:38Z"
+      "oppdatert": "2026-09-23T12:00:43Z"
     },
     {
       "issue": 13,
@@ -736,7 +752,7 @@
       "issue": 29,
       "navn": "Nytt lag: museer og samlinger",
       "github": "jthagesk",
-      "oppdatert": "2026-09-23T11:51:32Z"
+      "oppdatert": "2026-09-23T12:01:04Z"
     },
     {
       "issue": 30,
@@ -754,7 +770,7 @@
       "issue": 33,
       "navn": "Nytt lag: sykkelparkering",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T11:58:41Z"
+      "oppdatert": "2026-09-23T12:00:57Z"
     },
     {
       "issue": 39,
@@ -820,7 +836,7 @@
       "issue": 54,
       "navn": "Vær grei mot kildene",
       "github": "Puiu",
-      "oppdatert": "2026-09-23T11:59:19Z"
+      "oppdatert": "2026-09-23T12:00:47Z"
     },
     {
       "issue": 55,
@@ -892,13 +908,13 @@
       "issue": 116,
       "navn": "Nytt lag: værstasjoner",
       "github": "monet820",
-      "oppdatert": "2026-09-23T11:59:50Z"
+      "oppdatert": "2026-09-23T12:00:53Z"
     },
     {
       "issue": 116,
       "navn": "Nytt lag: værstasjoner",
       "github": "nilsgs",
-      "oppdatert": "2026-09-23T11:59:50Z"
+      "oppdatert": "2026-09-23T12:00:53Z"
     },
     {
       "issue": 117,
@@ -1023,6 +1039,18 @@
   ],
   "aapne": [
     {
+      "pr": 144,
+      "tittel": "Tydelige kartsymboler: båter som ser ut som båter (#141)",
+      "github": "leif-larsen",
+      "agent": "mini-leif",
+      "opprettet": "2026-09-23T11:58:52Z",
+      "oppdatert": "2026-09-23T12:00:31Z",
+      "utkast": false,
+      "issues": [
+        141
+      ]
+    },
+    {
       "pr": 72,
       "tittel": "Søk etter adresse og hopp dit på kartet (#21)",
       "github": "leif-larsen",
@@ -1032,18 +1060,6 @@
       "utkast": false,
       "issues": [
         21
-      ]
-    },
-    {
-      "pr": 144,
-      "tittel": "Tydelige kartsymboler: båter som ser ut som båter (#141)",
-      "github": "leif-larsen",
-      "agent": "mini-leif",
-      "opprettet": "2026-09-23T11:58:52Z",
-      "oppdatert": "2026-09-23T11:58:53Z",
-      "utkast": false,
-      "issues": [
-        141
       ]
     },
     {
