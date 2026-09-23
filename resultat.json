@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T15:21:45",
+  "oppdatert": "2026-09-23T15:22:29",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -288,10 +288,10 @@
           "poeng": 1
         }
       ],
-      "dollar": 42.299,
-      "tokens": 68672835,
-      "sekunder": 12955,
-      "pr": 13,
+      "dollar": 42.806,
+      "tokens": 69051426,
+      "sekunder": 13117,
+      "pr": 14,
       "utkast": 3,
       "merget": 8,
       "kjoeringer": 31,
@@ -701,7 +701,7 @@
       "issue": 210,
       "navn": "Historikkgrafen blinker fordi appen kjører på tre replikaer",
       "startet": "2026-09-23T13:19:01.0373888+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-wilma",
@@ -709,7 +709,7 @@
       "issue": 193,
       "navn": "Nytt lag: hjertestartere",
       "startet": "2026-09-23T13:20:02.3717642+00:00",
-      "minutter": 1
+      "minutter": 2
     }
   ],
   "main": {
@@ -1081,7 +1081,7 @@
       "issue": 186,
       "navn": "Nytt lag: bysykkelstasjoner som fyllingsringer",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T13:15:48Z"
+      "oppdatert": "2026-09-23T13:22:18Z"
     },
     {
       "issue": 187,
@@ -1205,6 +1205,18 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 254,
+      "tittel": "Historikkgrafen blinker fordi appen kjører på tre replikaer",
+      "github": "larsajakobsen",
+      "agent": "mini-wilma",
+      "opprettet": "2026-09-23T13:22:12Z",
+      "oppdatert": "2026-09-23T13:22:13Z",
+      "utkast": false,
+      "issues": [
+        210
+      ]
+    },
     {
       "pr": 83,
       "tittel": "Nytt lag: museer og samlinger",
