@@ -221,6 +221,17 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
     }
 
     [Fact]
+    public async Task Lagoversikten_har_trafikk()
+    {
+        var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
+
+        var trafikk = lag!.Single(l => l.Id == "trafikk");
+        Assert.Equal("Trafikk", trafikk.Navn);
+        Assert.False(string.IsNullOrWhiteSpace(trafikk.Beskrivelse));
+        Assert.False(string.IsNullOrWhiteSpace(trafikk.Ikon));
+    }
+
+    [Fact]
     public async Task Spisestederlaget_gir_featurecollection_uten_nett()
     {
         const string svar = """
@@ -530,6 +541,55 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
             Assert.Equal([10.747188, 59.906647], lag.Features[0].Geometry.Coordinates);
             Assert.Contains("kystdatahuset/find_ports_nearby", handler.SisteAdresse!.ToString());
             Assert.Contains("radius_km=", handler.SisteAdresse!.ToString());
+        }
+        finally
+        {
+            Allemannsdata.TømMellomlager();
+        }
+    }
+
+    [Fact]
+    public async Task Trafikklaget_gir_featurecollection_uten_nett()
+    {
+        const string svar = """
+            {
+                "source": "vegvesen",
+                "operation": "find_traffic_points",
+                "parameters": {},
+                "data": [
+                    {
+                        "id": "17684V2460285",
+                        "name": "Dr. Eufemias Gt. Vestgående Datter",
+                        "road_reference": "EV18 S55D10 m1625",
+                        "municipality": "Oslo",
+                        "county": "Oslo",
+                        "lat": 59.908734,
+                        "lon": 10.754618,
+                        "type": "VEHICLE",
+                        "operational": true,
+                        "latest_hourly_data": "2026-09-23T11:00:00+02:00"
+                    }
+                ]
+            }
+            """;
+
+        var handler = new OpptakendeSvarHandler(svar);
+        using var vertUtenNett = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient<Allemannsdata>().ConfigurePrimaryHttpMessageHandler(() => handler)));
+        var klient = vertUtenNett.CreateClient();
+
+        Allemannsdata.TømMellomlager();
+        try
+        {
+            var respons = await klient.GetAsync("/api/lag/trafikk");
+            var lag = await respons.Content.ReadFromJsonAsync<Kartlag>();
+
+            Assert.Equal(HttpStatusCode.OK, respons.StatusCode);
+            Assert.Equal("FeatureCollection", lag!.Type);
+            Assert.NotEmpty(lag.Features);
+            Assert.Equal([10.754618, 59.908734], lag.Features[0].Geometry.Coordinates);
+            Assert.Contains("vegvesen/find_traffic_points", handler.SisteAdresse!.ToString());
+            Assert.Contains("county_number=3", handler.SisteAdresse!.ToString());
         }
         finally
         {
