@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T15:32:46",
+  "oppdatert": "2026-09-23T15:33:29",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -706,7 +706,7 @@
       "issue": 184,
       "navn": "Neste avganger når du klikker på en holdeplass",
       "startet": "2026-09-23T13:24:18.5982608+00:00",
-      "minutter": 8
+      "minutter": 9
     },
     {
       "agent": "mini-wilma",
@@ -714,7 +714,7 @@
       "issue": 183,
       "navn": "Regner det i Oslo sentrum de neste to timene?",
       "startet": "2026-09-23T13:24:20.6110309+00:00",
-      "minutter": 8
+      "minutter": 9
     },
     {
       "agent": "mini-sindre",
