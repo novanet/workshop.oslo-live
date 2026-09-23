@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:03:46",
+  "oppdatert": "2026-09-23T14:04:25",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -554,7 +554,7 @@
       "issue": 44,
       "navn": "Sammenlign tid",
       "startet": "2026-09-23T11:57:22.3942011+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-wilma",
@@ -562,7 +562,7 @@
       "issue": 26,
       "navn": "Skoler",
       "startet": "2026-09-23T12:00:11.8740211+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-leif",
@@ -570,7 +570,7 @@
       "issue": 21,
       "navn": "Adressesøk",
       "startet": "2026-09-23T12:00:22.8365202+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-gir",
@@ -578,7 +578,7 @@
       "issue": 33,
       "navn": "Sykkelparkering",
       "startet": "2026-09-23T12:00:56.0494312+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-wilma",
@@ -586,7 +586,7 @@
       "issue": 8,
       "navn": "Hendelser",
       "startet": "2026-09-23T12:01:11.9782453+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-taco",
@@ -610,7 +610,7 @@
       "issue": 29,
       "navn": "Museer",
       "startet": "2026-09-23T12:01:56.5636433+00:00",
-      "minutter": 1
+      "minutter": 2
     }
   ],
   "main": {
@@ -786,7 +786,7 @@
       "issue": 50,
       "navn": "Mål hva som skjer",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T09:51:25Z"
+      "oppdatert": "2026-09-23T12:04:13Z"
     },
     {
       "issue": 51,
