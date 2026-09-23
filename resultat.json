@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:51:44",
+  "oppdatert": "2026-09-23T10:52:11",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -373,7 +373,7 @@
       "issue": 52,
       "navn": "Konfigurerbar bbox",
       "startet": "2026-09-23T08:42:06.8631198+00:00",
-      "minutter": 9
+      "minutter": 10
     },
     {
       "agent": "mini-richard",
@@ -405,7 +405,7 @@
       "issue": 25,
       "navn": "Historikk",
       "startet": "2026-09-23T08:47:59.0992794+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "Dmitry-agent",
@@ -413,7 +413,7 @@
       "issue": 12,
       "navn": "Holdeplasser",
       "startet": "2026-09-23T08:48:05.3217109+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-knive",
@@ -421,7 +421,7 @@
       "issue": 40,
       "navn": "Mobil",
       "startet": "2026-09-23T08:48:55.3857059+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "Andy3000",
@@ -429,7 +429,7 @@
       "issue": 11,
       "navn": "Kollektiv",
       "startet": "2026-09-23T08:49:04.1157424+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-astrid",
@@ -437,7 +437,15 @@
       "issue": 36,
       "navn": "Tegn område",
       "startet": "2026-09-23T08:49:47.9516568+00:00",
-      "minutter": 1
+      "minutter": 2
+    },
+    {
+      "agent": "mini-jon",
+      "github": "yonzo",
+      "issue": 44,
+      "navn": "Sammenlign tid",
+      "startet": "2026-09-23T08:51:36.6212576+00:00",
+      "minutter": 0
     }
   ],
   "main": {
@@ -698,7 +706,7 @@
       "issue": 44,
       "navn": "Sammenlign to tidspunkt",
       "github": "yonzo",
-      "oppdatert": "2026-09-23T08:50:44Z"
+      "oppdatert": "2026-09-23T08:51:37Z"
     },
     {
       "issue": 45,
@@ -793,6 +801,30 @@
   ],
   "aapne": [
     {
+      "pr": 83,
+      "tittel": "Nytt lag: museer og samlinger",
+      "github": "jthagesk",
+      "agent": "mini-kirsten",
+      "opprettet": "2026-09-23T08:34:12Z",
+      "oppdatert": "2026-09-23T08:51:54Z",
+      "utkast": false,
+      "issues": [
+        29
+      ]
+    },
+    {
+      "pr": 85,
+      "tittel": "#9: Nytt lag: badetemperaturer",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:35:02Z",
+      "oppdatert": "2026-09-23T08:51:21Z",
+      "utkast": false,
+      "issues": [
+        9
+      ]
+    },
+    {
       "pr": 101,
       "tittel": "#34: Skru tiden tilbake med en tidslinje",
       "github": "randsu",
@@ -886,18 +918,6 @@
       "utkast": false,
       "issues": [
         45
-      ]
-    },
-    {
-      "pr": 83,
-      "tittel": "Nytt lag: museer og samlinger",
-      "github": "jthagesk",
-      "agent": "mini-kirsten",
-      "opprettet": "2026-09-23T08:34:12Z",
-      "oppdatert": "2026-09-23T08:48:45Z",
-      "utkast": false,
-      "issues": [
-        29
       ]
     },
     {
@@ -1018,18 +1038,6 @@
       "utkast": false,
       "issues": [
         23
-      ]
-    },
-    {
-      "pr": 85,
-      "tittel": "#9: Nytt lag: badetemperaturer",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:35:02Z",
-      "oppdatert": "2026-09-23T08:37:27Z",
-      "utkast": false,
-      "issues": [
-        9
       ]
     },
     {
