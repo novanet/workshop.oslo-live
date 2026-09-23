@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:17:08",
+  "oppdatert": "2026-09-23T14:17:48",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -406,8 +406,8 @@
       "pr": 4,
       "utkast": 0,
       "merget": 1,
-      "kjoeringer": 13,
-      "utenPr": 5,
+      "kjoeringer": 14,
+      "utenPr": 6,
       "bygg": [],
       "estimert": false,
       "plass": 13
@@ -578,7 +578,7 @@
       "issue": 26,
       "navn": "Skoler",
       "startet": "2026-09-23T12:00:11.8740211+00:00",
-      "minutter": 16
+      "minutter": 17
     },
     {
       "agent": "mini-aud",
@@ -586,7 +586,7 @@
       "issue": 132,
       "navn": "Ekte sollys på 3D-byggene",
       "startet": "2026-09-23T12:07:36.4342939+00:00",
-      "minutter": 9
+      "minutter": 10
     },
     {
       "agent": "mini-wilma",
@@ -594,7 +594,7 @@
       "issue": 8,
       "navn": "Hendelser",
       "startet": "2026-09-23T12:10:34.6234355+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-wilma",
@@ -602,7 +602,7 @@
       "issue": 198,
       "navn": "",
       "startet": "2026-09-23T12:16:25.0295863+00:00",
-      "minutter": 0
+      "minutter": 1
     }
   ],
   "main": {
@@ -923,7 +923,7 @@
       "issue": 129,
       "navn": "Simulering: meteornedslag",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T11:42:31Z"
+      "oppdatert": "2026-09-23T12:17:22Z"
     },
     {
       "issue": 130,
@@ -965,7 +965,7 @@
       "issue": 141,
       "navn": "Tydelige kartsymboler: båter som ser ut som båter",
       "github": "leif-larsen",
-      "oppdatert": "2026-09-23T12:16:12Z"
+      "oppdatert": "2026-09-23T12:17:17Z"
     },
     {
       "issue": 142,
@@ -1005,6 +1005,18 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 144,
+      "tittel": "Tydelige kartsymboler: båter som ser ut som båter (#141)",
+      "github": "leif-larsen",
+      "agent": "mini-leif",
+      "opprettet": "2026-09-23T11:58:52Z",
+      "oppdatert": "2026-09-23T12:17:13Z",
+      "utkast": false,
+      "issues": [
+        141
+      ]
+    },
     {
       "pr": 109,
       "tittel": "Nytt lag: skoler og barnehager",
@@ -1051,18 +1063,6 @@
       "utkast": false,
       "issues": [
         33
-      ]
-    },
-    {
-      "pr": 144,
-      "tittel": "Tydelige kartsymboler: båter som ser ut som båter (#141)",
-      "github": "leif-larsen",
-      "agent": "mini-leif",
-      "opprettet": "2026-09-23T11:58:52Z",
-      "oppdatert": "2026-09-23T12:07:21Z",
-      "utkast": false,
-      "issues": [
-        141
       ]
     },
     {
