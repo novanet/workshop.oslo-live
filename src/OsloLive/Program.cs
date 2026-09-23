@@ -28,6 +28,16 @@ builder.Services.AddHttpClient("fly", klient =>
     klient.Timeout = TimeSpan.FromSeconds(10);
     klient.DefaultRequestHeaders.UserAgent.ParseAdd("OsloLive/1.0 (kurs)");
 });
+
+// Bomstasjonene hentes fra NVDB (Statens vegvesen), som heller ikke er en Allemannsdata-kilde,
+// og krever headeren X-Client. Se BomstasjonerLag.cs.
+builder.Services.AddHttpClient("bomstasjoner", klient =>
+{
+    klient.Timeout = TimeSpan.FromSeconds(15);
+    klient.DefaultRequestHeaders.UserAgent.ParseAdd("OsloLive/1.0 (kurs)");
+    klient.DefaultRequestHeaders.Add("X-Client", "OsloLive");
+    klient.DefaultRequestHeaders.Accept.ParseAdd("application/json");
+});
 builder.Services.AddMemoryCache();
 builder.Services.AddSingleton<Lagstatistikk>();
 
@@ -58,6 +68,7 @@ builder.Services.AddSingleton<ILag, HoldeplasserLag>();
 builder.Services.AddSingleton<ILag, SkipLag>();
 builder.Services.AddSingleton<ILag, VannmaalereLag>();
 builder.Services.AddSingleton<ILag, KaierLag>();
+builder.Services.AddSingleton<ILag, BomstasjonerLag>();
 builder.Services.AddSingleton<ILag, VaerstasjonerLag>();
 builder.Services.AddSingleton<ILag, IdrettsanleggLag>();
 
