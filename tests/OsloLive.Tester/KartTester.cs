@@ -78,4 +78,16 @@ public class AllemannsdataTester
         Assert.Contains("limit=10", url);
         Assert.Contains("offset=0", url);
     }
+
+    [Fact]
+    public void Levetid_er_tretti_sekunder()
+    {
+        Assert.Equal(30, Allemannsdata.Levetid.TotalSeconds);
+    }
+
+    [Fact]
+    public void Levetid_bruker_konstanten_i_sekunder()
+    {
+        Assert.Equal(TimeSpan.FromSeconds(Allemannsdata.LevetidSekunder), Allemannsdata.Levetid);
+    }
 }

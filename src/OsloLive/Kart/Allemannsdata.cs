@@ -26,7 +26,7 @@ public sealed class Allemannsdata(HttpClient http, ILogger<Allemannsdata> logg)
     /// <summary>Hvor lenge et svar gjenbrukes før vi spør kilden på nytt.</summary>
     public const int LevetidSekunder = 30;
 
-    public static readonly TimeSpan Levetid = TimeSpan.FromMinutes(LevetidSekunder);
+    public static readonly TimeSpan Levetid = TimeSpan.FromSeconds(LevetidSekunder);
 
     private static readonly ConcurrentDictionary<string, (DateTimeOffset Hentet, JsonElement Svar)> Mellomlager = new();
 
