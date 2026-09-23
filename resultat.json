@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:32:46",
+  "oppdatert": "2026-09-23T14:33:26",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -222,12 +222,12 @@
       ],
       "dollar": 10.674,
       "tokens": 19002132,
-      "sekunder": 3581,
+      "sekunder": 3582,
       "pr": 4,
       "utkast": 0,
       "merget": 2,
-      "kjoeringer": 9,
-      "utenPr": 5,
+      "kjoeringer": 10,
+      "utenPr": 6,
       "bygg": [],
       "estimert": false,
       "plass": 6
@@ -623,7 +623,7 @@
       "issue": 214,
       "navn": "Lagvelgeren er for høy: historikkgrafen tar en egen rad per lag",
       "startet": "2026-09-23T12:31:25.313151+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "henrik",
@@ -631,7 +631,7 @@
       "issue": 114,
       "navn": "Nytt lag: Kristiania i 1910",
       "startet": "2026-09-23T12:32:02.4130394+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-wilma",
@@ -639,7 +639,7 @@
       "issue": 206,
       "navn": "Popupene viser rådata: ISO-tider, «ikon: 😊» og tall uten enhet",
       "startet": "2026-09-23T12:32:25.3380267+00:00",
-      "minutter": 0
+      "minutter": 1
     }
   ],
   "main": {
@@ -937,7 +937,7 @@
       "issue": 157,
       "navn": "Kontrakttester for alle lag",
       "github": "randsu",
-      "oppdatert": "2026-09-23T12:30:04Z"
+      "oppdatert": "2026-09-23T12:33:20Z"
     },
     {
       "issue": 158,
@@ -1039,10 +1039,34 @@
       "issue": 215,
       "navn": "Svarte klynger dekker sentrum og skjuler hvilke lag som er der",
       "github": "Buggz",
-      "oppdatert": "2026-09-23T12:32:41Z"
+      "oppdatert": "2026-09-23T12:33:21Z"
     }
   ],
   "aapne": [
+    {
+      "pr": 219,
+      "tittel": "Simulering: tsunami i Oslofjorden",
+      "github": "FrodeBl",
+      "agent": "mini-frode",
+      "opprettet": "2026-09-23T12:28:49Z",
+      "oppdatert": "2026-09-23T12:32:48Z",
+      "utkast": false,
+      "issues": [
+        128
+      ]
+    },
+    {
+      "pr": 145,
+      "tittel": "#142: Kurs på skipene",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T12:03:14Z",
+      "oppdatert": "2026-09-23T12:32:45Z",
+      "utkast": false,
+      "issues": [
+        142
+      ]
+    },
     {
       "pr": 97,
       "tittel": "Søk på tvers av alle lag (#47)",
@@ -1128,18 +1152,6 @@
       ]
     },
     {
-      "pr": 219,
-      "tittel": "Simulering: tsunami i Oslofjorden",
-      "github": "FrodeBl",
-      "agent": "mini-frode",
-      "opprettet": "2026-09-23T12:28:49Z",
-      "oppdatert": "2026-09-23T12:29:55Z",
-      "utkast": false,
-      "issues": [
-        128
-      ]
-    },
-    {
       "pr": 217,
       "tittel": "Beskytt storskjermen mot innbrenning",
       "github": "yonzo",
@@ -1173,18 +1185,6 @@
       "utkast": false,
       "issues": [
         26
-      ]
-    },
-    {
-      "pr": 145,
-      "tittel": "#142: Kurs på skipene",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T12:03:14Z",
-      "oppdatert": "2026-09-23T12:10:38Z",
-      "utkast": false,
-      "issues": [
-        142
       ]
     },
     {
