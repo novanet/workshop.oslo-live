@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T15:07:40",
+  "oppdatert": "2026-09-23T15:08:21",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -287,13 +287,13 @@
           "poeng": 3
         }
       ],
-      "dollar": 12.99,
-      "tokens": 27892829,
-      "sekunder": 4572,
+      "dollar": 13.372,
+      "tokens": 29131791,
+      "sekunder": 4771,
       "pr": 5,
       "utkast": 0,
       "merget": 3,
-      "kjoeringer": 23,
+      "kjoeringer": 24,
       "utenPr": 10,
       "bygg": [],
       "estimert": false,
@@ -425,14 +425,14 @@
           "poeng": 5
         }
       ],
-      "dollar": 21.101,
-      "tokens": 46937309,
-      "sekunder": 6764,
+      "dollar": 20.648,
+      "tokens": 46597333,
+      "sekunder": 6594,
       "pr": 4,
       "utkast": 0,
       "merget": 1,
-      "kjoeringer": 19,
-      "utenPr": 10,
+      "kjoeringer": 18,
+      "utenPr": 9,
       "bygg": [],
       "estimert": false,
       "plass": 11
@@ -670,7 +670,7 @@
       "issue": 13,
       "navn": "Veiarbeid",
       "startet": "2026-09-23T13:02:49.243038+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-johan",
@@ -678,15 +678,7 @@
       "issue": 16,
       "navn": "Ladestasjoner",
       "startet": "2026-09-23T13:02:49.4778489+00:00",
-      "minutter": 4
-    },
-    {
-      "agent": "mini-leif",
-      "github": "leif-larsen",
-      "issue": 118,
-      "navn": "Nyhetslinje nederst på skjermen",
-      "startet": "2026-09-23T13:03:29.1360578+00:00",
-      "minutter": 3
+      "minutter": 5
     },
     {
       "agent": "mini-wilma",
@@ -694,7 +686,7 @@
       "issue": 204,
       "navn": "Lagraden sprenger panelet når navnet er langt",
       "startet": "2026-09-23T13:03:40.229746+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-knive",
@@ -702,7 +694,7 @@
       "issue": 195,
       "navn": "Nytt lag: avvik i kollektivtrafikken",
       "startet": "2026-09-23T13:04:43.4543256+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-ingve",
@@ -710,7 +702,23 @@
       "issue": 11,
       "navn": "Kollektiv",
       "startet": "2026-09-23T13:05:41.9082982+00:00",
+      "minutter": 2
+    },
+    {
+      "agent": "mini-frode",
+      "github": "FrodeBl",
+      "issue": 50,
+      "navn": "Metrikker",
+      "startet": "2026-09-23T13:07:05.7797026+00:00",
       "minutter": 1
+    },
+    {
+      "agent": "mini-gir",
+      "github": "GIR75",
+      "issue": 18,
+      "navn": "Kulturminner",
+      "startet": "2026-09-23T13:08:06.7329467+00:00",
+      "minutter": 0
     }
   ],
   "main": {
@@ -758,13 +766,13 @@
       "issue": 13,
       "navn": "Nytt lag: veiarbeid og stengte veier",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T13:02:50Z"
+      "oppdatert": "2026-09-23T13:08:15Z"
     },
     {
       "issue": 13,
       "navn": "Nytt lag: veiarbeid og stengte veier",
       "github": "pr0nin",
-      "oppdatert": "2026-09-23T13:02:50Z"
+      "oppdatert": "2026-09-23T13:08:15Z"
     },
     {
       "issue": 16,
@@ -782,7 +790,7 @@
       "issue": 18,
       "navn": "Nytt lag: kulturminner",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T12:39:45Z"
+      "oppdatert": "2026-09-23T13:08:07Z"
     },
     {
       "issue": 21,
@@ -866,7 +874,7 @@
       "issue": 50,
       "navn": "Mål hva som skjer",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T13:06:17Z"
+      "oppdatert": "2026-09-23T13:07:06Z"
     },
     {
       "issue": 51,
@@ -962,7 +970,7 @@
       "issue": 118,
       "navn": "Nyhetslinje nederst på skjermen",
       "github": "leif-larsen",
-      "oppdatert": "2026-09-23T13:03:30Z"
+      "oppdatert": "2026-09-23T13:07:19Z"
     },
     {
       "issue": 119,
@@ -1106,7 +1114,7 @@
       "issue": 189,
       "navn": "Travlere enn vanlig på veiene",
       "github": "yonzo",
-      "oppdatert": "2026-09-23T13:02:20Z"
+      "oppdatert": "2026-09-23T13:07:59Z"
     },
     {
       "issue": 190,
@@ -1201,12 +1209,24 @@
   ],
   "aapne": [
     {
+      "pr": 222,
+      "tittel": "Havet stiger: hva havner under vann? (#133)",
+      "github": "Puiu",
+      "agent": "mini-taco",
+      "opprettet": "2026-09-23T12:30:27Z",
+      "oppdatert": "2026-09-23T13:07:58Z",
+      "utkast": false,
+      "issues": [
+        133
+      ]
+    },
+    {
       "pr": 229,
       "tittel": "Nytt lag: Kristiania i 1910",
       "github": "monet820",
       "agent": "henrik",
       "opprettet": "2026-09-23T12:41:30Z",
-      "oppdatert": "2026-09-23T13:06:17Z",
+      "oppdatert": "2026-09-23T13:07:55Z",
       "utkast": false,
       "issues": [
         114
@@ -1218,7 +1238,7 @@
       "github": "jthagesk",
       "agent": "mini-kirsten",
       "opprettet": "2026-09-23T08:34:12Z",
-      "oppdatert": "2026-09-23T13:04:49Z",
+      "oppdatert": "2026-09-23T13:07:51Z",
       "utkast": false,
       "issues": [
         29
@@ -1230,7 +1250,7 @@
       "github": "leif-larsen",
       "agent": "mini-leif",
       "opprettet": "2026-09-23T12:41:18Z",
-      "oppdatert": "2026-09-23T13:03:28Z",
+      "oppdatert": "2026-09-23T13:07:17Z",
       "utkast": false,
       "issues": [
         118
@@ -1258,18 +1278,6 @@
       "utkast": false,
       "issues": [
         47
-      ]
-    },
-    {
-      "pr": 222,
-      "tittel": "Havet stiger: hva havner under vann? (#133)",
-      "github": "Puiu",
-      "agent": "mini-taco",
-      "opprettet": "2026-09-23T12:30:27Z",
-      "oppdatert": "2026-09-23T13:01:01Z",
-      "utkast": false,
-      "issues": [
-        133
       ]
     },
     {
