@@ -20,7 +20,7 @@ namespace OsloLive.Kart;
 /// (for eksempel { "vehicles": [...] }). Bruk MCP-serveren til å finne ut
 /// hvilken form den kilden du jobber med har - se README.
 /// </summary>
-public sealed class Allemannsdata(HttpClient http, ILogger<Allemannsdata> logg)
+public sealed class Allemannsdata(HttpClient http, ILogger<Allemannsdata> logg, TimeProvider? klokke = null)
 {
     private const string Rot = "https://allemannsdata.com/wiki/api/v1/kilder";
 
@@ -28,6 +28,12 @@ public sealed class Allemannsdata(HttpClient http, ILogger<Allemannsdata> logg)
     public const int LevetidSekunder = 30;
 
     public static readonly TimeSpan Levetid = TimeSpan.FromSeconds(LevetidSekunder);
+
+    /// <summary>Maks antall forsøk mot en kilde, inkludert det første.</summary>
+    private const int MaksForsøk = 3;
+
+    /// <summary>Ventetid før andre og tredje forsøk. Lengre for hvert forsøk.</summary>
+    private static readonly TimeSpan[] Ventetider = [TimeSpan.FromMilliseconds(500), TimeSpan.FromMilliseconds(1500)];
 
     private static readonly ConcurrentDictionary<string, (DateTimeOffset Hentet, JsonElement Svar)> Mellomlager = new();
 
@@ -72,7 +78,7 @@ public sealed class Allemannsdata(HttpClient http, ILogger<Allemannsdata> logg)
 
         logg.LogInformation("Henter {Kilde}/{Operasjon}", kilde, operasjon);
 
-        using var svar = await http.GetAsync(url, stopp);
+        using var svar = await HentMedNyeForsøk(kilde, operasjon, url, stopp);
         svar.EnsureSuccessStatusCode();
 
         var tekst = await svar.Content.ReadAsStringAsync(stopp);
@@ -116,4 +122,44 @@ public sealed class Allemannsdata(HttpClient http, ILogger<Allemannsdata> logg)
 
     /// <summary>Tømmer mellomlageret. Brukes av testene.</summary>
     public static void TømMellomlager() => Mellomlager.Clear();
+
+    /// <summary>
+    /// Henter <paramref name="url"/> og prøver på nytt inntil <see cref="MaksForsøk"/> ganger
+    /// ved 5xx-svar, tidsavbrudd eller nettverksfeil. En 404 eller annen 4xx-feil kastes
+    /// videre etter første forsøk. Ventetiden mellom forsøkene respekterer <paramref name="stopp"/>.
+    /// </summary>
+    private async Task<HttpResponseMessage> HentMedNyeForsøk(string kilde, string operasjon, string url, CancellationToken stopp)
+    {
+        for (var forsøk = 1; ; forsøk++)
+        {
+            HttpResponseMessage? svar = null;
+
+            try
+            {
+                svar = await http.GetAsync(url, stopp);
+            }
+            catch (HttpRequestException) when (forsøk < MaksForsøk)
+            {
+            }
+            catch (TaskCanceledException) when (forsøk < MaksForsøk && !stopp.IsCancellationRequested)
+            {
+            }
+
+            if (svar is not null)
+            {
+                if ((int)svar.StatusCode < 500 || forsøk == MaksForsøk)
+                {
+                    return svar;
+                }
+
+                svar.Dispose();
+            }
+
+            logg.LogWarning(
+                "Prøver {Kilde}/{Operasjon} på nytt, forsøk {Forsøk} av {MaksForsøk}",
+                kilde, operasjon, forsøk + 1, MaksForsøk);
+
+            await Task.Delay(Ventetider[forsøk - 1], klokke ?? TimeProvider.System, stopp);
+        }
+    }
 }

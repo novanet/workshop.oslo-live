@@ -1,5 +1,6 @@
 using System.Globalization;
 using OsloLive;
+using OsloLive.Helse;
 using OsloLive.Kart;
 using OsloLive.Lag;
 
@@ -31,7 +32,15 @@ builder.Services.AddMemoryCache();
 // Lagene på kartet. Nytt lag? Legg til én linje her.
 // ---------------------------------------------------------------------------
 builder.Services.AddSingleton<ILag, LuftkvalitetLag>();
+builder.Services.AddSingleton<ILag, SmilefjesLag>();
 builder.Services.AddSingleton<ILag, FlyLag>();
+builder.Services.AddSingleton<ILag, BadetemperaturLag>();
+builder.Services.AddSingleton<ILag, MobilitetLag>();
+
+// Bakgrunnssjekk av kildehelse, se Helse/HelseSjekker.cs.
+builder.Services.Configure<HelseValg>(builder.Configuration.GetSection("Helse"));
+builder.Services.AddSingleton<HelseSjekker>();
+builder.Services.AddHostedService(sp => sp.GetRequiredService<HelseSjekker>());
 
 var app = builder.Build();
 
@@ -90,7 +99,15 @@ app.MapGet("/api/stroempris", async (Allemannsdata data, CancellationToken stopp
     }
 });
 
+// Lever prosessen? Svarer alltid umiddelbart, uten å spørre kildene.
 app.MapGet("/api/helse", () => new { status = "ok", tid = DateTimeOffset.Now });
+
+// Virker tjenesten? Leser siste kjente resultat fra bakgrunnssjekken.
+app.MapGet("/api/helse/kilder", (HelseSjekker sjekker) =>
+{
+    var kilder = sjekker.Snapshot();
+    return Results.Ok(new { status = HelseSjekker.SamletStatus(kilder), kilder });
+});
 
 app.Run();
 
