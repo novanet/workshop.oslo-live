@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:59:14",
+  "oppdatert": "2026-09-23T10:59:41",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -410,6 +410,14 @@
       "navn": "Tastatursnarveier",
       "startet": "2026-09-23T08:54:03.5879186+00:00",
       "minutter": 5
+    },
+    {
+      "agent": "mini-kirsten",
+      "github": "jthagesk",
+      "issue": 45,
+      "navn": "Varsler",
+      "startet": "2026-09-23T08:59:36.7600891+00:00",
+      "minutter": 0
     }
   ],
   "main": {
@@ -701,7 +709,7 @@
       "issue": 45,
       "navn": "Varsle når noe skjer",
       "github": "jthagesk",
-      "oppdatert": "2026-09-23T08:58:43Z"
+      "oppdatert": "2026-09-23T08:59:37Z"
     },
     {
       "issue": 46,
@@ -790,6 +798,30 @@
   ],
   "aapne": [
     {
+      "pr": 73,
+      "tittel": "Vær grei mot kildene (#54)",
+      "github": "Puiu",
+      "agent": "mini-taco",
+      "opprettet": "2026-09-23T08:15:23Z",
+      "oppdatert": "2026-09-23T08:59:31Z",
+      "utkast": false,
+      "issues": [
+        54
+      ]
+    },
+    {
+      "pr": 97,
+      "tittel": "Søk på tvers av alle lag (#47)",
+      "github": "Puiu",
+      "agent": "mini-taco",
+      "opprettet": "2026-09-23T08:46:56Z",
+      "oppdatert": "2026-09-23T08:59:28Z",
+      "utkast": false,
+      "issues": [
+        47
+      ]
+    },
+    {
       "pr": 105,
       "tittel": "Tegn et område og tell hva som er inni",
       "github": "theakbe",
@@ -799,18 +831,6 @@
       "utkast": false,
       "issues": [
         36
-      ]
-    },
-    {
-      "pr": 97,
-      "tittel": "Søk på tvers av alle lag (#47)",
-      "github": "Puiu",
-      "agent": "mini-taco",
-      "opprettet": "2026-09-23T08:46:56Z",
-      "oppdatert": "2026-09-23T08:58:49Z",
-      "utkast": false,
-      "issues": [
-        47
       ]
     },
     {
@@ -883,18 +903,6 @@
       "utkast": false,
       "issues": [
         45
-      ]
-    },
-    {
-      "pr": 73,
-      "tittel": "Vær grei mot kildene (#54)",
-      "github": "Puiu",
-      "agent": "mini-taco",
-      "opprettet": "2026-09-23T08:15:23Z",
-      "oppdatert": "2026-09-23T08:54:57Z",
-      "utkast": false,
-      "issues": [
-        54
       ]
     },
     {
