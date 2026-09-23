@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:54:20",
+  "oppdatert": "2026-09-23T10:54:47",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -385,7 +385,7 @@
       "issue": 24,
       "navn": "Bydeler",
       "startet": "2026-09-23T08:45:28.8651408+00:00",
-      "minutter": 8
+      "minutter": 9
     },
     {
       "agent": "mini-frode",
@@ -393,7 +393,7 @@
       "issue": 50,
       "navn": "Metrikker",
       "startet": "2026-09-23T08:47:21.1306878+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-richard",
@@ -409,7 +409,7 @@
       "issue": 12,
       "navn": "Holdeplasser",
       "startet": "2026-09-23T08:48:05.3217109+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-knive",
@@ -433,7 +433,47 @@
       "issue": 44,
       "navn": "Sammenlign tid",
       "startet": "2026-09-23T08:51:36.6212576+00:00",
-      "minutter": 2
+      "minutter": 3
+    },
+    {
+      "agent": "mini-leif",
+      "github": "leif-larsen",
+      "issue": 14,
+      "navn": "Idrettsanlegg",
+      "startet": "2026-09-23T08:53:58.2896433+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-richard",
+      "github": "randsu",
+      "issue": 16,
+      "navn": "Ladestasjoner",
+      "startet": "2026-09-23T08:53:59.0288397+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-aud",
+      "github": "audmaha",
+      "issue": 39,
+      "navn": "Tastatursnarveier",
+      "startet": "2026-09-23T08:54:03.5879186+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-aud",
+      "github": "audmaha",
+      "issue": 7,
+      "navn": "Skipstrafikk",
+      "startet": "2026-09-23T08:54:03.6650491+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-aud",
+      "github": "audmaha",
+      "issue": 31,
+      "navn": "Vær",
+      "startet": "2026-09-23T08:54:04.5833346+00:00",
+      "minutter": 0
     }
   ],
   "main": {
@@ -538,8 +578,14 @@
     {
       "issue": 7,
       "navn": "Nytt lag: skip i Oslofjorden",
+      "github": "audmaha",
+      "oppdatert": "2026-09-23T08:54:04Z"
+    },
+    {
+      "issue": 7,
+      "navn": "Nytt lag: skip i Oslofjorden",
       "github": "monet820",
-      "oppdatert": "2026-09-23T08:53:29Z"
+      "oppdatert": "2026-09-23T08:54:04Z"
     },
     {
       "issue": 8,
@@ -563,13 +609,13 @@
       "issue": 14,
       "navn": "Nytt lag: idretts- og friluftsanlegg",
       "github": "leif-larsen",
-      "oppdatert": "2026-09-23T08:53:18Z"
+      "oppdatert": "2026-09-23T08:53:59Z"
     },
     {
       "issue": 16,
       "navn": "Nytt lag: ladestasjoner for elbil",
       "github": "randsu",
-      "oppdatert": "2026-09-23T08:53:57Z"
+      "oppdatert": "2026-09-23T08:53:59Z"
     },
     {
       "issue": 17,
@@ -638,6 +684,12 @@
       "oppdatert": "2026-09-23T08:50:43Z"
     },
     {
+      "issue": 31,
+      "navn": "Vis været over kartet",
+      "github": "audmaha",
+      "oppdatert": "2026-09-23T08:54:05Z"
+    },
+    {
       "issue": 32,
       "navn": "Vis strømprisen for Oslo",
       "github": "larsajakobsen",
@@ -666,6 +718,12 @@
       "navn": "Demomodus for storskjerm",
       "github": "randsu",
       "oppdatert": "2026-09-23T08:37:48Z"
+    },
+    {
+      "issue": 39,
+      "navn": "Tastatursnarveier",
+      "github": "audmaha",
+      "oppdatert": "2026-09-23T08:54:04Z"
     },
     {
       "issue": 40,
@@ -796,6 +854,30 @@
   ],
   "aapne": [
     {
+      "pr": 100,
+      "tittel": "Vis vannstanden i fjorden",
+      "github": "nilsgs",
+      "agent": "helstein",
+      "opprettet": "2026-09-23T08:50:41Z",
+      "oppdatert": "2026-09-23T08:54:19Z",
+      "utkast": false,
+      "issues": [
+        30
+      ]
+    },
+    {
+      "pr": 97,
+      "tittel": "Søk på tvers av alle lag (#47)",
+      "github": "Puiu",
+      "agent": "mini-taco",
+      "opprettet": "2026-09-23T08:46:56Z",
+      "oppdatert": "2026-09-23T08:54:02Z",
+      "utkast": false,
+      "issues": [
+        47
+      ]
+    },
+    {
       "pr": 74,
       "tittel": "Overlapping boxes",
       "github": "sin-rha",
@@ -916,18 +998,6 @@
       ]
     },
     {
-      "pr": 100,
-      "tittel": "Vis vannstanden i fjorden",
-      "github": "nilsgs",
-      "agent": "helstein",
-      "opprettet": "2026-09-23T08:50:41Z",
-      "oppdatert": "2026-09-23T08:50:42Z",
-      "utkast": false,
-      "issues": [
-        30
-      ]
-    },
-    {
       "pr": 67,
       "tittel": "Hent lagene parallelt",
       "github": "FrodeBl",
@@ -973,18 +1043,6 @@
       "utkast": false,
       "issues": [
         45
-      ]
-    },
-    {
-      "pr": 97,
-      "tittel": "Søk på tvers av alle lag (#47)",
-      "github": "Puiu",
-      "agent": "mini-taco",
-      "opprettet": "2026-09-23T08:46:56Z",
-      "oppdatert": "2026-09-23T08:48:11Z",
-      "utkast": false,
-      "issues": [
-        47
       ]
     },
     {
