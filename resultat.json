@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:31:26",
+  "oppdatert": "2026-09-23T14:32:06",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -607,7 +607,7 @@
       "issue": 188,
       "navn": "Vinden som strømmer over byen",
       "startet": "2026-09-23T12:23:41.4076789+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "mini-wilma",
@@ -615,7 +615,15 @@
       "issue": 26,
       "navn": "Skoler",
       "startet": "2026-09-23T12:28:26.4775068+00:00",
-      "minutter": 2
+      "minutter": 3
+    },
+    {
+      "agent": "mini-wilma",
+      "github": "larsajakobsen",
+      "issue": 214,
+      "navn": "Lagvelgeren er for høy: historikkgrafen tar en egen rad per lag",
+      "startet": "2026-09-23T12:31:25.313151+00:00",
+      "minutter": 0
     }
   ],
   "main": {
@@ -715,13 +723,13 @@
       "issue": 52,
       "navn": "Gjør kartutsnittet konfigurerbart",
       "github": "jthagesk",
-      "oppdatert": "2026-09-23T12:30:49Z"
+      "oppdatert": "2026-09-23T12:31:30Z"
     },
     {
       "issue": 55,
       "navn": "Kartet blir tregt med mange punkter",
       "github": "sin-rha",
-      "oppdatert": "2026-09-23T12:30:51Z"
+      "oppdatert": "2026-09-23T12:31:30Z"
     },
     {
       "issue": 57,
@@ -763,7 +771,7 @@
       "issue": 114,
       "navn": "Nytt lag: Kristiania i 1910",
       "github": "monet820",
-      "oppdatert": "2026-09-23T12:30:29Z"
+      "oppdatert": "2026-09-23T12:32:03Z"
     },
     {
       "issue": 115,
@@ -805,7 +813,7 @@
       "issue": 118,
       "navn": "Nyhetslinje nederst på skjermen",
       "github": "leif-larsen",
-      "oppdatert": "2026-09-23T12:30:20Z"
+      "oppdatert": "2026-09-23T12:31:40Z"
     },
     {
       "issue": 119,
@@ -955,59 +963,71 @@
       "issue": 190,
       "navn": "Hvor langt når jeg på 15 minutter?",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T12:30:40Z"
+      "oppdatert": "2026-09-23T12:31:29Z"
     },
     {
       "issue": 191,
       "navn": "Et døgn med bysykkelturer på 90 sekunder",
       "github": "randsu",
-      "oppdatert": "2026-09-23T12:30:07Z"
+      "oppdatert": "2026-09-23T12:31:29Z"
     },
     {
       "issue": 193,
       "navn": "Nytt lag: hjertestartere",
       "github": "Copilot",
-      "oppdatert": "2026-09-23T12:30:28Z"
+      "oppdatert": "2026-09-23T12:31:30Z"
     },
     {
       "issue": 193,
       "navn": "Nytt lag: hjertestartere",
       "github": "SasaRad",
-      "oppdatert": "2026-09-23T12:30:28Z"
+      "oppdatert": "2026-09-23T12:31:30Z"
     },
     {
       "issue": 194,
       "navn": "Nytt lag: bomstasjoner",
       "github": "nilsgs",
-      "oppdatert": "2026-09-23T12:30:29Z"
+      "oppdatert": "2026-09-23T12:31:31Z"
     },
     {
       "issue": 197,
       "navn": "Beskytt storskjermen mot innbrenning",
       "github": "yonzo",
-      "oppdatert": "2026-09-23T12:26:24Z"
+      "oppdatert": "2026-09-23T12:31:33Z"
     },
     {
       "issue": 199,
       "navn": "Styr storskjermen fra mobilen",
       "github": "yonzo",
-      "oppdatert": "2026-09-23T12:19:44Z"
+      "oppdatert": "2026-09-23T12:31:34Z"
     },
     {
       "issue": 214,
       "navn": "Lagvelgeren er for høy: historikkgrafen tar en egen rad per lag",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T12:31:22Z"
+      "oppdatert": "2026-09-23T12:31:43Z"
     }
   ],
   "aapne": [
+    {
+      "pr": 97,
+      "tittel": "Søk på tvers av alle lag (#47)",
+      "github": "Puiu",
+      "agent": "mini-taco",
+      "opprettet": "2026-09-23T08:46:56Z",
+      "oppdatert": "2026-09-23T12:31:33Z",
+      "utkast": false,
+      "issues": [
+        47
+      ]
+    },
     {
       "pr": 221,
       "tittel": "#191: Et døgn med bysykkelturer på 90 sekunder",
       "github": "randsu",
       "agent": "mini-richard",
       "opprettet": "2026-09-23T12:29:48Z",
-      "oppdatert": "2026-09-23T12:31:04Z",
+      "oppdatert": "2026-09-23T12:31:26Z",
       "utkast": false,
       "issues": [
         191
@@ -1191,18 +1211,6 @@
       "utkast": false,
       "issues": [
         113
-      ]
-    },
-    {
-      "pr": 97,
-      "tittel": "Søk på tvers av alle lag (#47)",
-      "github": "Puiu",
-      "agent": "mini-taco",
-      "opprettet": "2026-09-23T08:46:56Z",
-      "oppdatert": "2026-09-23T11:40:00Z",
-      "utkast": false,
-      "issues": [
-        47
       ]
     },
     {
