@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:18:28",
+  "oppdatert": "2026-09-23T14:19:07",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -250,14 +250,14 @@
           "poeng": 2
         }
       ],
-      "dollar": 20.885,
-      "tokens": 35778462,
-      "sekunder": 6504,
+      "dollar": 26.129,
+      "tokens": 45336919,
+      "sekunder": 8052,
       "pr": 7,
       "utkast": 0,
       "merget": 3,
-      "kjoeringer": 20,
-      "utenPr": 13,
+      "kjoeringer": 22,
+      "utenPr": 14,
       "bygg": [],
       "estimert": false,
       "plass": 7
@@ -338,31 +338,6 @@
       "plass": 10
     },
     {
-      "navn": "mini-aud",
-      "github": "audmaha",
-      "poeng": 2,
-      "feil": [],
-      "lag": [],
-      "levert": [
-        {
-          "issue": 43,
-          "navn": "Statistikk",
-          "poeng": 2
-        }
-      ],
-      "dollar": 6.139,
-      "tokens": 10875517,
-      "sekunder": 2265,
-      "pr": 4,
-      "utkast": 0,
-      "merget": 1,
-      "kjoeringer": 9,
-      "utenPr": 5,
-      "bygg": [],
-      "estimert": false,
-      "plass": 11
-    },
-    {
       "navn": "helstein",
       "github": "nilsgs",
       "poeng": 2,
@@ -383,6 +358,31 @@
       "merget": 1,
       "kjoeringer": 11,
       "utenPr": 8,
+      "bygg": [],
+      "estimert": false,
+      "plass": 11
+    },
+    {
+      "navn": "mini-aud",
+      "github": "audmaha",
+      "poeng": 2,
+      "feil": [],
+      "lag": [],
+      "levert": [
+        {
+          "issue": 43,
+          "navn": "Statistikk",
+          "poeng": 2
+        }
+      ],
+      "dollar": 7.352,
+      "tokens": 13387850,
+      "sekunder": 2912,
+      "pr": 5,
+      "utkast": 0,
+      "merget": 1,
+      "kjoeringer": 10,
+      "utenPr": 5,
       "bygg": [],
       "estimert": false,
       "plass": 12
@@ -526,8 +526,8 @@
       "pr": 2,
       "utkast": 0,
       "merget": 0,
-      "kjoeringer": 5,
-      "utenPr": 3,
+      "kjoeringer": 6,
+      "utenPr": 4,
       "bygg": [],
       "estimert": false,
       "plass": 19
@@ -575,26 +575,10 @@
     {
       "agent": "mini-wilma",
       "github": "larsajakobsen",
-      "issue": 26,
-      "navn": "Skoler",
-      "startet": "2026-09-23T12:00:11.8740211+00:00",
-      "minutter": 18
-    },
-    {
-      "agent": "mini-aud",
-      "github": "audmaha",
-      "issue": 132,
-      "navn": "Ekte sollys på 3D-byggene",
-      "startet": "2026-09-23T12:07:36.4342939+00:00",
-      "minutter": 10
-    },
-    {
-      "agent": "mini-wilma",
-      "github": "larsajakobsen",
       "issue": 8,
       "navn": "Hendelser",
       "startet": "2026-09-23T12:10:34.6234355+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "mini-wilma",
@@ -689,7 +673,7 @@
       "issue": 29,
       "navn": "Nytt lag: museer og samlinger",
       "github": "jthagesk",
-      "oppdatert": "2026-09-23T12:12:52Z"
+      "oppdatert": "2026-09-23T12:19:01Z"
     },
     {
       "issue": 30,
@@ -917,7 +901,7 @@
       "issue": 128,
       "navn": "Simulering: tsunami i Oslofjorden",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T12:14:52Z"
+      "oppdatert": "2026-09-23T12:18:58Z"
     },
     {
       "issue": 129,
@@ -953,25 +937,31 @@
       "issue": 132,
       "navn": "Ekte sollys på 3D-byggene",
       "github": "audmaha",
-      "oppdatert": "2026-09-23T12:15:00Z"
+      "oppdatert": "2026-09-23T12:19:01Z"
     },
     {
       "issue": 132,
       "navn": "Ekte sollys på 3D-byggene",
       "github": "nilsgs",
-      "oppdatert": "2026-09-23T12:15:00Z"
+      "oppdatert": "2026-09-23T12:19:01Z"
     },
     {
       "issue": 141,
       "navn": "Tydelige kartsymboler: båter som ser ut som båter",
       "github": "leif-larsen",
-      "oppdatert": "2026-09-23T12:17:17Z"
+      "oppdatert": "2026-09-23T12:18:40Z"
     },
     {
       "issue": 142,
       "navn": "Kurs på skipene",
       "github": "randsu",
       "oppdatert": "2026-09-23T12:03:16Z"
+    },
+    {
+      "issue": 157,
+      "navn": "Kontrakttester for alle lag",
+      "github": "randsu",
+      "oppdatert": "2026-09-23T12:19:03Z"
     },
     {
       "issue": 158,
@@ -992,6 +982,12 @@
       "oppdatert": "2026-09-23T12:16:46Z"
     },
     {
+      "issue": 191,
+      "navn": "Et døgn med bysykkelturer på 90 sekunder",
+      "github": "randsu",
+      "oppdatert": "2026-09-23T12:19:03Z"
+    },
+    {
       "issue": 198,
       "navn": "Et lite pling når noe nytt dukker opp",
       "github": "larsajakobsen",
@@ -1005,6 +1001,30 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 200,
+      "tittel": "Ekte sollys på 3D-byggene",
+      "github": "audmaha",
+      "agent": "mini-aud",
+      "opprettet": "2026-09-23T12:18:47Z",
+      "oppdatert": "2026-09-23T12:18:48Z",
+      "utkast": false,
+      "issues": [
+        132
+      ]
+    },
+    {
+      "pr": 80,
+      "tittel": "Nytt lag: politilogg og nyhetshendelser",
+      "github": "larsajakobsen",
+      "agent": "mini-wilma",
+      "opprettet": "2026-09-23T08:30:50Z",
+      "oppdatert": "2026-09-23T12:18:39Z",
+      "utkast": false,
+      "issues": [
+        8
+      ]
+    },
     {
       "pr": 144,
       "tittel": "Tydelige kartsymboler: båter som ser ut som båter (#141)",
@@ -1183,18 +1203,6 @@
       "utkast": false,
       "issues": [
         11
-      ]
-    },
-    {
-      "pr": 80,
-      "tittel": "Nytt lag: politilogg og nyhetshendelser",
-      "github": "larsajakobsen",
-      "agent": "mini-wilma",
-      "opprettet": "2026-09-23T08:30:50Z",
-      "oppdatert": "2026-09-23T09:21:49Z",
-      "utkast": false,
-      "issues": [
-        8
       ]
     },
     {
