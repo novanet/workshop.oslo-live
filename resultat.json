@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T13:40:00",
+  "oppdatert": "2026-09-23T13:40:38",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -143,13 +143,13 @@
           "poeng": 3
         }
       ],
-      "dollar": 8.168,
-      "tokens": 14859390,
-      "sekunder": 2866,
+      "dollar": 9.742,
+      "tokens": 17981676,
+      "sekunder": 3497,
       "pr": 3,
       "utkast": 0,
       "merget": 2,
-      "kjoeringer": 6,
+      "kjoeringer": 7,
       "utenPr": 3,
       "bygg": [],
       "estimert": false,
@@ -255,10 +255,10 @@
           "poeng": 2
         }
       ],
-      "dollar": 15.08,
-      "tokens": 27825920,
-      "sekunder": 4778,
-      "pr": 5,
+      "dollar": 16.115,
+      "tokens": 29007290,
+      "sekunder": 5118,
+      "pr": 6,
       "utkast": 0,
       "merget": 2,
       "kjoeringer": 16,
@@ -552,7 +552,7 @@
       "issue": 120,
       "navn": "Vis endringen per lag i lagvelgeren",
       "startet": "2026-09-23T11:34:18.8221852+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-wilma",
@@ -561,6 +561,14 @@
       "navn": "Simulering: meteornedslag",
       "startet": "2026-09-23T11:35:47.7322329+00:00",
       "minutter": 4
+    },
+    {
+      "agent": "mini-gir",
+      "github": "GIR75",
+      "issue": 18,
+      "navn": "Kulturminner",
+      "startet": "2026-09-23T11:40:28.2628432+00:00",
+      "minutter": 0
     }
   ],
   "main": {
@@ -616,7 +624,7 @@
       "issue": 13,
       "navn": "Nytt lag: veiarbeid og stengte veier",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T09:51:51Z"
+      "oppdatert": "2026-09-23T11:40:36Z"
     },
     {
       "issue": 14,
@@ -634,7 +642,7 @@
       "issue": 18,
       "navn": "Nytt lag: kulturminner",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T11:39:57Z"
+      "oppdatert": "2026-09-23T11:40:29Z"
     },
     {
       "issue": 19,
@@ -712,7 +720,7 @@
       "issue": 33,
       "navn": "Nytt lag: sykkelparkering",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T09:52:43Z"
+      "oppdatert": "2026-09-23T11:40:16Z"
     },
     {
       "issue": 39,
@@ -766,7 +774,7 @@
       "issue": 51,
       "navn": "Strukturert logging",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T09:51:57Z"
+      "oppdatert": "2026-09-23T11:40:35Z"
     },
     {
       "issue": 52,
@@ -814,7 +822,7 @@
       "issue": 112,
       "navn": "Nytt lag: målestasjoner i elvene",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T09:45:51Z"
+      "oppdatert": "2026-09-23T11:40:29Z"
     },
     {
       "issue": 113,
@@ -962,6 +970,30 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 140,
+      "tittel": "Vis endringen per lag i lagvelgeren",
+      "github": "larsajakobsen",
+      "agent": "mini-wilma",
+      "opprettet": "2026-09-23T11:40:24Z",
+      "oppdatert": "2026-09-23T11:40:25Z",
+      "utkast": false,
+      "issues": [
+        120
+      ]
+    },
+    {
+      "pr": 97,
+      "tittel": "Søk på tvers av alle lag (#47)",
+      "github": "Puiu",
+      "agent": "mini-taco",
+      "opprettet": "2026-09-23T08:46:56Z",
+      "oppdatert": "2026-09-23T11:40:00Z",
+      "utkast": false,
+      "issues": [
+        47
+      ]
+    },
     {
       "pr": 89,
       "tittel": "#23: Del kartutsnittet som en lenke",
@@ -1260,18 +1292,6 @@
       "utkast": false,
       "issues": [
         41
-      ]
-    },
-    {
-      "pr": 97,
-      "tittel": "Søk på tvers av alle lag (#47)",
-      "github": "Puiu",
-      "agent": "mini-taco",
-      "opprettet": "2026-09-23T08:46:56Z",
-      "oppdatert": "2026-09-23T09:01:16Z",
-      "utkast": false,
-      "issues": [
-        47
       ]
     },
     {
