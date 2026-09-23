@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T15:21:02",
+  "oppdatert": "2026-09-23T15:21:45",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -701,7 +701,7 @@
       "issue": 210,
       "navn": "Historikkgrafen blinker fordi appen kjører på tre replikaer",
       "startet": "2026-09-23T13:19:01.0373888+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-wilma",
@@ -709,14 +709,14 @@
       "issue": 193,
       "navn": "Nytt lag: hjertestartere",
       "startet": "2026-09-23T13:20:02.3717642+00:00",
-      "minutter": 0
+      "minutter": 1
     }
   ],
   "main": {
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
     "pr": null,
-    "kjoeringer": 64
+    "kjoeringer": 65
   },
   "produkt": {
     "testerBestatt": 20,
@@ -1206,12 +1206,24 @@
   ],
   "aapne": [
     {
+      "pr": 83,
+      "tittel": "Nytt lag: museer og samlinger",
+      "github": "jthagesk",
+      "agent": "mini-kirsten",
+      "opprettet": "2026-09-23T08:34:12Z",
+      "oppdatert": "2026-09-23T13:21:23Z",
+      "utkast": false,
+      "issues": [
+        29
+      ]
+    },
+    {
       "pr": 252,
       "tittel": "Nytt lag: bysykkelstasjoner som fyllingsringer",
       "github": "FrodeBl",
       "agent": "mini-frode",
       "opprettet": "2026-09-23T13:15:46Z",
-      "oppdatert": "2026-09-23T13:20:08Z",
+      "oppdatert": "2026-09-23T13:21:15Z",
       "utkast": false,
       "issues": [
         186
@@ -1227,18 +1239,6 @@
       "utkast": false,
       "issues": [
         48
-      ]
-    },
-    {
-      "pr": 83,
-      "tittel": "Nytt lag: museer og samlinger",
-      "github": "jthagesk",
-      "agent": "mini-kirsten",
-      "opprettet": "2026-09-23T08:34:12Z",
-      "oppdatert": "2026-09-23T13:18:35Z",
-      "utkast": false,
-      "issues": [
-        29
       ]
     },
     {
