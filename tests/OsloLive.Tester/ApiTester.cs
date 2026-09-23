@@ -4,6 +4,7 @@ using System.Text;
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using OsloLive.Historikk;
 using OsloLive.Kart;
 
@@ -131,6 +132,17 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
     }
 
     [Fact]
+    public async Task Lagoversikten_har_holdeplasser()
+    {
+        var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
+
+        var holdeplasser = lag!.Single(l => l.Id == "holdeplasser");
+        Assert.Equal("Holdeplasser", holdeplasser.Navn);
+        Assert.False(string.IsNullOrWhiteSpace(holdeplasser.Beskrivelse));
+        Assert.False(string.IsNullOrWhiteSpace(holdeplasser.Ikon));
+    }
+    
+    [Fact]
     public async Task Lagoversikten_har_skip()
     {
         var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
@@ -139,6 +151,17 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
         Assert.Equal("Skipstrafikk", skip.Navn);
         Assert.False(string.IsNullOrWhiteSpace(skip.Beskrivelse));
         Assert.False(string.IsNullOrWhiteSpace(skip.Ikon));
+    }
+
+    [Fact]
+    public async Task Lagoversikten_har_vannmaalere()
+    {
+        var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
+
+        var vannmaalere = lag!.Single(l => l.Id == "vannmaalere");
+        Assert.Equal("Vannmålere", vannmaalere.Navn);
+        Assert.False(string.IsNullOrWhiteSpace(vannmaalere.Beskrivelse));
+        Assert.False(string.IsNullOrWhiteSpace(vannmaalere.Ikon));
     }
 
     [Fact]
@@ -290,6 +313,53 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
             Allemannsdata.TømMellomlager();
         }
     }
+    
+    [Fact]
+    public async Task Holdeplasslaget_gir_featurecollection_uten_nett()
+    {
+        const string svar = """
+            {
+                "source": "entur",
+                "operation": "search_stops",
+                "parameters": {},
+                "data": {
+                    "returned": 1,
+                    "stops": [
+                        {
+                            "id": "NSR:StopPlace:59872",
+                            "name": "Oslo S",
+                            "label": "Oslo S, Oslo",
+                            "category": ["onstreetBus", "railStation"],
+                            "municipality": "Oslo",
+                            "county": "Oslo",
+                            "lat": 59.910357,
+                            "lon": 10.753051
+                        }
+                    ]
+                }
+            }
+            """;
+
+        using var vertUtenNett = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient<Allemannsdata>().ConfigurePrimaryHttpMessageHandler(() => new FastSvarHandler(svar))));
+        var klient = vertUtenNett.CreateClient();
+
+        Allemannsdata.TømMellomlager();
+        try
+        {
+            var respons = await klient.GetAsync("/api/lag/holdeplasser");
+            var lag = await respons.Content.ReadFromJsonAsync<Kartlag>();
+
+            Assert.Equal(HttpStatusCode.OK, respons.StatusCode);
+            Assert.Equal("FeatureCollection", lag!.Type);
+            Assert.NotEmpty(lag.Features);
+            Assert.Equal([10.753051, 59.910357], lag.Features[0].Geometry.Coordinates);
+        }
+        finally
+        {
+            Allemannsdata.TømMellomlager();
+        }
+    }
 
     private sealed class FastSvarHandler(string svar) : HttpMessageHandler
     {
@@ -298,6 +368,80 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
             {
                 Content = new StringContent(svar, Encoding.UTF8, "application/json"),
             });
+    }
+
+    [Fact]
+    public async Task Vannmaalerlaget_gir_featurecollection_uten_nett()
+    {
+        const string svar = """
+            {
+                "source": "nve",
+                "operation": "find_hydro_stations",
+                "parameters": {},
+                "data": {
+                    "count": 1,
+                    "returned": 1,
+                    "stations": [
+                        {
+                            "station_id": "6.38.0",
+                            "station_name": "Akerselva v/Elvebakken",
+                            "river": "Nordmarkvassdraget",
+                            "municipality": "Oslo",
+                            "county": "Oslo",
+                            "latitude": 59.91945,
+                            "longitude": 10.75348,
+                            "masl": 4,
+                            "latest_observation_at": "2026-09-23T11:00:00Z",
+                            "series": [
+                                {"parameter":1000,"name":"Vannstand","unit":"m","from":null,"to":null,"latest_data_at":"2026-09-23T11:00:00Z","resolutions":[0,60,1440]}
+                            ],
+                            "distance_km": 1.1
+                        }
+                    ],
+                    "limit": 100,
+                    "offset": 0,
+                    "has_more_results": false,
+                    "truncated": false
+                }
+            }
+            """;
+
+        var handler = new OpptakendeSvarHandler(svar);
+        using var vertUtenNett = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient<Allemannsdata>().ConfigurePrimaryHttpMessageHandler(() => handler)));
+        var klient = vertUtenNett.CreateClient();
+
+        Allemannsdata.TømMellomlager();
+        try
+        {
+            var respons = await klient.GetAsync("/api/lag/vannmaalere");
+            var lag = await respons.Content.ReadFromJsonAsync<Kartlag>();
+
+            Assert.Equal(HttpStatusCode.OK, respons.StatusCode);
+            Assert.Equal("FeatureCollection", lag!.Type);
+            Assert.NotEmpty(lag.Features);
+            Assert.Equal([10.75348, 59.91945], lag.Features[0].Geometry.Coordinates);
+            Assert.Contains("nve/find_hydro_stations", handler.SisteAdresse!.ToString());
+            Assert.Contains("has_recent_data=true", handler.SisteAdresse!.ToString());
+        }
+        finally
+        {
+            Allemannsdata.TømMellomlager();
+        }
+    }
+
+    private sealed class OpptakendeSvarHandler(string svar) : HttpMessageHandler
+    {
+        public Uri? SisteAdresse { get; private set; }
+
+        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage forespørsel, CancellationToken stopp)
+        {
+            SisteAdresse = forespørsel.RequestUri;
+            return Task.FromResult(new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(svar, Encoding.UTF8, "application/json"),
+            });
+        }
     }
 
     [Fact]
@@ -315,6 +459,27 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
         Assert.Equal(HttpStatusCode.BadGateway, fly.StatusCode);
         Assert.Equal(HttpStatusCode.OK, lag.StatusCode);
         Assert.Equal(HttpStatusCode.OK, helse.StatusCode);
+    }
+
+    [Fact]
+    public async Task Testverten_kjoerer_ingen_bakgrunnsjobb_og_lagrer_bare_i_sin_egen_mappe()
+    {
+        // Øyeblikksjobb og helsesjekken er fjernet fra testverten, og Historikk:Mappe peker på
+        // en midlertidig mappe som slettes etter testene. Ingen filer havner i App_Data/historikk.
+        // Testserveren har sin egen vertstjeneste; ingen av appens bakgrunnsjobber skal være der.
+        Assert.DoesNotContain(vert.Services.GetServices<IHostedService>(), t => t.GetType().Namespace?.StartsWith("OsloLive") == true);
+
+        var lager = vert.Services.GetRequiredService<Bildelager>();
+        await lager.Lagre("testlag", Geo.Samle([Geo.Lag("a", 59.91, 10.75, "A", "Test")]), DateTimeOffset.UtcNow);
+
+        Assert.NotEmpty(Directory.GetFiles(Path.Combine(vert.Mappe, "testlag"), "*.json"));
+    }
+
+    [Fact]
+    public async Task Historikk_for_ukjent_lag_gir_404()
+    {
+        var svar = await Klient.GetAsync("/api/lag/finnes-ikke/historikk");
+        Assert.Equal(HttpStatusCode.NotFound, svar.StatusCode);
     }
 
     [Fact]
@@ -405,6 +570,33 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
         var svar = await Klient.GetAsync("/api/lag/finnes-ikke?tid=2026-09-18T08:00:00Z");
 
         Assert.Equal(HttpStatusCode.NotFound, svar.StatusCode);
+    }
+
+    [Fact]
+    public async Task Historikk_for_lag_uten_bilder_gir_tom_liste()
+    {
+        var svar = await Klient.GetAsync("/api/lag/luftkvalitet/historikk");
+        var bilder = await svar.Content.ReadFromJsonAsync<List<Bilde>>();
+
+        Assert.Equal(HttpStatusCode.OK, svar.StatusCode);
+        Assert.NotNull(bilder);
+        Assert.Empty(bilder);
+    }
+
+    [Fact]
+    public async Task Historikk_viser_lagrede_bilder_med_tidspunkt_og_antall()
+    {
+        var lager = vert.Services.GetRequiredService<Bildelager>();
+        var punkt = Geo.Lag("a", 59.91, 10.75, "A", "Test");
+        await lager.Lagre("fly", Geo.Samle([punkt]), DateTimeOffset.UtcNow.AddHours(-1));
+
+        var svar = await Klient.GetAsync("/api/lag/fly/historikk");
+        var bilder = await svar.Content.ReadFromJsonAsync<List<Bilde>>();
+
+        Assert.Equal(HttpStatusCode.OK, svar.StatusCode);
+        Assert.NotNull(bilder);
+        var bilde = Assert.Single(bilder);
+        Assert.Equal(1, bilde.Antall);
     }
 
     [Fact]

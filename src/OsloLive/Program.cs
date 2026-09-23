@@ -51,12 +51,15 @@ builder.Services.AddSingleton<ILag, FlyLag>();
 builder.Services.AddSingleton<ILag, BadetemperaturLag>();
 builder.Services.AddSingleton<ILag, MobilitetLag>();
 builder.Services.AddSingleton<ILag, SpisestederLag>();
+builder.Services.AddSingleton<ILag, HoldeplasserLag>();
 builder.Services.AddSingleton<ILag, SkipLag>();
+builder.Services.AddSingleton<ILag, VannmaalereLag>();
 
 // Bakgrunnssjekk av kildehelse, se Helse/HelseSjekker.cs.
 builder.Services.Configure<HelseValg>(builder.Configuration.GetSection("Helse"));
 builder.Services.AddSingleton<HelseSjekker>();
 builder.Services.AddHostedService(sp => sp.GetRequiredService<HelseSjekker>());
+
 
 var app = builder.Build();
 
@@ -104,6 +107,21 @@ app.MapGet("/api/lag/{id}", async (string id, string? tid, IEnumerable<ILag> lag
         app.Logger.LogError(ex, "Laget {Id} feilet", id);
         return Results.Json(new { feil = ex.Message }, statusCode: 502);
     }
+});
+
+// Antall punkter per time i ett lag, siste døgn, eldste først.
+// Antall punkter per lagret bilde siste 24 timer (#25). Bildene ligger i App_Data/historikk i
+// containerens filsystem: de overlever omstart av prosessen, men en ny revisjon uten volum
+// starter med tom historikk som fylles igjen time for time. Se ARKITEKTUR.md.
+app.MapGet("/api/lag/{id}/historikk", (string id, IEnumerable<ILag> lag, Bildelager lager) =>
+{
+    var valgt = lag.FirstOrDefault(l => string.Equals(l.Id, id, StringComparison.OrdinalIgnoreCase));
+    if (valgt is null)
+    {
+        return Results.NotFound(new { feil = $"Fant ingen lag med id «{id}»." });
+    }
+
+    return Results.Ok(lager.Les(valgt.Id, DateTimeOffset.UtcNow));
 });
 
 // Antall punkter per bydel for ett lag. Tilstandsløs; bydelssentrene hentes
