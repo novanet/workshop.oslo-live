@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:23:35",
+  "oppdatert": "2026-09-23T10:24:01",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -141,25 +141,6 @@
       "plass": 6
     },
     {
-      "navn": "mini-wilma",
-      "github": "larsajakobsen",
-      "poeng": 0,
-      "feil": [],
-      "lag": [],
-      "levert": [],
-      "dollar": 0.883,
-      "tokens": 1545863,
-      "sekunder": 316,
-      "pr": 1,
-      "utkast": 0,
-      "merget": 0,
-      "kjoeringer": 2,
-      "utenPr": 1,
-      "bygg": [],
-      "estimert": false,
-      "plass": 7
-    },
-    {
       "navn": "mini-sindre",
       "github": "sin-rha",
       "poeng": 0,
@@ -173,6 +154,25 @@
       "utkast": 0,
       "merget": 0,
       "kjoeringer": 2,
+      "utenPr": 1,
+      "bygg": [],
+      "estimert": false,
+      "plass": 7
+    },
+    {
+      "navn": "mini-wilma",
+      "github": "larsajakobsen",
+      "poeng": 0,
+      "feil": [],
+      "lag": [],
+      "levert": [],
+      "dollar": 1.402,
+      "tokens": 2623990,
+      "sekunder": 512,
+      "pr": 2,
+      "utkast": 0,
+      "merget": 0,
+      "kjoeringer": 3,
       "utenPr": 1,
       "bygg": [],
       "estimert": false,
@@ -267,7 +267,7 @@
       "issue": 57,
       "navn": "Avgangstavle",
       "startet": "2026-09-23T08:16:36.122853+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-leif",
@@ -276,14 +276,6 @@
       "navn": "Adressesøk",
       "startet": "2026-09-23T08:18:27.0600008+00:00",
       "minutter": 5
-    },
-    {
-      "agent": "mini-wilma",
-      "github": "larsajakobsen",
-      "issue": 1,
-      "navn": "Koordinatrekkefølge",
-      "startet": "2026-09-23T08:20:01.4612094+00:00",
-      "minutter": 3
     },
     {
       "agent": "mini-wilma",
@@ -315,7 +307,7 @@
       "issue": 8,
       "navn": "Hendelser",
       "startet": "2026-09-23T08:22:51.9896553+00:00",
-      "minutter": 0
+      "minutter": 1
     },
     {
       "agent": "mini-kirsten",
@@ -349,13 +341,13 @@
       "issue": 1,
       "navn": "Alle punkter havner i havet, langt utenfor Norge",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T08:20:02Z"
+      "oppdatert": "2026-09-23T08:23:39Z"
     },
     {
       "issue": 1,
       "navn": "Alle punkter havner i havet, langt utenfor Norge",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T08:20:02Z"
+      "oppdatert": "2026-09-23T08:23:39Z"
     },
     {
       "issue": 2,
@@ -521,6 +513,18 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 75,
+      "tittel": "Alle punkter havner i havet, langt utenfor Norge",
+      "github": "larsajakobsen",
+      "agent": "mini-wilma",
+      "opprettet": "2026-09-23T08:23:37Z",
+      "oppdatert": "2026-09-23T08:23:38Z",
+      "utkast": false,
+      "issues": [
+        1
+      ]
+    },
     {
       "pr": 69,
       "tittel": "#56: Nytt lag: fly i lufta over Oslo",
