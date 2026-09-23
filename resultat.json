@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:50:11",
+  "oppdatert": "2026-09-23T10:50:38",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -347,13 +347,13 @@
       "feil": [],
       "lag": [],
       "levert": [],
-      "dollar": 7.55,
-      "tokens": 16880120,
-      "sekunder": 2597,
+      "dollar": 8.274,
+      "tokens": 18334204,
+      "sekunder": 2878,
       "pr": 3,
       "utkast": 0,
       "merget": 0,
-      "kjoeringer": 8,
+      "kjoeringer": 9,
       "utenPr": 5,
       "bygg": [],
       "estimert": false,
@@ -367,7 +367,7 @@
       "issue": 34,
       "navn": "Tidslinje",
       "startet": "2026-09-23T08:39:29.3560815+00:00",
-      "minutter": 10
+      "minutter": 11
     },
     {
       "agent": "helstein",
@@ -375,7 +375,7 @@
       "issue": 30,
       "navn": "Vannstand",
       "startet": "2026-09-23T08:39:37.818134+00:00",
-      "minutter": 10
+      "minutter": 11
     },
     {
       "agent": "mini-kirsten",
@@ -386,20 +386,12 @@
       "minutter": 8
     },
     {
-      "agent": "mini-frode",
-      "github": "FrodeBl",
-      "issue": 48,
-      "navn": "Parallell henting",
-      "startet": "2026-09-23T08:45:28.6931293+00:00",
-      "minutter": 4
-    },
-    {
       "agent": "mini-richard",
       "github": "randsu",
       "issue": 24,
       "navn": "Bydeler",
       "startet": "2026-09-23T08:45:28.8651408+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-frode",
@@ -407,7 +399,7 @@
       "issue": 19,
       "navn": "Artsobservasjoner",
       "startet": "2026-09-23T08:46:29.0268417+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-frode",
@@ -415,7 +407,7 @@
       "issue": 50,
       "navn": "Metrikker",
       "startet": "2026-09-23T08:47:21.1306878+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-richard",
@@ -740,7 +732,7 @@
       "issue": 48,
       "navn": "Hent lagene parallelt",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T08:45:29Z"
+      "oppdatert": "2026-09-23T08:50:29Z"
     },
     {
       "issue": 49,
@@ -810,6 +802,30 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 67,
+      "tittel": "Hent lagene parallelt",
+      "github": "FrodeBl",
+      "agent": "mini-frode",
+      "opprettet": "2026-09-23T07:59:18Z",
+      "oppdatert": "2026-09-23T08:50:28Z",
+      "utkast": false,
+      "issues": [
+        48
+      ]
+    },
+    {
+      "pr": 93,
+      "tittel": "En helsesjekk som betyr noe (#53)",
+      "github": "Buggz",
+      "agent": "mini-knive",
+      "opprettet": "2026-09-23T08:42:24Z",
+      "oppdatert": "2026-09-23T08:50:20Z",
+      "utkast": false,
+      "issues": [
+        53
+      ]
+    },
     {
       "pr": 98,
       "tittel": "Overlapping boxes",
@@ -940,18 +956,6 @@
       "utkast": false,
       "issues": [
         43
-      ]
-    },
-    {
-      "pr": 93,
-      "tittel": "En helsesjekk som betyr noe (#53)",
-      "github": "Buggz",
-      "agent": "mini-knive",
-      "opprettet": "2026-09-23T08:42:24Z",
-      "oppdatert": "2026-09-23T08:42:25Z",
-      "utkast": false,
-      "issues": [
-        53
       ]
     },
     {
@@ -1132,18 +1136,6 @@
       "utkast": false,
       "issues": [
         4
-      ]
-    },
-    {
-      "pr": 67,
-      "tittel": "Hent lagene parallelt",
-      "github": "FrodeBl",
-      "agent": "mini-frode",
-      "opprettet": "2026-09-23T07:59:18Z",
-      "oppdatert": "2026-09-23T08:13:25Z",
-      "utkast": false,
-      "issues": [
-        48
       ]
     }
   ],
