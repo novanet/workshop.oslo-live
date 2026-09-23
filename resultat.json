@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:28:12",
+  "oppdatert": "2026-09-23T14:28:52",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -596,7 +596,7 @@
       "issue": 191,
       "navn": "Et døgn med bysykkelturer på 90 sekunder",
       "startet": "2026-09-23T12:19:02.7888497+00:00",
-      "minutter": 8
+      "minutter": 9
     },
     {
       "agent": "mini-wilma",
@@ -604,7 +604,7 @@
       "issue": 190,
       "navn": "Hvor langt når jeg på 15 minutter?",
       "startet": "2026-09-23T12:19:34.8533908+00:00",
-      "minutter": 8
+      "minutter": 9
     },
     {
       "agent": "mini-frode",
@@ -612,7 +612,7 @@
       "issue": 128,
       "navn": "Simulering: tsunami i Oslofjorden",
       "startet": "2026-09-23T12:19:38.2554331+00:00",
-      "minutter": 8
+      "minutter": 9
     },
     {
       "agent": "mini-kirsten",
@@ -620,7 +620,7 @@
       "issue": 29,
       "navn": "Museer",
       "startet": "2026-09-23T12:19:47.6786683+00:00",
-      "minutter": 8
+      "minutter": 9
     },
     {
       "agent": "mini-wilma",
@@ -628,7 +628,7 @@
       "issue": 129,
       "navn": "Simulering: meteornedslag",
       "startet": "2026-09-23T12:20:25.1910717+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "mini-taco",
@@ -636,7 +636,7 @@
       "issue": 133,
       "navn": "Havet stiger: hva havner under vann?",
       "startet": "2026-09-23T12:20:40.4209313+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "mini-knive",
@@ -644,7 +644,7 @@
       "issue": 28,
       "navn": "Tog",
       "startet": "2026-09-23T12:21:43.7886322+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-astrid",
@@ -652,7 +652,7 @@
       "issue": 188,
       "navn": "Vinden som strømmer over byen",
       "startet": "2026-09-23T12:23:41.4076789+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-richard",
@@ -660,7 +660,7 @@
       "issue": 158,
       "navn": "Strøm av endringer i stedet for å spørre hvert 15. sekund",
       "startet": "2026-09-23T12:24:01.7531547+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-richard",
@@ -668,7 +668,7 @@
       "issue": 170,
       "navn": "Fortell en historie med kartet, styrt med presentasjonsklikker",
       "startet": "2026-09-23T12:24:03.3026673+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "helstein",
@@ -676,7 +676,7 @@
       "issue": 194,
       "navn": "Nytt lag: bomstasjoner",
       "startet": "2026-09-23T12:24:21.6258713+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-johan",
@@ -684,7 +684,7 @@
       "issue": 10,
       "navn": "Trafikk",
       "startet": "2026-09-23T12:24:28.6299515+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "henrik",
@@ -692,7 +692,7 @@
       "issue": 114,
       "navn": "Nytt lag: Kristiania i 1910",
       "startet": "2026-09-23T12:26:11.5734946+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-leif",
@@ -700,7 +700,63 @@
       "issue": 118,
       "navn": "Nyhetslinje nederst på skjermen",
       "startet": "2026-09-23T12:26:25.0299132+00:00",
-      "minutter": 1
+      "minutter": 2
+    },
+    {
+      "agent": "mini-gir",
+      "github": "GIR75",
+      "issue": 18,
+      "navn": "Kulturminner",
+      "startet": "2026-09-23T12:27:56.5414222+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-gir",
+      "github": "GIR75",
+      "issue": 13,
+      "navn": "Veiarbeid",
+      "startet": "2026-09-23T12:27:56.7393798+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-gir",
+      "github": "GIR75",
+      "issue": 51,
+      "navn": "Logging",
+      "startet": "2026-09-23T12:28:07.2626034+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "henrik",
+      "github": "monet820",
+      "issue": 116,
+      "navn": "Nytt lag: værstasjoner",
+      "startet": "2026-09-23T12:28:11.5051731+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-gir",
+      "github": "GIR75",
+      "issue": 33,
+      "navn": "Sykkelparkering",
+      "startet": "2026-09-23T12:28:16.1616527+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-wilma",
+      "github": "larsajakobsen",
+      "issue": 26,
+      "navn": "Skoler",
+      "startet": "2026-09-23T12:28:26.4775068+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-jon",
+      "github": "yonzo",
+      "issue": 189,
+      "navn": "Travlere enn vanlig på veiene",
+      "startet": "2026-09-23T12:28:43.0815958+00:00",
+      "minutter": 0
     }
   ],
   "main": {
@@ -729,6 +785,12 @@
     "feilmelding": null
   },
   "tildelt": [
+    {
+      "issue": 37,
+      "navn": "Eksporter det du ser",
+      "github": "renaa",
+      "oppdatert": "2026-09-23T12:06:19Z"
+    },
     {
       "issue": 39,
       "navn": "Tastatursnarveier",
@@ -781,211 +843,211 @@
       "issue": 51,
       "navn": "Strukturert logging",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T12:27:37Z"
+      "oppdatert": "2026-09-23T12:28:08Z"
     },
     {
       "issue": 52,
       "navn": "Gjør kartutsnittet konfigurerbart",
       "github": "jthagesk",
-      "oppdatert": "2026-09-23T09:47:34Z"
+      "oppdatert": "2026-09-23T12:28:27Z"
     },
     {
       "issue": 55,
       "navn": "Kartet blir tregt med mange punkter",
       "github": "sin-rha",
-      "oppdatert": "2026-09-23T11:55:02Z"
+      "oppdatert": "2026-09-23T12:28:28Z"
     },
     {
       "issue": 57,
       "navn": "Avgangstavle for Gardermoen",
       "github": "Buggz",
-      "oppdatert": "2026-09-23T08:31:36Z"
+      "oppdatert": "2026-09-23T12:28:29Z"
     },
     {
       "issue": 57,
       "navn": "Avgangstavle for Gardermoen",
       "github": "ingvevs",
-      "oppdatert": "2026-09-23T08:31:36Z"
+      "oppdatert": "2026-09-23T12:28:29Z"
     },
     {
       "issue": 59,
       "navn": "Overlapping boxes",
       "github": "jthagesk",
-      "oppdatert": "2026-09-23T09:20:55Z"
+      "oppdatert": "2026-09-23T12:28:29Z"
     },
     {
       "issue": 59,
       "navn": "Overlapping boxes",
       "github": "sin-rha",
-      "oppdatert": "2026-09-23T09:20:55Z"
+      "oppdatert": "2026-09-23T12:28:29Z"
     },
     {
       "issue": 111,
       "navn": "Nytt lag: kaier og ferjekaier",
       "github": "martinrholth",
-      "oppdatert": "2026-09-23T12:27:28Z"
+      "oppdatert": "2026-09-23T12:28:30Z"
     },
     {
       "issue": 113,
       "navn": "Nytt lag: store arbeidsplasser i sentrum",
       "github": "Copilot",
-      "oppdatert": "2026-09-23T09:46:54Z"
+      "oppdatert": "2026-09-23T12:28:31Z"
     },
     {
       "issue": 113,
       "navn": "Nytt lag: store arbeidsplasser i sentrum",
       "github": "SasaRad",
-      "oppdatert": "2026-09-23T09:46:54Z"
+      "oppdatert": "2026-09-23T12:28:31Z"
     },
     {
       "issue": 114,
       "navn": "Nytt lag: Kristiania i 1910",
       "github": "monet820",
-      "oppdatert": "2026-09-23T12:26:12Z"
+      "oppdatert": "2026-09-23T12:28:31Z"
     },
     {
       "issue": 115,
       "navn": "Nytt lag: parker og torg",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T11:17:22Z"
+      "oppdatert": "2026-09-23T12:28:32Z"
     },
     {
       "issue": 115,
       "navn": "Nytt lag: parker og torg",
       "github": "novanettor",
-      "oppdatert": "2026-09-23T11:17:22Z"
+      "oppdatert": "2026-09-23T12:28:32Z"
     },
     {
       "issue": 116,
       "navn": "Nytt lag: værstasjoner",
       "github": "monet820",
-      "oppdatert": "2026-09-23T12:27:09Z"
+      "oppdatert": "2026-09-23T12:28:32Z"
     },
     {
       "issue": 116,
       "navn": "Nytt lag: værstasjoner",
       "github": "nilsgs",
-      "oppdatert": "2026-09-23T12:27:09Z"
+      "oppdatert": "2026-09-23T12:28:32Z"
     },
     {
       "issue": 117,
       "navn": "Nye punkter pulserer når de dukker opp",
       "github": "Copilot",
-      "oppdatert": "2026-09-23T09:47:35Z"
+      "oppdatert": "2026-09-23T12:28:33Z"
     },
     {
       "issue": 117,
       "navn": "Nye punkter pulserer når de dukker opp",
       "github": "SasaRad",
-      "oppdatert": "2026-09-23T09:47:35Z"
+      "oppdatert": "2026-09-23T12:28:33Z"
     },
     {
       "issue": 118,
       "navn": "Nyhetslinje nederst på skjermen",
       "github": "leif-larsen",
-      "oppdatert": "2026-09-23T12:26:26Z"
+      "oppdatert": "2026-09-23T12:28:34Z"
     },
     {
       "issue": 119,
       "navn": "Mørkt kart når sola går ned i Oslo",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T09:47:47Z"
+      "oppdatert": "2026-09-23T12:28:34Z"
     },
     {
       "issue": 120,
       "navn": "Vis endringen per lag i lagvelgeren",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T11:41:18Z"
+      "oppdatert": "2026-09-23T12:28:35Z"
     },
     {
       "issue": 121,
       "navn": "Følg et punkt som beveger seg",
       "github": "Copilot",
-      "oppdatert": "2026-09-23T09:47:37Z"
+      "oppdatert": "2026-09-23T12:28:35Z"
     },
     {
       "issue": 121,
       "navn": "Følg et punkt som beveger seg",
       "github": "SasaRad",
-      "oppdatert": "2026-09-23T09:47:37Z"
+      "oppdatert": "2026-09-23T12:28:35Z"
     },
     {
       "issue": 123,
       "navn": "Riktig ikon for sykkel, elsparkesykkel og bil",
       "github": "Copilot",
-      "oppdatert": "2026-09-23T09:48:04Z"
+      "oppdatert": "2026-09-23T12:28:36Z"
     },
     {
       "issue": 123,
       "navn": "Riktig ikon for sykkel, elsparkesykkel og bil",
       "github": "SasaRad",
-      "oppdatert": "2026-09-23T09:48:04Z"
+      "oppdatert": "2026-09-23T12:28:36Z"
     },
     {
       "issue": 124,
       "navn": "Punkter som flytter seg, glir til ny posisjon",
       "github": "novanettor",
-      "oppdatert": "2026-09-23T12:01:21Z"
+      "oppdatert": "2026-09-23T12:28:36Z"
     },
     {
       "issue": 128,
       "navn": "Simulering: tsunami i Oslofjorden",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T12:19:38Z"
+      "oppdatert": "2026-09-23T12:28:37Z"
     },
     {
       "issue": 129,
       "navn": "Simulering: meteornedslag",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T12:20:26Z"
+      "oppdatert": "2026-09-23T12:28:38Z"
     },
     {
       "issue": 130,
       "navn": "Fyrverkeri over Rådhuset når en PR blir merget",
       "github": "Copilot",
-      "oppdatert": "2026-09-23T09:50:25Z"
+      "oppdatert": "2026-09-23T12:28:38Z"
     },
     {
       "issue": 130,
       "navn": "Fyrverkeri over Rådhuset når en PR blir merget",
       "github": "SasaRad",
-      "oppdatert": "2026-09-23T09:50:25Z"
+      "oppdatert": "2026-09-23T12:28:38Z"
     },
     {
       "issue": 130,
       "navn": "Fyrverkeri over Rådhuset når en PR blir merget",
       "github": "monet820",
-      "oppdatert": "2026-09-23T09:50:25Z"
+      "oppdatert": "2026-09-23T12:28:38Z"
     },
     {
       "issue": 131,
       "navn": "Kameratur over Oslo når ingen rører skjermen",
       "github": "randsu",
-      "oppdatert": "2026-09-23T11:02:42Z"
+      "oppdatert": "2026-09-23T12:28:39Z"
     },
     {
       "issue": 132,
       "navn": "Ekte sollys på 3D-byggene",
       "github": "audmaha",
-      "oppdatert": "2026-09-23T12:19:01Z"
+      "oppdatert": "2026-09-23T12:28:39Z"
     },
     {
       "issue": 132,
       "navn": "Ekte sollys på 3D-byggene",
       "github": "nilsgs",
-      "oppdatert": "2026-09-23T12:19:01Z"
+      "oppdatert": "2026-09-23T12:28:39Z"
     },
     {
       "issue": 133,
       "navn": "Havet stiger: hva havner under vann?",
       "github": "Puiu",
-      "oppdatert": "2026-09-23T12:20:41Z"
+      "oppdatert": "2026-09-23T12:28:40Z"
     },
     {
       "issue": 142,
       "navn": "Kurs på skipene",
       "github": "randsu",
-      "oppdatert": "2026-09-23T12:03:16Z"
+      "oppdatert": "2026-09-23T12:28:41Z"
     },
     {
       "issue": 157,
@@ -1024,6 +1086,12 @@
       "oppdatert": "2026-09-23T12:23:42Z"
     },
     {
+      "issue": 189,
+      "navn": "Travlere enn vanlig på veiene",
+      "github": "yonzo",
+      "oppdatert": "2026-09-23T12:28:43Z"
+    },
+    {
       "issue": 190,
       "navn": "Hvor langt når jeg på 15 minutter?",
       "github": "larsajakobsen",
@@ -1048,12 +1116,6 @@
       "oppdatert": "2026-09-23T12:26:24Z"
     },
     {
-      "issue": 198,
-      "navn": "Et lite pling når noe nytt dukker opp",
-      "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T12:27:23Z"
-    },
-    {
       "issue": 199,
       "navn": "Styr storskjermen fra mobilen",
       "github": "yonzo",
@@ -1061,6 +1123,18 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 217,
+      "tittel": "Beskytt storskjermen mot innbrenning",
+      "github": "yonzo",
+      "agent": "mini-jon",
+      "opprettet": "2026-09-23T12:26:22Z",
+      "oppdatert": "2026-09-23T12:27:44Z",
+      "utkast": false,
+      "issues": [
+        197
+      ]
+    },
     {
       "pr": 218,
       "tittel": "Nytt lag: kaier og ferjekaier",
@@ -1071,18 +1145,6 @@
       "utkast": false,
       "issues": [
         111
-      ]
-    },
-    {
-      "pr": 217,
-      "tittel": "Beskytt storskjermen mot innbrenning",
-      "github": "yonzo",
-      "agent": "mini-jon",
-      "opprettet": "2026-09-23T12:26:22Z",
-      "oppdatert": "2026-09-23T12:26:23Z",
-      "utkast": false,
-      "issues": [
-        197
       ]
     },
     {
