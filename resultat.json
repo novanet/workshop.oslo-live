@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:38:47",
+  "oppdatert": "2026-09-23T14:39:48",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -62,13 +62,13 @@
           "poeng": 8
         }
       ],
-      "dollar": 22.97,
-      "tokens": 43894602,
-      "sekunder": 8309,
-      "pr": 13,
+      "dollar": 23.539,
+      "tokens": 45344976,
+      "sekunder": 8558,
+      "pr": 14,
       "utkast": 0,
       "merget": 10,
-      "kjoeringer": 27,
+      "kjoeringer": 28,
       "utenPr": 14,
       "bygg": [],
       "estimert": false,
@@ -128,14 +128,14 @@
         }
       ],
       "levert": [],
-      "dollar": 12.603,
-      "tokens": 20571675,
-      "sekunder": 3866,
+      "dollar": 13.383,
+      "tokens": 21683786,
+      "sekunder": 4082,
       "pr": 3,
       "utkast": 0,
       "merget": 2,
-      "kjoeringer": 28,
-      "utenPr": 25,
+      "kjoeringer": 29,
+      "utenPr": 26,
       "bygg": [],
       "estimert": false,
       "plass": 3
@@ -280,6 +280,36 @@
       "plass": 7
     },
     {
+      "navn": "mini-aud",
+      "github": "audmaha",
+      "poeng": 4,
+      "feil": [],
+      "lag": [],
+      "levert": [
+        {
+          "issue": 41,
+          "navn": "Fargeblindhet",
+          "poeng": 2
+        },
+        {
+          "issue": 43,
+          "navn": "Statistikk",
+          "poeng": 2
+        }
+      ],
+      "dollar": 7.352,
+      "tokens": 13387850,
+      "sekunder": 2912,
+      "pr": 5,
+      "utkast": 0,
+      "merget": 2,
+      "kjoeringer": 10,
+      "utenPr": 5,
+      "bygg": [],
+      "estimert": false,
+      "plass": 8
+    },
+    {
       "navn": "helstein",
       "github": "nilsgs",
       "poeng": 4,
@@ -308,7 +338,7 @@
       "utenPr": 11,
       "bygg": [],
       "estimert": false,
-      "plass": 8
+      "plass": 9
     },
     {
       "navn": "mini-kirsten",
@@ -333,7 +363,7 @@
       "utenPr": 8,
       "bygg": [],
       "estimert": false,
-      "plass": 9
+      "plass": 10
     },
     {
       "navn": "mini-jon",
@@ -358,7 +388,7 @@
       "utenPr": 7,
       "bygg": [],
       "estimert": false,
-      "plass": 10
+      "plass": 11
     },
     {
       "navn": "henrik",
@@ -383,7 +413,7 @@
       "utenPr": 6,
       "bygg": [],
       "estimert": false,
-      "plass": 11
+      "plass": 12
     },
     {
       "navn": "Dmitry-agent",
@@ -406,31 +436,6 @@
       "merget": 1,
       "kjoeringer": 2,
       "utenPr": 1,
-      "bygg": [],
-      "estimert": false,
-      "plass": 12
-    },
-    {
-      "navn": "mini-aud",
-      "github": "audmaha",
-      "poeng": 2,
-      "feil": [],
-      "lag": [],
-      "levert": [
-        {
-          "issue": 43,
-          "navn": "Statistikk",
-          "poeng": 2
-        }
-      ],
-      "dollar": 7.352,
-      "tokens": 13387850,
-      "sekunder": 2912,
-      "pr": 5,
-      "utkast": 0,
-      "merget": 1,
-      "kjoeringer": 10,
-      "utenPr": 5,
       "bygg": [],
       "estimert": false,
       "plass": 13
@@ -607,7 +612,7 @@
       "issue": 26,
       "navn": "Skoler",
       "startet": "2026-09-23T12:28:26.4775068+00:00",
-      "minutter": 10
+      "minutter": 11
     },
     {
       "agent": "mini-wilma",
@@ -615,7 +620,7 @@
       "issue": 214,
       "navn": "Lagvelgeren er for høy: historikkgrafen tar en egen rad per lag",
       "startet": "2026-09-23T12:31:25.313151+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "henrik",
@@ -623,7 +628,7 @@
       "issue": 114,
       "navn": "Nytt lag: Kristiania i 1910",
       "startet": "2026-09-23T12:32:02.4130394+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-wilma",
@@ -631,7 +636,7 @@
       "issue": 206,
       "navn": "Popupene viser rådata: ISO-tider, «ikon: 😊» og tall uten enhet",
       "startet": "2026-09-23T12:32:25.3380267+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-knive",
@@ -639,7 +644,7 @@
       "issue": 215,
       "navn": "Svarte klynger dekker sentrum og skjuler hvilke lag som er der",
       "startet": "2026-09-23T12:34:13.5766398+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-kirsten",
@@ -647,7 +652,7 @@
       "issue": 29,
       "navn": "Museer",
       "startet": "2026-09-23T12:34:23.8175869+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-leif",
@@ -655,15 +660,7 @@
       "issue": 118,
       "navn": "Nyhetslinje nederst på skjermen",
       "startet": "2026-09-23T12:34:25.9928919+00:00",
-      "minutter": 4
-    },
-    {
-      "agent": "mini-richard",
-      "github": "randsu",
-      "issue": 116,
-      "navn": "Nytt lag: værstasjoner",
-      "startet": "2026-09-23T12:34:27.1286355+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-jon",
@@ -679,15 +676,7 @@
       "issue": 18,
       "navn": "Kulturminner",
       "startet": "2026-09-23T12:35:26.9487115+00:00",
-      "minutter": 3
-    },
-    {
-      "agent": "mini-gir",
-      "github": "GIR75",
-      "issue": 13,
-      "navn": "Veiarbeid",
-      "startet": "2026-09-23T12:35:36.9770034+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-gir",
@@ -695,7 +684,7 @@
       "issue": 51,
       "navn": "Logging",
       "startet": "2026-09-23T12:35:46.639797+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "mini-gir",
@@ -703,7 +692,7 @@
       "issue": 33,
       "navn": "Sykkelparkering",
       "startet": "2026-09-23T12:35:47.0074899+00:00",
-      "minutter": 2
+      "minutter": 3
     },
     {
       "agent": "helstein",
@@ -727,7 +716,7 @@
       "issue": 205,
       "navn": "Strømprisen vises med desimalpunktum",
       "startet": "2026-09-23T12:38:19.4975108+00:00",
-      "minutter": 0
+      "minutter": 1
     }
   ],
   "main": {
@@ -758,6 +747,12 @@
   },
   "tildelt": [
     {
+      "issue": 31,
+      "navn": "Vis været over kartet",
+      "github": "audmaha",
+      "oppdatert": "2026-09-23T08:57:49Z"
+    },
+    {
       "issue": 33,
       "navn": "Nytt lag: sykkelparkering",
       "github": "GIR75",
@@ -774,18 +769,6 @@
       "navn": "Tastatursnarveier",
       "github": "audmaha",
       "oppdatert": "2026-09-23T09:00:43Z"
-    },
-    {
-      "issue": 41,
-      "navn": "Fargene må virke for alle",
-      "github": "audmaha",
-      "oppdatert": "2026-09-23T08:42:15Z"
-    },
-    {
-      "issue": 41,
-      "navn": "Fargene må virke for alle",
-      "github": "nilsgs",
-      "oppdatert": "2026-09-23T08:42:15Z"
     },
     {
       "issue": 44,
@@ -905,19 +888,19 @@
       "issue": 116,
       "navn": "Nytt lag: værstasjoner",
       "github": "monet820",
-      "oppdatert": "2026-09-23T12:34:28Z"
+      "oppdatert": "2026-09-23T12:39:04Z"
     },
     {
       "issue": 116,
       "navn": "Nytt lag: værstasjoner",
       "github": "nilsgs",
-      "oppdatert": "2026-09-23T12:34:28Z"
+      "oppdatert": "2026-09-23T12:39:04Z"
     },
     {
       "issue": 116,
       "navn": "Nytt lag: værstasjoner",
       "github": "randsu",
-      "oppdatert": "2026-09-23T12:34:28Z"
+      "oppdatert": "2026-09-23T12:39:04Z"
     },
     {
       "issue": 117,
@@ -947,6 +930,12 @@
       "issue": 119,
       "navn": "Mørkt kart når sola går ned i Oslo",
       "github": "larsajakobsen",
+      "oppdatert": "2026-09-23T12:29:55Z"
+    },
+    {
+      "issue": 119,
+      "navn": "Mørkt kart når sola går ned i Oslo",
+      "github": "randsu",
       "oppdatert": "2026-09-23T12:29:55Z"
     },
     {
@@ -1180,6 +1169,66 @@
   ],
   "aapne": [
     {
+      "pr": 67,
+      "tittel": "Hent lagene parallelt",
+      "github": "FrodeBl",
+      "agent": "mini-frode",
+      "opprettet": "2026-09-23T07:59:18Z",
+      "oppdatert": "2026-09-23T12:39:14Z",
+      "utkast": false,
+      "issues": [
+        48
+      ]
+    },
+    {
+      "pr": 71,
+      "tittel": "Mål hva som skjer",
+      "github": "FrodeBl",
+      "agent": "mini-frode",
+      "opprettet": "2026-09-23T08:12:09Z",
+      "oppdatert": "2026-09-23T12:39:07Z",
+      "utkast": false,
+      "issues": [
+        50
+      ]
+    },
+    {
+      "pr": 227,
+      "tittel": "#116: Nytt lag: værstasjoner",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T12:39:02Z",
+      "oppdatert": "2026-09-23T12:39:03Z",
+      "utkast": false,
+      "issues": [
+        116
+      ]
+    },
+    {
+      "pr": 145,
+      "tittel": "#142: Kurs på skipene",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T12:03:14Z",
+      "oppdatert": "2026-09-23T12:39:01Z",
+      "utkast": false,
+      "issues": [
+        142
+      ]
+    },
+    {
+      "pr": 200,
+      "tittel": "Ekte sollys på 3D-byggene",
+      "github": "audmaha",
+      "agent": "mini-aud",
+      "opprettet": "2026-09-23T12:18:47Z",
+      "oppdatert": "2026-09-23T12:38:56Z",
+      "utkast": false,
+      "issues": [
+        132
+      ]
+    },
+    {
       "pr": 226,
       "tittel": "Popupene viser rådata: ISO-tider, «ikon: 😊» og tall uten enhet",
       "github": "larsajakobsen",
@@ -1240,18 +1289,6 @@
       ]
     },
     {
-      "pr": 91,
-      "tittel": "Fargene må virke for alle",
-      "github": "audmaha",
-      "agent": "mini-aud",
-      "opprettet": "2026-09-23T08:42:14Z",
-      "oppdatert": "2026-09-23T12:37:06Z",
-      "utkast": false,
-      "issues": [
-        41
-      ]
-    },
-    {
       "pr": 221,
       "tittel": "#191: Et døgn med bysykkelturer på 90 sekunder",
       "github": "randsu",
@@ -1261,18 +1298,6 @@
       "utkast": false,
       "issues": [
         191
-      ]
-    },
-    {
-      "pr": 145,
-      "tittel": "#142: Kurs på skipene",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T12:03:14Z",
-      "oppdatert": "2026-09-23T12:34:45Z",
-      "utkast": false,
-      "issues": [
-        142
       ]
     },
     {
@@ -1333,18 +1358,6 @@
       "utkast": false,
       "issues": [
         197
-      ]
-    },
-    {
-      "pr": 200,
-      "tittel": "Ekte sollys på 3D-byggene",
-      "github": "audmaha",
-      "agent": "mini-aud",
-      "opprettet": "2026-09-23T12:18:47Z",
-      "oppdatert": "2026-09-23T12:21:07Z",
-      "utkast": false,
-      "issues": [
-        132
       ]
     },
     {
@@ -1477,30 +1490,6 @@
       "utkast": false,
       "issues": [
         14
-      ]
-    },
-    {
-      "pr": 71,
-      "tittel": "Mål hva som skjer",
-      "github": "FrodeBl",
-      "agent": "mini-frode",
-      "opprettet": "2026-09-23T08:12:09Z",
-      "oppdatert": "2026-09-23T09:08:21Z",
-      "utkast": false,
-      "issues": [
-        50
-      ]
-    },
-    {
-      "pr": 67,
-      "tittel": "Hent lagene parallelt",
-      "github": "FrodeBl",
-      "agent": "mini-frode",
-      "opprettet": "2026-09-23T07:59:18Z",
-      "oppdatert": "2026-09-23T09:08:19Z",
-      "utkast": false,
-      "issues": [
-        48
       ]
     },
     {
