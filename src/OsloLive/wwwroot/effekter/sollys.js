@@ -55,6 +55,13 @@
    * Solas posisjon over Oslo sentrum ved gitt tidspunkt.
    * @param {Date} dato
    * @returns {{ azimut: number, hoyde: number }} grader. Azimut fra nord med klokka.
+   *
+   * Kontrollpunktene fra issue #132, kjørt med denne funksjonen i Node:
+   *   21.06.2026 13:18 (UTC+2): hoyde  53.53, azimut 179.62  (krav 52,5–54,5 og 175–185)
+   *   21.12.2026 12:15 (UTC+1): hoyde   6.65, azimut 179.96  (krav 5,5–7,5 og 175–185)
+   *   21.12.2026 00:00 (UTC+1): hoyde -53.43, azimut 354.24  (krav: negativ høyde)
+   * Samme tall fås i nettleserkonsollen med for eksempel
+   * solposisjon(new Date('2026-06-21T13:18:00+02:00')).
    */
   function solposisjon(dato) {
     const lw = RAD * -LENGDE;
