@@ -166,12 +166,13 @@ gh issue edit 3 --repo novanet/workshop.oslo-live --add-label kari</pre>
 
   <section>
     <h2>Se kostnaden i Log Analytics</h2>
-    <p class="intro">Kurslederen kan vise dette i Azure-portalen. Workeren skriver en <code>LLM request completed</code>-linje for hver modellkjøring. Det er denne linjen som brukes i forbrukstabellen på PR-en og i Status.</p>
+    <p class="intro">Kurslederen kan vise dette i Azure-portalen. Workeren skriver en <code>LLM request completed</code>-linje for hver modellkjøring, med de samme tallene som står i forbrukstabellen i PR-en. Status summerer fra en skjult sluttmarkør som hver kjøring skriver på issuen.</p>
     <pre>ContainerAppConsoleLogs_CL
 | where ContainerName_s == "worker"
 | where Log_s contains "LLM request completed"
 | project TimeGenerated, Log_s
 | order by TimeGenerated desc</pre>
+    <p><code>cost_usd</code> er Claude Codes egen utregning. Står det <code>cost_estimated=true</code>, har workeren regnet ut kostnaden selv fra tokens og listepris, fordi steget ble stoppet av tidsgrensen eller Claude Code ikke hadde pris for modellen. I forbrukstabellen i PR-en vises slike beløp med <code>~</code>.</p>
   </section>
 
   <section>

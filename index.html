@@ -309,7 +309,7 @@
         '<td>' + (d.utkast
             ? '<span class="pille roed"><span class="prikk"></span>' + d.utkast + ' utkast</span>'
             : '<span class="pille groenn"><span class="prikk"></span>alle bygger</span>') + '</td>' +
-        '<td><span class="tall' + dyrt + '">$' + (d.dollar || 0).toFixed(2) + '</span>' +
+        '<td><span class="tall' + dyrt + '"' + (d.estimert ? ' title="Deler av kostnaden er beregnet fra tokens og listepris"' : '') + '>' + (d.estimert ? '~' : '') + '$' + (d.dollar || 0).toFixed(2) + '</span>' +
             '<span class="under">' + Math.round((d.tokens || 0) / 1000) + 'k tokens' +
             (d.utenPr ? ' · ' + d.utenPr + ' uten PR' : '') + '</span></td>' +
         '<td><span class="poeng' + (d.poeng < 0 ? ' negativ' : '') + '">' + d.poeng + '</span></td>' +
