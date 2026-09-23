@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T15:02:32",
+  "oppdatert": "2026-09-23T15:03:14",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -658,7 +658,32 @@
       "plass": 21
     }
   ],
-  "kjoerer": [],
+  "kjoerer": [
+    {
+      "agent": "mini-wilma",
+      "github": "larsajakobsen",
+      "issue": 207,
+      "navn": "Delt mobilitet viser «drivstoff: ELECTRIC» og «COMBUSTION»",
+      "startet": "2026-09-23T13:02:39.5485012+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-johan",
+      "github": "pr0nin",
+      "issue": 13,
+      "navn": "Veiarbeid",
+      "startet": "2026-09-23T13:02:49.243038+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-johan",
+      "github": "pr0nin",
+      "issue": 16,
+      "navn": "Ladestasjoner",
+      "startet": "2026-09-23T13:02:49.4778489+00:00",
+      "minutter": 0
+    }
+  ],
   "main": {
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
@@ -692,25 +717,25 @@
       "issue": 13,
       "navn": "Nytt lag: veiarbeid og stengte veier",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T13:02:20Z"
+      "oppdatert": "2026-09-23T13:02:50Z"
     },
     {
       "issue": 13,
       "navn": "Nytt lag: veiarbeid og stengte veier",
       "github": "pr0nin",
-      "oppdatert": "2026-09-23T13:02:20Z"
+      "oppdatert": "2026-09-23T13:02:50Z"
     },
     {
       "issue": 16,
       "navn": "Nytt lag: ladestasjoner for elbil",
       "github": "pr0nin",
-      "oppdatert": "2026-09-23T13:02:18Z"
+      "oppdatert": "2026-09-23T13:02:50Z"
     },
     {
       "issue": 16,
       "navn": "Nytt lag: ladestasjoner for elbil",
       "github": "randsu",
-      "oppdatert": "2026-09-23T13:02:18Z"
+      "oppdatert": "2026-09-23T13:02:50Z"
     },
     {
       "issue": 18,
@@ -896,7 +921,7 @@
       "issue": 118,
       "navn": "Nyhetslinje nederst på skjermen",
       "github": "leif-larsen",
-      "oppdatert": "2026-09-23T13:01:06Z"
+      "oppdatert": "2026-09-23T13:02:56Z"
     },
     {
       "issue": 119,
@@ -1099,8 +1124,14 @@
     {
       "issue": 207,
       "navn": "Delt mobilitet viser «drivstoff: ELECTRIC» og «COMBUSTION»",
+      "github": "larsajakobsen",
+      "oppdatert": "2026-09-23T13:02:40Z"
+    },
+    {
+      "issue": 207,
+      "navn": "Delt mobilitet viser «drivstoff: ELECTRIC» og «COMBUSTION»",
       "github": "randsu",
-      "oppdatert": "2026-09-23T13:02:01Z"
+      "oppdatert": "2026-09-23T13:02:40Z"
     },
     {
       "issue": 208,
@@ -1140,7 +1171,7 @@
       "github": "jthagesk",
       "agent": "mini-kirsten",
       "opprettet": "2026-09-23T08:34:12Z",
-      "oppdatert": "2026-09-23T13:02:22Z",
+      "oppdatert": "2026-09-23T13:03:03Z",
       "utkast": false,
       "issues": [
         29
