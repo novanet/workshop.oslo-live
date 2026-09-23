@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:38:16",
+  "oppdatert": "2026-09-23T10:38:43",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -21,13 +21,13 @@
           "poeng": 8
         }
       ],
-      "dollar": 6.188,
-      "tokens": 11352200,
-      "sekunder": 2306,
-      "pr": 4,
+      "dollar": 7.065,
+      "tokens": 12984113,
+      "sekunder": 2681,
+      "pr": 5,
       "utkast": 0,
       "merget": 2,
-      "kjoeringer": 7,
+      "kjoeringer": 8,
       "utenPr": 3,
       "bygg": [],
       "estimert": false,
@@ -362,15 +362,7 @@
       "issue": 41,
       "navn": "Fargeblindhet",
       "startet": "2026-09-23T08:28:15.5659433+00:00",
-      "minutter": 9
-    },
-    {
-      "agent": "mini-richard",
-      "github": "randsu",
-      "issue": 23,
-      "navn": "Delbart utsnitt",
-      "startet": "2026-09-23T08:31:51.7313963+00:00",
-      "minutter": 6
+      "minutter": 10
     },
     {
       "agent": "mini-aud",
@@ -378,7 +370,7 @@
       "issue": 41,
       "navn": "Fargeblindhet",
       "startet": "2026-09-23T08:32:12.9324331+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-knive",
@@ -386,7 +378,7 @@
       "issue": 53,
       "navn": "Dyp helsesjekk",
       "startet": "2026-09-23T08:33:27.9645236+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-aud",
@@ -394,7 +386,7 @@
       "issue": 43,
       "navn": "Statistikk",
       "startet": "2026-09-23T08:33:40.253268+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-richard",
@@ -402,7 +394,7 @@
       "issue": 6,
       "navn": "Delt mobilitet",
       "startet": "2026-09-23T08:36:06.1007878+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-wilma",
@@ -410,6 +402,30 @@
       "issue": 32,
       "navn": "Strømpris",
       "startet": "2026-09-23T08:37:51.7658572+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-jon",
+      "github": "yonzo",
+      "issue": 44,
+      "navn": "Sammenlign tid",
+      "startet": "2026-09-23T08:38:34.7845421+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-kirsten",
+      "github": "jthagesk",
+      "issue": 29,
+      "navn": "Museer",
+      "startet": "2026-09-23T08:38:36.2729853+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-richard",
+      "github": "randsu",
+      "issue": 22,
+      "navn": "Klynging",
+      "startet": "2026-09-23T08:38:37.6037617+00:00",
       "minutter": 0
     }
   ],
@@ -533,7 +549,7 @@
       "issue": 11,
       "navn": "Nytt lag: kollektivtrafikk som beveger seg",
       "github": "coffeelyfe",
-      "oppdatert": "2026-09-23T08:14:44Z"
+      "oppdatert": "2026-09-23T08:38:21Z"
     },
     {
       "issue": 17,
@@ -560,22 +576,28 @@
       "oppdatert": "2026-09-23T08:24:29Z"
     },
     {
+      "issue": 22,
+      "navn": "Slå sammen punkter som ligger oppå hverandre",
+      "github": "randsu",
+      "oppdatert": "2026-09-23T08:38:38Z"
+    },
+    {
       "issue": 23,
       "navn": "Del kartutsnittet som en lenke",
       "github": "audmaha",
-      "oppdatert": "2026-09-23T08:37:46Z"
+      "oppdatert": "2026-09-23T08:38:27Z"
     },
     {
       "issue": 23,
       "navn": "Del kartutsnittet som en lenke",
       "github": "randsu",
-      "oppdatert": "2026-09-23T08:37:46Z"
+      "oppdatert": "2026-09-23T08:38:27Z"
     },
     {
       "issue": 29,
       "navn": "Nytt lag: museer og samlinger",
       "github": "jthagesk",
-      "oppdatert": "2026-09-23T08:37:58Z"
+      "oppdatert": "2026-09-23T08:38:37Z"
     },
     {
       "issue": 32,
@@ -617,7 +639,7 @@
       "issue": 44,
       "navn": "Sammenlign to tidspunkt",
       "github": "yonzo",
-      "oppdatert": "2026-09-23T08:37:59Z"
+      "oppdatert": "2026-09-23T08:38:35Z"
     },
     {
       "issue": 45,
@@ -693,6 +715,18 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 89,
+      "tittel": "#23: Del kartutsnittet som en lenke",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:38:25Z",
+      "oppdatert": "2026-09-23T08:38:26Z",
+      "utkast": false,
+      "issues": [
+        23
+      ]
+    },
     {
       "pr": 88,
       "tittel": "#38: Demomodus for storskjerm",
