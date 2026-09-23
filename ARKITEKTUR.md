@@ -14,6 +14,9 @@ src/OsloLive/
   Lag/
     LuftkvalitetLag.cs    mal for nye lag
     FlyLag.cs             unntak: egen kilde (airplanes.live), se «Unntak: flylaget»
+  Historikk/
+    Bildelager.cs         øyeblikksbilder på disk, nærmeste bilde, sletting etter sju dager
+    Øyeblikksjobb.cs      bakgrunnsjobb: bilde av hvert lag hver time, se «Historikk og tidslinjen»
   wwwroot/index.html      hele frontenden, én fil, ingen byggesteg
 tests/OsloLive.Tester/    xUnit. ApiTester.cs (WebApplicationFactory), KartTester.cs (Geo, Allemannsdata)
 issues/                   issuetekstene. Ikke rør.
@@ -112,6 +115,17 @@ HttpClient med en som alltid feiler og bekrefter dette. Rader uten posisjon elle
 Bruddet er isolert: `FlyLag` har egen navngitt `HttpClient` («fly») og eget mellomlager,
 og rører verken `Allemannsdata` eller de andre lagene. Kartutsnittet i `Geo` er ikke
 utvidet til Gardermoen; det er en egen beslutning om hva «Oslo Live» skal dekke.
+
+## Historikk og tidslinjen
+
+`Historikk/Øyeblikksjobb` tar et bilde (`Kartlag` som JSON) av hvert registrerte lag én gang i timen, første gang ved oppstart, og legger det i `Historikk:Mappe/<lagId>/<yyyyMMddTHHmmssZ>.json`. `Bildelager` velger bildet nærmest `?tid=` (maks to timer unna) og sletter bilder eldre enn sju dager. Et lag som svikter, eller et tidsavbrudd mot kilden, logges og hoppes over; jobben stopper bare når verten selv stopper.
+
+Konfigurasjon i `appsettings.json`:
+
+- `Historikk:Mappe`: hvor bildene ligger. Tom verdi betyr `<temp>/oslolive-historikk`.
+- `Historikk:Jobb`: `false` skrur jobben av. Testene gjør det via `TestVert`.
+
+Standardmappa er flyktig. I Container Apps forsvinner den ved ny revisjon eller omstart, så tidslinjen er tom til jobben har tatt nye bilder. Skal historikken overleve en utrulling, monter et volum (for eksempel Azure Files) i appen og pek `Historikk:Mappe` dit med miljøvariabelen `Historikk__Mappe`.
 
 ## Frontend
 

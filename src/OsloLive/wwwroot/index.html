@@ -118,7 +118,7 @@
 
 <div class="tidslinje">
   <span>−24 t</span>
-  <input id="tid" type="range" min="-1440" max="0" step="15" value="0" aria-label="Tidslinje, siste døgn">
+  <input id="tid" type="range" min="-1440" max="0" step="15" value="0" aria-label="Tidslinje, siste døgn" aria-valuetext="Nå">
   <span id="tid-tekst">Nå</span>
 </div>
 
@@ -427,6 +427,7 @@ document.getElementById('tid').addEventListener('input', (ev) => {
   const min = Number(ev.target.value);
   const d = min === 0 ? null : new Date(Date.now() + min * 60000);
   document.getElementById('tid-tekst').textContent = tidTekst(d);
+  ev.target.setAttribute('aria-valuetext', tidTekst(d));
 
   clearTimeout(tidTimer);
   tidTimer = setTimeout(() => {

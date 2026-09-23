@@ -37,13 +37,23 @@ public sealed class Øyeblikksjobb(IEnumerable<ILag> lag, Bildelager bilder, ICo
             {
                 await bilder.Lagre(l.Id, await l.Hent(stopp), nå, stopp);
             }
-            catch (Exception ex) when (ex is not OperationCanceledException)
+            catch (Exception ex) when (!stopp.IsCancellationRequested)
             {
-                // Ett lag som svikter skal ikke stoppe bilder av de andre.
+                // Ett lag som svikter skal ikke stoppe bilder av de andre. Det gjelder også
+                // tidsavbrudd mot kilden (TaskCanceledException); bare når verten selv
+                // stopper skal avbruddet slippe gjennom.
                 logg.LogWarning(ex, "Klarte ikke å ta bilde av {Id}", l.Id);
             }
         }
 
-        bilder.SlettEldreEnn(nå - Bildelager.Oppbevaring);
+        try
+        {
+            bilder.SlettEldreEnn(nå - Bildelager.Oppbevaring);
+        }
+        catch (Exception ex) when (ex is not OperationCanceledException)
+        {
+            // Ryddingen skal ikke stoppe jobben; de gamle bildene forsøkes slettet igjen neste time.
+            logg.LogWarning(ex, "Klarte ikke å slette gamle bilder");
+        }
     }
 }
