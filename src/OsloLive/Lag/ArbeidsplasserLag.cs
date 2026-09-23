@@ -59,7 +59,9 @@ public sealed class ArbeidsplasserLag(Allemannsdata data) : ILag
         var lon = lonProp.GetDouble();
 
         var navn = rad.TryGetProperty("name", out var n) ? n.GetString() ?? "Ukjent virksomhet" : "Ukjent virksomhet";
-        var orgnr = rad.TryGetProperty("organization_number", out var o) ? o.GetString() ?? navn : navn;
+        var orgnr = rad.TryGetProperty("organization_number", out var o) && o.ValueKind == JsonValueKind.String && !string.IsNullOrWhiteSpace(o.GetString())
+            ? o.GetString()!
+            : $"{lat:F6},{lon:F6}";
 
         var detaljer = new Dictionary<string, object?>();
 
