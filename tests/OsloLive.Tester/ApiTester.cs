@@ -131,6 +131,17 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
     }
 
     [Fact]
+    public async Task Lagoversikten_har_holdeplasser()
+    {
+        var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
+
+        var holdeplasser = lag!.Single(l => l.Id == "holdeplasser");
+        Assert.Equal("Holdeplasser", holdeplasser.Navn);
+        Assert.False(string.IsNullOrWhiteSpace(holdeplasser.Beskrivelse));
+        Assert.False(string.IsNullOrWhiteSpace(holdeplasser.Ikon));
+    }
+    
+    [Fact]
     public async Task Lagoversikten_har_skip()
     {
         var lag = await Klient.GetFromJsonAsync<List<Lagoppforing>>("/api/lag");
@@ -284,6 +295,53 @@ public class ApiTester(TestVert vert) : IClassFixture<TestVert>
             Assert.Equal("FeatureCollection", lag!.Type);
             Assert.NotEmpty(lag.Features);
             Assert.Equal([10.72, 59.905], lag.Features[0].Geometry.Coordinates);
+        }
+        finally
+        {
+            Allemannsdata.TømMellomlager();
+        }
+    }
+    
+    [Fact]
+    public async Task Holdeplasslaget_gir_featurecollection_uten_nett()
+    {
+        const string svar = """
+            {
+                "source": "entur",
+                "operation": "search_stops",
+                "parameters": {},
+                "data": {
+                    "returned": 1,
+                    "stops": [
+                        {
+                            "id": "NSR:StopPlace:59872",
+                            "name": "Oslo S",
+                            "label": "Oslo S, Oslo",
+                            "category": ["onstreetBus", "railStation"],
+                            "municipality": "Oslo",
+                            "county": "Oslo",
+                            "lat": 59.910357,
+                            "lon": 10.753051
+                        }
+                    ]
+                }
+            }
+            """;
+
+        using var vertUtenNett = vert.WithWebHostBuilder(b => b.ConfigureServices(tjenester =>
+            tjenester.AddHttpClient<Allemannsdata>().ConfigurePrimaryHttpMessageHandler(() => new FastSvarHandler(svar))));
+        var klient = vertUtenNett.CreateClient();
+
+        Allemannsdata.TømMellomlager();
+        try
+        {
+            var respons = await klient.GetAsync("/api/lag/holdeplasser");
+            var lag = await respons.Content.ReadFromJsonAsync<Kartlag>();
+
+            Assert.Equal(HttpStatusCode.OK, respons.StatusCode);
+            Assert.Equal("FeatureCollection", lag!.Type);
+            Assert.NotEmpty(lag.Features);
+            Assert.Equal([10.753051, 59.910357], lag.Features[0].Geometry.Coordinates);
         }
         finally
         {
