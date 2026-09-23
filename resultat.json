@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T12:01:10",
+  "oppdatert": "2026-09-23T12:01:48",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -540,7 +540,16 @@
       "plass": 21
     }
   ],
-  "kjoerer": [],
+  "kjoerer": [
+    {
+      "agent": "mini-sindre",
+      "github": "sin-rha",
+      "issue": 55,
+      "navn": "Ytelse",
+      "startet": "2026-09-23T10:01:25.46597+00:00",
+      "minutter": 0
+    }
+  ],
   "main": {
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
@@ -755,7 +764,7 @@
       "issue": 55,
       "navn": "Kartet blir tregt med mange punkter",
       "github": "sin-rha",
-      "oppdatert": "2026-09-23T10:00:24Z"
+      "oppdatert": "2026-09-23T10:01:26Z"
     },
     {
       "issue": 57,
