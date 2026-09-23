@@ -241,19 +241,66 @@
 <script>
 const SENTRUM = [10.7522, 59.9139];
 
+// Utsnittet i adressen: #lat=..&lon=..&zoom=..&pitch=..&bearing=..&lag=a,b
+// Gir null hvis adressen er tom eller ugyldig; da starter kartet som før.
+function lesUtsnitt() {
+  try {
+    const p = new URLSearchParams(location.hash.slice(1));
+    const tall = (navn, min, maks) => {
+      // Tom verdi (#lat=&lon=&zoom=) er ugyldig: Number('') gir 0, som ellers ville sendt kartet til [0, 0].
+      const rå = p.get(navn);
+      if (rå === null || rå.trim() === '') return NaN;
+      const v = Number(rå);
+      return Number.isFinite(v) && v >= min && v <= maks ? v : NaN;
+    };
+    const lat = tall('lat', -85, 85), lon = tall('lon', -180, 180), zoom = tall('zoom', 0, 22);
+    if ([lat, lon, zoom].some(Number.isNaN)) return null;
+    const pitch = p.has('pitch') ? tall('pitch', 0, 85) : 55;
+    const bearing = p.has('bearing') ? tall('bearing', -360, 360) : -20;
+    if (Number.isNaN(pitch) || Number.isNaN(bearing)) return null;
+    const lag = p.has('lag') ? new Set(p.get('lag').split(',').map(s => s.trim()).filter(Boolean)) : null;
+    return { senter: [lon, lat], zoom, pitch, bearing, lag };
+  } catch (e) {
+    return null;
+  }
+}
+const utsnitt = lesUtsnitt();
+
+let skrivId = null;
+function skrivUtsnitt() {
+  clearTimeout(skrivId);
+  skrivId = setTimeout(() => {
+    try {
+      const c = kart.getCenter();
+      const lag = lagene.size
+        ? [...lagene].filter(([, l]) => l.på).map(([id]) => id)
+        : [...(utsnitt?.lag ?? [])];
+      let hash = `#lat=${c.lat.toFixed(4)}&lon=${c.lng.toFixed(4)}` +
+        `&zoom=${kart.getZoom().toFixed(2)}&pitch=${kart.getPitch().toFixed(1)}` +
+        `&bearing=${kart.getBearing().toFixed(1)}`;
+      if (lagene.size || utsnitt?.lag) hash += '&lag=' + lag.map(encodeURIComponent).join(',');
+      history.replaceState(null, '', location.pathname + location.search + hash);
+    } catch (e) {
+      // Stille: Safari kan kaste SecurityError ved for hyppig replaceState.
+    }
+  }, 250);
+}
+
 const kart = new maplibregl.Map({
   container: 'kart',
   style: 'https://tiles.openfreemap.org/styles/liberty',
-  center: SENTRUM,
-  zoom: 14.2,
-  pitch: 55,
-  bearing: -20,
+  center: utsnitt?.senter ?? SENTRUM,
+  zoom: utsnitt?.zoom ?? 14.2,
+  pitch: utsnitt?.pitch ?? 55,
+  bearing: utsnitt?.bearing ?? -20,
   antialias: true,
   preserveDrawingBuffer: true,
   attributionControl: { compact: true },
   touchPitch: true,
   touchZoomRotate: true
 });
+
+kart.on('moveend', skrivUtsnitt);
 
 kart.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), 'bottom-right');
 
@@ -765,6 +812,7 @@ function settPå(id, på) {
   oppdaterBunn();
   if (valgtSted) visNaermest();
   if (omradeLukket) visOmrade();
+  skrivUtsnitt();
 }
 
 function oppdaterBunn() {
@@ -857,17 +905,19 @@ async function start() {
   }
 
   liste.innerHTML = '';
+  const onsket = utsnitt?.lag ?? null;
   const bydelSelect = document.getElementById('bydel-lag');
   const varmevalg = lesVarmevalg();
   lag.forEach((l, nr) => {
     const farge = fargeFor(l.id, nr);
-    lagene.set(l.id, { ikon: l.ikon || '📍', navn: l.navn, farge, punkter: [], antall: 0, på: true, feil: false, boks: null, varme: !!varmevalg[l.id], sistOk: null });
+    const på = onsket ? onsket.has(l.id) : true;
+    lagene.set(l.id, { ikon: l.ikon || '📍', navn: l.navn, farge, punkter: [], antall: 0, på, feil: false, boks: null, varme: !!varmevalg[l.id], sistOk: null });
 
     const rad = document.createElement('label');
     rad.className = 'lag';
     rad.title = l.beskrivelse ?? '';
     rad.innerHTML =
-      `<input type="checkbox" checked>` +
+      `<input type="checkbox"${på ? ' checked' : ''}>` +
       `<span class="prikk" style="background:${farge}"></span>` +
       `<span class="navn">${l.navn}</span>` +
       `<span class="antall" id="antall-${l.id}">…</span>` +
@@ -876,6 +926,9 @@ async function start() {
 
     lagene.get(l.id).boks = rad.querySelector('input');
     rad.querySelector('input').addEventListener('change', (ev) => settPå(l.id, ev.target.checked));
+    // Lag som adressen har slått av, skjules med én gang, samme vei som avkrysningen:
+    // settPå holder laget ute av kartkilden (oppdaterKilde) også når punktene hentes senere.
+    if (!på) settPå(l.id, false);
     rad.querySelector('.visning').addEventListener('click', (ev) => {
       ev.preventDefault(); ev.stopPropagation();
       const oppf = lagene.get(l.id);
@@ -910,6 +963,7 @@ async function start() {
 
   // Først nå finnes lagene, så demoen har noe å vise og noe å sette tilbake etterpå.
   document.getElementById('demo').disabled = false;
+  skrivUtsnitt();
 }
 
 /** Henter og tegner den lille grafen med antall punkter per time siste døgn. */
