@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T11:10:41",
+  "oppdatert": "2026-09-23T11:11:08",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -431,7 +431,7 @@
       "issue": 26,
       "navn": "Skoler",
       "startet": "2026-09-23T09:03:43.3920206+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "Andy3000",
@@ -447,7 +447,7 @@
       "issue": 51,
       "navn": "Logging",
       "startet": "2026-09-23T09:06:55.8322066+00:00",
-      "minutter": 3
+      "minutter": 4
     }
   ],
   "main": {
@@ -878,12 +878,24 @@
   ],
   "aapne": [
     {
+      "pr": 101,
+      "tittel": "#34: Skru tiden tilbake med en tidslinje",
+      "github": "randsu",
+      "agent": "mini-richard",
+      "opprettet": "2026-09-23T08:51:10Z",
+      "oppdatert": "2026-09-23T09:10:34Z",
+      "utkast": false,
+      "issues": [
+        34
+      ]
+    },
+    {
       "pr": 88,
       "tittel": "#38: Demomodus for storskjerm",
       "github": "randsu",
       "agent": "mini-richard",
       "opprettet": "2026-09-23T08:37:47Z",
-      "oppdatert": "2026-09-23T09:10:11Z",
+      "oppdatert": "2026-09-23T09:10:31Z",
       "utkast": false,
       "issues": [
         38
@@ -899,18 +911,6 @@
       "utkast": false,
       "issues": [
         22
-      ]
-    },
-    {
-      "pr": 101,
-      "tittel": "#34: Skru tiden tilbake med en tidslinje",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:51:10Z",
-      "oppdatert": "2026-09-23T09:09:39Z",
-      "utkast": false,
-      "issues": [
-        34
       ]
     },
     {
