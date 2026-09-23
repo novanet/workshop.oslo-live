@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T14:23:53",
+  "oppdatert": "2026-09-23T14:24:32",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -301,14 +301,14 @@
         }
       ],
       "levert": [],
-      "dollar": 1.804,
-      "tokens": 3455543,
-      "sekunder": 577,
+      "dollar": 2.109,
+      "tokens": 3676565,
+      "sekunder": 696,
       "pr": 1,
       "utkast": 0,
       "merget": 1,
-      "kjoeringer": 5,
-      "utenPr": 4,
+      "kjoeringer": 6,
+      "utenPr": 5,
       "bygg": [],
       "estimert": false,
       "plass": 9
@@ -401,13 +401,13 @@
       ],
       "lag": [],
       "levert": [],
-      "dollar": 8.912,
-      "tokens": 19227973,
-      "sekunder": 3163,
+      "dollar": 9.336,
+      "tokens": 20483881,
+      "sekunder": 3408,
       "pr": 4,
       "utkast": 0,
       "merget": 1,
-      "kjoeringer": 14,
+      "kjoeringer": 15,
       "utenPr": 6,
       "bygg": [],
       "estimert": false,
@@ -579,7 +579,7 @@
       "issue": 198,
       "navn": "",
       "startet": "2026-09-23T12:16:25.0295863+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "mini-richard",
@@ -587,15 +587,7 @@
       "issue": 191,
       "navn": "",
       "startet": "2026-09-23T12:19:02.7888497+00:00",
-      "minutter": 4
-    },
-    {
-      "agent": "mini-leif",
-      "github": "leif-larsen",
-      "issue": 141,
-      "navn": "Tydelige kartsymboler: båter som ser ut som båter",
-      "startet": "2026-09-23T12:19:28.1326146+00:00",
-      "minutter": 4
+      "minutter": 5
     },
     {
       "agent": "mini-wilma",
@@ -627,7 +619,7 @@
       "issue": 129,
       "navn": "Simulering: meteornedslag",
       "startet": "2026-09-23T12:20:25.1910717+00:00",
-      "minutter": 3
+      "minutter": 4
     },
     {
       "agent": "mini-taco",
@@ -667,6 +659,30 @@
       "issue": 188,
       "navn": "",
       "startet": "2026-09-23T12:23:41.4076789+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-richard",
+      "github": "randsu",
+      "issue": 158,
+      "navn": "",
+      "startet": "2026-09-23T12:24:01.7531547+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "mini-richard",
+      "github": "randsu",
+      "issue": 170,
+      "navn": "",
+      "startet": "2026-09-23T12:24:03.3026673+00:00",
+      "minutter": 0
+    },
+    {
+      "agent": "helstein",
+      "github": "nilsgs",
+      "issue": 194,
+      "navn": "",
+      "startet": "2026-09-23T12:24:21.6258713+00:00",
       "minutter": 0
     }
   ],
@@ -946,7 +962,7 @@
       "issue": 141,
       "navn": "Tydelige kartsymboler: båter som ser ut som båter",
       "github": "leif-larsen",
-      "oppdatert": "2026-09-23T12:19:29Z"
+      "oppdatert": "2026-09-23T12:23:59Z"
     },
     {
       "issue": 142,
@@ -964,7 +980,7 @@
       "issue": 158,
       "navn": "Strøm av endringer i stedet for å spørre hvert 15. sekund",
       "github": "randsu",
-      "oppdatert": "2026-09-23T12:21:45Z"
+      "oppdatert": "2026-09-23T12:24:02Z"
     },
     {
       "issue": 169,
@@ -976,7 +992,7 @@
       "issue": 170,
       "navn": "Fortell en historie med kartet, styrt med presentasjonsklikker",
       "github": "randsu",
-      "oppdatert": "2026-09-23T12:21:51Z"
+      "oppdatert": "2026-09-23T12:24:04Z"
     },
     {
       "issue": 181,
@@ -1006,7 +1022,7 @@
       "issue": 194,
       "navn": "Nytt lag: bomstasjoner",
       "github": "nilsgs",
-      "oppdatert": "2026-09-23T12:23:46Z"
+      "oppdatert": "2026-09-23T12:24:22Z"
     },
     {
       "issue": 197,
@@ -1029,6 +1045,18 @@
   ],
   "aapne": [
     {
+      "pr": 144,
+      "tittel": "Tydelige kartsymboler: båter som ser ut som båter (#141)",
+      "github": "leif-larsen",
+      "agent": "mini-leif",
+      "opprettet": "2026-09-23T11:58:52Z",
+      "oppdatert": "2026-09-23T12:23:58Z",
+      "utkast": false,
+      "issues": [
+        141
+      ]
+    },
+    {
       "pr": 200,
       "tittel": "Ekte sollys på 3D-byggene",
       "github": "audmaha",
@@ -1050,18 +1078,6 @@
       "utkast": false,
       "issues": [
         30
-      ]
-    },
-    {
-      "pr": 144,
-      "tittel": "Tydelige kartsymboler: båter som ser ut som båter (#141)",
-      "github": "leif-larsen",
-      "agent": "mini-leif",
-      "opprettet": "2026-09-23T11:58:52Z",
-      "oppdatert": "2026-09-23T12:19:27Z",
-      "utkast": false,
-      "issues": [
-        141
       ]
     },
     {
