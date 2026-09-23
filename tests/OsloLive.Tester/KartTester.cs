@@ -216,6 +216,38 @@ public class GeoTester
 
         Assert.Equal(frem, tilbake, precision: 6);
     }
+
+    private static readonly (double Lat, double Lon)[] Kvadrat =
+    [
+        (59.90, 10.70),
+        (59.90, 10.80),
+        (60.00, 10.80),
+        (60.00, 10.70),
+    ];
+
+    [Fact]
+    public void Punkt_innenfor_polygonet_gir_true()
+    {
+        Assert.True(Geo.IPolygon(59.95, 10.75, Kvadrat));
+    }
+
+    [Fact]
+    public void Punkt_utenfor_polygonet_gir_false()
+    {
+        Assert.False(Geo.IPolygon(59.95, 11.00, Kvadrat));
+    }
+
+    [Fact]
+    public void Punkt_paa_kanten_av_polygonet_gir_true()
+    {
+        Assert.True(Geo.IPolygon(59.90, 10.75, Kvadrat));
+    }
+
+    [Fact]
+    public void Polygon_med_faerre_enn_tre_hjoerner_gir_false()
+    {
+        Assert.False(Geo.IPolygon(59.95, 10.75, [(59.90, 10.70), (60.00, 10.80)]));
+    }
 }
 
 public class AllemannsdataTester
