@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T10:55:41",
+  "oppdatert": "2026-09-23T10:56:08",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -361,18 +361,18 @@
     {
       "navn": "mini-frode",
       "github": "FrodeBl",
-      "poeng": 0,
+      "poeng": -1,
       "feil": [],
       "lag": [],
       "levert": [],
-      "dollar": 9.514,
-      "tokens": 21118067,
-      "sekunder": 3250,
+      "dollar": 10.883,
+      "tokens": 23741011,
+      "sekunder": 3762,
       "pr": 3,
       "utkast": 0,
       "merget": 0,
-      "kjoeringer": 10,
-      "utenPr": 6,
+      "kjoeringer": 11,
+      "utenPr": 7,
       "bygg": [],
       "estimert": false,
       "plass": 16
@@ -388,20 +388,12 @@
       "minutter": 10
     },
     {
-      "agent": "mini-frode",
-      "github": "FrodeBl",
-      "issue": 50,
-      "navn": "Metrikker",
-      "startet": "2026-09-23T08:47:21.1306878+00:00",
-      "minutter": 8
-    },
-    {
       "agent": "mini-richard",
       "github": "randsu",
       "issue": 25,
       "navn": "Historikk",
       "startet": "2026-09-23T08:47:59.0992794+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "Dmitry-agent",
@@ -409,7 +401,7 @@
       "issue": 12,
       "navn": "Holdeplasser",
       "startet": "2026-09-23T08:48:05.3217109+00:00",
-      "minutter": 7
+      "minutter": 8
     },
     {
       "agent": "mini-knive",
@@ -417,7 +409,7 @@
       "issue": 40,
       "navn": "Mobil",
       "startet": "2026-09-23T08:48:55.3857059+00:00",
-      "minutter": 6
+      "minutter": 7
     },
     {
       "agent": "mini-astrid",
@@ -425,7 +417,7 @@
       "issue": 36,
       "navn": "Tegn område",
       "startet": "2026-09-23T08:49:47.9516568+00:00",
-      "minutter": 5
+      "minutter": 6
     },
     {
       "agent": "mini-leif",
@@ -433,7 +425,7 @@
       "issue": 14,
       "navn": "Idrettsanlegg",
       "startet": "2026-09-23T08:53:58.2896433+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-richard",
@@ -441,7 +433,7 @@
       "issue": 16,
       "navn": "Ladestasjoner",
       "startet": "2026-09-23T08:53:59.0288397+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-aud",
@@ -449,7 +441,7 @@
       "issue": 39,
       "navn": "Tastatursnarveier",
       "startet": "2026-09-23T08:54:03.5879186+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-aud",
@@ -457,7 +449,7 @@
       "issue": 7,
       "navn": "Skipstrafikk",
       "startet": "2026-09-23T08:54:03.6650491+00:00",
-      "minutter": 1
+      "minutter": 2
     },
     {
       "agent": "mini-aud",
@@ -465,14 +457,14 @@
       "issue": 31,
       "navn": "Vær",
       "startet": "2026-09-23T08:54:04.5833346+00:00",
-      "minutter": 1
+      "minutter": 2
     }
   ],
   "main": {
     "groent": true,
     "siden": "2026-09-17T21:19:00Z",
     "pr": null,
-    "kjoeringer": 23
+    "kjoeringer": 24
   },
   "produkt": {
     "testerBestatt": 12,
@@ -787,7 +779,7 @@
       "issue": 50,
       "navn": "Mål hva som skjer",
       "github": "FrodeBl",
-      "oppdatert": "2026-09-23T08:47:22Z"
+      "oppdatert": "2026-09-23T08:56:02Z"
     },
     {
       "issue": 52,
@@ -846,6 +838,18 @@
   ],
   "aapne": [
     {
+      "pr": 97,
+      "tittel": "Søk på tvers av alle lag (#47)",
+      "github": "Puiu",
+      "agent": "mini-taco",
+      "opprettet": "2026-09-23T08:46:56Z",
+      "oppdatert": "2026-09-23T08:55:55Z",
+      "utkast": false,
+      "issues": [
+        47
+      ]
+    },
+    {
       "pr": 84,
       "tittel": "Varsle når noe skjer",
       "github": "jthagesk",
@@ -891,18 +895,6 @@
       "utkast": false,
       "issues": [
         30
-      ]
-    },
-    {
-      "pr": 97,
-      "tittel": "Søk på tvers av alle lag (#47)",
-      "github": "Puiu",
-      "agent": "mini-taco",
-      "opprettet": "2026-09-23T08:46:56Z",
-      "oppdatert": "2026-09-23T08:54:02Z",
-      "utkast": false,
-      "issues": [
-        47
       ]
     },
     {
