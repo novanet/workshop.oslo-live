@@ -1,5 +1,5 @@
 {
-  "oppdatert": "2026-09-23T15:01:50",
+  "oppdatert": "2026-09-23T15:02:32",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
@@ -320,12 +320,12 @@
       ],
       "dollar": 5.126,
       "tokens": 8659113,
-      "sekunder": 1695,
+      "sekunder": 1696,
       "pr": 2,
       "utkast": 0,
       "merget": 2,
-      "kjoeringer": 8,
-      "utenPr": 6,
+      "kjoeringer": 9,
+      "utenPr": 7,
       "bygg": [],
       "estimert": false,
       "plass": 8
@@ -527,12 +527,12 @@
       ],
       "dollar": 11.634,
       "tokens": 27171215,
-      "sekunder": 4106,
+      "sekunder": 4107,
       "pr": 2,
       "utkast": 0,
       "merget": 1,
-      "kjoeringer": 10,
-      "utenPr": 8,
+      "kjoeringer": 11,
+      "utenPr": 9,
       "bygg": [],
       "estimert": true,
       "plass": 15
@@ -692,25 +692,25 @@
       "issue": 13,
       "navn": "Nytt lag: veiarbeid og stengte veier",
       "github": "GIR75",
-      "oppdatert": "2026-09-23T12:59:04Z"
+      "oppdatert": "2026-09-23T13:02:20Z"
     },
     {
       "issue": 13,
       "navn": "Nytt lag: veiarbeid og stengte veier",
       "github": "pr0nin",
-      "oppdatert": "2026-09-23T12:59:04Z"
+      "oppdatert": "2026-09-23T13:02:20Z"
     },
     {
       "issue": 16,
       "navn": "Nytt lag: ladestasjoner for elbil",
       "github": "pr0nin",
-      "oppdatert": "2026-09-23T12:58:55Z"
+      "oppdatert": "2026-09-23T13:02:18Z"
     },
     {
       "issue": 16,
       "navn": "Nytt lag: ladestasjoner for elbil",
       "github": "randsu",
-      "oppdatert": "2026-09-23T12:58:55Z"
+      "oppdatert": "2026-09-23T13:02:18Z"
     },
     {
       "issue": 18,
@@ -1040,7 +1040,7 @@
       "issue": 189,
       "navn": "Travlere enn vanlig på veiene",
       "github": "yonzo",
-      "oppdatert": "2026-09-23T13:01:25Z"
+      "oppdatert": "2026-09-23T13:02:20Z"
     },
     {
       "issue": 190,
@@ -1100,7 +1100,7 @@
       "issue": 207,
       "navn": "Delt mobilitet viser «drivstoff: ELECTRIC» og «COMBUSTION»",
       "github": "randsu",
-      "oppdatert": "2026-09-23T12:58:03Z"
+      "oppdatert": "2026-09-23T13:02:01Z"
     },
     {
       "issue": 208,
@@ -1134,6 +1134,30 @@
     }
   ],
   "aapne": [
+    {
+      "pr": 83,
+      "tittel": "Nytt lag: museer og samlinger",
+      "github": "jthagesk",
+      "agent": "mini-kirsten",
+      "opprettet": "2026-09-23T08:34:12Z",
+      "oppdatert": "2026-09-23T13:02:22Z",
+      "utkast": false,
+      "issues": [
+        29
+      ]
+    },
+    {
+      "pr": 73,
+      "tittel": "Vær grei mot kildene (#54)",
+      "github": "Puiu",
+      "agent": "mini-taco",
+      "opprettet": "2026-09-23T08:15:23Z",
+      "oppdatert": "2026-09-23T13:02:01Z",
+      "utkast": false,
+      "issues": [
+        54
+      ]
+    },
     {
       "pr": 97,
       "tittel": "Søk på tvers av alle lag (#47)",
@@ -1351,18 +1375,6 @@
       ]
     },
     {
-      "pr": 83,
-      "tittel": "Nytt lag: museer og samlinger",
-      "github": "jthagesk",
-      "agent": "mini-kirsten",
-      "opprettet": "2026-09-23T08:34:12Z",
-      "oppdatert": "2026-09-23T12:51:48Z",
-      "utkast": false,
-      "issues": [
-        29
-      ]
-    },
-    {
       "pr": 237,
       "tittel": "#124: Punkter som flytter seg, glir til ny posisjon",
       "github": "randsu",
@@ -1408,18 +1420,6 @@
       "utkast": false,
       "issues": [
         206
-      ]
-    },
-    {
-      "pr": 73,
-      "tittel": "Vær grei mot kildene (#54)",
-      "github": "Puiu",
-      "agent": "mini-taco",
-      "opprettet": "2026-09-23T08:15:23Z",
-      "oppdatert": "2026-09-23T12:43:29Z",
-      "utkast": false,
-      "issues": [
-        54
       ]
     },
     {
