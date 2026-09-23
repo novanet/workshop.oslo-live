@@ -1,11 +1,11 @@
 {
-  "oppdatert": "2026-09-23T13:47:41",
+  "oppdatert": "2026-09-23T13:50:46",
   "repo": "novanet/workshop.oslo-live",
   "deltakere": [
     {
       "navn": "mini-richard",
       "github": "randsu",
-      "poeng": 27,
+      "poeng": 30,
       "feil": [
         {
           "issue": 3,
@@ -15,17 +15,17 @@
       ],
       "lag": [
         {
-          "issue": 6,
-          "navn": "Delt mobilitet",
-          "poeng": 2
-        },
-        {
           "issue": 9,
           "navn": "Badetemperatur",
           "poeng": 1
         }
       ],
       "levert": [
+        {
+          "issue": 22,
+          "navn": "Klynging",
+          "poeng": 5
+        },
         {
           "issue": 24,
           "navn": "Bydeler",
@@ -52,7 +52,7 @@
       "sekunder": 5772,
       "pr": 10,
       "utkast": 0,
-      "merget": 7,
+      "merget": 8,
       "kjoeringer": 15,
       "utenPr": 5,
       "bygg": [],
@@ -180,8 +180,8 @@
       "pr": 2,
       "utkast": 0,
       "merget": 2,
-      "kjoeringer": 3,
-      "utenPr": 1,
+      "kjoeringer": 4,
+      "utenPr": 2,
       "bygg": [],
       "estimert": false,
       "plass": 5
@@ -255,13 +255,13 @@
           "poeng": 2
         }
       ],
-      "dollar": 17.384,
-      "tokens": 30976952,
-      "sekunder": 5565,
-      "pr": 6,
+      "dollar": 19.451,
+      "tokens": 33569390,
+      "sekunder": 6072,
+      "pr": 7,
       "utkast": 0,
       "merget": 2,
-      "kjoeringer": 18,
+      "kjoeringer": 19,
       "utenPr": 12,
       "bygg": [],
       "estimert": false,
@@ -311,8 +311,8 @@
       "pr": 3,
       "utkast": 0,
       "merget": 1,
-      "kjoeringer": 7,
-      "utenPr": 4,
+      "kjoeringer": 8,
+      "utenPr": 5,
       "bygg": [],
       "estimert": false,
       "plass": 10
@@ -361,8 +361,8 @@
       "pr": 3,
       "utkast": 0,
       "merget": 1,
-      "kjoeringer": 9,
-      "utenPr": 3,
+      "kjoeringer": 10,
+      "utenPr": 4,
       "bygg": [],
       "estimert": false,
       "plass": 12
@@ -547,19 +547,11 @@
   ],
   "kjoerer": [
     {
-      "agent": "mini-wilma",
-      "github": "larsajakobsen",
-      "issue": 112,
-      "navn": "Nytt lag: målestasjoner i elvene",
-      "startet": "2026-09-23T11:41:09.4028616+00:00",
-      "minutter": 6
-    },
-    {
-      "agent": "mini-leif",
-      "github": "leif-larsen",
-      "issue": 141,
-      "navn": "",
-      "startet": "2026-09-23T11:47:23.9195029+00:00",
+      "agent": "helstein",
+      "github": "nilsgs",
+      "issue": 132,
+      "navn": "Ekte sollys på 3D-byggene",
+      "startet": "2026-09-23T11:50:10.530436+00:00",
       "minutter": 0
     }
   ],
@@ -570,21 +562,20 @@
     "kjoeringer": 38
   },
   "produkt": {
-    "testerBestatt": 16,
-    "testerFeilet": 10,
+    "testerBestatt": 15,
+    "testerFeilet": 11,
     "issuerLost": [
       1,
       2,
       3,
       4,
       5,
-      6,
       7,
       9,
       15,
       17
     ],
-    "antallIssuer": 77,
+    "antallIssuer": 79,
     "feilmelding": null
   },
   "tildelt": [
@@ -598,19 +589,19 @@
       "issue": 10,
       "navn": "Nytt lag: trafikkregistreringspunkt",
       "github": "pr0nin",
-      "oppdatert": "2026-09-23T11:41:03Z"
+      "oppdatert": "2026-09-23T11:49:59Z"
     },
     {
       "issue": 11,
       "navn": "Nytt lag: kollektivtrafikk som beveger seg",
       "github": "coffeelyfe",
-      "oppdatert": "2026-09-23T11:47:02Z"
+      "oppdatert": "2026-09-23T11:48:05Z"
     },
     {
       "issue": 11,
       "navn": "Nytt lag: kollektivtrafikk som beveger seg",
       "github": "ingvevs",
-      "oppdatert": "2026-09-23T11:47:02Z"
+      "oppdatert": "2026-09-23T11:48:05Z"
     },
     {
       "issue": 12,
@@ -700,7 +691,7 @@
       "issue": 29,
       "navn": "Nytt lag: museer og samlinger",
       "github": "jthagesk",
-      "oppdatert": "2026-09-23T11:46:39Z"
+      "oppdatert": "2026-09-23T11:50:19Z"
     },
     {
       "issue": 30,
@@ -820,7 +811,7 @@
       "issue": 112,
       "navn": "Nytt lag: målestasjoner i elvene",
       "github": "larsajakobsen",
-      "oppdatert": "2026-09-23T11:41:10Z"
+      "oppdatert": "2026-09-23T11:50:03Z"
     },
     {
       "issue": 113,
@@ -958,22 +949,34 @@
       "issue": 132,
       "navn": "Ekte sollys på 3D-byggene",
       "github": "audmaha",
-      "oppdatert": "2026-09-23T11:42:03Z"
+      "oppdatert": "2026-09-23T11:50:11Z"
     },
     {
       "issue": 132,
       "navn": "Ekte sollys på 3D-byggene",
       "github": "nilsgs",
-      "oppdatert": "2026-09-23T11:42:03Z"
+      "oppdatert": "2026-09-23T11:50:11Z"
     },
     {
       "issue": 141,
       "navn": "Tydelige kartsymboler: båter som ser ut som båter",
       "github": "leif-larsen",
-      "oppdatert": "2026-09-23T11:47:24Z"
+      "oppdatert": "2026-09-23T11:47:48Z"
     }
   ],
   "aapne": [
+    {
+      "pr": 143,
+      "tittel": "Nytt lag: målestasjoner i elvene",
+      "github": "larsajakobsen",
+      "agent": "mini-wilma",
+      "opprettet": "2026-09-23T11:49:35Z",
+      "oppdatert": "2026-09-23T11:49:36Z",
+      "utkast": false,
+      "issues": [
+        112
+      ]
+    },
     {
       "pr": 140,
       "tittel": "Vis endringen per lag i lagvelgeren",
@@ -1020,18 +1023,6 @@
       "utkast": false,
       "issues": [
         25
-      ]
-    },
-    {
-      "pr": 96,
-      "tittel": "#22: Slå sammen punkter som ligger oppå hverandre",
-      "github": "randsu",
-      "agent": "mini-richard",
-      "opprettet": "2026-09-23T08:46:40Z",
-      "oppdatert": "2026-09-23T10:23:58Z",
-      "utkast": false,
-      "issues": [
-        22
       ]
     },
     {
@@ -1385,5 +1376,5 @@
     "brekk": -2,
     "fiks": 2
   },
-  "potten": 217
+  "potten": 221
 }
