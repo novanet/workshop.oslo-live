@@ -14,7 +14,7 @@ public sealed record Lagstatus(int? Antall, DateTimeOffset? Eldste, DateTimeOffs
 public sealed class Lagstatistikk
 {
     /// <summary>Egenskaper i et kartpunkt som regnes som tidsstempel.</summary>
-    public static readonly string[] Tidsnøkler = ["målt"];
+    public static readonly string[] Tidsnøkler = ["målt", "sist målt", "tilsyn"];
 
     private readonly ConcurrentDictionary<string, Lagstatus> status = new(StringComparer.OrdinalIgnoreCase);
 
@@ -51,8 +51,13 @@ public sealed class Lagstatistikk
                 {
                     tidspunkter.Add(tidspunkt);
                 }
-                else if (verdi is string tekst
-                    && DateTimeOffset.TryParse(tekst, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out var tolket))
+                else if (verdi is string tekst && DateOnly.TryParseExact(tekst, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out var dato))
+                {
+                    var midnatt = TimeZoneInfo.ConvertTimeToUtc(dato.ToDateTime(TimeOnly.MinValue), Stroempris.Oslo);
+                    tidspunkter.Add(new DateTimeOffset(midnatt));
+                }
+                else if (verdi is string tekstMedTid
+                    && DateTimeOffset.TryParse(tekstMedTid, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out var tolket))
                 {
                     tidspunkter.Add(tolket);
                 }
