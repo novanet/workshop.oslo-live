@@ -23,7 +23,7 @@
   #kart { position: absolute; inset: 0; background: #ede7d8; }
 
   .panel {
-    position: absolute; top: 16px; left: 16px; z-index: 10; width: 292px;
+    position: absolute; top: 16px; left: 16px; z-index: 10; width: 360px;
     background: rgba(255,255,255,.95);
     border: 1.5px solid var(--kant); border-radius: 10px;
     padding: 16px; box-shadow: 0 6px 20px rgba(0,0,0,.14);
@@ -31,8 +31,9 @@
     max-height: calc(100% - 32px - var(--tikkerhoyde)); overflow-y: auto;
   }
   .panel h1 { margin: 0 0 2px; font-size: 20px; letter-spacing: -.02em; }
-  .panel .under { margin: 0 0 14px; font-size: 12px; color: var(--dempet); }
+  .panel .under { margin: 0 0 8px; font-size: 12px; color: var(--dempet); }
 
+  .lag { display: flex; align-items: center; gap: 6px; padding: 2px 6px; border-radius: 7px; cursor: pointer; }
   .sok { display: flex; gap: 6px; margin: 0 0 8px; }
   .sok input { flex: 1; min-width: 0; border: 1.5px solid var(--kant); border-radius: 7px; padding: 6px 8px; font: inherit; font-size: 13px; }
   .sok button { border: 1.5px solid var(--kant); background: #fff; color: var(--tekst); border-radius: 7px; padding: 6px 10px; font-size: 12px; font-weight: 500; cursor: pointer; font-family: inherit; }
@@ -47,6 +48,10 @@
   .lag { display: flex; align-items: center; gap: 9px; padding: 7px 8px; border-radius: 7px; cursor: pointer; }
   .lag:hover { background: #f3f4f6; }
   .lag input { accent-color: #111; width: 15px; height: 15px; cursor: pointer; flex: none; }
+  .lag .prikk { width: 15px; height: 15px; border-radius: 50%; border: 1.5px solid #111; flex: none; }
+  .lag .navn { flex: 1; font-size: 14px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .lag .graf { flex: none; width: 48px; height: 14px; }
+  .lag .graf svg { display: block; width: 100%; height: 100%; }
   .lag .prikk {
     flex: none; display: grid; place-items: center;
     width: 24px; height: 24px;
@@ -58,27 +63,25 @@
   .lag .antall.ok { color: var(--ok); font-weight: 600; }
   .lag .alder { flex: none; font-size: 11px; color: var(--dempet); font-variant-numeric: tabular-nums; cursor: default; }
   .lag .alder.gammel { color: var(--feil); }
-  .lag .visning { flex: none; font: inherit; font-size: 11px; padding: 2px 7px; border: 1.5px solid var(--kant); border-radius: 6px; background: #fff; cursor: pointer; }
+  .lag .visning { flex: none; font: inherit; font-size: 11px; line-height: 1.1; padding: 1px 6px; border: 1.5px solid var(--kant); border-radius: 6px; background: #fff; cursor: pointer; }
   .lag .visning[aria-pressed="true"] { background: #111; color: #fff; }
   .tom { font-size: 13px; color: var(--dempet); line-height: 1.5; padding: 4px 2px; }
-  .graf { display: block; width: 100%; height: 26px; margin: 0 0 4px; padding: 0 8px; }
-  .graf-tom { font-size: 11px; color: var(--dempet); padding: 0 8px 4px; }
-  .bunn { margin-top: 12px; padding-top: 12px; border-top: 1px solid #e5e7eb; font-size: 11px; color: var(--dempet); display: flex; justify-content: space-between; }
-  .vannstand { margin-top: 10px; font-size: 13px; font-variant-numeric: tabular-nums; }
+  .bunn { margin-top: 8px; padding-top: 8px; border-top: 1px solid #e5e7eb; font-size: 11px; color: var(--dempet); display: flex; justify-content: space-between; }
+  .vannstand { margin-top: 6px; font-size: 13px; font-variant-numeric: tabular-nums; }
   .vannstand.feil { color: var(--feil); }
 
-  .statistikk { margin-top: 12px; padding-top: 12px; border-top: 1px solid #e5e7eb; font-size: 12px; }
+  .statistikk { margin-top: 8px; padding-top: 8px; border-top: 1px solid #e5e7eb; font-size: 12px; }
   .statistikk summary { cursor: pointer; font-weight: 600; font-size: 13px; }
   .statistikk table { width: 100%; border-collapse: collapse; margin-top: 6px; font-variant-numeric: tabular-nums; }
   .statistikk td { padding: 2px 4px; color: var(--dempet); }
   .statistikk .feiler { color: var(--feil); font-weight: 600; }
-  .stroem { margin-top: 12px; padding-top: 12px; border-top: 1px solid #e5e7eb; }
-  .stroem h2 { margin: 0 0 6px; font-size: 13px; }
-  .stroem .naa { font-size: 22px; font-weight: 700; }
+  .stroem { margin-top: 8px; padding-top: 8px; border-top: 1px solid #e5e7eb; }
+  .stroem h2 { margin: 0 0 2px; font-size: 13px; }
+  .stroem .naa { margin: 0; font-size: 22px; font-weight: 700; }
   .stroem .naa .enhet { font-size: 12px; font-weight: 400; color: var(--dempet); }
-  .stroem .rad { font-size: 12px; margin: 3px 0; }
+  .stroem .rad { font-size: 12px; margin: 1px 0; }
   .stroem .rad b { font-variant-numeric: tabular-nums; }
-  .stroem .graf { display: flex; align-items: flex-end; gap: 1px; height: 34px; margin-top: 8px; }
+  .stroem .graf { display: flex; align-items: flex-end; gap: 1px; height: 24px; margin: 8px 0 4px; padding: 0 8px; }
   .stroem .graf span { flex: 1; background: #d6cbb0; border-radius: 1px 1px 0 0; }
   .stroem .graf span.naa-time { background: #111; }
 
@@ -210,12 +213,12 @@
   .tidslinje { position:absolute; bottom:24px; left:50%; transform:translateX(-50%); z-index:10; width:min(520px, calc(100% - 220px)); display:flex; align-items:center; gap:10px; background:rgba(255,255,255,.95); border:1.5px solid var(--kant); border-radius:10px; padding:8px 12px; box-shadow:0 6px 20px rgba(0,0,0,.14); font-size:12px; }
   .tidslinje input { flex:1; accent-color:#111; }
   .tidslinje #tid-tekst { min-width:110px; text-align:right; font-variant-numeric:tabular-nums; font-weight:600; }
-  .bydeler { margin-top: 12px; padding-top: 12px; border-top: 1px solid #e5e7eb; }
-  .bydeler .topp { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .bydeler { margin-top: 8px; padding-top: 8px; border-top: 1px solid #e5e7eb; }
+  .bydeler .topp { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 4px; }
   .bydeler h2 { margin: 0; font-size: 16px; }
   .bydeler select { font: inherit; font-size: 12px; border: 1.5px solid var(--kant); border-radius: 6px; padding: 3px 5px; max-width: 110px; }
   .bydeler ol { list-style: none; margin: 0; padding: 0; }
-  .bydeler li { display: flex; justify-content: space-between; padding: 4px 2px; font-size: 13px; }
+  .bydeler li { display: flex; justify-content: space-between; padding: 2px; font-size: 13px; }
   .bydeler li .antall { font-variant-numeric: tabular-nums; color: var(--dempet); }
 
   .varsler { margin-bottom: 12px; }
@@ -1452,6 +1455,7 @@ async function start() {
   lag.forEach((l, nr) => {
     let farge = fargeFor(l.id, nr);
     const på = onsket ? onsket.has(l.id) : true;
+    lagene.set(l.id, { ikon: l.ikon || '📍', navn: l.navn, farge, punkter: [], antall: 0, på, feil: false, boks: null, varme: !!varmevalg[l.id], sistOk: null, beskrivelse: l.beskrivelse ?? '' });
     // To lag ved siden av hverandre skal aldri faa samme farge, selv om
     // reservepaletten er kortere enn antall lag.
     if (farge === forrige) {
@@ -1474,6 +1478,7 @@ async function start() {
       `<input type="checkbox"${på ? ' checked' : ''}>` +
       `<span class="prikk" aria-hidden="true"><img src="${prikkBilde(l.id, oppf)}" alt=""></span>` +
       `<span class="navn">${l.navn}</span>` +
+      `<span class="graf" id="graf-${l.id}"></span>` +
       `<span class="antall" id="antall-${l.id}">…</span>` +
       `<span class="alder" id="alder-${l.id}">aldri</span>` +
       `<button type="button" class="visning" aria-pressed="${!!varmevalg[l.id]}" title="Bytt mellom punkter og varmekart">${varmevalg[l.id] ? 'Varme' : 'Punkter'}</button>`;
@@ -1495,9 +1500,6 @@ async function start() {
     });
     liste.appendChild(rad);
 
-    const graf = document.createElement('div');
-    graf.id = 'graf-' + l.id;
-    liste.appendChild(graf);
     const valg = document.createElement('option');
     valg.value = l.id;
     valg.textContent = l.navn;
@@ -1520,6 +1522,14 @@ async function start() {
   skrivUtsnitt();
 }
 
+/** Setter verktøytipset på lagraden: navnet (kan være avkortet), beskrivelsen, og «Ingen historikk ennå» når grafen mangler. */
+function settHistorikkTips(id, harHistorikk) {
+  const rad = document.getElementById('graf-' + id)?.closest('.lag');
+  if (!rad) return;
+  const { navn, beskrivelse } = lagene.get(id);
+  rad.title = [navn, beskrivelse, harHistorikk ? '' : 'Ingen historikk ennå'].filter(Boolean).join('\n');
+}
+
 /** Henter og tegner den lille grafen med antall punkter per time siste døgn. */
 async function hentHistorikk(id) {
   const oppf = lagene.get(id);
@@ -1533,21 +1543,22 @@ async function hentHistorikk(id) {
     bilder = await svar.json();
   } catch (e) {
     mal.replaceChildren();
+    settHistorikkTips(id, false);
     return;
   }
 
-  if (!bilder.length) {
-    const tom = document.createElement('div');
-    tom.className = 'graf-tom';
-    tom.textContent = 'Ingen historikk ennå';
-    mal.replaceChildren(tom);
+  // Med under to bilder er det ingenting å tegne en trend av.
+  if (!Array.isArray(bilder) || bilder.length < 2) {
+    mal.replaceChildren();
+    settHistorikkTips(id, false);
     return;
   }
+  settHistorikkTips(id, true);
 
   // 24 faste timeluker med inneværende klokketime lengst til høyre. Hvert bilde
   // havner i luka for sin egen time, slik at nedetid vises som hull og ikke som
   // sammenpressede stolper.
-  const BREDDE = 260, HOYDE = 26, LUKER = 24, TIME = 60 * 60 * 1000;
+  const BREDDE = 48, HOYDE = 14, LUKER = 24, TIME = 60 * 60 * 1000;
   const start = Math.floor(Date.now() / TIME) * TIME - (LUKER - 1) * TIME;
   const luker = new Array(LUKER).fill(null);
   bilder.forEach((b) => {
@@ -1558,7 +1569,6 @@ async function hentHistorikk(id) {
   const maks = Math.max(1, ...bilder.map((b) => b.antall));
 
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-  svg.setAttribute('class', 'graf');
   svg.setAttribute('viewBox', `0 0 ${BREDDE} ${HOYDE}`);
   svg.setAttribute('preserveAspectRatio', 'none');
   const forste = new Date(bilder[0].tidspunkt).toLocaleTimeString('no-NO', { hour: '2-digit', minute: '2-digit' });
@@ -1571,7 +1581,7 @@ async function hentHistorikk(id) {
     const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
     rect.setAttribute('x', String(i * lukeBredde));
     rect.setAttribute('y', String(HOYDE - h));
-    rect.setAttribute('width', String(Math.max(0, lukeBredde - 1)));
+    rect.setAttribute('width', String(Math.max(0.5, lukeBredde - 0.5)));
     rect.setAttribute('height', String(h));
     rect.setAttribute('fill', oppf.farge);
 
